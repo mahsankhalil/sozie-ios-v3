@@ -11,7 +11,9 @@ import SwiftValidator
 
 class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDelegate {
 
-    @IBOutlet weak var emailField: DesignableTextField!
+  @IBOutlet weak var femaleBtn: UIButton!
+  @IBOutlet weak var maleBtn: UIButton!
+  @IBOutlet weak var emailField: DesignableTextField!
     @IBOutlet weak var nameField: DesignableTextField!
     @IBOutlet weak var passwordField: DesignableTextField!
     @IBOutlet weak var confirmPasswordField: DesignableTextField!
@@ -22,15 +24,26 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        validator.registerField(emailField, errorLabel: errorLabel, rules: [RequiredRule(message: "Email can't be empty") as Rule,EmailRule(message: "Invalid email")])
-        validator.registerField(nameField, errorLabel: errorLabel, rules: [RequiredRule(message: "Name can't be empty") as Rule, MinLengthRule(length: 3) as Rule])
-        validator.registerField(passwordField, errorLabel: errorLabel, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule, PasswordRule() as Rule])
-        validator.registerField(confirmPasswordField, errorLabel: errorLabel, rules: [ConfirmationRule(confirmField: passwordField)])
-        
-        [emailField,nameField,passwordField,confirmPasswordField].forEach { (field) in
-            field?.delegate = self
-        }
-        
+//        validator.registerField(emailField, errorLabel: errorLabel, rules: [RequiredRule(message: "Email can't be empty") as Rule,EmailRule(message: "Invalid email")])
+//        validator.registerField(nameField, errorLabel: errorLabel, rules: [RequiredRule(message: "Name can't be empty") as Rule, MinLengthRule(length: 3) as Rule])
+//        validator.registerField(passwordField, errorLabel: errorLabel, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule, PasswordRule() as Rule])
+//        validator.registerField(confirmPasswordField, errorLabel: errorLabel, rules: [ConfirmationRule(confirmField: passwordField)])
+//
+//        [emailField,nameField,passwordField,confirmPasswordField].forEach { (field) in
+//            field?.delegate = self
+//        }
+      
+      maleBtn.layer.borderColor = UIColor(displayP3Red: 166.0/255.0, green: 166.0/255.0, blue: 166.0/255.0, alpha: 0.8).cgColor
+      maleBtn.layer.cornerRadius = 2.0
+      maleBtn.layer.borderWidth = 1.0
+      maleBtn.clipsToBounds = true
+      
+      femaleBtn.layer.borderColor = UIColor(displayP3Red: 166.0/255.0, green: 166.0/255.0, blue: 166.0/255.0, alpha: 0.8).cgColor
+      femaleBtn.layer.cornerRadius = 2.0
+      femaleBtn.layer.borderWidth = 1.0
+
+      femaleBtn.clipsToBounds = true
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,5 +93,40 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
         }
         return true
     }
+  
+  
+  @IBAction func femaleBtnTapped(_ sender: Any) {
+    maleBtn.layer.borderColor = UIColor(displayP3Red: 166.0/255.0, green: 166.0/255.0, blue: 166.0/255.0, alpha: 0.8).cgColor
+    maleBtn.layer.cornerRadius = 2.0
+    maleBtn.layer.borderWidth = 1.0
 
+    maleBtn.clipsToBounds = true
+    
+    femaleBtn.layer.borderColor = UIColor(displayP3Red: 252.0/255.0, green: 135.0/255.0, blue: 135.0/255.0, alpha: 0.8).cgColor
+    femaleBtn.layer.cornerRadius = 2.0
+    femaleBtn.layer.borderWidth = 1.0
+
+    femaleBtn.clipsToBounds = true
+    
+  
+  }
+  
+  @IBAction func maleBtnTapped(_ sender: Any) {
+    maleBtn.layer.borderColor = UIColor(displayP3Red: 252.0/255.0, green: 135.0/255.0, blue: 135.0/255.0, alpha: 0.8).cgColor
+    maleBtn.layer.cornerRadius = 2.0
+    maleBtn.layer.borderWidth = 1.0
+
+    maleBtn.clipsToBounds = true
+    
+    femaleBtn.layer.borderColor = UIColor(displayP3Red: 166.0/255.0, green: 166.0/255.0, blue: 166.0/255.0, alpha: 0.8).cgColor
+    femaleBtn.layer.cornerRadius = 2.0
+    femaleBtn.layer.borderWidth = 1.0
+    femaleBtn.clipsToBounds = true
+  }
+  @IBAction func backBtnTapped(_ sender: Any) {
+    self.dismiss(animated: true) {
+      
+    }
+  }
+  
 }
