@@ -1,0 +1,46 @@
+
+//
+//  User.swift
+//  Connectivity
+//
+//  Created by Danial Zahid on 24/09/2017.
+//  Copyright © 2017 Danial Zahid. All rights reserved.
+//
+
+import UIKit
+
+@objc class User: BaseEntity {
+    
+    @objc var full_name: String?
+    @objc var email: String?
+    @objc var user_id: String?
+//    var image_path: String?
+    @objc var about: String?
+    @objc var interests: String?
+    @objc var school: String?
+    @objc var worked_at: String?
+    @objc var works_at: String?
+    @objc var lives_in: String?
+    @objc var contact_number: String?
+    @objc var facebook_profile: String?
+    @objc var linkedin_profile: String?
+    @objc var website: String?
+    @objc var google_profile: String?
+    @objc var headline: String?
+    
+    override init() {
+        super.init()
+    }
+    
+    override init(dictionary: [AnyHashable : Any]!) {
+        super.init()
+        let newDateFormatter = DateFormatter()
+        newDateFormatter.dateFormat = Constant.serverDateFormat
+        newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
+        self.setValuesForKeysWithJSONDictionary(dictionary, dateFormatter: newDateFormatter)
+        
+        
+    }
+    
+    
+}
