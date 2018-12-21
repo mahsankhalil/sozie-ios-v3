@@ -44,7 +44,10 @@ import UIKit
     @IBInspectable var gradientEndColor: UIColor = UIColor(hex: "FFA7A7")
     
     func applyGradient() {
-
+        if shadowAdded {
+            return
+        }
+        shadowAdded = true
         let shadowLayer = UIView(frame: self.frame)
         shadowLayer.backgroundColor = UIColor.clear
         shadowLayer.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
