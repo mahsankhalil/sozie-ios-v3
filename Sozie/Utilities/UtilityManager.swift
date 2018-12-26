@@ -40,7 +40,51 @@ class UtilityManager: NSObject {
     }
     
     //MARK: - Other Methods
+  
+    static func openImagePickerActionSheetFrom(vc: UIViewController)
+    {
+        let alert = UIAlertController(title: nil , message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            UtilityManager.openCameraFrom(vc: vc)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            UtilityManager.openGalleryFrom(vc: vc)
+        }))
+        
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        
+        vc.present(alert, animated: true, completion: nil)
+    }
     
+    static func openCameraFrom(vc : UIViewController)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
+        {
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.allowsEditing = false
+            vc.present(imagePicker, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            vc.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    static func openGalleryFrom(vc : UIViewController)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.allowsEditing = false
+        vc.present(imagePicker, animated: true, completion: nil)
+    }
+  
     static func activityIndicatorForView(view: UIView) -> UIActivityIndicatorView{
         let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         activityIndicator.color = UIColor.darkGray
