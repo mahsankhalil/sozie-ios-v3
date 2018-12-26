@@ -387,11 +387,13 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="162.5" height="73"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WhJ-6J-xTB" customClass="UnderLineTextFieldCarthage" customModule="Sozie" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="18" width="162.5" height="50"/>
+
+                                                                <rect key="frame" x="0.0" y="8" width="162.5" height="60"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad" textContentType="name"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" textContentType="name"/>
+
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="activeLineColor">
                                                                         <color key="value" red="0.98823529409999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -428,18 +430,22 @@
                                                             <constraint firstAttribute="trailing" secondItem="WhJ-6J-xTB" secondAttribute="trailing" id="3EF-nf-hhS"/>
                                                             <constraint firstAttribute="bottom" secondItem="WhJ-6J-xTB" secondAttribute="bottom" constant="5" id="42c-5S-e37"/>
                                                             <constraint firstItem="WhJ-6J-xTB" firstAttribute="leading" secondItem="LCm-X1-fLq" secondAttribute="leading" id="p39-vA-od2"/>
-                                                            <constraint firstItem="WhJ-6J-xTB" firstAttribute="top" secondItem="LCm-X1-fLq" secondAttribute="top" constant="18" id="yX5-OC-dSU"/>
+
+                                                            <constraint firstItem="WhJ-6J-xTB" firstAttribute="top" secondItem="LCm-X1-fLq" secondAttribute="top" constant="8" id="yX5-OC-dSU"/>
+
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIP-xh-seK">
                                                         <rect key="frame" x="162.5" y="0.0" width="162.5" height="73"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jmG-D3-PZB" customClass="UnderLineTextFieldCarthage" customModule="Sozie" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="18" width="162.5" height="50"/>
+
+                                                                <rect key="frame" x="0.0" y="8" width="162.5" height="60"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad" textContentType="name"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" textContentType="name"/>
+
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="activeLineColor">
                                                                         <color key="value" red="0.98823529409999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -474,7 +480,9 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="jmG-D3-PZB" firstAttribute="leading" secondItem="cIP-xh-seK" secondAttribute="leading" id="Yyf-Ri-Z8C"/>
-                                                            <constraint firstItem="jmG-D3-PZB" firstAttribute="top" secondItem="cIP-xh-seK" secondAttribute="top" constant="18" id="joW-Fc-Jjp"/>
+
+                                                            <constraint firstItem="jmG-D3-PZB" firstAttribute="top" secondItem="cIP-xh-seK" secondAttribute="top" constant="8" id="joW-Fc-Jjp"/>
+
                                                             <constraint firstAttribute="trailing" secondItem="jmG-D3-PZB" secondAttribute="trailing" id="voT-gv-C3u"/>
                                                             <constraint firstAttribute="bottom" secondItem="jmG-D3-PZB" secondAttribute="bottom" constant="5" id="w9f-Y7-Xrh"/>
                                                         </constraints>
@@ -509,7 +517,9 @@
                                                 <rect key="frame" x="25" y="258" width="325" height="73"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-21-rMj" customClass="UnderLineTextFieldCarthage" customModule="Sozie" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="18" width="325" height="50"/>
+
+                                                        <rect key="frame" x="0.0" y="8" width="325" height="60"/>
+
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -559,7 +569,9 @@
                                                     <constraint firstAttribute="bottom" secondItem="k6d-hg-miY" secondAttribute="bottom" id="DMh-B5-8JR"/>
                                                     <constraint firstAttribute="height" constant="73" id="E7U-oq-RTP"/>
                                                     <constraint firstAttribute="trailing" secondItem="k6d-hg-miY" secondAttribute="trailing" id="Las-Hy-adI"/>
-                                                    <constraint firstItem="yTy-21-rMj" firstAttribute="top" secondItem="eIP-U0-pQd" secondAttribute="top" constant="18" id="dVp-tI-rdl"/>
+
+                                                    <constraint firstItem="yTy-21-rMj" firstAttribute="top" secondItem="eIP-U0-pQd" secondAttribute="top" constant="8" id="dVp-tI-rdl"/>
+
                                                     <constraint firstAttribute="bottom" secondItem="yTy-21-rMj" secondAttribute="bottom" constant="5" id="kHk-N8-fsj"/>
                                                     <constraint firstAttribute="trailing" secondItem="yTy-21-rMj" secondAttribute="trailing" id="qDO-V3-N52"/>
                                                     <constraint firstItem="k6d-hg-miY" firstAttribute="leading" secondItem="eIP-U0-pQd" secondAttribute="leading" id="ran-uG-Eri"/>
@@ -570,7 +582,9 @@
                                                 <rect key="frame" x="25" y="351" width="325" height="73"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of Birth" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJO-9C-cYF" customClass="UnderLineTextFieldCarthage" customModule="Sozie" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="18" width="325" height="50"/>
+
+                                                        <rect key="frame" x="0.0" y="8" width="325" height="60"/>
+
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -614,15 +628,24 @@
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="birthday-icon" translatesAutoresizingMaskIntoConstraints="NO" id="EmT-fK-jT0">
+                                                        <rect key="frame" x="297" y="26" width="18" height="18"/>
+                                                    </imageView>
+
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="aJO-9C-cYF" firstAttribute="leading" secondItem="79U-qu-8ew" secondAttribute="leading" id="9pW-o7-5Cc"/>
+
+                                                    <constraint firstItem="EmT-fK-jT0" firstAttribute="centerY" secondItem="aJO-9C-cYF" secondAttribute="centerY" constant="-3" id="GmR-KA-c2M"/>
                                                     <constraint firstAttribute="bottom" secondItem="aJO-9C-cYF" secondAttribute="bottom" constant="5" id="KTO-Lj-Hpe"/>
+                                                    <constraint firstAttribute="trailing" secondItem="EmT-fK-jT0" secondAttribute="trailing" constant="10" id="T19-2k-Scv"/>
                                                     <constraint firstItem="ddM-XV-duY" firstAttribute="leading" secondItem="79U-qu-8ew" secondAttribute="leading" id="UI7-bU-h6H"/>
                                                     <constraint firstAttribute="bottom" secondItem="ddM-XV-duY" secondAttribute="bottom" id="Ztd-An-NBk"/>
                                                     <constraint firstAttribute="trailing" secondItem="ddM-XV-duY" secondAttribute="trailing" id="aRq-kD-dxN"/>
-                                                    <constraint firstItem="aJO-9C-cYF" firstAttribute="top" secondItem="79U-qu-8ew" secondAttribute="top" constant="18" id="jJr-XD-4Hw"/>
+                                                    <constraint firstItem="aJO-9C-cYF" firstAttribute="top" secondItem="79U-qu-8ew" secondAttribute="top" constant="8" id="jJr-XD-4Hw"/>
+
                                                     <constraint firstAttribute="trailing" secondItem="aJO-9C-cYF" secondAttribute="trailing" id="nZc-KZ-3YM"/>
                                                     <constraint firstAttribute="height" constant="73" id="wnZ-Ag-uhz"/>
                                                 </constraints>
@@ -632,6 +655,9 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duf-EW-SyB">
                                                         <rect key="frame" x="0.0" y="30" width="150" height="30"/>
+
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                         <state key="normal" title="Female">
                                                             <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -642,6 +668,8 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ep0-w7-gfX">
                                                         <rect key="frame" x="175" y="30" width="150" height="30"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                         <state key="normal" title="Male">
                                                             <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -732,6 +760,7 @@
     </scenes>
     <resources>
         <image name="back-button-white" width="22" height="10"/>
+        <image name="birthday-icon" width="18" height="18"/>
         <image name="facebook-login-icon" width="42" height="42"/>
         <image name="google-login-icon" width="42" height="42"/>
         <image name="login-logo" width="142" height="86.5"/>
