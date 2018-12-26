@@ -17,9 +17,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>3.0</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>8</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Sozie would like to access Camera to take photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Sozie would like to access photo library to select photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>segoeui.ttf</string>
