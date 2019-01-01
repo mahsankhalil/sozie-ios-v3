@@ -9,13 +9,17 @@
 import UIKit
 import SwiftValidator
 import UnderLineTextField
+import GoogleSignIn
+import UnderLineTextField
+import SVProgressHUD
+import FBSDKLoginKit
 
 class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate, UnderLineTextFieldDelegate {
     
     static let identifier = "signInViewController"
 
-    @IBOutlet weak var emailField: UnderLineTextFieldCarthage!
-    @IBOutlet weak var passwordField: UnderLineTextFieldCarthage!
+    @IBOutlet weak var emailField: UnderLineTextField!
+    @IBOutlet weak var passwordField: UnderLineTextField!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     

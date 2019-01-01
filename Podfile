@@ -2,6 +2,7 @@ platform :ios, '10.0'
 
 # ignore all warnings from all pods
 inhibit_all_warnings!
+use_frameworks!
 
 target 'Sozie' do
 
@@ -13,6 +14,11 @@ pod 'DZNEmptyDataSet'
 pod 'Google/SignIn'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
+
+pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
+
+pod 'SnapKit', '~> 4.0.0'
+pod 'UnderLineTextField', '~> 2.1'
 
 end
 

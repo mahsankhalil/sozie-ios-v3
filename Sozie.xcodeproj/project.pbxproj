@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B47AA269E40B7B3E267C5F7 /* libPods-Sozie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E40489CAB527AD213AF013D2 /* libPods-Sozie.a */; };
 		617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */; };
 		694480CC21C7A018001A11A2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF321C7A017001A11A2 /* SignUpViewController.swift */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
@@ -62,20 +61,17 @@
 		6944815921C7A018001A11A2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944809D21C7A018001A11A2 /* User.swift */; };
 		6944815B21C7A018001A11A2 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944809F21C7A018001A11A2 /* BaseEntity.m */; };
 		6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944817521C7A9ED001A11A2 /* LandingViewController.swift */; };
-		6944817A21C7AA99001A11A2 /* SwiftValidator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6944817821C7AA99001A11A2 /* SwiftValidator.framework */; };
-		6944817B21C7AA99001A11A2 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6944817921C7AA99001A11A2 /* SnapKit.framework */; };
 		69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69854D6821C8CA6D0092672D /* segoeui.ttf */; };
 		69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69854D6921C8CA6D0092672D /* segoeuib.ttf */; };
 		69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D6E21C8D88A0092672D /* DZGradientView.swift */; };
 		69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D7021C8D9C70092672D /* DZGradientButton.swift */; };
-		69854D7421C905060092672D /* UnderLineTextFieldCarthage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D7321C905060092672D /* UnderLineTextFieldCarthage.swift */; };
-		69854D7521C905410092672D /* UnderLineTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6944817C21C7BFC7001A11A2 /* UnderLineTextField.framework */; };
 		6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6998E7DC21C77778009DFBEF /* AppDelegate.swift */; };
 		6998E7E221C77778009DFBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E021C77778009DFBEF /* Main.storyboard */; };
 		6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E321C77779009DFBEF /* Assets.xcassets */; };
 		6998E7E721C77779009DFBEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E521C77779009DFBEF /* LaunchScreen.storyboard */; };
 		69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */; };
 		69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */; };
+		E417DCD0989C188C9CE6722B /* Pods_Sozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,12 +139,8 @@
 		6944809F21C7A018001A11A2 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		6944817421C7A5BD001A11A2 /* Sozie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sozie-Bridging-Header.h"; sourceTree = "<group>"; };
 		6944817521C7A9ED001A11A2 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
-		6944817821C7AA99001A11A2 /* SwiftValidator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftValidator.framework; path = Carthage/Build/iOS/SwiftValidator.framework; sourceTree = "<group>"; };
-		6944817921C7AA99001A11A2 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		6944817C21C7BFC7001A11A2 /* UnderLineTextField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnderLineTextField.framework; path = Carthage/Build/iOS/UnderLineTextField.framework; sourceTree = "<group>"; };
 		69854D6821C8CA6D0092672D /* segoeui.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = segoeui.ttf; sourceTree = "<group>"; };
 		69854D6921C8CA6D0092672D /* segoeuib.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = segoeuib.ttf; sourceTree = "<group>"; };
-		69854D6C21C8D61F0092672D /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyFloatingLabelTextField.framework; path = Carthage/Build/iOS/SkyFloatingLabelTextField.framework; sourceTree = "<group>"; };
 		69854D6E21C8D88A0092672D /* DZGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZGradientView.swift; sourceTree = "<group>"; };
 		69854D7021C8D9C70092672D /* DZGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DZGradientButton.swift; sourceTree = "<group>"; };
 		69854D7221C8DC610092672D /* seguisb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = seguisb.ttf; sourceTree = "<group>"; };
@@ -161,7 +153,7 @@
 		6998E7E821C77779009DFBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DZValidator.swift; sourceTree = "<group>"; };
-		E40489CAB527AD213AF013D2 /* libPods-Sozie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sozie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,10 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69854D7521C905410092672D /* UnderLineTextField.framework in Frameworks */,
-				6944817A21C7AA99001A11A2 /* SwiftValidator.framework in Frameworks */,
-				6944817B21C7AA99001A11A2 /* SnapKit.framework in Frameworks */,
-				4B47AA269E40B7B3E267C5F7 /* libPods-Sozie.a in Frameworks */,
+				E417DCD0989C188C9CE6722B /* Pods_Sozie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +312,7 @@
 				6998E7DB21C77778009DFBEF /* Sozie */,
 				6998E7DA21C77778009DFBEF /* Products */,
 				57DBE9031E8C78777537FE26 /* Pods */,
-				AF1D35918730F86CE795D281 /* Frameworks */,
+				9FCA74413CAF87C22BD8D93F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -354,14 +343,10 @@
 			path = Sozie;
 			sourceTree = "<group>";
 		};
-		AF1D35918730F86CE795D281 /* Frameworks */ = {
+		9FCA74413CAF87C22BD8D93F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				69854D6C21C8D61F0092672D /* SkyFloatingLabelTextField.framework */,
-				6944817C21C7BFC7001A11A2 /* UnderLineTextField.framework */,
-				6944817921C7AA99001A11A2 /* SnapKit.framework */,
-				6944817821C7AA99001A11A2 /* SwiftValidator.framework */,
-				E40489CAB527AD213AF013D2 /* libPods-Sozie.a */,
+				BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -378,7 +363,7 @@
 				6998E7D621C77778009DFBEF /* Frameworks */,
 				6998E7D721C77778009DFBEF /* Resources */,
 				E8874CA3E3421222BA772B7D /* [CP] Copy Pods Resources */,
-				6944817721C7AA57001A11A2 /* ShellScript */,
+				0F2B9975FDECE7491E45956A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -446,6 +431,54 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0F2B9975FDECE7491E45956A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Sozie/Pods-Sozie-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/UnderLineTextField/UnderLineTextField.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnderLineTextField.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sozie/Pods-Sozie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		543CE1B46035D98D23910295 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -468,26 +501,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6944817721C7AA57001A11A2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftValidator.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/UnderLineTextField.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n\n";
-		};
 		E8874CA3E3421222BA772B7D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -497,19 +510,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sozie/Pods-Sozie-resources.sh",
-				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
-				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -530,7 +537,6 @@
 				6944814D21C7A018001A11A2 /* SpringAnimation.swift in Sources */,
 				6944814B21C7A018001A11A2 /* DesignableTextView.swift in Sources */,
 				6944814A21C7A018001A11A2 /* SpringLabel.swift in Sources */,
-				69854D7421C905060092672D /* UnderLineTextFieldCarthage.swift in Sources */,
 				69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */,
 				6944813321C7A018001A11A2 /* WebClient.swift in Sources */,
 				6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */,
@@ -731,7 +737,7 @@
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sozie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -758,7 +764,7 @@
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sozie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

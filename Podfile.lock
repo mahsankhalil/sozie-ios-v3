@@ -63,8 +63,11 @@ PODS:
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
+  - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
+  - SwiftValidator (4.0.0)
   - TPKeyboardAvoiding (1.3.2)
+  - UnderLineTextField (2.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -73,8 +76,11 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - Google/SignIn
   - SDWebImage (~> 4.0)
+  - SnapKit (~> 4.0.0)
   - SVProgressHUD
+  - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
   - TPKeyboardAvoiding
+  - UnderLineTextField (~> 2.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -92,8 +98,20 @@ SPEC REPOS:
     - GTMOAuth2
     - GTMSessionFetcher
     - SDWebImage
+    - SnapKit
     - SVProgressHUD
     - TPKeyboardAvoiding
+    - UnderLineTextField
+
+EXTERNAL SOURCES:
+  SwiftValidator:
+    :branch: master
+    :git: https://github.com/jpotts18/SwiftValidator.git
+
+CHECKOUT OPTIONS:
+  SwiftValidator:
+    :commit: c0ee801a2d107eca5f748d07932b449666d8effd
+    :git: https://github.com/jpotts18/SwiftValidator.git
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -110,9 +128,12 @@ SPEC CHECKSUMS:
   GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
+  UnderLineTextField: b3f5307b56962331e30a965e81b79aae2df1de83
 
-PODFILE CHECKSUM: 52c89686dfedc0162245c16dc590a748986c9066
+PODFILE CHECKSUM: a92bd138de549825490cf13cfe9a1335c0048fe2
 
 COCOAPODS: 1.5.3

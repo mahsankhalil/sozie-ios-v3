@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-
+import SVProgressHUD
 
 class UtilityManager: NSObject {
     

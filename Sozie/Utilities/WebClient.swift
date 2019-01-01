@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 let RequestManager = WebClient.sharedInstance
 

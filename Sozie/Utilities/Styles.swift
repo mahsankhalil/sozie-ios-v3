@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SVProgressHUD
 struct ShadowStyle {
     let angle: Int //degrees
     let color: UIColor

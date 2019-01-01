@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 @IBDesignable class DZImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
