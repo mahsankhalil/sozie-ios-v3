@@ -102,12 +102,30 @@ class UtilityManager: NSObject {
     
     static func showErrorMessage(body: String, in controller: UIViewController) {
         SVProgressHUD.dismiss()
-        UIAlertController.showAlert(in: controller, withTitle: "Error", message: body, cancelButtonTitle: "OK", destructiveButtonTitle: nil, otherButtonTitles: nil, tap: nil)
+        let alert = UIAlertController(title: "Error", message: body, preferredStyle: .alert)
+        let okBtnAction = UIAlertAction(title: "OK", style: .cancel) { (okBtn) in
+            
+        }
+        alert.addAction(okBtnAction)
+        controller.present(alert, animated: true) {
+            
+        }
+
     }
     
     static func showSuccessMessage(body: String, in controller: UIViewController) {
         SVProgressHUD.dismiss()
-        UIAlertController.showAlert(in: controller, withTitle: "Success", message: body, cancelButtonTitle: "OK", destructiveButtonTitle: nil, otherButtonTitles: nil, tap: nil)
+        
+        let alert = UIAlertController(title: "Success", message: body, preferredStyle: .alert)
+        let okBtnAction = UIAlertAction(title: "OK", style: .cancel) { (okBtn) in
+            
+        }
+        alert.addAction(okBtnAction)
+        controller.present(alert, animated: true) {
+            
+        }
+        
+        
     }
     
     static func noDataViewWithText(errorMessage: String, on view: UIView) {

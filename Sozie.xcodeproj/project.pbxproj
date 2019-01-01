@@ -12,7 +12,6 @@
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
 		694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944800F21C7A017001A11A2 /* SignInViewController.swift */; };
 		694480EA21C7A018001A11A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801221C7A017001A11A2 /* Constants.swift */; };
-		694480EC21C7A018001A11A2 /* UIAlertController+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944801421C7A017001A11A2 /* UIAlertController+Blocks.m */; };
 		694480ED21C7A018001A11A2 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801521C7A017001A11A2 /* Styles.swift */; };
 		694480F121C7A018001A11A2 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6944801B21C7A017001A11A2 /* DayCell.xib */; };
 		694480F221C7A018001A11A2 /* ScrollableDatepicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801C21C7A017001A11A2 /* ScrollableDatepicker.swift */; };
@@ -82,7 +81,6 @@
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6944800F21C7A017001A11A2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6944801221C7A017001A11A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		6944801421C7A017001A11A2 /* UIAlertController+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Blocks.m"; sourceTree = "<group>"; };
 		6944801521C7A017001A11A2 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		6944801B21C7A017001A11A2 /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
 		6944801C21C7A017001A11A2 /* ScrollableDatepicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableDatepicker.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 		6944803A21C7A017001A11A2 /* LIALinkedInAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIALinkedInAuthorizationViewController.h; sourceTree = "<group>"; };
 		6944803B21C7A017001A11A2 /* NSString+LIAEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LIAEncode.m"; sourceTree = "<group>"; };
 		6944803C21C7A017001A11A2 /* LIALinkedInApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIALinkedInApplication.m; sourceTree = "<group>"; };
-		6944803D21C7A017001A11A2 /* UIAlertController+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Blocks.h"; sourceTree = "<group>"; };
 		6944803E21C7A017001A11A2 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		6944803F21C7A017001A11A2 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		6944804021C7A017001A11A2 /* DZImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZImageView.swift; sourceTree = "<group>"; };
@@ -207,8 +204,6 @@
 				6944801A21C7A017001A11A2 /* DatePicker */,
 				6944803421C7A017001A11A2 /* IOSLinkedInAPI */,
 				6944807521C7A017001A11A2 /* Spring */,
-				6944803D21C7A017001A11A2 /* UIAlertController+Blocks.h */,
-				6944801421C7A017001A11A2 /* UIAlertController+Blocks.m */,
 				6944803E21C7A017001A11A2 /* ApplicationManager.swift */,
 				6944801221C7A017001A11A2 /* Constants.swift */,
 				6944807421C7A017001A11A2 /* DatePickerTextField.swift */,
@@ -530,7 +525,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				694480EC21C7A018001A11A2 /* UIAlertController+Blocks.m in Sources */,
 				6944813421C7A018001A11A2 /* DatePickerTextField.swift in Sources */,
 				69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */,
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
