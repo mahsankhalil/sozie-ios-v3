@@ -19,5 +19,26 @@ class ServerManager: NSObject {
     }
     
     public typealias CompletionHandler = ((Bool,Any)->Void)?
+    
+    func loginWith(params : [String : Any] , block : CompletionHandler)
+    {
+//        Alamofire.request(Constant.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil) { (response : DataResponse<Any>) in
+        
+//        Alamofire.request(Constant.loginURL, method: .post , parameters: params, encoding:URLEncoding.default , headers: nil)
+        
+        Alamofire.request(Constant.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
+            
+            debugPrint(response)
+        }
+    }
+    
+    func getUserProfile(params : [String : Any] , block : CompletionHandler)
+    {
+        
+        Alamofire.request(Constant.profileURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
+            
+            debugPrint(response)
+        }
+    }
 
 }

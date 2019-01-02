@@ -19,18 +19,18 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(self.notificationReceived), name: NSNotification.Name(rawValue: "pushNotificationReceived"), object: nil)
         
-        if ApplicationManager.sharedInstance.user.email == nil {
-            SVProgressHUD.show()
-            RequestManager.getUser(successBlock: { (response) in
-                SVProgressHUD.dismiss()
-                let user = User(dictionary: response)
-                ApplicationManager.sharedInstance.user = user
-                
-                
-                
-            }, failureBlock: { (error) in
-                UtilityManager.showErrorMessage(body: error, in: self)
-            })
+        if ApplicationManager.sharedInstance.user == nil {
+//            SVProgressHUD.show()
+//            RequestManager.getUser(successBlock: { (response) in
+//                SVProgressHUD.dismiss()
+////                let user = User(dictionary: response)
+////                ApplicationManager.sharedInstance.user = user
+//
+//
+//
+//            }, failureBlock: { (error) in
+//                UtilityManager.showErrorMessage(body: error, in: self)
+//            })
         }
         // Do any additional setup after loading the view.
     }

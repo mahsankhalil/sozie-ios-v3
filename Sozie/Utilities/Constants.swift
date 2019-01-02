@@ -14,6 +14,9 @@ public class UserDefaultKey: NSObject {
     static let geoFeedRadius = "radiusValueForFeed"
     static let ownPostsFilter = "ownPostsFilter"
     static let linkedInAuthKey = "linkedInAuthKey"
+    static let accessToken = "access"
+    static let refreshToken = "refresh"
+    static let userId = "user_id"
 }
 
 public class Constant: NSObject {
@@ -27,7 +30,7 @@ public class Constant: NSObject {
     static let eventDetailDateFormat = "MMM dd yyyy',' hh:mm a"
     static let animationDuration : TimeInterval = 0.5
   
-    static let serverURL = "http://52.14.237.29:3000/connectIn/api/v1/"
+    static let serverURL = "http://172.16.12.58:8000/api/v1/"
 //    static let serverURL = "https://api.connectin.tech/connectIn/api/v1/"
 //    static let serverURL = "http://192.168.8.102:3000/connectIn/api/v1/"
   
@@ -38,8 +41,14 @@ public class Constant: NSObject {
     static let statusKey = "status"
     
     static let registrationURL = "signup"
-    static let loginURL = "signin"
+//    static let loginURL = "signin"
     static let getProfileURL = "signin"
     static let socialLoginURL = "signin"
+    
+    
+    // MARK: - API COnstants
+    
+    static let loginURL = Constant.serverURL + "user/login/"
+    static let profileURL = Constant.serverURL + "user/profile/"
     
 }
