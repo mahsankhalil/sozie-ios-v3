@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		61145CC121DB926700062332 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61145CC021DB926600062332 /* ServerManager.swift */; };
 		617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */; };
-		694480CC21C7A018001A11A2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF321C7A017001A11A2 /* SignUpViewController.swift */; };
+		617CD12621DE229000D4C885 /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12421DE229000D4C885 /* CountryCell.swift */; };
+		617CD12721DE229000D4C885 /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 617CD12521DE229000D4C885 /* CountryCell.xib */; };
+		617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12921DE286700D4C885 /* SignUpViewController.swift */; };
+		617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12B21DE288400D4C885 /* SelectCountryVC.swift */; };
+		617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
 		694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944800F21C7A017001A11A2 /* SignInViewController.swift */; };
 		694480EA21C7A018001A11A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801221C7A017001A11A2 /* Constants.swift */; };
@@ -73,7 +77,11 @@
 		61145CC021DB926600062332 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfilePictureVC.swift; sourceTree = "<group>"; };
 		617AC4FF21D38C6A00655C3C /* Sozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sozie.entitlements; sourceTree = "<group>"; };
-		69447FF321C7A017001A11A2 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		617CD12421DE229000D4C885 /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
+		617CD12521DE229000D4C885 /* CountryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
+		617CD12921DE286700D4C885 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		617CD12B21DE288400D4C885 /* SelectCountryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryVC.swift; sourceTree = "<group>"; };
+		617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailVC.swift; sourceTree = "<group>"; };
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6944800F21C7A017001A11A2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6944801221C7A017001A11A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -157,6 +165,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		617CD12321DE226600D4C885 /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				617CD12421DE229000D4C885 /* CountryCell.swift */,
+				617CD12521DE229000D4C885 /* CountryCell.xib */,
+			);
+			path = CustomControls;
+			sourceTree = "<group>";
+		};
+		617CD12821DE284F00D4C885 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				617CD12B21DE288400D4C885 /* SelectCountryVC.swift */,
+				617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */,
+				617CD12921DE286700D4C885 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		69447FDF21C7A017001A11A2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,10 +197,10 @@
 		69447FF221C7A017001A11A2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				617CD12821DE284F00D4C885 /* SignUp */,
 				69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */,
 				69447FF921C7A017001A11A2 /* BaseViewController.swift */,
 				6944800F21C7A017001A11A2 /* SignInViewController.swift */,
-				69447FF321C7A017001A11A2 /* SignUpViewController.swift */,
 				6944817521C7A9ED001A11A2 /* LandingViewController.swift */,
 				617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */,
 			);
@@ -284,6 +311,7 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				617CD12321DE226600D4C885 /* CustomControls */,
 				617AC4FF21D38C6A00655C3C /* Sozie.entitlements */,
 				69447FF221C7A017001A11A2 /* Controllers */,
 				69447FDF21C7A017001A11A2 /* Fonts */,
@@ -376,6 +404,7 @@
 				694480F321C7A018001A11A2 /* ScrollableDatepicker.xib in Resources */,
 				6944814921C7A018001A11A2 /* LoadingView.xib in Resources */,
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
+				617CD12721DE229000D4C885 /* CountryCell.xib in Resources */,
 				69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */,
 				6998E7E721C77779009DFBEF /* LaunchScreen.storyboard in Resources */,
 				694480F121C7A018001A11A2 /* DayCell.xib in Resources */,
@@ -494,6 +523,7 @@
 				6944814A21C7A018001A11A2 /* SpringLabel.swift in Sources */,
 				69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */,
 				6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */,
+				617CD12621DE229000D4C885 /* CountryCell.swift in Sources */,
 				6944810C21C7A018001A11A2 /* DZImageView.swift in Sources */,
 				6944813821C7A018001A11A2 /* TransitionZoom.swift in Sources */,
 				6944814E21C7A018001A11A2 /* UnwindSegue.swift in Sources */,
@@ -502,11 +532,11 @@
 				6944814C21C7A018001A11A2 /* AutoTextView.swift in Sources */,
 				694480EA21C7A018001A11A2 /* Constants.swift in Sources */,
 				6944813B21C7A018001A11A2 /* SpringImageView.swift in Sources */,
-				694480CC21C7A018001A11A2 /* SignUpViewController.swift in Sources */,
 				694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */,
 				6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */,
 				617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */,
 				694480F521C7A018001A11A2 /* LoadableFromXibView.swift in Sources */,
+				617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */,
 				6944814521C7A018001A11A2 /* SpringTextField.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
 				6944814F21C7A018001A11A2 /* LoadingView.swift in Sources */,
@@ -522,6 +552,7 @@
 				6944814821C7A018001A11A2 /* AsyncButton.swift in Sources */,
 				6944815921C7A018001A11A2 /* User.swift in Sources */,
 				6944813521C7A018001A11A2 /* DesignableImageView.swift in Sources */,
+				617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */,
 				6944814421C7A018001A11A2 /* DesignableButton.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
 				6944814021C7A018001A11A2 /* SpringButton.swift in Sources */,
@@ -535,6 +566,7 @@
 				6944814121C7A018001A11A2 /* SpringTextView.swift in Sources */,
 				6944813A21C7A018001A11A2 /* Spring.swift in Sources */,
 				6944813C21C7A018001A11A2 /* DesignableLabel.swift in Sources */,
+				617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */,
 				6944814721C7A018001A11A2 /* DesignableTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
