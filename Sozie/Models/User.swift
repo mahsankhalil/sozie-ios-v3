@@ -10,11 +10,11 @@
 import UIKit
 
 
-struct User: Codable{
+struct User: Codable {
     
     var username: String?
     var email: String?
-    var user_id: Int?
+    var userId: Int?
 
     var gender: String?
     var birthday: String?
@@ -26,7 +26,7 @@ struct User: Codable{
         
         case username
         case email
-        case user_id
+        case userId = "user_id"
         case gender
         case birthday
         case city
@@ -41,7 +41,7 @@ struct User: Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         username = try values.decode(String.self, forKey: .username)
         email = try values.decode(String.self, forKey: .email)
-        user_id = try values.decode(Int.self, forKey: .user_id)
+        userId = try values.decode(Int.self, forKey: .userId)
         gender = try values.decode(String.self, forKey: .gender)
         birthday = try values.decode(String.self, forKey: .birthday)
         city = try values.decode(String.self, forKey: .city)

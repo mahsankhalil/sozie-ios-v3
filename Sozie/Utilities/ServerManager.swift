@@ -10,13 +10,12 @@ import UIKit
 import Alamofire
 
 class ServerManager: NSObject {
-    struct Singleton {
-        static let sharedInstance = ServerManager()
-    }
-    
-    class var sharedInstance: ServerManager {
-        return Singleton.sharedInstance
-    }
+
+    static let sharedInstance = ServerManager()
+
+    static let serverURL = "http://172.16.12.58:8000/api/v1/"
+    static let loginURL = ServerManager.serverURL + "user/login/"
+    static let profileURL = ServerManager.serverURL + "user/profile/"
     
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
@@ -26,7 +25,7 @@ class ServerManager: NSObject {
         
 //        Alamofire.request(Constant.loginURL, method: .post , parameters: params, encoding:URLEncoding.default , headers: nil)
         
-        Alamofire.request(Constant.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
+        Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
             
             debugPrint(response)
         }
@@ -35,7 +34,7 @@ class ServerManager: NSObject {
     func getUserProfile(params : [String : Any] , block : CompletionHandler)
     {
         
-        Alamofire.request(Constant.profileURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
+        Alamofire.request(ServerManager.profileURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
             
             debugPrint(response)
         }
