@@ -10,6 +10,7 @@ import UIKit
 import MaterialTextField
 class DatePickerTextField: MFTextField, UITextFieldDelegate {
 
+
     var pickerView: UIDatePicker!
     var values : [String]?
     var selectedIndex : Int?
@@ -48,7 +49,7 @@ class DatePickerTextField: MFTextField, UITextFieldDelegate {
         titleLbl?.textAlignment = .center
         myInputView.addSubview(titleLbl!)
         
-        
+
         self.inputView = myInputView
         self.inputView?.layer.cornerRadius = 10.0
         self.inputView?.clipsToBounds = true

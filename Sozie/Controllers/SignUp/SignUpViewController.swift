@@ -17,24 +17,25 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lastNameTxtFld: MFTextField!
     @IBOutlet weak var firstNameTxtFld: MFTextField!
     @IBOutlet weak var userNameTxtFld: MFTextField!
+
+
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
         maleBtn.applyButtonUnSelected()
         femaleBtn.applyButtonUnSelected()
         
         dateOfBirtTxtFld.title = "DATE OF BIRTH"
         restrictToFourteenYears()
+
         firstNameTxtFld.setupAppDesign()
         lastNameTxtFld.setupAppDesign()
         userNameTxtFld.setupAppDesign()
         dateOfBirtTxtFld.setupAppDesign()
         
         
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,6 +43,7 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
     func setupMaterialTxtField()
     {
         firstNameTxtFld.underlineColor = UIColor(hex: "DADADA")
@@ -55,6 +57,7 @@ class SignUpViewController: UIViewController {
         
         let fourteenYearsAgoDate =  Calendar.current.date(byAdding: .year, value: -14, to: Date())
         dateOfBirtTxtFld.pickerView.maximumDate = fourteenYearsAgoDate
+
     }
     
     
