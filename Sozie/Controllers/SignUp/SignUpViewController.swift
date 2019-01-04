@@ -8,21 +8,29 @@
 
 import UIKit
 import SwiftValidator
+import UnderLineTextField
 
 class SignUpViewController: UIViewController {
 
   @IBOutlet weak var femaleBtn: UIButton!
   @IBOutlet weak var maleBtn: UIButton!
 
+    @IBOutlet weak var lastNameTxtFld: UnderLineTextField!
+    @IBOutlet weak var firstNameTxtFld: UnderLineTextField!
+    @IBOutlet weak var userNameTxtFld: UnderLineTextField!
+    @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
 
 
-      maleBtn.applyButtonUnSelected()
-      femaleBtn.applyButtonUnSelected()
-
+        maleBtn.applyButtonUnSelected()
+        femaleBtn.applyButtonUnSelected()
+        
+        dateOfBirtTxtFld.title = "DATE OF BIRTH"
+        restrictToFourteenYears()
+        
       
     }
 
@@ -30,6 +38,13 @@ class SignUpViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func restrictToFourteenYears()
+    {
+        let fourteenYearInterval = TimeInterval(14 * 60 * 60 * 24 * 365)
+        dateOfBirtTxtFld.pickerView.maximumDate = Date(timeIntervalSinceNow: fourteenYearInterval)
+    }
+    
     
     @IBAction func signupButtonPressed(_ sender: Any) {
 
