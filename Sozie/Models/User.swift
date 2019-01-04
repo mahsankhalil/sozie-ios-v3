@@ -54,7 +54,7 @@ struct User: Codable {
 struct Measurement : Codable{
     var bra : String?
     var height : String?
-    var body_shape : String?
+    var bodyShape : String?
     var hip : String?
     var cup : String?
     var waist : String?
@@ -62,7 +62,7 @@ struct Measurement : Codable{
 
         case bra
         case height
-        case body_shape
+        case bodyShape = "body_shape"
         case hip
         case cup
         case waist
@@ -71,7 +71,7 @@ struct Measurement : Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         bra = try values.decode(String.self, forKey: .bra)
         height = try values.decode(String.self, forKey: .height)
-        body_shape = try values.decode(String.self, forKey: .body_shape)
+        bodyShape = try values.decode(String.self, forKey: .bodyShape)
         hip = try values.decode(String.self, forKey: .hip)
         cup = try values.decode(String.self, forKey: .cup)
         waist = try values.decode(String.self, forKey: .waist)
