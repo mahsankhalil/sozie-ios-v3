@@ -157,6 +157,7 @@ extension MFTextField {
         self.rightViewMode = .always
         self.rightView = lbl
     }
+
 }
 
 extension UIButton {

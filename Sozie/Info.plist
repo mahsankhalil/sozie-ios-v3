@@ -20,6 +20,7 @@
 	<string>9</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var userNameTxtFld: MFTextField!
 
 
+
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     
     override func viewDidLoad() {
@@ -33,7 +34,7 @@ class SignUpViewController: UIViewController {
         lastNameTxtFld.setupAppDesign()
         userNameTxtFld.setupAppDesign()
         dateOfBirtTxtFld.setupAppDesign()
-        
+
         
 
     }
@@ -53,10 +54,12 @@ class SignUpViewController: UIViewController {
     }
     func restrictToFourteenYears()
     {
+
         //        let fourteenYearInterval = TimeInterval(14 * 60 * 60 * 24 * 365)
         
         let fourteenYearsAgoDate =  Calendar.current.date(byAdding: .year, value: -14, to: Date())
         dateOfBirtTxtFld.pickerView.maximumDate = fourteenYearsAgoDate
+
 
     }
     
