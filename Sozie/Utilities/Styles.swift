@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SVProgressHUD
+import MaterialTextField
 struct ShadowStyle {
     let angle: Int //degrees
     let color: UIColor
@@ -131,6 +132,16 @@ extension UIView {
         layer.borderColor = UIColor(hex: "BFBFBF").cgColor
         layer.masksToBounds = true
         
+    }
+}
+
+extension MFTextField {
+    func setupAppDesign()
+    {
+        self.underlineColor = UIColor(hex: "DADADA")
+        self.placeholderColor = UIColor(hex: "888888")
+        self.tintColor = UIColor(hex: "FC8888")
+        self.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
     }
 }
 

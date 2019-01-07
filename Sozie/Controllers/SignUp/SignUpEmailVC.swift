@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import UnderLineTextField
+import MaterialTextField
 class SignUpEmailVC: UIViewController {
 
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var emailTxtFld: UnderLineTextField!
-    @IBOutlet weak var passwordTxtFld: UnderLineTextField!
-    @IBOutlet weak var confirmPasswordTxtFld: UnderLineTextField!
+    @IBOutlet weak var emailTxtFld: MFTextField!
+    @IBOutlet weak var passwordTxtFld: MFTextField!
+    @IBOutlet weak var confirmPasswordTxtFld: MFTextField!
     @IBOutlet weak var facebookBtn: UIButton!
     @IBOutlet weak var showConfirmPasswordBtn: UIButton!
     
@@ -26,9 +26,9 @@ class SignUpEmailVC: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        emailTxtFld.validationType = .afterEdit
-        passwordTxtFld.validationType = .afterEdit
-        confirmPasswordTxtFld.validationType = .afterEdit
+        emailTxtFld.setupAppDesign()
+        passwordTxtFld.setupAppDesign()
+        confirmPasswordTxtFld.setupAppDesign()
 
     }
     
