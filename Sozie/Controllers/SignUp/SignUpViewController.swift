@@ -8,16 +8,15 @@
 
 import UIKit
 import SwiftValidator
-import UnderLineTextField
-
+import MaterialTextField
 class SignUpViewController: UIViewController {
 
   @IBOutlet weak var femaleBtn: UIButton!
   @IBOutlet weak var maleBtn: UIButton!
 
-    @IBOutlet weak var lastNameTxtFld: UnderLineTextField!
-    @IBOutlet weak var firstNameTxtFld: UnderLineTextField!
-    @IBOutlet weak var userNameTxtFld: UnderLineTextField!
+    @IBOutlet weak var lastNameTxtFld: MFTextField!
+    @IBOutlet weak var firstNameTxtFld: MFTextField!
+    @IBOutlet weak var userNameTxtFld: MFTextField!
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     
     override func viewDidLoad() {
@@ -30,6 +29,10 @@ class SignUpViewController: UIViewController {
         
         dateOfBirtTxtFld.title = "DATE OF BIRTH"
         restrictToFourteenYears()
+        firstNameTxtFld.setupAppDesign()
+        lastNameTxtFld.setupAppDesign()
+        userNameTxtFld.setupAppDesign()
+        dateOfBirtTxtFld.setupAppDesign()
         
       
     }
@@ -39,10 +42,19 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setupMaterialTxtField()
+    {
+        firstNameTxtFld.underlineColor = UIColor(hex: "DADADA")
+        firstNameTxtFld.placeholderColor = UIColor(hex: "888888")
+        firstNameTxtFld.tintColor = UIColor(hex: "FC8888")
+        firstNameTxtFld.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
+    }
     func restrictToFourteenYears()
     {
-        let fourteenYearInterval = TimeInterval(14 * 60 * 60 * 24 * 365)
-        dateOfBirtTxtFld.pickerView.maximumDate = Date(timeIntervalSinceNow: fourteenYearInterval)
+//        let fourteenYearInterval = TimeInterval(14 * 60 * 60 * 24 * 365)
+        
+        let fourteenYearsAgoDate =  Calendar.current.date(byAdding: .year, value: -14, to: Date())
+        dateOfBirtTxtFld.pickerView.maximumDate = fourteenYearsAgoDate
     }
     
     

@@ -8,18 +8,17 @@
 
 import UIKit
 import SwiftValidator
-import UnderLineTextField
 import GoogleSignIn
-import UnderLineTextField
 import SVProgressHUD
+import MaterialTextField
 import FBSDKLoginKit
 
-class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate, UnderLineTextFieldDelegate {
+class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
     
     static let identifier = "signInViewController"
 
-    @IBOutlet weak var emailField: UnderLineTextField!
-    @IBOutlet weak var passwordField: UnderLineTextField!
+    @IBOutlet weak var emailField: MFTextField!
+    @IBOutlet weak var passwordField: MFTextField!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     
@@ -39,8 +38,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        emailField.validationType = .afterEdit
-        passwordField.validationType = .afterEdit
+        emailField.setupAppDesign()
+        passwordField.setupAppDesign()
+//        emailField.validationType = .afterEdit
+//        passwordField.validationType = .afterEdit
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,29 +88,21 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
-            if let field = field as? UnderLineTextField {
+            if let field = field as? MFTextField {
 
-                _ = field.resignFirstResponder()
-                field.errorLabel.text = error.errorMessage
-                field.status = .error
+//                _ = field.resignFirstResponder()
+//                field.errorLabel.text = error.errorMessage
+//                field.status = .error
 //                }
             }
         }
     }
     
-    func textFieldValidate(underLineTextField: UnderLineTextField) throws {
-        if underLineTextField.status == .error
-        {
-            throw UnderLineTextFieldErrors.error(message: "Invalid data")
-
-        }
-
-        
-    }
+    
     
     //MARK: - IBActions
     @IBAction func signinButtonPressed(_ sender: Any) {
-        validator.validate(self)
+//        validator.validate(self)
     }
     
     @IBAction func facebookButtonPressed(sender: AnyObject) {
