@@ -9,13 +9,17 @@
 import UIKit
 import SwiftValidator
 import UnderLineTextField
+import GoogleSignIn
+import UnderLineTextField
+import SVProgressHUD
+import FBSDKLoginKit
 
 class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate, UnderLineTextFieldDelegate {
     
     static let identifier = "signInViewController"
 
-    @IBOutlet weak var emailField: UnderLineTextFieldCarthage!
-    @IBOutlet weak var passwordField: UnderLineTextFieldCarthage!
+    @IBOutlet weak var emailField: UnderLineTextField!
+    @IBOutlet weak var passwordField: UnderLineTextField!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     
@@ -52,6 +56,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         [emailField, passwordField].forEach { (field) in
             field?.delegate = self
         }
+        
+    
+        
+        
     }
     
     func validationSuccessful() {
@@ -61,33 +69,41 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         params["password"] = passwordField.text
         
         SVProgressHUD.show()
-        RequestManager.loginUser(param: params, successBlock: { (response) in
+        
+        
+        ServerManager.sharedInstance.loginWith(params: params) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-            self.successfulLogin(response: response)
-        }) { (error) in
-            
-            UtilityManager.showErrorMessage(body: error, in: self)
+
         }
+        
+//        RequestManager.loginUser(param: params, successBlock: { (response) in
+//            SVProgressHUD.dismiss()
+//            self.successfulLogin(response: response)
+//        }) { (error) in
+//
+//            UtilityManager.showErrorMessage(body: error, in: self)
+//        }
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
-            if let field = field as? UITextField {
-                field.layer.borderColor = UIColor.red.cgColor
-                field.layer.borderWidth = 1.0
-                field.resignFirstResponder()
-                if error.errorLabel?.isHidden == true {
-                    error.errorLabel?.text = error.errorMessage // works if you added labels
-                    error.errorLabel?.isHidden = false
-                }
+            if let field = field as? UnderLineTextField {
+
+                _ = field.resignFirstResponder()
+                field.errorLabel.text = error.errorMessage
+                field.status = .error
+//                }
             }
         }
     }
     
     func textFieldValidate(underLineTextField: UnderLineTextField) throws {
-        if underLineTextField == emailField {
+        if underLineTextField.status == .error
+        {
             throw UnderLineTextFieldErrors.error(message: "Invalid data")
+
         }
+
         
     }
     
@@ -118,40 +134,40 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             let url = Constant.facebookURL + "?fields=\(fields)&access_token=\(token.tokenString!)"
             
             //Make API call to facebook graph api to get data
-            RequestManager.getUserFacebookProfile(url: url, successBlock: { (response) in
-                /*{
-                 email = "danialzahid94@live.com";
-                 "first_name" = Danial;
-                 gender = male;
-                 id = 10210243338655397;
-                 "last_name" = Zahid;
-                 name = "Danial Zahid";
-                 }*/
-                print(response)
-                var params = [String: String]()
-                params["social_provider_name"] = "facebook"
-                params["full_name"] = response["name"] as? String
-                params["social_id"] = response["id"] as? String
-                params["email"] = response["email"] as? String
-                params["facebook_profile"] = response["link"] as? String
-                if let image = response["picture"] as? [String: AnyObject] {
-                    if let data = image["data"] as? [String: AnyObject] {
-                        params["image_path"] = data["url"] as? String
-                    }
-                }
-                
-                
-                RequestManager.socialLoginUser(param: params, successBlock: { (response) in
-                    self.successfulLogin(response: response)
-                }, failureBlock: { (error) in
-                    
-                    UtilityManager.showErrorMessage(body: error, in: self)
-                    
-                })
-                
-            }, failureBlock: { (error) in
-                UtilityManager.showErrorMessage(body: error, in: self)
-            })
+//            RequestManager.getUserFacebookProfile(url: url, successBlock: { (response) in
+//                /*{
+//                 email = "danialzahid94@live.com";
+//                 "first_name" = Danial;
+//                 gender = male;
+//                 id = 10210243338655397;
+//                 "last_name" = Zahid;
+//                 name = "Danial Zahid";
+//                 }*/
+//                print(response)
+//                var params = [String: String]()
+//                params["social_provider_name"] = "facebook"
+//                params["full_name"] = response["name"] as? String
+//                params["social_id"] = response["id"] as? String
+//                params["email"] = response["email"] as? String
+//                params["facebook_profile"] = response["link"] as? String
+//                if let image = response["picture"] as? [String: AnyObject] {
+//                    if let data = image["data"] as? [String: AnyObject] {
+//                        params["image_path"] = data["url"] as? String
+//                    }
+//                }
+//
+//
+//                RequestManager.socialLoginUser(param: params, successBlock: { (response) in
+//                    self.successfulLogin(response: response)
+//                }, failureBlock: { (error) in
+//
+//                    UtilityManager.showErrorMessage(body: error, in: self)
+//
+//                })
+//
+//            }, failureBlock: { (error) in
+//                UtilityManager.showErrorMessage(body: error, in: self)
+//            })
         }
     }
     
@@ -171,12 +187,12 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             params["image_path"] = user.profile.imageURL(withDimension: 200).absoluteString
             
             
-            RequestManager.socialLoginUser(param: params, successBlock: { (response) in
-                self.successfulLogin(response: response)
-            }, failureBlock: { (error) in
-                UtilityManager.showErrorMessage(body: error, in: self)
-                
-            })
+//            RequestManager.socialLoginUser(param: params, successBlock: { (response) in
+//                self.successfulLogin(response: response)
+//            }, failureBlock: { (error) in
+//                UtilityManager.showErrorMessage(body: error, in: self)
+//                
+//            })
             // ...
         } else {
             if error.localizedDescription == "The user canceled the sign-in flow." {
@@ -211,10 +227,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     
     func successfulLogin(response: [String: AnyObject]) {
         SVProgressHUD.dismiss()
-        let user = User(dictionary: response)
-        ApplicationManager.sharedInstance.user = user
-        ApplicationManager.sharedInstance.session_id = response["session_id"] as! String
-        UserDefaults.standard.set(response["session_id"] as! String, forKey: UserDefaultKey.sessionID)
+//        let user = User(dictionary: response)
+//        ApplicationManager.sharedInstance.user = user
+//        ApplicationManager.sharedInstance.session_id = response["session_id"] as! String
+//        UserDefaults.standard.set(response["session_id"] as! String, forKey: UserDefaultKey.sessionID)
         //        Router.showMainTabBar()
     }
     

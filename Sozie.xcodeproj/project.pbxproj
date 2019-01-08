@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B47AA269E40B7B3E267C5F7 /* libPods-Sozie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E40489CAB527AD213AF013D2 /* libPods-Sozie.a */; };
+		61145CC121DB926700062332 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61145CC021DB926600062332 /* ServerManager.swift */; };
+		617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */; };
 		694480CC21C7A018001A11A2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF321C7A017001A11A2 /* SignUpViewController.swift */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
 		694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944800F21C7A017001A11A2 /* SignInViewController.swift */; };
 		694480EA21C7A018001A11A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801221C7A017001A11A2 /* Constants.swift */; };
-		694480EC21C7A018001A11A2 /* UIAlertController+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944801421C7A017001A11A2 /* UIAlertController+Blocks.m */; };
 		694480ED21C7A018001A11A2 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801521C7A017001A11A2 /* Styles.swift */; };
 		694480F121C7A018001A11A2 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6944801B21C7A017001A11A2 /* DayCell.xib */; };
 		694480F221C7A018001A11A2 /* ScrollableDatepicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801C21C7A017001A11A2 /* ScrollableDatepicker.swift */; };
@@ -21,14 +21,9 @@
 		694480F521C7A018001A11A2 /* LoadableFromXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801F21C7A017001A11A2 /* LoadableFromXibView.swift */; };
 		694480F621C7A018001A11A2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944802021C7A017001A11A2 /* Configuration.swift */; };
 		694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944802121C7A017001A11A2 /* UtilityManager.swift */; };
-		6944810621C7A018001A11A2 /* LIALinkedInAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944803621C7A017001A11A2 /* LIALinkedInAuthorizationViewController.m */; };
-		6944810721C7A018001A11A2 /* LIALinkedInHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944803921C7A017001A11A2 /* LIALinkedInHttpClient.m */; };
-		6944810821C7A018001A11A2 /* NSString+LIAEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944803B21C7A017001A11A2 /* NSString+LIAEncode.m */; };
-		6944810921C7A018001A11A2 /* LIALinkedInApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944803C21C7A017001A11A2 /* LIALinkedInApplication.m */; };
 		6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944803E21C7A017001A11A2 /* ApplicationManager.swift */; };
 		6944810B21C7A018001A11A2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944803F21C7A017001A11A2 /* Router.swift */; };
 		6944810C21C7A018001A11A2 /* DZImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944804021C7A017001A11A2 /* DZImageView.swift */; };
-		6944813321C7A018001A11A2 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944807321C7A017001A11A2 /* WebClient.swift */; };
 		6944813421C7A018001A11A2 /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944807421C7A017001A11A2 /* DatePickerTextField.swift */; };
 		6944813521C7A018001A11A2 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944807621C7A017001A11A2 /* DesignableImageView.swift */; };
 		6944813621C7A018001A11A2 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944807721C7A017001A11A2 /* KeyboardLayoutConstraint.swift */; };
@@ -59,31 +54,29 @@
 		6944814F21C7A018001A11A2 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944809121C7A017001A11A2 /* LoadingView.swift */; };
 		6944815121C7A018001A11A2 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944809321C7A017001A11A2 /* AsyncImageView.swift */; };
 		6944815921C7A018001A11A2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944809D21C7A018001A11A2 /* User.swift */; };
-		6944815B21C7A018001A11A2 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944809F21C7A018001A11A2 /* BaseEntity.m */; };
 		6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944817521C7A9ED001A11A2 /* LandingViewController.swift */; };
-		6944817A21C7AA99001A11A2 /* SwiftValidator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6944817821C7AA99001A11A2 /* SwiftValidator.framework */; };
-		6944817B21C7AA99001A11A2 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6944817921C7AA99001A11A2 /* SnapKit.framework */; };
 		69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69854D6821C8CA6D0092672D /* segoeui.ttf */; };
 		69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69854D6921C8CA6D0092672D /* segoeuib.ttf */; };
 		69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D6E21C8D88A0092672D /* DZGradientView.swift */; };
 		69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D7021C8D9C70092672D /* DZGradientButton.swift */; };
-		69854D7421C905060092672D /* UnderLineTextFieldCarthage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D7321C905060092672D /* UnderLineTextFieldCarthage.swift */; };
-		69854D7521C905410092672D /* UnderLineTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6944817C21C7BFC7001A11A2 /* UnderLineTextField.framework */; };
 		6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6998E7DC21C77778009DFBEF /* AppDelegate.swift */; };
 		6998E7E221C77778009DFBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E021C77778009DFBEF /* Main.storyboard */; };
 		6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E321C77779009DFBEF /* Assets.xcassets */; };
 		6998E7E721C77779009DFBEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E521C77779009DFBEF /* LaunchScreen.storyboard */; };
 		69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */; };
 		69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */; };
+		E417DCD0989C188C9CE6722B /* Pods_Sozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.debug.xcconfig"; sourceTree = "<group>"; };
+		61145CC021DB926600062332 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfilePictureVC.swift; sourceTree = "<group>"; };
+		617AC4FF21D38C6A00655C3C /* Sozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sozie.entitlements; sourceTree = "<group>"; };
 		69447FF321C7A017001A11A2 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6944800F21C7A017001A11A2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6944801221C7A017001A11A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		6944801421C7A017001A11A2 /* UIAlertController+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Blocks.m"; sourceTree = "<group>"; };
 		6944801521C7A017001A11A2 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		6944801B21C7A017001A11A2 /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
 		6944801C21C7A017001A11A2 /* ScrollableDatepicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableDatepicker.swift; sourceTree = "<group>"; };
@@ -92,19 +85,9 @@
 		6944801F21C7A017001A11A2 /* LoadableFromXibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableFromXibView.swift; sourceTree = "<group>"; };
 		6944802021C7A017001A11A2 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		6944802121C7A017001A11A2 /* UtilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityManager.swift; sourceTree = "<group>"; };
-		6944803521C7A017001A11A2 /* LIALinkedInHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIALinkedInHttpClient.h; sourceTree = "<group>"; };
-		6944803621C7A017001A11A2 /* LIALinkedInAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIALinkedInAuthorizationViewController.m; sourceTree = "<group>"; };
-		6944803721C7A017001A11A2 /* LIALinkedInApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIALinkedInApplication.h; sourceTree = "<group>"; };
-		6944803821C7A017001A11A2 /* NSString+LIAEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LIAEncode.h"; sourceTree = "<group>"; };
-		6944803921C7A017001A11A2 /* LIALinkedInHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIALinkedInHttpClient.m; sourceTree = "<group>"; };
-		6944803A21C7A017001A11A2 /* LIALinkedInAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIALinkedInAuthorizationViewController.h; sourceTree = "<group>"; };
-		6944803B21C7A017001A11A2 /* NSString+LIAEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LIAEncode.m"; sourceTree = "<group>"; };
-		6944803C21C7A017001A11A2 /* LIALinkedInApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIALinkedInApplication.m; sourceTree = "<group>"; };
-		6944803D21C7A017001A11A2 /* UIAlertController+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Blocks.h"; sourceTree = "<group>"; };
 		6944803E21C7A017001A11A2 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		6944803F21C7A017001A11A2 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		6944804021C7A017001A11A2 /* DZImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZImageView.swift; sourceTree = "<group>"; };
-		6944807321C7A017001A11A2 /* WebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		6944807421C7A017001A11A2 /* DatePickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
 		6944807621C7A017001A11A2 /* DesignableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
 		6944807721C7A017001A11A2 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
@@ -128,28 +111,19 @@
 		6944808921C7A017001A11A2 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		6944808A21C7A017001A11A2 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		6944808B21C7A017001A11A2 /* SpringLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
-		6944808C21C7A017001A11A2 /* Spring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spring.h; sourceTree = "<group>"; };
 		6944808D21C7A017001A11A2 /* DesignableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextView.swift; sourceTree = "<group>"; };
 		6944808E21C7A017001A11A2 /* AutoTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTextView.swift; sourceTree = "<group>"; };
 		6944808F21C7A017001A11A2 /* SpringAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringAnimation.swift; sourceTree = "<group>"; };
 		6944809021C7A017001A11A2 /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
 		6944809121C7A017001A11A2 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6944809321C7A017001A11A2 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
-		6944809721C7A018001A11A2 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		6944809D21C7A018001A11A2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		6944809F21C7A018001A11A2 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
-		6944817421C7A5BD001A11A2 /* Sozie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sozie-Bridging-Header.h"; sourceTree = "<group>"; };
 		6944817521C7A9ED001A11A2 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
-		6944817821C7AA99001A11A2 /* SwiftValidator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftValidator.framework; path = Carthage/Build/iOS/SwiftValidator.framework; sourceTree = "<group>"; };
-		6944817921C7AA99001A11A2 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		6944817C21C7BFC7001A11A2 /* UnderLineTextField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnderLineTextField.framework; path = Carthage/Build/iOS/UnderLineTextField.framework; sourceTree = "<group>"; };
 		69854D6821C8CA6D0092672D /* segoeui.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = segoeui.ttf; sourceTree = "<group>"; };
 		69854D6921C8CA6D0092672D /* segoeuib.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = segoeuib.ttf; sourceTree = "<group>"; };
-		69854D6C21C8D61F0092672D /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyFloatingLabelTextField.framework; path = Carthage/Build/iOS/SkyFloatingLabelTextField.framework; sourceTree = "<group>"; };
 		69854D6E21C8D88A0092672D /* DZGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZGradientView.swift; sourceTree = "<group>"; };
 		69854D7021C8D9C70092672D /* DZGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DZGradientButton.swift; sourceTree = "<group>"; };
 		69854D7221C8DC610092672D /* seguisb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = seguisb.ttf; sourceTree = "<group>"; };
-		69854D7321C905060092672D /* UnderLineTextFieldCarthage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnderLineTextFieldCarthage.swift; path = "Carthage/Checkouts/UnderLineTextField/Carthage Wrapper/UnderLineTextFieldCarthage.swift"; sourceTree = SOURCE_ROOT; };
 		6998E7D921C77778009DFBEF /* Sozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6998E7DC21C77778009DFBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6998E7E121C77778009DFBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -158,7 +132,7 @@
 		6998E7E821C77779009DFBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DZValidator.swift; sourceTree = "<group>"; };
-		E40489CAB527AD213AF013D2 /* libPods-Sozie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sozie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,10 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69854D7521C905410092672D /* UnderLineTextField.framework in Frameworks */,
-				6944817A21C7AA99001A11A2 /* SwiftValidator.framework in Frameworks */,
-				6944817B21C7AA99001A11A2 /* SnapKit.framework in Frameworks */,
-				4B47AA269E40B7B3E267C5F7 /* libPods-Sozie.a in Frameworks */,
+				E417DCD0989C188C9CE6722B /* Pods_Sozie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +175,7 @@
 				6944800F21C7A017001A11A2 /* SignInViewController.swift */,
 				69447FF321C7A017001A11A2 /* SignUpViewController.swift */,
 				6944817521C7A9ED001A11A2 /* LandingViewController.swift */,
+				617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -212,10 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				6944801A21C7A017001A11A2 /* DatePicker */,
-				6944803421C7A017001A11A2 /* IOSLinkedInAPI */,
 				6944807521C7A017001A11A2 /* Spring */,
-				6944803D21C7A017001A11A2 /* UIAlertController+Blocks.h */,
-				6944801421C7A017001A11A2 /* UIAlertController+Blocks.m */,
 				6944803E21C7A017001A11A2 /* ApplicationManager.swift */,
 				6944801221C7A017001A11A2 /* Constants.swift */,
 				6944807421C7A017001A11A2 /* DatePickerTextField.swift */,
@@ -224,10 +193,9 @@
 				6944804021C7A017001A11A2 /* DZImageView.swift */,
 				6944803F21C7A017001A11A2 /* Router.swift */,
 				6944801521C7A017001A11A2 /* Styles.swift */,
-				69854D7321C905060092672D /* UnderLineTextFieldCarthage.swift */,
 				6944802121C7A017001A11A2 /* UtilityManager.swift */,
-				6944807321C7A017001A11A2 /* WebClient.swift */,
 				69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */,
+				61145CC021DB926600062332 /* ServerManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -243,21 +211,6 @@
 				6944802021C7A017001A11A2 /* Configuration.swift */,
 			);
 			path = DatePicker;
-			sourceTree = "<group>";
-		};
-		6944803421C7A017001A11A2 /* IOSLinkedInAPI */ = {
-			isa = PBXGroup;
-			children = (
-				6944803521C7A017001A11A2 /* LIALinkedInHttpClient.h */,
-				6944803621C7A017001A11A2 /* LIALinkedInAuthorizationViewController.m */,
-				6944803721C7A017001A11A2 /* LIALinkedInApplication.h */,
-				6944803821C7A017001A11A2 /* NSString+LIAEncode.h */,
-				6944803921C7A017001A11A2 /* LIALinkedInHttpClient.m */,
-				6944803A21C7A017001A11A2 /* LIALinkedInAuthorizationViewController.h */,
-				6944803B21C7A017001A11A2 /* NSString+LIAEncode.m */,
-				6944803C21C7A017001A11A2 /* LIALinkedInApplication.m */,
-			);
-			path = IOSLinkedInAPI;
 			sourceTree = "<group>";
 		};
 		6944807521C7A017001A11A2 /* Spring */ = {
@@ -280,7 +233,6 @@
 				6944808A21C7A017001A11A2 /* LoadingView.xib */,
 				6944808321C7A017001A11A2 /* Misc.swift */,
 				6944807E21C7A017001A11A2 /* SoundPlayer.swift */,
-				6944808C21C7A017001A11A2 /* Spring.h */,
 				6944807B21C7A017001A11A2 /* Spring.swift */,
 				6944808F21C7A017001A11A2 /* SpringAnimation.swift */,
 				6944808121C7A017001A11A2 /* SpringButton.swift */,
@@ -299,8 +251,6 @@
 		6944809421C7A018001A11A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6944809721C7A018001A11A2 /* BaseEntity.h */,
-				6944809F21C7A018001A11A2 /* BaseEntity.m */,
 				6944809D21C7A018001A11A2 /* User.swift */,
 			);
 			path = Models;
@@ -319,7 +269,7 @@
 				6998E7DB21C77778009DFBEF /* Sozie */,
 				6998E7DA21C77778009DFBEF /* Products */,
 				57DBE9031E8C78777537FE26 /* Pods */,
-				AF1D35918730F86CE795D281 /* Frameworks */,
+				9FCA74413CAF87C22BD8D93F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -334,6 +284,7 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				617AC4FF21D38C6A00655C3C /* Sozie.entitlements */,
 				69447FF221C7A017001A11A2 /* Controllers */,
 				69447FDF21C7A017001A11A2 /* Fonts */,
 				6944809421C7A018001A11A2 /* Models */,
@@ -344,19 +295,14 @@
 				6998E7E321C77779009DFBEF /* Assets.xcassets */,
 				6998E7E521C77779009DFBEF /* LaunchScreen.storyboard */,
 				6998E7E821C77779009DFBEF /* Info.plist */,
-				6944817421C7A5BD001A11A2 /* Sozie-Bridging-Header.h */,
 			);
 			path = Sozie;
 			sourceTree = "<group>";
 		};
-		AF1D35918730F86CE795D281 /* Frameworks */ = {
+		9FCA74413CAF87C22BD8D93F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				69854D6C21C8D61F0092672D /* SkyFloatingLabelTextField.framework */,
-				6944817C21C7BFC7001A11A2 /* UnderLineTextField.framework */,
-				6944817921C7AA99001A11A2 /* SnapKit.framework */,
-				6944817821C7AA99001A11A2 /* SwiftValidator.framework */,
-				E40489CAB527AD213AF013D2 /* libPods-Sozie.a */,
+				BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -373,7 +319,7 @@
 				6998E7D621C77778009DFBEF /* Frameworks */,
 				6998E7D721C77778009DFBEF /* Resources */,
 				E8874CA3E3421222BA772B7D /* [CP] Copy Pods Resources */,
-				6944817721C7AA57001A11A2 /* ShellScript */,
+				0F2B9975FDECE7491E45956A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -396,6 +342,11 @@
 				TargetAttributes = {
 					6998E7D821C77778009DFBEF = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -436,6 +387,54 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0F2B9975FDECE7491E45956A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Sozie/Pods-Sozie-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/UnderLineTextField/UnderLineTextField.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnderLineTextField.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sozie/Pods-Sozie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		543CE1B46035D98D23910295 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,26 +457,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6944817721C7AA57001A11A2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftValidator.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/UnderLineTextField.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n\n";
-		};
 		E8874CA3E3421222BA772B7D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -487,19 +466,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sozie/Pods-Sozie-resources.sh",
-				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
-				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -513,16 +486,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				694480EC21C7A018001A11A2 /* UIAlertController+Blocks.m in Sources */,
 				6944813421C7A018001A11A2 /* DatePickerTextField.swift in Sources */,
 				69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */,
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
 				6944814D21C7A018001A11A2 /* SpringAnimation.swift in Sources */,
 				6944814B21C7A018001A11A2 /* DesignableTextView.swift in Sources */,
 				6944814A21C7A018001A11A2 /* SpringLabel.swift in Sources */,
-				69854D7421C905060092672D /* UnderLineTextFieldCarthage.swift in Sources */,
 				69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */,
-				6944813321C7A018001A11A2 /* WebClient.swift in Sources */,
 				6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */,
 				6944810C21C7A018001A11A2 /* DZImageView.swift in Sources */,
 				6944813821C7A018001A11A2 /* TransitionZoom.swift in Sources */,
@@ -530,13 +500,12 @@
 				6944813E21C7A018001A11A2 /* BlurView.swift in Sources */,
 				6944813621C7A018001A11A2 /* KeyboardLayoutConstraint.swift in Sources */,
 				6944814C21C7A018001A11A2 /* AutoTextView.swift in Sources */,
-				6944810921C7A018001A11A2 /* LIALinkedInApplication.m in Sources */,
 				694480EA21C7A018001A11A2 /* Constants.swift in Sources */,
 				6944813B21C7A018001A11A2 /* SpringImageView.swift in Sources */,
 				694480CC21C7A018001A11A2 /* SignUpViewController.swift in Sources */,
 				694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */,
 				6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */,
-				6944810621C7A018001A11A2 /* LIALinkedInAuthorizationViewController.m in Sources */,
+				617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */,
 				694480F521C7A018001A11A2 /* LoadableFromXibView.swift in Sources */,
 				6944814521C7A018001A11A2 /* SpringTextField.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
@@ -546,13 +515,12 @@
 				69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */,
 				6944814621C7A018001A11A2 /* DesignableView.swift in Sources */,
 				69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */,
-				6944810821C7A018001A11A2 /* NSString+LIAEncode.m in Sources */,
+				61145CC121DB926700062332 /* ServerManager.swift in Sources */,
 				694480F421C7A018001A11A2 /* DayCell.swift in Sources */,
 				6944813F21C7A018001A11A2 /* DesignableTextField.swift in Sources */,
 				694480F221C7A018001A11A2 /* ScrollableDatepicker.swift in Sources */,
 				6944814821C7A018001A11A2 /* AsyncButton.swift in Sources */,
 				6944815921C7A018001A11A2 /* User.swift in Sources */,
-				6944810721C7A018001A11A2 /* LIALinkedInHttpClient.m in Sources */,
 				6944813521C7A018001A11A2 /* DesignableImageView.swift in Sources */,
 				6944814421C7A018001A11A2 /* DesignableButton.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
@@ -560,7 +528,6 @@
 				694480F621C7A018001A11A2 /* Configuration.swift in Sources */,
 				6944814221C7A018001A11A2 /* Misc.swift in Sources */,
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
-				6944815B21C7A018001A11A2 /* BaseEntity.m in Sources */,
 				6944813D21C7A018001A11A2 /* SoundPlayer.swift in Sources */,
 				6944814321C7A018001A11A2 /* SpringView.swift in Sources */,
 				6944815121C7A018001A11A2 /* AsyncImageView.swift in Sources */,
@@ -715,11 +682,12 @@
 			baseConfigurationReference = 599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sozie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -730,7 +698,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Sozie/Sozie-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -741,11 +709,12 @@
 			baseConfigurationReference = F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sozie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -756,7 +725,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Sozie/Sozie-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

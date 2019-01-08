@@ -9,38 +9,73 @@
 
 import UIKit
 
-@objc class User: BaseEntity {
+
+struct User: Codable {
     
-    @objc var full_name: String?
-    @objc var email: String?
-    @objc var user_id: String?
-//    var image_path: String?
-    @objc var about: String?
-    @objc var interests: String?
-    @objc var school: String?
-    @objc var worked_at: String?
-    @objc var works_at: String?
-    @objc var lives_in: String?
-    @objc var contact_number: String?
-    @objc var facebook_profile: String?
-    @objc var linkedin_profile: String?
-    @objc var website: String?
-    @objc var google_profile: String?
-    @objc var headline: String?
-    
-    override init() {
-        super.init()
-    }
-    
-    override init(dictionary: [AnyHashable : Any]!) {
-        super.init()
-        let newDateFormatter = DateFormatter()
-        newDateFormatter.dateFormat = Constant.serverDateFormat
-        newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
-        self.setValuesForKeysWithJSONDictionary(dictionary, dateFormatter: newDateFormatter)
+    var username: String?
+    var email: String?
+    var userId: Int?
+
+    var gender: String?
+    var birthday: String?
+    var city: String?
+    var avatar: String?
+    var picture: String?
+    var measurement : Measurement?
+    enum CodingKeys: String, CodingKey {
         
+        case username
+        case email
+        case userId = "user_id"
+        case gender
+        case birthday
+        case city
+        case avatar
+        case picture
+        case measurement
+        
+
         
     }
-    
-    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        username = try values.decode(String.self, forKey: .username)
+        email = try values.decode(String.self, forKey: .email)
+        userId = try values.decode(Int.self, forKey: .userId)
+        gender = try values.decode(String.self, forKey: .gender)
+        birthday = try values.decode(String.self, forKey: .birthday)
+        city = try values.decode(String.self, forKey: .city)
+        avatar = try values.decode(String.self, forKey: .avatar)
+        picture = try values.decode(String.self, forKey: .picture)
+        measurement = try values.decode(Measurement.self, forKey: .measurement)
+    }
+}
+
+struct Measurement : Codable{
+    var bra : String?
+    var height : String?
+    var body_shape : String?
+    var hip : String?
+    var cup : String?
+    var waist : String?
+    enum CodingKeys: String, CodingKey {
+
+        case bra
+        case height
+        case body_shape
+        case hip
+        case cup
+        case waist
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        bra = try values.decode(String.self, forKey: .bra)
+        height = try values.decode(String.self, forKey: .height)
+        body_shape = try values.decode(String.self, forKey: .body_shape)
+        hip = try values.decode(String.self, forKey: .hip)
+        cup = try values.decode(String.self, forKey: .cup)
+        waist = try values.decode(String.self, forKey: .waist)
+
+        
+    }
 }
