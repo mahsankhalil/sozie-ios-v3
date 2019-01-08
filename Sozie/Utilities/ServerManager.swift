@@ -13,10 +13,10 @@ class ServerManager: NSObject {
 
     static let sharedInstance = ServerManager()
 
-    static let serverURL = "http://172.16.12.58:8000/api/v1/"
+    static let serverURL = "http://3.8.161.238/api/v1/"
     static let loginURL = ServerManager.serverURL + "user/login/"
     static let profileURL = ServerManager.serverURL + "user/profile/"
-    
+    static let sizeChartURL = ServerManager.serverURL + "common/sizechart"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
     func loginWith(params : [String : Any] , block : CompletionHandler)
@@ -35,6 +35,14 @@ class ServerManager: NSObject {
     {
         
         Alamofire.request(ServerManager.profileURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
+            
+            debugPrint(response)
+        }
+    }
+    
+    func getSizeCharts(params : [String : Any] , block : CompletionHandler)
+    {
+        Alamofire.request(ServerManager.sizeChartURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
             
             debugPrint(response)
         }

@@ -18,6 +18,8 @@
 	<string>3.0</string>
 	<key>CFBundleVersion</key>
 	<string>9</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -29,6 +31,7 @@
 		<string>segoeui.ttf</string>
 		<string>segoeuib.ttf</string>
 		<string>seguisb.ttf</string>
+		<string>SEGOEUII_1.TTF</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
