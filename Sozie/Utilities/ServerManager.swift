@@ -42,6 +42,7 @@ class ServerManager: NSObject {
     
     func getSizeCharts(params : [String : Any] , block : CompletionHandler)
     {
+
         Alamofire.request(ServerManager.sizeChartURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             
             let decoder = JSONDecoder()
@@ -53,6 +54,7 @@ class ServerManager: NSObject {
                 block!(false , obj.error!)
             }
             
+
         }
     }
 

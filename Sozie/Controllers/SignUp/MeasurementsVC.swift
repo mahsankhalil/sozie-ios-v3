@@ -8,6 +8,7 @@
 
 import UIKit
 import MaterialTextField
+
 import SVProgressHUD
 public enum MeasurementType {
     case height
@@ -21,28 +22,34 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var backBtn: UIButton!
    
     @IBOutlet weak var tblVu: UITableView!
+
     @IBOutlet weak var waistNotSureBtn: UIButton!
     @IBOutlet weak var uploadBtn: DZGradientButton!
     @IBOutlet weak var hipsNotSureBtn: UIButton!
     @IBOutlet weak var shipBtn: UIButton!
+
     
     var sizeChart : SizeChart?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
 
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         fetchDataFromServer()
 
     }
     
     func fetchDataFromServer()
     {
+
         SVProgressHUD.show()
         ServerManager.sharedInstance.getSizeCharts(params: [:]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -56,6 +63,7 @@ class MeasurementsVC: UIViewController {
                 let err = response as? Error
                 UtilityManager.showErrorMessage(body: err?.localizedDescription ?? "Something went wrong" , in: self)
             }
+
         }
     }
     
@@ -76,6 +84,7 @@ class MeasurementsVC: UIViewController {
     @IBAction func skipBtnTapped(_ sender: Any) {
     }
     @IBAction func backBtnTapped(_ sender: Any) {
+
         self.dismiss(animated: true) {
             
         }
@@ -156,4 +165,5 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource{
     }
     
     
+
 }
