@@ -234,6 +234,19 @@ public func timeAgoSinceDate(date: Date, numericDates: Bool) -> String {
     
 }
 
+extension Array where Element == Int {
+    func convertArrayToString() -> [String]
+    {
+        var arrayOfString = [String]()
+        for elem in self
+        {
+            arrayOfString.append(String(describing: elem))
+        }
+        return arrayOfString
+    }
+    
+}
+
 extension UIImageView {
     func setImage(url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit, placeholderImage: UIImage?) {
         contentMode = mode

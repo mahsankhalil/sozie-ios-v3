@@ -44,6 +44,8 @@ public class Constant: NSObject {
     static let getProfileURL = "signin"
     static let socialLoginURL = "signin"
     
+    static let single = "single"
+    static let double = "double"
     
     // MARK: - API COnstants
     

@@ -14,9 +14,14 @@
 		617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12921DE286700D4C885 /* SignUpViewController.swift */; };
 		617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12B21DE288400D4C885 /* SelectCountryVC.swift */; };
 		617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */; };
+		619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619EC53021E5F95000E4AE02 /* SizeChart.swift */; };
 		61A20A5021E4B28A00B27C8E /* MeasurementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */; };
 		61A20A5221E4D24300B27C8E /* CustomPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A5121E4D24300B27C8E /* CustomPickerTextField.swift */; };
 		61A20A5421E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A5321E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift */; };
+		61A20A5721E5DDAC00B27C8E /* SingleTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A5521E5DDAC00B27C8E /* SingleTextFieldCell.swift */; };
+		61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A20A5621E5DDAC00B27C8E /* SingleTextFieldCell.xib */; };
+		61A20A5B21E5DDBF00B27C8E /* DoubleTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */; };
+		61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */; };
 		61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
 		694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944800F21C7A017001A11A2 /* SignInViewController.swift */; };
@@ -86,9 +91,14 @@
 		617CD12921DE286700D4C885 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		617CD12B21DE288400D4C885 /* SelectCountryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryVC.swift; sourceTree = "<group>"; };
 		617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailVC.swift; sourceTree = "<group>"; };
+		619EC53021E5F95000E4AE02 /* SizeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeChart.swift; sourceTree = "<group>"; };
 		61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsVC.swift; sourceTree = "<group>"; };
 		61A20A5121E4D24300B27C8E /* CustomPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickerTextField.swift; sourceTree = "<group>"; };
 		61A20A5321E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+DecodeResponse.swift"; sourceTree = "<group>"; };
+		61A20A5521E5DDAC00B27C8E /* SingleTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextFieldCell.swift; sourceTree = "<group>"; };
+		61A20A5621E5DDAC00B27C8E /* SingleTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleTextFieldCell.xib; sourceTree = "<group>"; };
+		61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextFieldCell.swift; sourceTree = "<group>"; };
+		61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleTextFieldCell.xib; sourceTree = "<group>"; };
 		61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SEGOEUII_1.TTF; sourceTree = "<group>"; };
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6944800F21C7A017001A11A2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +188,10 @@
 			children = (
 				617CD12421DE229000D4C885 /* CountryCell.swift */,
 				617CD12521DE229000D4C885 /* CountryCell.xib */,
+				61A20A5521E5DDAC00B27C8E /* SingleTextFieldCell.swift */,
+				61A20A5621E5DDAC00B27C8E /* SingleTextFieldCell.xib */,
+				61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */,
+				61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */,
 			);
 			path = CustomControls;
 			sourceTree = "<group>";
@@ -291,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				6944809D21C7A018001A11A2 /* User.swift */,
+				619EC53021E5F95000E4AE02 /* SizeChart.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -413,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */,
 				694480F321C7A018001A11A2 /* ScrollableDatepicker.xib in Resources */,
 				6944814921C7A018001A11A2 /* LoadingView.xib in Resources */,
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
@@ -420,6 +436,7 @@
 				69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */,
 				6998E7E721C77779009DFBEF /* LaunchScreen.storyboard in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
+				61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */,
 				694480F121C7A018001A11A2 /* DayCell.xib in Resources */,
 				6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */,
 				6998E7E221C77778009DFBEF /* Main.storyboard in Resources */,
@@ -529,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6944813421C7A018001A11A2 /* DatePickerTextField.swift in Sources */,
+				61A20A5721E5DDAC00B27C8E /* SingleTextFieldCell.swift in Sources */,
 				61A20A5221E4D24300B27C8E /* CustomPickerTextField.swift in Sources */,
 				61A20A5021E4B28A00B27C8E /* MeasurementsVC.swift in Sources */,
 				69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */,
@@ -555,6 +573,7 @@
 				6944814521C7A018001A11A2 /* SpringTextField.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
 				6944814F21C7A018001A11A2 /* LoadingView.swift in Sources */,
+				61A20A5B21E5DDBF00B27C8E /* DoubleTextFieldCell.swift in Sources */,
 				6944810B21C7A018001A11A2 /* Router.swift in Sources */,
 				6944813921C7A018001A11A2 /* ImageLoader.swift in Sources */,
 				69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */,
@@ -572,6 +591,7 @@
 				6944814421C7A018001A11A2 /* DesignableButton.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
 				6944814021C7A018001A11A2 /* SpringButton.swift in Sources */,
+				619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */,
 				694480F621C7A018001A11A2 /* Configuration.swift in Sources */,
 				6944814221C7A018001A11A2 /* Misc.swift in Sources */,
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
