@@ -8,13 +8,17 @@
 
 import UIKit
 import MaterialTextField
+
 class SignUpEmailVC: UIViewController {
 
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
+
     @IBOutlet weak var emailTxtFld: MFTextField!
     @IBOutlet weak var passwordTxtFld: MFTextField!
     @IBOutlet weak var confirmPasswordTxtFld: MFTextField!
+
+
     @IBOutlet weak var facebookBtn: UIButton!
     @IBOutlet weak var showConfirmPasswordBtn: UIButton!
     
@@ -26,9 +30,12 @@ class SignUpEmailVC: UIViewController {
 
         // Do any additional setup after loading the view.
         
+
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
+
+
 
     }
     
