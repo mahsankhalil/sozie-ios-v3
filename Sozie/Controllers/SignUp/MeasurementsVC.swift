@@ -27,6 +27,7 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var shipBtn: UIButton!
 
 
+
     
     var sizeChart : SizeChart?
 
@@ -164,6 +165,4 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource{
     }
     
     
-
-
 }

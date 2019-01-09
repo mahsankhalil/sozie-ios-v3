@@ -10,6 +10,7 @@ import UIKit
 import SwiftValidator
 import MaterialTextField
 class SignUpViewController: UIViewController {
+
     
     @IBOutlet weak var femaleBtn: UIButton!
     @IBOutlet weak var maleBtn: UIButton!
@@ -20,10 +21,12 @@ class SignUpViewController: UIViewController {
 
 
 
+
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         maleBtn.applyButtonUnSelected()
         femaleBtn.applyButtonUnSelected()
         
@@ -36,9 +39,10 @@ class SignUpViewController: UIViewController {
         dateOfBirtTxtFld.setupAppDesign()
 
         
-
+      
     }
-    
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -55,16 +59,19 @@ class SignUpViewController: UIViewController {
     func restrictToFourteenYears()
     {
 
+
         //        let fourteenYearInterval = TimeInterval(14 * 60 * 60 * 24 * 365)
         
         let fourteenYearsAgoDate =  Calendar.current.date(byAdding: .year, value: -14, to: Date())
         dateOfBirtTxtFld.pickerView.maximumDate = fourteenYearsAgoDate
 
 
+
     }
     
     
     @IBAction func signupButtonPressed(_ sender: Any) {
+
         
     }
     
@@ -94,4 +101,5 @@ class SignUpViewController: UIViewController {
         
     }
     
+
 }

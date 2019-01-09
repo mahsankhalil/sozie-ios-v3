@@ -321,12 +321,10 @@
                                 <rect key="frame" x="116.5" y="80" width="142" height="86"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX2-BI-bGz">
-                                <rect key="frame" x="38.5" y="262.5" width="298" height="102.5"/>
+                                <rect key="frame" x="40" y="277" width="295" height="73.5"/>
                                 <string key="text">SOZIE  [so-zee]  noun
-                                    1. Someone who has the same shape and style, but belongs to a different social circle
-                                    
-                                    2. Lookalike, double
-                                    “I want to see what my sozie is trying on because it would look good on me too.”</string>
+ 1. Someone who has the same shape and style, but belongs to a different social circle
+ 2. Lookalike, double “I want to see what my sozie is trying on because it would look good on me too.”</string>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="11"/>
                                 <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1484,6 +1482,6 @@
         <image name="login-logo" width="142" height="86.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DE9-Vg-jdy"/>
+        <segue reference="90n-N6-YqP"/>
     </inferredMetricsTieBreakers>
 </document>

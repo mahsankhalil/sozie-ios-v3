@@ -27,12 +27,12 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     var secondColumnAppendingString : String?
     var pickerDelegate: CustomPickerTextFieldDelegate?
 
-   
 
     override func awakeFromNib() {
         super.awakeFromNib()
         pickerView = UIPickerView()
         let myInputView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: pickerView.frame.height+20))
+
 
 
         pickerView.backgroundColor = UIColor.white
@@ -106,8 +106,8 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         {
 
 
-            return (secondColumnValues?.count)!
 
+            return (secondColumnValues?.count)!
 
         }
         
@@ -115,7 +115,9 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
 
 
+
         if self.measurementType == Constant.single
+
 
         {
             return 1
@@ -149,6 +151,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
 
 
 
+
         titleLbl?.text = title
         updateValues()
 
@@ -172,9 +175,9 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
 
 
 
+
         updateValues()
         self.endEditing(true)
-
 
 
     }

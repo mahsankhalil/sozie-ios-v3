@@ -23,8 +23,6 @@
 		61A20A5B21E5DDBF00B27C8E /* DoubleTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */; };
 		61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */; };
 		61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */; };
-
-
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
 		694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944800F21C7A017001A11A2 /* SignInViewController.swift */; };
 		694480EA21C7A018001A11A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801221C7A017001A11A2 /* Constants.swift */; };
@@ -102,7 +100,6 @@
 		61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextFieldCell.swift; sourceTree = "<group>"; };
 		61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleTextFieldCell.xib; sourceTree = "<group>"; };
 		61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SEGOEUII_1.TTF; sourceTree = "<group>"; };
-
 
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6944800F21C7A017001A11A2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -208,8 +205,8 @@
 				617CD12921DE286700D4C885 /* SignUpViewController.swift */,
 
 
-				61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */,
 
+				61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */,
 
 			);
 			path = SignUp;
