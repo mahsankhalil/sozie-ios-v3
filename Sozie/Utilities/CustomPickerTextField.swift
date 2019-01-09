@@ -8,19 +8,31 @@
 
 import UIKit
 import MaterialTextField
+
+@objc protocol CustomPickerTextFieldDelegate {
+    
+    @objc optional func customPickerValueChanges(value1 : String? , value2 : String?)
+}
 class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDelegate , UIPickerViewDataSource {
     var pickerView: UIPickerView!
     var values : [String]?
+    var secondColumnValues : [String]?
     var selectedIndex : Int?
     var currentValue: String?
     var measurementType : String?
     var titleLbl : UILabel?
     var title : String?
+    var firstColumnAppendingString : String?
+    var secondColumnAppendingString : String?
+    var pickerDelegate: CustomPickerTextFieldDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         pickerView = UIPickerView()
         let myInputView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: pickerView.frame.height+20))
+        pickerView.backgroundColor = UIColor.white
+        myInputView.backgroundColor = UIColor.white
+
         pickerView.frame = CGRect(x: pickerView.frame.origin.x, y: pickerView.frame.origin.y,width: myInputView.frame.size.width, height: pickerView.frame.size.height)
         pickerView.center = CGPoint(x: myInputView.center.x, y: myInputView.center.y + 10)
         myInputView.addSubview(pickerView)
@@ -48,6 +60,35 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         
     }
     
+    // MARK: - Custom Methods
+    
+    func updateTxtFldWith( rightTitle : String , placeholder : String , measurementType : String , values1 : [String]? , values2 : [String]? , title : String , firsColumStr : String , secondColumnStr : String)
+    {
+        self.applyRightVuLblWith(title: rightTitle)
+        self.placeholder = placeholder
+        self.measurementType = measurementType
+        self.values = values1
+        self.secondColumnValues = values2
+        
+        self.title = title
+        self.firstColumnAppendingString = firsColumStr
+        self.secondColumnAppendingString = secondColumnStr
+    }
+    
+    
+    func updateValues()
+    {
+        let value1 = values?[pickerView.selectedRow(inComponent: 0)]
+        var value2 : String?
+        if (secondColumnValues?.count)! > 0
+        {
+            value2 = secondColumnValues?[pickerView.selectedRow(inComponent: 1)]
+            
+        }
+        pickerDelegate?.customPickerValueChanges?(value1: value1, value2: value2)
+
+    }
+    
     // MARK: - PickerVIew Delegates
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0
@@ -56,12 +97,12 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         }
         else
         {
-            return 1
+            return (secondColumnValues?.count)!
         }
         
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if self.measurementType == "none"
+        if self.measurementType == Constant.single
         {
             return 1
         }
@@ -74,25 +115,25 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0
         {
-            return values?[row]
+            return ((values?[row]) ?? "")  + (firstColumnAppendingString ?? "")
         }
         else
         {
-            return measurementType
+            return (secondColumnValues?[row] ?? "") + (secondColumnAppendingString ?? "")
         }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.text = values?[pickerView.selectedRow(inComponent: 0)]
-
+        
+        updateValues()
     }
     
     //MARK: - Textfield delegates
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
-        self.text = values?[pickerView.selectedRow(inComponent: 0)]
         titleLbl?.text = title
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "datePickerTextFieldTextChanged"), object: nil)
+        updateValues()
+
     }
     
     //MARK: - IBActions
@@ -101,16 +142,14 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     
     @objc func pickerValueChanged(){
 
-        self.text = values?[pickerView.selectedRow(inComponent: 0)]
-
+        updateValues()
     }
     
     @IBAction func donePickerBtnClick(sender: AnyObject){
 
-        self.text = values?[pickerView.selectedRow(inComponent: 0)]
-
+        updateValues()
         self.endEditing(true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "datePickerTextFieldTextChanged"), object: nil)
+
     }
     
 }
