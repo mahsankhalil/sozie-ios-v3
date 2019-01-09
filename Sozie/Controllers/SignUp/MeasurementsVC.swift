@@ -8,7 +8,6 @@
 
 import UIKit
 import MaterialTextField
-
 import SVProgressHUD
 public enum MeasurementType {
     case height
@@ -22,11 +21,11 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var backBtn: UIButton!
    
     @IBOutlet weak var tblVu: UITableView!
-
     @IBOutlet weak var waistNotSureBtn: UIButton!
     @IBOutlet weak var uploadBtn: DZGradientButton!
     @IBOutlet weak var hipsNotSureBtn: UIButton!
     @IBOutlet weak var shipBtn: UIButton!
+
 
     
     var sizeChart : SizeChart?
@@ -165,5 +164,6 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource{
     }
     
     
+
 
 }

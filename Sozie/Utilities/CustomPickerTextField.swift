@@ -9,7 +9,6 @@
 import UIKit
 import MaterialTextField
 
-
 @objc protocol CustomPickerTextFieldDelegate {
     
     @objc optional func customPickerValueChanges(value1 : String? , value2 : String?)
@@ -24,16 +23,17 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     var measurementType : String?
     var titleLbl : UILabel?
     var title : String?
-
     var firstColumnAppendingString : String?
     var secondColumnAppendingString : String?
     var pickerDelegate: CustomPickerTextFieldDelegate?
 
+   
 
     override func awakeFromNib() {
         super.awakeFromNib()
         pickerView = UIPickerView()
         let myInputView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: pickerView.frame.height+20))
+
 
         pickerView.backgroundColor = UIColor.white
         myInputView.backgroundColor = UIColor.white
@@ -95,7 +95,6 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         pickerDelegate?.customPickerValueChanges?(value1: value1, value2: value2)
 
     }
-    
 
     // MARK: - PickerVIew Delegates
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -106,12 +105,15 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         else
         {
 
+
             return (secondColumnValues?.count)!
+
 
         }
         
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+
 
         if self.measurementType == Constant.single
 
@@ -146,6 +148,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
 
+
         titleLbl?.text = title
         updateValues()
 
@@ -159,15 +162,19 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     @objc func pickerValueChanged(){
 
 
+
         updateValues()
+
 
     }
     
     @IBAction func donePickerBtnClick(sender: AnyObject){
 
 
+
         updateValues()
         self.endEditing(true)
+
 
 
     }
