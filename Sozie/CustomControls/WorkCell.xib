@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="segoeui.ttf">
+            <string>SegoeUI</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="42" id="KGk-i7-Jjw" customClass="WorkCell" customModule="Sozie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="41.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZARA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1od-xC-74m">
+                        <rect key="frame" x="0.0" y="10.5" width="290" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="lRB-Zd-bbr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="vfx-xw-2us">
+                        <rect key="frame" x="298" y="13" width="15" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="IlY-Ya-Cyd"/>
+                            <constraint firstAttribute="height" constant="16" id="wdI-Gk-kIk"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ig6-bm-bfg">
+                        <rect key="frame" x="0.0" y="40.5" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="xfx-Ue-dRX"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vfx-xw-2us" firstAttribute="leading" secondItem="1od-xC-74m" secondAttribute="trailing" constant="8" id="4Dj-Gs-IhE"/>
+                    <constraint firstAttribute="bottom" secondItem="ig6-bm-bfg" secondAttribute="bottom" id="9JB-jG-LQu"/>
+                    <constraint firstItem="1od-xC-74m" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="N9S-eq-RbL"/>
+                    <constraint firstItem="1od-xC-74m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="URF-Kj-w54"/>
+                    <constraint firstItem="vfx-xw-2us" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Whc-8W-7eH"/>
+                    <constraint firstItem="ig6-bm-bfg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="cv7-5x-UBv"/>
+                    <constraint firstAttribute="trailing" secondItem="vfx-xw-2us" secondAttribute="trailing" constant="7" id="mQE-QJ-fsJ"/>
+                    <constraint firstAttribute="trailing" secondItem="ig6-bm-bfg" secondAttribute="trailing" id="nAn-Nk-ppn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkMarkImgVu" destination="vfx-xw-2us" id="nnP-mo-nM6"/>
+                <outlet property="titleLbl" destination="1od-xC-74m" id="Smb-G8-j8f"/>
+            </connections>
+            <point key="canvasLocation" x="76.799999999999997" y="99.850074962518747"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Checkmark" width="12" height="12"/>
+    </resources>
+</document>

@@ -122,8 +122,10 @@ extension UIView {
     func applyStandardContainerViewShadow() {
         layer.shadowColor = UIColor.black.cgColor;
         layer.shadowRadius = 1.0;
-        layer.shadowOffset = CGSize(width: 1, height: 1)
-        layer.shadowOpacity = 0.8;
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOpacity = 0.1;
+        layer.masksToBounds = false
+
     }
     func applyCornerRadiusAndBorder()
     {

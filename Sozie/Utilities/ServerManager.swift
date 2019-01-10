@@ -17,6 +17,7 @@ class ServerManager: NSObject {
     static let loginURL = ServerManager.serverURL + "user/login/"
     static let profileURL = ServerManager.serverURL + "user/profile/"
     static let sizeChartURL = ServerManager.serverURL + "common/sizechart"
+    static let brandListURL = ServerManager.serverURL + "brand/list"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
     func loginWith(params : [String : Any] , block : CompletionHandler)
@@ -56,5 +57,22 @@ class ServerManager: NSObject {
             
         }
     }
+    func getBrandList(params : [String : Any] , block : CompletionHandler)
+    {
+        
+        Alamofire.request(ServerManager.brandListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<[Brand]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
 
+    
 }
