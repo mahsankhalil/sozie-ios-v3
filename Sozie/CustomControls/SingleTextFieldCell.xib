@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="325" height="73"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Waist" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3r7-9o-b1N" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
+                                        <rect key="frame" x="0.0" y="7" width="325" height="52"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -43,7 +43,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fW-fS-hvd">
-                                        <rect key="frame" x="0.0" y="47" width="117" height="14"/>
+                                        <rect key="frame" x="0.0" y="59" width="117" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="KMU-uQ-qkL"/>
                                         </constraints>
@@ -57,11 +57,9 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3r7-9o-b1N" secondAttribute="trailing" id="4Jn-Ww-MR4"/>
                                     <constraint firstItem="3r7-9o-b1N" firstAttribute="leading" secondItem="EvB-e8-y2B" secondAttribute="leading" id="Kvg-Nj-bQU"/>
-                                    <constraint firstItem="1fW-fS-hvd" firstAttribute="top" secondItem="3r7-9o-b1N" secondAttribute="bottom" constant="-12" id="LUC-pL-fIj"/>
+                                    <constraint firstItem="1fW-fS-hvd" firstAttribute="top" secondItem="3r7-9o-b1N" secondAttribute="bottom" id="LUC-pL-fIj"/>
                                     <constraint firstAttribute="bottom" secondItem="3r7-9o-b1N" secondAttribute="bottom" constant="14" id="YMd-gG-YqE"/>
                                     <constraint firstItem="1fW-fS-hvd" firstAttribute="leading" secondItem="EvB-e8-y2B" secondAttribute="leading" id="d9Y-hu-oNY"/>
-                                    <constraint firstItem="3r7-9o-b1N" firstAttribute="top" secondItem="EvB-e8-y2B" secondAttribute="top" id="dtC-TQ-a2o"/>
-                                    <constraint firstAttribute="height" constant="73" id="ok1-hP-dqj"/>
                                 </constraints>
                             </view>
                         </subviews>

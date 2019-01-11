@@ -145,21 +145,13 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0
+        if indexPath.row == 0 || indexPath.row == 3
         {
-            return 84.0
-        }
-        else if indexPath.row == 1
-        {
-            return 83.0
-        }
-        else if indexPath.row == 2
-        {
-            return 83.0
+            return 59.0
         }
         else
         {
-            return 59.0
+            return 83.0
         }
         
     }

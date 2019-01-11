@@ -125,6 +125,17 @@ class UtilityManager: NSObject {
 
     }
     
+    static func showMessageWith(title : String , body : String, in controller : UIViewController) {
+        let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+        let okBtnAction = UIAlertAction(title: "OK", style: .cancel) { (okBtn) in
+            
+        }
+        alert.addAction(okBtnAction)
+        controller.present(alert, animated: true) {
+            
+        }
+    }
+    
     static func showSuccessMessage(body: String, in controller: UIViewController) {
         SVProgressHUD.dismiss()
         

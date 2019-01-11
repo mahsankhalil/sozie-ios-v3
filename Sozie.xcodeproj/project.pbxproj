@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		61145CC121DB926700062332 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61145CC021DB926600062332 /* ServerManager.swift */; };
+		613F897921E897AA00EB48D2 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897821E897AA00EB48D2 /* Country.swift */; };
+		613F897B21E8AEF800EB48D2 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897A21E8AEF800EB48D2 /* LoginResponse.swift */; };
+		613F897D21E8C5FB00EB48D2 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897C21E8C5FB00EB48D2 /* CustomError.swift */; };
 		617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */; };
 		617CD12621DE229000D4C885 /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12421DE229000D4C885 /* CountryCell.swift */; };
 		617CD12721DE229000D4C885 /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 617CD12521DE229000D4C885 /* CountryCell.xib */; };
@@ -91,6 +94,9 @@
 /* Begin PBXFileReference section */
 		599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.debug.xcconfig"; sourceTree = "<group>"; };
 		61145CC021DB926600062332 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		613F897821E897AA00EB48D2 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		613F897A21E8AEF800EB48D2 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		613F897C21E8C5FB00EB48D2 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		617AC4FD21D3595500655C3C /* UploadProfilePictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfilePictureVC.swift; sourceTree = "<group>"; };
 		617AC4FF21D38C6A00655C3C /* Sozie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sozie.entitlements; sourceTree = "<group>"; };
 		617CD12421DE229000D4C885 /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
@@ -269,6 +275,7 @@
 				69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */,
 				61145CC021DB926600062332 /* ServerManager.swift */,
 				61A20A5321E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift */,
+				613F897C21E8C5FB00EB48D2 /* CustomError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -327,6 +334,8 @@
 				6944809D21C7A018001A11A2 /* User.swift */,
 				619EC53021E5F95000E4AE02 /* SizeChart.swift */,
 				61BC873621E76C62000AEA06 /* Brand.swift */,
+				613F897821E897AA00EB48D2 /* Country.swift */,
+				613F897A21E8AEF800EB48D2 /* LoginResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -584,10 +593,12 @@
 				61BC873721E76C62000AEA06 /* Brand.swift in Sources */,
 				6944813821C7A018001A11A2 /* TransitionZoom.swift in Sources */,
 				6944814E21C7A018001A11A2 /* UnwindSegue.swift in Sources */,
+				613F897D21E8C5FB00EB48D2 /* CustomError.swift in Sources */,
 				6944813E21C7A018001A11A2 /* BlurView.swift in Sources */,
 				6944813621C7A018001A11A2 /* KeyboardLayoutConstraint.swift in Sources */,
 				6944814C21C7A018001A11A2 /* AutoTextView.swift in Sources */,
 				694480EA21C7A018001A11A2 /* Constants.swift in Sources */,
+				613F897B21E8AEF800EB48D2 /* LoginResponse.swift in Sources */,
 				6183FFCE21E747790090393E /* InviteFriendsVC.swift in Sources */,
 				6944813B21C7A018001A11A2 /* SpringImageView.swift in Sources */,
 				694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */,
@@ -611,6 +622,7 @@
 				61A20A5421E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift in Sources */,
 				6944813F21C7A018001A11A2 /* DesignableTextField.swift in Sources */,
 				694480F221C7A018001A11A2 /* ScrollableDatepicker.swift in Sources */,
+				613F897921E897AA00EB48D2 /* Country.swift in Sources */,
 				6944814821C7A018001A11A2 /* AsyncButton.swift in Sources */,
 				6944815921C7A018001A11A2 /* User.swift in Sources */,
 				6944813521C7A018001A11A2 /* DesignableImageView.swift in Sources */,

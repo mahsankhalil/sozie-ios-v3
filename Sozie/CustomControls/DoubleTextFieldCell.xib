@@ -31,10 +31,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYX-pg-uYL">
-                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="73"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="66"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Height" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="6Qo-b7-2xs" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="59"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="52"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -64,10 +64,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHg-G7-5sO">
-                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="73"/>
+                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="66"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="C7I-qT-1CX" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="59"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="52"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -108,11 +108,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="yHg-G7-5sO" firstAttribute="leading" secondItem="XYX-pg-uYL" secondAttribute="trailing" id="4Gf-Oa-gUJ"/>
-                                    <constraint firstAttribute="height" constant="59" id="6n8-Id-Tft"/>
                                     <constraint firstAttribute="bottom" secondItem="olb-Kx-COr" secondAttribute="bottom" constant="2" id="7Ae-gR-wge"/>
-                                    <constraint firstAttribute="bottom" secondItem="XYX-pg-uYL" secondAttribute="bottom" constant="-14" id="ANW-vK-8pT"/>
                                     <constraint firstItem="yHg-G7-5sO" firstAttribute="top" secondItem="Rda-6h-ot5" secondAttribute="top" id="DW6-lf-qOg"/>
-                                    <constraint firstAttribute="bottom" secondItem="yHg-G7-5sO" secondAttribute="bottom" constant="-14" id="UMt-he-nbO"/>
                                     <constraint firstAttribute="trailing" secondItem="yHg-G7-5sO" secondAttribute="trailing" id="e3J-RR-aHv"/>
                                     <constraint firstItem="yHg-G7-5sO" firstAttribute="leading" secondItem="olb-Kx-COr" secondAttribute="trailing" constant="0.5" id="hnS-za-j4F"/>
                                     <constraint firstItem="XYX-pg-uYL" firstAttribute="leading" secondItem="Rda-6h-ot5" secondAttribute="leading" id="kaA-7W-duh"/>

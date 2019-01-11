@@ -50,7 +50,7 @@
                                                 <rect key="frame" x="116.5" y="62" width="142" height="86"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2bI-dV-Fca" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="203" width="326" height="17"/>
+                                                <rect key="frame" x="24.5" y="203" width="326" height="19"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -105,7 +105,7 @@
                                                 </state>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXO-80-eao" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="245" width="326" height="17"/>
+                                                <rect key="frame" x="24.5" y="247" width="326" height="19"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -116,24 +116,24 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CyK-iU-Bfw">
-                                                <rect key="frame" x="253.5" y="255.5" width="92" height="26"/>
+                                                <rect key="frame" x="257.5" y="259.5" width="88" height="28"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="12"/>
                                                 <state key="normal" title="Forgot Password">
                                                     <color key="titleColor" red="0.68627450980392157" green="0.84313725490196079" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In with Facebook or Gmail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crl-7Y-OR1">
-                                                <rect key="frame" x="89.5" y="312" width="196.5" height="16.5"/>
+                                                <rect key="frame" x="92" y="316" width="191.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3H-KA-Slj">
-                                                <rect key="frame" x="135.5" y="343.5" width="42" height="42"/>
+                                                <rect key="frame" x="135.5" y="350" width="42" height="42"/>
                                                 <state key="normal" image="facebook-login-icon"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbP-TY-kLU">
-                                                <rect key="frame" x="197.5" y="343.5" width="42" height="42"/>
+                                                <rect key="frame" x="197.5" y="350" width="42" height="42"/>
                                                 <state key="normal" image="google-login-icon"/>
                                             </button>
                                         </subviews>
@@ -267,7 +267,7 @@
                                 <rect key="frame" x="116.5" y="80" width="142" height="86"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX2-BI-bGz">
-                                <rect key="frame" x="37.5" y="281.5" width="300" height="64.5"/>
+                                <rect key="frame" x="40" y="277" width="295" height="73.5"/>
                                 <string key="text">SOZIE  [so-zee]  noun
  1. Someone who has the same shape and style, but belongs to a different social circle
  2. Lookalike, double “I want to see what my sozie is trying on because it would look good on me too.”</string>
@@ -418,11 +418,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ytY-zG-3Qq" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="150" width="326" height="55"/>
+                                                <rect key="frame" x="24.5" y="150" width="326" height="34.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="55" id="Tvf-Mj-FVQ"/>
-                                                </constraints>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
@@ -481,10 +478,7 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxQ-8O-JIX" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="230" width="326" height="55"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="55" id="NgD-6g-Sld"/>
-                                                </constraints>
+                                                <rect key="frame" x="24.5" y="209.5" width="326" height="34.5"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -495,10 +489,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l1y-dB-2qe" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="310.5" width="326" height="55"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="55" id="Xqw-0g-iNa"/>
-                                                </constraints>
+                                                <rect key="frame" x="24.5" y="269.5" width="326" height="34.5"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -509,17 +500,17 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up with Facebook or Gmail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHz-JK-vTW">
-                                                <rect key="frame" x="86" y="387.5" width="203.5" height="16.5"/>
+                                                <rect key="frame" x="89.5" y="326" width="196.5" height="16.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16.5" id="Jbf-CK-B75"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196.5" id="vdr-pi-ZNG"/>
+                                                    <constraint firstAttribute="width" constant="196.5" id="vdr-pi-ZNG"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ4-N9-vhG">
-                                                <rect key="frame" x="135.5" y="419" width="104" height="42"/>
+                                                <rect key="frame" x="135.5" y="357.5" width="104" height="42"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7q-Nm-HqQ">
                                                         <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
@@ -549,7 +540,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqw-9I-kR6">
-                                                <rect key="frame" x="327" y="257" width="18" height="22"/>
+                                                <rect key="frame" x="327" y="226.5" width="18" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="18" id="fFJ-nq-7YN"/>
                                                     <constraint firstAttribute="height" constant="22" id="llB-Wc-IVW"/>
@@ -560,7 +551,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-d4-4vn">
-                                                <rect key="frame" x="327" y="337.5" width="18" height="22"/>
+                                                <rect key="frame" x="327" y="286.5" width="18" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="Gdu-OT-rwY"/>
                                                     <constraint firstAttribute="width" constant="18" id="e1q-WY-QzA"/>
@@ -575,11 +566,10 @@
                                         <constraints>
                                             <constraint firstItem="gxQ-8O-JIX" firstAttribute="top" secondItem="ytY-zG-3Qq" secondAttribute="bottom" constant="25" id="1d7-lU-ybX"/>
                                             <constraint firstItem="EHz-JK-vTW" firstAttribute="top" secondItem="l1y-dB-2qe" secondAttribute="bottom" constant="22" id="6U5-Ix-hrR"/>
+                                            <constraint firstItem="ubF-pe-nlU" firstAttribute="leading" secondItem="cem-kf-ded" secondAttribute="leading" constant="30" id="73d-Oe-cvz"/>
                                             <constraint firstItem="Iqw-9I-kR6" firstAttribute="centerY" secondItem="gxQ-8O-JIX" secondAttribute="centerY" constant="10.5" id="7iG-hX-O5Z"/>
                                             <constraint firstItem="y1b-7x-PVc" firstAttribute="top" secondItem="ubF-pe-nlU" secondAttribute="bottom" constant="20" id="Bgn-2M-Ny0"/>
-                                            <constraint firstItem="ubF-pe-nlU" firstAttribute="width" secondItem="cem-kf-ded" secondAttribute="width" multiplier="0.84" id="DEq-g7-eEu"/>
                                             <constraint firstAttribute="trailing" secondItem="AmT-Y0-fou" secondAttribute="trailing" constant="25" id="I7h-vz-EgM"/>
-                                            <constraint firstItem="ubF-pe-nlU" firstAttribute="centerX" secondItem="y1b-7x-PVc" secondAttribute="centerX" id="JPq-5I-cFF"/>
                                             <constraint firstAttribute="trailing" secondItem="l1y-dB-2qe" secondAttribute="trailing" constant="24.5" id="JVN-xQ-ZNf"/>
                                             <constraint firstItem="l1y-dB-2qe" firstAttribute="top" secondItem="gxQ-8O-JIX" secondAttribute="bottom" constant="25.5" id="PLc-LY-ktq"/>
                                             <constraint firstItem="AmT-Y0-fou" firstAttribute="top" secondItem="7HN-kf-RCf" secondAttribute="bottom" constant="12" id="PhI-zi-Sqj"/>
@@ -593,6 +583,7 @@
                                             <constraint firstAttribute="trailing" secondItem="ytY-zG-3Qq" secondAttribute="trailing" constant="24.5" id="i8z-81-pY1"/>
                                             <constraint firstItem="7HN-kf-RCf" firstAttribute="leading" secondItem="cem-kf-ded" secondAttribute="leading" constant="18" id="jjl-Ju-ItF"/>
                                             <constraint firstItem="aJ4-N9-vhG" firstAttribute="centerX" secondItem="cem-kf-ded" secondAttribute="centerX" id="lDv-e8-KvG"/>
+                                            <constraint firstAttribute="trailing" secondItem="ubF-pe-nlU" secondAttribute="trailing" constant="30" id="mW6-nj-q2y"/>
                                             <constraint firstItem="aJ4-N9-vhG" firstAttribute="top" secondItem="EHz-JK-vTW" secondAttribute="bottom" constant="15" id="nj0-Ri-HmU"/>
                                             <constraint firstAttribute="trailing" secondItem="Iqw-9I-kR6" secondAttribute="trailing" constant="30" id="peT-Hb-5jy"/>
                                             <constraint firstAttribute="bottom" secondItem="y1b-7x-PVc" secondAttribute="bottom" constant="13" id="q2J-cS-Q8O"/>
@@ -604,9 +595,9 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="cem-kf-ded" firstAttribute="width" secondItem="Mwg-TE-HXV" secondAttribute="width" id="IsT-8v-xcY"/>
-                                    <constraint firstItem="cem-kf-ded" firstAttribute="height" secondItem="Mwg-TE-HXV" secondAttribute="height" id="jKg-Gq-jyJ"/>
                                     <constraint firstAttribute="bottom" secondItem="cem-kf-ded" secondAttribute="bottom" id="rpF-kY-4Yw"/>
+                                    <constraint firstItem="cem-kf-ded" firstAttribute="centerX" secondItem="Mwg-TE-HXV" secondAttribute="centerX" id="tp6-Ve-VCL"/>
+                                    <constraint firstItem="cem-kf-ded" firstAttribute="centerY" secondItem="Mwg-TE-HXV" secondAttribute="centerY" id="vAT-sf-UTf"/>
                                     <constraint firstAttribute="trailing" secondItem="cem-kf-ded" secondAttribute="trailing" id="vTX-L6-ugh"/>
                                     <constraint firstItem="cem-kf-ded" firstAttribute="top" secondItem="Mwg-TE-HXV" secondAttribute="top" id="yZJ-7l-HRW"/>
                                     <constraint firstItem="cem-kf-ded" firstAttribute="leading" secondItem="Mwg-TE-HXV" secondAttribute="leading" id="ycq-jg-Lh5"/>
@@ -674,13 +665,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMI-yt-sye">
-                                                <rect key="frame" x="25" y="165" width="325" height="73"/>
+                                                <rect key="frame" x="25" y="165" width="325" height="46.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-X1-fLq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="73"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="46.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="WhJ-6J-xTB" customClass="MFTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="59"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="32.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -710,10 +701,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIP-xh-seK">
-                                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="73"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="46.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="jmG-D3-PZB" customClass="MFTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="59"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="32.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -743,16 +734,13 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This information is for our eyes only and will not be displayed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFp-1I-pcZ">
-                                                        <rect key="frame" x="0.0" y="59" width="325" height="14"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="14" id="kkH-ZE-s2I"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="34.5" width="325" height="12"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-Ek-lM7">
-                                                        <rect key="frame" x="161" y="46" width="1" height="11"/>
+                                                        <rect key="frame" x="161" y="19.5" width="1" height="11"/>
                                                         <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="11" id="IB9-N4-ViT"/>
@@ -767,22 +755,20 @@
                                                     <constraint firstItem="oFp-1I-pcZ" firstAttribute="leading" secondItem="XMI-yt-sye" secondAttribute="leading" id="KFn-La-ghG"/>
                                                     <constraint firstItem="LCm-X1-fLq" firstAttribute="leading" secondItem="XMI-yt-sye" secondAttribute="leading" id="Lw4-gc-GIf"/>
                                                     <constraint firstAttribute="bottom" secondItem="Wf5-Ek-lM7" secondAttribute="bottom" constant="16" id="OEg-xJ-n4g"/>
-                                                    <constraint firstItem="cIP-xh-seK" firstAttribute="leading" secondItem="Wf5-Ek-lM7" secondAttribute="trailing" constant="0.5" id="PH1-sD-hgx"/>
-                                                    <constraint firstAttribute="bottom" secondItem="LCm-X1-fLq" secondAttribute="bottom" id="VPY-Im-BOY"/>
                                                     <constraint firstAttribute="bottom" secondItem="oFp-1I-pcZ" secondAttribute="bottom" id="Wha-Et-dN3"/>
                                                     <constraint firstAttribute="trailing" secondItem="oFp-1I-pcZ" secondAttribute="trailing" id="aUf-US-ZFM"/>
                                                     <constraint firstAttribute="trailing" secondItem="cIP-xh-seK" secondAttribute="trailing" id="ec3-vR-ZUQ"/>
                                                     <constraint firstAttribute="bottom" secondItem="cIP-xh-seK" secondAttribute="bottom" id="fQw-kW-9PD"/>
                                                     <constraint firstItem="cIP-xh-seK" firstAttribute="leading" secondItem="LCm-X1-fLq" secondAttribute="trailing" id="hLL-03-U4X"/>
-                                                    <constraint firstAttribute="height" constant="73" id="sIy-xJ-APx"/>
+                                                    <constraint firstItem="cIP-xh-seK" firstAttribute="leading" secondItem="Wf5-Ek-lM7" secondAttribute="trailing" constant="0.5" id="rKQ-h0-QkB"/>
                                                     <constraint firstItem="cIP-xh-seK" firstAttribute="width" secondItem="LCm-X1-fLq" secondAttribute="width" id="w4k-YB-R3y"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIP-U0-pQd">
-                                                <rect key="frame" x="25" y="258" width="325" height="73"/>
+                                                <rect key="frame" x="25" y="231.5" width="325" height="46"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-21-rMj" customClass="MFTextField">
-                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="32"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -794,10 +780,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make this anonymous" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6d-hg-miY">
-                                                        <rect key="frame" x="0.0" y="59" width="325" height="14"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="14" id="kyu-Uf-QE4"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="34" width="325" height="12"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -806,7 +789,6 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="k6d-hg-miY" secondAttribute="bottom" id="DMh-B5-8JR"/>
-                                                    <constraint firstAttribute="height" constant="73" id="E7U-oq-RTP"/>
                                                     <constraint firstAttribute="trailing" secondItem="k6d-hg-miY" secondAttribute="trailing" id="Las-Hy-adI"/>
                                                     <constraint firstItem="yTy-21-rMj" firstAttribute="top" secondItem="eIP-U0-pQd" secondAttribute="top" id="dVp-tI-rdl"/>
                                                     <constraint firstAttribute="bottom" secondItem="yTy-21-rMj" secondAttribute="bottom" constant="14" id="kHk-N8-fsj"/>
@@ -816,26 +798,23 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79U-qu-8ew">
-                                                <rect key="frame" x="25" y="351" width="325" height="73"/>
+                                                <rect key="frame" x="25" y="297.5" width="325" height="31"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of Birth" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJO-9C-cYF" customClass="DatePickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="17"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This information is for our eyes only and will not be displayed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddM-XV-duY">
-                                                        <rect key="frame" x="0.0" y="59" width="325" height="14"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="14" id="GR8-TM-KHA"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="19" width="325" height="12"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="birthday-icon" translatesAutoresizingMaskIntoConstraints="NO" id="EmT-fK-jT0">
-                                                        <rect key="frame" x="297" y="26" width="18" height="18"/>
+                                                        <rect key="frame" x="297" y="5" width="18" height="18"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -849,11 +828,10 @@
                                                     <constraint firstAttribute="trailing" secondItem="ddM-XV-duY" secondAttribute="trailing" id="aRq-kD-dxN"/>
                                                     <constraint firstItem="aJO-9C-cYF" firstAttribute="top" secondItem="79U-qu-8ew" secondAttribute="top" id="jJr-XD-4Hw"/>
                                                     <constraint firstAttribute="trailing" secondItem="aJO-9C-cYF" secondAttribute="trailing" id="nZc-KZ-3YM"/>
-                                                    <constraint firstAttribute="height" constant="73" id="wnZ-Ag-uhz"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7O-hf-Dvt">
-                                                <rect key="frame" x="25" y="424" width="325" height="60"/>
+                                                <rect key="frame" x="25" y="328.5" width="325" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duf-EW-SyB">
                                                         <rect key="frame" x="0.0" y="30" width="150" height="30"/>
@@ -880,8 +858,8 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="6RV-Np-pnT"/>
                                                     <constraint firstItem="ep0-w7-gfX" firstAttribute="width" secondItem="Duf-EW-SyB" secondAttribute="width" id="9F7-rr-T21"/>
+                                                    <constraint firstAttribute="height" constant="60" id="9KE-PY-Cpr"/>
                                                     <constraint firstAttribute="bottom" secondItem="Duf-EW-SyB" secondAttribute="bottom" id="Nye-oh-cCj"/>
                                                     <constraint firstItem="ep0-w7-gfX" firstAttribute="top" secondItem="C7O-hf-Dvt" secondAttribute="top" constant="30" id="Rm5-CA-x7F"/>
                                                     <constraint firstItem="Duf-EW-SyB" firstAttribute="leading" secondItem="C7O-hf-Dvt" secondAttribute="leading" id="bSc-4I-Xwd"/>
@@ -932,10 +910,10 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="M2w-Wc-j8a" firstAttribute="height" secondItem="xjN-DD-gBX" secondAttribute="height" id="GlX-Q6-VdU"/>
                                     <constraint firstAttribute="trailing" secondItem="M2w-Wc-j8a" secondAttribute="trailing" id="H6d-gF-MGK"/>
                                     <constraint firstItem="M2w-Wc-j8a" firstAttribute="leading" secondItem="xjN-DD-gBX" secondAttribute="leading" id="Tkb-IJ-0Yg"/>
-                                    <constraint firstItem="M2w-Wc-j8a" firstAttribute="width" secondItem="xjN-DD-gBX" secondAttribute="width" id="aa8-Aw-Smw"/>
+                                    <constraint firstItem="M2w-Wc-j8a" firstAttribute="centerY" secondItem="xjN-DD-gBX" secondAttribute="centerY" id="aVW-qs-eg0"/>
+                                    <constraint firstItem="M2w-Wc-j8a" firstAttribute="centerX" secondItem="xjN-DD-gBX" secondAttribute="centerX" id="p91-N3-HUv"/>
                                     <constraint firstAttribute="bottom" secondItem="M2w-Wc-j8a" secondAttribute="bottom" id="paR-Ng-fYV"/>
                                     <constraint firstItem="M2w-Wc-j8a" firstAttribute="top" secondItem="xjN-DD-gBX" secondAttribute="top" id="xrC-Id-RGI"/>
                                 </constraints>
@@ -1411,7 +1389,6 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add your measurements to be matched with clients! Don't worry - your information is private!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIT-6i-FxZ">
                                                 <rect key="frame" x="25" y="126" width="284" height="32"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="Vge-lU-Rtb"/>
                                                     <constraint firstAttribute="width" constant="284" id="mPs-RE-fgh"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Italic" family="Segoe UI" pointSize="12"/>

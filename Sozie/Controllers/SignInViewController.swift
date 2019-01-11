@@ -63,6 +63,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
     }
     
+    
     func validationSuccessful() {
         
         var params = [String : String]()
@@ -74,35 +75,45 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
         ServerManager.sharedInstance.loginWith(params: params) { (isSuccess, response) in
             SVProgressHUD.dismiss()
+            
+            if isSuccess
+            {
+                // Do something after login
+            }
+            else
+            {
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                
+            }
 
         }
         
-//        RequestManager.loginUser(param: params, successBlock: { (response) in
-//            SVProgressHUD.dismiss()
-//            self.successfulLogin(response: response)
-//        }) { (error) in
-//
-//            UtilityManager.showErrorMessage(body: error, in: self)
-//        }
+
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
             if let field = field as? MFTextField {
 
-//                _ = field.resignFirstResponder()
-//                field.errorLabel.text = error.errorMessage
-//                field.status = .error
-//                }
+                _ = field.resignFirstResponder()
+                field.setError(CustomError(str: error.errorMessage), animated: true)
+
+                
             }
         }
     }
     
+    //MARK: - Text Field Delegates
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let txtFld  = textField as! MFTextField
+        txtFld.setError(nil, animated: true)
+    }
     
     //MARK: - IBActions
     @IBAction func signinButtonPressed(_ sender: Any) {
-//        validator.validate(self)
+        validator.validate(self)
     }
     
     @IBAction func facebookButtonPressed(sender: AnyObject) {
