@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SVProgressHUD
+import MaterialTextField
 struct ShadowStyle {
     let angle: Int //degrees
     let color: UIColor
@@ -121,8 +122,10 @@ extension UIView {
     func applyStandardContainerViewShadow() {
         layer.shadowColor = UIColor.black.cgColor;
         layer.shadowRadius = 1.0;
-        layer.shadowOffset = CGSize(width: 1, height: 1)
-        layer.shadowOpacity = 0.8;
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOpacity = 0.1;
+        layer.masksToBounds = false
+
     }
     func applyCornerRadiusAndBorder()
     {
@@ -132,6 +135,31 @@ extension UIView {
         layer.masksToBounds = true
         
     }
+}
+
+extension MFTextField {
+    func setupAppDesign()
+    {
+        self.underlineColor = UIColor(hex: "DADADA")
+        self.placeholderColor = UIColor(hex: "888888")
+        self.tintColor = UIColor(hex: "FC8888")
+        self.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
+    }
+    
+    func applyRightVuLblWith(title : String )
+    {
+        let lbl = InsetLabel(frame: CGRect(x: 0.0, y: 0.0, width:38.0 , height: 40.0))
+        lbl.text = title
+        lbl.textAlignment = .right
+        lbl.font = UIFont(name: "SegoeUI", size: 12.0)
+        lbl.textColor = UIColor(hex: "323232")
+        lbl.rightInset = 8.0
+        lbl.topInset = 17.0
+        lbl.text = title
+        self.rightViewMode = .always
+        self.rightView = lbl
+    }
+
 }
 
 extension UIButton {
@@ -324,6 +352,26 @@ extension Blurable
                                  &BlurableKey.blurable,
                                  blurOverlay,
                                  objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+    }
+}
+
+class InsetLabel: UILabel {
+    var topInset = CGFloat(0)
+    var bottomInset = CGFloat(0)
+    var leftInset = CGFloat(0)
+    var rightInset = CGFloat(0)
+    
+    override func drawText(in rect: CGRect) {
+        let insets: UIEdgeInsets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+//        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+    }
+    
+    override public var intrinsicContentSize: CGSize {
+        var intrinsicSuperViewContentSize = super.intrinsicContentSize
+        intrinsicSuperViewContentSize.height += topInset + bottomInset
+        intrinsicSuperViewContentSize.width += leftInset + rightInset
+        return intrinsicSuperViewContentSize
     }
 }
 

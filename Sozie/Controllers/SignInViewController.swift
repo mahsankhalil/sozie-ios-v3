@@ -8,18 +8,17 @@
 
 import UIKit
 import SwiftValidator
-import UnderLineTextField
 import GoogleSignIn
-import UnderLineTextField
 import SVProgressHUD
+import MaterialTextField
 import FBSDKLoginKit
 
-class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate, UnderLineTextFieldDelegate {
+class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
     
     static let identifier = "signInViewController"
 
-    @IBOutlet weak var emailField: UnderLineTextField!
-    @IBOutlet weak var passwordField: UnderLineTextField!
+    @IBOutlet weak var emailField: MFTextField!
+    @IBOutlet weak var passwordField: MFTextField!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     
@@ -39,8 +38,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        emailField.validationType = .afterEdit
-        passwordField.validationType = .afterEdit
+        emailField.setupAppDesign()
+        passwordField.setupAppDesign()
+//        emailField.validationType = .afterEdit
+//        passwordField.validationType = .afterEdit
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +63,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
     }
     
+    
     func validationSuccessful() {
         
         var params = [String : String]()
@@ -73,38 +75,40 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
         ServerManager.sharedInstance.loginWith(params: params) { (isSuccess, response) in
             SVProgressHUD.dismiss()
+            
+            if isSuccess
+            {
+                // Do something after login
+            }
+            else
+            {
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                
+            }
 
         }
         
-//        RequestManager.loginUser(param: params, successBlock: { (response) in
-//            SVProgressHUD.dismiss()
-//            self.successfulLogin(response: response)
-//        }) { (error) in
-//
-//            UtilityManager.showErrorMessage(body: error, in: self)
-//        }
+
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
-            if let field = field as? UnderLineTextField {
+            if let field = field as? MFTextField {
 
                 _ = field.resignFirstResponder()
-                field.errorLabel.text = error.errorMessage
-                field.status = .error
-//                }
+                field.setError(CustomError(str: error.errorMessage), animated: true)
+
+                
             }
         }
     }
     
-    func textFieldValidate(underLineTextField: UnderLineTextField) throws {
-        if underLineTextField.status == .error
-        {
-            throw UnderLineTextFieldErrors.error(message: "Invalid data")
-
-        }
-
-        
+    //MARK: - Text Field Delegates
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let txtFld  = textField as! MFTextField
+        txtFld.setError(nil, animated: true)
     }
     
     //MARK: - IBActions

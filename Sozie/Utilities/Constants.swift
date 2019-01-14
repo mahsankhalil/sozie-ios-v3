@@ -25,7 +25,7 @@ public class Constant: NSObject {
     
     static let applicationName = "Sozie"
     static let serverDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-    static let appDateFormat = "MM/dd/yyyy hh:mm:ss a"
+    static let appDateFormat = "MM/dd/yyyy"
     static let eventDateFormat = "MM/dd/yyyy hh:mm a"
     static let eventDetailDateFormat = "MMM dd yyyy',' hh:mm a"
     static let animationDuration : TimeInterval = 0.5
@@ -44,6 +44,8 @@ public class Constant: NSObject {
     static let getProfileURL = "signin"
     static let socialLoginURL = "signin"
     
+    static let single = "single"
+    static let double = "double"
     
     // MARK: - API COnstants
     

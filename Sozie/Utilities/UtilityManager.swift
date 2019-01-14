@@ -84,6 +84,18 @@ class UtilityManager: NSObject {
         imagePicker.allowsEditing = false
         vc.present(imagePicker, animated: true, completion: nil)
     }
+    
+    static func showActivityControllerWith(objectsToShare : [Any] , vc : UIViewController)
+    {
+        let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        let excludedActivities = [UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.message, UIActivity.ActivityType.mail, UIActivity.ActivityType.print, UIActivity.ActivityType.copyToPasteboard, UIActivity.ActivityType.assignToContact, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.postToTencentWeibo]
+        
+        activityController.excludedActivityTypes = excludedActivities
+        
+        
+        
+        vc.present(activityController, animated: true, completion: nil)
+    }
   
     static func activityIndicatorForView(view: UIView) -> UIActivityIndicatorView{
         let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
@@ -111,6 +123,17 @@ class UtilityManager: NSObject {
             
         }
 
+    }
+    
+    static func showMessageWith(title : String , body : String, in controller : UIViewController) {
+        let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+        let okBtnAction = UIAlertAction(title: "OK", style: .cancel) { (okBtn) in
+            
+        }
+        alert.addAction(okBtnAction)
+        controller.present(alert, animated: true) {
+            
+        }
     }
     
     static func showSuccessMessage(body: String, in controller: UIViewController) {
