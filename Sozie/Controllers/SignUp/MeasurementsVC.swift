@@ -9,6 +9,7 @@
 import UIKit
 import MaterialTextField
 import SVProgressHUD
+import PopupController
 public enum MeasurementType {
     case height
     case waist
@@ -29,7 +30,7 @@ class MeasurementsVC: UIViewController {
 
 
     
-    var sizeChart : SizeChart?
+    var sizeChart : Size?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +56,7 @@ class MeasurementsVC: UIViewController {
             SVProgressHUD.dismiss()
             if isSuccess
             {
-                self.sizeChart = response as? SizeChart
+                self.sizeChart = response as? Size
                 self.tblVu.reloadData()
             }
             else
@@ -94,7 +95,7 @@ class MeasurementsVC: UIViewController {
 
 
 
-extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource{
+extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleTextFieldDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -113,6 +114,7 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource{
             tableView.register(UINib(nibName: "DoubleTextFieldCell", bundle: nil), forCellReuseIdentifier: "DoubleTextFieldCell")
             doubletextFieldCell = tableView.dequeueReusableCell(withIdentifier: "DoubleTextFieldCell") as? DoubleTextFieldCell
         }
+        singleTextFieldCell.delegate = self
         
         if indexPath.row == 0
         {
@@ -154,6 +156,12 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource{
             return 83.0
         }
         
+    }
+    
+    func singleTextFieldNotSureBtnTapped(btn: UIButton) {
+        _ = PopupController
+            .create(self)
+            .show(SizeChartPopUpVC.instance())
     }
     
     

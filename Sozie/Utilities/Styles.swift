@@ -135,6 +135,12 @@ extension UIView {
         layer.masksToBounds = true
         
     }
+    
+    func applyStandardBorder()
+    {
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor(hex: "DADADA").cgColor
+    }
 }
 
 extension MFTextField {

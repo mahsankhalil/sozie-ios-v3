@@ -11,7 +11,7 @@ class DoubleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
 
     @IBOutlet weak var secondTxtFld: CustomPickerTextField!
     @IBOutlet weak var firstTxtFld: CustomPickerTextField!
-    var sizeChart : SizeChart?
+    var sizeChart : Size?
 
     override func awakeFromNib() {
         super.awakeFromNib()
