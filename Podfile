@@ -15,6 +15,8 @@ pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', 
 pod 'SnapKit', '~> 4.0.0'
 pod 'Alamofire'
 pod 'MaterialTextField', '~> 1.0'
+pod 'PopupController'
+
 end
 
 post_install do |installer|

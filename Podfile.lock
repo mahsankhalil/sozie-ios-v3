@@ -24,9 +24,10 @@ PODS:
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - GTMSessionFetcher/Core (1.2.1)
   - MaterialTextField (1.0.1)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
+  - PopupController (0.2.0)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
   - SwiftValidator (4.0.0)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - GoogleSignIn
   - MaterialTextField (~> 1.0)
+  - PopupController
   - SDWebImage (~> 4.0)
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
@@ -52,6 +54,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - MaterialTextField
+    - PopupController
     - SDWebImage
     - SnapKit
     - SVProgressHUD
@@ -75,11 +78,12 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   MaterialTextField: f1a0786588e4d3610cb9bb62d2adbe9777cebbf9
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  PopupController: 0b69fdf11cbeaa807789a8c3992599083640988f
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
 
-PODFILE CHECKSUM: ec1be0c456468e18914b306bd3e022fa7ea5e862
+PODFILE CHECKSUM: 791e8722162a228c0e15fbbeaf355299a01e7af4
 
 COCOAPODS: 1.5.3

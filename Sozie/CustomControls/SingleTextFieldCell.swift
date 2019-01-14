@@ -8,11 +8,16 @@
 
 import UIKit
 import MaterialTextField
+
+@objc protocol SingleTextFieldDelegate {
+    @objc optional func singleTextFieldNotSureBtnTapped(btn : UIButton)
+}
 class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
 
     @IBOutlet weak var notSureBtn: UIButton!
     @IBOutlet weak var txtFld: CustomPickerTextField!
-    var sizeChart : SizeChart?
+    var sizeChart : Size?
+    var delegate : SingleTextFieldDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -54,5 +59,9 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
     }
     
     
+    @IBAction func notSureBtnTapped(_ sender: Any) {
+        
+        delegate?.singleTextFieldNotSureBtnTapped!(btn: (sender as! UIButton) )
+    }
     
 }

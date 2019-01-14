@@ -54,7 +54,7 @@ class ServerManager: NSObject {
         Alamofire.request(ServerManager.sizeChartURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             
             let decoder = JSONDecoder()
-            let obj: Result<SizeChart> = decoder.decodeResponse(from: response)
+            let obj: Result<Size> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true , obj.value!)
             }
