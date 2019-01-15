@@ -28,10 +28,12 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var shipBtn: UIButton!
 
 
-
     
-    var sizeChart : Size?
+    var sizes : Size?
 
+    var selectedHip : Int?
+    var selectedWaist : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,7 +58,7 @@ class MeasurementsVC: UIViewController {
             SVProgressHUD.dismiss()
             if isSuccess
             {
-                self.sizeChart = response as? Size
+                self.sizes = response as? Size
                 self.tblVu.reloadData()
             }
             else
@@ -115,28 +117,32 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
             doubletextFieldCell = tableView.dequeueReusableCell(withIdentifier: "DoubleTextFieldCell") as? DoubleTextFieldCell
         }
         singleTextFieldCell.delegate = self
+        singleTextFieldCell.notSureBtn.tag = indexPath.row
         
         if indexPath.row == 0
         {
-            doubletextFieldCell.sizeChart = sizeChart
+            doubletextFieldCell.sizes = sizes
             doubletextFieldCell.configureCellData(cellType: .height)
             return doubletextFieldCell
         }
         else if indexPath.row == 1
         {
-            singleTextFieldCell.sizeChart = sizeChart
+            singleTextFieldCell.sizes = sizes
+            singleTextFieldCell.selectedWaist = selectedWaist
             singleTextFieldCell.configureCellData(cellType: .waist)
             return singleTextFieldCell
         }
         else if indexPath.row == 2
         {
-            singleTextFieldCell.sizeChart = sizeChart
+            singleTextFieldCell.sizes = sizes
+            singleTextFieldCell.selectedHip = selectedHip
             singleTextFieldCell.configureCellData(cellType: .hips)
+            
             return singleTextFieldCell
         }
         else
         {
-            doubletextFieldCell.sizeChart = sizeChart
+            doubletextFieldCell.sizes = sizes
             doubletextFieldCell.configureCellData(cellType: .braSize)
             return doubletextFieldCell
 
@@ -159,10 +165,39 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
     }
     
     func singleTextFieldNotSureBtnTapped(btn: UIButton) {
-        _ = PopupController
+        
+        var type : MeasurementType
+        if btn.tag == 1
+        {
+            type = .waist
+        }
+        else
+        {
+            type = .hips
+        }
+        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes?.sizeChart ?? [], arrayOfGeneral: sizes?.general ?? [], type: type )
+        let popUpVC = PopupController
             .create(self)
-            .show(SizeChartPopUpVC.instance())
+            .show(popUpInstnc)
+        popUpInstnc.delegate = self
+        popUpInstnc.closeHandler = { [weak self] in
+            popUpVC.dismiss()
+        }
     }
     
     
+}
+
+extension MeasurementsVC : SizeChartPopupVCDelegate {
+    func selectedValueFromPopUp(value: Int, type: MeasurementType) {
+        if type == .hips
+        {
+            selectedHip = value
+        }
+        else if type == .waist
+        {
+            selectedWaist = value
+        }
+        tblVu.reloadData()
+    }
 }

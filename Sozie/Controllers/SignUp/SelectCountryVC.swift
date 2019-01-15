@@ -15,6 +15,9 @@ class SelectCountryVC: UIViewController {
     @IBOutlet weak var tblVu: UITableView!
     var countriesList : [Country]?
     var selectedCountryId : Int?
+    
+    var currentUserType : UserType?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,7 +61,22 @@ class SelectCountryVC: UIViewController {
     // MARK: - Actions
     
     
-    @IBAction func signUpBtnTapped(_ sender: Any) {
+    @IBAction func nextBtnTapped(_ sender: Any) {
+        if selectedCountryId != nil
+        {
+            if currentUserType == .sozie
+            {
+                performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+            }
+            else if currentUserType == .shopper
+            {
+                performSegue(withIdentifier: "toWorkVC", sender: self)
+            }
+        }
+        else
+        {
+            UtilityManager.showErrorMessage(body: "Please select Country.", in: self)
+        }
     }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true) {

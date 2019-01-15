@@ -16,8 +16,10 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
 
     @IBOutlet weak var notSureBtn: UIButton!
     @IBOutlet weak var txtFld: CustomPickerTextField!
-    var sizeChart : Size?
+    var sizes : Size?
     var delegate : SingleTextFieldDelegate?
+    var selectedHip : Int?
+    var selectedWaist : Int?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,16 +37,23 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
         switch cellType {
         case .waist:
             
-            txtFld.updateTxtFldWith(rightTitle: "", placeholder: "Waist", measurementType: Constant.single, values1: sizeChart?.waist.convertArrayToString(), values2: [], title: "WAIST", firsColumStr: "\"", secondColumnStr: "")
+            txtFld.updateTxtFldWith(rightTitle: "", placeholder: "Waist", measurementType: Constant.single, values1: sizes?.waist.convertArrayToString(), values2: [], title: "WAIST", firsColumStr: "\"", secondColumnStr: "")
+            if selectedWaist != nil
+            {
+                txtFld.text = String(describing: selectedWaist!)
+            }
 
         case .hips:
-            txtFld.updateTxtFldWith(rightTitle: "", placeholder: "Hips", measurementType: Constant.single, values1: sizeChart?.hip.convertArrayToString(), values2: [], title: "HIPS", firsColumStr: "\"", secondColumnStr: "")
+            txtFld.updateTxtFldWith(rightTitle: "", placeholder: "Hips", measurementType: Constant.single, values1: sizes?.hip.convertArrayToString(), values2: [], title: "HIPS", firsColumStr: "\"", secondColumnStr: "")
 
-
+            if selectedHip != nil
+            {
+                txtFld.text = String(describing: selectedHip!)
+            }
         default: break
         }
         txtFld.pickerDelegate = self
-        if sizeChart == nil
+        if sizes == nil
         {
             txtFld.isUserInteractionEnabled = false
         }
