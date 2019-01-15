@@ -11,7 +11,7 @@ class DoubleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
 
     @IBOutlet weak var secondTxtFld: CustomPickerTextField!
     @IBOutlet weak var firstTxtFld: CustomPickerTextField!
-    var sizeChart : Size?
+    var sizes : Size?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,24 +31,24 @@ class DoubleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
     func configureCellData(cellType:MeasurementType) {
         switch cellType {
         case .height:
-            firstTxtFld.updateTxtFldWith(rightTitle: "ft", placeholder: "Height", measurementType: Constant.double, values1: sizeChart?.height.feet.convertArrayToString(), values2: sizeChart?.height.inches.convertArrayToString(), title: "HEIGHT", firsColumStr: "'", secondColumnStr: "\"")
+            firstTxtFld.updateTxtFldWith(rightTitle: "ft", placeholder: "Height", measurementType: Constant.double, values1: sizes?.height.feet.convertArrayToString(), values2: sizes?.height.inches.convertArrayToString(), title: "HEIGHT", firsColumStr: "'", secondColumnStr: "\"")
 
             
-            secondTxtFld.updateTxtFldWith(rightTitle: "in", placeholder: "", measurementType: Constant.double, values1: sizeChart?.height.feet.convertArrayToString(), values2: sizeChart?.height.inches.convertArrayToString(), title: "HEIGHT", firsColumStr: "'", secondColumnStr: "\"")
+            secondTxtFld.updateTxtFldWith(rightTitle: "in", placeholder: "", measurementType: Constant.double, values1: sizes?.height.feet.convertArrayToString(), values2: sizes?.height.inches.convertArrayToString(), title: "HEIGHT", firsColumStr: "'", secondColumnStr: "\"")
             
 
 
         case .braSize:
             
-            firstTxtFld.updateTxtFldWith(rightTitle: "band", placeholder: "Bra Size", measurementType: Constant.double, values1: sizeChart?.bra.band.convertArrayToString(), values2: sizeChart?.bra.cup, title: "BRA SIZE", firsColumStr: "", secondColumnStr: "")
+            firstTxtFld.updateTxtFldWith(rightTitle: "band", placeholder: "Bra Size", measurementType: Constant.double, values1: sizes?.bra.band.convertArrayToString(), values2: sizes?.bra.cup, title: "BRA SIZE", firsColumStr: "", secondColumnStr: "")
             
 
-            secondTxtFld.updateTxtFldWith(rightTitle: "cup", placeholder: "", measurementType: Constant.double, values1: sizeChart?.bra.band.convertArrayToString(), values2: sizeChart?.bra.cup, title: "BRA SIZE", firsColumStr: "", secondColumnStr: "")
+            secondTxtFld.updateTxtFldWith(rightTitle: "cup", placeholder: "", measurementType: Constant.double, values1: sizes?.bra.band.convertArrayToString(), values2: sizes?.bra.cup, title: "BRA SIZE", firsColumStr: "", secondColumnStr: "")
             
 
         default: break
         }
-        if sizeChart == nil
+        if sizes == nil
         {
             firstTxtFld.isUserInteractionEnabled = false
             secondTxtFld.isUserInteractionEnabled = false

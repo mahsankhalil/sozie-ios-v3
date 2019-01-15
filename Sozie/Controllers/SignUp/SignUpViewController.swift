@@ -9,7 +9,7 @@
 import UIKit
 import SwiftValidator
 import MaterialTextField
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationDelegate {
 
     
     @IBOutlet weak var femaleBtn: UIButton!
@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var firstNameTxtFld: MFTextField!
     @IBOutlet weak var userNameTxtFld: MFTextField!
 
+    let validator = Validator()
 
 
 
@@ -37,11 +38,52 @@ class SignUpViewController: UIViewController {
         lastNameTxtFld.setupAppDesign()
         userNameTxtFld.setupAppDesign()
         dateOfBirtTxtFld.setupAppDesign()
-
+        applyValidators()
         
       
     }
+    //MARK: - Custom Methods
+    func applyValidators() {
+        validator.registerField(firstNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
+        validator.registerField(lastNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
+        validator.registerField(userNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
+        validator.registerField(dateOfBirtTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
 
+        
+        [firstNameTxtFld, lastNameTxtFld , userNameTxtFld , dateOfBirtTxtFld].forEach { (field) in
+            field?.delegate = self
+        }
+        
+        
+        
+        
+    }
+    
+    func validationSuccessful() {
+        
+        performSegue(withIdentifier: "toMeasurementVC", sender: self)
+        
+    }
+    
+    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+        for (field, error) in errors {
+            if let field = field as? MFTextField {
+                
+                _ = field.resignFirstResponder()
+                field.setError(CustomError(str: error.errorMessage), animated: true)
+                
+                
+            }
+        }
+    }
+    
+    //MARK: - Text Field Delegates
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let txtFld  = textField as! MFTextField
+        txtFld.setError(nil, animated: true)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,7 +114,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signupButtonPressed(_ sender: Any) {
 
-        
+        validator.validate(self)
     }
     
     
@@ -88,6 +130,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func maleBtnTapped(_ sender: Any) {
+        
         
         maleBtn.applyButtonSelected()
         femaleBtn.applyButtonUnSelected()

@@ -191,6 +191,17 @@ extension UIButton {
         self.clipsToBounds = true
     }
     
+    func applyButtonSelectedWithoutBorder()
+    {
+        self.titleLabel?.font = UIFont(font: Font.Bold, size: 16.0)
+        self.setTitleColor(UIColor(hex: "FC8888"), for: .normal)
+    }
+    func applyButtonUnSelectedWithoutBorder()
+    {
+        self.titleLabel?.font = UIFont(font: Font.Standard, size: 16.0)
+        self.setTitleColor(UIColor(hex: "323232"), for: .normal)
+    }
+    
     func applyButtonShadow(){
         self.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
         self.layer.shadowRadius = 4.0

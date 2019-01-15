@@ -15,6 +15,8 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
     @IBOutlet weak var uploadBtn: DZGradientButton!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var imgVu: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
