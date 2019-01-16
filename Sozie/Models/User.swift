@@ -9,21 +9,19 @@
 
 import UIKit
 
-
 struct User: Codable {
     
     var username: String?
     var email: String?
     var userId: Int?
-
     var gender: String?
     var birthday: String?
     var city: String?
     var avatar: String?
     var picture: String?
     var measurement : Measurement?
+    
     enum CodingKeys: String, CodingKey {
-        
         case username
         case email
         case userId = "user_id"
@@ -33,10 +31,8 @@ struct User: Codable {
         case avatar
         case picture
         case measurement
-        
-
-        
     }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         username = try values.decode(String.self, forKey: .username)
@@ -51,15 +47,15 @@ struct User: Codable {
     }
 }
 
-struct Measurement : Codable{
-    var bra : String?
-    var height : String?
-    var bodyShape : String?
-    var hip : String?
-    var cup : String?
-    var waist : String?
+struct Measurement: Codable {
+    var bra: String?
+    var height: String?
+    var bodyShape: String?
+    var hip: String?
+    var cup: String?
+    var waist: String?
+    
     enum CodingKeys: String, CodingKey {
-
         case bra
         case height
         case bodyShape = "body_shape"
@@ -67,6 +63,7 @@ struct Measurement : Codable{
         case cup
         case waist
     }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         bra = try values.decode(String.self, forKey: .bra)
@@ -75,7 +72,5 @@ struct Measurement : Codable{
         hip = try values.decode(String.self, forKey: .hip)
         cup = try values.decode(String.self, forKey: .cup)
         waist = try values.decode(String.self, forKey: .waist)
-
-        
     }
 }

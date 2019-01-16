@@ -10,11 +10,12 @@ import UIKit
 
 struct SizeChart: Codable {
 
-    var general : [String]
-    var height : Height
-    var waist : [Int]
-    var hip : [Int]
-    var bra : Bra
+    var general: [String]
+    var height: Height
+    var waist: [Int]
+    var hip: [Int]
+    var bra: Bra
+    
     enum CodingKeys: String, CodingKey {
         case general
         case height
@@ -34,12 +35,11 @@ struct SizeChart: Codable {
     }
 }
 
-struct Height : Codable {
-    var inches : [Int]
-    var feet : [Int]
+struct Height: Codable {
+    var inches: [Int]
+    var feet: [Int]
     
     enum CodingKeys: String, CodingKey {
-
         case inches
         case feet
     }
@@ -48,16 +48,14 @@ struct Height : Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         inches = try values.decode([Int].self, forKey: .inches)
         feet = try values.decode([Int].self, forKey: .feet)
-
     }
 }
 
-struct Bra : Codable {
-    var cup : [String]
-    var band : [Int]
+struct Bra: Codable {
+    var cup: [String]
+    var band: [Int]
     
     enum CodingKeys: String, CodingKey {
-
         case cup
         case band
     }

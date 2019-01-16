@@ -9,13 +9,14 @@
 import UIKit
 
 struct Brand: Codable {
-    var brandId : Int
-    var createdAt : String
-    var updatedAt : String
-    var label : String
-    var logo : String
+    
+    var brandId: Int
+    var createdAt: String
+    var updatedAt: String
+    var label: String
+    var logo: String
+    
     enum CodingKeys: String, CodingKey {
-        
         case brandId = "id"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
@@ -31,7 +32,5 @@ struct Brand: Codable {
         updatedAt = try values.decode(String.self, forKey: .updatedAt)
         label = try values.decode(String.self, forKey: .label)
         logo = try values.decode(String.self, forKey: .logo)
-
     }
-
 }

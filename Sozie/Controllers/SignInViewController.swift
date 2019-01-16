@@ -135,7 +135,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             let fields = "name,first_name,last_name,email,gender,picture,locale,link"
             
             // Build URL with Access Token
-            let url = Constant.facebookURL + "?fields=\(fields)&access_token=\(token.tokenString!)"
+            _ = Constant.facebookURL + "?fields=\(fields)&access_token=\(token.tokenString!)"
             
             //Make API call to facebook graph api to get data
 //            RequestManager.getUserFacebookProfile(url: url, successBlock: { (response) in

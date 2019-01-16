@@ -15,18 +15,15 @@ struct LoginResponse: Codable {
     var userId : Int
     
     enum CodingKeys: String, CodingKey {
-
         case refresh
         case access
         case userId = "user_id"
     }
     
     init(from decoder: Decoder) throws {
-        
         let values = try decoder.container(keyedBy: CodingKeys.self)
         refresh = try values.decode(String.self, forKey: .refresh)
         access = try values.decode(String.self, forKey: .access)
         userId = try values.decode(Int.self, forKey: .userId)
-        
     }
 }
