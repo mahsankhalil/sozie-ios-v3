@@ -17,6 +17,7 @@
 		617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12921DE286700D4C885 /* SignUpViewController.swift */; };
 		617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12B21DE288400D4C885 /* SelectCountryVC.swift */; };
 		617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */; };
+		618091C821EF43D0004B3347 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618091C721EF43D0004B3347 /* UserDefaultManager.swift */; };
 		6183FFCE21E747790090393E /* InviteFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6183FFCD21E747790090393E /* InviteFriendsVC.swift */; };
 		6183FFD021E756810090393E /* SelectWorkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6183FFCF21E756810090393E /* SelectWorkVC.swift */; };
 		6183FFD321E759920090393E /* WorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6183FFD121E759920090393E /* WorkCell.swift */; };
@@ -106,6 +107,7 @@
 		617CD12921DE286700D4C885 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		617CD12B21DE288400D4C885 /* SelectCountryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryVC.swift; sourceTree = "<group>"; };
 		617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailVC.swift; sourceTree = "<group>"; };
+		618091C721EF43D0004B3347 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		6183FFCD21E747790090393E /* InviteFriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsVC.swift; sourceTree = "<group>"; };
 		6183FFCF21E756810090393E /* SelectWorkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWorkVC.swift; sourceTree = "<group>"; };
 		6183FFD121E759920090393E /* WorkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCell.swift; sourceTree = "<group>"; };
@@ -229,11 +231,11 @@
 			isa = PBXGroup;
 			children = (
 				617CD12B21DE288400D4C885 /* SelectCountryVC.swift */,
+				6183FFCF21E756810090393E /* SelectWorkVC.swift */,
 				617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */,
 				617CD12921DE286700D4C885 /* SignUpViewController.swift */,
 				61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */,
 				6183FFCD21E747790090393E /* InviteFriendsVC.swift */,
-				6183FFCF21E756810090393E /* SelectWorkVC.swift */,
 				6188C70221EC98A000B51EA1 /* SizeChartPopUpVC.swift */,
 			);
 			path = SignUp;
@@ -290,6 +292,7 @@
 				61145CC021DB926600062332 /* ServerManager.swift */,
 				61A20A5321E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift */,
 				613F897C21E8C5FB00EB48D2 /* CustomError.swift */,
+				618091C721EF43D0004B3347 /* UserDefaultManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				61BC873421E76244000AEA06 /* SearchNotFoundCell.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
 				6944814F21C7A018001A11A2 /* LoadingView.swift in Sources */,
+				618091C821EF43D0004B3347 /* UserDefaultManager.swift in Sources */,
 				61A20A5B21E5DDBF00B27C8E /* DoubleTextFieldCell.swift in Sources */,
 				6944810B21C7A018001A11A2 /* Router.swift in Sources */,
 				6944813921C7A018001A11A2 /* ImageLoader.swift in Sources */,

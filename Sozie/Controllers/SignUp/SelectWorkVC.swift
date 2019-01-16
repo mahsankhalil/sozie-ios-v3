@@ -19,6 +19,7 @@ class SelectWorkVC: UIViewController {
     var brandList : [Brand]?
     var searchList : [Brand] = []
     var isNotFound = false
+    var signUpDict : [String: Any]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +93,8 @@ class SelectWorkVC: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "toSignUpEmailVC"
         {
-            
+            let vc = segue.destination as! SignUpEmailVC
+            vc.signUpDict = signUpDict
         }
     }
  
@@ -102,6 +104,7 @@ class SelectWorkVC: UIViewController {
         
         if selectedBrandId != nil
         {
+            signUpDict![User.CodingKeys.brand.stringValue] = selectedBrandId
             performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
         }
         else

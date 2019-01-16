@@ -9,6 +9,7 @@
 import UIKit
 import SwiftValidator
 import MaterialTextField
+import SVProgressHUD
 class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationDelegate {
 
     
@@ -22,6 +23,8 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
     let validator = Validator()
 
 
+    var isFemaleSelected = false
+    var signUpDict : [String: Any]?
 
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     
@@ -50,7 +53,7 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
         validator.registerField(dateOfBirtTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
 
         
-        [firstNameTxtFld, lastNameTxtFld , userNameTxtFld , dateOfBirtTxtFld].forEach { (field) in
+        [firstNameTxtFld, lastNameTxtFld , userNameTxtFld ].forEach { (field) in
             field?.delegate = self
         }
         
@@ -59,9 +62,72 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
         
     }
     
+    func verifyUsernameUniquenessFromServer(username : String?)
+    {
+        let dataDict = ["attr_type" : "username" , "attr_value" : username!]
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.validateEmailOrUsername(params: dataDict as [String : Any]) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                self.signUpUser()
+            }
+            else
+            {
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                
+            }
+        }
+
+    }
+    
+    func signUpUser()
+    {
+        signUpDict![User.CodingKeys.firstName.stringValue] = firstNameTxtFld.text
+        signUpDict![User.CodingKeys.lastName.stringValue] = lastNameTxtFld.text
+        signUpDict![User.CodingKeys.username.stringValue] = userNameTxtFld.text
+        signUpDict![User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
+        if isFemaleSelected
+        {
+            signUpDict![User.CodingKeys.gender.stringValue] = "Female"
+        }
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.signUpUserWith(params: signUpDict!) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                let res = response as! LoginResponse
+                
+                _ = UserDefaultManager.saveLoginResponse(loginResp: res)
+                self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
+            }
+            else
+            {
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    // MARK: - Validation CallBacks
+
     func validationSuccessful() {
         
-        performSegue(withIdentifier: "toMeasurementVC", sender: self)
+        if !isFemaleSelected
+        {
+            UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
+
+        }
+        else
+        {
+            verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
+        }
+        
         
     }
     
@@ -121,6 +187,7 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
     
     @IBAction func femaleBtnTapped(_ sender: Any) {
         
+        isFemaleSelected = true
         femaleBtn.applyButtonSelected()
         maleBtn.applyButtonUnSelected()
         femaleBtn.applyButtonShadow()

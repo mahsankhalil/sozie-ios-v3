@@ -7,9 +7,9 @@
 //
 
 import UIKit
-public enum UserType {
-    case sozie
-    case shopper
+public enum UserType : String {
+    case sozie = "Sozie"
+    case shopper = "Shopper"
 }
 class LandingViewController: UIViewController {
 

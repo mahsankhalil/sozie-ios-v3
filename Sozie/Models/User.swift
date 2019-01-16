@@ -11,26 +11,37 @@ import UIKit
 
 struct User: Codable {
     
-    var username: String?
-    var email: String?
-    var userId: Int?
-    var gender: String?
-    var birthday: String?
+
+    var username: String
+    var email: String
+    var userId: Int
+    var gender: String
+    var birthday: String
     var city: String?
     var avatar: String?
     var picture: String?
+    var country : Int
+    var type : String
+    var brand : Int?
+    var firstName : String?
+    var lastName : String?
     var measurement : Measurement?
     
     enum CodingKeys: String, CodingKey {
         case username
         case email
-        case userId = "user_id"
+        case userId = "id"
         case gender
         case birthday
         case city
         case avatar
         case picture
+        case country
+        case type
+        case brand
         case measurement
+        case firstName = "first_name"
+        case lastName = "last_name"
     }
     
     init(from decoder: Decoder) throws {
@@ -40,10 +51,16 @@ struct User: Codable {
         userId = try values.decode(Int.self, forKey: .userId)
         gender = try values.decode(String.self, forKey: .gender)
         birthday = try values.decode(String.self, forKey: .birthday)
-        city = try values.decode(String.self, forKey: .city)
-        avatar = try values.decode(String.self, forKey: .avatar)
-        picture = try values.decode(String.self, forKey: .picture)
-        measurement = try values.decode(Measurement.self, forKey: .measurement)
+        city = try? values.decode(String.self, forKey: .city)
+        avatar = try? values.decode(String.self, forKey: .avatar)
+        picture = try? values.decode(String.self, forKey: .picture)
+        country = try values.decode(Int.self, forKey: .country)
+        type = try values.decode(String.self, forKey: .type)
+        brand = try? values.decode(Int.self, forKey: .brand)
+        firstName = try values.decode(String.self, forKey: .firstName)
+        lastName = try values.decode(String.self, forKey: .lastName)
+
+        measurement = try? values.decode(Measurement.self, forKey: .measurement)
     }
 }
 
