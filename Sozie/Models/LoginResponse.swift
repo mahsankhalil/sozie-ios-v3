@@ -12,13 +12,15 @@ struct LoginResponse: Codable {
 
     var refresh : String
     var access : String
-    var userId : Int
+    var userId : Int?
+    var user : User?
     
     enum CodingKeys: String, CodingKey {
 
         case refresh
         case access
         case userId = "user_id"
+        case user
     }
     
     init(from decoder: Decoder) throws {
@@ -26,7 +28,22 @@ struct LoginResponse: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         refresh = try values.decode(String.self, forKey: .refresh)
         access = try values.decode(String.self, forKey: .access)
-        userId = try values.decode(Int.self, forKey: .userId)
+        userId = try? values.decode(Int.self, forKey: .userId)
+        user = try values.decode(User.self, forKey: .user)
         
+    }
+}
+
+struct ValidateRespose : Codable {
+    var detail : String
+    enum CodingKeys: String, CodingKey {
+        
+        case detail
+        
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        detail = try values.decode(String.self, forKey: .detail)
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import MaterialTextField
 import SwiftValidator
+import SVProgressHUD
 class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
 
     @IBOutlet weak var signInBtn: UIButton!
@@ -31,6 +32,7 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
     
     let validator = Validator()
 
+    var signUpDict : [String: Any]?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,6 +60,29 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
         
     }
     
+    func verifyEmailFromServer(email : String?)
+    {
+        let dataDict = ["attr_type" : "email" , "attr_value" : email!]
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.validateEmailOrUsername(params: dataDict as [String : Any]) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+
+            }
+            else
+            {
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Validation CallBacks
     func validationSuccessful() {
         
         if passwordTxtFld.text != confirmPasswordTxtFld.text
@@ -66,22 +91,16 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
         }
         else
         {
-            var params = [String : String]()
-            params["email"] = emailTxtFld.text
-            params["password"] = passwordTxtFld.text
+            signUpDict![User.CodingKeys.email.stringValue] = emailTxtFld.text
+            signUpDict!["password"] = passwordTxtFld.text
+
+            
             
             confirmPasswordTxtFld.setError( nil, animated: true)
-            performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+            verifyEmailFromServer(email: emailTxtFld.text)
 
         }
-        
-        
-        
-        
-        
-        
-        
-        
+
         
     }
     
@@ -105,15 +124,20 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toSignUpPersonalInfo"
+        {
+            let vc = segue.destination as! SignUpViewController
+            vc.signUpDict = signUpDict
+        }
     }
-    */
+ 
     
     // MARK: - Actions
     

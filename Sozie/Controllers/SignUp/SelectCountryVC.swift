@@ -18,6 +18,7 @@ class SelectCountryVC: UIViewController {
     
     var currentUserType : UserType?
 
+    var signUpDict : [String : Any] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,15 +48,25 @@ class SelectCountryVC: UIViewController {
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toSignUpEmailVC"
+        {
+            let vc = segue.destination as! SignUpEmailVC
+            vc.signUpDict = signUpDict
+        }
+        else if segue.identifier == "toWorkVC"
+        {
+            let vc = segue.destination as! SelectWorkVC
+            vc.signUpDict = signUpDict
+        }
     }
-    */
+ 
     
     
     // MARK: - Actions
@@ -64,11 +75,13 @@ class SelectCountryVC: UIViewController {
     @IBAction func nextBtnTapped(_ sender: Any) {
         if selectedCountryId != nil
         {
-            if currentUserType == .sozie
+            signUpDict[User.CodingKeys.country.stringValue] = selectedCountryId
+            signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+            if currentUserType == .shopper
             {
                 performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
             }
-            else if currentUserType == .shopper
+            else if currentUserType == .sozie
             {
                 performSegue(withIdentifier: "toWorkVC", sender: self)
             }
