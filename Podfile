@@ -6,16 +6,12 @@ use_frameworks!
 
 target 'Sozie' do
 
-pod 'TPKeyboardAvoiding'
 pod 'SVProgressHUD'
 pod 'SDWebImage', '~> 4.0'
-pod 'DZNEmptyDataSet'
-pod 'Google/SignIn'
+pod 'GoogleSignIn'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
-
 pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
-
 pod 'SnapKit', '~> 4.0.0'
 pod 'Alamofire'
 pod 'MaterialTextField', '~> 1.0'
