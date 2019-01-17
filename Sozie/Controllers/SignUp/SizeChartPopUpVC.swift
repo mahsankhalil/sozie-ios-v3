@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PopupController
 
 protocol SizeChartPopupVCDelegate {
     func selectedValueFromPopUp(value : Int , type : MeasurementType)

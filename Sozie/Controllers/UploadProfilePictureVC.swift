@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate , UIImagePickerControllerDelegate {
     
     @IBOutlet weak var backBtn: UIButton!
@@ -16,7 +16,7 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var imgVu: UIImageView!
     
-    
+    var pickedImage : UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,9 +40,10 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
     // MARK: - Image Picker Delegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        if let pickdImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         {
-            imgVu.image = pickedImage
+            pickedImage = pickdImg
+            imgVu.image = pickdImg
             imgVu.contentMode = .scaleAspectFill
         }
         picker.dismiss(animated: true, completion: nil)
@@ -59,6 +60,33 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
         
     }
     @IBAction func uploadBtnTapped(_ sender: Any) {
+        if pickedImage != nil
+        {
+            if let scaledImg = pickedImage?.scaleImageToSize(newSize: CGSize(width: 1024, height: 512))
+            {
+                let imgData = scaledImg.pngData()
+                SVProgressHUD.show()
+                ServerManager.sharedInstance.updateProfile(params: nil, imageData: imgData) { (isSuccess, response) in
+                    SVProgressHUD.dismiss()
+                    if isSuccess
+                    {
+                        self.performSegue(withIdentifier: "toInviteFriends", sender: self)
+                    }
+                    else
+                    {
+                        let error = response as! Error
+                        UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                    }
+                    
+                }
+
+            }
+            
+        }
+        else
+        {
+            UtilityManager.showErrorMessage(body: "Please select Image", in: self)
+        }
     }
     @IBAction func skipBtnTapped(_ sender: Any) {
     }

@@ -10,7 +10,6 @@
 import UIKit
 
 struct User: Codable {
-    
 
     var username: String
     var email: String
@@ -59,7 +58,6 @@ struct User: Codable {
         brand = try? values.decode(Int.self, forKey: .brand)
         firstName = try values.decode(String.self, forKey: .firstName)
         lastName = try values.decode(String.self, forKey: .lastName)
-
         measurement = try? values.decode(Measurement.self, forKey: .measurement)
     }
 }
@@ -90,4 +88,19 @@ struct Measurement: Codable {
         cup = try values.decode(String.self, forKey: .cup)
         waist = try values.decode(String.self, forKey: .waist)
     }
+    
+    init() {
+        
+    }
+}
+
+
+class LocalMeasurement: NSObject {
+    var bra: String?
+    var height: String?
+    var bodyShape: String?
+    var hip: String?
+    var cup: String?
+    var waist: String?
+
 }
