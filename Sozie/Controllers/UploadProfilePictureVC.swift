@@ -17,6 +17,7 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
     @IBOutlet weak var imgVu: UIImageView!
     
     var pickedImage : UIImage?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

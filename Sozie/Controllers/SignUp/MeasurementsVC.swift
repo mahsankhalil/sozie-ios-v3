@@ -33,9 +33,11 @@ class MeasurementsVC: UIViewController {
     var selectedHip : Int?
     var selectedWaist : Int?
     
+
     var currentMeasurement : LocalMeasurement?
     var shouldValidate = false
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -159,6 +161,7 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
             doubletextFieldCell.measurementType = .height
             doubletextFieldCell.shouldValidate = shouldValidate
             doubletextFieldCell.currentMeasurement = currentMeasurement
+
             doubletextFieldCell.configureCellData(cellType: .height)
             doubletextFieldCell.validateCellData()
             return doubletextFieldCell
@@ -177,20 +180,24 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
         else if indexPath.row == 2
         {
             singleTextFieldCell.sizes = sizes
+
             singleTextFieldCell.measurementType = .hips
             singleTextFieldCell.shouldValidate = shouldValidate
             singleTextFieldCell.currentMeasurement = currentMeasurement
             singleTextFieldCell.selectedHip = selectedHip
             singleTextFieldCell.configureCellData(cellType: .hips)
             singleTextFieldCell.validateCellData()
+
             return singleTextFieldCell
         }
         else
         {
             doubletextFieldCell.sizes = sizes
+
             doubletextFieldCell.measurementType = .braSize
             doubletextFieldCell.shouldValidate = shouldValidate
             doubletextFieldCell.currentMeasurement = currentMeasurement
+
             doubletextFieldCell.configureCellData(cellType: .braSize)
             doubletextFieldCell.validateCellData()
             return doubletextFieldCell
@@ -246,6 +253,7 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
     }
     
     
+    
 }
 
 extension MeasurementsVC : SizeChartPopupVCDelegate {
@@ -253,12 +261,16 @@ extension MeasurementsVC : SizeChartPopupVCDelegate {
         if type == .hips
         {
             selectedHip = value
+
             currentMeasurement?.hip = String(value)
+
         }
         else if type == .waist
         {
             selectedWaist = value
+
             currentMeasurement?.waist = String(value)
+
         }
         tblVu.reloadData()
     }

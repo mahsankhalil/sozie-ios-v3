@@ -147,7 +147,9 @@ class ServerManager: NSObject {
                 multipartFormData.append(data, withName: "picture", fileName: "image.png", mimeType: "image/png")
             }
             
+
         }, usingThreshold: UInt64.init(), to: ServerManager.profileURL + String(UserDefaultManager.getCurrentUserId()!) + "/", method: .patch, headers: headers) { (result) in
+
             switch result{
             case .success(let upload, _, _):
                 upload.responseData { response in

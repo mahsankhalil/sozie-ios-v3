@@ -20,10 +20,10 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
     var delegate : SingleTextFieldDelegate?
     var selectedHip : Int?
     var selectedWaist : Int?
-    
     var currentMeasurement : LocalMeasurement?
     var measurementType : MeasurementType?
     var shouldValidate : Bool?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -46,6 +46,7 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
             {
                 txtFld.text = String(describing: selectedWaist!)
             }
+
             if let waist = currentMeasurement?.waist
             {
                 txtFld.text = waist
@@ -55,6 +56,7 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
                 txtFld.text = ""
             }
 
+
         case .hips:
             txtFld.updateTxtFldWith(rightTitle: "", placeholder: "Hips", measurementType: Constant.single, values1: sizes?.hip.convertArrayToString(), values2: [], title: "HIPS", firsColumStr: "\"", secondColumnStr: "")
 
@@ -62,6 +64,7 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
             {
                 txtFld.text = String(describing: selectedHip!)
             }
+
             if let hips = currentMeasurement?.hip
             {
                 txtFld.text = hips
@@ -70,6 +73,7 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
             {
                 txtFld.text = ""
             }
+
         default: break
         }
         txtFld.pickerDelegate = self

@@ -16,6 +16,7 @@ class DoubleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
     var measurementType : MeasurementType?
     var shouldValidate : Bool?
 
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

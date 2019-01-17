@@ -34,6 +34,7 @@ struct LoginResponse: Codable {
 struct ValidateRespose : Codable {
     var detail : String
     enum CodingKeys: String, CodingKey {
+
         
         case detail
         
@@ -44,3 +45,5 @@ struct ValidateRespose : Codable {
         detail = try values.decode(String.self, forKey: .detail)
     }
 }
+
+
