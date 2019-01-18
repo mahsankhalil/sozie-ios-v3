@@ -27,7 +27,7 @@ struct LoginResponse: Codable {
         refresh = try values.decode(String.self, forKey: .refresh)
         access = try values.decode(String.self, forKey: .access)
         userId = try? values.decode(Int.self, forKey: .userId)
-        user = try values.decode(User.self, forKey: .user)
+        user = try? values.decode(User.self, forKey: .user)
     }
 }
 

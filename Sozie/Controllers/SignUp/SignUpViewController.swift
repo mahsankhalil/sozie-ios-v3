@@ -10,6 +10,7 @@ import UIKit
 import SwiftValidator
 import MaterialTextField
 import SVProgressHUD
+import EasyTipView
 class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationDelegate {
 
     
@@ -26,6 +27,8 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
     var isFemaleSelected = false
     var signUpDict : [String: Any]?
 
+    var tipVu : EasyTipView?
+    
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     
     override func viewDidLoad() {
@@ -208,16 +211,39 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
         femaleBtn.applyButtonShadow()
         
         maleBtn.layer.shadowOpacity = 0.0
+        tipVu?.dismiss()
         
     }
     
     @IBAction func maleBtnTapped(_ sender: Any) {
+        tipVu?.dismiss()
+        var preferences = EasyTipView.globalPreferences
+        preferences.drawing.foregroundColor = UIColor.white
+        preferences.drawing.backgroundColor = UIColor(hex: "5CCEC4")
+        preferences.drawing.font = UIFont(name: "SegoeUI", size: 11)!
+        preferences.drawing.textAlignment = NSTextAlignment.left
+        
+        preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
+        preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: 15)
+        preferences.animating.showInitialAlpha = 0
+        preferences.animating.showDuration = 1
+        preferences.animating.dismissDuration = 1.0
+        preferences.drawing.arrowPosition = .bottom
+        preferences.drawing.cornerRadius = 10.0
+        preferences.positioning.maxWidth = 143
+        
+        let text = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
+        
+        tipVu = EasyTipView(text: text, preferences: preferences, delegate: nil)
+        tipVu?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
+        
+    
         
         
-        maleBtn.applyButtonSelected()
-        femaleBtn.applyButtonUnSelected()
-        maleBtn.applyButtonShadow()
-        femaleBtn.layer.shadowOpacity = 0.0
+//        maleBtn.applyButtonSelected()
+//        femaleBtn.applyButtonUnSelected()
+//        maleBtn.applyButtonShadow()
+//        femaleBtn.layer.shadowOpacity = 0.0
     }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true) {

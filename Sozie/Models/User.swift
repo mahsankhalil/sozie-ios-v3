@@ -19,8 +19,8 @@ struct User: Codable {
     var city: String?
     var avatar: String?
     var picture: String?
-    var country : Int
-    var type : String
+    var country : Int?
+    var type : String?
     var brand : Int?
     var firstName : String?
     var lastName : String?
@@ -59,14 +59,14 @@ struct User: Codable {
         city = try? values.decode(String.self, forKey: .city)
         avatar = try? values.decode(String.self, forKey: .avatar)
         picture = try? values.decode(String.self, forKey: .picture)
-        country = try values.decode(Int.self, forKey: .country)
-        type = try values.decode(String.self, forKey: .type)
+        country = try? values.decode(Int.self, forKey: .country)
+        type = try? values.decode(String.self, forKey: .type)
         brand = try? values.decode(Int.self, forKey: .brand)
-        firstName = try values.decode(String.self, forKey: .firstName)
-        lastName = try values.decode(String.self, forKey: .lastName)
-        socialId = try values.decode(String.self, forKey: .socialId)
-        socialToken = try values.decode(String.self, forKey: .socialToken)
-        signUpMedium = try values.decode(String.self, forKey: .signUpMedium)
+        firstName = try? values.decode(String.self, forKey: .firstName)
+        lastName = try? values.decode(String.self, forKey: .lastName)
+        socialId = try? values.decode(String.self, forKey: .socialId)
+        socialToken = try? values.decode(String.self, forKey: .socialToken)
+        signUpMedium = try? values.decode(String.self, forKey: .signUpMedium)
 
         measurement = try? values.decode(Measurement.self, forKey: .measurement)
     }

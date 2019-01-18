@@ -65,7 +65,7 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
         {
             if let scaledImg = pickedImage?.scaleImageToSize(newSize: CGSize(width: 1024, height: 512))
             {
-                let imgData = scaledImg.pngData()
+                let imgData = scaledImg.jpegData(compressionQuality: 0.1)
                 SVProgressHUD.show()
                 ServerManager.sharedInstance.updateProfile(params: nil, imageData: imgData) { (isSuccess, response) in
                     SVProgressHUD.dismiss()
