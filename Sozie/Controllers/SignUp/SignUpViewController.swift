@@ -42,15 +42,30 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
         userNameTxtFld.setupAppDesign()
         dateOfBirtTxtFld.setupAppDesign()
         applyValidators()
+        populateSocialData()
         
       
+    }
+    
+    func populateSocialData()
+    {
+        if let firstName = signUpDict![User.CodingKeys.firstName.stringValue]
+        {
+            firstNameTxtFld.text = firstName as? String
+        }
+        if let lastName = signUpDict![User.CodingKeys.lastName.stringValue]
+        {
+            lastNameTxtFld.text = lastName as? String
+        }
+        
+        
     }
     //MARK: - Custom Methods
     func applyValidators() {
         validator.registerField(firstNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
-        validator.registerField(lastNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
-        validator.registerField(userNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
-        validator.registerField(dateOfBirtTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
+        validator.registerField(lastNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Last Name can't be empty") as Rule,])
+        validator.registerField(userNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Username can't be empty") as Rule,])
+        validator.registerField(dateOfBirtTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Date of Birth can't be empty") as Rule,])
 
         
         [firstNameTxtFld, lastNameTxtFld , userNameTxtFld ].forEach { (field) in
@@ -212,4 +227,13 @@ class SignUpViewController: UIViewController , UITextFieldDelegate , ValidationD
     }
     
 
+}
+
+extension SignUpViewController: SignUpInfoProvider {
+    var signUpInfo: [String: Any]? {
+        get { return signUpDict }
+        set (newInfo) {
+            signUpDict = newInfo
+        }
+    }
 }

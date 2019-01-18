@@ -10,7 +10,8 @@ import UIKit
 import MaterialTextField
 import SwiftValidator
 import SVProgressHUD
-class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
+import GoogleSignIn
+class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate , GIDSignInDelegate, GIDSignInUIDelegate{
 
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
@@ -38,7 +39,8 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
 
         // Do any additional setup after loading the view.
         
-
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
@@ -131,16 +133,57 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "toSignUpPersonalInfo"
-        {
-            let vc = segue.destination as! SignUpViewController
-            vc.signUpDict = signUpDict
+        
+        if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
+            signUpInfoProvider.signUpInfo = signUpDict
         }
+
     }
  
     
+    // MARK: Google SignIn Delegate
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        SVProgressHUD.dismiss()
+        if error == nil
+        {
+            let dataDict = SocialAuthManager.convertGoogleUserToAppDict(user: user)
+            self.signUpDict = self.signUpDict!.merging(dataDict) { (_, new) in new }
+            self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+
+
+        }
+        else
+        {
+            UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+
+        }
+        
+    }
+    
     // MARK: - Actions
     
+    @IBAction func facebookBtnTapped(_ sender: Any) {
+        SVProgressHUD.show()
+        SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                let resp = response as! [String : Any]
+                self.signUpDict = self.signUpDict!.merging(resp) { (_, new) in new }
+                self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+
+            }
+            else
+            {
+                let err = response as! Error
+                UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
+            }
+        }
+    }
+    @IBAction func googleBtnTapped(_ sender: Any) {
+        SVProgressHUD.show()
+        GIDSignIn.sharedInstance()?.signIn()
+    }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true) {
             
@@ -158,5 +201,15 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate{
     @IBAction func showConfirmPasswordBtnTapped(_ sender: Any) {
         self.confirmPasswordTxtFld.isSecureTextEntry = !self.confirmPasswordTxtFld.isSecureTextEntry
 
+    }
+}
+
+
+extension SignUpEmailVC: SignUpInfoProvider {
+    var signUpInfo: [String: Any]? {
+        get { return signUpDict }
+        set (newInfo) {
+            signUpDict = newInfo
+        }
     }
 }

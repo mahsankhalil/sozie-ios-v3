@@ -102,9 +102,9 @@ class SelectWorkVC: UIViewController {
     // MARK: - Actions
     @IBAction func nextBtnTapped(_ sender: Any) {
         
-        if selectedBrandId != nil
+        if let brandId = selectedBrandId
         {
-            signUpDict![User.CodingKeys.brand.stringValue] = selectedBrandId
+            signUpDict![User.CodingKeys.brand.stringValue] = brandId
             performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
         }
         else
@@ -190,4 +190,12 @@ extension SelectWorkVC : UITableViewDelegate , UITableViewDataSource {
     }
     
     
+}
+extension SelectWorkVC: SignUpInfoProvider {
+    var signUpInfo: [String: Any]? {
+        get { return signUpDict }
+        set (newInfo) {
+            signUpDict = newInfo
+        }
+    }
 }

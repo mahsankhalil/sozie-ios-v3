@@ -8,6 +8,9 @@
 
 import UIKit
 import SVProgressHUD
+protocol SignUpInfoProvider {
+    var signUpInfo: [String: Any]? { get set }
+}
 class SelectCountryVC: UIViewController {
 
     @IBOutlet weak var backBtn: UIButton!
@@ -55,16 +58,21 @@ class SelectCountryVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "toSignUpEmailVC"
-        {
-            let vc = segue.destination as! SignUpEmailVC
-            vc.signUpDict = signUpDict
+        
+        if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
+            signUpInfoProvider.signUpInfo = signUpDict
         }
-        else if segue.identifier == "toWorkVC"
-        {
-            let vc = segue.destination as! SelectWorkVC
-            vc.signUpDict = signUpDict
-        }
+
+//        if segue.identifier == "toSignUpEmailVC"
+//        {
+//            let vc = segue.destination as! SignUpEmailVC
+//            vc.signUpDict = signUpDict
+//        }
+//        else if segue.identifier == "toWorkVC"
+//        {
+//            let vc = segue.destination as! SelectWorkVC
+//            vc.signUpDict = signUpDict
+//        }
     }
  
     
@@ -73,9 +81,9 @@ class SelectCountryVC: UIViewController {
     
     
     @IBAction func nextBtnTapped(_ sender: Any) {
-        if selectedCountryId != nil
+        if let countryid = selectedCountryId
         {
-            signUpDict[User.CodingKeys.country.stringValue] = selectedCountryId
+            signUpDict[User.CodingKeys.country.stringValue] = countryid
             signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
             if currentUserType == .shopper
             {

@@ -125,9 +125,17 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 SVProgressHUD.dismiss()
                 return
             }
+            
+            
             // Verify token is not empty
             if token.tokenString.isEmpty {
                 print("Token is empty")
+                SVProgressHUD.dismiss()
+                return
+            }
+            
+            guard let userId = token.userID else
+            {
                 SVProgressHUD.dismiss()
                 return
             }
@@ -135,6 +143,14 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             let fields = "name,first_name,last_name,email,gender,picture,locale,link"
             
             // Build URL with Access Token
+            
+            let request = FBSDKGraphRequest(graphPath: "\(userId)", parameters: ["fields" : "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
+            request?.start(completionHandler: { (connection, result, error) in
+                // Handle the result
+                
+                print(result)
+            })
+            
             _ = Constant.facebookURL + "?fields=\(fields)&access_token=\(token.tokenString!)"
             
             //Make API call to facebook graph api to get data
@@ -176,7 +192,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     }
     
     @IBAction func googleButtonPressed(sender: AnyObject) {
-        GIDSignIn.sharedInstance().signIn()
+        GIDSignIn.sharedInstance()?.signIn()
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {

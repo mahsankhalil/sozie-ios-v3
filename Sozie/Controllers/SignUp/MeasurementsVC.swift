@@ -9,7 +9,7 @@
 import UIKit
 import MaterialTextField
 import SVProgressHUD
-public enum MeasurementType {
+public enum MeasurementType : Int {
     case height
     case waist
     case hips
@@ -233,16 +233,16 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
     
     func singleTextFieldNotSureBtnTapped(btn: UIButton) {
         
-        var type : MeasurementType
-        if btn.tag == 1
-        {
-            type = .waist
-        }
-        else
-        {
-            type = .hips
-        }
-        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes?.sizeChart ?? [], arrayOfGeneral: sizes?.general ?? [], type: type )
+        let type = MeasurementType(rawValue: btn.tag)
+//        if btn.tag == 1
+//        {
+//            type = .waist
+//        }
+//        else
+//        {
+//            type = .hips
+//        }
+        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes?.sizeChart ?? [], arrayOfGeneral: sizes?.general ?? [], type: type ?? .height)
         let popUpVC = PopupController
             .create(self)
             .show(popUpInstnc)

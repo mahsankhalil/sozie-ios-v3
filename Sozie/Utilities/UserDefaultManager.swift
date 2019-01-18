@@ -10,53 +10,65 @@ import UIKit
 
 class UserDefaultManager: NSObject {
 
+    
+    private class func loginResponse() -> LoginResponse? {
+        if let loginResponseData = UserDefaults.standard.data(forKey: UserDefaultKey.loginResponse) {
+            let decoder = JSONDecoder()
+            if let loginResponse = try? decoder.decode(LoginResponse.self, from: loginResponseData) {
+                return loginResponse
+            }
+        }
+        return nil
+    }
+    
     class func getCurrentUserObject() -> User?
     {
-        if let loginRespData = UserDefaults.standard.data(forKey: UserDefaultKey.loginResponse)
+        if let loginResponse = UserDefaultManager.loginResponse()
         {
-            let decoder = JSONDecoder()
-            if let loginResp = try? decoder.decode(LoginResponse.self, from: loginRespData)
-            {
-                return loginResp.user
-            }
+            return loginResponse.user
         }
-        return nil
+        else
+        {
+            return nil
+        }
     }
+    
     class func getCurrentUserId() -> Int?
     {
-        if let loginRespData = UserDefaults.standard.data(forKey: UserDefaultKey.loginResponse)
+        if let loginResponse = UserDefaultManager.loginResponse()
         {
-            let decoder = JSONDecoder()
-            if let loginResp = try? decoder.decode(LoginResponse.self, from: loginRespData)
-            {
-                return loginResp.user?.userId
-            }
+            return loginResponse.user?.userId
         }
-        return nil
+        else
+        {
+            return nil
+        }
+        
     }
+    
     class func getAccessToken() -> String?
     {
-        if let loginRespData = UserDefaults.standard.data(forKey: UserDefaultKey.loginResponse)
+        if let loginResponse = UserDefaultManager.loginResponse()
         {
-            let decoder = JSONDecoder()
-            if let loginResp = try? decoder.decode(LoginResponse.self, from: loginRespData)
-            {
-                return loginResp.access
-            }
+            return loginResponse.access
         }
-        return nil
+        else
+        {
+            return nil
+        }
     }
+    
     class func getRefreshToken() -> String?
     {
-        if let loginRespData = UserDefaults.standard.data(forKey: UserDefaultKey.loginResponse)
+        if let loginResponse = UserDefaultManager.loginResponse()
         {
-            let decoder = JSONDecoder()
-            if let loginResp = try? decoder.decode(LoginResponse.self, from: loginRespData)
-            {
-                return loginResp.refresh
-            }
+            return loginResponse.refresh
         }
-        return nil
+        else
+        {
+            return nil
+        }
+        
     }
     
     class func saveLoginResponse(loginResp : LoginResponse) -> Bool
