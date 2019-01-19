@@ -9,6 +9,8 @@
 import UIKit
 import MaterialTextField
 import SVProgressHUD
+import PopupController
+
 public enum MeasurementType : Int {
     case height
     case waist
