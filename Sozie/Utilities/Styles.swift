@@ -135,6 +135,12 @@ extension UIView {
         layer.masksToBounds = true
         
     }
+    
+    func applyStandardBorder()
+    {
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor(hex: "DADADA").cgColor
+    }
 }
 
 extension MFTextField {
@@ -183,6 +189,17 @@ extension UIButton {
         self.layer.cornerRadius = 2.0
         self.layer.borderWidth = 1.0
         self.clipsToBounds = true
+    }
+    
+    func applyButtonSelectedWithoutBorder()
+    {
+        self.titleLabel?.font = UIFont(font: Font.Bold, size: 16.0)
+        self.setTitleColor(UIColor(hex: "FC8888"), for: .normal)
+    }
+    func applyButtonUnSelectedWithoutBorder()
+    {
+        self.titleLabel?.font = UIFont(font: Font.Standard, size: 16.0)
+        self.setTitleColor(UIColor(hex: "323232"), for: .normal)
     }
     
     func applyButtonShadow(){

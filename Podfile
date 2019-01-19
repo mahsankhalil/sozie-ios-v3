@@ -5,7 +5,8 @@ inhibit_all_warnings!
 use_frameworks!
 
 target 'Sozie' do
-
+    
+pod 'TPKeyboardAvoiding'
 pod 'SVProgressHUD'
 pod 'SDWebImage', '~> 4.0'
 pod 'GoogleSignIn'
@@ -15,6 +16,8 @@ pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', 
 pod 'SnapKit', '~> 4.0.0'
 pod 'Alamofire'
 pod 'MaterialTextField', '~> 1.0'
+pod 'EasyTipView', '~> 2.0.0'
+
 end
 
 post_install do |installer|

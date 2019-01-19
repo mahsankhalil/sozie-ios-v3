@@ -18,21 +18,25 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="73" id="KGk-i7-Jjw" customClass="SingleTextFieldCell" customModule="Sozie" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="325" height="73"/>
+            <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="72.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="70.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Iu-TE-Y23">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="73"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EvB-e8-y2B">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="73"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Waist" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3r7-9o-b1N" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="7" width="325" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="56"/>
+
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="ag3-0V-6sm"/>
+                                        </constraints>
                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="namePhonePad" textContentType="name"/>
@@ -43,7 +47,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fW-fS-hvd">
-                                        <rect key="frame" x="0.0" y="59" width="117" height="14"/>
+                                        <rect key="frame" x="0.0" y="57" width="117" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="KMU-uQ-qkL"/>
                                         </constraints>
@@ -51,15 +55,19 @@
                                         <state key="normal" title="Not sure? Select a top size">
                                             <color key="titleColor" red="0.68235294120000001" green="0.80392156859999997" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="notSureBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wVI-Vd-bjD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3r7-9o-b1N" secondAttribute="trailing" id="4Jn-Ww-MR4"/>
+                                    <constraint firstAttribute="bottom" secondItem="1fW-fS-hvd" secondAttribute="bottom" id="GTK-O0-9XY"/>
                                     <constraint firstItem="3r7-9o-b1N" firstAttribute="leading" secondItem="EvB-e8-y2B" secondAttribute="leading" id="Kvg-Nj-bQU"/>
-                                    <constraint firstItem="1fW-fS-hvd" firstAttribute="top" secondItem="3r7-9o-b1N" secondAttribute="bottom" id="LUC-pL-fIj"/>
-                                    <constraint firstAttribute="bottom" secondItem="3r7-9o-b1N" secondAttribute="bottom" constant="14" id="YMd-gG-YqE"/>
                                     <constraint firstItem="1fW-fS-hvd" firstAttribute="leading" secondItem="EvB-e8-y2B" secondAttribute="leading" id="d9Y-hu-oNY"/>
+                                    <constraint firstItem="1fW-fS-hvd" firstAttribute="top" secondItem="3r7-9o-b1N" secondAttribute="bottom" constant="1" id="dvZ-n5-MTD"/>
+                                    <constraint firstItem="3r7-9o-b1N" firstAttribute="top" secondItem="EvB-e8-y2B" secondAttribute="top" id="uQQ-zI-vAE"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -84,6 +92,7 @@
                 <outlet property="notSureBtn" destination="1fW-fS-hvd" id="2Uq-0U-D7V"/>
                 <outlet property="txtFld" destination="3r7-9o-b1N" id="mWQ-XH-r4g"/>
             </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="108.39580209895054"/>
         </tableViewCell>
     </objects>
 </document>

@@ -8,6 +8,9 @@
 
 import UIKit
 import SVProgressHUD
+protocol SignUpInfoProvider {
+    var signUpInfo: [String: Any]? { get set }
+}
 class SelectCountryVC: UIViewController {
 
     @IBOutlet weak var backBtn: UIButton!
@@ -15,6 +18,10 @@ class SelectCountryVC: UIViewController {
     @IBOutlet weak var tblVu: UITableView!
     var countriesList : [Country]?
     var selectedCountryId : Int?
+    
+    var currentUserType : UserType?
+
+    var signUpDict : [String : Any] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,21 +51,53 @@ class SelectCountryVC: UIViewController {
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
+            signUpInfoProvider.signUpInfo = signUpDict
+        }
+
+//        if segue.identifier == "toSignUpEmailVC"
+//        {
+//            let vc = segue.destination as! SignUpEmailVC
+//            vc.signUpDict = signUpDict
+//        }
+//        else if segue.identifier == "toWorkVC"
+//        {
+//            let vc = segue.destination as! SelectWorkVC
+//            vc.signUpDict = signUpDict
+//        }
     }
-    */
+ 
     
     
     // MARK: - Actions
     
     
-    @IBAction func signUpBtnTapped(_ sender: Any) {
+    @IBAction func nextBtnTapped(_ sender: Any) {
+        if let countryid = selectedCountryId
+        {
+            signUpDict[User.CodingKeys.country.stringValue] = countryid
+            signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+            if currentUserType == .shopper
+            {
+                performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+            }
+            else if currentUserType == .sozie
+            {
+                performSegue(withIdentifier: "toWorkVC", sender: self)
+            }
+        }
+        else
+        {
+            UtilityManager.showErrorMessage(body: "Please select Country.", in: self)
+        }
     }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true) {

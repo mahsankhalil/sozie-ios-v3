@@ -28,7 +28,7 @@ extension JSONDecoder {
             return .failure(CustomError(str: "Did not get data in response"))
 
         }
-        if response.response?.statusCode != 200
+        if !((response.response?.statusCode == 200) || (response.response?.statusCode == 201))
         {
             do {
                 if let data = response.data,

@@ -18,24 +18,27 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="59" id="KGk-i7-Jjw" customClass="DoubleTextFieldCell" customModule="Sozie" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
+            <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="58.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="70.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI8-Mk-Yfx">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-6h-ot5">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="59"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYX-pg-uYL">
-                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="66"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="71"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Height" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="6Qo-b7-2xs" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="52"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="71"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="71" id="Kse-Zh-2v9"/>
+                                                </constraints>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" textContentType="name"/>
@@ -59,16 +62,19 @@
                                         <constraints>
                                             <constraint firstItem="6Qo-b7-2xs" firstAttribute="top" secondItem="XYX-pg-uYL" secondAttribute="top" id="F6d-3I-6AE"/>
                                             <constraint firstAttribute="trailing" secondItem="6Qo-b7-2xs" secondAttribute="trailing" id="NWk-Ts-Zvn"/>
-                                            <constraint firstAttribute="bottom" secondItem="6Qo-b7-2xs" secondAttribute="bottom" constant="14" id="OFP-oK-1O0"/>
+                                            <constraint firstAttribute="bottom" secondItem="6Qo-b7-2xs" secondAttribute="bottom" id="OFP-oK-1O0"/>
                                             <constraint firstItem="6Qo-b7-2xs" firstAttribute="leading" secondItem="XYX-pg-uYL" secondAttribute="leading" id="tcn-4O-qvW"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHg-G7-5sO">
-                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="66"/>
+                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="71"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="C7I-qT-1CX" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="52"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="71"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="71" id="U8O-WU-hXr"/>
+                                                </constraints>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" textContentType="name"/>
@@ -90,7 +96,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="C7I-qT-1CX" secondAttribute="bottom" constant="14" id="6qK-G2-hfR"/>
+                                            <constraint firstAttribute="bottom" secondItem="C7I-qT-1CX" secondAttribute="bottom" id="6qK-G2-hfR"/>
                                             <constraint firstItem="C7I-qT-1CX" firstAttribute="leading" secondItem="yHg-G7-5sO" secondAttribute="leading" id="TsH-aR-3Bn"/>
                                             <constraint firstItem="C7I-qT-1CX" firstAttribute="top" secondItem="yHg-G7-5sO" secondAttribute="top" id="hra-qs-sRq"/>
                                             <constraint firstAttribute="trailing" secondItem="C7I-qT-1CX" secondAttribute="trailing" id="vKK-nl-sSn"/>
@@ -108,10 +114,12 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="yHg-G7-5sO" firstAttribute="leading" secondItem="XYX-pg-uYL" secondAttribute="trailing" id="4Gf-Oa-gUJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="olb-Kx-COr" secondAttribute="bottom" constant="2" id="7Ae-gR-wge"/>
+                                    <constraint firstAttribute="bottom" secondItem="yHg-G7-5sO" secondAttribute="bottom" id="712-bi-yDC"/>
+                                    <constraint firstAttribute="bottom" secondItem="olb-Kx-COr" secondAttribute="bottom" constant="14" id="7Ae-gR-wge"/>
                                     <constraint firstItem="yHg-G7-5sO" firstAttribute="top" secondItem="Rda-6h-ot5" secondAttribute="top" id="DW6-lf-qOg"/>
                                     <constraint firstAttribute="trailing" secondItem="yHg-G7-5sO" secondAttribute="trailing" id="e3J-RR-aHv"/>
                                     <constraint firstItem="yHg-G7-5sO" firstAttribute="leading" secondItem="olb-Kx-COr" secondAttribute="trailing" constant="0.5" id="hnS-za-j4F"/>
+                                    <constraint firstAttribute="bottom" secondItem="XYX-pg-uYL" secondAttribute="bottom" id="jY6-3d-4dn"/>
                                     <constraint firstItem="XYX-pg-uYL" firstAttribute="leading" secondItem="Rda-6h-ot5" secondAttribute="leading" id="kaA-7W-duh"/>
                                     <constraint firstItem="XYX-pg-uYL" firstAttribute="top" secondItem="Rda-6h-ot5" secondAttribute="top" id="oXZ-wt-D7n"/>
                                     <constraint firstItem="yHg-G7-5sO" firstAttribute="width" secondItem="XYX-pg-uYL" secondAttribute="width" id="ro3-Gc-34c"/>
