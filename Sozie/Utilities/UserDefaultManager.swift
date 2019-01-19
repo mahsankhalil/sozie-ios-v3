@@ -10,8 +10,7 @@ import UIKit
 
 class UserDefaultManager: NSObject {
 
-    
-    private class func loginResponse() -> LoginResponse? {
+    private static func loginResponse() -> LoginResponse? {
         if let loginResponseData = UserDefaults.standard.data(forKey: UserDefaultKey.loginResponse) {
             let decoder = JSONDecoder()
             if let loginResponse = try? decoder.decode(LoginResponse.self, from: loginResponseData) {
@@ -21,68 +20,35 @@ class UserDefaultManager: NSObject {
         return nil
     }
     
-    class func getCurrentUserObject() -> User?
-    {
-        if let loginResponse = UserDefaultManager.loginResponse()
-        {
-            return loginResponse.user
-        }
-        else
-        {
-            return nil
-        }
+    static func getCurrentUserObject() -> User? {
+        guard let loginResponse = loginResponse() else { return nil }
+        return loginResponse.user
     }
     
-    class func getCurrentUserId() -> Int?
-    {
-        if let loginResponse = UserDefaultManager.loginResponse()
-        {
-            return loginResponse.user?.userId
-        }
-        else
-        {
-            return nil
-        }
-        
+    static func getCurrentUserId() -> Int? {
+        guard let loginResponse = loginResponse() else { return nil }
+        return loginResponse.user?.userId
     }
     
-    class func getAccessToken() -> String?
-    {
-        if let loginResponse = UserDefaultManager.loginResponse()
-        {
-            return loginResponse.access
-        }
-        else
-        {
-            return nil
-        }
+    static func getAccessToken() -> String? {
+        guard let loginResponse = loginResponse() else { return nil }
+        return loginResponse.access
     }
     
-    class func getRefreshToken() -> String?
-    {
-        if let loginResponse = UserDefaultManager.loginResponse()
-        {
-            return loginResponse.refresh
-        }
-        else
-        {
-            return nil
-        }
-        
+    static func getRefreshToken() -> String? {
+        guard let loginResponse = loginResponse() else { return nil }
+        return loginResponse.refresh
     }
     
-    class func saveLoginResponse(loginResp : LoginResponse) -> Bool
-    {
+    static func saveLoginResponse(loginResp : LoginResponse) -> Bool {
         let encoder = JSONEncoder()
-        if let loginResp = try? encoder.encode(loginResp)
-        {
+        if let loginResp = try? encoder.encode(loginResp) {
             UserDefaults.standard.set(loginResp, forKey: UserDefaultKey.loginResponse)
             UserDefaults.standard.synchronize()
             return true
         }
         
         return false
-        
     }
-    
+
 }
