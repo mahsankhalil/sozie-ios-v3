@@ -147,8 +147,9 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             let request = FBSDKGraphRequest(graphPath: "\(userId)", parameters: ["fields" : "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
             request?.start(completionHandler: { (connection, result, error) in
                 // Handle the result
-                
-                print(result)
+                if let result = result {
+                    print(result)
+                }
             })
             
             _ = Constant.facebookURL + "?fields=\(fields)&access_token=\(token.tokenString!)"

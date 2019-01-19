@@ -281,7 +281,7 @@ private extension PopupController {
     
     // Tap Gesture
     @objc func didTapGesture(_ sender: UITapGestureRecognizer) {
-        self.closePopup { [weak self] in }
+        self.closePopup { }
     }
     
     func closePopup(_ completion: (() -> Void)?) {
@@ -456,7 +456,7 @@ extension PopupController: UIScrollViewDelegate {
         if delta > 50 {
             baseScrollView.contentInset.top = -scrollView.contentOffset.y
             animation = .slideUp
-            self.closePopup { [weak self] in }
+            self.closePopup { }
         }
     }
     
