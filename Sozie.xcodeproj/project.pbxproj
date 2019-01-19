@@ -43,12 +43,6 @@
 		694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944800F21C7A017001A11A2 /* SignInViewController.swift */; };
 		694480EA21C7A018001A11A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801221C7A017001A11A2 /* Constants.swift */; };
 		694480ED21C7A018001A11A2 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801521C7A017001A11A2 /* Styles.swift */; };
-		694480F121C7A018001A11A2 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6944801B21C7A017001A11A2 /* DayCell.xib */; };
-		694480F221C7A018001A11A2 /* ScrollableDatepicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801C21C7A017001A11A2 /* ScrollableDatepicker.swift */; };
-		694480F321C7A018001A11A2 /* ScrollableDatepicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6944801D21C7A017001A11A2 /* ScrollableDatepicker.xib */; };
-		694480F421C7A018001A11A2 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801E21C7A017001A11A2 /* DayCell.swift */; };
-		694480F521C7A018001A11A2 /* LoadableFromXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801F21C7A017001A11A2 /* LoadableFromXibView.swift */; };
-		694480F621C7A018001A11A2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944802021C7A017001A11A2 /* Configuration.swift */; };
 		694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944802121C7A017001A11A2 /* UtilityManager.swift */; };
 		6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944803E21C7A017001A11A2 /* ApplicationManager.swift */; };
 		6944810B21C7A018001A11A2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944803F21C7A017001A11A2 /* Router.swift */; };
@@ -109,12 +103,6 @@
 		6944800F21C7A017001A11A2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6944801221C7A017001A11A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6944801521C7A017001A11A2 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		6944801B21C7A017001A11A2 /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
-		6944801C21C7A017001A11A2 /* ScrollableDatepicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableDatepicker.swift; sourceTree = "<group>"; };
-		6944801D21C7A017001A11A2 /* ScrollableDatepicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableDatepicker.xib; sourceTree = "<group>"; };
-		6944801E21C7A017001A11A2 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
-		6944801F21C7A017001A11A2 /* LoadableFromXibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableFromXibView.swift; sourceTree = "<group>"; };
-		6944802021C7A017001A11A2 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		6944802121C7A017001A11A2 /* UtilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityManager.swift; sourceTree = "<group>"; };
 		6944803E21C7A017001A11A2 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		6944803F21C7A017001A11A2 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -252,7 +240,6 @@
 		6944801121C7A017001A11A2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				6944801A21C7A017001A11A2 /* DatePicker */,
 				6944803E21C7A017001A11A2 /* ApplicationManager.swift */,
 				6944801221C7A017001A11A2 /* Constants.swift */,
 				6944807421C7A017001A11A2 /* DatePickerTextField.swift */,
@@ -270,19 +257,6 @@
 				618091C721EF43D0004B3347 /* UserDefaultManager.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		6944801A21C7A017001A11A2 /* DatePicker */ = {
-			isa = PBXGroup;
-			children = (
-				6944801B21C7A017001A11A2 /* DayCell.xib */,
-				6944801C21C7A017001A11A2 /* ScrollableDatepicker.swift */,
-				6944801D21C7A017001A11A2 /* ScrollableDatepicker.xib */,
-				6944801E21C7A017001A11A2 /* DayCell.swift */,
-				6944801F21C7A017001A11A2 /* LoadableFromXibView.swift */,
-				6944802021C7A017001A11A2 /* Configuration.swift */,
-			);
-			path = DatePicker;
 			sourceTree = "<group>";
 		};
 		6944809421C7A018001A11A2 /* Models */ = {
@@ -430,7 +404,6 @@
 				61BC873521E76244000AEA06 /* SearchNotFoundCell.xib in Resources */,
 				61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */,
 				614CEA4321F1E08F00FE5F9D /* GoogleService-Info.plist in Resources */,
-				694480F321C7A018001A11A2 /* ScrollableDatepicker.xib in Resources */,
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
 				617CD12721DE229000D4C885 /* CountryCell.xib in Resources */,
 				69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */,
@@ -438,7 +411,6 @@
 				6183FFD421E759920090393E /* WorkCell.xib in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
 				61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */,
-				694480F121C7A018001A11A2 /* DayCell.xib in Resources */,
 				6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */,
 				6998E7E221C77778009DFBEF /* Main.storyboard in Resources */,
 			);
@@ -567,7 +539,6 @@
 				6183FFD321E759920090393E /* WorkCell.swift in Sources */,
 				6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */,
 				617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */,
-				694480F521C7A018001A11A2 /* LoadableFromXibView.swift in Sources */,
 				617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */,
 				61BC873421E76244000AEA06 /* SearchNotFoundCell.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
@@ -577,17 +548,14 @@
 				69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */,
 				69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */,
 				61145CC121DB926700062332 /* ServerManager.swift in Sources */,
-				694480F421C7A018001A11A2 /* DayCell.swift in Sources */,
 				61A20A5421E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift in Sources */,
 				6188C70321EC98A000B51EA1 /* SizeChartPopUpVC.swift in Sources */,
-				694480F221C7A018001A11A2 /* ScrollableDatepicker.swift in Sources */,
 				613F897921E897AA00EB48D2 /* Country.swift in Sources */,
 				6944815921C7A018001A11A2 /* User.swift in Sources */,
 				618091CB21F0BFEB004B3347 /* PopupController.swift in Sources */,
 				617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
 				619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */,
-				694480F621C7A018001A11A2 /* Configuration.swift in Sources */,
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
 				6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */,
 				6183FFD021E756810090393E /* SelectWorkVC.swift in Sources */,
