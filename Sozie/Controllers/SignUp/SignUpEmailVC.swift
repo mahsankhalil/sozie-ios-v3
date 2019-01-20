@@ -11,18 +11,14 @@ import MaterialTextField
 import SwiftValidator
 import SVProgressHUD
 import GoogleSignIn
-class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate , GIDSignInDelegate, GIDSignInUIDelegate{
+class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
 
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
 
-
-
     @IBOutlet weak var emailTxtFld: MFTextField!
     @IBOutlet weak var passwordTxtFld: MFTextField!
     @IBOutlet weak var confirmPasswordTxtFld: MFTextField!
-
-
 
     @IBOutlet weak var facebookBtn: UIButton!
     @IBOutlet weak var showConfirmPasswordBtn: UIButton!
@@ -34,11 +30,11 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate 
     let validator = Validator()
 
     var signUpDict : [String: Any]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         emailTxtFld.setupAppDesign()
@@ -56,64 +52,41 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate 
         [emailTxtFld, passwordTxtFld].forEach { (field) in
             field?.delegate = self
         }
-        
-        
-        
-        
     }
     
-    func verifyEmailFromServer(email : String?)
-    {
+    func verifyEmailFromServer(email : String?) {
         let dataDict = ["attr_type" : "email" , "attr_value" : email!]
         SVProgressHUD.show()
         ServerManager.sharedInstance.validateEmailOrUsername(params: dataDict as [String : Any]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-            if isSuccess
-            {
+            if isSuccess {
                 self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
-
-            }
-            else
-            {
+                
+            } else {
                 let error = response as! Error
                 UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
-                
             }
-            
         }
-        
     }
     
     // MARK: - Validation CallBacks
     func validationSuccessful() {
-        
-        if passwordTxtFld.text != confirmPasswordTxtFld.text
-        {
+        if passwordTxtFld.text != confirmPasswordTxtFld.text {
             confirmPasswordTxtFld.setError(CustomError(str: "Password and Confirm do not match"), animated: true)
-        }
-        else
-        {
+        } else {
             signUpDict![User.CodingKeys.email.stringValue] = emailTxtFld.text
             signUpDict!["password"] = passwordTxtFld.text
 
-            
-            
             confirmPasswordTxtFld.setError( nil, animated: true)
             verifyEmailFromServer(email: emailTxtFld.text)
-
         }
-
-        
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
             if let field = field as? MFTextField {
-                
                 _ = field.resignFirstResponder()
                 field.setError(CustomError(str: error.errorMessage), animated: true)
-                
-                
             }
         }
     }
@@ -124,9 +97,7 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate 
         let txtFld  = textField as! MFTextField
         txtFld.setError(nil, animated: true)
     }
-    
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -137,27 +108,18 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate 
         if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
             signUpInfoProvider.signUpInfo = signUpDict
         }
-
     }
- 
     
     // MARK: Google SignIn Delegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         SVProgressHUD.dismiss()
-        if error == nil
-        {
-            let dataDict = SocialAuthManager.convertGoogleUserToAppDict(user: user)
+        if error == nil {
+            let dataDict = SocialAuthManager.sharedInstance.convertGoogleUserToAppDict(user: user)
             self.signUpDict = self.signUpDict!.merging(dataDict) { (_, new) in new }
             self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
-
-
-        }
-        else
-        {
+        } else {
             UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
-
         }
-        
     }
     
     // MARK: - Actions
@@ -166,41 +128,37 @@ class SignUpEmailVC: UIViewController , UITextFieldDelegate, ValidationDelegate 
         SVProgressHUD.show()
         SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-            if isSuccess
-            {
+            if isSuccess {
                 let resp = response as! [String : Any]
                 self.signUpDict = self.signUpDict!.merging(resp) { (_, new) in new }
                 self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
-
-            }
-            else
-            {
+            } else {
                 let err = response as! Error
                 UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
             }
         }
     }
+    
     @IBAction func googleBtnTapped(_ sender: Any) {
         SVProgressHUD.show()
         GIDSignIn.sharedInstance()?.signIn()
     }
+    
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true) {
-            
-        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func signUpBtnTapped(_ sender: Any) {
         validator.validate(self)
 
     }
+    
     @IBAction func showPasswordBtnTapped(_ sender: Any) {
         self.passwordTxtFld.isSecureTextEntry = !self.passwordTxtFld.isSecureTextEntry
-        
     }
+    
     @IBAction func showConfirmPasswordBtnTapped(_ sender: Any) {
         self.confirmPasswordTxtFld.isSecureTextEntry = !self.confirmPasswordTxtFld.isSecureTextEntry
-
     }
 }
 

@@ -94,8 +94,7 @@ class SelectCountryVC: UIViewController {
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true) {
-        }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

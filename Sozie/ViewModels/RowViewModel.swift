@@ -8,4 +8,5 @@
 
 import Foundation
 
+// A Generic protocol to allow for a CellConfigurable protocol that accepts RowViewModel
 protocol RowViewModel { }

@@ -57,10 +57,6 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         [emailField, passwordField].forEach { (field) in
             field?.delegate = self
         }
-        
-    
-        
-        
     }
     
     
@@ -72,34 +68,22 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
         SVProgressHUD.show()
         
-        
         ServerManager.sharedInstance.loginWith(params: params) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-            
-            if isSuccess
-            {
+            if isSuccess {
                 // Do something after login
-            }
-            else
-            {
+            } else {
                 let error = response as! Error
                 UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
-                
             }
-
         }
-        
-
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
             if let field = field as? MFTextField {
-
                 _ = field.resignFirstResponder()
                 field.setError(CustomError(str: error.errorMessage), animated: true)
-
-                
             }
         }
     }
@@ -134,11 +118,11 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 return
             }
             
-            guard let userId = token.userID else
-            {
+            guard let userId = token.userID else {
                 SVProgressHUD.dismiss()
                 return
             }
+            
             // Request Fields
             let fields = "name,first_name,last_name,email,gender,picture,locale,link"
             

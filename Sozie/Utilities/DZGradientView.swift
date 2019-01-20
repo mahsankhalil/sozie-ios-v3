@@ -9,7 +9,6 @@
 import UIKit
 
 @IBDesignable class DZGradientView: UIView {
-
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -24,14 +23,8 @@ import UIKit
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5);
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5);
         self.layer.insertSublayer(gradient, at: 0)
-        
-        
-        
     }
     
     @IBInspectable var gradientStartColor: UIColor = UIColor(hex: "FC8787")
     @IBInspectable var gradientEndColor: UIColor = UIColor(hex: "FFA7A7")
-    
-
-
 }

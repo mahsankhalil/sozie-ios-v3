@@ -15,14 +15,12 @@ class SocialAuthManager: NSObject {
 
     public typealias CompletionHandler = ((Bool,Any)->Void)?
 
-    func loginWithFacebook(from vc: UIViewController , block : CompletionHandler)
-    {
+    func loginWithFacebook(from vc: UIViewController , block : CompletionHandler) {
         let loginManager = FBSDKLoginManager()
         loginManager.loginBehavior = FBSDKLoginBehavior.native
         loginManager.logIn(withReadPermissions: ["public_profile","email"], from: vc) { (result, error) in
             
-            if error == nil
-            {
+            if error == nil {
                 guard let token = result?.token else {
                     block!(false, CustomError(str: "Token is empty."))
                     return
@@ -36,8 +34,7 @@ class SocialAuthManager: NSObject {
                     return
                 }
                 
-                guard let userId = token.userID else
-                {
+                guard let userId = token.userID else {
                     block!(false, CustomError(str: "UserId not found."))
                     return
                 }
@@ -46,52 +43,40 @@ class SocialAuthManager: NSObject {
                 let request = FBSDKGraphRequest(graphPath: "\(userId)", parameters: ["fields" : "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
                 request?.start(completionHandler: { (connection, result, error) in
                     // Handle the result
-                    if error == nil
-                    {
+                    if error == nil {
                         let dataDict = self.convertFacebookDictToAppDict(fbDict: result as! [String : Any], token: token.tokenString)
-                        
                         block!(true , dataDict)
-                    }
-                    else
-                    {
+                    } else {
                         block!(false , error!)
-
                     }
-                    
                 })
-            }
-            else
-            {
+            } else {
                 block!(false , error!)
             }
-            
         }
     }
     
-    func convertFacebookDictToAppDict (fbDict : [String : Any] , token : String) -> [String: Any]
-    {
+    func convertFacebookDictToAppDict (fbDict : [String : Any] , token : String) -> [String: Any] {
         var dataDict = [String : Any]()
-        if let firstName = fbDict["first_name"]
-        {
+        
+        if let firstName = fbDict["first_name"] {
             dataDict[User.CodingKeys.firstName.stringValue] = firstName
-
         }
-        if let lastName = fbDict["last_name"]
-        {
+        
+        if let lastName = fbDict["last_name"] {
             dataDict[User.CodingKeys.lastName.stringValue] = lastName
-
         }
-        if let email = fbDict["email"]
-        {
+        
+        if let email = fbDict["email"] {
             dataDict[User.CodingKeys.email.stringValue] = email
         }
-        if let birthday = fbDict["birthday"]
-        {
+        
+        if let birthday = fbDict["birthday"] {
             dataDict[User.CodingKeys.firstName.stringValue] = birthday
 
         }
-        if let userId = fbDict["id"]
-        {
+        
+        if let userId = fbDict["id"] {
             dataDict[User.CodingKeys.socialId.stringValue] = userId
         }
         
@@ -99,25 +84,19 @@ class SocialAuthManager: NSObject {
         dataDict[User.CodingKeys.signUpMedium.stringValue] = "FB"
         
         return dataDict
-
     }
     
-    class func convertGoogleUserToAppDict(user: GIDGoogleUser) -> [String : Any]
-    {
+    func convertGoogleUserToAppDict(user: GIDGoogleUser) -> [String : Any] {
         var dataDict = [String: String]()
 
         let fullName = user.profile.name
         var components = fullName?.components(separatedBy: " ")
-        if((components?.count)! > 0)
-        {
+        if((components?.count)! > 0) {
             let firstName = components?.removeFirst()
             let lastName = components?.joined(separator: " ")
             dataDict[User.CodingKeys.firstName.stringValue] = firstName
             dataDict[User.CodingKeys.lastName.stringValue] = lastName
-
-        }
-        else
-        {
+        } else {
             dataDict[User.CodingKeys.firstName.stringValue] = user.profile.name
         }
         
@@ -127,10 +106,5 @@ class SocialAuthManager: NSObject {
         dataDict[User.CodingKeys.socialToken.stringValue] = user.authentication.accessToken
         dataDict[User.CodingKeys.signUpMedium.stringValue] = "GI"
         return dataDict
-
-
     }
-    
-    
-    
 }

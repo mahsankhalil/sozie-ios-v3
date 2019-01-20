@@ -38,29 +38,29 @@ import MobileCoreServices
         
         self.layer.cornerRadius = self.frame.height/2
         self.layer.masksToBounds = true
-        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
     }
     
     @objc func imageViewTapped(sender: UITapGestureRecognizer){
-        
-        
-        
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-
+        
+        // add cancel action
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-
         }))
+        
+        // add upload camera action
         actionSheet.addAction(UIAlertAction(title: "Upload from Camera", style: .default, handler: { (action) -> Void in
             self.selectFromCameraPressed()
         }))
+        
+        // add upload gallery action
         actionSheet.addAction(UIAlertAction(title: "Upload from Gallery", style: .default, handler: { (action) -> Void in
             self.selectFromGalleryPressed()
         }))
+        
         actionSheet.popoverPresentationController?.sourceView = self.parentController?.view
 
         self.parentController?.present(actionSheet, animated: true, completion: nil)
@@ -68,7 +68,7 @@ import MobileCoreServices
 
     func selectFromCameraPressed(){
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.navigationBar.barTintColor = Styles.sharedStyles.primaryColor
             imagePicker.delegate = self
@@ -76,36 +76,28 @@ import MobileCoreServices
             imagePicker.mediaTypes = [kUTTypeImage as String]
             imagePicker.allowsEditing = false
             self.parentController?.present(imagePicker, animated: true, completion: nil)
-        }
-        else{
+        } else {
             let alert = UIAlertController(title: "No Camera detected", message: "No Camera was detected on this device", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) -> Void in
-                
             }))
             self.parentController?.present(alert, animated: true, completion: nil)
-            
         }
-        
     }
     
     func selectFromGalleryPressed(){
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
             let imagePicker = UIImagePickerController()
-            
             imagePicker.navigationBar.barTintColor = Styles.sharedStyles.primaryColor
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             imagePicker.mediaTypes = [kUTTypeImage as String]
             imagePicker.allowsEditing = false
             self.parentController?.present(imagePicker, animated: true, completion: nil)
-        }
-        else{
+        } else {
             let alert = UIAlertController(title: "Gallery ", message: "No Camera was detected on this device", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) -> Void in
-                
             }))
             self.parentController?.present(alert, animated: true, completion: nil)
-            
         }
     }
     
@@ -126,15 +118,13 @@ import MobileCoreServices
         
         self.image = newImage
         picker.dismiss(animated: true, completion: nil)
-        
     }
 
 }
 
-extension UIImage{
+extension UIImage {
     
     func resizeImageWith(newSize: CGSize) -> UIImage {
-        
         let horizontalRatio = newSize.width / size.width
         let verticalRatio = newSize.height / size.height
         

@@ -23,11 +23,8 @@ class ServerManager: NSObject {
     static let signUpURL = ServerManager.serverURL + "user/signup/"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
-    func loginWith(params : [String : Any] , block : CompletionHandler)
-    {
-        
+    func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
-            
             let decoder = JSONDecoder()
             let obj: Result<LoginResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
@@ -36,25 +33,17 @@ class ServerManager: NSObject {
             obj.ifFailure {
                 block!(false , obj.error!)
             }
-            
         }
     }
     
-    func getUserProfile(params : [String : Any] , block : CompletionHandler)
-    {
-        
+    func getUserProfile(params: [String: Any], block : CompletionHandler) {
         Alamofire.request(ServerManager.profileURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
-            
-            
             debugPrint(response)
         }
     }
     
-    func getSizeCharts(params : [String : Any] , block : CompletionHandler)
-    {
-
+    func getSizeCharts(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.sizeChartURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
-            
             let decoder = JSONDecoder()
             let obj: Result<Size> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
@@ -63,14 +52,11 @@ class ServerManager: NSObject {
             obj.ifFailure {
                 block!(false , obj.error!)
             }
-            
         }
     }
-    func getBrandList(params : [String : Any] , block : CompletionHandler)
-    {
-        
+    
+    func getBrandList(params: [String: Any], block : CompletionHandler) {
         Alamofire.request(ServerManager.brandListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
-            
             let decoder = JSONDecoder()
             let obj: Result<[Brand]> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
@@ -79,12 +65,10 @@ class ServerManager: NSObject {
             obj.ifFailure {
                 block!(false , obj.error!)
             }
-            
         }
     }
     
-    func getCountriesList(params : [String : Any], block : CompletionHandler)
-    {
+    func getCountriesList(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.countriesListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             
             let decoder = JSONDecoder()
@@ -95,14 +79,11 @@ class ServerManager: NSObject {
             obj.ifFailure {
                 block!(false , obj.error!)
             }
-            
         }
     }
     
-    func validateEmailOrUsername(params : [String : Any], block : CompletionHandler)
-    {
+    func validateEmailOrUsername(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.validateURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
-            
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
@@ -111,14 +92,11 @@ class ServerManager: NSObject {
             obj.ifFailure {
                 block!(false , obj.error!)
             }
-            
         }
     }
     
-    func signUpUserWith(params : [String : Any] , block : CompletionHandler)
-    {
+    func signUpUserWith(params : [String : Any] , block : CompletionHandler) {
         Alamofire.request(ServerManager.signUpURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
-            
             let decoder = JSONDecoder()
             let obj: Result<LoginResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
@@ -127,12 +105,10 @@ class ServerManager: NSObject {
             obj.ifFailure {
                 block!(false , obj.error!)
             }
-            
         }
     }
     
-    func updateProfile(params : [String : Any]? , imageData : Data? , block : CompletionHandler)
-    {
+    func updateProfile(params : [String : Any]? , imageData : Data? , block : CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
             "Content-type": "multipart/form-data"
@@ -146,8 +122,6 @@ class ServerManager: NSObject {
             if let data = imageData{
                 multipartFormData.append(data, withName: "picture", fileName: "image.png", mimeType: "image/png")
             }
-            
-
         }, usingThreshold: UInt64.init(), to: ServerManager.profileURL + String(UserDefaultManager.getCurrentUserId()!) + "/", method: .patch, headers: headers) { (result) in
 
             switch result{
@@ -167,8 +141,6 @@ class ServerManager: NSObject {
                 block!(false , error)
             }
         }
-
     }
-
     
 }

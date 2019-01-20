@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-struct CellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling {
+struct BrandCellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling {
     var title: String?
     var attributedTitle: NSAttributedString?
     var isCheckmarkHidden: Bool
@@ -37,22 +37,22 @@ class SelectWorkVC: UIViewController {
                 viewModels = [noSearchResultViewModel]
             } else {
                 for brand in searchList {
-                    let viewModel = CellViewModel(title: brand.label, attributedTitle: nil, isCheckmarkHidden: true)
+                    let viewModel = BrandCellViewModel(title: brand.label, attributedTitle: nil, isCheckmarkHidden: true)
                     viewModels.append(viewModel)
                 }
             }
         }
     }
     
-    private lazy var noSearchResultViewModel: CellViewModel = {
+    private lazy var noSearchResultViewModel: BrandCellViewModel = {
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor(hex: "#F2A19C")
         ]
         let attributedTitle = NSAttributedString(string: "Search not found", attributes: attributes)
-        return CellViewModel(title: nil, attributedTitle: attributedTitle, isCheckmarkHidden: true)
+        return BrandCellViewModel(title: nil, attributedTitle: attributedTitle, isCheckmarkHidden: true)
     }()
     
-    private var viewModels: [CellViewModel] = []
+    private var viewModels: [BrandCellViewModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,9 +119,7 @@ class SelectWorkVC: UIViewController {
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true) {
-            
-        }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

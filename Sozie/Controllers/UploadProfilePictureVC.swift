@@ -22,11 +22,9 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         imgVu.applyCornerRadiusAndBorder()
     }
-    
-    
+
     /*
      // MARK: - Navigation
      
@@ -41,8 +39,7 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
     // MARK: - Image Picker Delegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickdImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        {
+        if let pickdImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             pickedImage = pickdImg
             imgVu.image = pickdImg
             imgVu.contentMode = .scaleAspectFill
@@ -50,51 +47,36 @@ class UploadProfilePictureVC: UIViewController , UINavigationControllerDelegate 
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    
     // MARK : - Actions
     
     @IBAction func addBtnTapped(_ sender: Any) {
-        
         UtilityManager.openImagePickerActionSheetFrom(vc: self)
-        
     }
+    
     @IBAction func uploadBtnTapped(_ sender: Any) {
-        if pickedImage != nil
-        {
-            if let scaledImg = pickedImage?.scaleImageToSize(newSize: CGSize(width: 1024, height: 512))
-            {
+        if pickedImage != nil {
+            if let scaledImg = pickedImage?.scaleImageToSize(newSize: CGSize(width: 1024, height: 512)) {
                 let imgData = scaledImg.jpegData(compressionQuality: 0.1)
                 SVProgressHUD.show()
                 ServerManager.sharedInstance.updateProfile(params: nil, imageData: imgData) { (isSuccess, response) in
                     SVProgressHUD.dismiss()
-                    if isSuccess
-                    {
+                    if isSuccess {
                         self.performSegue(withIdentifier: "toInviteFriends", sender: self)
-                    }
-                    else
-                    {
+                    } else {
                         let error = response as! Error
                         UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
                     }
-                    
                 }
-
             }
-            
-        }
-        else
-        {
+        } else {
             UtilityManager.showErrorMessage(body: "Please select Image", in: self)
         }
     }
+    
     @IBAction func skipBtnTapped(_ sender: Any) {
     }
-    @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true) {
-            
-        }
-    }
     
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

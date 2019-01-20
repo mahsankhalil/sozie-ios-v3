@@ -11,8 +11,7 @@ import Foundation
 extension Array where Element == Int {
     func convertArrayToString() -> [String] {
         var arrayOfString = [String]()
-        for elem in self
-        {
+        for elem in self {
             arrayOfString.append(String(describing: elem))
         }
         return arrayOfString

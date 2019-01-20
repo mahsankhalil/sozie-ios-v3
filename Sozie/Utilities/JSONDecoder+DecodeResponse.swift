@@ -9,11 +9,6 @@
 import UIKit
 import Alamofire
 
-
-
-
-
-
 extension JSONDecoder {
     func decodeResponse<T: Decodable>(from response: DataResponse<Data>) -> Result<T> {
         guard response.error == nil else {
@@ -28,23 +23,18 @@ extension JSONDecoder {
             return .failure(CustomError(str: "Did not get data in response"))
 
         }
-        if !((response.response?.statusCode == 200) || (response.response?.statusCode == 201))
-        {
+        if !((response.response?.statusCode == 200) || (response.response?.statusCode == 201)) {
             do {
                 if let data = response.data,
-                    let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-                {
+                    let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
                     let error = getServerErrorFrom(json: json)
                     return .failure(error)
                 }
-                
             } catch {
                 print("Error deserializing JSON: \(error)")
                 return .failure(error)
-                
             }
         }
-        
         
         do {
             let item = try decode(T.self, from: responseData)
@@ -56,34 +46,22 @@ extension JSONDecoder {
         }
     }
     
-    func getServerErrorFrom(json : [String : Any]) -> Error
-    {
-        if let nonFieldsError = json["non_field_errors"] as? [String]
-        {
+    func getServerErrorFrom(json : [String : Any]) -> Error {
+        if let nonFieldsError = json["non_field_errors"] as? [String] {
             return CustomError(str: nonFieldsError[0])
 //            return BackendError.objectSerialization(reason: nonFieldsError[0])
-        }
-        else if let errors = json["errors"] as? [String : Any]
-        {
-            for key in errors.keys
-            {
-                if let keyErrors = errors[key] as? [String]
-                {
+        } else if let errors = json["errors"] as? [String: Any] {
+            for key in errors.keys {
+                if let keyErrors = errors[key] as? [String] {
                     return CustomError(str: keyErrors[0])
 //                    return BackendError.objectSerialization(reason: keyErrors[0])
-                }
-                else
-                {
+                } else {
                     return CustomError(str: "Something Went Wrong")
-
 //                    return BackendError.objectSerialization(reason: "Something Went Wrong")
-
                 }
-                
             }
         }
         return CustomError(str: "Something Went Wrong")
-
 //        return BackendError.objectSerialization(reason: "Something Went Wrong")
     }
 }

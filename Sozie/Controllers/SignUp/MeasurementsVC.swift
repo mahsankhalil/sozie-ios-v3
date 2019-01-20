@@ -11,7 +11,7 @@ import MaterialTextField
 import SVProgressHUD
 import PopupController
 
-public enum MeasurementType : Int {
+public enum MeasurementType: Int {
     case height
     case waist
     case hips
@@ -21,65 +21,39 @@ public enum MeasurementType : Int {
 class MeasurementsVC: UIViewController {
 
     @IBOutlet weak var backBtn: UIButton!
-   
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var waistNotSureBtn: UIButton!
     @IBOutlet weak var uploadBtn: DZGradientButton!
     @IBOutlet weak var hipsNotSureBtn: UIButton!
     @IBOutlet weak var shipBtn: UIButton!
 
-
-    
-    var sizes : Size?
-
-    var selectedHip : Int?
-    var selectedWaist : Int?
-    
-
-    var currentMeasurement : LocalMeasurement?
+    var sizes: Size?
+    var selectedHip: Int?
+    var selectedWaist: Int?
+    var currentMeasurement: LocalMeasurement?
     var shouldValidate = false
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         currentMeasurement = LocalMeasurement()
-
-
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         fetchDataFromServer()
-
     }
     
-    func fetchDataFromServer()
-    {
-
+    func fetchDataFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getSizeCharts(params: [:]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-            if isSuccess
-            {
+            if isSuccess {
                 self.sizes = response as? Size
                 self.tblVu.reloadData()
-            }
-            else
-            {
+            } else {
                 let err = response as? Error
                 UtilityManager.showErrorMessage(body: err?.localizedDescription ?? "Something went wrong" , in: self)
             }
-
         }
     }
-    
-    
-    
 
     /*
     // MARK: - Navigation
@@ -90,10 +64,10 @@ class MeasurementsVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
     @IBAction func uploadBtnTapped(_ sender: Any) {
         shouldValidate = true
-        if let height = currentMeasurement?.height , let waist = currentMeasurement?.waist , let hip = currentMeasurement?.hip , let bra = currentMeasurement?.bra , let cup = currentMeasurement?.cup
-        {
+        if let height = currentMeasurement?.height , let waist = currentMeasurement?.waist , let hip = currentMeasurement?.hip , let bra = currentMeasurement?.bra , let cup = currentMeasurement?.cup {
             var dataDict = [String : Any]()
             dataDict["height"] = height
             dataDict["waist"] = waist
@@ -105,35 +79,25 @@ class MeasurementsVC: UIViewController {
             SVProgressHUD.show()
             ServerManager.sharedInstance.updateProfile(params: paramDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
-                if isSuccess
-                {
+                if isSuccess {
                     self.performSegue(withIdentifier: "toUploadProfilePic", sender: self)
-                }
-                else
-                {
+                } else {
                     let error = response as! Error
                     UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
                 }
             }
-        }
-        else
-        {
+        } else {
             tblVu.reloadData()
-        }
-        
-    }
-    @IBAction func skipBtnTapped(_ sender: Any) {
-    }
-    @IBAction func backBtnTapped(_ sender: Any) {
-
-        self.dismiss(animated: true) {
-            
         }
     }
     
+    @IBAction func skipBtnTapped(_ sender: Any) {
+    }
+    
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
-
-
 
 extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleTextFieldDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -157,8 +121,7 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
         singleTextFieldCell.delegate = self
         singleTextFieldCell.notSureBtn.tag = indexPath.row
         
-        if indexPath.row == 0
-        {
+        if indexPath.row == 0 {
             doubletextFieldCell.sizes = sizes
             doubletextFieldCell.measurementType = .height
             doubletextFieldCell.shouldValidate = shouldValidate
@@ -167,9 +130,7 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
             doubletextFieldCell.configureCellData(cellType: .height)
             doubletextFieldCell.validateCellData()
             return doubletextFieldCell
-        }
-        else if indexPath.row == 1
-        {
+        } else if indexPath.row == 1 {
             singleTextFieldCell.sizes = sizes
             singleTextFieldCell.measurementType = .waist
             singleTextFieldCell.shouldValidate = shouldValidate
@@ -178,9 +139,7 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
             singleTextFieldCell.configureCellData(cellType: .waist)
             singleTextFieldCell.validateCellData()
             return singleTextFieldCell
-        }
-        else if indexPath.row == 2
-        {
+        } else if indexPath.row == 2 {
             singleTextFieldCell.sizes = sizes
 
             singleTextFieldCell.measurementType = .hips
@@ -191,9 +150,7 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
             singleTextFieldCell.validateCellData()
 
             return singleTextFieldCell
-        }
-        else
-        {
+        } else {
             doubletextFieldCell.sizes = sizes
 
             doubletextFieldCell.measurementType = .braSize
@@ -203,32 +160,17 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
             doubletextFieldCell.configureCellData(cellType: .braSize)
             doubletextFieldCell.validateCellData()
             return doubletextFieldCell
-
         }
-        
-        
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 || indexPath.row == 3
-//        {
-//            return 71.0
-//        }
-//        else
-//        {
-//            return 83.0
-//        }
         return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 || indexPath.row == 3
-        {
+        if indexPath.row == 0 || indexPath.row == 3 {
             return 71.0
-        }
-        else
-        {
+        } else {
             return 83.0
         }
     }
@@ -236,14 +178,6 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
     func singleTextFieldNotSureBtnTapped(btn: UIButton) {
         
         let type = MeasurementType(rawValue: btn.tag)
-//        if btn.tag == 1
-//        {
-//            type = .waist
-//        }
-//        else
-//        {
-//            type = .hips
-//        }
         let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes?.sizeChart ?? [], arrayOfGeneral: sizes?.general ?? [], type: type ?? .height)
         let popUpVC = PopupController
             .create(self)
@@ -253,26 +187,16 @@ extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleT
             popUpVC.dismiss()
         }
     }
-    
-    
-    
 }
 
 extension MeasurementsVC : SizeChartPopupVCDelegate {
     func selectedValueFromPopUp(value: Int, type: MeasurementType) {
-        if type == .hips
-        {
+        if type == .hips {
             selectedHip = value
-
             currentMeasurement?.hip = String(value)
-
-        }
-        else if type == .waist
-        {
+        } else if type == .waist {
             selectedWaist = value
-
             currentMeasurement?.waist = String(value)
-
         }
         tblVu.reloadData()
     }

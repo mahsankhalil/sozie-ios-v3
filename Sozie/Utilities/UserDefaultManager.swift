@@ -47,7 +47,6 @@ class UserDefaultManager: NSObject {
             UserDefaults.standard.synchronize()
             return true
         }
-        
         return false
     }
 

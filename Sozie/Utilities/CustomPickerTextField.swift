@@ -10,9 +10,9 @@ import UIKit
 import MaterialTextField
 
 @objc protocol CustomPickerTextFieldDelegate {
-    
     @objc optional func customPickerValueChanges(value1 : String? , value2 : String?)
 }
+
 class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDelegate , UIPickerViewDataSource {
     var pickerView: UIPickerView!
     var values : [String]?
@@ -62,15 +62,12 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         self.inputView = myInputView
         self.delegate = self
         pickerView.delegate = self
-        
-        
     }
     
 
     // MARK: - Custom Methods
     
-    func updateTxtFldWith( rightTitle : String , placeholder : String , measurementType : String , values1 : [String]? , values2 : [String]? , title : String , firsColumStr : String , secondColumnStr : String)
-    {
+    func updateTxtFldWith( rightTitle : String , placeholder : String , measurementType : String , values1 : [String]? , values2 : [String]? , title : String , firsColumStr : String , secondColumnStr : String) {
         self.applyRightVuLblWith(title: rightTitle)
         self.placeholder = placeholder
         self.measurementType = measurementType
@@ -81,105 +78,61 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         self.firstColumnAppendingString = firsColumStr
         self.secondColumnAppendingString = secondColumnStr
     }
-    
-    
-    func updateValues()
-    {
+
+    func updateValues() {
         let value1 = values?[pickerView.selectedRow(inComponent: 0)]
         var value2 : String?
-        if (secondColumnValues?.count)! > 0
-        {
+        if (secondColumnValues?.count)! > 0 {
             value2 = secondColumnValues?[pickerView.selectedRow(inComponent: 1)]
-            
         }
         pickerDelegate?.customPickerValueChanges?(value1: value1, value2: value2)
-
     }
 
     // MARK: - PickerVIew Delegates
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0
-        {
+        if component == 0 {
             return (values?.count)!
-        }
-        else
-        {
-
-
-
+        } else {
             return (secondColumnValues?.count)!
-
         }
-        
     }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-
-
-
-        if self.measurementType == Constant.single
-
-
-        {
+        if self.measurementType == Constant.single {
             return 1
-        }
-        else
-        {
+        } else {
             return 2
-
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0
-        {
-
+        if component == 0 {
             return ((values?[row]) ?? "")  + (firstColumnAppendingString ?? "")
-        }
-        else
-        {
+        } else {
             return (secondColumnValues?[row] ?? "") + (secondColumnAppendingString ?? "")
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         updateValues()
-
     }
     
     //MARK: - Textfield delegates
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
-
-
-
         titleLbl?.text = title
         updateValues()
-
-
     }
     
     //MARK: - IBActions
-    
-   
-    
+
     @objc func pickerValueChanged(){
-
-
-
         updateValues()
-
-
     }
     
     @IBAction func donePickerBtnClick(sender: AnyObject){
-
-
-
-
         updateValues()
         self.endEditing(true)
-
-
     }
     
 }
