@@ -27,10 +27,23 @@ class SelectCountryVC: UIViewController {
     @IBOutlet weak var signUpBtn: DZGradientButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var countries: [Country]?
     var selectedCountryId: Int?
     var currentUserType: UserType?
     var signUpDict: [String: Any] = [:]
+    
+    var countries: [Country]? {
+        didSet {
+            guard let countries = countries else { return }
+            
+            for country in countries {
+                let viewModel = CountryCellViewModel(title: country.code, attributedTitle: nil, isCheckmarkHidden: true)
+                viewModels.append(viewModel)
+            }
+        }
+    }
+    
+    private var viewModels: [CountryCellViewModel] = []
+    private var selectedViewModelIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,14 +114,13 @@ extension SelectCountryVC: UITableViewDelegate, UITableViewDataSource {
             tableViewCell = tableView.dequeueReusableCell(withIdentifier:reuseIdentifier)
         }
         
-        guard let countries = countries, let cell = tableViewCell else { return UITableViewCell() }
+        guard let cell = tableViewCell else { return UITableViewCell() }
         
         cell.selectionStyle = .none
         
-        let country = countries[indexPath.row]
-        let model = CountryCellViewModel(title: country.code, attributedTitle: nil, isCheckmarkHidden: (selectedCountryId != country.countryId))
+        let viewModel = viewModels[indexPath.row]
         if let cellConfigurable = cell as? CellConfigurable {
-            cellConfigurable.setup(model)
+            cellConfigurable.setup(viewModel)
         }
         
         return cell
@@ -119,15 +131,18 @@ extension SelectCountryVC: UITableViewDelegate, UITableViewDataSource {
         
         guard let countries = countries else { return }
         
-        var indexesToReload = [indexPath]
+        self.selectedCountryId = countries[indexPath.row].countryId
         
-        if  let selectedCountryId = selectedCountryId,
-            let previousRow = countries.index(where: { $0.countryId == selectedCountryId }) {
-            indexesToReload.append(IndexPath(row: previousRow, section: 0))
+        var indexPathsToReload = [indexPath]
+        if let previousSelectedIndex = selectedViewModelIndex {
+            viewModels[previousSelectedIndex].isCheckmarkHidden = true
+            indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
         }
         
-        self.selectedCountryId = countries[indexPath.row].countryId
-        tableView.reloadRows(at: indexesToReload, with: .automatic)
+        viewModels[indexPath.row].isCheckmarkHidden = false
+        selectedViewModelIndex = indexPath.row
+        
+        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
     }
     
 }
