@@ -16,7 +16,7 @@ protocol SignUpInfoProvider {
 struct CountryCellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling {
     var title: String?
     var attributedTitle: NSAttributedString?
-    var isCheckmarkEnabled: Bool
+    var isCheckmarkHidden: Bool
 }
 
 class SelectCountryVC: UIViewController {
@@ -106,7 +106,7 @@ extension SelectCountryVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         let country = countries[indexPath.row]
-        let model = CountryCellViewModel(title: country.code, attributedTitle: nil, isCheckmarkEnabled: (selectedCountryId == country.countryId))
+        let model = CountryCellViewModel(title: country.code, attributedTitle: nil, isCheckmarkHidden: (selectedCountryId != country.countryId))
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(model)
         }

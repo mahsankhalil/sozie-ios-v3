@@ -30,7 +30,7 @@ extension TitleAndCheckmarkCell: CellConfigurable {
         // Check for CheckmarkViewModeling
         checkmarkImageView.isHidden = true
         if let checkmarkModel = viewModel as? CheckmarkViewModeling {
-            checkmarkImageView.isHidden = !checkmarkModel.isCheckmarkEnabled
+            checkmarkImageView.isHidden = checkmarkModel.isCheckmarkHidden
         }
     }
 }

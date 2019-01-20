@@ -12,7 +12,7 @@ import SVProgressHUD
 struct CellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling {
     var title: String?
     var attributedTitle: NSAttributedString?
-    var isCheckmarkEnabled: Bool
+    var isCheckmarkHidden: Bool
 }
 
 class SelectWorkVC: UIViewController {
@@ -37,7 +37,7 @@ class SelectWorkVC: UIViewController {
                 viewModels = [noSearchResultViewModel]
             } else {
                 for brand in searchList {
-                    let viewModel = CellViewModel(title: brand.label, attributedTitle: nil, isCheckmarkEnabled: false)
+                    let viewModel = CellViewModel(title: brand.label, attributedTitle: nil, isCheckmarkHidden: true)
                     viewModels.append(viewModel)
                 }
             }
@@ -49,7 +49,7 @@ class SelectWorkVC: UIViewController {
             .foregroundColor: UIColor(hex: "#F2A19C")
         ]
         let attributedTitle = NSAttributedString(string: "Search not found", attributes: attributes)
-        return CellViewModel(title: nil, attributedTitle: attributedTitle, isCheckmarkEnabled: false)
+        return CellViewModel(title: nil, attributedTitle: attributedTitle, isCheckmarkHidden: true)
     }()
     
     private var viewModels: [CellViewModel] = []
@@ -158,11 +158,11 @@ extension SelectWorkVC : UITableViewDelegate , UITableViewDataSource {
             
             var indexPathsToReload = [indexPath]
             if let previousSelectedIndex = selectedViewModelIndex {
-                viewModels[previousSelectedIndex].isCheckmarkEnabled = false
+                viewModels[previousSelectedIndex].isCheckmarkHidden = true
                 indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
             }
             
-            viewModels[indexPath.row].isCheckmarkEnabled = true
+            viewModels[indexPath.row].isCheckmarkHidden = false
             selectedViewModelIndex = indexPath.row
 
             tableView.reloadRows(at: indexPathsToReload, with: .automatic)

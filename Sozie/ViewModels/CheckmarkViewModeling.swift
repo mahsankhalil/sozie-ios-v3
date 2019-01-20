@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CheckmarkViewModeling {
-    var isCheckmarkEnabled: Bool { get set }
+    var isCheckmarkHidden: Bool { get set }
 }
