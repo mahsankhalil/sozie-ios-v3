@@ -16,14 +16,13 @@ import FBSDKLoginKit
 class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
     
     static let identifier = "signInViewController"
-
     @IBOutlet weak var emailField: MFTextField!
     @IBOutlet weak var passwordField: MFTextField!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
+    @IBOutlet weak var forgotPasswordBtn: UIButton!
     
     let validator = Validator()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,11 +68,16 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         var params = [String : String]()
         params["email"] = emailField.text
         params["password"] = passwordField.text
-        
+        signInWithDict(dataDict: params)
+
+    }
+    
+    func signInWithDict(dataDict : [String : Any])
+    {
         SVProgressHUD.show()
         
         
-        ServerManager.sharedInstance.loginWith(params: params) { (isSuccess, response) in
+        ServerManager.sharedInstance.loginWith(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             
             if isSuccess
@@ -86,10 +90,8 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
                 
             }
-
+            
         }
-        
-
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
@@ -117,77 +119,19 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     }
     
     @IBAction func facebookButtonPressed(sender: AnyObject) {
-        let loginManager = FBSDKLoginManager()
-        loginManager.loginBehavior = FBSDKLoginBehavior.native
-        loginManager.logIn(withReadPermissions: ["public_profile","email"], from: self) { (result, error) in
-            SVProgressHUD.show()
-            guard let token = result?.token else {
-                SVProgressHUD.dismiss()
-                return
-            }
-            
-            
-            // Verify token is not empty
-            if token.tokenString.isEmpty {
-                print("Token is empty")
-                SVProgressHUD.dismiss()
-                return
-            }
-            
-            guard let userId = token.userID else
+        SVProgressHUD.show()
+        SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
             {
-                SVProgressHUD.dismiss()
-                return
+                let resp = response as! [String : Any]
+                self.signInWithDict(dataDict: resp)
             }
-            // Request Fields
-            let fields = "name,first_name,last_name,email,gender,picture,locale,link"
-            
-            // Build URL with Access Token
-            
-            let request = FBSDKGraphRequest(graphPath: "\(userId)", parameters: ["fields" : "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
-            request?.start(completionHandler: { (connection, result, error) in
-                // Handle the result
-                
-                print(result)
-            })
-            
-            _ = Constant.facebookURL + "?fields=\(fields)&access_token=\(token.tokenString!)"
-            
-            //Make API call to facebook graph api to get data
-//            RequestManager.getUserFacebookProfile(url: url, successBlock: { (response) in
-//                /*{
-//                 email = "danialzahid94@live.com";
-//                 "first_name" = Danial;
-//                 gender = male;
-//                 id = 10210243338655397;
-//                 "last_name" = Zahid;
-//                 name = "Danial Zahid";
-//                 }*/
-//                print(response)
-//                var params = [String: String]()
-//                params["social_provider_name"] = "facebook"
-//                params["full_name"] = response["name"] as? String
-//                params["social_id"] = response["id"] as? String
-//                params["email"] = response["email"] as? String
-//                params["facebook_profile"] = response["link"] as? String
-//                if let image = response["picture"] as? [String: AnyObject] {
-//                    if let data = image["data"] as? [String: AnyObject] {
-//                        params["image_path"] = data["url"] as? String
-//                    }
-//                }
-//
-//
-//                RequestManager.socialLoginUser(param: params, successBlock: { (response) in
-//                    self.successfulLogin(response: response)
-//                }, failureBlock: { (error) in
-//
-//                    UtilityManager.showErrorMessage(body: error, in: self)
-//
-//                })
-//
-//            }, failureBlock: { (error) in
-//                UtilityManager.showErrorMessage(body: error, in: self)
-//            })
+            else
+            {
+                let err = response as! Error
+                UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
+            }
         }
     }
     
@@ -195,30 +139,27 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         GIDSignIn.sharedInstance()?.signIn()
     }
     
+    @IBAction func forgotPasswordBtnTapped(_ sender: Any) {
+        
+        let popUpInstnc = ForgotPasswordEmailPopUp.instance()
+        let popUpVC = PopupController
+            .create(self)
+            .show(popUpInstnc)
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+    }
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if error == nil {
-            // Perform any operations on signed in user here.
-            var params = [String: String]()
-            
-            params["social_provider_name"] = "google"
-            params["full_name"] = user.profile.name
-            params["social_id"] = user.userID
-            params["email"] = user.profile.email
-            params["image_path"] = user.profile.imageURL(withDimension: 200).absoluteString
-            
-            
-//            RequestManager.socialLoginUser(param: params, successBlock: { (response) in
-//                self.successfulLogin(response: response)
-//            }, failureBlock: { (error) in
-//                UtilityManager.showErrorMessage(body: error, in: self)
-//                
-//            })
-            // ...
-        } else {
-            if error.localizedDescription == "The user canceled the sign-in flow." {
-                return
-            }
+        SVProgressHUD.dismiss()
+        if error == nil
+        {
+            let dataDict = SocialAuthManager.convertGoogleUserToAppDict(user: user)
+            self.signInWithDict(dataDict: dataDict)
+        }
+        else
+        {
             UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+            
         }
     }
     

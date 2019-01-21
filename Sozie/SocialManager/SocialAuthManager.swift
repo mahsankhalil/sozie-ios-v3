@@ -125,7 +125,7 @@ class SocialAuthManager: NSObject {
         dataDict[User.CodingKeys.email.stringValue] = user.profile.email
         dataDict["image_path"] = user.profile.imageURL(withDimension: 200).absoluteString
         dataDict[User.CodingKeys.socialToken.stringValue] = user.authentication.accessToken
-        dataDict[User.CodingKeys.signUpMedium.stringValue] = "GI"
+        dataDict[User.CodingKeys.signUpMedium.stringValue] = "GL"
         return dataDict
 
 
