@@ -100,14 +100,14 @@ class MeasurementsVC: UIViewController {
 }
 
 extension MeasurementsVC : UITableViewDelegate , UITableViewDataSource , SingleTextFieldDelegate{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var singleTextFieldCell:SingleTextFieldCell! = tableView.dequeueReusableCell(withIdentifier: "SingleTextFieldCell") as? SingleTextFieldCell
-        var doubletextFieldCell :DoubleTextFieldCell! = tableView.dequeueReusableCell(withIdentifier: "DoubleTextFieldCell") as? DoubleTextFieldCell
-        
+        var singleTextFieldCell: SingleTextFieldCell! = tableView.dequeueReusableCell(withIdentifier: "SingleTextFieldCell") as? SingleTextFieldCell
+        var doubletextFieldCell: DoubleTextFieldCell! = tableView.dequeueReusableCell(withIdentifier: "DoubleTextFieldCell") as? DoubleTextFieldCell
         
         if singleTextFieldCell == nil {
             tableView.register(UINib(nibName: "SingleTextFieldCell", bundle: nil), forCellReuseIdentifier: "SingleTextFieldCell")

@@ -12,11 +12,11 @@ import MaterialTextField
 @objc protocol SingleTextFieldDelegate {
     @objc optional func singleTextFieldNotSureBtnTapped(btn : UIButton)
 }
-class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
+class SingleTextFieldCell: UITableViewCell, CustomPickerTextFieldDelegate {
 
     @IBOutlet weak var notSureBtn: UIButton!
-    @IBOutlet weak var txtFld: CustomPickerTextField!
-    var sizes : Size?
+    @IBOutlet weak var textField: CustomPickerTextField!
+    var sizes: Size?
     var delegate : SingleTextFieldDelegate?
     var selectedHip : Int?
     var selectedWaist : Int?
@@ -27,8 +27,7 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        txtFld.setupAppDesign()
-
+        textField.setupAppDesign()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -40,98 +39,76 @@ class SingleTextFieldCell: UITableViewCell , CustomPickerTextFieldDelegate {
     func configureCellData(cellType:MeasurementType) {
         switch cellType {
         case .waist:
+    
+            var values: [String] = []
+            if let sizes = sizes {
+                values = sizes.waist.convertArrayToString()
+            }
             
-            txtFld.updateTxtFldWith(rightTitle: "", placeholder: "Waist", measurementType: Constant.single, values1: sizes?.waist.convertArrayToString(), values2: [], title: "WAIST", firsColumStr: "\"", secondColumnStr: "")
-            if selectedWaist != nil
-            {
-                txtFld.text = String(describing: selectedWaist!)
+            textField.configure(title: "WASIT", placeholder: "Wasit", values: values, valuesSuffix: "\"")
+            
+            if selectedWaist != nil {
+                textField.text = String(describing: selectedWaist!)
             }
 
-            if let waist = currentMeasurement?.waist
-            {
-                txtFld.text = waist
+            if let waist = currentMeasurement?.waist {
+                textField.text = waist
+            } else {
+                textField.text = ""
             }
-            else
-            {
-                txtFld.text = ""
-            }
-
 
         case .hips:
-            txtFld.updateTxtFldWith(rightTitle: "", placeholder: "Hips", measurementType: Constant.single, values1: sizes?.hip.convertArrayToString(), values2: [], title: "HIPS", firsColumStr: "\"", secondColumnStr: "")
-
-            if selectedHip != nil
-            {
-                txtFld.text = String(describing: selectedHip!)
+            var values: [String] = []
+            if let sizes = sizes {
+                values = sizes.hip.convertArrayToString()
+            }
+            textField.configure(title: "HIPS", placeholder: "Hips", values: values, valuesSuffix: "\"")
+            
+            if selectedHip != nil {
+                textField.text = String(describing: selectedHip!)
             }
 
-            if let hips = currentMeasurement?.hip
-            {
-                txtFld.text = hips
-            }
-            else
-            {
-                txtFld.text = ""
+            if let hips = currentMeasurement?.hip {
+                textField.text = hips
+            } else {
+                textField.text = ""
             }
 
         default: break
         }
-        txtFld.pickerDelegate = self
-        if sizes == nil
-        {
-            txtFld.isUserInteractionEnabled = false
-        }
-        else
-        {
-            txtFld.isUserInteractionEnabled = true
-        }
+        
+        textField.pickerDelegate = self
+        textField.isUserInteractionEnabled = !(sizes == nil)
     }
     
-    func validateCellData()
-    {
-        if shouldValidate!
-        {
-            if measurementType == .waist
-            {
-                if currentMeasurement?.waist == nil
-                {
-                    txtFld.setError(CustomError(str: "Please Select Waist"), animated: true)
+    func validateCellData() {
+        if shouldValidate! {
+            if measurementType == .waist {
+                if currentMeasurement?.waist == nil {
+                    textField.setError(CustomError(str: "Please Select Waist"), animated: true)
+                } else {
+                    textField.setError(nil, animated: true)
                 }
-                else
-                {
-                    txtFld.setError(nil, animated: true)
-                }
-            }
-            else if measurementType == .hips
-            {
-                if currentMeasurement?.hip == nil
-                {
-                    txtFld.setError(CustomError(str: "Please Select Hip"), animated: true)
-                }
-                else
-                {
-                    txtFld.setError(nil, animated: true)
+            } else if measurementType == .hips {
+                if currentMeasurement?.hip == nil {
+                    textField.setError(CustomError(str: "Please Select Hip"), animated: true)
+                } else {
+                    textField.setError(nil, animated: true)
                 }
             }
         }
-        
     }
     
     func customPickerValueChanges(value1: String?, value2: String?) {
-        txtFld.text = value1
-        if measurementType == .waist
-        {
-            currentMeasurement?.waist = txtFld.text
-        }
-        else if measurementType == .hips
-        {
-            currentMeasurement?.hip = txtFld.text
+        textField.text = value1
+        if measurementType == .waist {
+            currentMeasurement?.waist = textField.text
+        } else if measurementType == .hips {
+            currentMeasurement?.hip = textField.text
         }
     }
     
-    
     @IBAction func notSureBtnTapped(_ sender: Any) {
-        
         delegate?.singleTextFieldNotSureBtnTapped!(btn: (sender as! UIButton) )
     }
     

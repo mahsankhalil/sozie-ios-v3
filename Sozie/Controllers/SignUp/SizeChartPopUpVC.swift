@@ -44,8 +44,6 @@ class SizeChartPopUpVC: UIViewController {
     }
     
     // MARK: - Custom Methods
-    
-
 
     /*
     // MARK: - Navigation
@@ -86,7 +84,12 @@ class SizeChartPopUpVC: UIViewController {
                 break
             }
         } else {
-            let currentSelection = sizeChartList![selectedIndex!]
+            guard let sizeChart = sizeChartList, let index = selectedIndex else {
+                closeHandler?()
+                return
+            }
+            
+            let currentSelection = sizeChart[index]
            
             switch type! {
             case .hips:
