@@ -21,6 +21,7 @@ class ServerManager: NSObject {
     static let countriesListURL = ServerManager.serverURL + "common/countries"
     static let validateURL = ServerManager.serverURL + "user/validate/"
     static let signUpURL = ServerManager.serverURL + "user/signup/"
+    static let forgotPasswordURL = ServerManager.serverURL + "user/forgot_password/"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
     func loginWith(params : [String : Any] , block : CompletionHandler)
@@ -168,6 +169,22 @@ class ServerManager: NSObject {
             }
         }
 
+    }
+    
+    func forgotPasswordWith(params : [String : Any] , block : CompletionHandler)
+    {
+        Alamofire.request(ServerManager.forgotPasswordURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
     }
 
     

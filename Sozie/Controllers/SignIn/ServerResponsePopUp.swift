@@ -9,7 +9,8 @@
 import UIKit
 
 class ServerResponsePopUp: UIViewController {
-
+   
+    var closeHandler: (() -> Void)?
     @IBOutlet weak var okBtn: DZGradientButton!
     @IBOutlet weak var detailTxtLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
@@ -20,11 +21,14 @@ class ServerResponsePopUp: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    class func instance() -> ServerResponsePopUp {
+    class func instance(imageName : String, title : String , description : String) -> ServerResponsePopUp {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "ServerResponsePopUp") as! ServerResponsePopUp
         instnce.view.layer.cornerRadius = 10.0
         instnce.view.clipsToBounds = true
+        instnce.titleImgVu.image = UIImage(named: imageName)
+        instnce.titleLbl.text = title
+        instnce.detailTxtLbl.text = description
         return instnce
     }
     /*
@@ -37,6 +41,7 @@ class ServerResponsePopUp: UIViewController {
     }
     */
     @IBAction func okBtnTapped(_ sender: Any) {
+        closeHandler!()
     }
     
 }
@@ -44,6 +49,6 @@ extension ServerResponsePopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
         popupController.popupView.layer.cornerRadius = 10.0
         popupController.popupView.clipsToBounds = true
-        return CGSize(width: UIScreen.main.bounds.size.width - 26.0 ,height: 270.0)
+        return CGSize(width: UIScreen.main.bounds.size.width - 26.0 ,height: 300.0)
     }
 }

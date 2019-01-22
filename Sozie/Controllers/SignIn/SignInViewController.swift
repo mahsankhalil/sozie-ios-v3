@@ -39,8 +39,19 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
         emailField.setupAppDesign()
         passwordField.setupAppDesign()
+        applyRightVuToPassword()
+        
 //        emailField.validationType = .afterEdit
 //        passwordField.validationType = .afterEdit
+    }
+    
+    func applyRightVuToPassword()
+    {
+        let eyeBtn = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 19.0, height: 22.0))
+        eyeBtn.setImage(UIImage(named: "eye-icon-white"), for: .normal)
+        eyeBtn.addTarget(self, action: #selector(eyeBtnTapped(sender:)), for: .touchUpInside)
+        passwordField.rightViewMode = .always
+        passwordField.rightView = eyeBtn
     }
 
     override func didReceiveMemoryWarning() {
@@ -139,6 +150,22 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         GIDSignIn.sharedInstance()?.signIn()
     }
     
+    @objc func eyeBtnTapped(sender : UIButton)
+    {
+        if passwordField.isSecureTextEntry
+        {
+            passwordField.isSecureTextEntry = false
+            
+            sender.setImage(UIImage(named: "eyeIconHide"), for: .normal)
+        }
+        else
+        {
+            passwordField.isSecureTextEntry = true
+            sender.setImage(UIImage(named: "eye-icon-white"), for: .normal)
+
+        }
+    }
+    
     @IBAction func forgotPasswordBtnTapped(_ sender: Any) {
         
         let popUpInstnc = ForgotPasswordEmailPopUp.instance()
@@ -148,6 +175,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()
         }
+        popUpInstnc.delegate = self
     }
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         SVProgressHUD.dismiss()
@@ -169,6 +197,9 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         // ...
         SVProgressHUD.dismiss()
     }
+    
+    
+    
     
     //MARK: Delegates
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -195,5 +226,51 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         //        Router.showMainTabBar()
     }
     
+    func forgotPassword(email : String)
+    {
+        let dataDict = ["email" : email]
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.forgotPasswordWith(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                let resp = response as! ValidateRespose
+                self.showPopUpWithResponse(isSuccess: isSuccess, detailStr: resp.detail)
+            }
+            else
+            {
+                let err = response as! Error
+                self.showPopUpWithResponse(isSuccess: isSuccess, detailStr: err.localizedDescription)
+            }
+        }
+    }
     
+    func showPopUpWithResponse(isSuccess : Bool , detailStr : String)
+    {
+        var popUpInstnc : ServerResponsePopUp?
+        if isSuccess
+        {
+            popUpInstnc = ServerResponsePopUp.instance(imageName: "checked", title: "Email Sent", description: detailStr)
+
+        }
+        else
+        {
+            popUpInstnc = ServerResponsePopUp.instance(imageName: "cancel", title: "Email Not Sent", description: detailStr)
+
+        }
+        let popUpVC = PopupController
+            .create(self)
+            .show(popUpInstnc!)
+        popUpInstnc!.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+    }
+    
+    
+}
+
+extension SignInViewController : ForgotPasswordEmailPopupDelegate {
+    func recoverPasswordBtnTapped(email: String) {
+        self.forgotPassword(email: email)
+    }
 }

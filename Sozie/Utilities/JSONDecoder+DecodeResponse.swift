@@ -82,6 +82,10 @@ extension JSONDecoder {
                 
             }
         }
+        else if let detail = json["detail"] as? String
+        {
+            return CustomError(str: detail)
+        }
         return CustomError(str: "Something Went Wrong")
 
 //        return BackendError.objectSerialization(reason: "Something Went Wrong")

@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol ForgotPasswordEmailPopupDelegate {
+    func recoverPasswordBtnTapped(email : String)
+}
 class ForgotPasswordEmailPopUp: UIViewController {
 
     var closeHandler: (() -> Void)?
@@ -16,6 +19,8 @@ class ForgotPasswordEmailPopUp: UIViewController {
     @IBOutlet weak var recoverPasswordBtn: DZGradientButton!
     @IBOutlet weak var emailTxtFld: UITextField!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var errorLbl: UILabel!
+    var delegate : ForgotPasswordEmailPopupDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,8 +44,20 @@ class ForgotPasswordEmailPopUp: UIViewController {
     }
     */
     @IBAction func recoverPasswordBtnTapped(_ sender: Any) {
+        if self.emailTxtFld.text!.isValidEmail()
+        {
+            self.errorLbl.isHidden = true
+            closeHandler!()
+            delegate?.recoverPasswordBtnTapped(email: emailTxtFld.text!)
+
+        }
+        else
+        {
+            self.errorLbl.isHidden = false
+        }
     }
     @IBAction func closeBtnTapped(_ sender: Any) {
+        closeHandler!()
     }
     
 }
