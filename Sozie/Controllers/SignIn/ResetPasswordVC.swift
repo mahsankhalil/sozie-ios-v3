@@ -18,6 +18,8 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate
     
     let validator = Validator()
 
+    var params : [String : Any]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

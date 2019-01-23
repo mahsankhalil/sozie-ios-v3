@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
+    
+    
     GIDSignIn.sharedInstance().clientID = "943339111983-3cca64ei8g4gukhudc5lurr6cpi0k91f.apps.googleusercontent.com"
     
     FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -31,12 +33,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options)
+        
+        if url.absoluteString.hasPrefix("sozie://resetpwd")
         {
-            return handled
+            if let params = url.queryParameters
+            {
+                showResetPasswordVC(with: params)
+            }
         }
         
-        return false
+            if let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options)
+            {
+                return handled
+            }
+            
+        
+        
+        
+        
+        return true
+    }
+    // Respond to Universal Links
+    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        // pass the url to the handle deep link call
+        
+        
+        return true
     }
   func applicationDidEnterBackground(_ application: UIApplication) {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
@@ -56,5 +78,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
 
+    
+    func showResetPasswordVC(with params : [String : Any])
+    {
+        let resetVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
+        resetVC.params = params
+        self.window?.rootViewController?.presentedViewController?.present(resetVC, animated: true, completion: {
+            
+        })
+        
+        
+    }
 }
 
