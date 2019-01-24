@@ -9,6 +9,7 @@
 import UIKit
 import MaterialTextField
 import SwiftValidator
+import SVProgressHUD
 class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate {
 
     @IBOutlet weak var saveBtn: DZGradientButton!
@@ -36,10 +37,6 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate
         [passwordTxtFld].forEach { (field) in
             field?.delegate = self
         }
-        
-        
-        
-        
     }
     
     
@@ -52,7 +49,27 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate
         }
         else
         {
-            
+            params!["new_password"] = self.passwordTxtFld.text
+            params!["token"] = params!["user_token"]
+            params?.removeValue(forKey: "user_token")
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.resetPasswordWith(params: params!) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess
+                {
+                    let resp = response as! ValidateRespose
+                    UtilityManager.showMessageWith(title: "Success!", body: resp.detail, in: self, block: {
+                        self.dismiss(animated: true, completion: {
+                            
+                        })
+                    })
+                }
+                else
+                {
+                    let err = response as! Error
+                    UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
+                }
+            }
         }
         
         

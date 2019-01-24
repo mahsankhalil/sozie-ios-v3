@@ -83,11 +83,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let resetVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
         resetVC.params = params
-        self.window?.rootViewController?.presentedViewController?.present(resetVC, animated: true, completion: {
-            
-        })
-        
-        
+        if let presentedVC = self.window?.rootViewController?.presentedViewController
+        {
+            presentedVC.present(resetVC, animated: true, completion: {
+                
+            })
+        }
+        else
+        {
+            self.window?.rootViewController?.present(resetVC, animated: true, completion: {
+                
+            })
+        }
     }
 }
 
