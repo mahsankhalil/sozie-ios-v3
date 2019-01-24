@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18721F9E98800C7E7CF /* LaunchScreen.storyboard */; };
+		6103E18C21F9E98800C7E7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18921F9E98800C7E7CF /* Main.storyboard */; };
+		6103E18E21F9E9AB00C7E7CF /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */; };
 		61145CC121DB926700062332 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61145CC021DB926600062332 /* ServerManager.swift */; };
 		6122289921F5D33500D4D747 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289821F5D33500D4D747 /* SignInViewController.swift */; };
 		6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */; };
@@ -92,9 +95,7 @@
 		69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D6E21C8D88A0092672D /* DZGradientView.swift */; };
 		69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69854D7021C8D9C70092672D /* DZGradientButton.swift */; };
 		6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6998E7DC21C77778009DFBEF /* AppDelegate.swift */; };
-		6998E7E221C77778009DFBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E021C77778009DFBEF /* Main.storyboard */; };
 		6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E321C77779009DFBEF /* Assets.xcassets */; };
-		6998E7E721C77779009DFBEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E521C77779009DFBEF /* LaunchScreen.storyboard */; };
 		69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */; };
 		69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */; };
 		E417DCD0989C188C9CE6722B /* Pods_Sozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */; };
@@ -102,6 +103,9 @@
 
 /* Begin PBXFileReference section */
 		599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.debug.xcconfig"; sourceTree = "<group>"; };
+		6103E18821F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6103E18A21F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		61145CC021DB926600062332 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		6122289821F5D33500D4D747 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailPopUp.swift; sourceTree = "<group>"; };
@@ -190,9 +194,7 @@
 		69854D7221C8DC610092672D /* seguisb.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = seguisb.ttf; sourceTree = "<group>"; };
 		6998E7D921C77778009DFBEF /* Sozie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sozie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6998E7DC21C77778009DFBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6998E7E121C77778009DFBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6998E7E321C77779009DFBEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6998E7E621C77779009DFBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6998E7E821C77779009DFBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DZValidator.swift; sourceTree = "<group>"; };
@@ -219,6 +221,16 @@
 				F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6103E18621F9E98800C7E7CF /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				6103E18721F9E98800C7E7CF /* LaunchScreen.storyboard */,
+				6103E18921F9E98800C7E7CF /* Main.storyboard */,
+				6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */,
+			);
+			path = StoryBoards;
 			sourceTree = "<group>";
 		};
 		6122289721F5D33500D4D747 /* SignIn */ = {
@@ -432,6 +444,7 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				6103E18621F9E98800C7E7CF /* StoryBoards */,
 				614CEA4421F1E46800FE5F9D /* SocialManager */,
 				614CEA4121F1E08F00FE5F9D /* GooglePlist */,
 				618091C921F0BFEB004B3347 /* ThirdParty */,
@@ -443,9 +456,7 @@
 				6944801121C7A017001A11A2 /* Utilities */,
 				694480A421C7A018001A11A2 /* Views */,
 				6998E7DC21C77778009DFBEF /* AppDelegate.swift */,
-				6998E7E021C77778009DFBEF /* Main.storyboard */,
 				6998E7E321C77779009DFBEF /* Assets.xcassets */,
-				6998E7E521C77779009DFBEF /* LaunchScreen.storyboard */,
 				6998E7E821C77779009DFBEF /* Info.plist */,
 			);
 			path = Sozie;
@@ -534,15 +545,16 @@
 				694480F321C7A018001A11A2 /* ScrollableDatepicker.xib in Resources */,
 				6944814921C7A018001A11A2 /* LoadingView.xib in Resources */,
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
+				6103E18C21F9E98800C7E7CF /* Main.storyboard in Resources */,
 				617CD12721DE229000D4C885 /* CountryCell.xib in Resources */,
 				69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */,
-				6998E7E721C77779009DFBEF /* LaunchScreen.storyboard in Resources */,
+				6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */,
 				6183FFD421E759920090393E /* WorkCell.xib in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
 				61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */,
 				694480F121C7A018001A11A2 /* DayCell.xib in Resources */,
+				6103E18E21F9E9AB00C7E7CF /* TabBar.storyboard in Resources */,
 				6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */,
-				6998E7E221C77778009DFBEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,20 +739,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6998E7E021C77778009DFBEF /* Main.storyboard */ = {
+		6103E18721F9E98800C7E7CF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6998E7E121C77778009DFBEF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6998E7E521C77779009DFBEF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6998E7E621C77779009DFBEF /* Base */,
+				6103E18821F9E98800C7E7CF /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6103E18921F9E98800C7E7CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6103E18A21F9E98800C7E7CF /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
