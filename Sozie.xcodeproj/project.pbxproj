@@ -10,6 +10,11 @@
 		6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18721F9E98800C7E7CF /* LaunchScreen.storyboard */; };
 		6103E18C21F9E98800C7E7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18921F9E98800C7E7CF /* Main.storyboard */; };
 		6103E18E21F9E9AB00C7E7CF /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */; };
+		6103E19121FAF24200C7E7CF /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6103E19021FAF24200C7E7CF /* TabBarVC.swift */; };
+		6103E19E21FB190100C7E7CF /* BrowseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6103E19D21FB190100C7E7CF /* BrowseVC.swift */; };
+		6103E1A021FB191100C7E7CF /* ProfileRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6103E19F21FB191100C7E7CF /* ProfileRootVC.swift */; };
+		6103E1A221FB192200C7E7CF /* WishListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6103E1A121FB192200C7E7CF /* WishListVC.swift */; };
+		6103E1A421FB43B600C7E7CF /* ProfileSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6103E1A321FB43B600C7E7CF /* ProfileSideMenuVC.swift */; };
 		61145CC121DB926700062332 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61145CC021DB926600062332 /* ServerManager.swift */; };
 		6122289921F5D33500D4D747 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289821F5D33500D4D747 /* SignInViewController.swift */; };
 		6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */; };
@@ -106,6 +111,11 @@
 		6103E18821F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6103E18A21F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
+		6103E19021FAF24200C7E7CF /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		6103E19D21FB190100C7E7CF /* BrowseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseVC.swift; sourceTree = "<group>"; };
+		6103E19F21FB191100C7E7CF /* ProfileRootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRootVC.swift; sourceTree = "<group>"; };
+		6103E1A121FB192200C7E7CF /* WishListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListVC.swift; sourceTree = "<group>"; };
+		6103E1A321FB43B600C7E7CF /* ProfileSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSideMenuVC.swift; sourceTree = "<group>"; };
 		61145CC021DB926600062332 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		6122289821F5D33500D4D747 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailPopUp.swift; sourceTree = "<group>"; };
@@ -233,6 +243,42 @@
 			path = StoryBoards;
 			sourceTree = "<group>";
 		};
+		6103E18F21FAF1E500C7E7CF /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6103E19321FAF91D00C7E7CF /* Browse */,
+				6103E19421FAF91D00C7E7CF /* Profile */,
+				6103E19221FAF91D00C7E7CF /* WishList */,
+				6103E19021FAF24200C7E7CF /* TabBarVC.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		6103E19221FAF91D00C7E7CF /* WishList */ = {
+			isa = PBXGroup;
+			children = (
+				6103E1A121FB192200C7E7CF /* WishListVC.swift */,
+			);
+			path = WishList;
+			sourceTree = "<group>";
+		};
+		6103E19321FAF91D00C7E7CF /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				6103E19D21FB190100C7E7CF /* BrowseVC.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		6103E19421FAF91D00C7E7CF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6103E19F21FB191100C7E7CF /* ProfileRootVC.swift */,
+				6103E1A321FB43B600C7E7CF /* ProfileSideMenuVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		6122289721F5D33500D4D747 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +368,7 @@
 		69447FF221C7A017001A11A2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6103E18F21FAF1E500C7E7CF /* TabBar */,
 				6122289721F5D33500D4D747 /* SignIn */,
 				617CD12821DE284F00D4C885 /* SignUp */,
 				69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */,
@@ -580,6 +627,7 @@
 				"${BUILT_PRODUCTS_DIR}/MaterialTextField/MaterialTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
@@ -598,6 +646,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
@@ -665,6 +714,7 @@
 				6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */,
 				69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */,
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
+				6103E1A221FB192200C7E7CF /* WishListVC.swift in Sources */,
 				6944814D21C7A018001A11A2 /* SpringAnimation.swift in Sources */,
 				6944814B21C7A018001A11A2 /* DesignableTextView.swift in Sources */,
 				6944814A21C7A018001A11A2 /* SpringLabel.swift in Sources */,
@@ -688,6 +738,7 @@
 				6183FFD321E759920090393E /* WorkCell.swift in Sources */,
 				6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */,
 				617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */,
+				6103E19E21FB190100C7E7CF /* BrowseVC.swift in Sources */,
 				694480F521C7A018001A11A2 /* LoadableFromXibView.swift in Sources */,
 				617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */,
 				6944814521C7A018001A11A2 /* SpringTextField.swift in Sources */,
@@ -717,6 +768,7 @@
 				6944814421C7A018001A11A2 /* DesignableButton.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
 				6944814021C7A018001A11A2 /* SpringButton.swift in Sources */,
+				6103E1A021FB191100C7E7CF /* ProfileRootVC.swift in Sources */,
 				619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */,
 				694480F621C7A018001A11A2 /* Configuration.swift in Sources */,
 				6944814221C7A018001A11A2 /* Misc.swift in Sources */,
@@ -724,6 +776,8 @@
 				6944813D21C7A018001A11A2 /* SoundPlayer.swift in Sources */,
 				6944814321C7A018001A11A2 /* SpringView.swift in Sources */,
 				6944815121C7A018001A11A2 /* AsyncImageView.swift in Sources */,
+				6103E19121FAF24200C7E7CF /* TabBarVC.swift in Sources */,
+				6103E1A421FB43B600C7E7CF /* ProfileSideMenuVC.swift in Sources */,
 				6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */,
 				6944813721C7A018001A11A2 /* TransitionManager.swift in Sources */,
 				6944814121C7A018001A11A2 /* SpringTextView.swift in Sources */,

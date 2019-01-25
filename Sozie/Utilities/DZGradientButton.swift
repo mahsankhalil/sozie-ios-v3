@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable class DZGradientButton: UIButton {
 
     var shadowAdded: Bool = false
-    
+    var cornerRadius : CGFloat?
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -27,8 +27,16 @@ import UIKit
         
         setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont(font: .Standard, size: 16.0)
-        
-        layer.cornerRadius = Styles.sharedStyles.buttonCornerRadius
+        if let radius = cornerRadius
+        {
+            layer.cornerRadius = radius
+
+        }
+        else
+        {
+            layer.cornerRadius = Styles.sharedStyles.buttonCornerRadius
+
+        }
         layer.masksToBounds = true
         
         applyGradient()

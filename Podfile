@@ -17,6 +17,7 @@ pod 'SnapKit', '~> 4.0.0'
 pod 'Alamofire'
 pod 'MaterialTextField', '~> 1.0'
 pod 'EasyTipView', '~> 2.0.0'
+pod 'SideMenu'
 end
 
 post_install do |installer|

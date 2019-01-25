@@ -28,6 +28,7 @@ PODS:
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
+  - SideMenu (5.0.3)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
   - SwiftValidator (4.0.0)
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - MaterialTextField (~> 1.0)
   - SDWebImage (~> 4.0)
+  - SideMenu
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
@@ -58,6 +60,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - MaterialTextField
     - SDWebImage
+    - SideMenu
     - SnapKit
     - SVProgressHUD
     - TPKeyboardAvoiding
@@ -83,11 +86,12 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   MaterialTextField: f1a0786588e4d3610cb9bb62d2adbe9777cebbf9
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: f7bd939c091af58375e0443009d15eba8e9e5b0b
+PODFILE CHECKSUM: e807f783ac06b8e28adfe0304e89771bc2c56bec
 
 COCOAPODS: 1.5.3

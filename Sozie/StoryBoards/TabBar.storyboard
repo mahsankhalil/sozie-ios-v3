@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="segoeui.ttf">
+            <string>SegoeUI</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="mKJ-G7-b6p">
@@ -26,11 +31,11 @@
             </objects>
             <point key="canvasLocation" x="-458" y="55"/>
         </scene>
-        <!--Browse-->
+        <!--Shop-->
         <scene sceneID="Tsd-tv-doY">
             <objects>
-                <navigationController id="426-an-J1C" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Browse" image="Browse icon" selectedImage="Browse icon-Selected" id="x17-MT-4c1"/>
+                <navigationController storyboardIdentifier="BrowseNC" id="426-an-J1C" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Shop" image="Shop" selectedImage="Shop Selected" id="x17-MT-4c1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorTransitionMaskImage="back-button-white" id="3zs-bY-LOd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -43,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="1041" y="-303"/>
         </scene>
-        <!--View Controller-->
+        <!--BrowseVC-->
         <scene sceneID="hsg-Dg-us7">
             <objects>
-                <viewController id="M1c-lm-bi2" sceneMemberID="viewController">
+                <viewController id="M1c-lm-bi2" customClass="BrowseVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yz8-Jr-6qJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="1804" y="-304"/>
         </scene>
-        <!--View Controller-->
+        <!--Wish ListVC-->
         <scene sceneID="Zua-sr-ELn">
             <objects>
-                <viewController id="0aq-9A-vpe" sceneMemberID="viewController">
+                <viewController id="0aq-9A-vpe" customClass="WishListVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GbB-Ph-FcZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,27 +80,125 @@
             </objects>
             <point key="canvasLocation" x="1804" y="404"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile RootVC-->
         <scene sceneID="akM-ve-myT">
             <objects>
-                <viewController id="lfr-T0-TPt" sceneMemberID="viewController">
+                <viewController id="lfr-T0-TPt" customClass="ProfileRootVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6bi-mT-6RD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="C0N-KA-g4T"/>
                     </view>
-                    <navigationItem key="navigationItem" id="sw3-uL-QKe"/>
+                    <navigationItem key="navigationItem" id="sw3-uL-QKe">
+                        <barButtonItem key="rightBarButtonItem" image="Menu Icon" id="w7p-p3-se7">
+                            <connections>
+                                <segue destination="Ibr-9w-Qrb" kind="presentation" id="9p8-mr-srI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Vi-gl-k7Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1804" y="1080"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Side Menu Navigation Controller-->
+        <scene sceneID="nZx-7N-uvg">
+            <objects>
+                <navigationController storyboardIdentifier="RightMenuNavigationController" navigationBarHidden="YES" id="Ibr-9w-Qrb" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oiG-yK-Wyw">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="77b-ez-nUK" kind="relationship" relationship="rootViewController" id="viL-vd-GlK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="foN-Gx-h5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2498" y="1080"/>
+        </scene>
+        <!--Profile Side MenuVC-->
+        <scene sceneID="LC4-IG-tkG">
+            <objects>
+                <viewController id="77b-ez-nUK" customClass="ProfileSideMenuVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZLg-x3-pOX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emk-YG-NNX">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WL-Ri-f6Q">
+                                        <rect key="frame" x="0.0" y="14" width="38" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="e9b-9G-AcL"/>
+                                            <constraint firstAttribute="height" constant="38" id="hay-4A-dkF"/>
+                                        </constraints>
+                                        <state key="normal" image="Menu Icon"/>
+                                        <connections>
+                                            <action selector="menuBtnTapped:" destination="77b-ez-nUK" eventType="touchUpInside" id="4ar-Oc-A50"/>
+                                        </connections>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vuA-GP-hoS">
+                                        <rect key="frame" x="0.0" y="52" width="375" height="563"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxh-LR-Fbt" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="615" width="375" height="32"/>
+                                        <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="kp3-2J-lUV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                        <state key="normal" title="LOGOUT">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logoutBtnTapped:" destination="77b-ez-nUK" eventType="touchUpInside" id="tOV-pX-zip"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nxh-LR-Fbt" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="4em-yE-yDP"/>
+                                    <constraint firstItem="9WL-Ri-f6Q" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="DCh-Cm-n6S"/>
+                                    <constraint firstItem="nxh-LR-Fbt" firstAttribute="bottom" secondItem="g2K-iV-vEO" secondAttribute="bottom" id="F0D-1j-YCI"/>
+                                    <constraint firstItem="vuA-GP-hoS" firstAttribute="top" secondItem="9WL-Ri-f6Q" secondAttribute="bottom" id="KK3-Zb-X9d"/>
+                                    <constraint firstItem="nxh-LR-Fbt" firstAttribute="top" secondItem="vuA-GP-hoS" secondAttribute="bottom" id="X2a-tb-KPl"/>
+                                    <constraint firstItem="vuA-GP-hoS" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="jQv-9O-Hz3"/>
+                                    <constraint firstItem="9WL-Ri-f6Q" firstAttribute="top" secondItem="g2K-iV-vEO" secondAttribute="top" constant="14" id="oVi-2J-01K"/>
+                                    <constraint firstItem="vuA-GP-hoS" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="r4k-SK-1d5"/>
+                                    <constraint firstItem="nxh-LR-Fbt" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="zCt-0T-5kr"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="g2K-iV-vEO"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Emk-YG-NNX" firstAttribute="bottom" secondItem="ZLg-x3-pOX" secondAttribute="bottom" id="3nN-FP-AWO"/>
+                            <constraint firstItem="Emk-YG-NNX" firstAttribute="leading" secondItem="E0M-Oj-hcV" secondAttribute="leading" id="NiZ-AW-8vO"/>
+                            <constraint firstItem="Emk-YG-NNX" firstAttribute="trailing" secondItem="E0M-Oj-hcV" secondAttribute="trailing" id="VsO-os-Jv3"/>
+                            <constraint firstItem="Emk-YG-NNX" firstAttribute="top" secondItem="E0M-Oj-hcV" secondAttribute="top" id="aCa-e5-Qw8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="E0M-Oj-hcV"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CFa-m9-Aec"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="logoutBtn" destination="nxh-LR-Fbt" id="CDX-GP-7Qb"/>
+                        <outlet property="menuBtn" destination="9WL-Ri-f6Q" id="Tsp-w1-CgF"/>
+                        <outlet property="tblVu" destination="vuA-GP-hoS" id="Vec-fJ-C25"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jgC-Bd-dFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3192.8000000000002" y="1078.1109445277361"/>
+        </scene>
+        <!--Wish List-->
         <scene sceneID="uHZ-nX-9RY">
             <objects>
-                <navigationController id="8Ns-t2-1RW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Camera icon" selectedImage="Camera icon-Selected" id="ySQ-pD-YxI"/>
+                <navigationController storyboardIdentifier="WishListNC" id="8Ns-t2-1RW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wish List" image="Whish List" selectedImage="Wish List Selected" id="ySQ-pD-YxI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorTransitionMaskImage="back-button-white" id="474-Lj-6Gb">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -111,7 +214,7 @@
         <!--Profile-->
         <scene sceneID="LjO-GQ-eO5">
             <objects>
-                <navigationController id="23l-gx-hZ1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNC" id="23l-gx-hZ1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="Profile icon" selectedImage="Profile icon-Selected" id="byK-1Q-SDS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorTransitionMaskImage="back-button-white" id="0gp-5q-yjY">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -125,10 +228,10 @@
             </objects>
             <point key="canvasLocation" x="1041" y="1080"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab BarVC-->
         <scene sceneID="Kmw-If-3aR">
             <objects>
-                <tabBarController id="p3v-9Q-Gy8" sceneMemberID="viewController">
+                <tabBarController id="p3v-9Q-Gy8" customClass="TabBarVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="fL3-5n-cxw"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gOd-LG-q7D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -150,12 +253,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Browse icon" width="27" height="27"/>
-        <image name="Browse icon-Selected" width="27" height="27"/>
-        <image name="Camera icon" width="29" height="21.5"/>
-        <image name="Camera icon-Selected" width="29" height="21.5"/>
+        <image name="Menu Icon" width="18" height="18"/>
         <image name="Profile icon" width="29" height="29"/>
         <image name="Profile icon-Selected" width="29" height="29"/>
+        <image name="Shop" width="21" height="27.5"/>
+        <image name="Shop Selected" width="21" height="27.5"/>
+        <image name="Whish List" width="28" height="25.5"/>
+        <image name="Wish List Selected" width="27" height="24.5"/>
         <image name="back-button-white" width="22" height="10"/>
     </resources>
 </document>

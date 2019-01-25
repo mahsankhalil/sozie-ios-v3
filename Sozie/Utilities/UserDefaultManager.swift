@@ -45,6 +45,17 @@ class UserDefaultManager: NSObject {
         }
         
     }
+    class func getCurrentUserType() -> String?
+    {
+        if let loginResponse = UserDefaultManager.loginResponse()
+        {
+            return loginResponse.user?.type
+        }
+        else
+        {
+            return nil
+        }
+    }
     
     class func getAccessToken() -> String?
     {

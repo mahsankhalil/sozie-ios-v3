@@ -12,7 +12,6 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackgroundImage()
         navigationItem.backBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         navigationItem.backBarButtonItem?.width = 30
     }
@@ -27,11 +26,32 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setupShopNavBar(){
+        let logo = UIImage(named: "NavBarLogo")
+        let imageView = UIImageView(image:logo)
+        navigationItem.titleView = imageView
+    }
+    func setupWishListNavBar(){
+        let logo = UIImage(named: "NavBarLogo")
+        let imageView = UIImageView(image:logo)
+        navigationItem.titleView = imageView
+    }
+    func setupProfileNavBar(){
+//        let logo = UIImage(named: "NavBarLogo")
+//        let imageView = UIImageView(image:logo)
+//        let sideMenuBtn = UIBarButtonItem(image: UIImage(named: ""), style: .plain, target: self, action: <#T##Selector?#>)
+        navigationItem.titleView = nil
+    }
+    
     func setupBackgroundImage(){
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "nav-bg")?.resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), resizingMode: UIImage.ResizingMode.stretch), for: .default)
     }
     
+//    func sideMenuBtnTapped()
+//    {
+//
+//    }
 
     /*
     // MARK: - Navigation
