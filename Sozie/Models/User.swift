@@ -99,13 +99,3 @@ struct Measurement: Codable {
         waist = try values.decode(String.self, forKey: .waist)
     }
 }
-
-
-class LocalMeasurement: NSObject {
-    var bra: String?
-    var height: String?
-    var bodyShape: String?
-    var hip: String?
-    var cup: String?
-    var waist: String?
-}

@@ -77,7 +77,6 @@ class SelectWorkVC: UIViewController {
     }
     
     @objc func textFieldDidChange(textField : UITextField) {
-        
         searchList.removeAll()
         guard let brands = brandList, let searchText = textField.text else { return }
         if textField.text?.isEmpty ?? true {
