@@ -60,6 +60,18 @@
 		D738BF6C21F41C5900302FE5 /* CheckmarkViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF6B21F41C5900302FE5 /* CheckmarkViewModeling.swift */; };
 		D738BF7221F439EA00302FE5 /* CellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF7121F439EA00302FE5 /* CellConfigurable.swift */; };
 		D738BF7421F43A3900302FE5 /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF7321F43A3900302FE5 /* RowViewModel.swift */; };
+		DA48CB0E21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB0D21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift */; };
+		DA48CB1021FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB0F21FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift */; };
+		DA48CB1221FAC04E006804B6 /* ButtonTappedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1121FAC04E006804B6 /* ButtonTappedDelegate.swift */; };
+		DA48CB1421FACFCD006804B6 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1321FACFCD006804B6 /* TextFieldDelegate.swift */; };
+		DA48CB1621FAD371006804B6 /* ErrorMessageViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1521FAD371006804B6 /* ErrorMessageViewModeling.swift */; };
+		DA48CB1821FAD871006804B6 /* ReuseIdentifierProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1721FAD871006804B6 /* ReuseIdentifierProviding.swift */; };
+		DA48CB1A21FADD8D006804B6 /* ErrorViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1921FADD8D006804B6 /* ErrorViewModeling.swift */; };
+		DA48CB1C21FC16F4006804B6 /* TextFieldDelegateProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1B21FC16F4006804B6 /* TextFieldDelegateProviding.swift */; };
+		DA48CB1E21FC17E8006804B6 /* UIButtonProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1D21FC17E8006804B6 /* UIButtonProviding.swift */; };
+		DA48CB2021FC25E8006804B6 /* MeasurementTypeProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1F21FC25E8006804B6 /* MeasurementTypeProviding.swift */; };
+		DA48CB2221FC3A46006804B6 /* SingleTextFieldCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB2121FC3A46006804B6 /* SingleTextFieldCellViewModel.swift */; };
+		DA48CB2421FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB2321FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift */; };
 		E417DCD0989C188C9CE6722B /* Pods_Sozie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +135,18 @@
 		D738BF6B21F41C5900302FE5 /* CheckmarkViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkViewModeling.swift; sourceTree = "<group>"; };
 		D738BF7121F439EA00302FE5 /* CellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurable.swift; sourceTree = "<group>"; };
 		D738BF7321F43A3900302FE5 /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
+		DA48CB0D21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextFieldCellViewModeling.swift; sourceTree = "<group>"; };
+		DA48CB0F21FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextFieldCellViewModeling.swift; sourceTree = "<group>"; };
+		DA48CB1121FAC04E006804B6 /* ButtonTappedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTappedDelegate.swift; sourceTree = "<group>"; };
+		DA48CB1321FACFCD006804B6 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
+		DA48CB1521FAD371006804B6 /* ErrorMessageViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageViewModeling.swift; sourceTree = "<group>"; };
+		DA48CB1721FAD871006804B6 /* ReuseIdentifierProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProviding.swift; sourceTree = "<group>"; };
+		DA48CB1921FADD8D006804B6 /* ErrorViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModeling.swift; sourceTree = "<group>"; };
+		DA48CB1B21FC16F4006804B6 /* TextFieldDelegateProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDelegateProviding.swift; sourceTree = "<group>"; };
+		DA48CB1D21FC17E8006804B6 /* UIButtonProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonProviding.swift; sourceTree = "<group>"; };
+		DA48CB1F21FC25E8006804B6 /* MeasurementTypeProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementTypeProviding.swift; sourceTree = "<group>"; };
+		DA48CB2121FC3A46006804B6 /* SingleTextFieldCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextFieldCellViewModel.swift; sourceTree = "<group>"; };
+		DA48CB2321FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextFieldCellViewModel.swift; sourceTree = "<group>"; };
 		F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -324,10 +348,22 @@
 		D738BF6821F3F7F800302FE5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				D738BF6921F3F82400302FE5 /* TitleViewModeling.swift */,
-				D738BF6B21F41C5900302FE5 /* CheckmarkViewModeling.swift */,
+				DA48CB1121FAC04E006804B6 /* ButtonTappedDelegate.swift */,
 				D738BF7121F439EA00302FE5 /* CellConfigurable.swift */,
+				D738BF6B21F41C5900302FE5 /* CheckmarkViewModeling.swift */,
+				DA48CB2321FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift */,
+				DA48CB0D21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift */,
+				DA48CB1521FAD371006804B6 /* ErrorMessageViewModeling.swift */,
+				DA48CB1921FADD8D006804B6 /* ErrorViewModeling.swift */,
+				DA48CB1F21FC25E8006804B6 /* MeasurementTypeProviding.swift */,
+				DA48CB1721FAD871006804B6 /* ReuseIdentifierProviding.swift */,
 				D738BF7321F43A3900302FE5 /* RowViewModel.swift */,
+				DA48CB2121FC3A46006804B6 /* SingleTextFieldCellViewModel.swift */,
+				DA48CB0F21FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift */,
+				DA48CB1321FACFCD006804B6 /* TextFieldDelegate.swift */,
+				DA48CB1B21FC16F4006804B6 /* TextFieldDelegateProviding.swift */,
+				D738BF6921F3F82400302FE5 /* TitleViewModeling.swift */,
+				DA48CB1D21FC17E8006804B6 /* UIButtonProviding.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -517,6 +553,7 @@
 			files = (
 				D738BF6A21F3F82400302FE5 /* TitleViewModeling.swift in Sources */,
 				6944813421C7A018001A11A2 /* DatePickerTextField.swift in Sources */,
+				DA48CB1621FAD371006804B6 /* ErrorMessageViewModeling.swift in Sources */,
 				61A20A5721E5DDAC00B27C8E /* SingleTextFieldCell.swift in Sources */,
 				D738BF7221F439EA00302FE5 /* CellConfigurable.swift in Sources */,
 				61A20A5221E4D24300B27C8E /* CustomPickerTextField.swift in Sources */,
@@ -525,20 +562,27 @@
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
 				69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */,
 				6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */,
+				DA48CB1C21FC16F4006804B6 /* TextFieldDelegateProviding.swift in Sources */,
 				6944810C21C7A018001A11A2 /* DZImageView.swift in Sources */,
+				DA48CB1A21FADD8D006804B6 /* ErrorViewModeling.swift in Sources */,
 				61BC873721E76C62000AEA06 /* Brand.swift in Sources */,
 				613F897D21E8C5FB00EB48D2 /* CustomError.swift in Sources */,
 				614CEA4621F1E48600FE5F9D /* SocialAuthManager.swift in Sources */,
 				694480EA21C7A018001A11A2 /* Constants.swift in Sources */,
 				D738BF6321F3D72600302FE5 /* Array.swift in Sources */,
 				D738BF7421F43A3900302FE5 /* RowViewModel.swift in Sources */,
+				DA48CB1421FACFCD006804B6 /* TextFieldDelegate.swift in Sources */,
 				613F897B21E8AEF800EB48D2 /* LoginResponse.swift in Sources */,
+				DA48CB2221FC3A46006804B6 /* SingleTextFieldCellViewModel.swift in Sources */,
 				D738BF6C21F41C5900302FE5 /* CheckmarkViewModeling.swift in Sources */,
 				6183FFCE21E747790090393E /* InviteFriendsVC.swift in Sources */,
 				694480E821C7A018001A11A2 /* SignInViewController.swift in Sources */,
 				6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */,
+				DA48CB1221FAC04E006804B6 /* ButtonTappedDelegate.swift in Sources */,
 				617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */,
+				DA48CB1021FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift in Sources */,
 				617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */,
+				DA48CB2021FC25E8006804B6 /* MeasurementTypeProviding.swift in Sources */,
 				D738BF6721F3E3EA00302FE5 /* TitleAndCheckmarkCell.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
 				618091C821EF43D0004B3347 /* UserDefaultManager.swift in Sources */,
@@ -547,6 +591,8 @@
 				69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */,
 				69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */,
 				61145CC121DB926700062332 /* ServerManager.swift in Sources */,
+				DA48CB1E21FC17E8006804B6 /* UIButtonProviding.swift in Sources */,
+				DA48CB2421FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift in Sources */,
 				61A20A5421E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift in Sources */,
 				6188C70321EC98A000B51EA1 /* SizeChartPopUpVC.swift in Sources */,
 				613F897921E897AA00EB48D2 /* Country.swift in Sources */,
@@ -557,6 +603,8 @@
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
 				6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */,
 				6183FFD021E756810090393E /* SelectWorkVC.swift in Sources */,
+				DA48CB1821FAD871006804B6 /* ReuseIdentifierProviding.swift in Sources */,
+				DA48CB0E21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift in Sources */,
 				617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
