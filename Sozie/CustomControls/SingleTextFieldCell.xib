@@ -88,7 +88,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="notSureBtn" destination="1fW-fS-hvd" id="2Uq-0U-D7V"/>
                 <outlet property="notSureButton" destination="1fW-fS-hvd" id="hMC-ND-pqh"/>
                 <outlet property="textField" destination="3r7-9o-b1N" id="mWQ-XH-r4g"/>
             </connections>
