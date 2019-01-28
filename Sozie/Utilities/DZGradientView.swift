@@ -18,7 +18,7 @@ import UIKit
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [gradientStartColor.cgColor,gradientEndColor.cgColor]
-        gradient.opacity = 0.3
+        gradient.opacity = 1.0
         
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5);
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5);

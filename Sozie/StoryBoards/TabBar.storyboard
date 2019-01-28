@@ -139,9 +139,13 @@
                                             <action selector="menuBtnTapped:" destination="77b-ez-nUK" eventType="touchUpInside" id="4ar-Oc-A50"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vuA-GP-hoS">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vuA-GP-hoS">
                                         <rect key="frame" x="0.0" y="52" width="375" height="563"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="77b-ez-nUK" id="bBg-eB-jlE"/>
+                                            <outlet property="delegate" destination="77b-ez-nUK" id="xxG-xZ-Ba6"/>
+                                        </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxh-LR-Fbt" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="615" width="375" height="32"/>
