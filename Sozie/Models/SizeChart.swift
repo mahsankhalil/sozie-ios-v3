@@ -10,12 +10,12 @@ import UIKit
 
 struct Size: Codable {
 
-    var general : [General]
-    var height : Height
-    var waist : [Int]
-    var hip : [Int]
-    var bra : Bra
-    var sizeChart : [SizeChart]
+    var general: [General]
+    var height: Height
+    var waist: [Int]
+    var hip: [Int]
+    var bra: Bra
+    var sizeChart: [SizeChart]
 
     enum CodingKeys: String, CodingKey {
         case general
@@ -36,14 +36,14 @@ struct Size: Codable {
         sizeChart = try values.decode([SizeChart].self, forKey: .sizeChart)
     }
 }
-struct SizeChart : Codable {
+struct SizeChart: Codable {
     
-    var us : Int
-    var uk : Int
-    var eu : Int
-    var waist : Scales
-    var hip : Scales
-    var bust : Scales
+    var us: Int
+    var uk: Int
+    var eu: Int
+    var waist: Scales
+    var hip: Scales
+    var bust: Scales
     
     enum CodingKeys: String, CodingKey {
         case us = "US"
@@ -63,13 +63,12 @@ struct SizeChart : Codable {
         hip = try values.decode(Scales.self, forKey: .hip)
         bust = try values.decode(Scales.self, forKey: .bust)
     }
-    
 }
 
-struct Scales : Codable {
+struct Scales: Codable {
     
-    var inch : Double
-    var centimeter : Double
+    var inch: Double
+    var centimeter: Double
     
     enum CodingKeys: String, CodingKey {
         case inch
@@ -83,14 +82,12 @@ struct Scales : Codable {
     }
 }
 
-
-
-struct General : Codable {
+struct General: Codable {
     
-    var label : String
-    var waist : Scales
-    var hip : Scales
-    var bust : Scales
+    var label: String
+    var waist: Scales
+    var hip: Scales
+    var bust: Scales
     
     enum CodingKeys: String, CodingKey {
         case label

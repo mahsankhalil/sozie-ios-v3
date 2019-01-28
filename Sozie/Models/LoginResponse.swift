@@ -10,10 +10,10 @@ import UIKit
 
 struct LoginResponse: Codable {
 
-    var refresh : String
-    var access : String
-    var userId : Int?
-    var user : User?
+    var refresh: String
+    var access: String
+    var userId: Int?
+    var user: User?
     
     enum CodingKeys: String, CodingKey {
         case refresh
@@ -31,13 +31,12 @@ struct LoginResponse: Codable {
     }
 }
 
-struct ValidateRespose : Codable {
-    var detail : String
+struct ValidateRespose: Codable {
+    
+    var detail: String
+    
     enum CodingKeys: String, CodingKey {
-
-        
         case detail
-        
     }
     
     init(from decoder: Decoder) throws {

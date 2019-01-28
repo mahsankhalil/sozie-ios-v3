@@ -18,13 +18,11 @@ public class UserDefaultKey: NSObject {
     static let refreshToken = "refresh"
     static let userId = "user_id"
     static let loginResponse = "loginResponse"
-    
 }
 
 public class Constant: NSObject {
 
     static let facebookURL = "https://graph.facebook.com/me"
-    
     static let applicationName = "Sozie"
     static let serverDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     static let appDateFormat = "MM/dd/yyyy"
@@ -32,25 +30,6 @@ public class Constant: NSObject {
     static let eventDetailDateFormat = "MMM dd yyyy',' hh:mm a"
     static let animationDuration : TimeInterval = 0.5
   
-//    static let serverURL = "https://api.connectin.tech/connectIn/api/v1/"
-//    static let serverURL = "http://192.168.8.102:3000/connectIn/api/v1/"
-  
-    //MARK: - Response Keys
-    
-    static let messageKey = "message"
-    static let responseKey = "responce"
-    static let statusKey = "status"
-    
-    static let registrationURL = "signup"
-//    static let loginURL = "signin"
-    static let getProfileURL = "signin"
-    static let socialLoginURL = "signin"
-    
     static let single = "single"
     static let double = "double"
-    
-    // MARK: - API COnstants
-    
-    
-    
 }

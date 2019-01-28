@@ -13,23 +13,21 @@ public enum UserType : String {
 }
 class LandingViewController: UIViewController {
 
-    var currentUserType : UserType?
+    var currentUserType: UserType?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "toCountryVC"
-        {
+        if segue.identifier == "toCountryVC" {
             let vc = segue.destination as! SelectCountryVC
             vc.currentUserType = currentUserType
         }
@@ -39,10 +37,10 @@ class LandingViewController: UIViewController {
         currentUserType = .shopper
         performSegue(withIdentifier: "toCountryVC", sender: self)
     }
+    
     @IBAction func signUpSozieBtnTapped(_ sender: Any) {
         currentUserType = .sozie
         performSegue(withIdentifier: "toCountryVC", sender: self)
-
     }
-    
+
 }

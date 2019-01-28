@@ -18,6 +18,8 @@ pod 'Alamofire'
 pod 'MaterialTextField', '~> 1.0'
 pod 'EasyTipView', '~> 2.0.0'
 pod 'SideMenu'
+pod 'Hex'
+
 end
 
 post_install do |installer|

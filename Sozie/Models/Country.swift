@@ -9,9 +9,9 @@
 import UIKit
 
 struct Country: Codable {
-    var countryId : Int
-    var name : String
-    var code : String
+    var countryId: Int
+    var name: String
+    var code: String
     
     enum CodingKeys: String, CodingKey {
         case countryId = "id"

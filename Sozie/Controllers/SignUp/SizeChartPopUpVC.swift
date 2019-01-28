@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-
 protocol SizeChartPopupVCDelegate {
     func selectedValueFromPopUp(value : Int , type : MeasurementType)
 }
@@ -26,10 +24,8 @@ class SizeChartPopUpVC: UIViewController {
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     var isUKSelected = false
-
     var sizeChartList : [SizeChart]?
     var generalList : [General]?
-    
     var isSelectedFromGeneral = false
     var selectedIndex : Int?
     var delegate : SizeChartPopupVCDelegate?
@@ -46,8 +42,6 @@ class SizeChartPopUpVC: UIViewController {
     }
     
     // MARK: - Custom Methods
-    
-
 
     /*
     // MARK: - Navigation
@@ -58,6 +52,7 @@ class SizeChartPopUpVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
     @IBAction func usBtnTapped(_ sender: Any) {
         isUKSelected = false
         usBtn.applyButtonSelectedWithoutBorder()
@@ -66,16 +61,16 @@ class SizeChartPopUpVC: UIViewController {
         
         
     }
+
     @IBAction func ukBtnTapped(_ sender: Any) {
         isUKSelected = true
         usBtn.applyButtonUnSelectedWithoutBorder()
         ukBtn.applyButtonSelectedWithoutBorder()
         sizeChartCollectionVu.reloadData()
-
     }
+    
     @IBAction func selectBtnTapped(_ sender: Any) {
-        if isSelectedFromGeneral
-        {
+        if isSelectedFromGeneral {
             let currentSelection = generalList![selectedIndex!]
             switch type! {
             case .hips:
@@ -86,28 +81,28 @@ class SizeChartPopUpVC: UIViewController {
              default:
                 break
             }
-        }
-        else
-        {
-            let currentSelection = sizeChartList![selectedIndex!]
+        } else {
+            guard let sizeChart = sizeChartList, let index = selectedIndex else {
+                closeHandler?()
+                return
+            }
+            
+            let currentSelection = sizeChart[index]
            
             switch type! {
             case .hips:
                 delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips)
             case .waist:
                 delegate?.selectedValueFromPopUp(value: Int(currentSelection.waist.inch), type: .waist)
-                
             default:
                 break
             }
         }
-        
-        closeHandler?()
 
-        
+        closeHandler?()
     }
     
-    class func instance(arrayOfSizeChart : [SizeChart] , arrayOfGeneral : [General] , type : MeasurementType) -> SizeChartPopUpVC {
+    static func instance(arrayOfSizeChart : [SizeChart] , arrayOfGeneral : [General] , type : MeasurementType) -> SizeChartPopUpVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "SizeChartPopUpVC") as! SizeChartPopUpVC
         instnce.sizeChartList = arrayOfSizeChart
@@ -117,7 +112,6 @@ class SizeChartPopUpVC: UIViewController {
         instnce.type = type
         return instnce
     }
-    
 }
 
 extension SizeChartPopUpVC: PopupContentViewController {
@@ -131,41 +125,27 @@ extension SizeChartPopUpVC: PopupContentViewController {
 
 extension SizeChartPopUpVC : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
 {
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == sizesCollectionVu
-        {
+        if collectionView == sizesCollectionVu {
             return generalList?.count ?? 0
-        }
-        else
-        {
+        } else {
             return sizeChartList?.count ?? 0
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeCell", for: indexPath) as! SizeCell
 
-        if collectionView == sizesCollectionVu
-        {
+        if collectionView == sizesCollectionVu {
             let currentGeneralSize = generalList?[indexPath.row]
             cell.titleLbl.text = currentGeneralSize?.label
-        }
-        else
-        {
+        } else {
             let currentSizeChart = sizeChartList?[indexPath.row]
-            if isUKSelected
-            {
+            if isUKSelected {
                 cell.titleLbl.text = String(describing: currentSizeChart!.uk)
-
             }
-            else
-            {
+            else {
                 cell.titleLbl.text = String(describing: currentSizeChart!.us)
-
             }
             
             cell.hideShowLinesInCell(indexPath: indexPath, count: sizeChartList!.count)
@@ -173,27 +153,19 @@ extension SizeChartPopUpVC : UICollectionViewDelegate , UICollectionViewDataSour
         
         self.configureCellSelection(indexPath: indexPath, collectionView: collectionView, cell: cell)
         return cell
-        
     }
     
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //2
-//        let paddingSpace = Int(sectionInsets.left)
-        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
         var availableWidth : Int
-        if collectionView == sizesCollectionVu
-        {
+        if collectionView == sizesCollectionVu {
             availableWidth = Int(UIScreen.main.bounds.size.width - 28.0 - 32.0 )
-        }
-        else
-        {
+        } else {
             availableWidth = Int(UIScreen.main.bounds.size.width - 28.0 - 32.0 - 34.0)
         }
-        let widthPerItem = Double(availableWidth/5)
         
+        let widthPerItem = Double(availableWidth/5)
         return CGSize(width: widthPerItem  , height: 40.0 )
     }
     
@@ -204,78 +176,51 @@ extension SizeChartPopUpVC : UICollectionViewDelegate , UICollectionViewDataSour
         return sectionInsets
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
-    {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
     
     // 4
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == sizesCollectionVu
-        {
+        if collectionView == sizesCollectionVu {
             isSelectedFromGeneral = true
-            
-        }
-        else
-        {
+        } else {
             isSelectedFromGeneral = false
-
         }
+        
         selectedIndex = indexPath.row
         sizesCollectionVu.reloadData()
         sizeChartCollectionVu.reloadData()
     }
     
-    func configureCellSelection(indexPath : IndexPath , collectionView : UICollectionView , cell : SizeCell)
-    {
-        if isSelectedFromGeneral
-        {
-            if collectionView == sizesCollectionVu
-            {
-                if selectedIndex == indexPath.row
-                {
+    func configureCellSelection(indexPath: IndexPath, collectionView: UICollectionView, cell: SizeCell) {
+        if isSelectedFromGeneral {
+            if collectionView == sizesCollectionVu {
+                if selectedIndex == indexPath.row {
                     cell.titleLbl.textColor = UIColor(hex: "FC8888")
-                }
-                else
-                {
+                } else {
                     cell.titleLbl.textColor = UIColor.black
-                    
                 }
-            }
-            else
-            {
+            } else {
                 cell.titleLbl.textColor = UIColor.black
             }
-        }
-        else
-        {
-            if collectionView == sizesCollectionVu
-            {
+        } else {
+            if collectionView == sizesCollectionVu {
                 cell.titleLbl.textColor = UIColor.black
-            }
-            else
-            {
-                if selectedIndex == indexPath.row
-                {
+            } else {
+                if selectedIndex == indexPath.row {
                     cell.titleLbl.textColor = UIColor(hex: "FC8888")
-                }
-                else
-                {
+                } else {
                     cell.titleLbl.textColor = UIColor.black
-                    
                 }
-                
             }
         }
     }
-    
+
 }
 
 

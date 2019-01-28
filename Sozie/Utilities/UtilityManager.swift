@@ -13,36 +13,31 @@ import SVProgressHUD
 class UtilityManager: NSObject {
     
     static func stringFromNSDateWithFormat(date: NSDate, format : String) -> String {
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: date as Date)
-        
     }
     
-    static func dateFromStringWithFormat(date: String, format: String) -> NSDate{
+    static func dateFromStringWithFormat(date: String, format: String) -> NSDate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: date)! as NSDate
     }
     
-    static func serverDateStringFromAppDateString(dateString: String) -> String{
+    static func serverDateStringFromAppDateString(dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constant.appDateFormat
         dateFormatter.timeZone = NSTimeZone.local
-        
         
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = Constant.serverDateFormat
         newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         return newDateFormatter.string(from: dateFormatter.date(from: dateString)!)
-        
     }
     
     //MARK: - Other Methods
   
-    static func openImagePickerActionSheetFrom(vc: UIViewController)
-    {
+    static func openImagePickerActionSheetFrom(vc: UIViewController) {
         let alert = UIAlertController(title: nil , message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             UtilityManager.openCameraFrom(vc: vc)
@@ -54,30 +49,24 @@ class UtilityManager: NSObject {
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
-        
         vc.present(alert, animated: true, completion: nil)
     }
     
-    static func openCameraFrom(vc : UIViewController)
-    {
+    static func openCameraFrom(vc : UIViewController) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
-        {
+        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
             imagePicker.allowsEditing = false
             vc.present(imagePicker, animated: true, completion: nil)
-        }
-        else
-        {
+        } else {
             let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             vc.present(alert, animated: true, completion: nil)
         }
     }
     
-    static func openGalleryFrom(vc : UIViewController)
-    {
+    static func openGalleryFrom(vc : UIViewController) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -85,19 +74,16 @@ class UtilityManager: NSObject {
         vc.present(imagePicker, animated: true, completion: nil)
     }
     
-    static func showActivityControllerWith(objectsToShare : [Any] , vc : UIViewController)
-    {
+    static func showActivityControllerWith(objectsToShare : [Any] , vc : UIViewController) {
         let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         let excludedActivities = [UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.message, UIActivity.ActivityType.mail, UIActivity.ActivityType.print, UIActivity.ActivityType.copyToPasteboard, UIActivity.ActivityType.assignToContact, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.postToTencentWeibo]
         
         activityController.excludedActivityTypes = excludedActivities
         
-        
-        
         vc.present(activityController, animated: true, completion: nil)
     }
   
-    static func activityIndicatorForView(view: UIView) -> UIActivityIndicatorView{
+    static func activityIndicatorForView(view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         activityIndicator.color = UIColor.darkGray
         activityIndicator.center = view.center
@@ -119,10 +105,7 @@ class UtilityManager: NSObject {
             
         }
         alert.addAction(okBtnAction)
-        controller.present(alert, animated: true) {
-            
-        }
-
+        controller.present(alert, animated: true, completion: nil)
     }
     
     static func showMessageWith(title : String , body : String, in controller : UIViewController , block : (() -> Void)? = nil) {
@@ -131,9 +114,7 @@ class UtilityManager: NSObject {
             block?()
         }
         alert.addAction(okBtnAction)
-        controller.present(alert, animated: true) {
-            
-        }
+        controller.present(alert, animated: true, completion: nil)
     }
     
 //    static func showMessageWith(title : String , body : String, in controller : UIViewController) {
@@ -155,17 +136,12 @@ class UtilityManager: NSObject {
             
         }
         alert.addAction(okBtnAction)
-        controller.present(alert, animated: true) {
-            
-        }
-        
-        
+        controller.present(alert, animated: true, completion: nil)
     }
     
     static func noDataViewWithText(errorMessage: String, on view: UIView) {
         let layer = CALayer()
         layer.frame = view.bounds
-        
     }
     
     static func uniqueKeyWithLength (len : Int) -> NSString {
@@ -184,7 +160,6 @@ class UtilityManager: NSObject {
     }
     
     static func delay(delay: Double, closure: @escaping () -> ()) {
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             closure()
         }
@@ -295,8 +270,7 @@ extension URL {
 
 // MARK: - Image Scaling.
 extension UIImage {
-    
-    
+
     /// Scales an image to fit within a bounds with a size governed by the passed size. Also keeps the aspect ratio.
     /// Switch MIN to MAX for aspect fill instead of fit.
     ///

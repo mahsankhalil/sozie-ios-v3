@@ -24,6 +24,7 @@ PODS:
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - GTMSessionFetcher/Core (1.2.1)
+  - Hex (6.0.0)
   - MaterialTextField (1.0.1)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - GoogleSignIn
+  - Hex
   - MaterialTextField (~> 1.0)
   - SDWebImage (~> 4.0)
   - SideMenu
@@ -58,6 +60,7 @@ SPEC REPOS:
     - GoogleSignIn
     - GoogleToolboxForMac
     - GTMSessionFetcher
+    - Hex
     - MaterialTextField
     - SDWebImage
     - SideMenu
@@ -84,6 +87,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  Hex: 3888e06c29fe725b12e33d434e31b06beb4112db
   MaterialTextField: f1a0786588e4d3610cb9bb62d2adbe9777cebbf9
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
@@ -92,6 +96,6 @@ SPEC CHECKSUMS:
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: e807f783ac06b8e28adfe0304e89771bc2c56bec
+PODFILE CHECKSUM: ce06500b442766eb1ba8cd0cf681ee52371d4bee
 
 COCOAPODS: 1.5.3

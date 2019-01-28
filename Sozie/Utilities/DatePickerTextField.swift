@@ -11,12 +11,11 @@ import MaterialTextField
 class DatePickerTextField: MFTextField, UITextFieldDelegate {
 
     var pickerView: UIDatePicker!
-    var values : [String]?
-    var selectedIndex : Int?
+    var values: [String]?
+    var selectedIndex: Int?
     var date: Date?
-    var title : String?
-
-    var titleLbl : UILabel?
+    var title: String?
+    var titleLbl: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +29,6 @@ class DatePickerTextField: MFTextField, UITextFieldDelegate {
         pickerView.center = CGPoint(x: myInputView.center.x, y: myInputView.center.y + 10)
         myInputView.addSubview(pickerView)
         
-//        pickerView.maximumDate = NSDate() as Date
         pickerView.datePickerMode = UIDatePicker.Mode.date
         pickerView.addTarget(self, action: #selector(DatePickerTextField.pickerValueChanged), for: UIControl.Event.valueChanged)
         
@@ -52,14 +50,8 @@ class DatePickerTextField: MFTextField, UITextFieldDelegate {
         self.inputView?.layer.cornerRadius = 10.0
         self.inputView?.clipsToBounds = true
         self.delegate = self
-        
-        
-        
     }
-    
-    
-    
-    
+
     //MARK: - Textfield delegates
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -83,6 +75,5 @@ class DatePickerTextField: MFTextField, UITextFieldDelegate {
         self.endEditing(true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "datePickerTextFieldTextChanged"), object: nil)
     }
-    
-    
+
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Hex
 
 @IBDesignable class DZGradientButton: UIButton {
 
@@ -70,5 +71,4 @@ import UIKit
         self.superview?.bringSubviewToFront(self)
     }
  
-
 }

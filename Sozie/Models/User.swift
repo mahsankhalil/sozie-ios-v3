@@ -19,15 +19,15 @@ struct User: Codable {
     var city: String?
     var avatar: String?
     var picture: String?
-    var country : Int?
-    var type : String?
-    var brand : Int?
-    var firstName : String?
-    var lastName : String?
-    var socialId : String?
-    var signUpMedium : String?
-    var socialToken : String?
-    var measurement : Measurement?
+    var country: Int?
+    var type: String?
+    var brand: Int?
+    var firstName: String?
+    var lastName: String?
+    var socialId: String?
+    var signUpMedium: String?
+    var socialToken: String?
+    var measurement: Measurement?
     
     enum CodingKeys: String, CodingKey {
         case username
@@ -98,19 +98,4 @@ struct Measurement: Codable {
         cup = try values.decode(String.self, forKey: .cup)
         waist = try values.decode(String.self, forKey: .waist)
     }
-    
-    init() {
-        
-    }
-}
-
-
-class LocalMeasurement: NSObject {
-    var bra: String?
-    var height: String?
-    var bodyShape: String?
-    var hip: String?
-    var cup: String?
-    var waist: String?
-
 }

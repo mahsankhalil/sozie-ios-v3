@@ -63,7 +63,6 @@ class Styles {
         
         SVProgressHUD.setDefaultStyle(.light)
         SVProgressHUD.setDefaultMaskType(.gradient)
-        
     }
     
     ///**Warning:** Not from style guide. Do not add more uses
@@ -127,33 +126,30 @@ extension UIView {
         layer.masksToBounds = false
 
     }
-    func applyCornerRadiusAndBorder()
-    {
+    
+    func applyCornerRadiusAndBorder() {
         layer.cornerRadius = 10.0
         layer.borderWidth = 1.0
         layer.borderColor = UIColor(hex: "BFBFBF").cgColor
         layer.masksToBounds = true
-        
     }
     
-    func applyStandardBorder()
-    {
+    func applyStandardBorder() {
         layer.borderWidth = 1.0
         layer.borderColor = UIColor(hex: "DADADA").cgColor
     }
 }
 
 extension MFTextField {
-    func setupAppDesign()
-    {
+    
+    func setupAppDesign() {
         self.underlineColor = UIColor(hex: "DADADA")
         self.placeholderColor = UIColor(hex: "888888")
         self.tintColor = UIColor(hex: "FC8888")
         self.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
     }
     
-    func applyRightVuLblWith(title : String )
-    {
+    func applyRightVuLblWith(title : String ) {
         let lbl = InsetLabel(frame: CGRect(x: 0.0, y: 0.0, width:38.0 , height: 40.0))
         lbl.text = title
         lbl.textAlignment = .right
@@ -165,10 +161,10 @@ extension MFTextField {
         self.rightViewMode = .always
         self.rightView = lbl
     }
-
 }
 
 extension UIButton {
+    
     func styleFilledSignUp() {
         backgroundColor = UIColor.white
         setTitleColor(UIColor(hex: "3FB0AC"), for:.normal)
@@ -191,28 +187,22 @@ extension UIButton {
         self.clipsToBounds = true
     }
     
-    func applyButtonSelectedWithoutBorder()
-    {
+    func applyButtonSelectedWithoutBorder() {
         self.titleLabel?.font = UIFont(font: Font.Bold, size: 16.0)
         self.setTitleColor(UIColor(hex: "FC8888"), for: .normal)
     }
-    func applyButtonUnSelectedWithoutBorder()
-    {
+    
+    func applyButtonUnSelectedWithoutBorder() {
         self.titleLabel?.font = UIFont(font: Font.Standard, size: 16.0)
         self.setTitleColor(UIColor(hex: "323232"), for: .normal)
     }
     
-    func applyButtonShadow(){
+    func applyButtonShadow() {
         self.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
         self.layer.shadowRadius = 4.0
         self.layer.shadowOpacity = 0.6
         self.layer.shadowOffset.height = 4.0
-        
     }
-    
-    
-    
-    
 }
 
 extension UITextField {
@@ -249,8 +239,6 @@ var StandardVerticalMargin : CGFloat {
     return Styles.sharedStyles.standardVerticalMargin
 }
 
-
-
 //Global variables
 struct GlobalVariables {
     static let blue = UIColor.rbg(r: 129, g: 144, b: 255)
@@ -283,32 +271,25 @@ class RoundedButton: UIButton {
     }
 }
 
-protocol Blurable
-{
+protocol Blurable {
     var layer: CALayer { get }
     var subviews: [UIView] { get }
     var frame: CGRect { get }
     var superview: UIView? { get }
     func removeFromSuperview()
-    
     func blur(blurRadius: CGFloat)
 }
 
-class BlurOverlay: UIImageView
-{
+class BlurOverlay: UIImageView {
 }
 
-struct BlurableKey
-{
+struct BlurableKey {
     static var blurable = "blurable"
 }
 
-extension Blurable
-{
-    func blur(blurRadius: CGFloat)
-    {
-        if self.superview == nil
-        {
+extension Blurable {
+    func blur(blurRadius: CGFloat) {
+        if self.superview == nil {
             return
         }
         
@@ -321,8 +302,7 @@ extension Blurable
         UIGraphicsEndImageContext();
         
         guard let blur = CIFilter(name: "CIGaussianBlur"),
-            let this = self as? UIView else
-        {
+            let this = self as? UIView else {
             return
         }
         
@@ -349,13 +329,10 @@ extension Blurable
         blurOverlay.contentMode = UIView.ContentMode.left
         
         if let superview = superview as? UIStackView,
-            let index = (superview as UIStackView).arrangedSubviews.index(of: this)
-        {
+            let index = (superview as UIStackView).arrangedSubviews.index(of: this) {
             removeFromSuperview()
             superview.insertArrangedSubview(blurOverlay, at: index)
-        }
-        else
-        {
+        } else {
             blurOverlay.frame.origin = frame.origin
             
             UIView.transition(from: this,
@@ -393,5 +370,4 @@ class InsetLabel: UILabel {
 }
 
 extension UIButton: Blurable {
-    
 }

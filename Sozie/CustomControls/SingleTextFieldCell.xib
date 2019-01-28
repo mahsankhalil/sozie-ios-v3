@@ -32,7 +32,6 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Waist" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3r7-9o-b1N" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="56"/>
-
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="ag3-0V-6sm"/>
@@ -56,7 +55,7 @@
                                             <color key="titleColor" red="0.68235294120000001" green="0.80392156859999997" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="notSureBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wVI-Vd-bjD"/>
+                                            <action selector="onButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="C5u-HY-Ra9"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -90,7 +89,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="notSureBtn" destination="1fW-fS-hvd" id="2Uq-0U-D7V"/>
-                <outlet property="txtFld" destination="3r7-9o-b1N" id="mWQ-XH-r4g"/>
+                <outlet property="notSureButton" destination="1fW-fS-hvd" id="hMC-ND-pqh"/>
+                <outlet property="textField" destination="3r7-9o-b1N" id="mWQ-XH-r4g"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="108.39580209895054"/>
         </tableViewCell>
