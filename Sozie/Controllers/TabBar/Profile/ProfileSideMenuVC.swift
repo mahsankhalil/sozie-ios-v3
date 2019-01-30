@@ -8,27 +8,36 @@
 
 import UIKit
 
-struct AccountSectionCellViewModel : RowViewModel, TitleViewModeling {
+struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling {
     var title: String?
     var attributedTitle: NSAttributedString?
+    let reuseIdentifier = "TitleCell"
+
 }
-struct AboutSectionCellViewModel : RowViewModel, TitleViewModeling {
-    var title: String?
-    var attributedTitle: NSAttributedString?
-}
-struct SettingSectionCellViewModel : RowViewModel, TitleViewModeling {
+//struct AboutSectionCellViewModel : RowViewModel, TitleViewModeling {
+//    var title: String?
+//    var attributedTitle: NSAttributedString?
+//}
+struct TitleCellWithSwitchViewModel : RowViewModel , SwitchProviding , TitleViewModeling , ReuseIdentifierProviding {
     var title: String?
     var attributedTitle: NSAttributedString?
     var isSwitchOn : Bool?
+    let reuseIdentifier = "TitleAndSwitchCell"
 }
 
+
 class ProfileSideMenuVC: UIViewController {
+
+    struct Section {
+        var title: String
+        var rowViewModels: [RowViewModel]
+    }
+    
+    var sections: [Section] = []
 
     @IBOutlet weak var logoutBtn: DZGradientButton!
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
-    
-    let titles = ["ACCOUNT","SETTINGS","ABOUT"]
     
     let accountTitles = ["Edit Profile" , "Update Profile Picture" , "Change Password" , "My Measurements"]
     let settingTitles = ["Push Notifications" , "Reset first-time use Guide" , "Blocked Accounts"]
@@ -36,41 +45,36 @@ class ProfileSideMenuVC: UIViewController {
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
 
-    private var accountViewModels : [AccountSectionCellViewModel] {
-        get {
-            var accTitles : [AccountSectionCellViewModel] = []
-            
-            for title in accountTitles {
-                accTitles.append(AccountSectionCellViewModel(title: title, attributedTitle: nil))
-            }
-            return accTitles
-        }
-    }
-    private var settingsViewModels : [SettingSectionCellViewModel] {
-        get {
-            var settTitles : [SettingSectionCellViewModel] = []
-            
-            for title in settingTitles {
-                settTitles.append(SettingSectionCellViewModel(title: title, attributedTitle: nil , isSwitchOn : false))
-            }
-            return settTitles
-        }
-    }
-    private var aboutViewModels : [AboutSectionCellViewModel] {
-        get {
-            var abtTitles : [AboutSectionCellViewModel] = []
-            
-            for title in settingTitles {
-                abtTitles.append(AboutSectionCellViewModel(title: title, attributedTitle: nil))
-            }
-            return abtTitles
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        func setupViewModels(_ titles: [String]) -> [RowViewModel] {
+            var viewModels: [RowViewModel] = []
+            for title in titles {
+                var viewModel: RowViewModel
+                if title == "Push Notifications" || title == "Reset first-time use Guide" {
+                    viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: false)
+                } else {
+                    viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
+                }
+                viewModels.append(viewModel)
+            }
+            return viewModels
+        }
+        
+        let accountViewModels = setupViewModels(accountTitles)
+        let accountSection = Section(title: "ACCOUNT", rowViewModels: accountViewModels)
+        sections.append(accountSection)
+        
+        let settingViewModels = setupViewModels(settingTitles)
+        let settingSection = Section(title: "SETTINGS", rowViewModels: settingViewModels)
+        sections.append(settingSection)
+        let aboutViewModels = setupViewModels(aboutTitles)
+        let aboutSection = Section(title: "ABOUT", rowViewModels: aboutViewModels)
+        sections.append(aboutSection)
+    
         logoutBtn.cornerRadius = 0.0
     }
     
@@ -93,20 +97,11 @@ class ProfileSideMenuVC: UIViewController {
 extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return accountViewModels.count
-        case 1:
-            return settingsViewModels.count
-        case 2:
-            return aboutViewModels.count
-        default:
-            return 0
-        }
+        return sections[section].rowViewModels.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return titles.count
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -123,93 +118,43 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         let headerVu = DZGradientView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.size.width, height: (self.tableView(tableView, heightForHeaderInSection: section))))
         let lbl = UILabel(frame: CGRect(x: 22.0, y: 0.0, width: tableView.frame.size.width - 22.0, height: (self.tableView(tableView, heightForHeaderInSection: section))))
         lbl.font = UIFont(name: "SegoeUI", size: 13.0)
-        lbl.text = titles[section]
+        lbl.text = sections[section].title
         lbl.textColor = UIColor.white
         headerVu.addSubview(lbl)
         return headerVu
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let section = sections[indexPath.section]
+        let rowViewModel = section.rowViewModels[indexPath.row]
         
-        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: titleCellReuseIdentifier)
-        
-        if tableViewCell == nil {
-            tableView.register(UINib(nibName: titleCellReuseIdentifier, bundle: nil), forCellReuseIdentifier: titleCellReuseIdentifier)
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier:titleCellReuseIdentifier)
+        var reuseIdentifier: String? = nil
+        if let reuseIdentifierProvider = rowViewModel as? ReuseIdentifierProviding {
+            reuseIdentifier = reuseIdentifierProvider.reuseIdentifier
         }
         
-        var switchTableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: titleAndSwitchCellReuseIdentifier)
+        guard let identifier = reuseIdentifier else { return UITableViewCell() }
         
-        if switchTableViewCell == nil {
-            tableView.register(UINib(nibName: titleAndSwitchCellReuseIdentifier, bundle: nil), forCellReuseIdentifier: titleAndSwitchCellReuseIdentifier)
-            switchTableViewCell = tableView.dequeueReusableCell(withIdentifier:titleAndSwitchCellReuseIdentifier)
+        var tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
+        
+        if tableViewcell == nil {
+            tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+            tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
+        }
+        
+        guard let cell = tableViewcell else { return UITableViewCell() }
+        
+        if let cellConfigurable = cell as? CellConfigurable {
+            cellConfigurable.setup(rowViewModel)
         }
 
-        guard let cell = tableViewCell else { return UITableViewCell() }
-        guard let switchCell = switchTableViewCell else { return UITableViewCell() }
-
-        switch indexPath.section {
-        case 0:
-            let viewModel = accountViewModels[indexPath.row]
-            if let cellConfigurable = cell as? CellConfigurable {
-                cellConfigurable.setup(viewModel)
-            }
-        case 1:
-            let viewModel = settingsViewModels[indexPath.row]
-            if indexPath.row == 0 || indexPath.row == 1
-            {
-                if let cellConfigurable = switchCell as? CellConfigurable {
-                    cellConfigurable.setup(viewModel)
-                    switchCell.selectionStyle = .none
-                    return switchCell
-                }
-            }
-            else
-            {
-                if let cellConfigurable = cell as? CellConfigurable {
-                    cellConfigurable.setup(viewModel)
-                }
-            }
-            
-        case 2:
-            let viewModel = aboutViewModels[indexPath.row]
-            if let cellConfigurable = cell as? CellConfigurable {
-                cellConfigurable.setup(viewModel)
-            }
-            
-        default:
-            return cell
-        }
-        
-        cell.selectionStyle = .none
-        
-        
-        
-//        let viewModel = viewModels[indexPath.row]
-//        if let cellConfigurable = cell as? CellConfigurable {
-//            cellConfigurable.setup(viewModel)
-//        }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
         
-//        guard let countries = countries else { return }
-//
-//        self.selectedCountryId = countries[indexPath.row].countryId
-//
-//        var indexPathsToReload = [indexPath]
-//        if let previousSelectedIndex = selectedViewModelIndex {
-//            viewModels[previousSelectedIndex].isCheckmarkHidden = true
-//            indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
-//        }
-//
-//        viewModels[indexPath.row].isCheckmarkHidden = false
-//        selectedViewModelIndex = indexPath.row
-//
-//        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
     }
     
 }

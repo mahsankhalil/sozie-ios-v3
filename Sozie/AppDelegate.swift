@@ -28,15 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if url.absoluteString.hasPrefix("sozie://resetpwd")
-        {
-            if let params = url.queryParameters
-            {
+        if url.absoluteString.hasPrefix("sozie://resetpwd") {
+            if let params = url.queryParameters {
                 showResetPasswordVC(with: params)
             }
         }
-        if let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options)
-        {
+        if let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options) {
             return handled
         }
         return true
@@ -66,17 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let resetVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
         resetVC.params = params
-        if let presentedVC = self.window?.rootViewController?.presentedViewController
-        {
-            presentedVC.present(resetVC, animated: true, completion: {
-                
-            })
-        }
-        else
-        {
-            self.window?.rootViewController?.present(resetVC, animated: true, completion: {
-                
-            })
+        if let presentedVC = self.window?.rootViewController?.presentedViewController {
+            presentedVC.present(resetVC, animated: true, completion: nil)
+        } else {
+            self.window?.rootViewController?.present(resetVC, animated: true, completion: nil)
         }
     }
     func applicationWillTerminate(_ application: UIApplication) {

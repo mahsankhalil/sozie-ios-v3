@@ -59,9 +59,7 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate
                 {
                     let resp = response as! ValidateRespose
                     UtilityManager.showMessageWith(title: "Success!", body: resp.detail, in: self, block: {
-                        self.dismiss(animated: true, completion: {
-                            
-                        })
+                        self.dismiss(animated: true, completion: nil)
                     })
                 }
                 else
@@ -107,9 +105,7 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate
         validator.validate(self)
     }
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true) {
-            
-        }
+        self.dismiss(animated: true)
     }
     
 }

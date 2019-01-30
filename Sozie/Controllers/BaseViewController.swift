@@ -25,18 +25,13 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setupShopNavBar() {
+    func setupSozieLogoNavBar() {
         let logo = UIImage(named: "NavBarLogo")
         setupBackgroundImage()
         let imageView = UIImageView(image:logo)
         navigationItem.titleView = imageView
     }
-    func setupWishListNavBar() {
-        let logo = UIImage(named: "NavBarLogo")
-        setupBackgroundImage()
-        let imageView = UIImageView(image:logo)
-        navigationItem.titleView = imageView
-    }
+    
     func setupProfileNavBar() {
         setupBackgroundImage()
         navigationItem.titleView = nil

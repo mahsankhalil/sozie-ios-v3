@@ -30,8 +30,6 @@ class ForgotPasswordEmailPopUp: UIViewController {
     class func instance() -> ForgotPasswordEmailPopUp {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordEmailPopUp") as! ForgotPasswordEmailPopUp
-        instnce.view.layer.cornerRadius = 10.0
-        instnce.view.clipsToBounds = true
         return instnce
     }
     /*
@@ -65,8 +63,6 @@ class ForgotPasswordEmailPopUp: UIViewController {
 
 extension ForgotPasswordEmailPopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
-        popupController.popupView.layer.cornerRadius = 10.0
-        popupController.popupView.clipsToBounds = true
         return CGSize(width: UIScreen.main.bounds.size.width - 26.0 ,height: 270.0)
     }
 }

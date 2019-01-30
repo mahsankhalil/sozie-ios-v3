@@ -24,8 +24,6 @@ class ServerResponsePopUp: UIViewController {
     class func instance(imageName : String, title : String , description : String) -> ServerResponsePopUp {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "ServerResponsePopUp") as! ServerResponsePopUp
-        instnce.view.layer.cornerRadius = 10.0
-        instnce.view.clipsToBounds = true
         instnce.titleImgVu.image = UIImage(named: imageName)
         instnce.titleLbl.text = title
         instnce.detailTxtLbl.text = description
@@ -47,8 +45,6 @@ class ServerResponsePopUp: UIViewController {
 }
 extension ServerResponsePopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
-        popupController.popupView.layer.cornerRadius = 10.0
-        popupController.popupView.clipsToBounds = true
         return CGSize(width: UIScreen.main.bounds.size.width - 26.0 ,height: 300.0)
     }
 }

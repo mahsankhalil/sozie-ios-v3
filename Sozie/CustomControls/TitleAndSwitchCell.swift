@@ -39,6 +39,10 @@ extension TitleAndSwitchCell: CellConfigurable {
             }
         }
         
+        if let switchModel = viewModel as? SwitchProviding {
+            switchControl.setOn(switchModel.isSwitchOn ?? false, animated: true)
+        }
+        
         
     }
 }
