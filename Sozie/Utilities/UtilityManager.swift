@@ -108,14 +108,25 @@ class UtilityManager: NSObject {
         controller.present(alert, animated: true, completion: nil)
     }
     
-    static func showMessageWith(title : String , body : String, in controller : UIViewController) {
+    static func showMessageWith(title : String , body : String, in controller : UIViewController , block : (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
         let okBtnAction = UIAlertAction(title: "OK", style: .cancel) { (okBtn) in
-            
+            block?()
         }
         alert.addAction(okBtnAction)
         controller.present(alert, animated: true, completion: nil)
     }
+    
+//    static func showMessageWith(title : String , body : String, in controller : UIViewController) {
+//        let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+//        let okBtnAction = UIAlertAction(title: "OK", style: .cancel) { (okBtn) in
+//            
+//        }
+//        alert.addAction(okBtnAction)
+//        controller.present(alert, animated: true) {
+//            
+//        }
+//    }
     
     static func showSuccessMessage(body: String, in controller: UIViewController) {
         SVProgressHUD.dismiss()
@@ -241,6 +252,22 @@ extension Double {
         return (self * divisor).rounded() / divisor
     }
 }
+extension URL {
+    
+    public var queryParameters: [String: String]? {
+        guard let components = URLComponents(url: self, resolvingAgainstBaseURL: true), let queryItems = components.queryItems else {
+            return nil
+        }
+        
+        var parameters = [String: String]()
+        for item in queryItems {
+            parameters[item.name] = item.value
+        }
+        
+        return parameters
+    }
+}
+
 // MARK: - Image Scaling.
 extension UIImage {
 

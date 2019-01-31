@@ -9,7 +9,6 @@
 import UIKit
 import MaterialTextField
 import SVProgressHUD
-import PopupController
 
 public enum MeasurementType: Int {
     case height
@@ -59,7 +58,7 @@ class MeasurementsVC: UIViewController {
                 
                 let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: nil, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
                 
-                let braViewModel = DoubleTextFieldCellViewModel(title: "BRA SIZE", columnUnit: ["brand", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
+                let braViewModel = DoubleTextFieldCellViewModel(title: "BRA SIZE", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
                 
                 self.rowViewModels = [heightViewModel, waistViewModel, hipsViewModel, braViewModel]
                 self.sizes = size

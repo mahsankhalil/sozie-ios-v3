@@ -17,8 +17,8 @@ pod 'SnapKit', '~> 4.0.0'
 pod 'Alamofire'
 pod 'MaterialTextField', '~> 1.0'
 pod 'EasyTipView', '~> 2.0.0'
+pod 'SideMenu'
 pod 'Hex'
-pod 'PopupController', :git => 'https://github.com/jprothwell/PopupController.git'
 
 end
 

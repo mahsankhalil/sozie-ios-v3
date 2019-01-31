@@ -26,10 +26,10 @@ PODS:
   - GTMSessionFetcher/Core (1.2.1)
   - Hex (6.0.0)
   - MaterialTextField (1.0.1)
-  - PopupController (0.2.0)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
+  - SideMenu (5.0.3)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
   - SwiftValidator (4.0.0)
@@ -43,8 +43,8 @@ DEPENDENCIES:
   - GoogleSignIn
   - Hex
   - MaterialTextField (~> 1.0)
-  - PopupController (from `https://github.com/jprothwell/PopupController.git`)
   - SDWebImage (~> 4.0)
+  - SideMenu
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
@@ -63,21 +63,17 @@ SPEC REPOS:
     - Hex
     - MaterialTextField
     - SDWebImage
+    - SideMenu
     - SnapKit
     - SVProgressHUD
     - TPKeyboardAvoiding
 
 EXTERNAL SOURCES:
-  PopupController:
-    :git: https://github.com/jprothwell/PopupController.git
   SwiftValidator:
     :branch: master
     :git: https://github.com/jpotts18/SwiftValidator.git
 
 CHECKOUT OPTIONS:
-  PopupController:
-    :commit: cd35e9304531abb20d46bbd2964e0ec86783211e
-    :git: https://github.com/jprothwell/PopupController.git
   SwiftValidator:
     :commit: c0ee801a2d107eca5f748d07932b449666d8effd
     :git: https://github.com/jpotts18/SwiftValidator.git
@@ -93,13 +89,13 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   Hex: 3888e06c29fe725b12e33d434e31b06beb4112db
   MaterialTextField: f1a0786588e4d3610cb9bb62d2adbe9777cebbf9
-  PopupController: 0b69fdf11cbeaa807789a8c3992599083640988f
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 3ec73bd32b9fd6035b415c2a3337030eca2b6b56
+PODFILE CHECKSUM: ce06500b442766eb1ba8cd0cf681ee52371d4bee
 
 COCOAPODS: 1.5.3

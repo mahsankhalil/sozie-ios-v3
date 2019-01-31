@@ -12,9 +12,7 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     var window: UIWindow?
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
@@ -29,10 +27,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if url.absoluteString.hasPrefix("sozie://resetpwd") {
+            if let params = url.queryParameters {
+                showResetPasswordVC(with: params)
+            }
+        }
         if let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options) {
             return handled
         }
-        return false
+        return true
+    }
+    // Respond to Universal Links
+    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        // pass the url to the handle deep link call
+        
+        
+        return true
+
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -47,7 +59,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    func showResetPasswordVC(with params : [String : Any])
+    {
+        let resetVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
+        resetVC.params = params
+        if let presentedVC = self.window?.rootViewController?.presentedViewController {
+            presentedVC.present(resetVC, animated: true, completion: nil)
+        } else {
+            self.window?.rootViewController?.present(resetVC, animated: true, completion: nil)
+        }
+    }
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }

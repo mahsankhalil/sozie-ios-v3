@@ -30,6 +30,12 @@ class UserDefaultManager: NSObject {
         return loginResponse.user?.userId
     }
     
+    static func getCurrentUserType() -> String?
+    {
+        guard let loginResponse = loginResponse() else { return nil }
+        return loginResponse.user?.type
+    }
+    
     static func getAccessToken() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.access

@@ -16,14 +16,13 @@ import FBSDKLoginKit
 class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
     
     static let identifier = "signInViewController"
-
     @IBOutlet weak var emailField: MFTextField!
     @IBOutlet weak var passwordField: MFTextField!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
+    @IBOutlet weak var forgotPasswordBtn: UIButton!
     
     let validator = Validator()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,8 +39,19 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
         emailField.setupAppDesign()
         passwordField.setupAppDesign()
+        applyRightVuToPassword()
+        
 //        emailField.validationType = .afterEdit
 //        passwordField.validationType = .afterEdit
+    }
+    
+    func applyRightVuToPassword()
+    {
+        let eyeBtn = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 19.0, height: 22.0))
+        eyeBtn.setImage(UIImage(named: "eye-icon-white"), for: .normal)
+        eyeBtn.addTarget(self, action: #selector(eyeBtnTapped(sender:)), for: .touchUpInside)
+        passwordField.rightViewMode = .always
+        passwordField.rightView = eyeBtn
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,10 +75,14 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         var params = [String : String]()
         params["email"] = emailField.text
         params["password"] = passwordField.text
-        
+        signInWithDict(dataDict: params)
+
+    }
+    
+    func signInWithDict(dataDict : [String : Any])
+    {
         SVProgressHUD.show()
-        
-        ServerManager.sharedInstance.loginWith(params: params) { (isSuccess, response) in
+        ServerManager.sharedInstance.loginWith(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
                 // Do something after login
@@ -101,78 +115,19 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     }
     
     @IBAction func facebookButtonPressed(sender: AnyObject) {
-        let loginManager = FBSDKLoginManager()
-        loginManager.loginBehavior = FBSDKLoginBehavior.native
-        loginManager.logIn(withReadPermissions: ["public_profile","email"], from: self) { (result, error) in
-            SVProgressHUD.show()
-            guard let token = result?.token else {
-                SVProgressHUD.dismiss()
-                return
+        SVProgressHUD.show()
+        SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                let resp = response as! [String : Any]
+                self.signInWithDict(dataDict: resp)
             }
-            
-            
-            // Verify token is not empty
-            if token.tokenString.isEmpty {
-                print("Token is empty")
-                SVProgressHUD.dismiss()
-                return
+            else
+            {
+                let err = response as! Error
+                UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
             }
-            
-            guard let userId = token.userID else {
-                SVProgressHUD.dismiss()
-                return
-            }
-            
-            // Request Fields
-            let fields = "name,first_name,last_name,email,gender,picture,locale,link"
-            
-            // Build URL with Access Token
-            
-            let request = FBSDKGraphRequest(graphPath: "\(userId)", parameters: ["fields" : "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
-            request?.start(completionHandler: { (connection, result, error) in
-                // Handle the result
-                if let result = result {
-                    print(result)
-                }
-            })
-            
-            _ = Constant.facebookURL + "?fields=\(fields)&access_token=\(token.tokenString!)"
-            
-            //Make API call to facebook graph api to get data
-//            RequestManager.getUserFacebookProfile(url: url, successBlock: { (response) in
-//                /*{
-//                 email = "danialzahid94@live.com";
-//                 "first_name" = Danial;
-//                 gender = male;
-//                 id = 10210243338655397;
-//                 "last_name" = Zahid;
-//                 name = "Danial Zahid";
-//                 }*/
-//                print(response)
-//                var params = [String: String]()
-//                params["social_provider_name"] = "facebook"
-//                params["full_name"] = response["name"] as? String
-//                params["social_id"] = response["id"] as? String
-//                params["email"] = response["email"] as? String
-//                params["facebook_profile"] = response["link"] as? String
-//                if let image = response["picture"] as? [String: AnyObject] {
-//                    if let data = image["data"] as? [String: AnyObject] {
-//                        params["image_path"] = data["url"] as? String
-//                    }
-//                }
-//
-//
-//                RequestManager.socialLoginUser(param: params, successBlock: { (response) in
-//                    self.successfulLogin(response: response)
-//                }, failureBlock: { (error) in
-//
-//                    UtilityManager.showErrorMessage(body: error, in: self)
-//
-//                })
-//
-//            }, failureBlock: { (error) in
-//                UtilityManager.showErrorMessage(body: error, in: self)
-//            })
         }
     }
     
@@ -180,30 +135,44 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         GIDSignIn.sharedInstance()?.signIn()
     }
     
+    @objc func eyeBtnTapped(sender : UIButton)
+    {
+        if passwordField.isSecureTextEntry
+        {
+            passwordField.isSecureTextEntry = false
+            
+            sender.setImage(UIImage(named: "eyeIconHide"), for: .normal)
+        }
+        else
+        {
+            passwordField.isSecureTextEntry = true
+            sender.setImage(UIImage(named: "eye-icon-white"), for: .normal)
+
+        }
+    }
+    
+    @IBAction func forgotPasswordBtnTapped(_ sender: Any) {
+        
+        let popUpInstnc = ForgotPasswordEmailPopUp.instance()
+        let popUpVC = PopupController
+            .create(self)
+            .show(popUpInstnc)
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+        popUpInstnc.delegate = self
+    }
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if error == nil {
-            // Perform any operations on signed in user here.
-            var params = [String: String]()
-            
-            params["social_provider_name"] = "google"
-            params["full_name"] = user.profile.name
-            params["social_id"] = user.userID
-            params["email"] = user.profile.email
-            params["image_path"] = user.profile.imageURL(withDimension: 200).absoluteString
-            
-            
-//            RequestManager.socialLoginUser(param: params, successBlock: { (response) in
-//                self.successfulLogin(response: response)
-//            }, failureBlock: { (error) in
-//                UtilityManager.showErrorMessage(body: error, in: self)
-//                
-//            })
-            // ...
-        } else {
-            if error.localizedDescription == "The user canceled the sign-in flow." {
-                return
-            }
+        SVProgressHUD.dismiss()
+        if error == nil
+        {
+            let dataDict = SocialAuthManager.sharedInstance.convertGoogleUserToAppDict(user: user)
+            self.signInWithDict(dataDict: dataDict)
+        }
+        else
+        {
             UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+            
         }
     }
     
@@ -213,6 +182,9 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         // ...
         SVProgressHUD.dismiss()
     }
+    
+    
+    
     
     //MARK: Delegates
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -239,5 +211,51 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         //        Router.showMainTabBar()
     }
     
+    func forgotPassword(email : String)
+    {
+        let dataDict = ["email" : email]
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.forgotPasswordWith(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                let resp = response as! ValidateRespose
+                self.showPopUpWithResponse(isSuccess: isSuccess, detailStr: resp.detail)
+            }
+            else
+            {
+                let err = response as! Error
+                self.showPopUpWithResponse(isSuccess: isSuccess, detailStr: err.localizedDescription)
+            }
+        }
+    }
     
+    func showPopUpWithResponse(isSuccess : Bool , detailStr : String)
+    {
+        var popUpInstnc : ServerResponsePopUp?
+        if isSuccess
+        {
+            popUpInstnc = ServerResponsePopUp.instance(imageName: "checked", title: "Email Sent", description: detailStr)
+
+        }
+        else
+        {
+            popUpInstnc = ServerResponsePopUp.instance(imageName: "cancel", title: "Email Not Sent", description: detailStr)
+
+        }
+        let popUpVC = PopupController
+            .create(self)
+            .show(popUpInstnc!)
+        popUpInstnc!.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+    }
+    
+    
+}
+
+extension SignInViewController : ForgotPasswordEmailPopupDelegate {
+    func recoverPasswordBtnTapped(email: String) {
+        self.forgotPassword(email: email)
+    }
 }
