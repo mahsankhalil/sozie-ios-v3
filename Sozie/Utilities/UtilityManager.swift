@@ -108,12 +108,18 @@ class UtilityManager: NSObject {
         controller.present(alert, animated: true, completion: nil)
     }
     
-    static func showMessageWith(title : String , body : String, in controller : UIViewController , block : (() -> Void)? = nil) {
+    static func showMessageWith(title : String , body : String, in controller : UIViewController , okBtnTitle : String = "OK" ,cancelBtnTitle : String? = nil ,  block : (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
-        let okBtnAction = UIAlertAction(title: "OK", style: .cancel) { (okBtn) in
+        let okBtnAction = UIAlertAction(title: okBtnTitle, style: .default) { (okBtn) in
             block?()
         }
         alert.addAction(okBtnAction)
+        if let cancelTite = cancelBtnTitle
+        {
+            let cancelAction = UIAlertAction(title: cancelTite, style: .cancel)
+            alert.addAction(cancelAction)
+
+        }
         controller.present(alert, animated: true, completion: nil)
     }
     

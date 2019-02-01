@@ -23,6 +23,8 @@ class ServerManager: NSObject {
     static let signUpURL = ServerManager.serverURL + "user/signup/"
     static let forgotPasswordURL = ServerManager.serverURL + "user/forgot_password/"
     static let resetPassword = ServerManager.serverURL + "user/reset_password/"
+    static let productListURL = ServerManager.serverURL + "product/browse/feed/get/"
+    static let logoutURL = ServerManager.serverURL + "user/logout/"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
     func loginWith(params: [String: Any], block: CompletionHandler) {
@@ -163,6 +165,45 @@ class ServerManager: NSObject {
     func resetPasswordWith(params : [String : Any] , block : CompletionHandler)
     {
         Alamofire.request(ServerManager.resetPassword, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
+    func getAllProducts(params : [String : Any] , block : CompletionHandler)
+    {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
+            "Content-type": "application/json"
+        ]
+        
+        Alamofire.request(ServerManager.productListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<[Product]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
+    
+    func logoutUser(params : [String : Any], block : CompletionHandler)
+    {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.logoutURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)

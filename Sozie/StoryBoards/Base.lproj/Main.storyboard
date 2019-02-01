@@ -209,7 +209,7 @@
         <!--Landing View Controller-->
         <scene sceneID="e9l-Vl-NLp">
             <objects>
-                <viewController id="qhF-if-nqj" customClass="LandingViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LandingViewController" id="qhF-if-nqj" customClass="LandingViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jyu-xw-oc8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

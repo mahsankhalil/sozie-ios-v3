@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling {
     var title: String?
     var attributedTitle: NSAttributedString?
@@ -26,7 +26,7 @@ struct TitleCellWithSwitchViewModel : RowViewModel , SwitchProviding , TitleView
 }
 
 
-class ProfileSideMenuVC: UIViewController {
+class ProfileSideMenuVC: BaseViewController {
 
     struct Section {
         var title: String
@@ -79,6 +79,26 @@ class ProfileSideMenuVC: UIViewController {
     }
     
 
+    func logout()
+    {
+        SVProgressHUD.show()
+        var dataDict = [String : Any]()
+        dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
+        ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess
+            {
+                self.changeRootVCToLoginNC()
+            }
+            else
+            {
+                let error = response as! Error
+                let window = UIApplication.shared.keyWindow
+
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: (window?.rootViewController)!)
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -92,6 +112,15 @@ class ProfileSideMenuVC: UIViewController {
     @IBAction func menuBtnTapped(_ sender: Any) {
     }
     @IBAction func logoutBtnTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+
+        let window = UIApplication.shared.keyWindow
+        
+        UtilityManager.showMessageWith(title: "Logout", body: "Are you sure you want to Log Out?", in: (window?.rootViewController)!, okBtnTitle: "Yes", cancelBtnTitle: "No") {
+            self.logout()
+        }
+    
+
     }
 }
 extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {

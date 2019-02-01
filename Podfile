@@ -19,6 +19,8 @@ pod 'MaterialTextField', '~> 1.0'
 pod 'EasyTipView', '~> 2.0.0'
 pod 'SideMenu'
 pod 'Hex'
+pod 'WaterfallLayout', '~> 0.1'
+
 
 end
 

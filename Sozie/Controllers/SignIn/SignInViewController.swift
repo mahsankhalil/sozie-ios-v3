@@ -86,6 +86,9 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             SVProgressHUD.dismiss()
             if isSuccess {
                 // Do something after login
+                let res = response as! LoginResponse
+                _ = UserDefaultManager.saveLoginResponse(loginResp: res)
+                self.changeRootVCToTabBarNC()
             } else {
                 let error = response as! Error
                 UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
@@ -100,6 +103,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 field.setError(CustomError(str: error.errorMessage), animated: true)
             }
         }
+    }
+    
+    func navigateToTabBar() {
+        
     }
     
     //MARK: - Text Field Delegates
