@@ -78,7 +78,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="ImageViewCell" id="ian-Pe-Sxh" customClass="ImageViewCell" customModule="Sozie" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="ImageViewCell" id="ian-Pe-Sxh" customClass="ImageCollectionViewCell" customModule="Sozie" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="12" width="50" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -98,7 +98,7 @@
                                                             <constraint firstItem="NoQ-9a-OOe" firstAttribute="leading" secondItem="ian-Pe-Sxh" secondAttribute="leading" id="qB9-US-Jwn"/>
                                                         </constraints>
                                                         <connections>
-                                                            <outlet property="imgVu" destination="NoQ-9a-OOe" id="OKn-Ae-IH9"/>
+                                                            <outlet property="imageView" destination="NoQ-9a-OOe" id="b3S-yO-Eql"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
@@ -223,7 +223,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="skI-SI-4x1" customClass="ProductCell" customModule="Sozie" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="skI-SI-4x1" customClass="ProductCollectionViewCell" customModule="Sozie" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="165.5" height="221"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -270,9 +270,9 @@
                                                         <connections>
                                                             <outlet property="imgVuHeightConstraint" destination="ISP-yc-UWj" id="Y55-AT-gts"/>
                                                             <outlet property="imgVuWidthConstraint" destination="qzv-Gl-Nok" id="To3-RJ-c8h"/>
-                                                            <outlet property="priceLbl" destination="qx0-4y-7Tv" id="SgX-DR-vX0"/>
-                                                            <outlet property="productImgVu" destination="IQS-yO-C7B" id="fVF-PP-N0i"/>
-                                                            <outlet property="titleImgVu" destination="jJj-pQ-tSf" id="Ner-IQ-dWm"/>
+                                                            <outlet property="priceLabel" destination="qx0-4y-7Tv" id="b3R-K3-01p"/>
+                                                            <outlet property="productImageView" destination="IQS-yO-C7B" id="1RR-3N-NXK"/>
+                                                            <outlet property="titleImageView" destination="jJj-pQ-tSf" id="c9S-ba-djg"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>

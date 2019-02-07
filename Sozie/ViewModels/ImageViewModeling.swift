@@ -9,5 +9,5 @@
 import UIKit
 
 protocol ImageViewModeling {
-    var imgURL: URL? { get set }
+    var imageURL: URL? { get set }
 }

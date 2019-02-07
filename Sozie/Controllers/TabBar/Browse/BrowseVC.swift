@@ -10,19 +10,6 @@ import UIKit
 import SVProgressHUD
 import WaterfallLayout
 
-struct BrandImageCellViewModel: RowViewModel, ImageViewModeling , ReuseIdentifierProviding {
-    var imgURL: URL?
-    let reuseIdentifier = "ImageViewCell"
-}
-
-struct ProductImageCellViewModel : RowViewModel , TitleViewModeling , ImageViewModeling , TitleImgViewModeling , ReuseIdentifierProviding {
-    var title: String?
-    var attributedTitle: NSAttributedString?
-    var titleImgURL: URL?
-    var imgURL: URL?
-    let reuseIdentifier = "ProductCell"
-
-}
 class BrowseVC: BaseViewController {
 
     @IBOutlet weak var searchTxtFld: UITextField!
@@ -49,16 +36,16 @@ class BrowseVC: BaseViewController {
     
     private var brandList: [Brand] = [] {
         didSet {
-            viewModels.removeAll()
+            brandViewModels.removeAll()
             for brand in brandList {
-                let viewModel = BrandImageCellViewModel(imgURL: URL(string: brand.logo))
-                viewModels.append(viewModel)
+                let viewModel = ImageCellViewModel(imageURL: URL(string: brand.logo))
+                brandViewModels.append(viewModel)
             }
             
         }
     }
 
-    private var viewModels: [BrandImageCellViewModel] = []
+    private var brandViewModels: [ImageCellViewModel] = []
     private var productViewModels : [ProductImageCellViewModel] = []
     
     override func viewDidLoad() {
@@ -68,11 +55,6 @@ class BrowseVC: BaseViewController {
         setupSozieLogoNavBar()
         fetchBrandsFromServer()
         setupViews()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         populateDummyData()
     }
     // MARK: - Custom Methods
@@ -107,9 +89,9 @@ class BrowseVC: BaseViewController {
     func populateDummyData() {
         for index in 0...16 {
             if index % 2 == 0 {
-                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImgURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imgURL:  Bundle.main.url(forResource: "ProductImg", withExtension: "png")))
+                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg", withExtension: "png")))
             } else {
-                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImgURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imgURL:  Bundle.main.url(forResource: "ProductImg1", withExtension: "png")))
+                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg1", withExtension: "png")))
             }
             
         }
@@ -187,7 +169,7 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == brandsCollectionVu {
-            return viewModels.count
+            return brandViewModels.count
         } else {
             return productViewModels.count
         }
@@ -196,7 +178,7 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var rowViewModel : RowViewModel
         if collectionView == brandsCollectionVu {
-            rowViewModel = viewModels[indexPath.row]
+            rowViewModel = brandViewModels[indexPath.row]
 
         } else
         {
@@ -249,11 +231,7 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
     
     // 4
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == brandsCollectionVu {
-            return 12.0
-        } else {
-            return 12.0
-        }
+        return 12.0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

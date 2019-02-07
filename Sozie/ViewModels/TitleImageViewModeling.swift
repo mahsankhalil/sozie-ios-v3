@@ -1,5 +1,5 @@
 //
-//  TitleImgViewModeling.swift
+//  TitleImageViewModeling.swift
 //  Sozie
 //
 //  Created by Zaighum Ghazali Khan on 1/31/19.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-protocol TitleImgViewModeling {
-    var titleImgURL: URL? { get set }
+protocol TitleImageViewModeling {
+    var titleImageURL: URL? { get set }
 }

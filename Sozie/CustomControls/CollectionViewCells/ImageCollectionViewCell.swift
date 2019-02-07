@@ -8,17 +8,17 @@
 
 import UIKit
 import SDWebImage
-class ImageViewCell: UICollectionViewCell {
-    @IBOutlet weak var imgVu: UIImageView!
+class ImageCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var imageView: UIImageView!
     
     override func awakeFromNib() {
         self.applyShadowWith(radius: 10.0, shadowOffSet: CGSize(width: 0.0, height: 15.0), opacity: 0.25)
     }
 }
-extension ImageViewCell: CellConfigurable {
+extension ImageCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
-        if let imgModel = viewModel as? ImageViewModeling {
-            imgVu.sd_setImage(with: imgModel.imgURL, completed: nil)
+        if let imageModel = viewModel as? ImageViewModeling {
+            imageView.sd_setImage(with: imageModel.imageURL, completed: nil)
         }
 
     }

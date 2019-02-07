@@ -13,13 +13,13 @@ struct Brand: Codable {
     var brandId: Int
     var label: String
     var logo: String
-    var titleImg : String
+    var titleImage : String
     
     enum CodingKeys: String, CodingKey {
         case brandId = "id"
         case label
         case logo
-        case titleImg = "title_image"
+        case titleImage = "title_image"
         
     }
     
@@ -28,6 +28,6 @@ struct Brand: Codable {
         brandId = try values.decode(Int.self, forKey: .brandId)
         label = try values.decode(String.self, forKey: .label)
         logo = try values.decode(String.self, forKey: .logo)
-        titleImg = try values.decode(String.self, forKey: .titleImg)
+        titleImage = try values.decode(String.self, forKey: .titleImage)
     }
 }

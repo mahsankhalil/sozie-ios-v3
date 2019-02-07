@@ -9,11 +9,11 @@
 import UIKit
 
 struct Product: Codable {
-    var productId : Int
-    var productName : String
-    var deepLink : String
-    var brand : Brand
-    var searchPrice : Int
+    var productId: Int
+    var productName: String
+    var deepLink: String
+    var brand: Brand
+    var searchPrice: Int
     
     enum CodingKeys: String, CodingKey {
         case productId = "id"
