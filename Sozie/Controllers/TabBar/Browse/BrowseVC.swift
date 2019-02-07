@@ -25,6 +25,9 @@ struct ProductImageCellViewModel : RowViewModel , TitleViewModeling , ImageViewM
 }
 class BrowseVC: BaseViewController {
 
+    @IBOutlet weak var searchTxtFld: UITextField!
+    @IBOutlet weak var searchVu: UIView!
+    @IBOutlet weak var searchVuHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoryBtn: UIButton!
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var filterBtn: UIButton!
@@ -64,6 +67,7 @@ class BrowseVC: BaseViewController {
         // Do any additional setup after loading the view.
         setupSozieLogoNavBar()
         fetchBrandsFromServer()
+        setupViews()
         
     }
     
@@ -73,6 +77,33 @@ class BrowseVC: BaseViewController {
     }
     // MARK: - Custom Methods
     
+    func setupViews() {
+        searchTxtFld.delegate = self
+        searchVuHeightConstraint.constant = 0.0
+        let gstrRcgnzr = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        gstrRcgnzr.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(gstrRcgnzr)
+    }
+    func showSearchVu() {
+        searchVuHeightConstraint.constant = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchVuHeightConstraint.constant = 47.0
+            self.view.layoutIfNeeded()
+            self.searchVu.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+        }
+    }
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    func hideSearchVu() {
+        searchVuHeightConstraint.constant = 47.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchVuHeightConstraint.constant = 0.0
+            self.searchVu.clipsToBounds = true
+            self.dismissKeyboard()
+            self.view.layoutIfNeeded()
+        }
+    }
     func populateDummyData() {
         for index in 0...16 {
             if index % 2 == 0 {
@@ -109,14 +140,49 @@ class BrowseVC: BaseViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    func showPopUpWithTitle(title : String) {
+        let popUpInstnc : PopupNavController? = PopupNavController.instance(title: title)
+        let popUpVC = PopupController
+            .create(self.tabBarController!)
+        
+        let options = PopupCustomOption.layout(.bottom)
+        popUpVC.cornerRadius = 0.0
+        _ = popUpVC.customize([options])
+        _ = popUpVC.show(popUpInstnc!)
+        popUpInstnc!.navigationHandler = { []  in
+            UIView.animate(withDuration: 0.6, animations: {
+                popUpVC.updatePopUpSize()
+            })
+        }
+    }
+    
+    
+    // MARK: - Actions
     @IBAction func filterBtnTapped(_ sender: Any) {
+        showPopUpWithTitle(title: "FILTER")
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
+        if searchVuHeightConstraint.constant == 0 {
+            showSearchVu()
+        } else {
+            hideSearchVu()
+        }
     }
     @IBAction func categoryBtnTapped(_ sender: Any) {
+        showPopUpWithTitle(title: "CATEGORY")
     }
 }
+extension BrowseVC : UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        hideSearchVu()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideSearchVu()
+        return true
+    }
+}
+
 extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -86,18 +86,8 @@ class ProfileSideMenuVC: BaseViewController {
         dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
         ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-            if isSuccess
-            {
                 self.changeRootVCToLoginNC()
             }
-            else
-            {
-                let error = response as! Error
-                let window = UIApplication.shared.keyWindow
-
-                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: (window?.rootViewController)!)
-            }
-        }
     }
     /*
     // MARK: - Navigation

@@ -55,7 +55,7 @@ open class PopupController: UIViewController {
     
     // MARK: - Public variables
     open var popupView: UIView!
-    
+    open var cornerRadius : CGFloat = 10.0
     // MARK: - Private variables
     fileprivate var movesAlongWithKeyboard: Bool = true
     fileprivate var scrollable: Bool = true {
@@ -134,6 +134,10 @@ public extension PopupController {
         return controller
     }
     
+    public func updatePopUpSize() {
+        updateLayouts()
+    }
+    
     public func customize(_ options: [PopupCustomOption]) -> PopupController {
         customOptions(options)
         return self
@@ -188,7 +192,7 @@ private extension PopupController {
         baseScrollView.frame = view.frame
         view.addSubview(baseScrollView)
         
-        popupView.layer.cornerRadius = 10.0
+        popupView.layer.cornerRadius = cornerRadius
         popupView.layer.masksToBounds = true
         popupView.frame.origin.y = 0
         
