@@ -13,7 +13,8 @@ struct Product: Codable {
     var productName: String
     var deepLink: String
     var brand: Brand
-    var searchPrice: Int
+    var searchPrice: Float
+    var imageURL: String
     
     enum CodingKeys: String, CodingKey {
         case productId = "id"
@@ -21,6 +22,8 @@ struct Product: Codable {
         case deepLink = "service_deep_link"
         case brand = "sozie_brand"
         case searchPrice = "search_price"
+        case imageURL = "service_image_url"
+
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -28,6 +31,7 @@ struct Product: Codable {
         productName = try values.decode(String.self, forKey: .productName)
         deepLink = try values.decode(String.self, forKey: .deepLink)
         brand = try values.decode(Brand.self, forKey: .brand)
-        searchPrice = try values.decode(Int.self, forKey: .searchPrice)
+        searchPrice = try values.decode(Float.self, forKey: .searchPrice)
+        imageURL = try values.decode(String.self, forKey: .imageURL)
     }
 }

@@ -21,12 +21,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var firstNameTxtFld: MFTextField!
     @IBOutlet weak var userNameTxtFld: MFTextField!
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
-
+    @IBOutlet weak var signUpBtn: DZGradientButton!
+    
     let validator = Validator()
     var isFemaleSelected = false
     var signUpDict: [String: Any]?
     var tipVu: EasyTipView?
-
+    var isFromEditProfile : Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,7 +42,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         userNameTxtFld.setupAppDesign()
         dateOfBirtTxtFld.setupAppDesign()
         applyValidators()
-        populateSocialData()
+        if isFromEditProfile! {
+            populateCurrentUserData()
+            signUpBtn.setTitle("Save", for: .normal)
+        } else {
+            populateSocialData()
+        }
     }
     
     func populateSocialData() {
@@ -52,6 +58,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if let lastName = signUpDict![User.CodingKeys.lastName.stringValue] {
             lastNameTxtFld.text = lastName as? String
         }
+    }
+    
+    func populateCurrentUserData()
+    {
+        let currentUser = UserDefaultManager.getCurrentUserObject()
+        firstNameTxtFld.text = currentUser?.firstName
+        lastNameTxtFld.text = currentUser?.lastName
+        dateOfBirtTxtFld.text = currentUser?.birthday
+        dateOfBirtTxtFld.date = UtilityManager.dateFromStringWithFormat(date: (currentUser?.birthday)!, format: "yyyy-MM-dd") as Date
+        userNameTxtFld.text = currentUser?.username
+        if currentUser?.gender == "Female" {
+            applyFemaleSelection()
+        }
+        
     }
     
     //MARK: - Custom Methods
@@ -105,6 +125,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         }
     }
     
+    func updateProfile() {
+        var dataDict = [String : Any]()
+        dataDict[User.CodingKeys.firstName.stringValue] = firstNameTxtFld.text
+        dataDict[User.CodingKeys.lastName.stringValue] = lastNameTxtFld.text
+        dataDict[User.CodingKeys.username.stringValue] = userNameTxtFld.text
+        dataDict[User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
+        if isFemaleSelected {
+            dataDict[User.CodingKeys.gender.stringValue] = "Female"
+        }
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+            }
+        }
+    }
+    
     // MARK: - Validation CallBacks
 
     func validationSuccessful() {
@@ -112,7 +153,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if !isFemaleSelected {
             UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
         } else {
-            verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
+            if isFromEditProfile! {
+                updateProfile()
+            } else {
+                verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
+            }
         }
     }
     
@@ -151,11 +196,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         dateOfBirtTxtFld.pickerView.maximumDate = fourteenYearsAgoDate
     }
     
-    @IBAction func signupButtonPressed(_ sender: Any) {
-        validator.validate(self)
-    }
-    
-    @IBAction func femaleBtnTapped(_ sender: Any) {
+    func applyFemaleSelection()
+    {
         isFemaleSelected = true
         femaleBtn.applyButtonSelected()
         maleBtn.applyButtonUnSelected()
@@ -163,6 +205,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         
         maleBtn.layer.shadowOpacity = 0.0
         tipVu?.dismiss()
+    }
+    
+    @IBAction func signupButtonPressed(_ sender: Any) {
+        validator.validate(self)
+    }
+    
+    @IBAction func femaleBtnTapped(_ sender: Any) {
+        applyFemaleSelection()
     }
     
     @IBAction func maleBtnTapped(_ sender: Any) {
@@ -189,7 +239,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if isFromEditProfile! {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

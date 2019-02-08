@@ -45,6 +45,8 @@
 		6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6158DC272201881500CB78EC /* SwitchProviding.swift */; };
 		61592031220C172C00816034 /* ImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61592030220C172C00816034 /* ImageCellViewModel.swift */; };
 		61592033220C176500816034 /* ProductImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61592032220C176500816034 /* ProductImageCellViewModel.swift */; };
+		61592035220D882600816034 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61592034220D882600816034 /* Category.swift */; };
+		61592037220D884F00816034 /* SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61592036220D884F00816034 /* SubCategory.swift */; };
 		616DDD68220ADF1C00A7CCFA /* DisclosureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */; };
 		616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */; };
 		616DDD6D220B080000A7CCFA /* PopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616DDD6C220B080000A7CCFA /* PopUpViewModel.swift */; };
@@ -149,6 +151,8 @@
 		6158DC272201881500CB78EC /* SwitchProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchProviding.swift; sourceTree = "<group>"; };
 		61592030220C172C00816034 /* ImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellViewModel.swift; sourceTree = "<group>"; };
 		61592032220C176500816034 /* ProductImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCellViewModel.swift; sourceTree = "<group>"; };
+		61592034220D882600816034 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		61592036220D884F00816034 /* SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategory.swift; sourceTree = "<group>"; };
 		616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureCell.swift; sourceTree = "<group>"; };
 		616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisclosureCell.xib; sourceTree = "<group>"; };
 		616DDD6C220B080000A7CCFA /* PopUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewModel.swift; sourceTree = "<group>"; };
@@ -423,6 +427,8 @@
 				613F897821E897AA00EB48D2 /* Country.swift */,
 				613F897A21E8AEF800EB48D2 /* LoginResponse.swift */,
 				610A743C22031B7C00964886 /* Product.swift */,
+				61592034220D882600816034 /* Category.swift */,
+				61592036220D884F00816034 /* SubCategory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -630,6 +636,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sozie/Pods-Sozie-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CCBottomRefreshControl/CCBottomRefreshControl.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -651,6 +658,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CCBottomRefreshControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -731,6 +739,7 @@
 				61A20A5021E4B28A00B27C8E /* MeasurementsVC.swift in Sources */,
 				6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */,
 				612F00CF22084B390025DBEA /* SelectionPopupVC.swift in Sources */,
+				61592035220D882600816034 /* Category.swift in Sources */,
 				612F00CD2208476A0025DBEA /* ListingPopupVC.swift in Sources */,
 				6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */,
 				612F00D122084B6D0025DBEA /* PopupNavController.swift in Sources */,
@@ -771,6 +780,7 @@
 				DA48CB1021FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift in Sources */,
 				617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */,
 				DA48CB2021FC25E8006804B6 /* MeasurementTypeProviding.swift in Sources */,
+				61592037220D884F00816034 /* SubCategory.swift in Sources */,
 				D738BF6721F3E3EA00302FE5 /* TitleAndCheckmarkCell.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
 				61592031220C172C00816034 /* ImageCellViewModel.swift in Sources */,

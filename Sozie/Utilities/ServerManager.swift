@@ -13,7 +13,7 @@ class ServerManager: NSObject {
 
     static let sharedInstance = ServerManager()
 
-    static let serverURL = "http://3.8.161.238/api/v1/"
+    static let serverURL = "http://35.177.203.47/api/v1/"
     static let loginURL = ServerManager.serverURL + "user/login/"
     static let profileURL = ServerManager.serverURL + "user/profile/"
     static let sizeChartURL = ServerManager.serverURL + "common/sizechart"
@@ -25,6 +25,7 @@ class ServerManager: NSObject {
     static let resetPassword = ServerManager.serverURL + "user/reset_password/"
     static let productListURL = ServerManager.serverURL + "product/browse/feed/get/"
     static let logoutURL = ServerManager.serverURL + "user/logout/"
+    static let categoriesURL = ServerManager.serverURL + "common/categories"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
     func loginWith(params: [String: Any], block: CompletionHandler) {
@@ -188,6 +189,21 @@ class ServerManager: NSObject {
             
             let decoder = JSONDecoder()
             let obj: Result<[Product]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
+    func getAllCategories(params: [String : Any], block : CompletionHandler)
+    {
+        Alamofire.request(ServerManager.categoriesURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<[Category]> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true , obj.value!)
             }

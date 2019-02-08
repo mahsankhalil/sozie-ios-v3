@@ -173,7 +173,16 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        switch indexPath.row {
+        case 0:
+            let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+            editProfileVC.isFromEditProfile = true
+            self.navigationController?.pushViewController(editProfileVC, animated: true)
+        default:
+            return
+            
+        }
     }
     
 }

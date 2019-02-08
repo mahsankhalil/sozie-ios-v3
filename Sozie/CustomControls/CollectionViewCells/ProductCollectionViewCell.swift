@@ -38,7 +38,7 @@ extension ProductCollectionViewCell: CellConfigurable {
             titleImageView.sd_setImage(with: titleImgModel.titleImageURL, completed: nil)
         }
         if let titleModel = viewModel as? TitleViewModeling {
-            priceLabel.text = titleModel.title
+            priceLabel.text = "$ " + titleModel.title!
         }
     }
     

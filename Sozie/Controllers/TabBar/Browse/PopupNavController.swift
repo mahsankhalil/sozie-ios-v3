@@ -12,7 +12,8 @@ class PopupNavController: UINavigationController {
 
     var navigationHandler: (() -> Void)?
 
-    var popUpTitle: String?
+    var popupType: PopupType?
+    var brandList : [Brand]?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,11 +21,11 @@ class PopupNavController: UINavigationController {
         self.delegate = self
     }
     
-    class func instance(title : String) -> PopupNavController {
+    class func instance(type : PopupType , brandList : [Brand]) -> PopupNavController {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "PopupNavController") as! PopupNavController
-        instnce.popUpTitle = title
-        
+        instnce.popupType = type
+        instnce.brandList = brandList
         return instnce
     }
     /*
@@ -41,9 +42,19 @@ class PopupNavController: UINavigationController {
 extension PopupNavController: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
         if (self.topViewController as? SelectionPopupVC) != nil {
-            return CGSize(width: UIScreen.main.bounds.size.width  ,height: 200)
+            if popupType == PopupType.category {
+                return CGSize(width: UIScreen.main.bounds.size.width  ,height: 200)
+            } else {
+                return CGSize(width: UIScreen.main.bounds.size.width  ,height: 354)
+            }
         } else {
-            return CGSize(width: UIScreen.main.bounds.size.width  ,height: 440)
+            if popupType == PopupType.category {
+                return CGSize(width: UIScreen.main.bounds.size.width  ,height: 440)
+
+            } else {
+                return CGSize(width: UIScreen.main.bounds.size.width  ,height: 165)
+
+            }
         }
     }
 }
@@ -52,7 +63,7 @@ extension PopupNavController : UINavigationControllerDelegate {
         navigationHandler!()
         if let vc = self.viewControllers[0] as? ListingPopupVC
         {
-            vc.setupData(title: popUpTitle!)
+            vc.setPopupType(type: popupType, brandList: brandList)
         }
     }
 }

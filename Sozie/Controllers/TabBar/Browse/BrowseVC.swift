@@ -9,7 +9,12 @@
 import UIKit
 import SVProgressHUD
 import WaterfallLayout
+import CCBottomRefreshControl
 
+public enum PopupType : String {
+    case category = "CATEGORY"
+    case filter = "FILTER"
+}
 class BrowseVC: BaseViewController {
 
     @IBOutlet weak var searchTxtFld: UITextField!
@@ -45,17 +50,33 @@ class BrowseVC: BaseViewController {
         }
     }
 
+    private var productList: [Product] = [] {
+        didSet {
+            for product in productList {
+                let imageURL = product.imageURL.getActualSizeImageURL()
+                let viewModel = ProductImageCellViewModel(title: String(product.searchPrice), attributedTitle: nil, titleImageURL: URL(string: product.brand.titleImage), imageURL:  URL(string: imageURL ?? ""))
+                productViewModels.append(viewModel)
+            }
+            productsCollectionVu.reloadData()
+        }
+    }
     private var brandViewModels: [ImageCellViewModel] = []
     private var productViewModels : [ProductImageCellViewModel] = []
-    
+    var pageSize = 6
+    var pagesPerRequest = 3
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupSozieLogoNavBar()
         fetchBrandsFromServer()
+        fetchProductsFromServer()
         setupViews()
-        populateDummyData()
+        let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        refreshControl.triggerVerticalOffset = 50.0
+        refreshControl.addTarget(self, action: #selector(fetchProductsFromServer), for: .valueChanged)
+        productsCollectionVu.bottomRefreshControl = refreshControl
+//        populateDummyData()
     }
     // MARK: - Custom Methods
     
@@ -86,17 +107,17 @@ class BrowseVC: BaseViewController {
             self.view.layoutIfNeeded()
         }
     }
-    func populateDummyData() {
-        for index in 0...16 {
-            if index % 2 == 0 {
-                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg", withExtension: "png")))
-            } else {
-                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg1", withExtension: "png")))
-            }
-            
-        }
-        productsCollectionVu.reloadData()
-    }
+//    func populateDummyData() {
+//        for index in 0...16 {
+//            if index % 2 == 0 {
+//                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg", withExtension: "png")))
+//            } else {
+//                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg1", withExtension: "png")))
+//            }
+//
+//        }
+//        productsCollectionVu.reloadData()
+//    }
     
     func fetchBrandsFromServer() {
         SVProgressHUD.show()
@@ -109,8 +130,20 @@ class BrowseVC: BaseViewController {
         }
     }
     
-    func fetchProductsFromServer() {
+    @objc func fetchProductsFromServer() {
         
+        var dataDict = [String : Any]()
+        dataDict["pagesize"] = pageSize
+        dataDict["pages_per_request"] = pagesPerRequest
+        
+        ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
+            self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
+            if isSuccess {
+                self.productList = response as! [Product]
+            } else {
+                
+            }
+        }
     }
 
     /*
@@ -123,8 +156,8 @@ class BrowseVC: BaseViewController {
     }
     */
     
-    func showPopUpWithTitle(title : String) {
-        let popUpInstnc : PopupNavController? = PopupNavController.instance(title: title)
+    func showPopUpWithTitle(type : PopupType) {
+        let popUpInstnc : PopupNavController? = PopupNavController.instance(type: type , brandList: brandList)
         let popUpVC = PopupController
             .create(self.tabBarController!)
         
@@ -142,7 +175,7 @@ class BrowseVC: BaseViewController {
     
     // MARK: - Actions
     @IBAction func filterBtnTapped(_ sender: Any) {
-        showPopUpWithTitle(title: "FILTER")
+        showPopUpWithTitle(type: .filter)
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
         if searchVuHeightConstraint.constant == 0 {
@@ -152,7 +185,7 @@ class BrowseVC: BaseViewController {
         }
     }
     @IBAction func categoryBtnTapped(_ sender: Any) {
-        showPopUpWithTitle(title: "CATEGORY")
+        showPopUpWithTitle(type: .category)
     }
 }
 extension BrowseVC : UITextFieldDelegate {
