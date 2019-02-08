@@ -30,6 +30,9 @@ class BaseViewController: UIViewController {
         setupBackgroundImage()
         let imageView = UIImageView(image:logo)
         navigationItem.titleView = imageView
+        navigationController?.navigationBar.layer.borderWidth = 1.0
+        navigationController?.navigationBar.layer.borderColor = UIColor(hex: "707070").cgColor.copy(alpha: 0.05)
+
     }
     
     func setupProfileNavBar() {

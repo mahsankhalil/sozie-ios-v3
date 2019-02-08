@@ -42,5 +42,7 @@ class InviteFriendsVC: UIViewController {
     }
     
     @IBAction func skipBtnTapped(_ sender: Any) {
+        self.changeRootVCToTabBarNC()
+
     }
 }
