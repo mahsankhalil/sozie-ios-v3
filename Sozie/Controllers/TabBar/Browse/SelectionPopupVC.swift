@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SelectionPopupVCDelegate {
+    func doneButtonTapped(type : FilterType? , id : Int?)
+}
+
 class SelectionPopupVC: UIViewController {
     
     @IBOutlet weak var topView: UIView!
@@ -16,6 +20,7 @@ class SelectionPopupVC: UIViewController {
     @IBOutlet weak var doneBtn: UIButton!
     @IBOutlet weak var tblVu: UITableView!
     private var selectedViewModelIndex: Int?
+    var delegate : SelectionPopupVCDelegate?
 
     var popupType: PopupType?
 
@@ -84,6 +89,18 @@ class SelectionPopupVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func doneBtnTapped(_ sender: Any) {
+        if let index = selectedViewModelIndex {
+            var selectedId : Int?
+            var filterType : FilterType?
+            if popupType == PopupType.category {
+                selectedId = category?.subCategories[index].subCategoryId
+                filterType = FilterType.category
+            } else if popupType == PopupType.filter {
+                selectedId = brandList?[index].brandId
+                filterType = FilterType.filter
+            }
+            delegate?.doneButtonTapped(type: filterType, id: selectedId)
+        }
     }
     
 }

@@ -17,14 +17,18 @@ extension String {
     }
     public func getActualSizeImageURL() -> String? {
         var urlComponents = URLComponents(string: self)
-        var queryitems = urlComponents?.queryItems
-        for item in queryitems! {
-            if item.name == "w" || item.name == "h" || item.name == "bg" || item.name == "trim" {
-                queryitems?.removeAll{$0 == item}
-            } 
+        if var queryitems = urlComponents?.queryItems {
+            for item in queryitems {
+                if item.name == "w" || item.name == "h" || item.name == "bg" || item.name == "trim" {
+                    queryitems.removeAll{$0 == item}
+                }
+            }
+            urlComponents?.queryItems = queryitems
+            return urlComponents?.string
+        } else {
+            return urlComponents?.string
         }
-        urlComponents?.queryItems = queryitems
-        return urlComponents?.string
+        
     }
 
 }

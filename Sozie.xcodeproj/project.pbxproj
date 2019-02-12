@@ -40,6 +40,7 @@
 		613F897921E897AA00EB48D2 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897821E897AA00EB48D2 /* Country.swift */; };
 		613F897B21E8AEF800EB48D2 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897A21E8AEF800EB48D2 /* LoginResponse.swift */; };
 		613F897D21E8C5FB00EB48D2 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897C21E8C5FB00EB48D2 /* CustomError.swift */; };
+		6140C07522117CD200D9CE4F /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140C07422117CD200D9CE4F /* ProductDetailVC.swift */; };
 		614CEA4321F1E08F00FE5F9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 614CEA4221F1E08F00FE5F9D /* GoogleService-Info.plist */; };
 		614CEA4621F1E48600FE5F9D /* SocialAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */; };
 		6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6158DC272201881500CB78EC /* SwitchProviding.swift */; };
@@ -146,6 +147,7 @@
 		613F897821E897AA00EB48D2 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		613F897A21E8AEF800EB48D2 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		613F897C21E8C5FB00EB48D2 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		6140C07422117CD200D9CE4F /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		614CEA4221F1E08F00FE5F9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthManager.swift; sourceTree = "<group>"; };
 		6158DC272201881500CB78EC /* SwitchProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchProviding.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				612F00CC2208476A0025DBEA /* ListingPopupVC.swift */,
 				612F00CE22084B390025DBEA /* SelectionPopupVC.swift */,
 				612F00D022084B6D0025DBEA /* PopupNavController.swift */,
+				6140C07422117CD200D9CE4F /* ProductDetailVC.swift */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				612F00CD2208476A0025DBEA /* ListingPopupVC.swift in Sources */,
 				6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */,
 				612F00D122084B6D0025DBEA /* PopupNavController.swift in Sources */,
+				6140C07522117CD200D9CE4F /* ProductDetailVC.swift in Sources */,
 				610A74372202DF6E00964886 /* ImageViewModeling.swift in Sources */,
 				69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */,
 				610A743D22031B7C00964886 /* Product.swift in Sources */,

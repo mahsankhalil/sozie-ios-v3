@@ -7,16 +7,25 @@
 //
 
 import UIKit
-
-struct DisclosureCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling {
+public enum FilterType : String {
+    case category = "CATEGORY"
+    case filter = "FILTER"
+    case sozie = "SOZIE"
+}
+struct DisclosureCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling , CheckmarkViewModeling {
+    var isCheckmarkHidden: Bool = true
     var title: String?
     var attributedTitle: NSAttributedString?
-    let reuseIdentifier = "DisclosureCell"
+    var reuseIdentifier : String = "DisclosureCell"
+}
+protocol ListingPopupVCDelegate {
+    func doneButtonTapped(type : FilterType? , id : Int?)
 }
 class ListingPopupVC: UIViewController {
 
-    private let reuseIdentifier = "DisclosureCell"
+    var delegate : ListingPopupVCDelegate?
 
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tblVu: UITableView!
@@ -24,11 +33,13 @@ class ListingPopupVC: UIViewController {
     var arrayOfDisclosureCellViewModel : [DisclosureCellViewModel] = []
     var brandList : [Brand]?
     var selectedCategory : Category?
+    private var selectedViewModelIndex: Int?
     private var categoriesList : [Category] = [] {
         didSet {
             arrayOfDisclosureCellViewModel.removeAll()
             for category in categoriesList {
-                let viewModel = DisclosureCellViewModel(title: category.categoryName, attributedTitle: nil)
+                var viewModel = DisclosureCellViewModel()
+                viewModel.title = category.categoryName
                 arrayOfDisclosureCellViewModel.append(viewModel)
             }
         }
@@ -49,9 +60,12 @@ class ListingPopupVC: UIViewController {
             fetchCategoriesFromServer()
         } else {
             arrayOfDisclosureCellViewModel.removeAll()
-            let viewModel1 = DisclosureCellViewModel(title: "FILTER BY BRANDS", attributedTitle: nil)
+            var viewModel1 = DisclosureCellViewModel()
+            viewModel1.title = "FILTER BY BRANDS"
             arrayOfDisclosureCellViewModel.append(viewModel1)
-            let viewModel2 = DisclosureCellViewModel(title: "FILTER BY SOZIES", attributedTitle: nil)
+            var viewModel2 = DisclosureCellViewModel()
+            viewModel2.title = "FILTER BY SOZIES"
+            viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
             arrayOfDisclosureCellViewModel.append(viewModel2)
             self.tblVu.reloadData()
         }
@@ -67,6 +81,9 @@ class ListingPopupVC: UIViewController {
         }
     }
     
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        delegate?.doneButtonTapped(type: FilterType.sozie, id: nil)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -82,6 +99,7 @@ class ListingPopupVC: UIViewController {
             } else {
                 vc.brandList = brandList
             }
+            vc.delegate = self
         }
     }
     
@@ -100,7 +118,7 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
         
         if tableViewCell == nil {
-            tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
+            tableView.register(UINib(nibName: viewModel.reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
             tableViewCell = tableView.dequeueReusableCell(withIdentifier:viewModel.reuseIdentifier)
         }
         
@@ -120,10 +138,28 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         if popupType == PopupType.category {
             selectedCategory = categoriesList[indexPath.row]
         } else if indexPath.row == 1 {
+            var indexPathsToReload = [indexPath]
+            if let previousSelectedIndex = selectedViewModelIndex {
+                arrayOfDisclosureCellViewModel[previousSelectedIndex].isCheckmarkHidden = true
+                indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
+                selectedViewModelIndex = nil
+                self.doneButton.isHidden = true
+            } else {
+                arrayOfDisclosureCellViewModel[indexPath.row].isCheckmarkHidden = false
+                selectedViewModelIndex = indexPath.row
+                self.doneButton.isHidden = false
+            }
+            tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+
             return
         }
         
         performSegue(withIdentifier: "toSubcategory", sender: self)
     }
     
+}
+extension ListingPopupVC : SelectionPopupVCDelegate {
+    func doneButtonTapped(type: FilterType?, id: Int?) {
+        delegate?.doneButtonTapped(type: type, id: id)
+    }
 }

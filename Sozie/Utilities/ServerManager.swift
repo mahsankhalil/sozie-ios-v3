@@ -181,11 +181,10 @@ class ServerManager: NSObject {
     func getAllProducts(params : [String : Any] , block : CompletionHandler)
     {
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
-            "Content-type": "application/json"
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") 
         ]
         
-        Alamofire.request(ServerManager.productListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+        Alamofire.request(ServerManager.productListURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             
             let decoder = JSONDecoder()
             let obj: Result<[Product]> = decoder.decodeResponse(from: response)

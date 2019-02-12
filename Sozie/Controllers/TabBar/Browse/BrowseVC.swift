@@ -52,6 +52,7 @@ class BrowseVC: BaseViewController {
 
     private var productList: [Product] = [] {
         didSet {
+            productViewModels.removeAll()
             for product in productList {
                 let imageURL = product.imageURL.getActualSizeImageURL()
                 let viewModel = ProductImageCellViewModel(title: String(product.searchPrice), attributedTitle: nil, titleImageURL: URL(string: product.brand.titleImage), imageURL:  URL(string: imageURL ?? ""))
@@ -64,6 +65,7 @@ class BrowseVC: BaseViewController {
     private var productViewModels : [ProductImageCellViewModel] = []
     var pageSize = 6
     var pagesPerRequest = 3
+    var selectedProduct : Product?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -139,25 +141,29 @@ class BrowseVC: BaseViewController {
         ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
             self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
             if isSuccess {
-                self.productList = response as! [Product]
+                self.productList.append(contentsOf: response as! [Product])
+//                self.productList = response as! [Product]
             } else {
                 
             }
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let vc = segue.destination as? ProductDetailVC
+        vc?.currentProduct = selectedProduct
     }
-    */
+ 
     
     func showPopUpWithTitle(type : PopupType) {
         let popUpInstnc : PopupNavController? = PopupNavController.instance(type: type , brandList: brandList)
+        popUpInstnc?.popupDelegate = self
         let popUpVC = PopupController
             .create(self.tabBarController!)
         
@@ -169,6 +175,9 @@ class BrowseVC: BaseViewController {
             UIView.animate(withDuration: 0.6, animations: {
                 popUpVC.updatePopUpSize()
             })
+        }
+        popUpInstnc?.closeHandler = { [] in
+            popUpVC.dismiss()
         }
     }
     
@@ -269,7 +278,8 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-       
+        selectedProduct = productList[indexPath.row]
+        performSegue(withIdentifier: "toProductDetail", sender: self)
     }
     
     
@@ -284,4 +294,10 @@ extension BrowseVC: WaterfallLayoutDelegate {
         return .waterfall(column: 2, distributionMethod: .balanced)
     }
     
+}
+
+extension BrowseVC : PopupNavControllerDelegate {
+    func doneButtonTapped(type: FilterType?, id: Int?) {
+        
+    }
 }

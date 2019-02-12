@@ -7,13 +7,18 @@
 //
 
 import UIKit
-
+protocol PopupNavControllerDelegate {
+    func doneButtonTapped(type : FilterType? , id : Int?)
+}
 class PopupNavController: UINavigationController {
 
     var navigationHandler: (() -> Void)?
 
     var popupType: PopupType?
     var brandList : [Brand]?
+    var popupDelegate : PopupNavControllerDelegate?
+    var closeHandler: (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,6 +69,13 @@ extension PopupNavController : UINavigationControllerDelegate {
         if let vc = self.viewControllers[0] as? ListingPopupVC
         {
             vc.setPopupType(type: popupType, brandList: brandList)
+            vc.delegate = self
         }
     }
+}
+extension PopupNavController : ListingPopupVCDelegate {
+    func doneButtonTapped(type: FilterType?, id: Int?) {
+        popupDelegate?.doneButtonTapped(type: type, id: id)
+        closeHandler!()
+    }  
 }
