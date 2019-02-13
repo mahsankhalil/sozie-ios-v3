@@ -9,6 +9,7 @@
 import UIKit
 
 struct Category: Codable {
+    
     var categoryId: Int
     var categoryName: String
     var subCategories : [SubCategory]
@@ -17,6 +18,7 @@ struct Category: Codable {
         case categoryName = "name"
         case subCategories = "sub_categories"
     }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         categoryId = try values.decode(Int.self, forKey: .categoryId)

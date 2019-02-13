@@ -27,20 +27,20 @@ class ListingPopupVC: UIViewController {
 
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tblVu: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     var popupType : PopupType?
-    var arrayOfDisclosureCellViewModel : [DisclosureCellViewModel] = []
+    var viewModels : [DisclosureCellViewModel] = []
     var brandList : [Brand]?
     var selectedCategory : Category?
     private var selectedViewModelIndex: Int?
     private var categoriesList : [Category] = [] {
         didSet {
-            arrayOfDisclosureCellViewModel.removeAll()
+            viewModels.removeAll()
             for category in categoriesList {
                 var viewModel = DisclosureCellViewModel()
                 viewModel.title = category.categoryName
-                arrayOfDisclosureCellViewModel.append(viewModel)
+                viewModels.append(viewModel)
             }
         }
     }
@@ -55,19 +55,19 @@ class ListingPopupVC: UIViewController {
     func setPopupType(type : PopupType? , brandList : [Brand]?) {
         self.popupType = type
         self.brandList = brandList
-        self.titleLbl.text = popupType?.rawValue
+        self.titleLabel.text = popupType?.rawValue
         if popupType == PopupType.category {
             fetchCategoriesFromServer()
         } else {
-            arrayOfDisclosureCellViewModel.removeAll()
+            viewModels.removeAll()
             var viewModel1 = DisclosureCellViewModel()
             viewModel1.title = "FILTER BY BRANDS"
-            arrayOfDisclosureCellViewModel.append(viewModel1)
+            viewModels.append(viewModel1)
             var viewModel2 = DisclosureCellViewModel()
             viewModel2.title = "FILTER BY SOZIES"
             viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
-            arrayOfDisclosureCellViewModel.append(viewModel2)
-            self.tblVu.reloadData()
+            viewModels.append(viewModel2)
+            self.tableView.reloadData()
         }
     }
     
@@ -76,7 +76,7 @@ class ListingPopupVC: UIViewController {
         ServerManager.sharedInstance.getAllCategories(params: [:]) { (isSuccess, response) in
             if isSuccess {
                 self.categoriesList = response as! [Category]
-                self.tblVu.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
@@ -110,11 +110,11 @@ class ListingPopupVC: UIViewController {
 extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfDisclosureCellViewModel.count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let viewModel = arrayOfDisclosureCellViewModel[indexPath.row]
+        let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
         
         if tableViewCell == nil {
@@ -140,12 +140,12 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 1 {
             var indexPathsToReload = [indexPath]
             if let previousSelectedIndex = selectedViewModelIndex {
-                arrayOfDisclosureCellViewModel[previousSelectedIndex].isCheckmarkHidden = true
+                viewModels[previousSelectedIndex].isCheckmarkHidden = true
                 indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
                 selectedViewModelIndex = nil
                 self.doneButton.isHidden = true
             } else {
-                arrayOfDisclosureCellViewModel[indexPath.row].isCheckmarkHidden = false
+                viewModels[indexPath.row].isCheckmarkHidden = false
                 selectedViewModelIndex = indexPath.row
                 self.doneButton.isHidden = false
             }

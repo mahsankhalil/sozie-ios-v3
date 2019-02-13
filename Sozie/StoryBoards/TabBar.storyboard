@@ -642,8 +642,8 @@
                     <size key="freeformSize" width="375" height="440"/>
                     <connections>
                         <outlet property="doneButton" destination="p6m-pL-4r4" id="tWQ-SV-XNt"/>
-                        <outlet property="tblVu" destination="atj-5d-SfY" id="BB5-hR-5Qa"/>
-                        <outlet property="titleLbl" destination="bPP-Fy-inr" id="OW5-5w-GOc"/>
+                        <outlet property="tableView" destination="atj-5d-SfY" id="6rH-BP-aDe"/>
+                        <outlet property="titleLabel" destination="bPP-Fy-inr" id="aGf-tG-euC"/>
                         <outlet property="topView" destination="ecO-4b-92J" id="73j-AD-Ogx"/>
                         <segue destination="6p7-a4-Skt" kind="show" identifier="toSubcategory" id="A53-3w-dzr"/>
                     </connections>

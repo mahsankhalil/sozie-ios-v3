@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         userNameTxtFld.setupAppDesign()
         dateOfBirtTxtFld.setupAppDesign()
         applyValidators()
-        if isFromEditProfile! {
+        if let _ = isFromEditProfile {
             populateCurrentUserData()
             signUpBtn.setTitle("Save", for: .normal)
         } else {
@@ -62,15 +62,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     
     func populateCurrentUserData()
     {
-        let currentUser = UserDefaultManager.getCurrentUserObject()
-        firstNameTxtFld.text = currentUser?.firstName
-        lastNameTxtFld.text = currentUser?.lastName
-        dateOfBirtTxtFld.text = currentUser?.birthday
-        dateOfBirtTxtFld.date = UtilityManager.dateFromStringWithFormat(date: (currentUser?.birthday)!, format: "yyyy-MM-dd") as Date
-        userNameTxtFld.text = currentUser?.username
-        if currentUser?.gender == "Female" {
-            applyFemaleSelection()
+        if let currentUser = UserDefaultManager.getCurrentUserObject() {
+            firstNameTxtFld.text = currentUser.firstName
+            lastNameTxtFld.text = currentUser.lastName
+            dateOfBirtTxtFld.text = currentUser.birthday
+            dateOfBirtTxtFld.date = UtilityManager.dateFromStringWithFormat(date: currentUser.birthday, format: "yyyy-MM-dd") as Date
+            userNameTxtFld.text = currentUser.username
+            if currentUser.gender == "Female" {
+                applyFemaleSelection()
+            }
         }
+        
         
     }
     
@@ -153,7 +155,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if !isFemaleSelected {
             UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
         } else {
-            if isFromEditProfile! {
+            if let _ = isFromEditProfile {
                 updateProfile()
             } else {
                 verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
