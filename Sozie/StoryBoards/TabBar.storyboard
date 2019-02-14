@@ -364,7 +364,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7L-ct-lfX">
-                                <rect key="frame" x="0.0" y="455" width="375" height="99"/>
+                                <rect key="frame" x="0.0" y="445" width="375" height="109"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UA8-P9-2dS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
@@ -453,37 +453,38 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C4U-6s-864">
-                                        <rect key="frame" x="0.0" y="47" width="375" height="52"/>
+                                        <rect key="frame" x="0.0" y="47" width="375" height="62"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwg-bq-Msw">
-                                                <rect key="frame" x="328.5" y="5" width="31.5" height="24"/>
+                                                <rect key="frame" x="329.5" y="5" width="30.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="18"/>
                                                 <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LsT-za-vWh">
-                                                <rect key="frame" x="15" y="0.0" width="306" height="52"/>
-                                                <string key="text">Red Jumpsuit International Women's Day Grey short sleeve tee with Girl Crush slogan print. Red Jumpsuit International Women's Day </string>
-                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-yn-n4E">
+                                                <rect key="frame" x="15" y="0.0" width="307" height="62"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="lwg-bq-Msw" secondAttribute="trailing" constant="15" id="6bL-ZA-rmk"/>
-                                            <constraint firstAttribute="bottom" secondItem="LsT-za-vWh" secondAttribute="bottom" id="Iny-BB-UKn"/>
-                                            <constraint firstItem="LsT-za-vWh" firstAttribute="top" secondItem="C4U-6s-864" secondAttribute="top" id="Rsu-UQ-sAU"/>
+                                            <constraint firstAttribute="bottom" secondItem="GCS-yn-n4E" secondAttribute="bottom" id="FMn-EC-GK1"/>
+                                            <constraint firstItem="GCS-yn-n4E" firstAttribute="leading" secondItem="C4U-6s-864" secondAttribute="leading" constant="15" id="IFy-O6-6Hu"/>
+                                            <constraint firstItem="GCS-yn-n4E" firstAttribute="top" secondItem="C4U-6s-864" secondAttribute="top" id="SOd-tb-Msh"/>
                                             <constraint firstItem="lwg-bq-Msw" firstAttribute="top" secondItem="C4U-6s-864" secondAttribute="top" constant="5" id="afl-Nq-jCe"/>
-                                            <constraint firstItem="LsT-za-vWh" firstAttribute="leading" secondItem="C4U-6s-864" secondAttribute="leading" constant="15" id="ayP-LC-OKV"/>
-                                            <constraint firstItem="lwg-bq-Msw" firstAttribute="leading" secondItem="LsT-za-vWh" secondAttribute="trailing" constant="7.5" id="hUC-WA-yxf"/>
+                                            <constraint firstItem="lwg-bq-Msw" firstAttribute="leading" secondItem="GCS-yn-n4E" secondAttribute="trailing" constant="7.5" id="eEG-bz-kJR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="UA8-P9-2dS" secondAttribute="trailing" id="5fN-GT-h8o"/>
-                                    <constraint firstAttribute="height" secondItem="LsT-za-vWh" secondAttribute="height" constant="47" id="DOI-ar-h4K"/>
+                                    <constraint firstAttribute="height" constant="109" id="68M-sd-RxJ"/>
                                     <constraint firstItem="C4U-6s-864" firstAttribute="top" secondItem="UA8-P9-2dS" secondAttribute="bottom" id="SXU-Gg-1z4"/>
                                     <constraint firstItem="UA8-P9-2dS" firstAttribute="leading" secondItem="M7L-ct-lfX" secondAttribute="leading" id="VN3-pI-h7I"/>
                                     <constraint firstItem="UA8-P9-2dS" firstAttribute="top" secondItem="M7L-ct-lfX" secondAttribute="top" id="d2c-OW-QmI"/>
@@ -493,27 +494,39 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ob-KC-dSl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="445"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ewl-Gb-nW9">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="391"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S5S-OF-Hb3">
-                                        <rect key="frame" x="12" y="16" width="192" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="Bv0-Hi-UeR"/>
-                                            <constraint firstAttribute="width" constant="192" id="Ovv-yd-TRa"/>
-                                        </constraints>
-                                    </imageView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ApC-rC-p13">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="445"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jgf-jI-gg4">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HNM-jN-C3u">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Shc-8z-rMy" id="E5A-df-IcU"/>
+                                            <outlet property="delegate" destination="Shc-8z-rMy" id="Npb-pn-f8L"/>
+                                        </connections>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="S5S-OF-Hb3" firstAttribute="top" secondItem="9ob-KC-dSl" secondAttribute="top" constant="16" id="Dww-mg-9zv"/>
-                                    <constraint firstItem="S5S-OF-Hb3" firstAttribute="leading" secondItem="9ob-KC-dSl" secondAttribute="leading" constant="12" id="IWz-Ub-Sqw"/>
-                                    <constraint firstAttribute="trailing" secondItem="ewl-Gb-nW9" secondAttribute="trailing" id="KVF-Q9-c9u"/>
-                                    <constraint firstItem="ewl-Gb-nW9" firstAttribute="top" secondItem="S5S-OF-Hb3" secondAttribute="bottom" constant="16" id="QZ4-M4-rJm"/>
-                                    <constraint firstAttribute="bottom" secondItem="ewl-Gb-nW9" secondAttribute="bottom" id="tbe-H3-Gg6"/>
-                                    <constraint firstItem="ewl-Gb-nW9" firstAttribute="leading" secondItem="9ob-KC-dSl" secondAttribute="leading" id="yu5-Qe-6eo"/>
+                                    <constraint firstAttribute="bottom" secondItem="ApC-rC-p13" secondAttribute="bottom" id="52U-0V-x1n"/>
+                                    <constraint firstItem="ApC-rC-p13" firstAttribute="leading" secondItem="9ob-KC-dSl" secondAttribute="leading" id="PWe-00-d2T"/>
+                                    <constraint firstAttribute="trailing" secondItem="ApC-rC-p13" secondAttribute="trailing" id="VOC-jc-Otg"/>
+                                    <constraint firstItem="ApC-rC-p13" firstAttribute="top" secondItem="9ob-KC-dSl" secondAttribute="top" id="fpk-FO-Oxp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -530,13 +543,12 @@
                         <viewLayoutGuide key="safeArea" id="sRM-8U-giY"/>
                     </view>
                     <connections>
-                        <outlet property="brandImageView" destination="S5S-OF-Hb3" id="Qzr-O8-syc"/>
                         <outlet property="buyButton" destination="z4u-hJ-9Tk" id="KTG-m1-L0l"/>
-                        <outlet property="descriptionTextLabel" destination="LsT-za-vWh" id="End-a6-WRu"/>
+                        <outlet property="collectionView" destination="ApC-rC-p13" id="9SC-4k-rn1"/>
+                        <outlet property="descriptionTextView" destination="GCS-yn-n4E" id="4Sb-db-jzG"/>
                         <outlet property="heartButton" destination="xLy-9j-GzS" id="xKM-YB-2MS"/>
                         <outlet property="pageControl" destination="KW0-xI-QVV" id="mz1-tv-uk0"/>
                         <outlet property="priceLabel" destination="lwg-bq-Msw" id="Z3d-Ln-JaE"/>
-                        <outlet property="productImageView" destination="ewl-Gb-nW9" id="Q2P-g5-Wr9"/>
                         <outlet property="requestSozieButton" destination="ozV-A0-SdB" id="kUH-OZ-0AY"/>
                         <outlet property="shareButton" destination="yoB-gL-alp" id="Wa5-KY-mVo"/>
                     </connections>

@@ -55,5 +55,31 @@ class UserDefaultManager: NSObject {
         }
         return false
     }
+    static func saveAllBrands(brands : [Brand]) -> Bool {
+        let encoder = JSONEncoder()
+        if let brandsList = try? encoder.encode(brands) {
+            UserDefaults.standard.set(brandsList, forKey: UserDefaultKey.brands)
+            UserDefaults.standard.synchronize()
+        }
+        return false
+    }
+    
+    private static func brandList () -> [Brand]? {
+        if let brandList = UserDefaults.standard.data(forKey: UserDefaultKey.brands) {
+            let decoder = JSONDecoder()
+            if let brands = try? decoder.decode([Brand].self, from: brandList) {
+                return brands
+            }
+        }
+        return nil
+    }
+    static func getBrandWithId(brandId : Int) -> Brand? {
+        guard let brands = brandList() else { return nil }
+        if let brand = brands.first(where: {$0.brandId == brandId}) {
+            return brand
+        } else {
+            return nil
+        }
+    }
 
 }

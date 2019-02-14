@@ -38,7 +38,9 @@ class BrowseVC: BaseViewController {
     }
     @IBOutlet weak var brandsCollectionVu: UICollectionView!
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
-    
+    var filterCategoryIds : [Int?]?
+    var filterBrandId : Int?
+    var filterBySozies = false
     private var brandList: [Brand] = [] {
         didSet {
             brandViewModels.removeAll()
@@ -55,9 +57,14 @@ class BrowseVC: BaseViewController {
             productViewModels.removeAll()
             for product in productList {
                 let imageURL = product.imageURL.getActualSizeImageURL()
-                let viewModel = ProductImageCellViewModel(title: String(product.searchPrice), attributedTitle: nil, titleImageURL: URL(string: product.brand.titleImage), imageURL:  URL(string: imageURL ?? ""))
+                var brandImageURL = ""
+                if let brand = UserDefaultManager.getBrandWithId(brandId: product.brandId) {
+                    brandImageURL = brand.titleImage
+                }
+                let viewModel = ProductImageCellViewModel(title: String(product.searchPrice), attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL ?? ""))
                 productViewModels.append(viewModel)
             }
+            
             productsCollectionVu.reloadData()
         }
     }
@@ -65,6 +72,7 @@ class BrowseVC: BaseViewController {
     private var productViewModels : [ProductImageCellViewModel] = []
     var pageSize = 6
     var pagesPerRequest = 3
+    var isFirstPage = true
     var selectedProduct : Product?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +80,16 @@ class BrowseVC: BaseViewController {
         // Do any additional setup after loading the view.
         setupSozieLogoNavBar()
         fetchBrandsFromServer()
-        fetchProductsFromServer()
         setupViews()
         let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         refreshControl.triggerVerticalOffset = 50.0
-        refreshControl.addTarget(self, action: #selector(fetchProductsFromServer), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         productsCollectionVu.bottomRefreshControl = refreshControl
-//        populateDummyData()
+        let upperRefreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        upperRefreshControl.triggerVerticalOffset = 50.0
+        upperRefreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        productsCollectionVu.refreshControl = upperRefreshControl
+        self.refreshData()
     }
     // MARK: - Custom Methods
     
@@ -109,17 +120,6 @@ class BrowseVC: BaseViewController {
             self.view.layoutIfNeeded()
         }
     }
-//    func populateDummyData() {
-//        for index in 0...16 {
-//            if index % 2 == 0 {
-//                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg", withExtension: "png")))
-//            } else {
-//                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg1", withExtension: "png")))
-//            }
-//
-//        }
-//        productsCollectionVu.reloadData()
-//    }
     
     func fetchBrandsFromServer() {
         SVProgressHUD.show()
@@ -127,19 +127,43 @@ class BrowseVC: BaseViewController {
             SVProgressHUD.dismiss()
             if isSuccess {
                 self.brandList = response as? [Brand] ?? []
+                _ = UserDefaultManager.saveAllBrands(brands: self.brandList)
                 self.brandsCollectionVu.reloadData()
             }
         }
     }
     
-    @objc func fetchProductsFromServer() {
+    @objc func loadNextPage() {
+        isFirstPage = false
+        fetchProductsFromServer()
+    }
+    @objc func refreshData() {
+        isFirstPage = true
+        filterBrandId = nil
+        filterCategoryIds = nil
+        filterBySozies = false
+        productList.removeAll()
+        fetchProductsFromServer()
+    }
+    
+    func fetchProductsFromServer() {
         
         var dataDict = [String : Any]()
         dataDict["pagesize"] = pageSize
         dataDict["pages_per_request"] = pagesPerRequest
-        
+        dataDict["is_first_page"] = isFirstPage
+        if let brandId = filterBrandId {
+            dataDict["brand"] = brandId
+        }
+        if let categoryIds = filterCategoryIds {
+            dataDict["categories"] = categoryIds
+        }
+        dataDict["filter_by_sozie"] = filterBySozies
         ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
+            
+            self.productsCollectionVu.refreshControl?.endRefreshing()
             self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
+        
             if isSuccess {
                 self.productList.append(contentsOf: response as! [Product])
 //                self.productList = response as! [Product]
@@ -298,6 +322,24 @@ extension BrowseVC: WaterfallLayoutDelegate {
 
 extension BrowseVC : PopupNavControllerDelegate {
     func doneButtonTapped(type: FilterType?, id: Int?) {
-        
+        productList.removeAll()
+        if type == FilterType.filter {
+            self.filterCategoryIds = nil
+            self.filterBrandId = id
+            self.filterBySozies = false
+        } else if type == FilterType.category {
+            self.filterCategoryIds = [id]
+            self.filterBrandId = nil
+            self.filterBySozies = false
+        }
+        else if type == FilterType.sozie {
+            self.filterCategoryIds = nil
+            self.filterBrandId = nil
+            self.filterBySozies = true
+        }
+        self.isFirstPage = true
+        self.productsCollectionVu.refreshControl?.beginRefreshing()
+        fetchProductsFromServer()
+
     }
 }

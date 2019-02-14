@@ -18,6 +18,7 @@ public class UserDefaultKey: NSObject {
     static let refreshToken = "refresh"
     static let userId = "user_id"
     static let loginResponse = "loginResponse"
+    static let brands = "brands"
 }
 
 public class Constant: NSObject {

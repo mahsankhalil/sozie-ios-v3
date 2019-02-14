@@ -183,8 +183,12 @@ class ServerManager: NSObject {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") 
         ]
+        var url = ServerManager.productListURL
         
-        Alamofire.request(ServerManager.productListURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+        if let isFirstPage = params["is_first_page"] as? Bool {
+            url = url + "?is_first_page=" + String(isFirstPage ? 1:0)
+        }
+        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             
             let decoder = JSONDecoder()
             let obj: Result<[Product]> = decoder.decodeResponse(from: response)
