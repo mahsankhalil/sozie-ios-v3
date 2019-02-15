@@ -35,7 +35,35 @@ class PostCollectionViewCell: UICollectionViewCell {
 }
 extension PostCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
-
+        if let imgModel = viewModel as? ImageViewModeling {
+            postImageView.sd_setImage(with: imgModel.imageURL) { (img, err, cacheType, url) in
+                
+            }
+        }
+        if let titleModel = viewModel as? TitleViewModeling {
+            if let title = titleModel.title {
+                nameLabel.text = title
+            } else if let title = titleModel.attributedTitle {
+                nameLabel.attributedText = title
+            }
+        }
+        if let measurementModel = viewModel as? MeasurementViewModeling {
+            if let bra = measurementModel.bra , let cup = measurementModel.cup {
+                braLabel.text = "Bra Size: " + String(bra) + cup
+            }
+            if let height = measurementModel.height {
+                let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+                let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
+                heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
+                
+            }
+            if let hip = measurementModel.hip {
+                hipLabel.text = "Hip: " + String(hip) + "  |"
+            }
+            if let waist = measurementModel.waist {
+                waistLabel.text = "Waist: " + String(waist) + "  |"
+            }
+        }
     }
     
 }

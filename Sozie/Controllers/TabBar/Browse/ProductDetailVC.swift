@@ -18,6 +18,7 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var swipeToSeeView: UIView!
     var currentProduct : Product?
     var viewModels : [PostCellViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
@@ -26,8 +27,8 @@ class ProductDetailVC: BaseViewController {
 
         // Do any additional setup after loading the view.
         setupSozieLogoNavBar()
-        populateProductData()
-        populateDummyData()
+//        populateProductData()
+        fetchProductDetailFromServer()
         collectionView.register(UINib(nibName: "PostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostCollectionViewCell")
         collectionView.register(UINib(nibName: "ProductDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductDetailCollectionViewCell")
         pageControl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -37,9 +38,28 @@ class ProductDetailVC: BaseViewController {
         descriptionTextView.setContentOffset(.zero, animated: false)
     }
     
+    func fetchProductDetailFromServer () {
+        if let productId = currentProduct?.productId {
+            ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
+                if isSuccess {
+                    self.updateCurrentProductObject(product: response as! Product)
+                    self.populateProductData()
+                }
+            }
+        }
+        
+    }
+    
+    func updateCurrentProductObject(product : Product) {
+        currentProduct?.isFavourite = product.isFavourite
+        currentProduct?.posts = product.posts
+    }
+    
     func populateProductData()
     {
-        priceLabel.text = String(currentProduct!.searchPrice)
+        if let price = currentProduct?.searchPrice {
+            priceLabel.text = String(price)
+        }
         if let productName = currentProduct?.productName , let productDescription = currentProduct?.description {
             descriptionTextView.text = productName + "\n" +  productDescription
         }
@@ -51,6 +71,37 @@ class ProductDetailVC: BaseViewController {
         if let imageURL = currentProduct?.imageURL {
             productViewModel.imageURL = URL(string :imageURL)
         }
+        makePostCellViewModel()
+        pageControl.currentPage = 0
+        if let posts = currentProduct?.posts {
+            if posts.count == 0 {
+                swipeToSeeView.isHidden = true
+            } else {
+                swipeToSeeView.isHidden = false
+            }
+            pageControl.numberOfPages = posts.count + 1
+        } else {
+            pageControl.numberOfPages = 1
+            swipeToSeeView.isHidden = true
+        }
+    }
+    func makePostCellViewModel() {
+        viewModels.removeAll()
+        if let posts = currentProduct?.posts {
+            for post in posts {
+                var viewModel = PostCellViewModel()
+                viewModel.title = post.user.username
+                viewModel.imageURL = URL(string: post.imageURL)
+                viewModel.bra = post.user.measurement?.bra
+                viewModel.height = post.user.measurement?.height
+                viewModel.hip = post.user.measurement?.hip
+                viewModel.cup = post.user.measurement?.cup
+                viewModel.waist = post.user.measurement?.waist
+                viewModels.append(viewModel)
+            }
+        }
+        self.collectionView.reloadData()
+        
     }
     func populateDummyData() {
         for _ in 0...4 {
@@ -136,4 +187,18 @@ extension ProductDetailVC : UICollectionViewDelegate , UICollectionViewDataSourc
     
     
     
+}
+extension ProductDetailVC: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let x = scrollView.contentOffset.x
+        let w = scrollView.bounds.size.width
+        let currentPage = Int(ceil(x/w))
+        pageControl.currentPage = currentPage
+        if currentPage > 0 {
+            swipeToSeeView.isHidden = true
+        } else {
+            swipeToSeeView.isHidden = false
+        }
+        
+    }
 }

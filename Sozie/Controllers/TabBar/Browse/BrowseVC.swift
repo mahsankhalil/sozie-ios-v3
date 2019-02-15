@@ -24,6 +24,7 @@ class BrowseVC: BaseViewController {
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var itemsCountLbl: UILabel!
+    @IBOutlet weak var clearFilterButton: UIButton!
     @IBOutlet weak var productsCollectionVu: UICollectionView! {
         didSet {
             let layout = WaterfallLayout()
@@ -56,12 +57,21 @@ class BrowseVC: BaseViewController {
         didSet {
             productViewModels.removeAll()
             for product in productList {
-                let imageURL = product.imageURL.getActualSizeImageURL()
-                var brandImageURL = ""
-                if let brand = UserDefaultManager.getBrandWithId(brandId: product.brandId) {
-                    brandImageURL = brand.titleImage
+                var imageURL = ""
+                if let productImageURL = product.imageURL {
+                    imageURL = productImageURL.getActualSizeImageURL() ?? ""
                 }
-                let viewModel = ProductImageCellViewModel(title: String(product.searchPrice), attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL ?? ""))
+                var brandImageURL = ""
+                if let brandId = product.brandId {
+                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+                        brandImageURL = brand.titleImage
+                    }
+                }
+                var searchPrice = 0.0
+                if let price = product.searchPrice {
+                    searchPrice = Double(price)
+                }
+                let viewModel = ProductImageCellViewModel(title: String(searchPrice), attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL))
                 productViewModels.append(viewModel)
             }
             
@@ -80,6 +90,7 @@ class BrowseVC: BaseViewController {
         // Do any additional setup after loading the view.
         setupSozieLogoNavBar()
         fetchBrandsFromServer()
+        fetchProductCount()
         setupViews()
         let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         refreshControl.triggerVerticalOffset = 50.0
@@ -144,6 +155,29 @@ class BrowseVC: BaseViewController {
         filterBySozies = false
         productList.removeAll()
         fetchProductsFromServer()
+        fetchProductCount()
+
+    }
+    
+    func fetchProductCount() {
+        var dataDict = [String : Any]()
+        dataDict["pagesize"] = pageSize
+        dataDict["pages_per_request"] = pagesPerRequest
+        
+        if let brandId = filterBrandId {
+            dataDict["brand"] = brandId
+        }
+        if let categoryIds = filterCategoryIds {
+            dataDict["categories"] = categoryIds
+        }
+        dataDict["filter_by_sozie"] = filterBySozies
+        ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
+            if isSuccess {
+                self.itemsCountLbl.text = String((response as! countResponse).count) + " ITEMS"
+            } else {
+                
+            }
+        }
     }
     
     func fetchProductsFromServer() {
@@ -151,7 +185,9 @@ class BrowseVC: BaseViewController {
         var dataDict = [String : Any]()
         dataDict["pagesize"] = pageSize
         dataDict["pages_per_request"] = pagesPerRequest
-        dataDict["is_first_page"] = isFirstPage
+        if isFirstPage {
+            dataDict["is_first_page"] = isFirstPage
+        }
         if let brandId = filterBrandId {
             dataDict["brand"] = brandId
         }
@@ -209,6 +245,8 @@ class BrowseVC: BaseViewController {
     // MARK: - Actions
     @IBAction func filterBtnTapped(_ sender: Any) {
         showPopUpWithTitle(type: .filter)
+    }
+    @IBAction func clearFilterButtonTapped(_ sender: Any) {
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
         if searchVuHeightConstraint.constant == 0 {
@@ -339,6 +377,7 @@ extension BrowseVC : PopupNavControllerDelegate {
         }
         self.isFirstPage = true
         self.productsCollectionVu.refreshControl?.beginRefreshing()
+        fetchProductCount()
         fetchProductsFromServer()
 
     }

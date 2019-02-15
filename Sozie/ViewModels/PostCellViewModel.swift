@@ -8,7 +8,12 @@
 
 import UIKit
 
-struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling , ReuseIdentifierProviding {
+struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling , ReuseIdentifierProviding , MeasurementViewModeling {
+    var bra: Int?
+    var height: Int?
+    var hip: Int?
+    var cup: String?
+    var waist: Int?
     var title: String?
     var attributedTitle: NSAttributedString?
     var imageURL: URL?

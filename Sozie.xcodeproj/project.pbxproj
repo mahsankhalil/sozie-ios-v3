@@ -66,6 +66,9 @@
 		6183FFD021E756810090393E /* SelectWorkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6183FFCF21E756810090393E /* SelectWorkVC.swift */; };
 		6188C70321EC98A000B51EA1 /* SizeChartPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6188C70221EC98A000B51EA1 /* SizeChartPopUpVC.swift */; };
 		6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6188C70721ECA30200B51EA1 /* SizeCell.swift */; };
+		6197726622169B08003A7091 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6197726522169B08003A7091 /* Post.swift */; };
+		619772682216BF1E003A7091 /* MeasurementViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619772672216BF1E003A7091 /* MeasurementViewModeling.swift */; };
+		6197726A2216C3D9003A7091 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619772692216C3D9003A7091 /* Double.swift */; };
 		6198D00321F725C50030B002 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6198D00221F725C50030B002 /* ResetPasswordVC.swift */; };
 		619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619EC53021E5F95000E4AE02 /* SizeChart.swift */; };
 		61A20A5021E4B28A00B27C8E /* MeasurementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */; };
@@ -180,6 +183,9 @@
 		6183FFCF21E756810090393E /* SelectWorkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWorkVC.swift; sourceTree = "<group>"; };
 		6188C70221EC98A000B51EA1 /* SizeChartPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeChartPopUpVC.swift; sourceTree = "<group>"; };
 		6188C70721ECA30200B51EA1 /* SizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCell.swift; sourceTree = "<group>"; };
+		6197726522169B08003A7091 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		619772672216BF1E003A7091 /* MeasurementViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewModeling.swift; sourceTree = "<group>"; };
+		619772692216C3D9003A7091 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		6198D00221F725C50030B002 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		619EC53021E5F95000E4AE02 /* SizeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeChart.swift; sourceTree = "<group>"; };
 		61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsVC.swift; sourceTree = "<group>"; };
@@ -448,6 +454,7 @@
 				610A743C22031B7C00964886 /* Product.swift */,
 				61592034220D882600816034 /* Category.swift */,
 				61592036220D884F00816034 /* SubCategory.swift */,
+				6197726522169B08003A7091 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -518,6 +525,7 @@
 				D738BF6221F3D72600302FE5 /* Array.swift */,
 				6103E1AA21FEE03900C7E7CF /* String.swift */,
 				61E8E73222044FA9008C33BC /* ViewController.swift */,
+				619772692216C3D9003A7091 /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -549,6 +557,7 @@
 				61592032220C176500816034 /* ProductImageCellViewModel.swift */,
 				611E41212214719F007B1C62 /* ProductDetailCellViewModel.swift */,
 				611E412322147224007B1C62 /* PostCellViewModel.swift */,
+				619772672216BF1E003A7091 /* MeasurementViewModeling.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -778,6 +787,7 @@
 				69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */,
 				6103E1B021FF330400C7E7CF /* TitleCell.swift in Sources */,
 				6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */,
+				6197726622169B08003A7091 /* Post.swift in Sources */,
 				61E8E73322044FA9008C33BC /* ViewController.swift in Sources */,
 				610A7439220307D000964886 /* TitleImageViewModeling.swift in Sources */,
 				DA48CB1C21FC16F4006804B6 /* TextFieldDelegateProviding.swift in Sources */,
@@ -821,6 +831,7 @@
 				69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */,
 				61145CC121DB926700062332 /* ServerManager.swift in Sources */,
 				DA48CB1E21FC17E8006804B6 /* UIButtonProviding.swift in Sources */,
+				6197726A2216C3D9003A7091 /* Double.swift in Sources */,
 				DA48CB2421FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift in Sources */,
 				61A20A5421E4DE1D00B27C8E /* JSONDecoder+DecodeResponse.swift in Sources */,
 				6188C70321EC98A000B51EA1 /* SizeChartPopUpVC.swift in Sources */,
@@ -831,6 +842,7 @@
 				6103E1A021FB191100C7E7CF /* ProfileRootVC.swift in Sources */,
 				619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */,
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
+				619772682216BF1E003A7091 /* MeasurementViewModeling.swift in Sources */,
 				6103E19121FAF24200C7E7CF /* TabBarVC.swift in Sources */,
 				6103E1A421FB43B600C7E7CF /* ProfileSideMenuVC.swift in Sources */,
 				6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */,

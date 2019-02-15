@@ -26,6 +26,8 @@ class ServerManager: NSObject {
     static let productListURL = ServerManager.serverURL + "product/browse/feed/get/"
     static let logoutURL = ServerManager.serverURL + "user/logout/"
     static let categoriesURL = ServerManager.serverURL + "common/categories"
+    static let productDetailURL = ServerManager.serverURL + "product/detail/"
+    static let productCountURL = ServerManager.serverURL + "product/browse/feed/count/"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
     func loginWith(params: [String: Any], block: CompletionHandler) {
@@ -148,8 +150,7 @@ class ServerManager: NSObject {
         }
     }
     
-    func forgotPasswordWith(params : [String : Any] , block : CompletionHandler)
-    {
+    func forgotPasswordWith(params : [String : Any] , block : CompletionHandler) {
         Alamofire.request(ServerManager.forgotPasswordURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             
             let decoder = JSONDecoder()
@@ -163,8 +164,7 @@ class ServerManager: NSObject {
             
         }
     }
-    func resetPasswordWith(params : [String : Any] , block : CompletionHandler)
-    {
+    func resetPasswordWith(params : [String : Any] , block : CompletionHandler) {
         Alamofire.request(ServerManager.resetPassword, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             
             let decoder = JSONDecoder()
@@ -178,8 +178,7 @@ class ServerManager: NSObject {
             
         }
     }
-    func getAllProducts(params : [String : Any] , block : CompletionHandler)
-    {
+    func getAllProducts(params : [String : Any] , block : CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") 
         ]
@@ -201,8 +200,42 @@ class ServerManager: NSObject {
             
         }
     }
-    func getAllCategories(params: [String : Any], block : CompletionHandler)
-    {
+    func getProductsCount(params : [String : Any] , block : CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.productCountURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<countResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
+    func getProductDetail(productId : Int , block : CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.productDetailURL + String(productId) + "/"
+        Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<Product> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
+    func getAllCategories(params: [String : Any], block : CompletionHandler) {
         Alamofire.request(ServerManager.categoriesURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             
             let decoder = JSONDecoder()
@@ -217,8 +250,7 @@ class ServerManager: NSObject {
         }
     }
     
-    func logoutUser(params : [String : Any], block : CompletionHandler)
-    {
+    func logoutUser(params : [String : Any], block : CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
