@@ -799,10 +799,10 @@
                     <navigationItem key="navigationItem" id="BeI-Qc-KRn"/>
                     <size key="freeformSize" width="375" height="440"/>
                     <connections>
-                        <outlet property="backBtn" destination="FtI-Hi-YVl" id="PpD-V7-bS2"/>
-                        <outlet property="doneBtn" destination="RCw-w0-iQL" id="yzs-Sp-vIG"/>
-                        <outlet property="tblVu" destination="wjJ-Ot-Qi1" id="TRa-Bc-yac"/>
-                        <outlet property="titleLbl" destination="lgt-KP-rRU" id="LpA-ZU-ylb"/>
+                        <outlet property="backButton" destination="FtI-Hi-YVl" id="k98-KH-W6P"/>
+                        <outlet property="doneButton" destination="RCw-w0-iQL" id="Cu6-Ut-10O"/>
+                        <outlet property="tableView" destination="wjJ-Ot-Qi1" id="YJo-u6-e6k"/>
+                        <outlet property="titleLabel" destination="lgt-KP-rRU" id="FM4-qA-pqD"/>
                         <outlet property="topView" destination="Was-bu-cZV" id="gQG-BI-D96"/>
                     </connections>
                 </viewController>

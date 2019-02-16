@@ -9,18 +9,14 @@
 import UIKit
 import SVProgressHUD
 
-struct BrandCellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling , ReuseIdentifierProviding {
+struct BrandCellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling, ReuseIdentifierProviding {
     var title: String?
     var attributedTitle: NSAttributedString?
     var isCheckmarkHidden: Bool
     let reuseIdentifier = "TitleAndCheckmarkCell"
-
 }
 
 class SelectWorkVC: UIViewController {
-
-//    private let reuseIdentifier = "TitleAndCheckmarkCell"
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchTxtFld: UITextField!
     @IBOutlet weak var backBtn: UIButton!

@@ -7,34 +7,36 @@
 //
 
 import UIKit
+
 public enum FilterType : String {
     case category = "CATEGORY"
     case filter = "FILTER"
     case sozie = "SOZIE"
 }
+
 struct DisclosureCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling , CheckmarkViewModeling {
     var isCheckmarkHidden: Bool = true
     var title: String?
     var attributedTitle: NSAttributedString?
     var reuseIdentifier : String = "DisclosureCell"
 }
+
 protocol ListingPopupVCDelegate {
-    func doneButtonTapped(type : FilterType? , id : Int?)
+    func doneButtonTapped(type: FilterType? , id : Int?)
 }
+
 class ListingPopupVC: UIViewController {
-
     var delegate : ListingPopupVCDelegate?
-
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    var popupType : PopupType?
-    var viewModels : [DisclosureCellViewModel] = []
-    var brandList : [Brand]?
-    var selectedCategory : Category?
+    var popupType: PopupType?
+    var viewModels: [DisclosureCellViewModel] = []
+    var brandList: [Brand]?
+    var selectedCategory: Category?
     private var selectedViewModelIndex: Int?
-    private var categoriesList : [Category] = [] {
+    private var categoriesList: [Category] = [] {
         didSet {
             viewModels.removeAll()
             for category in categoriesList {
@@ -52,7 +54,7 @@ class ListingPopupVC: UIViewController {
         topView.layer.cornerRadius = 10.0
         
     }
-    func setPopupType(type : PopupType? , brandList : [Brand]?) {
+    func setPopupType(type: PopupType? , brandList: [Brand]?) {
         self.popupType = type
         self.brandList = brandList
         self.titleLabel.text = popupType?.rawValue
@@ -158,7 +160,8 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-extension ListingPopupVC : SelectionPopupVCDelegate {
+extension ListingPopupVC: SelectionPopupVCDelegate {
+    
     func doneButtonTapped(type: FilterType?, id: Int?) {
         delegate?.doneButtonTapped(type: type, id: id)
     }

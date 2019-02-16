@@ -15,15 +15,14 @@ protocol SelectionPopupVCDelegate {
 class SelectionPopupVC: UIViewController {
     
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var doneBtn: UIButton!
-    @IBOutlet weak var tblVu: UITableView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
     private var selectedViewModelIndex: Int?
     var delegate : SelectionPopupVCDelegate?
-
     var popupType: PopupType?
-
     var category : Category? = nil {
         didSet {
             viewModels.removeAll()
@@ -33,17 +32,6 @@ class SelectionPopupVC: UIViewController {
             }
         }
     }
-    
-//    var subcategories : [SubCategory]? = [] {
-//        didSet {
-//            viewModels.removeAll()
-//            for subCategory in subcategories! {
-//                let viewModel = BrandCellViewModel(title: subCategory.subCategoryName, attributedTitle: nil, isCheckmarkHidden: true)
-//                viewModels.append(viewModel)
-//                self.tblVu.reloadData()
-//            }
-//        }
-//    }
     var brandList: [Brand]? = [] {
         didSet {
             viewModels.removeAll()
@@ -67,11 +55,11 @@ class SelectionPopupVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if popupType == PopupType.category {
-            titleLbl.text = category?.categoryName
+            titleLabel.text = category?.categoryName
         } else {
-            titleLbl.text = "BRANDS"
+            titleLabel.text = "BRANDS"
         }
-        self.tblVu.reloadData()
+        self.tableView.reloadData()
     }
     
     

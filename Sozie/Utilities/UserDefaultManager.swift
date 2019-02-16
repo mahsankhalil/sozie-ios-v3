@@ -36,6 +36,11 @@ class UserDefaultManager: NSObject {
         return loginResponse.user?.type
     }
     
+    static func deleteLoginResponse() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginResponse)
+        UserDefaults.standard.synchronize()
+    }
+    
     static func getAccessToken() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.access

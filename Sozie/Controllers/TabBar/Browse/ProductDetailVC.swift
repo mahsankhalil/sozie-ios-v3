@@ -19,9 +19,11 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var swipeToSeeView: UIView!
+    
     var currentProduct : Product?
     var viewModels : [PostCellViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,8 +57,7 @@ class ProductDetailVC: BaseViewController {
         currentProduct?.posts = product.posts
     }
     
-    func populateProductData()
-    {
+    func populateProductData() {
         if let price = currentProduct?.searchPrice {
             priceLabel.text = String(price)
         }
@@ -146,9 +147,7 @@ extension ProductDetailVC : UICollectionViewDelegate , UICollectionViewDataSourc
         } else {
             viewModel = viewModels[indexPath.row - 1]
         }
-        var collectionViewCell: UICollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier, for: indexPath)
-        
-            
+        let collectionViewCell: UICollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier, for: indexPath)
         guard let cell = collectionViewCell else { return UICollectionViewCell() }
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel as! RowViewModel)

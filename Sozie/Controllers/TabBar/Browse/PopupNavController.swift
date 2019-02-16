@@ -7,13 +7,14 @@
 //
 
 import UIKit
+
 protocol PopupNavControllerDelegate {
     func doneButtonTapped(type : FilterType? , id : Int?)
 }
+
 class PopupNavController: UINavigationController {
-
+    
     var navigationHandler: (() -> Void)?
-
     var popupType: PopupType?
     var brandList : [Brand]?
     var popupDelegate : PopupNavControllerDelegate?

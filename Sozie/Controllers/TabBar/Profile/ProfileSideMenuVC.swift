@@ -86,8 +86,9 @@ class ProfileSideMenuVC: BaseViewController {
         dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
         ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-                self.changeRootVCToLoginNC()
-            }
+            UserDefaultManager.deleteLoginResponse()
+            self.changeRootVCToLoginNC()
+        }
     }
     /*
     // MARK: - Navigation
@@ -177,7 +178,6 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-            editProfileVC.isFromEditProfile = true
             self.navigationController?.pushViewController(editProfileVC, animated: true)
         default:
             return

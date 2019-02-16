@@ -11,10 +11,12 @@ import UIKit
 struct SubCategory: Codable {
     var subCategoryId: Int
     var subCategoryName: String
+    
     enum CodingKeys: String, CodingKey {
         case subCategoryId = "id"
         case subCategoryName = "name"
     }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         subCategoryId = try values.decode(Int.self, forKey: .subCategoryId)

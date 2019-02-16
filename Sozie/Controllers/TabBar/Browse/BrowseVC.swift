@@ -39,7 +39,7 @@ class BrowseVC: BaseViewController {
     }
     @IBOutlet weak var brandsCollectionVu: UICollectionView!
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
-    var filterCategoryIds : [Int?]?
+    var filterCategoryIds : [Int]?
     var filterBrandId : Int?
     var filterBySozies = false
     private var brandList: [Brand] = [] {
@@ -170,7 +170,9 @@ class BrowseVC: BaseViewController {
         if let categoryIds = filterCategoryIds {
             dataDict["categories"] = categoryIds
         }
-        dataDict["filter_by_sozie"] = filterBySozies
+        if filterBySozies {
+            dataDict["filter_by_sozie"] = filterBySozies
+        }
         ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
             if isSuccess {
                 self.itemsCountLbl.text = String((response as! countResponse).count) + " ITEMS"
@@ -194,7 +196,9 @@ class BrowseVC: BaseViewController {
         if let categoryIds = filterCategoryIds {
             dataDict["categories"] = categoryIds
         }
-        dataDict["filter_by_sozie"] = filterBySozies
+        if filterBySozies {
+            dataDict["filter_by_sozie"] = filterBySozies
+        }
         ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
             
             self.productsCollectionVu.refreshControl?.endRefreshing()
@@ -202,7 +206,6 @@ class BrowseVC: BaseViewController {
         
             if isSuccess {
                 self.productList.append(contentsOf: response as! [Product])
-//                self.productList = response as! [Product]
             } else {
                 
             }
@@ -308,7 +311,6 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
             return CGSize(width: 95.0  , height: 54.0 )
         } else {
             return CGSize(width: (UIScreen.main.bounds.size.width-44)/2  , height: 200.0 )
-//            return CGSize(width: 0, height: 0)
         }
 
     }
@@ -366,9 +368,12 @@ extension BrowseVC : PopupNavControllerDelegate {
             self.filterBrandId = id
             self.filterBySozies = false
         } else if type == FilterType.category {
-            self.filterCategoryIds = [id]
-            self.filterBrandId = nil
-            self.filterBySozies = false
+            if let catId = id {
+                self.filterCategoryIds = [catId]
+                self.filterBrandId = nil
+                self.filterBySozies = false
+            }
+            
         }
         else if type == FilterType.sozie {
             self.filterCategoryIds = nil
