@@ -28,6 +28,7 @@ class ServerManager: NSObject {
     static let categoriesURL = ServerManager.serverURL + "common/categories"
     static let productDetailURL = ServerManager.serverURL + "product/detail/"
     static let productCountURL = ServerManager.serverURL + "product/browse/feed/count/"
+    static let favProductURL = ServerManager.serverURL + "product/favourite/"
     public typealias CompletionHandler = ((Bool,Any)->Void)?
     
     func loginWith(params: [String: Any], block: CompletionHandler) {
@@ -235,7 +236,45 @@ class ServerManager: NSObject {
             
         }
     }
-    func getAllCategories(params: [String : Any], block : CompletionHandler) {
+    
+    func favouriteProduct(params : [String : Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.favProductURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
+    
+    func removeFavouriteProduct(productId: Int, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.favProductURL + String(productId) + "/"
+        Alamofire.request(url, method: .delete, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true , obj.value!)
+            }
+            obj.ifFailure {
+                block!(false , obj.error!)
+            }
+            
+        }
+    }
+    
+    func getAllCategories(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.categoriesURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             
             let decoder = JSONDecoder()
@@ -249,6 +288,7 @@ class ServerManager: NSObject {
             
         }
     }
+    
     
     func logoutUser(params : [String : Any], block : CompletionHandler) {
         let headers: HTTPHeaders = [

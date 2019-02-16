@@ -72,6 +72,11 @@ class ProductDetailVC: BaseViewController {
         if let imageURL = currentProduct?.imageURL {
             productViewModel.imageURL = URL(string :imageURL)
         }
+        if currentProduct?.isFavourite == false {
+            heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
+        } else {
+            heartButton.setImage(UIImage(named: "Filled Heart"), for: .normal)
+        }
         makePostCellViewModel()
         pageControl.currentPage = 0
         if let posts = currentProduct?.posts {
@@ -132,6 +137,31 @@ class ProductDetailVC: BaseViewController {
     @IBAction func shareButtonTapped(_ sender: Any) {
     }
     @IBAction func heartButtonTapped(_ sender: Any) {
+        
+        if currentProduct?.isFavourite == false {
+            if let productId = currentProduct?.productId {
+                self.heartButton.setImage(UIImage(named: "Filled Heart"), for: .normal)
+                var dataDict = [String : Any]()
+                dataDict["user"] = UserDefaultManager.getCurrentUserId()
+                dataDict["product"] = productId
+                ServerManager.sharedInstance.favouriteProduct(params: dataDict) { (isSuccess, response) in
+                    if isSuccess {
+                        self.currentProduct?.isFavourite = true
+                    }
+                }
+            }
+        } else {
+            if let productId = currentProduct?.productId {
+                self.heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
+                ServerManager.sharedInstance.removeFavouriteProduct(productId: productId) { (isSuccess, response) in
+                    if isSuccess {
+                        self.currentProduct?.isFavourite = false
+                    }
+                }
+            }
+        }
+        
+        
     }
 }
 extension ProductDetailVC : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout

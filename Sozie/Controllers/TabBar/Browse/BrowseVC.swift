@@ -71,7 +71,11 @@ class BrowseVC: BaseViewController {
                 if let price = product.searchPrice {
                     searchPrice = Double(price)
                 }
-                let viewModel = ProductImageCellViewModel(title: String(searchPrice), attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL))
+                var postCount = 0
+                if let count = product.postCount {
+                    postCount = count
+                }
+                let viewModel = ProductImageCellViewModel(count: postCount, title: String(searchPrice), attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL))
                 productViewModels.append(viewModel)
             }
             
@@ -153,6 +157,7 @@ class BrowseVC: BaseViewController {
         filterBrandId = nil
         filterCategoryIds = nil
         filterBySozies = false
+        clearFilterButton.isHidden = true
         productList.removeAll()
         fetchProductsFromServer()
         fetchProductCount()
@@ -250,6 +255,7 @@ class BrowseVC: BaseViewController {
         showPopUpWithTitle(type: .filter)
     }
     @IBAction func clearFilterButtonTapped(_ sender: Any) {
+        refreshData()
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
         if searchVuHeightConstraint.constant == 0 {
@@ -381,6 +387,7 @@ extension BrowseVC : PopupNavControllerDelegate {
             self.filterBySozies = true
         }
         self.isFirstPage = true
+        self.clearFilterButton.isHidden = false
         self.productsCollectionVu.refreshControl?.beginRefreshing()
         fetchProductCount()
         fetchProductsFromServer()
