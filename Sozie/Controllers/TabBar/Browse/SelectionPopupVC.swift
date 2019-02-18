@@ -8,22 +8,58 @@
 
 import UIKit
 
+protocol SelectionPopupVCDelegate {
+    func doneButtonTapped(type : FilterType? , id : Int?)
+}
+
 class SelectionPopupVC: UIViewController {
     
-    private let reuseIdentifier = "TitleAndCheckmarkCell"
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var doneBtn: UIButton!
-    @IBOutlet weak var tblVu: UITableView!
-    var popUpTitle: String?
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var selectedViewModelIndex: Int?
+    var delegate : SelectionPopupVCDelegate?
+    var popupType: PopupType?
+    var category : Category? = nil {
+        didSet {
+            viewModels.removeAll()
+            for subCategory in (category?.subCategories)! {
+                let viewModel = BrandCellViewModel(title: subCategory.subCategoryName, attributedTitle: nil, isCheckmarkHidden: true)
+                viewModels.append(viewModel)
+            }
+        }
+    }
+    var brandList: [Brand]? = [] {
+        didSet {
+            viewModels.removeAll()
+            for brand in brandList! {
+                let viewModel = BrandCellViewModel(title: brand.label, attributedTitle: nil, isCheckmarkHidden: true)
+                viewModels.append(viewModel)
+            }
+        }
+    }
+    private var viewModels: [BrandCellViewModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         topView.layer.cornerRadius = 10.0
-        titleLbl.text = popUpTitle
+        
+//        titleLbl.text = popupType?.rawValue
+    
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if popupType == PopupType.category {
+            titleLabel.text = category?.categoryName
+        } else {
+            titleLabel.text = "BRANDS"
+        }
+        self.tableView.reloadData()
     }
     
     
@@ -41,6 +77,18 @@ class SelectionPopupVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func doneBtnTapped(_ sender: Any) {
+        if let index = selectedViewModelIndex {
+            var selectedId : Int?
+            var filterType : FilterType?
+            if popupType == PopupType.category {
+                selectedId = category?.subCategories[index].subCategoryId
+                filterType = FilterType.category
+            } else if popupType == PopupType.filter {
+                selectedId = brandList?[index].brandId
+                filterType = FilterType.filter
+            }
+            delegate?.doneButtonTapped(type: filterType, id: selectedId)
+        }
     }
     
 }
@@ -48,22 +96,24 @@ class SelectionPopupVC: UIViewController {
 extension SelectionPopupVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
+        let viewModel = viewModels[indexPath.row]
+        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
         
         if tableViewCell == nil {
-            tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier:reuseIdentifier)
+            tableView.register(UINib(nibName: viewModel.reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier:viewModel.reuseIdentifier)
         }
         
         guard let cell = tableViewCell else { return UITableViewCell() }
         
         cell.selectionStyle = .none
-        
+        if let cellConfigurable = cell as? CellConfigurable {
+            cellConfigurable.setup(viewModel)
+        }
         
         
         return cell
@@ -71,6 +121,15 @@ extension SelectionPopupVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        var indexPathsToReload = [indexPath]
+        if let previousSelectedIndex = selectedViewModelIndex {
+            viewModels[previousSelectedIndex].isCheckmarkHidden = true
+            indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
+        }
+        viewModels[indexPath.row].isCheckmarkHidden = false
+        selectedViewModelIndex = indexPath.row
+        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
     }
     
 }

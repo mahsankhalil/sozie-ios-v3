@@ -9,16 +9,14 @@
 import UIKit
 import SVProgressHUD
 
-struct BrandCellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling {
+struct BrandCellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModeling, ReuseIdentifierProviding {
     var title: String?
     var attributedTitle: NSAttributedString?
     var isCheckmarkHidden: Bool
+    let reuseIdentifier = "TitleAndCheckmarkCell"
 }
 
 class SelectWorkVC: UIViewController {
-
-    private let reuseIdentifier = "TitleAndCheckmarkCell"
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchTxtFld: UITextField!
     @IBOutlet weak var backBtn: UIButton!
@@ -129,18 +127,19 @@ extension SelectWorkVC : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var tableViewcell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
+        let viewModel = viewModels[indexPath.row]
+
+        var tableViewcell = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
         
         if tableViewcell == nil {
-            tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-            tableViewcell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
+            tableView.register(UINib(nibName: viewModel.reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
+            tableViewcell = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
         }
         
         guard let cell = tableViewcell else { return UITableViewCell() }
         
         cell.selectionStyle = .none
         
-        let viewModel = viewModels[indexPath.row]
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
         }

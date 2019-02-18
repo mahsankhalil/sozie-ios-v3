@@ -86,8 +86,9 @@ class ProfileSideMenuVC: BaseViewController {
         dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
         ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
-                self.changeRootVCToLoginNC()
-            }
+            UserDefaultManager.deleteLoginResponse()
+            self.changeRootVCToLoginNC()
+        }
     }
     /*
     // MARK: - Navigation
@@ -173,7 +174,15 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        switch indexPath.row {
+        case 0:
+            let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+            self.navigationController?.pushViewController(editProfileVC, animated: true)
+        default:
+            return
+            
+        }
     }
     
 }

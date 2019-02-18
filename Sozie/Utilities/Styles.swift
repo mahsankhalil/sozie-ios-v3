@@ -143,9 +143,13 @@ extension UIView {
         layer.masksToBounds = true
     }
     
-    func applyStandardBorder() {
+    func applyStandardBorder(hexColor : String = "DADADA") {
         layer.borderWidth = 1.0
-        layer.borderColor = UIColor(hex: "DADADA").cgColor
+        layer.borderColor = UIColor(hex: hexColor).cgColor
+    }
+    func makeViewCircle() {
+        layer.cornerRadius = frame.size.width/2.0
+        clipsToBounds = true
     }
 }
 

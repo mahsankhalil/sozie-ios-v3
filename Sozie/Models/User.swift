@@ -27,7 +27,7 @@ struct User: Codable {
     var socialId: String?
     var signUpMedium: String?
     var socialToken: String?
-    var measurement: Measurement?
+    var measurement: Measurements?
     
     enum CodingKeys: String, CodingKey {
         case username
@@ -68,17 +68,17 @@ struct User: Codable {
         socialToken = try? values.decode(String.self, forKey: .socialToken)
         signUpMedium = try? values.decode(String.self, forKey: .signUpMedium)
 
-        measurement = try? values.decode(Measurement.self, forKey: .measurement)
+        measurement = try? values.decode(Measurements.self, forKey: .measurement)
     }
 }
 
-struct Measurement: Codable {
-    var bra: String?
-    var height: String?
+struct Measurements: Codable {
+    var bra: Int?
+    var height: Int?
     var bodyShape: String?
-    var hip: String?
+    var hip: Int?
     var cup: String?
-    var waist: String?
+    var waist: Int?
     
     enum CodingKeys: String, CodingKey {
         case bra
@@ -91,11 +91,11 @@ struct Measurement: Codable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        bra = try values.decode(String.self, forKey: .bra)
-        height = try values.decode(String.self, forKey: .height)
-        bodyShape = try values.decode(String.self, forKey: .bodyShape)
-        hip = try values.decode(String.self, forKey: .hip)
-        cup = try values.decode(String.self, forKey: .cup)
-        waist = try values.decode(String.self, forKey: .waist)
+        bra = try? values.decode(Int.self, forKey: .bra)
+        height = try? values.decode(Int.self, forKey: .height)
+        bodyShape = try? values.decode(String.self, forKey: .bodyShape)
+        hip = try? values.decode(Int.self, forKey: .hip)
+        cup = try? values.decode(String.self, forKey: .cup)
+        waist = try? values.decode(Int.self, forKey: .waist)
     }
 }

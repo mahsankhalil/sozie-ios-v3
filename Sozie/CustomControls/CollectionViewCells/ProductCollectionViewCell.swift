@@ -15,13 +15,14 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var maskImageView: UIImageView!
+    
     override func awakeFromNib() {
         productImageView.layer.cornerRadius = 5.0
         productImageView.clipsToBounds = true
         
     }
 }
-
 
 extension ProductCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
@@ -38,7 +39,14 @@ extension ProductCollectionViewCell: CellConfigurable {
             titleImageView.sd_setImage(with: titleImgModel.titleImageURL, completed: nil)
         }
         if let titleModel = viewModel as? TitleViewModeling {
-            priceLabel.text = titleModel.title
+            priceLabel.text = "$ " + titleModel.title!
+        }
+        if let countModel = viewModel as? CountViewModeling {
+            if countModel.count > 0 {
+                maskImageView.isHidden = false
+            } else {
+                maskImageView.isHidden = true
+            }
         }
     }
     

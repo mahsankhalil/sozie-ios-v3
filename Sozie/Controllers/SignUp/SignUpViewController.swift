@@ -21,37 +21,54 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var firstNameTxtFld: MFTextField!
     @IBOutlet weak var userNameTxtFld: MFTextField!
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
-
+    @IBOutlet weak var signUpButton: DZGradientButton!
+    
     let validator = Validator()
     var isFemaleSelected = false
     var signUpDict: [String: Any]?
-    var tipVu: EasyTipView?
-
+    var tipView: EasyTipView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         maleBtn.applyButtonUnSelected()
         femaleBtn.applyButtonUnSelected()
-        
         dateOfBirtTxtFld.title = "DATE OF BIRTH"
         restrictToFourteenYears()
-
         firstNameTxtFld.setupAppDesign()
         lastNameTxtFld.setupAppDesign()
         userNameTxtFld.setupAppDesign()
         dateOfBirtTxtFld.setupAppDesign()
         applyValidators()
+        populateCurrentUserData()
         populateSocialData()
     }
     
     func populateSocialData() {
-        if let firstName = signUpDict![User.CodingKeys.firstName.stringValue] {
+        if let firstName = signUpDict?[User.CodingKeys.firstName.stringValue] {
             firstNameTxtFld.text = firstName as? String
         }
         
-        if let lastName = signUpDict![User.CodingKeys.lastName.stringValue] {
+        if let lastName = signUpDict?[User.CodingKeys.lastName.stringValue] {
             lastNameTxtFld.text = lastName as? String
         }
+    }
+    
+    func populateCurrentUserData()
+    {
+        if let currentUser = UserDefaultManager.getCurrentUserObject() {
+            firstNameTxtFld.text = currentUser.firstName
+            lastNameTxtFld.text = currentUser.lastName
+            dateOfBirtTxtFld.text = currentUser.birthday
+            dateOfBirtTxtFld.date = UtilityManager.dateFromStringWithFormat(date: currentUser.birthday, format: "yyyy-MM-dd") as Date
+            userNameTxtFld.text = currentUser.username
+            if currentUser.gender == "Female" {
+                applyFemaleSelection()
+            }
+            signUpButton.setTitle("Save", for: .normal)
+        }
+        
+        
     }
     
     //MARK: - Custom Methods
@@ -105,6 +122,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         }
     }
     
+    func updateProfile() {
+        var dataDict = [String : Any]()
+        dataDict[User.CodingKeys.firstName.stringValue] = firstNameTxtFld.text
+        dataDict[User.CodingKeys.lastName.stringValue] = lastNameTxtFld.text
+        dataDict[User.CodingKeys.username.stringValue] = userNameTxtFld.text
+        dataDict[User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
+        if isFemaleSelected {
+            dataDict[User.CodingKeys.gender.stringValue] = "Female"
+        }
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+            }
+        }
+    }
+    
     // MARK: - Validation CallBacks
 
     func validationSuccessful() {
@@ -112,7 +150,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if !isFemaleSelected {
             UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
         } else {
-            verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
+            if let _ = UserDefaultManager.getCurrentUserObject() {
+                updateProfile()
+            } else {
+                verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
+            }
         }
     }
     
@@ -151,22 +193,25 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         dateOfBirtTxtFld.pickerView.maximumDate = fourteenYearsAgoDate
     }
     
+    func applyFemaleSelection() {
+        isFemaleSelected = true
+        femaleBtn.applyButtonSelected()
+        maleBtn.applyButtonUnSelected()
+        femaleBtn.applyButtonShadow()
+        maleBtn.layer.shadowOpacity = 0.0
+        tipView?.dismiss()
+    }
+    
     @IBAction func signupButtonPressed(_ sender: Any) {
         validator.validate(self)
     }
     
     @IBAction func femaleBtnTapped(_ sender: Any) {
-        isFemaleSelected = true
-        femaleBtn.applyButtonSelected()
-        maleBtn.applyButtonUnSelected()
-        femaleBtn.applyButtonShadow()
-        
-        maleBtn.layer.shadowOpacity = 0.0
-        tipVu?.dismiss()
+        applyFemaleSelection()
     }
     
     @IBAction func maleBtnTapped(_ sender: Any) {
-        tipVu?.dismiss()
+        tipView?.dismiss()
         var preferences = EasyTipView.globalPreferences
         preferences.drawing.foregroundColor = UIColor.white
         preferences.drawing.backgroundColor = UIColor(hex: "5CCEC4")
@@ -184,12 +229,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         
         let text = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
         
-        tipVu = EasyTipView(text: text, preferences: preferences, delegate: nil)
-        tipVu?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
+        tipView = EasyTipView(text: text, preferences: preferences, delegate: nil)
+        tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if let _ = UserDefaultManager.getCurrentUserObject() {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
