@@ -9,7 +9,12 @@
 import UIKit
 import SVProgressHUD
 import WaterfallLayout
+import CCBottomRefreshControl
 
+public enum PopupType : String {
+    case category = "CATEGORY"
+    case filter = "FILTER"
+}
 class BrowseVC: BaseViewController {
 
     @IBOutlet weak var searchTxtFld: UITextField!
@@ -19,6 +24,7 @@ class BrowseVC: BaseViewController {
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var itemsCountLbl: UILabel!
+    @IBOutlet weak var clearFilterButton: UIButton!
     @IBOutlet weak var productsCollectionVu: UICollectionView! {
         didSet {
             let layout = WaterfallLayout()
@@ -33,7 +39,9 @@ class BrowseVC: BaseViewController {
     }
     @IBOutlet weak var brandsCollectionVu: UICollectionView!
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
-    
+    var filterCategoryIds : [Int]?
+    var filterBrandId : Int?
+    var filterBySozies = false
     private var brandList: [Brand] = [] {
         didSet {
             brandViewModels.removeAll()
@@ -45,17 +53,58 @@ class BrowseVC: BaseViewController {
         }
     }
 
+    private var productList: [Product] = [] {
+        didSet {
+            productViewModels.removeAll()
+            for product in productList {
+                var imageURL = ""
+                if let productImageURL = product.imageURL {
+                    imageURL = productImageURL.getActualSizeImageURL() ?? ""
+                }
+                var brandImageURL = ""
+                if let brandId = product.brandId {
+                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+                        brandImageURL = brand.titleImage
+                    }
+                }
+                var searchPrice = 0.0
+                if let price = product.searchPrice {
+                    searchPrice = Double(price)
+                }
+                var postCount = 0
+                if let count = product.postCount {
+                    postCount = count
+                }
+                let viewModel = ProductImageCellViewModel(count: postCount, title: String(searchPrice), attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL))
+                productViewModels.append(viewModel)
+            }
+            
+            productsCollectionVu.reloadData()
+        }
+    }
     private var brandViewModels: [ImageCellViewModel] = []
     private var productViewModels : [ProductImageCellViewModel] = []
-    
+    var pageSize = 6
+    var pagesPerRequest = 3
+    var isFirstPage = true
+    var selectedProduct : Product?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupSozieLogoNavBar()
         fetchBrandsFromServer()
+        fetchProductCount()
         setupViews()
-        populateDummyData()
+        let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        refreshControl.triggerVerticalOffset = 50.0
+        refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
+        productsCollectionVu.bottomRefreshControl = refreshControl
+        let upperRefreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        upperRefreshControl.triggerVerticalOffset = 50.0
+        upperRefreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        productsCollectionVu.refreshControl = upperRefreshControl
+        self.refreshData()
     }
     // MARK: - Custom Methods
     
@@ -86,17 +135,6 @@ class BrowseVC: BaseViewController {
             self.view.layoutIfNeeded()
         }
     }
-    func populateDummyData() {
-        for index in 0...16 {
-            if index % 2 == 0 {
-                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg", withExtension: "png")))
-            } else {
-                productViewModels.append(ProductImageCellViewModel(title: "$10", attributedTitle: nil, titleImageURL: Bundle.main.url(forResource: "M_S", withExtension: "png"), imageURL:  Bundle.main.url(forResource: "ProductImg1", withExtension: "png")))
-            }
-            
-        }
-        productsCollectionVu.reloadData()
-    }
     
     func fetchBrandsFromServer() {
         SVProgressHUD.show()
@@ -104,27 +142,96 @@ class BrowseVC: BaseViewController {
             SVProgressHUD.dismiss()
             if isSuccess {
                 self.brandList = response as? [Brand] ?? []
+                _ = UserDefaultManager.saveAllBrands(brands: self.brandList)
                 self.brandsCollectionVu.reloadData()
+            }
+        }
+    }
+    
+    @objc func loadNextPage() {
+        isFirstPage = false
+        fetchProductsFromServer()
+    }
+    @objc func refreshData() {
+        isFirstPage = true
+        filterBrandId = nil
+        filterCategoryIds = nil
+        filterBySozies = false
+        clearFilterButton.isHidden = true
+        productList.removeAll()
+        fetchProductsFromServer()
+        fetchProductCount()
+
+    }
+    
+    func fetchProductCount() {
+        var dataDict = [String : Any]()
+        dataDict["pagesize"] = pageSize
+        dataDict["pages_per_request"] = pagesPerRequest
+        
+        if let brandId = filterBrandId {
+            dataDict["brand"] = brandId
+        }
+        if let categoryIds = filterCategoryIds {
+            dataDict["categories"] = categoryIds
+        }
+        if filterBySozies {
+            dataDict["filter_by_sozie"] = filterBySozies
+        }
+        ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
+            if isSuccess {
+                self.itemsCountLbl.text = String((response as! countResponse).count) + " ITEMS"
+            } else {
+                
             }
         }
     }
     
     func fetchProductsFromServer() {
         
+        var dataDict = [String : Any]()
+        dataDict["pagesize"] = pageSize
+        dataDict["pages_per_request"] = pagesPerRequest
+        if isFirstPage {
+            dataDict["is_first_page"] = isFirstPage
+        }
+        if let brandId = filterBrandId {
+            dataDict["brand"] = brandId
+        }
+        if let categoryIds = filterCategoryIds {
+            dataDict["categories"] = categoryIds
+        }
+        if filterBySozies {
+            dataDict["filter_by_sozie"] = filterBySozies
+        }
+        ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
+            
+            self.productsCollectionVu.refreshControl?.endRefreshing()
+            self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
+        
+            if isSuccess {
+                self.productList.append(contentsOf: response as! [Product])
+            } else {
+                
+            }
+        }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let vc = segue.destination as? ProductDetailVC
+        vc?.currentProduct = selectedProduct
     }
-    */
+ 
     
-    func showPopUpWithTitle(title : String) {
-        let popUpInstnc : PopupNavController? = PopupNavController.instance(title: title)
+    func showPopUpWithTitle(type : PopupType) {
+        let popUpInstnc : PopupNavController? = PopupNavController.instance(type: type , brandList: brandList)
+        popUpInstnc?.popupDelegate = self
         let popUpVC = PopupController
             .create(self.tabBarController!)
         
@@ -137,12 +244,18 @@ class BrowseVC: BaseViewController {
                 popUpVC.updatePopUpSize()
             })
         }
+        popUpInstnc?.closeHandler = { [] in
+            popUpVC.dismiss()
+        }
     }
     
     
     // MARK: - Actions
     @IBAction func filterBtnTapped(_ sender: Any) {
-        showPopUpWithTitle(title: "FILTER")
+        showPopUpWithTitle(type: .filter)
+    }
+    @IBAction func clearFilterButtonTapped(_ sender: Any) {
+        refreshData()
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
         if searchVuHeightConstraint.constant == 0 {
@@ -152,7 +265,7 @@ class BrowseVC: BaseViewController {
         }
     }
     @IBAction func categoryBtnTapped(_ sender: Any) {
-        showPopUpWithTitle(title: "CATEGORY")
+        showPopUpWithTitle(type: .category)
     }
 }
 extension BrowseVC : UITextFieldDelegate {
@@ -204,7 +317,6 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
             return CGSize(width: 95.0  , height: 54.0 )
         } else {
             return CGSize(width: (UIScreen.main.bounds.size.width-44)/2  , height: 200.0 )
-//            return CGSize(width: 0, height: 0)
         }
 
     }
@@ -236,7 +348,8 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-       
+        selectedProduct = productList[indexPath.row]
+        performSegue(withIdentifier: "toProductDetail", sender: self)
     }
     
     
@@ -251,4 +364,33 @@ extension BrowseVC: WaterfallLayoutDelegate {
         return .waterfall(column: 2, distributionMethod: .balanced)
     }
     
+}
+
+extension BrowseVC : PopupNavControllerDelegate {
+    func doneButtonTapped(type: FilterType?, id: Int?) {
+        productList.removeAll()
+        if type == FilterType.filter {
+            self.filterCategoryIds = nil
+            self.filterBrandId = id
+            self.filterBySozies = false
+        } else if type == FilterType.category {
+            if let catId = id {
+                self.filterCategoryIds = [catId]
+                self.filterBrandId = nil
+                self.filterBySozies = false
+            }
+            
+        }
+        else if type == FilterType.sozie {
+            self.filterCategoryIds = nil
+            self.filterBrandId = nil
+            self.filterBySozies = true
+        }
+        self.isFirstPage = true
+        self.clearFilterButton.isHidden = false
+        self.productsCollectionVu.refreshControl?.beginRefreshing()
+        fetchProductCount()
+        fetchProductsFromServer()
+
+    }
 }

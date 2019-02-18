@@ -13,7 +13,9 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.width = 30
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back-button-white")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back-button-white")
+        navigationItem.backBarButtonItem?.width = 80
     }
     
     override func viewWillAppear(_ animated: Bool) {

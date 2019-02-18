@@ -636,7 +636,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="mtn-Kp-LPe">
             <objects>
-                <viewController id="2ke-Ea-KbH" customClass="SignUpViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="2ke-Ea-KbH" customClass="SignUpViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nJE-t9-I8u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -937,6 +937,7 @@
                         <outlet property="firstNameTxtFld" destination="WhJ-6J-xTB" id="Kf6-eo-Onc"/>
                         <outlet property="lastNameTxtFld" destination="jmG-D3-PZB" id="glt-f5-N1C"/>
                         <outlet property="maleBtn" destination="ep0-w7-gfX" id="hwv-H8-tnV"/>
+                        <outlet property="signUpButton" destination="ubp-I4-qtT" id="h5N-MQ-5QC"/>
                         <outlet property="userNameTxtFld" destination="yTy-21-rMj" id="iW7-Uy-aAj"/>
                         <segue destination="Rft-Ix-kIG" kind="show" identifier="toMeasurementVC" id="LyK-p2-Z5M"/>
                     </connections>

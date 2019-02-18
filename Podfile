@@ -20,6 +20,7 @@ pod 'EasyTipView', '~> 2.0.0'
 pod 'SideMenu'
 pod 'Hex'
 pod 'WaterfallLayout', '~> 0.1'
+pod 'CCBottomRefreshControl'
 
 
 end

@@ -27,7 +27,7 @@ import Hex
         layer.insertSublayer(gradient, at: 0)
         
         setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont(font: .Standard, size: 16.0)
+//        titleLabel?.font = UIFont(font: .Standard, size: 16.0)
         if let radius = cornerRadius
         {
             layer.cornerRadius = radius
