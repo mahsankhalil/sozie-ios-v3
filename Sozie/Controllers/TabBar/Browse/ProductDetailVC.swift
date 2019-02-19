@@ -65,8 +65,20 @@ class ProductDetailVC: BaseViewController {
                 productViewModel.titleImageURL = URL(string: brand.titleImage)
             }
         }
-        if let imageURL = currentProduct?.imageURL {
-            productViewModel.imageURL = URL(string: imageURL)
+        if let imageURL = currentProduct?.merchantImageURL {
+            if let feedId = currentProduct?.feedId {
+                if feedId == 18857 {
+                    let delimeter = "|"
+                    let url = imageURL.components(separatedBy: delimeter)
+                    productViewModel.imageURL = URL(string: url[0])
+
+                } else {
+                    productViewModel.imageURL = URL(string: imageURL)
+                }
+            } else {
+                productViewModel.imageURL = URL(string: imageURL)
+            }
+            
         }
         if currentProduct?.isFavourite == false {
             heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)

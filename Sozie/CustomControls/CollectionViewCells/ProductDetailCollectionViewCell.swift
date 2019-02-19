@@ -21,7 +21,7 @@ class ProductDetailCollectionViewCell: UICollectionViewCell {
 extension ProductDetailCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
-            productImageView.sd_setImage(with: imgModel.imageURL) { (img, err, cacheType, url) in
+            productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
             
             }
         }

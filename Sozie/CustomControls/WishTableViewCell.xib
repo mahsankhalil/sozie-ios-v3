@@ -30,7 +30,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmA-M6-VEV">
                         <rect key="frame" x="16" y="20" width="343" height="143"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6oD-lW-MFr">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6oD-lW-MFr">
                                 <rect key="frame" x="11" y="16" width="136" height="111"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="HgY-t0-OqM"/>
@@ -61,11 +61,11 @@
                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-ee-8wD">
-                                <rect key="frame" x="155" y="16" width="158" height="15"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-ee-8wD">
+                                <rect key="frame" x="155" y="16" width="100" height="13"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="158" id="MgO-Ka-8aq"/>
-                                    <constraint firstAttribute="height" constant="15" id="heo-LE-GAK"/>
+                                    <constraint firstAttribute="width" constant="100" id="MgO-Ka-8aq"/>
+                                    <constraint firstAttribute="height" constant="13" id="heo-LE-GAK"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wBa-ky-01D">
@@ -75,6 +75,9 @@
                                     <constraint firstAttribute="height" constant="27" id="uHN-Ea-Ua9"/>
                                 </constraints>
                                 <state key="normal" image="Cancel icon"/>
+                                <connections>
+                                    <action selector="crossButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="av6-aL-h4q"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iko-fV-p20">
                                 <rect key="frame" x="304" y="106" width="25" height="19"/>
@@ -114,6 +117,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="backgroudView" destination="hmA-M6-VEV" id="3QY-fo-Plh"/>
+                <outlet property="crossButton" destination="wBa-ky-01D" id="Y2i-7f-pjO"/>
+                <outlet property="descriptionLabel" destination="Pke-nJ-whq" id="0nd-g1-qe8"/>
+                <outlet property="maskImageView" destination="hEq-M0-2XC" id="FWG-ly-Mfn"/>
+                <outlet property="priceLabel" destination="iko-fV-p20" id="iIR-jt-PQc"/>
+                <outlet property="productImageView" destination="6oD-lW-MFr" id="u1L-k8-6s9"/>
+                <outlet property="titleImageView" destination="zdb-ee-8wD" id="lvf-xD-xhu"/>
+            </connections>
             <point key="canvasLocation" x="-0.80000000000000004" y="18.440779610194905"/>
         </tableViewCell>
     </objects>

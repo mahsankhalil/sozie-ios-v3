@@ -14,6 +14,7 @@ class ServerManager: NSObject {
     static let sharedInstance = ServerManager()
 
     static let serverURL = "http://35.177.203.47/api/v1/"
+//    static let serverURL = "http://172.16.12.58:8000/api/v1/"
     static let loginURL = ServerManager.serverURL + "user/login/"
     static let profileURL = ServerManager.serverURL + "user/profile/"
     static let sizeChartURL = ServerManager.serverURL + "common/sizechart"
@@ -29,9 +30,7 @@ class ServerManager: NSObject {
     static let productDetailURL = ServerManager.serverURL + "product/detail/"
     static let productCountURL = ServerManager.serverURL + "product/browse/feed/count/"
     static let favProductURL = ServerManager.serverURL + "product/favourite/"
-    
-    public typealias CompletionHandler = ((Bool,Any)->Void)?
-    
+    public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             guard let block = block else { return }
@@ -107,7 +106,7 @@ class ServerManager: NSObject {
             }
         }
     }
-    
+
     func signUpUserWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.signUpURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             guard let block = block else { return }
@@ -156,7 +155,7 @@ class ServerManager: NSObject {
             }
         }
     }
-    
+
     func forgotPasswordWith(params : [String : Any] , block : CompletionHandler) {
 
         Alamofire.request(ServerManager.forgotPasswordURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -170,8 +169,8 @@ class ServerManager: NSObject {
             }
         }
     }
-    
-    func resetPasswordWith(params : [String : Any] , block : CompletionHandler) {
+
+    func resetPasswordWith(params : [String: Any] , block: CompletionHandler) {
 
         Alamofire.request(ServerManager.resetPassword, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             let decoder = JSONDecoder()
@@ -185,17 +184,16 @@ class ServerManager: NSObject {
         }
     }
 
-    func getAllProducts(params : [String : Any] , block : CompletionHandler) {
+    func getAllProducts(params: [String: Any] , block : CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") 
         ]
         var url = ServerManager.productListURL
-        
+
         if let isFirstPage = params["is_first_page"] as? Bool {
             url = url + "?is_first_page=" + String(isFirstPage ? 1:0)
         }
         Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
-            
 
             let decoder = JSONDecoder()
             let obj: Result<[Product]> = decoder.decodeResponse(from: response)
@@ -278,6 +276,23 @@ class ServerManager: NSObject {
                 block!(false , obj.error!)
             }
             
+        }
+    }
+
+    func getFavouriteList(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.favProductURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+
+            let decoder = JSONDecoder()
+            let obj: Result<[Product]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
         }
     }
     
