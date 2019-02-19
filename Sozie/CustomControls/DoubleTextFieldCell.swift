@@ -12,7 +12,7 @@ class DoubleTextFieldCell: UITableViewCell, CustomPickerTextFieldDelegate {
     @IBOutlet weak var secondTxtFld: CustomPickerTextField!
     @IBOutlet weak var firstTxtFld: CustomPickerTextField!
     
-    var textFieldDelegate: TextFieldDelegate?
+    weak var textFieldDelegate: TextFieldDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

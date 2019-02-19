@@ -8,13 +8,12 @@
 
 import UIKit
 
-
 class ApplicationManager {
 
-    //MARK: - Shared Instance
+    // MARK: - Shared Instance
     static let sharedInstance = ApplicationManager()
-    
-    //MARK: - Variable
-    var session_id = ""
-    var user : User?
+
+    // MARK: - Variable
+    var sessionId = ""
+    var user: User?
 }

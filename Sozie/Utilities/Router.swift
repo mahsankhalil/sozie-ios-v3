@@ -8,30 +8,20 @@
 
 import UIKit
 
-
 class Router: NSObject {
-    
+
     static func logout() {
-        ApplicationManager.sharedInstance.session_id = ""
-        
-        /*RequestManager.logoutUser(param: [:], successBlock: { (response) in
-            
-        }) { (error) in
-            
-        }
-        UserDefaults.standard.set(nil, forKey: UserDefaultKey.sessionID)
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.geoFeedRadius)
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.ownPostsFilter)
- */
-        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: SignInViewController.identifier)
- 
+        ApplicationManager.sharedInstance.sessionId = ""
+
+        let rootViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: SignInViewController.identifier)
+
         if let window = UIApplication.shared.delegate?.window {
             UIView.transition(with: window!, duration: 0.5, options: UIView.AnimationOptions.transitionFlipFromLeft, animations: {
-                window?.rootViewController = vc
+                window?.rootViewController = rootViewController
             }, completion: nil)
         }
     }
-    
+
     /*
     static func showMainTabBar() {
         let tabBarController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
@@ -51,6 +41,5 @@ class Router: NSObject {
     
     }
     */
-    
-    
+
 }

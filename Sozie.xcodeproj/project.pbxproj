@@ -107,6 +107,7 @@
 		D738BF6C21F41C5900302FE5 /* CheckmarkViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF6B21F41C5900302FE5 /* CheckmarkViewModeling.swift */; };
 		D738BF7221F439EA00302FE5 /* CellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF7121F439EA00302FE5 /* CellConfigurable.swift */; };
 		D738BF7421F43A3900302FE5 /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF7321F43A3900302FE5 /* RowViewModel.swift */; };
+		DA43F897221BAE3300EE12DD /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DA43F896221BAE3200EE12DD /* .swiftlint.yml */; };
 		DA48CB0E21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB0D21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift */; };
 		DA48CB1021FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB0F21FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift */; };
 		DA48CB1221FAC04E006804B6 /* ButtonTappedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48CB1121FAC04E006804B6 /* ButtonTappedDelegate.swift */; };
@@ -229,6 +230,7 @@
 		D738BF6B21F41C5900302FE5 /* CheckmarkViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkViewModeling.swift; sourceTree = "<group>"; };
 		D738BF7121F439EA00302FE5 /* CellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurable.swift; sourceTree = "<group>"; };
 		D738BF7321F43A3900302FE5 /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
+		DA43F896221BAE3200EE12DD /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DA48CB0D21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextFieldCellViewModeling.swift; sourceTree = "<group>"; };
 		DA48CB0F21FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextFieldCellViewModeling.swift; sourceTree = "<group>"; };
 		DA48CB1121FAC04E006804B6 /* ButtonTappedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTappedDelegate.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 		6998E7D021C77778009DFBEF = {
 			isa = PBXGroup;
 			children = (
+				DA43F896221BAE3200EE12DD /* .swiftlint.yml */,
 				6998E7DB21C77778009DFBEF /* Sozie */,
 				6998E7DA21C77778009DFBEF /* Products */,
 				57DBE9031E8C78777537FE26 /* Pods */,
@@ -578,6 +581,7 @@
 				6998E7D721C77778009DFBEF /* Resources */,
 				E8874CA3E3421222BA772B7D /* [CP] Copy Pods Resources */,
 				0F2B9975FDECE7491E45956A /* [CP] Embed Pods Frameworks */,
+				DA43F895221BA7AE00EE12DD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -637,6 +641,7 @@
 				61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */,
 				610A744722033B9000964886 /* MK.png in Resources */,
 				614CEA4321F1E08F00FE5F9D /* GoogleService-Info.plist in Resources */,
+				DA43F897221BAE3300EE12DD /* .swiftlint.yml in Resources */,
 				D738BF6521F3E33A00302FE5 /* TitleAndCheckmarkCell.xib in Resources */,
 				611E412022145C0D007B1C62 /* PostCollectionViewCell.xib in Resources */,
 				610A743F22032E5200964886 /* M_S.png in Resources */,
@@ -735,6 +740,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DA43F895221BA7AE00EE12DD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		E8874CA3E3421222BA772B7D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

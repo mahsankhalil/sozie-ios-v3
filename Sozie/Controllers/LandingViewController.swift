@@ -7,14 +7,16 @@
 //
 
 import UIKit
-public enum UserType : String {
+
+public enum UserType: String {
     case sozie = "Sozie"
     case shopper = "Shopper"
 }
+
 class LandingViewController: UIViewController {
 
     var currentUserType: UserType?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,12 +29,11 @@ class LandingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "toCountryVC" {
-            let vc = segue.destination as! SelectCountryVC
-            vc.currentUserType = currentUserType
+        if segue.identifier == "toCountryVC", let selectCountryViewController = segue.destination as? SelectCountryVC {
+            selectCountryViewController.currentUserType = currentUserType
         }
     }
-    
+
     @IBAction func signupShopperBtnTapped(_ sender: Any) {
         currentUserType = .shopper
         performSegue(withIdentifier: "toCountryVC", sender: self)

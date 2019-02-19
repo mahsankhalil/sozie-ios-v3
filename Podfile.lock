@@ -33,6 +33,7 @@ PODS:
   - SideMenu (5.0.3)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
+  - SwiftLint (0.30.0)
   - SwiftValidator (4.0.0)
   - TPKeyboardAvoiding (1.3.2)
   - WaterfallLayout (0.2)
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - SideMenu
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
+  - SwiftLint
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
   - TPKeyboardAvoiding
   - WaterfallLayout (~> 0.1)
@@ -71,6 +73,7 @@ SPEC REPOS:
     - SideMenu
     - SnapKit
     - SVProgressHUD
+    - SwiftLint
     - TPKeyboardAvoiding
     - WaterfallLayout
 
@@ -100,10 +103,11 @@ SPEC CHECKSUMS:
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftLint: 4e37cb5cd33435170dfd09fba089f41fdbf64d53
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: b84cf85e3d2b336ac17377c5b8b3755dc9f76aea
+PODFILE CHECKSUM: 5831d4a61bff142bef652424583256463478ae0a
 
 COCOAPODS: 1.5.3

@@ -9,42 +9,42 @@
 import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
+
 class SocialAuthManager: NSObject {
 
     static let sharedInstance = SocialAuthManager()
 
-    public typealias CompletionHandler = ((Bool,Any)->Void)?
+    public typealias CompletionHandler = ((Bool, Any) -> Void)?
 
-    func loginWithFacebook(from vc: UIViewController , block : CompletionHandler) {
+    func loginWithFacebook(from viewController: UIViewController, block: CompletionHandler) {
         let loginManager = FBSDKLoginManager()
         loginManager.loginBehavior = FBSDKLoginBehavior.native
-        loginManager.logIn(withReadPermissions: ["public_profile","email"], from: vc) { (result, error) in
-            
+        loginManager.logIn(withReadPermissions: ["public_profile", "email"], from: viewController) { (result, error) in
+
             if error == nil {
                 guard let token = result?.token else {
                     block!(false, CustomError(str: "Token is empty."))
                     return
                 }
-                
-                
+
                 // Verify token is not empty
                 if token.tokenString.isEmpty {
                     print("Token is empty")
                     block!(false, CustomError(str: "Token is empty."))
                     return
                 }
-                
+
                 guard let userId = token.userID else {
                     block!(false, CustomError(str: "UserId not found."))
                     return
                 }
-                
-                
-                let request = FBSDKGraphRequest(graphPath: "\(userId)", parameters: ["fields" : "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
-                request?.start(completionHandler: { (connection, result, error) in
+
+                let request = FBSDKGraphRequest(graphPath: "\(userId)",
+                    parameters: ["fields": "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
+                request?.start(completionHandler: { (_, result, error) in
                     // Handle the result
-                    if error == nil {
-                        let dataDict = self.convertFacebookDictToAppDict(fbDict: result as! [String : Any], token: token.tokenString)
+                    if error == nil, let fbDict = result as? [String: Any]  {
+                        let dataDict = self.convertFacebookDictToAppDict(fbDict: fbDict, token: token.tokenString)
                         block!(true , dataDict)
                     } else {
                         block!(false , error!)

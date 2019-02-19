@@ -211,11 +211,6 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     
     func successfulLogin(response: [String: AnyObject]) {
         SVProgressHUD.dismiss()
-//        let user = User(dictionary: response)
-//        ApplicationManager.sharedInstance.user = user
-//        ApplicationManager.sharedInstance.session_id = response["session_id"] as! String
-//        UserDefaults.standard.set(response["session_id"] as! String, forKey: UserDefaultKey.sessionID)
-        //        Router.showMainTabBar()
     }
     
     func forgotPassword(email : String)

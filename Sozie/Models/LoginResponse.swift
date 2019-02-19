@@ -14,14 +14,14 @@ struct LoginResponse: Codable {
     var access: String
     var userId: Int?
     var user: User?
-    
+
     enum CodingKeys: String, CodingKey {
         case refresh
         case access
         case userId = "user_id"
         case user
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         refresh = try values.decode(String.self, forKey: .refresh)
@@ -32,30 +32,29 @@ struct LoginResponse: Codable {
 }
 
 struct ValidateRespose: Codable {
-    
+
     var detail: String
-    
+
     enum CodingKeys: String, CodingKey {
         case detail
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         detail = try values.decode(String.self, forKey: .detail)
     }
 }
 
-struct countResponse : Codable {
+struct CountResponse: Codable {
+
     var count: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case count
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         count = try values.decode(Int.self, forKey: .count)
     }
 }
-
-

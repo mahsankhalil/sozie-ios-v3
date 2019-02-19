@@ -180,7 +180,7 @@ class BrowseVC: BaseViewController {
         }
         ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
             if isSuccess {
-                self.itemsCountLbl.text = String((response as! countResponse).count) + " ITEMS"
+                self.itemsCountLbl.text = String((response as! CountResponse).count) + " ITEMS"
             } else {
                 
             }
