@@ -43,7 +43,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         populateCurrentUserData()
         populateSocialData()
     }
-    
+
     func populateSocialData() {
         if let firstName = signUpDict?[User.CodingKeys.firstName.stringValue] {
             firstNameTxtFld.text = firstName as? String
@@ -56,6 +56,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     
     func populateCurrentUserData()
     {
+
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
             firstNameTxtFld.text = currentUser.firstName
             lastNameTxtFld.text = currentUser.lastName
@@ -67,43 +68,42 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             }
             signUpButton.setTitle("Save", for: .normal)
         }
-        
-        
     }
     
     //MARK: - Custom Methods
-    func applyValidators() {
-        validator.registerField(firstNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,])
-        validator.registerField(lastNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Last Name can't be empty") as Rule,])
-        validator.registerField(userNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Username can't be empty") as Rule,])
-        validator.registerField(dateOfBirtTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Date of Birth can't be empty") as Rule,])
 
-        
-        [firstNameTxtFld, lastNameTxtFld , userNameTxtFld ].forEach { (field) in
+    func applyValidators() {
+        validator.registerField(firstNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule])
+        validator.registerField(lastNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Last Name can't be empty") as Rule])
+        validator.registerField(userNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Username can't be empty") as Rule])
+        validator.registerField(dateOfBirtTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Date of Birth can't be empty") as Rule])
+
+        [firstNameTxtFld, lastNameTxtFld, userNameTxtFld ].forEach { (field) in
             field?.delegate = self
         }
     }
-    
-    func verifyUsernameUniquenessFromServer(username : String?) {
-        let dataDict = ["attr_type" : "username" , "attr_value" : username!]
+
+    func verifyUsernameUniquenessFromServer(username: String?) {
+        let dataDict = ["attr_type": "username", "attr_value": username!]
         SVProgressHUD.show()
-        ServerManager.sharedInstance.validateEmailOrUsername(params: dataDict as [String : Any]) { (isSuccess, response) in
+        ServerManager.sharedInstance.validateEmailOrUsername(params: dataDict as [String: Any]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
                 self.signUpUser()
             } else {
-                let error = response as! Error
-                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                if let error = response as? Error {
+                    UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                }
             }
         }
     }
-    
+
     func signUpUser() {
         signUpDict![User.CodingKeys.firstName.stringValue] = firstNameTxtFld.text
         signUpDict![User.CodingKeys.lastName.stringValue] = lastNameTxtFld.text
         signUpDict![User.CodingKeys.username.stringValue] = userNameTxtFld.text
         signUpDict![User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
-        
+
         if isFemaleSelected {
             signUpDict![User.CodingKeys.gender.stringValue] = "Female"
         }
@@ -112,18 +112,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         ServerManager.sharedInstance.signUpUserWith(params: signUpDict!) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                let res = response as! LoginResponse
-                _ = UserDefaultManager.saveLoginResponse(loginResp: res)
+                if let loginResponse = response as? LoginResponse {
+                    _ = UserDefaultManager.saveLoginResponse(loginResp: loginResponse)
+                }
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {
-                let error = response as! Error
-                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                if let error = response as? Error {
+                    UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
+                }
             }
         }
     }
     
     func updateProfile() {
         var dataDict = [String : Any]()
+
         dataDict[User.CodingKeys.firstName.stringValue] = firstNameTxtFld.text
         dataDict[User.CodingKeys.lastName.stringValue] = lastNameTxtFld.text
         dataDict[User.CodingKeys.username.stringValue] = userNameTxtFld.text
@@ -146,18 +149,19 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     // MARK: - Validation CallBacks
 
     func validationSuccessful() {
-        
+
         if !isFemaleSelected {
             UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
         } else {
             if let _ = UserDefaultManager.getCurrentUserObject() {
+
                 updateProfile()
             } else {
                 verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
             }
         }
     }
-    
+
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
             if let field = field as? MFTextField {
@@ -166,20 +170,19 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             }
         }
     }
-    
-    //MARK: - Text Field Delegates
-    
+
+    // MARK: - Text Field Delegates
+
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let txtFld  = textField as! MFTextField
-        txtFld.setError(nil, animated: true)
+        if let txtFld  = textField as? MFTextField {
+            txtFld.setError(nil, animated: true)
+        }
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     func setupMaterialTxtField() {
         firstNameTxtFld.underlineColor = UIColor(hex: "DADADA")
@@ -187,12 +190,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         firstNameTxtFld.tintColor = UIColor(hex: "FC8888")
         firstNameTxtFld.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
     }
-    
+
     func restrictToFourteenYears() {
         let fourteenYearsAgoDate =  Calendar.current.date(byAdding: .year, value: -14, to: Date())
         dateOfBirtTxtFld.pickerView.maximumDate = fourteenYearsAgoDate
     }
-    
+
     func applyFemaleSelection() {
         isFemaleSelected = true
         femaleBtn.applyButtonSelected()
@@ -208,8 +211,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     
     @IBAction func femaleBtnTapped(_ sender: Any) {
         applyFemaleSelection()
+
     }
+
     
+
     @IBAction func maleBtnTapped(_ sender: Any) {
         tipView?.dismiss()
         var preferences = EasyTipView.globalPreferences
@@ -217,7 +223,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         preferences.drawing.backgroundColor = UIColor(hex: "5CCEC4")
         preferences.drawing.font = UIFont(name: "SegoeUI", size: 11)!
         preferences.drawing.textAlignment = NSTextAlignment.left
-        
+
         preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
         preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: 15)
         preferences.animating.showInitialAlpha = 0
@@ -226,7 +232,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         preferences.drawing.arrowPosition = .bottom
         preferences.drawing.cornerRadius = 10.0
         preferences.positioning.maxWidth = 143
-        
+
         let text = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
         
         tipView = EasyTipView(text: text, preferences: preferences, delegate: nil)
@@ -235,6 +241,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     
     @IBAction func backBtnTapped(_ sender: Any) {
         if let _ = UserDefaultManager.getCurrentUserObject() {
+
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)

@@ -31,12 +31,12 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var uploadBtn: DZGradientButton!
-    
+
     var sizes: Size?
     var currentMeasurement = LocalMeasurement()
     
     var rowViewModels: [RowViewModel] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,17 +55,17 @@ class MeasurementsVC: UIViewController {
                 let heightViewModel = DoubleTextFieldCellViewModel(title: "HEIGHT", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
                 
                 let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: nil, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
-                
+
                 let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: nil, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
-                
+
                 let braViewModel = DoubleTextFieldCellViewModel(title: "BRA SIZE", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
-                
+
                 self.rowViewModels = [heightViewModel, waistViewModel, hipsViewModel, braViewModel]
                 self.sizes = size
                 self.tblVu.reloadData()
             } else {
                 let err = response as? Error
-                UtilityManager.showErrorMessage(body: err?.localizedDescription ?? "Something went wrong" , in: self)
+                UtilityManager.showErrorMessage(body: err?.localizedDescription ?? "Something went wrong", in: self)
             }
         }
     }
@@ -79,21 +79,21 @@ class MeasurementsVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+
     private func isValidMeasurements() -> Bool {
         return currentMeasurement.height != nil && currentMeasurement.waist != nil &&
             currentMeasurement.hip != nil && currentMeasurement.bra != nil && currentMeasurement.cup != nil
     }
-    
+
     @IBAction func uploadBtnTapped(_ sender: Any) {
         if isValidMeasurements() {
-            var dataDict = [String : Any]()
+            var dataDict = [String: Any]()
             dataDict["height"] = currentMeasurement.height!
             dataDict["waist"] = currentMeasurement.waist!
             dataDict["hip"] = currentMeasurement.hip!
             dataDict["bra"] = currentMeasurement.bra!
             dataDict["cup"] = currentMeasurement.cup!
-            let paramDict = ["measurement" : dataDict]
+            let paramDict = ["measurement": dataDict]
             SVProgressHUD.show()
             ServerManager.sharedInstance.updateProfile(params: paramDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()

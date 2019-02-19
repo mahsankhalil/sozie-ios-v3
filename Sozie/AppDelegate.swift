@@ -12,17 +12,19 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
     var window: UIWindow?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
         // Override point for customization after application launch.
-    
         GIDSignIn.sharedInstance().clientID = "943339111983-3cca64ei8g4gukhudc5lurr6cpi0k91f.apps.googleusercontent.com"
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+
         if UserDefaultManager.getCurrentUserObject() != nil {
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
-            self.window?.rootViewController = vc
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
+            self.window?.rootViewController = rootViewController
         }
         return true
     }
@@ -32,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         
         if url.absoluteString.hasPrefix("sozie://resetpwd") {
             if let params = url.queryParameters {
@@ -44,15 +46,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+
     // Respond to Universal Links
     private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         // pass the url to the handle deep link call
-        
-        
         return true
-
     }
-    
+
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -65,18 +65,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-    func showResetPasswordVC(with params : [String : Any])
-    {
-        let resetVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
+
+    func showResetPasswordVC(with params: [String: Any]) {
+        guard let resetVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ResetPasswordVC") as? ResetPasswordVC else { return }
         resetVC.params = params
+
         if let presentedVC = self.window?.rootViewController?.presentedViewController {
             presentedVC.present(resetVC, animated: true, completion: nil)
         } else {
             self.window?.rootViewController?.present(resetVC, animated: true, completion: nil)
         }
     }
+
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 }
-

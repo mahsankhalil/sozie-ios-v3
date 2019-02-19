@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TextFieldDelegate {
+protocol TextFieldDelegate: class {
     func textFieldDidUpdate(_ sender: Any?, text: String)
     func textFieldDidUpdate(_ sender: Any?, textField1: String, textField2: String)
 }

@@ -19,11 +19,9 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var swipeToSeeView: UIView!
-    
-    var currentProduct : Product?
-    var viewModels : [PostCellViewModel] = []
+    var currentProduct: Product?
+    var viewModels: [PostCellViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,7 +37,7 @@ class ProductDetailVC: BaseViewController {
     override func viewDidLayoutSubviews() {
         descriptionTextView.setContentOffset(.zero, animated: false)
     }
-    
+
     func fetchProductDetailFromServer () {
         if let productId = currentProduct?.productId {
             ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
@@ -49,28 +47,26 @@ class ProductDetailVC: BaseViewController {
                 }
             }
         }
-        
     }
-    
-    func updateCurrentProductObject(product : Product) {
+    func updateCurrentProductObject(product: Product) {
         currentProduct?.isFavourite = product.isFavourite
         currentProduct?.posts = product.posts
     }
-    
     func populateProductData() {
         if let price = currentProduct?.searchPrice {
             priceLabel.text = String(price)
         }
-        if let productName = currentProduct?.productName , let productDescription = currentProduct?.description {
+        if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {
+
             descriptionTextView.text = productName + "\n" +  productDescription
         }
         if let brandId = currentProduct?.brandId {
             if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                productViewModel.titleImageURL = URL(string : brand.titleImage)
+                productViewModel.titleImageURL = URL(string: brand.titleImage)
             }
         }
         if let imageURL = currentProduct?.imageURL {
-            productViewModel.imageURL = URL(string :imageURL)
+            productViewModel.imageURL = URL(string: imageURL)
         }
         if currentProduct?.isFavourite == false {
             heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
@@ -107,8 +103,8 @@ class ProductDetailVC: BaseViewController {
             }
         }
         self.collectionView.reloadData()
-        
     }
+
     func populateDummyData() {
         for _ in 0...4 {
             var viewModel = PostCellViewModel()
@@ -116,7 +112,6 @@ class ProductDetailVC: BaseViewController {
             viewModels.append(viewModel)
         }
     }
-    
 
     /*
     // MARK: - Navigation
@@ -128,23 +123,23 @@ class ProductDetailVC: BaseViewController {
     }
     */
 
-    // MARK : - Actions
+    // MARK: - Actions
+
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
     }
-    
     @IBAction func butButtonTapped(_ sender: Any) {
     }
     @IBAction func shareButtonTapped(_ sender: Any) {
     }
     @IBAction func heartButtonTapped(_ sender: Any) {
-        
         if currentProduct?.isFavourite == false {
             if let productId = currentProduct?.productId {
                 self.heartButton.setImage(UIImage(named: "Filled Heart"), for: .normal)
-                var dataDict = [String : Any]()
+                var dataDict = [String: Any]()
                 dataDict["user"] = UserDefaultManager.getCurrentUserId()
                 dataDict["product"] = productId
-                ServerManager.sharedInstance.favouriteProduct(params: dataDict) { (isSuccess, response) in
+                ServerManager.sharedInstance.favouriteProduct(params: dataDict) { (isSuccess, _) in
+
                     if isSuccess {
                         self.currentProduct?.isFavourite = true
                     }
@@ -153,25 +148,24 @@ class ProductDetailVC: BaseViewController {
         } else {
             if let productId = currentProduct?.productId {
                 self.heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
-                ServerManager.sharedInstance.removeFavouriteProduct(productId: productId) { (isSuccess, response) in
+                ServerManager.sharedInstance.removeFavouriteProduct(productId: productId) { (isSuccess, _) in
+
                     if isSuccess {
                         self.currentProduct?.isFavourite = false
                     }
                 }
             }
         }
-        
-        
     }
 }
-extension ProductDetailVC : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
-{
+
+extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModels.count + 1
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var viewModel : ReuseIdentifierProviding
+        var viewModel: ReuseIdentifierProviding
+
         if indexPath.row == 0 {
             viewModel = productViewModel
         } else {
@@ -184,50 +178,38 @@ extension ProductDetailVC : UICollectionViewDelegate , UICollectionViewDataSourc
         }
         return cell
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width  , height: collectionView.frame.size.height)
+        return CGSize(width: UIScreen.main.bounds.size.width, height: collectionView.frame.size.height)
 
     }
-    
     //3
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
-    
     // 4
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
     }
-    
-    
-    
 }
 extension ProductDetailVC: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let x = scrollView.contentOffset.x
-        let w = scrollView.bounds.size.width
-        let currentPage = Int(ceil(x/w))
+        let xAxis = scrollView.contentOffset.x
+        let width = scrollView.bounds.size.width
+        let currentPage = Int(ceil(xAxis/width))
+
         pageControl.currentPage = currentPage
         if currentPage > 0 {
             swipeToSeeView.isHidden = true
         } else {
             swipeToSeeView.isHidden = false
         }
-        
+
     }
 }

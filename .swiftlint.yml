@@ -1,0 +1,6 @@
+disabled_rules: # rule identifiers to exclude from running
+- line_length
+- force_cast
+- shorthand_operator
+excluded:
+- Pods

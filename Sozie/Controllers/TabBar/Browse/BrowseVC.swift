@@ -80,7 +80,6 @@ class BrowseVC: BaseViewController {
                 {
                     priceString = currency + " " + String(format: "%0.2f" , searchPrice)
                 }
-                
                 let viewModel = ProductImageCellViewModel(count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL))
                 productViewModels.append(viewModel)
             }
@@ -186,7 +185,8 @@ class BrowseVC: BaseViewController {
         }
         ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
             if isSuccess {
-                self.itemsCountLbl.text = String((response as! countResponse).count) + " ITEMS"
+                self.itemsCountLbl.text = String((response as! CountResponse).count) + " ITEMS"
+
             } else {
                 
             }
@@ -235,6 +235,7 @@ class BrowseVC: BaseViewController {
         fetchProductCount()
         fetchProductsFromServer()
     }
+
     
     // MARK: - Navigation
 
@@ -373,7 +374,6 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
             fetchFilteredData()
 
         }
-        
     }
     
     
