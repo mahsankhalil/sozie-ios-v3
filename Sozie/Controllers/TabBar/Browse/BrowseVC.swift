@@ -75,7 +75,13 @@ class BrowseVC: BaseViewController {
                 if let count = product.postCount {
                     postCount = count
                 }
-                let viewModel = ProductImageCellViewModel(count: postCount, title: String(searchPrice), attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL))
+                var priceString = ""
+                if let currency = product.currency?.getCurrencySymbol()
+                {
+                    priceString = currency + " " + String(format: "%0.2f" , searchPrice)
+                }
+                
+                let viewModel = ProductImageCellViewModel(count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL:  URL(string: imageURL))
                 productViewModels.append(viewModel)
             }
             
@@ -173,7 +179,7 @@ class BrowseVC: BaseViewController {
             dataDict["brand"] = brandId
         }
         if let categoryIds = filterCategoryIds {
-            dataDict["categories"] = categoryIds
+            dataDict["categories"] = categoryIds.makeArrayJSON()
         }
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
@@ -199,7 +205,7 @@ class BrowseVC: BaseViewController {
             dataDict["brand"] = brandId
         }
         if let categoryIds = filterCategoryIds {
-            dataDict["categories"] = categoryIds
+            dataDict["categories"] = categoryIds.convertArrayToString()
         }
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
@@ -217,6 +223,18 @@ class BrowseVC: BaseViewController {
         }
     }
 
+    func filterByBrand(brandId : Int?) {
+        self.filterCategoryIds = nil
+        self.filterBrandId = brandId
+        self.filterBySozies = false
+    }
+    func fetchFilteredData() {
+        self.isFirstPage = true
+        self.clearFilterButton.isHidden = false
+        self.productsCollectionVu.refreshControl?.beginRefreshing()
+        fetchProductCount()
+        fetchProductsFromServer()
+    }
     
     // MARK: - Navigation
 
@@ -293,10 +311,8 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
         if collectionView == brandsCollectionVu {
             rowViewModel = brandViewModels[indexPath.row]
 
-        } else
-        {
+        } else {
             rowViewModel = productViewModels[indexPath.row]
-
         }
         var cell : UICollectionViewCell
         if let viewModel = rowViewModel as? ReuseIdentifierProviding {
@@ -347,9 +363,17 @@ extension BrowseVC : UICollectionViewDelegate , UICollectionViewDataSource , UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == productsCollectionVu {
+            selectedProduct = productList[indexPath.row]
+            performSegue(withIdentifier: "toProductDetail", sender: self)
+        } else {
+            let currentBrand = brandList[indexPath.row]
+            productList.removeAll()
+            filterByBrand(brandId: currentBrand.brandId)
+            fetchFilteredData()
+
+        }
         
-        selectedProduct = productList[indexPath.row]
-        performSegue(withIdentifier: "toProductDetail", sender: self)
     }
     
     
@@ -370,9 +394,7 @@ extension BrowseVC : PopupNavControllerDelegate {
     func doneButtonTapped(type: FilterType?, id: Int?) {
         productList.removeAll()
         if type == FilterType.filter {
-            self.filterCategoryIds = nil
-            self.filterBrandId = id
-            self.filterBySozies = false
+            filterByBrand(brandId: id)
         } else if type == FilterType.category {
             if let catId = id {
                 self.filterCategoryIds = [catId]
@@ -386,11 +408,6 @@ extension BrowseVC : PopupNavControllerDelegate {
             self.filterBrandId = nil
             self.filterBySozies = true
         }
-        self.isFirstPage = true
-        self.clearFilterButton.isHidden = false
-        self.productsCollectionVu.refreshControl?.beginRefreshing()
-        fetchProductCount()
-        fetchProductsFromServer()
-
+        fetchFilteredData()
     }
 }

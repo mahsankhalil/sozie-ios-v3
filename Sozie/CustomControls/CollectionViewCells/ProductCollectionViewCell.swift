@@ -19,6 +19,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         productImageView.layer.cornerRadius = 5.0
+        productImageView.layer.borderWidth = 1.0
+        productImageView.layer.borderColor = UIColor(hex: "DDDDDD").cgColor
         productImageView.clipsToBounds = true
         
     }
@@ -39,7 +41,7 @@ extension ProductCollectionViewCell: CellConfigurable {
             titleImageView.sd_setImage(with: titleImgModel.titleImageURL, completed: nil)
         }
         if let titleModel = viewModel as? TitleViewModeling {
-            priceLabel.text = "$ " + titleModel.title!
+            priceLabel.text = titleModel.title!
         }
         if let countModel = viewModel as? CountViewModeling {
             if countModel.count > 0 {

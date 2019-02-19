@@ -43,7 +43,7 @@
                                                 </constraints>
                                                 <state key="normal" image="back-button-white"/>
                                                 <connections>
-                                                    <segue destination="D3u-cz-nza" kind="unwind" unwindAction="unwindToViewController:" id="t2M-t8-eje"/>
+                                                    <action selector="backButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lTC-vo-baW"/>
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="3jW-hQ-oQE">
@@ -103,6 +103,9 @@
                                                         </fragment>
                                                     </attributedString>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="deG-JL-TgY"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXO-80-eao" customClass="MFTextField">
                                                 <rect key="frame" x="24.5" y="247" width="326" height="19"/>
@@ -202,7 +205,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <exit id="D3u-cz-nza" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-10" y="-260"/>
         </scene>
@@ -497,16 +499,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up with Facebook or Gmail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHz-JK-vTW">
-                                                <rect key="frame" x="88.5" y="279.5" width="198" height="16.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16.5" id="Jbf-CK-B75"/>
-                                                </constraints>
+                                                <rect key="frame" x="88.5" y="279.5" width="198" height="19"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ4-N9-vhG">
-                                                <rect key="frame" x="135.5" y="311" width="104" height="42"/>
+                                                <rect key="frame" x="135.5" y="313.5" width="104" height="42"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7q-Nm-HqQ">
                                                         <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
@@ -2083,6 +2082,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9OJ-ih-pcb"/>
-        <segue reference="90n-N6-YqP"/>
+        <segue reference="DE9-Vg-jdy"/>
     </inferredMetricsTieBreakers>
 </document>

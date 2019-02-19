@@ -82,7 +82,7 @@ class SelectWorkVC: UIViewController {
             self.tableView.reloadData()
             return
         }
-
+        selectedBrandId = nil
         searchList = brands.filter { $0.label.range(of: searchText, options: .caseInsensitive) != nil}
         
         self.tableView.reloadData()
@@ -111,7 +111,7 @@ class SelectWorkVC: UIViewController {
             signUpDict![User.CodingKeys.brand.stringValue] = brandId
             performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
         } else {
-            UtilityManager.showErrorMessage(body: "Please select Brnad where you work.", in: self)
+            UtilityManager.showErrorMessage(body: "Please select Brand where you work.", in: self)
         }
     }
     

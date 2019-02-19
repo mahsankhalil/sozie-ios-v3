@@ -37,6 +37,8 @@
 		611E412022145C0D007B1C62 /* PostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611E411E22145C0D007B1C62 /* PostCollectionViewCell.xib */; };
 		611E41222214719F007B1C62 /* ProductDetailCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E41212214719F007B1C62 /* ProductDetailCellViewModel.swift */; };
 		611E412422147224007B1C62 /* PostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E412322147224007B1C62 /* PostCellViewModel.swift */; };
+		611EDFD5221AF0DB00FB2DBE /* WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EDFD3221AF0DB00FB2DBE /* WishTableViewCell.swift */; };
+		611EDFD6221AF0DB00FB2DBE /* WishTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EDFD4221AF0DB00FB2DBE /* WishTableViewCell.xib */; };
 		6122289921F5D33500D4D747 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289821F5D33500D4D747 /* SignInViewController.swift */; };
 		6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */; };
 		6122289D21F5D3D500D4D747 /* ServerResponsePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289C21F5D3D500D4D747 /* ServerResponsePopUp.swift */; };
@@ -154,6 +156,8 @@
 		611E411E22145C0D007B1C62 /* PostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCollectionViewCell.xib; sourceTree = "<group>"; };
 		611E41212214719F007B1C62 /* ProductDetailCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailCellViewModel.swift; sourceTree = "<group>"; };
 		611E412322147224007B1C62 /* PostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellViewModel.swift; sourceTree = "<group>"; };
+		611EDFD3221AF0DB00FB2DBE /* WishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishTableViewCell.swift; sourceTree = "<group>"; };
+		611EDFD4221AF0DB00FB2DBE /* WishTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WishTableViewCell.xib; sourceTree = "<group>"; };
 		6122289821F5D33500D4D747 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailPopUp.swift; sourceTree = "<group>"; };
 		6122289C21F5D3D500D4D747 /* ServerResponsePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponsePopUp.swift; sourceTree = "<group>"; };
@@ -366,6 +370,8 @@
 				6103E1B321FF33CC00C7E7CF /* TitleAndSwitchCell.xib */,
 				616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */,
 				616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */,
+				611EDFD3221AF0DB00FB2DBE /* WishTableViewCell.swift */,
+				611EDFD4221AF0DB00FB2DBE /* WishTableViewCell.xib */,
 			);
 			path = CustomControls;
 			sourceTree = "<group>";
@@ -648,6 +654,7 @@
 				6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
 				6103E1B521FF33CC00C7E7CF /* TitleAndSwitchCell.xib in Resources */,
+				611EDFD6221AF0DB00FB2DBE /* WishTableViewCell.xib in Resources */,
 				6103E1B121FF330400C7E7CF /* TitleCell.xib in Resources */,
 				61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */,
 				616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */,
@@ -855,6 +862,7 @@
 				6183FFD021E756810090393E /* SelectWorkVC.swift in Sources */,
 				DA48CB1821FAD871006804B6 /* ReuseIdentifierProviding.swift in Sources */,
 				610A743B2203126600964886 /* ProductCollectionViewCell.swift in Sources */,
+				611EDFD5221AF0DB00FB2DBE /* WishTableViewCell.swift in Sources */,
 				DA48CB0E21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift in Sources */,
 				617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */,
 			);

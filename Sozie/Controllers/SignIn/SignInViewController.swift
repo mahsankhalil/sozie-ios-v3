@@ -120,7 +120,12 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBAction func signinButtonPressed(_ sender: Any) {
         validator.validate(self)
     }
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
+    @IBAction func signUpButtonTapped(_ sender: Any) {
+    }
     @IBAction func facebookButtonPressed(sender: AnyObject) {
         SVProgressHUD.show()
         SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in

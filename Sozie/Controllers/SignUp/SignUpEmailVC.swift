@@ -154,11 +154,23 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     }
     
     @IBAction func showPasswordBtnTapped(_ sender: Any) {
-        self.passwordTxtFld.isSecureTextEntry = !self.passwordTxtFld.isSecureTextEntry
+        if passwordTxtFld.isSecureTextEntry {
+            passwordTxtFld.isSecureTextEntry = false
+            (sender as AnyObject).setImage(UIImage(named: "eyeIconHide"), for: .normal)
+        } else {
+            passwordTxtFld.isSecureTextEntry = true
+            (sender as AnyObject).setImage(UIImage(named: "eye-icon-white"), for: .normal)
+        }
     }
     
     @IBAction func showConfirmPasswordBtnTapped(_ sender: Any) {
-        self.confirmPasswordTxtFld.isSecureTextEntry = !self.confirmPasswordTxtFld.isSecureTextEntry
+        if confirmPasswordTxtFld.isSecureTextEntry {
+            confirmPasswordTxtFld.isSecureTextEntry = false
+            (sender as AnyObject).setImage(UIImage(named: "eyeIconHide"), for: .normal)
+        } else {
+            confirmPasswordTxtFld.isSecureTextEntry = true
+            (sender as AnyObject).setImage(UIImage(named: "eye-icon-white"), for: .normal)
+        }
     }
 }
 
