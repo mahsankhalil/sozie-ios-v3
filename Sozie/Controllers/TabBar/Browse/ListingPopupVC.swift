@@ -22,11 +22,11 @@ struct DisclosureCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleV
 }
 
 protocol ListingPopupVCDelegate {
-    func doneButtonTapped(type: FilterType? , id : Int?)
+    func doneButtonTapped(type: FilterType?, id: Int?)
 }
 
 class ListingPopupVC: UIViewController {
-    var delegate : ListingPopupVCDelegate?
+    var delegate: ListingPopupVCDelegate?
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -42,19 +42,22 @@ class ListingPopupVC: UIViewController {
             for category in categoriesList {
                 var viewModel = DisclosureCellViewModel()
                 viewModel.title = category.categoryName
+                if category.subCategories.count == 0 {
+                    viewModel.reuseIdentifier = "TitleAndCheckmarkCell"
+                }
                 viewModels.append(viewModel)
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         topView.layer.cornerRadius = 10.0
-        
+
     }
-    func setPopupType(type: PopupType? , brandList: [Brand]?) {
+    func setPopupType(type: PopupType?, brandList: [Brand]?) {
         self.popupType = type
         self.brandList = brandList
         self.titleLabel.text = popupType?.rawValue
@@ -72,9 +75,8 @@ class ListingPopupVC: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-    func fetchCategoriesFromServer()
-    {
+
+    func fetchCategoriesFromServer() {
         ServerManager.sharedInstance.getAllCategories(params: [:]) { (isSuccess, response) in
             if isSuccess {
                 self.categoriesList = response as! [Category]
@@ -82,9 +84,17 @@ class ListingPopupVC: UIViewController {
             }
         }
     }
-    
+
     @IBAction func doneButtonTapped(_ sender: Any) {
-        delegate?.doneButtonTapped(type: FilterType.sozie, id: nil)
+        
+        if popupType == PopupType.category {
+            if let index = selectedViewModelIndex {
+                let currentCategory = categoriesList[index]
+                delegate?.doneButtonTapped(type: FilterType.category, id: currentCategory.categoryId)
+            }
+        } else {
+            delegate?.doneButtonTapped(type: FilterType.sozie, id: nil)
+        }
     }
     // MARK: - Navigation
 
@@ -92,8 +102,7 @@ class ListingPopupVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "toSubcategory"
-        {
+        if segue.identifier == "toSubcategory" {
             let vc = segue.destination as! SelectionPopupVC
             vc.popupType = popupType
             if popupType == PopupType.category {
@@ -104,41 +113,54 @@ class ListingPopupVC: UIViewController {
             vc.delegate = self
         }
     }
-    
-    
+
 }
 
-
 extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
-        
+
         if tableViewCell == nil {
             tableView.register(UINib(nibName: viewModel.reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier:viewModel.reuseIdentifier)
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
         }
-        
+
         guard let cell = tableViewCell else { return UITableViewCell() }
-        
+
         cell.selectionStyle = .none
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
         }
-        
-        
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if popupType == PopupType.category {
-            selectedCategory = categoriesList[indexPath.row]
+            let currentCategory = categoriesList[indexPath.row]
+            if currentCategory.subCategories.count == 0 {
+                var indexPathsToReload = [indexPath]
+                if let previousSelectedIndex = selectedViewModelIndex {
+                    viewModels[previousSelectedIndex].isCheckmarkHidden = true
+                    indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
+                    selectedViewModelIndex = nil
+                    self.doneButton.isHidden = true
+                } else {
+                    viewModels[indexPath.row].isCheckmarkHidden = false
+                    selectedViewModelIndex = indexPath.row
+                    self.doneButton.isHidden = false
+                }
+                tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+                return
+            } else {
+                selectedCategory = categoriesList[indexPath.row]
+            }
         } else if indexPath.row == 1 {
             var indexPathsToReload = [indexPath]
             if let previousSelectedIndex = selectedViewModelIndex {
@@ -155,13 +177,13 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
 
             return
         }
-        
+
         performSegue(withIdentifier: "toSubcategory", sender: self)
     }
-    
+
 }
 extension ListingPopupVC: SelectionPopupVCDelegate {
-    
+
     func doneButtonTapped(type: FilterType?, id: Int?) {
         delegate?.doneButtonTapped(type: type, id: id)
     }

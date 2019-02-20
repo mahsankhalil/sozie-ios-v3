@@ -73,16 +73,16 @@ class UtilityManager: NSObject {
         imagePicker.allowsEditing = false
         vc.present(imagePicker, animated: true, completion: nil)
     }
-    
-    static func showActivityControllerWith(objectsToShare : [Any] , vc : UIViewController) {
+
+    static func showActivityControllerWith(objectsToShare: [Any], vc: UIViewController) {
         let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        let excludedActivities = [UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.message, UIActivity.ActivityType.mail, UIActivity.ActivityType.print, UIActivity.ActivityType.copyToPasteboard, UIActivity.ActivityType.assignToContact, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.postToTencentWeibo]
-        
+        let excludedActivities = [UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.print, UIActivity.ActivityType.assignToContact, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToFlickr, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.postToTencentWeibo]
+
         activityController.excludedActivityTypes = excludedActivities
-        
+
         vc.present(activityController, animated: true, completion: nil)
     }
-  
+
     static func activityIndicatorForView(view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         activityIndicator.color = UIColor.darkGray

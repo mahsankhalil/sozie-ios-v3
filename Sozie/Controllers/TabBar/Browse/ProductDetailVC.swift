@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import SDWebImage
+import SVProgressHUD
 class ProductDetailVC: BaseViewController {
 
     @IBOutlet weak var priceLabel: UILabel!
@@ -59,6 +60,8 @@ class ProductDetailVC: BaseViewController {
         if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {
 
             descriptionTextView.text = productName + "\n" +  productDescription
+            descriptionTextView.setContentOffset(.zero, animated: true)
+
         }
         if let brandId = currentProduct?.brandId {
             if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
@@ -142,6 +145,21 @@ class ProductDetailVC: BaseViewController {
     @IBAction func butButtonTapped(_ sender: Any) {
     }
     @IBAction func shareButtonTapped(_ sender: Any) {
+        if let imageURL = currentProduct?.merchantImageURL {
+            SVProgressHUD.show()
+            SDWebImageDownloader.shared().downloadImage(with: URL(string: imageURL), options: SDWebImageDownloaderOptions.highPriority, progress: nil) { (image, _, _, _) in
+                SVProgressHUD.dismiss()
+                if let downloadedImage = image {
+                    if let productURL = self.currentProduct?.deepLink {
+                        if let appLink = URL(string: "https://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8") {
+                            UtilityManager.showActivityControllerWith(objectsToShare: [downloadedImage, productURL, appLink], vc: self)
+                        }
+
+                    }
+                }
+            }
+        }
+
     }
     @IBAction func heartButtonTapped(_ sender: Any) {
         if currentProduct?.isFavourite == false {
