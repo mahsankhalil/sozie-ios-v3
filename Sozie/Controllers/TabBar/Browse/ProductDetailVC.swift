@@ -40,7 +40,7 @@ class ProductDetailVC: BaseViewController {
     }
 
     func fetchProductDetailFromServer () {
-        if let productId = currentProduct?.productId {
+        if let productId = currentProduct?.productStringId {
             ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
                 if isSuccess {
                     self.updateCurrentProductObject(product: response as! Product)
@@ -54,14 +54,18 @@ class ProductDetailVC: BaseViewController {
         currentProduct?.posts = product.posts
     }
     func populateProductData() {
+        var priceString = ""
+        var searchPrice = 0.0
         if let price = currentProduct?.searchPrice {
-            priceLabel.text = String(price)
+            searchPrice = Double(price)
         }
+        if let currency = currentProduct?.currency?.getCurrencySymbol() {
+            priceString = currency + " " + String(format: "%0.2f", searchPrice)
+        }
+        priceLabel.text = priceString
         if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {
-
             descriptionTextView.text = productName + "\n" +  productDescription
             descriptionTextView.setContentOffset(.zero, animated: true)
-
         }
         if let brandId = currentProduct?.brandId {
             if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
@@ -74,14 +78,12 @@ class ProductDetailVC: BaseViewController {
                     let delimeter = "|"
                     let url = imageURL.components(separatedBy: delimeter)
                     productViewModel.imageURL = URL(string: url[0])
-
                 } else {
                     productViewModel.imageURL = URL(string: imageURL)
                 }
             } else {
                 productViewModel.imageURL = URL(string: imageURL)
             }
-            
         }
         if currentProduct?.isFavourite == false {
             heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
@@ -105,6 +107,7 @@ class ProductDetailVC: BaseViewController {
     func makePostCellViewModel() {
         viewModels.removeAll()
         if let posts = currentProduct?.posts {
+            var index = 0
             for post in posts {
                 var viewModel = PostCellViewModel()
                 viewModel.title = post.user.username
@@ -114,7 +117,10 @@ class ProductDetailVC: BaseViewController {
                 viewModel.hip = post.user.measurement?.hip
                 viewModel.cup = post.user.measurement?.cup
                 viewModel.waist = post.user.measurement?.waist
+                viewModel.index = index
+                viewModel.isFollow = post.userFollowedByMe
                 viewModels.append(viewModel)
+                index = index + 1
             }
         }
         self.collectionView.reloadData()
@@ -143,6 +149,11 @@ class ProductDetailVC: BaseViewController {
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
     }
     @IBAction func butButtonTapped(_ sender: Any) {
+        if let productURL = self.currentProduct?.deepLink {
+            guard let url = URL(string: productURL) else { return }
+            UIApplication.shared.open(url)
+        }
+
     }
     @IBAction func shareButtonTapped(_ sender: Any) {
         if let imageURL = currentProduct?.merchantImageURL {
@@ -163,11 +174,11 @@ class ProductDetailVC: BaseViewController {
     }
     @IBAction func heartButtonTapped(_ sender: Any) {
         if currentProduct?.isFavourite == false {
-            if let productId = currentProduct?.productId {
+            if let productId = currentProduct?.productStringId {
                 self.heartButton.setImage(UIImage(named: "Filled Heart"), for: .normal)
                 var dataDict = [String: Any]()
                 dataDict["user"] = UserDefaultManager.getCurrentUserId()
-                dataDict["product"] = productId
+                dataDict["product_id"] = productId
                 ServerManager.sharedInstance.favouriteProduct(params: dataDict) { (isSuccess, _) in
 
                     if isSuccess {
@@ -176,7 +187,7 @@ class ProductDetailVC: BaseViewController {
                 }
             }
         } else {
-            if let productId = currentProduct?.productId {
+            if let productId = currentProduct?.productStringId {
                 self.heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
                 ServerManager.sharedInstance.removeFavouriteProduct(productId: productId) { (isSuccess, _) in
 
@@ -205,6 +216,9 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         guard let cell = collectionViewCell else { return UICollectionViewCell() }
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel as! RowViewModel)
+        }
+        if let postCollectionCell = cell as? PostCollectionViewCell {
+            postCollectionCell.delegate = self
         }
         return cell
     }
@@ -241,5 +255,64 @@ extension ProductDetailVC: UIScrollViewDelegate {
             swipeToSeeView.isHidden = false
         }
 
+    }
+}
+extension ProductDetailVC: PostCollectionViewCellDelegate {
+    func moreButtonTapped(button: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Report", style: .default, handler: { _ in
+            if let posts = self.currentProduct?.posts {
+                let postId = posts[button.tag].postId
+                var dataDict = [String: Any]()
+                dataDict["post"] = postId
+                dataDict["user"] = UserDefaultManager.getCurrentUserId()
+                SVProgressHUD.show()
+                ServerManager.sharedInstance.reportPost(params: dataDict, block: { (isSuccess, _ ) in
+                    SVProgressHUD.dismiss()
+                    if isSuccess {
+                        UtilityManager.showMessageWith(title: "Thank you for reporting this post", body: "Our administration will remove the post if it violates Sozie terms and conditions.", in: self)
+                    }
+                })
+            }
+        }))
+
+        alert.addAction(UIAlertAction(title: "Block", style: .default, handler: { _ in
+            
+            if let posts = self.currentProduct?.posts {
+                UtilityManager.showMessageWith(title: "Block " + posts[button.tag].user.username, body: "Are you sure you want to Block?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", block: {
+                    let userIdToBlock = posts[button.tag].user.userId
+                    var dataDict = [String: Any]()
+                    dataDict["blocker"] = UserDefaultManager.getCurrentUserId()
+                    dataDict["user"] = userIdToBlock
+                    SVProgressHUD.show()
+                    ServerManager.sharedInstance.blockUser(params: dataDict, block: { (_, _ ) in
+                        SVProgressHUD.dismiss()
+
+                    })
+                })
+
+            }
+        }))
+
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func followButtonTapped(button: UIButton) {
+        var dataDict = [String: Any]()
+        if let posts = currentProduct?.posts {
+            let userId = posts[button.tag].user.userId
+            dataDict["user"] = userId
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.followUser(params: dataDict) { (isSuccess, _) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.currentProduct?.posts![button.tag].userFollowedByMe = true
+                    self.viewModels[button.tag].isFollow = true
+                    self.collectionView.reloadItems(at: [IndexPath(item: button.tag + 1, section: 0)])
+                }
+            }
+        }
     }
 }

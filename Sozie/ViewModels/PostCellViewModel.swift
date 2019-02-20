@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling , ReuseIdentifierProviding , MeasurementViewModeling {
+struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling , ReuseIdentifierProviding , MeasurementViewModeling, FollowViewModeling {
+    var isFollow: Bool?
     var bra: Int?
     var height: Int?
     var hip: Int?
@@ -17,5 +18,6 @@ struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling 
     var title: String?
     var attributedTitle: NSAttributedString?
     var imageURL: URL?
+    var index: Int?
     let reuseIdentifier: String = "PostCollectionViewCell"
 }

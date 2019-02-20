@@ -52,6 +52,8 @@ class UtilityManager: NSObject {
         vc.present(alert, animated: true, completion: nil)
     }
     
+    
+    
     static func openCameraFrom(vc : UIViewController) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate

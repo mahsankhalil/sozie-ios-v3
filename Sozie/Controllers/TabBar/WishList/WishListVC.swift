@@ -140,8 +140,9 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
 extension WishListVC: WishTableViewCellDelegate {
     func crossButonTapped(btn: UIButton) {
         let index = btn.tag
-        let productId = productList[index].productId
-        ServerManager.sharedInstance.removeFavouriteProduct(productId: productId) { (_, _) in
+        if let productId = productList[index].productStringId {
+            ServerManager.sharedInstance.removeFavouriteProduct(productId: productId) { (_, _) in
+            }
         }
         productList.remove(at: index)
 

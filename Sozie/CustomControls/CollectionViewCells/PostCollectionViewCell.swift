@@ -7,9 +7,12 @@
 //
 
 import UIKit
-
+protocol PostCollectionViewCellDelegate {
+    func moreButtonTapped(button: UIButton)
+    func followButtonTapped(button: UIButton)
+}
 class PostCollectionViewCell: UICollectionViewCell {
-
+    var delegate: PostCollectionViewCellDelegate?
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
@@ -28,15 +31,18 @@ class PostCollectionViewCell: UICollectionViewCell {
         profileImageView.applyStandardBorder(hexColor: "A6A6A6")
     }
     @IBAction func followButtonTapped(_ sender: Any) {
+        
+        delegate?.followButtonTapped(button: sender as! UIButton)
     }
     @IBAction func moreButtonTapped(_ sender: Any) {
+        delegate?.moreButtonTapped(button: sender as! UIButton)
     }
-    
+
 }
 extension PostCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
-            postImageView.sd_setImage(with: imgModel.imageURL) { (img, err, cacheType, url) in
+            postImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
                 
             }
         }
@@ -48,14 +54,14 @@ extension PostCollectionViewCell: CellConfigurable {
             }
         }
         if let measurementModel = viewModel as? MeasurementViewModeling {
-            if let bra = measurementModel.bra , let cup = measurementModel.cup {
+            if let bra = measurementModel.bra, let cup = measurementModel.cup {
                 braLabel.text = "Bra Size: " + String(bra) + cup
             }
             if let height = measurementModel.height {
                 let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                 let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                 heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
-                
+
             }
             if let hip = measurementModel.hip {
                 hipLabel.text = "Hip: " + String(hip) + "  |"
@@ -63,7 +69,23 @@ extension PostCollectionViewCell: CellConfigurable {
             if let waist = measurementModel.waist {
                 waistLabel.text = "Waist: " + String(waist) + "  |"
             }
+            if let indexModel = viewModel as? IndexViewModeling {
+                if let index = indexModel.index {
+                    followButton.tag = index
+                    moreButton.tag = index
+                }
+                
+            }
+            if let followModel = viewModel as? FollowViewModeling {
+                if let isFollowed = followModel.isFollow {
+                    if isFollowed == true {
+                        self.followButton.isHidden = true
+                    } else {
+                        self.followButton.isHidden = false
+                    }
+                }
+            }
         }
     }
-    
+
 }

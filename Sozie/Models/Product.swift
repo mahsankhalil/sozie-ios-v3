@@ -23,6 +23,7 @@ struct Product: Codable {
     var isFavourite: Bool?
     var feedId: Int?
     var merchantImageURL: String?
+    var productStringId: String?
     enum CodingKeys: String, CodingKey {
         case productId = "id"
         case productName = "product_name"
@@ -38,6 +39,7 @@ struct Product: Codable {
         case isFavourite = "is_favourite"
         case feedId = "feed_id"
         case merchantImageURL = "merchant_image_url"
+        case productStringId = "product_id"
 
     }
     init(from decoder: Decoder) throws {
@@ -56,6 +58,8 @@ struct Product: Codable {
         isFavourite = try? values.decode(Bool.self, forKey: .isFavourite)
         feedId = try? values.decode(Int.self, forKey: .feedId)
         merchantImageURL = try? values.decode(String.self, forKey: .merchantImageURL)
+        productStringId = try? values.decode(String.self, forKey: .productStringId)
+
 
     }
 }
