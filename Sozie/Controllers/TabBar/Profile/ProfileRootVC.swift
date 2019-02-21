@@ -9,11 +9,18 @@
 import UIKit
 import SideMenu
 class ProfileRootVC: BaseViewController {
-
+    var tabVC : ProfileTabsPageVC?
+    @IBOutlet weak var tabView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tabVC = ProfileTabsPageVC()
+        tabVC?.view.backgroundColor = UIColor.clear
+        tabView.addSubview((tabVC?.view)!)
+        tabView.autoresizesSubviews = true
+        tabVC?.view.frame = CGRect(x: 0.0, y: 0.0, width: tabView.frame.size.width, height: tabView.frame.size.height)
+        self.addChild(tabVC!)
         setupProfileNavBar()
         SideMenuManager.default.menuRightNavigationController = storyboard!.instantiateViewController(withIdentifier: "RightMenuNavigationController") as? UISideMenuNavigationController
         SideMenuManager.default.menuPresentMode = .menuSlideIn
@@ -21,7 +28,6 @@ class ProfileRootVC: BaseViewController {
         SideMenuManager.default.menuWidth = UIScreen.main.bounds.size.width - 60.0
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
     }
-    
 
     /*
     // MARK: - Navigation
