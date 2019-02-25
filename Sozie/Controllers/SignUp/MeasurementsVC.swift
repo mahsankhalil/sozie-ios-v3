@@ -44,7 +44,7 @@ class MeasurementsVC: UIViewController {
         currentMeasurement = LocalMeasurement()
         fetchDataFromServer()
     }
-    
+
     func fetchDataFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getSizeCharts(params: [:]) { (isSuccess, response) in
@@ -112,7 +112,7 @@ class MeasurementsVC: UIViewController {
                     rowViewModels[index] = errorViewModel as! RowViewModel
                 }
             }
-            
+
             setError(for: 0, isError: currentMeasurement.height == nil)
             setError(for: 1, isError: currentMeasurement.waist == nil)
             setError(for: 2, isError: currentMeasurement.hip == nil)
@@ -128,46 +128,46 @@ class MeasurementsVC: UIViewController {
 }
 
 extension MeasurementsVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rowViewModels.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rowViewModel = rowViewModels[indexPath.row]
-        
+
         var reuseIdentifier: String? = nil
         if let reuseIdentifierProvider = rowViewModel as? ReuseIdentifierProviding {
             reuseIdentifier = reuseIdentifierProvider.reuseIdentifier
         }
-        
+
         guard let identifier = reuseIdentifier else { return UITableViewCell() }
-        
+
         var tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
-        
+
         if tableViewcell == nil {
             tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
             tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
         }
-        
+
         guard let cell = tableViewcell else { return UITableViewCell() }
         cell.tag = indexPath.row
         
         if let cell = cell as? CellConfigurable {
             cell.setup(rowViewModel)
         }
-        
+
         if let cell = cell as? UIButtonProviding {
             cell.button.tag = indexPath.row
         }
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         let rowViewModel = rowViewModels[indexPath.row]
         if let _ = rowViewModel as? DoubleTextFieldCellViewModel {
@@ -178,7 +178,7 @@ extension MeasurementsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MeasurementsVC: TextFieldDelegate {
-    
+
     func updateCurrentMeasurement(_ index: Int, text: String, text2: String? = nil) {
         if let measurementTypeProvider = rowViewModels[index] as? MeasurementTypeProviding {
             let type = measurementTypeProvider.measurementType
@@ -197,12 +197,12 @@ extension MeasurementsVC: TextFieldDelegate {
             }
         }
     }
-    
+
     func textFieldDidUpdate(_ sender: Any?, text: String) {
         guard let cell = sender as? UITableViewCell else { return }
         updateCurrentMeasurement(cell.tag, text: text)
     }
-    
+
     func textFieldDidUpdate(_ sender: Any?, textField1: String, textField2: String) {
         guard let cell = sender as? UITableViewCell else { return }
         updateCurrentMeasurement(cell.tag, text: textField1, text2: textField2)
@@ -229,7 +229,7 @@ extension MeasurementsVC: ButtonTappedDelegate {
 }
 
 extension MeasurementsVC: SizeChartPopupVCDelegate {
-    func selectedValueFromPopUp(value: Int, type: MeasurementType) {
+    func selectedValueFromPopUp(value: Int?, type: MeasurementType?, sizeType: SizeType?, sizeValue: String?) {
         let index = rowViewModels.index {
             if let measurementModel = $0 as? MeasurementTypeProviding {
                 return measurementModel.measurementType == type
@@ -244,7 +244,7 @@ extension MeasurementsVC: SizeChartPopupVCDelegate {
                 singleTextFieldCellViewModel.text = String(describing: value)
                 rowViewModels[index] = singleTextFieldCellViewModel
             }
-
+            
             let indexPath = IndexPath(row: index, section: 0)
             tblVu.reloadRows(at: [indexPath], with: .automatic)
         }

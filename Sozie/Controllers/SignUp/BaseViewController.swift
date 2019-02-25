@@ -37,6 +37,15 @@ class BaseViewController: UIViewController {
 
     }
     
+    func setupBrandNavBar(imageURL: String) {
+        let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 200.0, height: 26.0))
+        imageView.contentMode = .scaleAspectFit
+        imageView.sd_setImage(with: URL(string: imageURL), completed: nil)
+        navigationItem.titleView = imageView
+        navigationController?.navigationBar.layer.borderWidth = 1.0
+        navigationController?.navigationBar.layer.borderColor = UIColor(hex: "707070").cgColor.copy(alpha: 0.05)
+    }
+    
     func setupProfileNavBar() {
         setupBackgroundImage()
         navigationItem.titleView = nil

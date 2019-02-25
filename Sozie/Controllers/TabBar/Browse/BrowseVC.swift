@@ -103,7 +103,21 @@ class BrowseVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setupSozieLogoNavBar()
+        if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.shopper.rawValue {
+                setupSozieLogoNavBar()
+            } else {
+                brandsVuHeightConstraint.constant = 0.0
+                if let user = UserDefaultManager.getCurrentUserObject() {
+                    if let brandId = user.brand {
+                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+                            setupBrandNavBar(imageURL: brand.titleImage)
+                        }
+                    }
+                }
+            }
+        }
+        
         fetchBrandsFromServer()
         fetchProductCount()
         setupViews()
@@ -188,6 +202,11 @@ class BrowseVC: BaseViewController {
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
         }
+        if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.sozie.rawValue {
+                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
+            }
+        }
         ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
             if isSuccess {
                 self.itemsCountLbl.text = String((response as! CountResponse).count) + " ITEMS"
@@ -213,6 +232,11 @@ class BrowseVC: BaseViewController {
         }
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
+        }
+        if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.sozie.rawValue {
+                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
+            }
         }
         ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
 

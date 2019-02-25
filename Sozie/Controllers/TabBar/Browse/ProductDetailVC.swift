@@ -148,7 +148,7 @@ class ProductDetailVC: BaseViewController {
     // MARK: - Actions
 
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
-        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart)
+        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId)
         let popUpVC = PopupController
             .create(self.tabBarController ?? self)
             .show(popUpInstnc)

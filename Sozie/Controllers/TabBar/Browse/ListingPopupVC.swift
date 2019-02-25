@@ -12,6 +12,8 @@ public enum FilterType : String {
     case category = "CATEGORY"
     case filter = "FILTER"
     case sozie = "SOZIE"
+    case mySozies = "MYSOZIES"
+    case request = "REQUESTS"
 }
 
 struct DisclosureCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling , CheckmarkViewModeling {
@@ -35,6 +37,7 @@ class ListingPopupVC: UIViewController {
     var viewModels: [DisclosureCellViewModel] = []
     var brandList: [Brand]?
     var selectedCategory: Category?
+    var filterType: FilterType?
     private var selectedViewModelIndex: Int?
     private var categoriesList: [Category] = [] {
         didSet {
@@ -57,22 +60,53 @@ class ListingPopupVC: UIViewController {
         topView.layer.cornerRadius = 10.0
 
     }
-    func setPopupType(type: PopupType?, brandList: [Brand]?) {
+    func setPopupType(type: PopupType?, brandList: [Brand]?, filterType: FilterType?) {
         self.popupType = type
         self.brandList = brandList
-        self.titleLabel.text = popupType?.rawValue
+        if let type = type {
+            self.titleLabel.text = type.rawValue
+        } else {
+            self.titleLabel.text = "FILTER"
+        }
+//        self.titleLabel.text = popupType?.rawValue
         if popupType == PopupType.category {
             fetchCategoriesFromServer()
         } else {
-            viewModels.removeAll()
-            var viewModel1 = DisclosureCellViewModel()
-            viewModel1.title = "FILTER BY BRANDS"
-            viewModels.append(viewModel1)
-            var viewModel2 = DisclosureCellViewModel()
-            viewModel2.title = "FILTER BY SOZIES"
-            viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
-            viewModels.append(viewModel2)
-            self.tableView.reloadData()
+            if let type = filterType {
+                if type == FilterType.mySozies {
+                    viewModels.removeAll()
+                    var viewModel1 = DisclosureCellViewModel()
+                    viewModel1.title = "SOZIES | FOLLOW"
+                    viewModel1.reuseIdentifier = "TitleAndCheckmarkCell"
+                    viewModels.append(viewModel1)
+                    self.tableView.reloadData()
+                } else if type == FilterType.request {
+                    viewModels.removeAll()
+                    var viewModel1 = DisclosureCellViewModel()
+                    viewModel1.title = "FILLED REQUESTS"
+                    viewModel1.reuseIdentifier = "TitleAndCheckmarkCell"
+                    viewModels.append(viewModel1)
+                    var viewModel2 = DisclosureCellViewModel()
+                    viewModel2.title = "NEW REQUESTS"
+                    viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
+                    viewModels.append(viewModel2)
+                    self.tableView.reloadData()
+                }
+            } else {
+                if let userType = UserDefaultManager.getCurrentUserType() {
+                    if userType == UserType.shopper.rawValue {
+                        viewModels.removeAll()
+                        var viewModel1 = DisclosureCellViewModel()
+                        viewModel1.title = "FILTER BY BRANDS"
+                        viewModels.append(viewModel1)
+                    }
+                }
+                var viewModel2 = DisclosureCellViewModel()
+                viewModel2.title = "FILTER BY SOZIES"
+                viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
+                viewModels.append(viewModel2)
+                self.tableView.reloadData()
+            }
         }
     }
 
@@ -93,7 +127,13 @@ class ListingPopupVC: UIViewController {
                 delegate?.doneButtonTapped(type: FilterType.category, id: currentCategory.categoryId)
             }
         } else {
-            delegate?.doneButtonTapped(type: FilterType.sozie, id: nil)
+            if let type = filterType {
+                if let index = selectedViewModelIndex {
+                    delegate?.doneButtonTapped(type: type, id: index)
+                }
+            } else {
+                delegate?.doneButtonTapped(type: FilterType.sozie, id: nil)
+            }
         }
     }
     // MARK: - Navigation
@@ -149,8 +189,9 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
                 if let previousSelectedIndex = selectedViewModelIndex {
                     viewModels[previousSelectedIndex].isCheckmarkHidden = true
                     indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
-                    selectedViewModelIndex = nil
-                    self.doneButton.isHidden = true
+                    viewModels[indexPath.row].isCheckmarkHidden = false
+                    selectedViewModelIndex = indexPath.row
+                    self.doneButton.isHidden = false
                 } else {
                     viewModels[indexPath.row].isCheckmarkHidden = false
                     selectedViewModelIndex = indexPath.row
@@ -161,21 +202,54 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 selectedCategory = categoriesList[indexPath.row]
             }
-        } else if indexPath.row == 1 {
+        } else if filterType == FilterType.mySozies || filterType == FilterType.request {
             var indexPathsToReload = [indexPath]
             if let previousSelectedIndex = selectedViewModelIndex {
                 viewModels[previousSelectedIndex].isCheckmarkHidden = true
                 indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
-                selectedViewModelIndex = nil
-                self.doneButton.isHidden = true
+                selectedViewModelIndex = indexPath.row
+                viewModels[indexPath.row].isCheckmarkHidden = false
+                self.doneButton.isHidden = false
             } else {
                 viewModels[indexPath.row].isCheckmarkHidden = false
                 selectedViewModelIndex = indexPath.row
                 self.doneButton.isHidden = false
             }
             tableView.reloadRows(at: indexPathsToReload, with: .automatic)
-
             return
+        } else if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.sozie.rawValue {
+                if indexPath.row == 0 {
+                    var indexPathsToReload = [indexPath]
+                    if let previousSelectedIndex = selectedViewModelIndex {
+                        viewModels[previousSelectedIndex].isCheckmarkHidden = true
+                        indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
+                        selectedViewModelIndex = nil
+                        self.doneButton.isHidden = true
+                    } else {
+                        viewModels[indexPath.row].isCheckmarkHidden = false
+                        selectedViewModelIndex = indexPath.row
+                        self.doneButton.isHidden = false
+                    }
+                    tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+                    return
+                }
+            } else if indexPath.row == 1 {
+                var indexPathsToReload = [indexPath]
+                if let previousSelectedIndex = selectedViewModelIndex {
+                    viewModels[previousSelectedIndex].isCheckmarkHidden = true
+                    indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
+                    selectedViewModelIndex = nil
+                    self.doneButton.isHidden = true
+                } else {
+                    viewModels[indexPath.row].isCheckmarkHidden = false
+                    selectedViewModelIndex = indexPath.row
+                    self.doneButton.isHidden = false
+                }
+                tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+                
+                return
+            }
         }
 
         performSegue(withIdentifier: "toSubcategory", sender: self)

@@ -31,6 +31,22 @@ class RequestsVC: UIViewController {
     }
     */
     @IBAction func filterButtonTapped(_ sender: Any) {
+        let popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.request )
+        //        popUpInstnc?.popupDelegate = self
+        let popUpVC = PopupController
+            .create(self.tabBarController!)
+        let options = PopupCustomOption.layout(.bottom)
+        popUpVC.cornerRadius = 0.0
+        _ = popUpVC.customize([options])
+        _ = popUpVC.show(popUpInstnc!)
+        popUpInstnc!.navigationHandler = { []  in
+            UIView.animate(withDuration: 0.6, animations: {
+                popUpVC.updatePopUpSize()
+            })
+        }
+        popUpInstnc?.closeHandler = { [] in
+            popUpVC.dismiss()
+        }
     }
     @IBAction func crossButtonTapped(_ sender: Any) {
     }

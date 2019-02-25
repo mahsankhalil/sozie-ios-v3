@@ -44,7 +44,7 @@ class SelectCountryVC: UIViewController {
     
     private var viewModels: [CountryCellViewModel] = []
     private var selectedViewModelIndex: Int?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,7 +71,6 @@ class SelectCountryVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        
         if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
             signUpInfoProvider.signUpInfo = signUpDict
         }
@@ -92,7 +91,7 @@ class SelectCountryVC: UIViewController {
             UtilityManager.showErrorMessage(body: "Please select Country.", in: self)
         }
     }
-    
+
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -103,9 +102,8 @@ extension SelectCountryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countries?.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
         
         if tableViewCell == nil {
@@ -114,34 +112,28 @@ extension SelectCountryVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         guard let cell = tableViewCell else { return UITableViewCell() }
-        
         cell.selectionStyle = .none
         
         let viewModel = viewModels[indexPath.row]
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
         }
-        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let countries = countries else { return }
         
         self.selectedCountryId = countries[indexPath.row].countryId
-        
         var indexPathsToReload = [indexPath]
         if let previousSelectedIndex = selectedViewModelIndex {
             viewModels[previousSelectedIndex].isCheckmarkHidden = true
             indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
         }
-        
         viewModels[indexPath.row].isCheckmarkHidden = false
         selectedViewModelIndex = indexPath.row
-        
         tableView.reloadRows(at: indexPathsToReload, with: .automatic)
     }
-    
 }

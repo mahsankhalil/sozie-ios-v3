@@ -16,12 +16,20 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var maskImageView: UIImageView!
+    @IBOutlet weak var titleImageViewHeightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         productImageView.layer.cornerRadius = 5.0
         productImageView.layer.borderWidth = 1.0
         productImageView.layer.borderColor = UIColor(hex: "DDDDDD").cgColor
         productImageView.clipsToBounds = true
+        if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.shopper.rawValue {
+                titleImageViewHeightConstraint.constant = 13.0
+            } else {
+                titleImageViewHeightConstraint.constant = 0.0
+            }
+        }
         
     }
 }
