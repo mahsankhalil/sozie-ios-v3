@@ -87,7 +87,7 @@ class BrowseVC: BaseViewController {
                 if let currency = product.currency?.getCurrencySymbol() {
                     priceString = currency + " " + String(format: "%0.2f", searchPrice)
                 }
-                let viewModel = ProductImageCellViewModel(index: nil, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: nil, reuseIdentifier: "ProductCell")
+                let viewModel = ProductImageCellViewModel(count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: nil, reuseIdentifier: "ProductCell")
                 productViewModels.append(viewModel)
             }
             productsCollectionVu.reloadData()

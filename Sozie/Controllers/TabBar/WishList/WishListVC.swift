@@ -16,7 +16,6 @@ class WishListVC: BaseViewController {
     private var productList: [Product] = [] {
         didSet {
             viewModels.removeAll()
-            var index = 0
             for product in productList {
                 var imageURL = ""
                 if let productImageURL = product.imageURL {
@@ -44,9 +43,8 @@ class WishListVC: BaseViewController {
                 if let description = product.description {
                     productDescription = description
                 }
-                let viewModel = ProductImageCellViewModel(index: index, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: productDescription, reuseIdentifier: "WishTableViewCell")
+                let viewModel = ProductImageCellViewModel(count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: productDescription, reuseIdentifier: "WishTableViewCell")
                 viewModels.append(viewModel)
-                index = index + 1
             }
             if viewModels.count == 0 {
                 noProductLabel.isHidden = false
@@ -56,6 +54,7 @@ class WishListVC: BaseViewController {
             self.tableView.reloadData()
         }
     }
+    var selectedProduct: Product?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,15 +97,15 @@ class WishListVC: BaseViewController {
         }
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let destVC = segue.destination as? ProductDetailVC
+        destVC?.currentProduct = selectedProduct
     }
-    */
 
 }
 extension WishListVC: UITableViewDelegate, UITableViewDataSource {
@@ -130,14 +129,29 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
         }
+        if let cellIndexing = cell as? ButtonProviding {
+            cellIndexing.assignTagWith(indexPath.row)
+        }
         if let currentCell = cell as? WishTableViewCell {
             currentCell.delegate = self
         }
 
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedProduct = productList[indexPath.row]
+        performSegue(withIdentifier: "toProductDetail", sender: self)
+    }
 }
 extension WishListVC: WishTableViewCellDelegate {
+    func buyButtonTapped(button: UIButton) {
+        let currentProduct = productList[button.tag]
+        if let productURL = currentProduct.deepLink {
+            guard let url = URL(string: productURL) else { return }
+            UIApplication.shared.open(url)
+        }
+    }
+    
     func crossButonTapped(btn: UIButton) {
         let index = btn.tag
         if let productId = productList[index].productStringId {

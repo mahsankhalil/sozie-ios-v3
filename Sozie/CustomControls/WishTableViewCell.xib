@@ -44,6 +44,9 @@
                                     <constraint firstAttribute="width" constant="80" id="eZz-5W-hCo"/>
                                 </constraints>
                                 <state key="normal" title="Buy"/>
+                                <connections>
+                                    <action selector="buyButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="st2-ui-wzX"/>
+                                </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Mask" translatesAutoresizingMaskIntoConstraints="NO" id="hEq-M0-2XC">
                                 <rect key="frame" x="157" y="70" width="30" height="30"/>
@@ -119,6 +122,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="backgroudView" destination="hmA-M6-VEV" id="3QY-fo-Plh"/>
+                <outlet property="buyButton" destination="7xd-0E-fV7" id="uaa-kk-pQO"/>
                 <outlet property="crossButton" destination="wBa-ky-01D" id="Y2i-7f-pjO"/>
                 <outlet property="descriptionLabel" destination="Pke-nJ-whq" id="0nd-g1-qe8"/>
                 <outlet property="maskImageView" destination="hEq-M0-2XC" id="FWG-ly-Mfn"/>

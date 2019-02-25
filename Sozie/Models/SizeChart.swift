@@ -25,7 +25,7 @@ struct Size: Codable {
         case bra
         case sizeChart = "size_chart"
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         general = try values.decode([General].self, forKey: .general)
@@ -37,14 +37,14 @@ struct Size: Codable {
     }
 }
 struct SizeChart: Codable {
-    
-    var us: Int
-    var uk: Int
-    var eu: Int
+
+    var us: String
+    var uk: String
+    var eu: String
     var waist: Scales
     var hip: Scales
     var bust: Scales
-    
+
     enum CodingKeys: String, CodingKey {
         case us = "US"
         case uk = "UK"
@@ -53,12 +53,12 @@ struct SizeChart: Codable {
         case hip = "HIPS"
         case bust = "BUST"
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        us = try values.decode(Int.self, forKey: .us)
-        uk = try values.decode(Int.self, forKey: .uk)
-        eu = try values.decode(Int.self, forKey: .eu)
+        us = try values.decode(String.self, forKey: .us)
+        uk = try values.decode(String.self, forKey: .uk)
+        eu = try values.decode(String.self, forKey: .eu)
         waist = try values.decode(Scales.self, forKey: .waist)
         hip = try values.decode(Scales.self, forKey: .hip)
         bust = try values.decode(Scales.self, forKey: .bust)
@@ -66,15 +66,15 @@ struct SizeChart: Codable {
 }
 
 struct Scales: Codable {
-    
+
     var inch: Double
     var centimeter: Double
-    
+
     enum CodingKeys: String, CodingKey {
         case inch
         case centimeter
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         inch = try values.decode(Double.self, forKey: .inch)
@@ -83,19 +83,19 @@ struct Scales: Codable {
 }
 
 struct General: Codable {
-    
+
     var label: String
     var waist: Scales
     var hip: Scales
     var bust: Scales
-    
+
     enum CodingKeys: String, CodingKey {
         case label
         case waist = "WAIST"
         case hip = "HIPS"
         case bust = "BUST"
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         label = try values.decode(String.self, forKey: .label)
@@ -103,19 +103,19 @@ struct General: Codable {
         hip = try values.decode(Scales.self, forKey: .hip)
         bust = try values.decode(Scales.self, forKey: .bust)
     }
-    
+
 }
 
 struct Height: Codable {
-    
+
     var inches: [Int]
     var feet: [Int]
-    
+
     enum CodingKeys: String, CodingKey {
         case inches
         case feet
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         inches = try values.decode([Int].self, forKey: .inches)
@@ -124,15 +124,15 @@ struct Height: Codable {
 }
 
 struct Bra: Codable {
-    
+
     var cup: [String]
     var band: [Int]
-    
+
     enum CodingKeys: String, CodingKey {
         case cup
         case band
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         cup = try values.decode([String].self, forKey: .cup)

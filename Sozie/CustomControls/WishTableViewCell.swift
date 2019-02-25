@@ -9,6 +9,7 @@
 import UIKit
 protocol WishTableViewCellDelegate {
     func crossButonTapped(btn: UIButton)
+    func buyButtonTapped(button: UIButton)
 }
 class WishTableViewCell: UITableViewCell {
 
@@ -19,6 +20,7 @@ class WishTableViewCell: UITableViewCell {
     @IBOutlet weak var maskImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var backgroudView: UIView!
+    @IBOutlet weak var buyButton: DZGradientButton!
     var delegate: WishTableViewCellDelegate?
 
     override func awakeFromNib() {
@@ -32,6 +34,9 @@ class WishTableViewCell: UITableViewCell {
     }
     @IBAction func crossButtonTapped(_ sender: Any) {
         delegate?.crossButonTapped(btn: sender as! UIButton)
+    }
+    @IBAction func buyButtonTapped(_ sender: Any) {
+        delegate?.buyButtonTapped(button: sender as! UIButton)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -67,10 +72,12 @@ extension WishTableViewCell: CellConfigurable {
                 descriptionLabel.text = ""
             }
         }
-        if let indexModel = viewModel as? IndexViewModeling {
-            if let index = indexModel.index {
-                crossButton.tag = index
-            }
-        }
+        
+    }
+}
+extension WishTableViewCell: ButtonProviding {
+    func assignTagWith(_ index: Int) {
+        buyButton.tag = index
+        crossButton.tag = index
     }
 }

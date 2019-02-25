@@ -216,7 +216,7 @@ extension MeasurementsVC: ButtonTappedDelegate {
         let rowViewModel = rowViewModels[index]
         if let measurementModel = rowViewModel as? MeasurementTypeProviding {
             let type = measurementModel.measurementType
-            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes.sizeChart, arrayOfGeneral: sizes.general, type: type)
+            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes.sizeChart, arrayOfGeneral: sizes.general, type: type, productSizeChart: nil)
             let popUpVC = PopupController
                 .create(self)
                 .show(popUpInstnc)

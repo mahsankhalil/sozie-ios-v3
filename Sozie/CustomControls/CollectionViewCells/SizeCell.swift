@@ -14,13 +14,13 @@ class SizeCell: UICollectionViewCell {
     @IBOutlet weak var sideLine: UIView!
     @IBOutlet weak var bottomLine: UIView!
     
-    func hideShowLinesInCell(indexPath : IndexPath , count : Int) {
+    func hideShowLinesInCell(indexPath: IndexPath, count: Int) {
         if (indexPath.row % 5 == 4) {
             sideLine.isHidden = true
         } else {
             sideLine.isHidden = false
         }
-        
+
         let rem = count % 5
         if rem == 0 {
             if indexPath.row >= count - 5 {
@@ -34,6 +34,25 @@ class SizeCell: UICollectionViewCell {
                 bottomLine.isHidden = true
             } else {
                 bottomLine.isHidden = false
+            }
+        }
+    }
+}
+extension SizeCell: CellConfigurable {
+    func setup(_ viewModel: RowViewModel) {
+        if let titleViewodel = viewModel as? TitleViewModeling {
+            if let title = titleViewodel.title {
+                self.titleLbl.text = title
+            } else if let attributedTitle = titleViewodel.attributedTitle {
+                self.titleLbl.attributedText = attributedTitle
+            }
+        }
+        
+        if let selectionViewModel = viewModel as? SelectionProviding {
+            if selectionViewModel.isSelected {
+                self.titleLbl.textColor = UIColor(hex: "FC8888")
+            } else {
+                self.titleLbl.textColor = UIColor.black
             }
         }
     }

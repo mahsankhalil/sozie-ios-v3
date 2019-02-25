@@ -52,6 +52,7 @@ class ProductDetailVC: BaseViewController {
     func updateCurrentProductObject(product: Product) {
         currentProduct?.isFavourite = product.isFavourite
         currentProduct?.posts = product.posts
+        currentProduct?.sizeChart = product.sizeChart
     }
     func populateProductData() {
         var priceString = ""
@@ -147,6 +148,14 @@ class ProductDetailVC: BaseViewController {
     // MARK: - Actions
 
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
+        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart)
+        let popUpVC = PopupController
+            .create(self.tabBarController ?? self)
+            .show(popUpInstnc)
+//        popUpInstnc.delegate = self
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
     }
     @IBAction func butButtonTapped(_ sender: Any) {
         if let productURL = self.currentProduct?.deepLink {
