@@ -28,7 +28,7 @@ struct User: Codable {
     var signUpMedium: String?
     var socialToken: String?
     var measurement: Measurements?
-    
+    var isFollowed: Bool?
     enum CodingKeys: String, CodingKey {
         case username
         case email
@@ -47,6 +47,7 @@ struct User: Codable {
         case socialId = "social_id"
         case signUpMedium = "signup_medium"
         case socialToken = "social_token"
+        case isFollowed = "is_followed"
     }
     
     init(from decoder: Decoder) throws {
@@ -67,8 +68,8 @@ struct User: Codable {
         socialId = try? values.decode(String.self, forKey: .socialId)
         socialToken = try? values.decode(String.self, forKey: .socialToken)
         signUpMedium = try? values.decode(String.self, forKey: .signUpMedium)
-
         measurement = try? values.decode(Measurements.self, forKey: .measurement)
+        isFollowed = try? values.decode(Bool.self, forKey: .isFollowed)
     }
 }
 
@@ -88,7 +89,7 @@ struct Measurements: Codable {
         case cup
         case waist
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         bra = try? values.decode(Int.self, forKey: .bra)

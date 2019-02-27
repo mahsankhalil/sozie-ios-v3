@@ -67,11 +67,27 @@ class SelectWorkVC: UIViewController {
         ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.brandList = response as? [Brand]
+                self.brandList = self.removeTargetIfUS(brands: response as! [Brand])
                 self.searchList = self.brandList ?? []
                 self.tableView.reloadData()
             }
         }
+    }
+    func removeTargetIfUS(brands: [Brand]) -> [Brand] {
+        var brandsList: [Brand] = []
+        for brand in brands {
+            if let dataDict = signUpDict {
+                if let countryId = dataDict[User.CodingKeys.country.stringValue] as? Int {
+                    if countryId == 1 {
+                        if brand.brandId == 10 {
+                            continue
+                        }
+                    }
+                }
+            }
+            brandsList.append(brand)
+        }
+        return brandsList
     }
     
     @objc func textFieldDidChange(textField : UITextField) {

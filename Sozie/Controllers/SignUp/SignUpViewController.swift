@@ -22,12 +22,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var userNameTxtFld: MFTextField!
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     @IBOutlet weak var signUpButton: DZGradientButton!
-    
+
     let validator = Validator()
     var isFemaleSelected = false
     var signUpDict: [String: Any]?
     var tipView: EasyTipView?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,8 +54,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         }
     }
     
-    func populateCurrentUserData()
-    {
+    func populateCurrentUserData() {
 
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
             firstNameTxtFld.text = currentUser.firstName
@@ -105,9 +104,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         signUpDict![User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
 
         if isFemaleSelected {
-            signUpDict![User.CodingKeys.gender.stringValue] = "Female"
+            signUpDict![User.CodingKeys.gender.stringValue] = "F"
         }
-        
+
         SVProgressHUD.show()
         ServerManager.sharedInstance.signUpUserWith(params: signUpDict!) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -123,7 +122,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             }
         }
     }
-    
+
     func updateProfile() {
         var dataDict = [String : Any]()
 
@@ -204,17 +203,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         maleBtn.layer.shadowOpacity = 0.0
         tipView?.dismiss()
     }
-    
+
     @IBAction func signupButtonPressed(_ sender: Any) {
         validator.validate(self)
     }
-    
+
     @IBAction func femaleBtnTapped(_ sender: Any) {
         applyFemaleSelection()
 
     }
-
-    
 
     @IBAction func maleBtnTapped(_ sender: Any) {
         tipView?.dismiss()
@@ -234,11 +231,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         preferences.positioning.maxWidth = 143
 
         let text = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
-        
+
         tipView = EasyTipView(text: text, preferences: preferences, delegate: nil)
         tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
     }
-    
+
     @IBAction func backBtnTapped(_ sender: Any) {
         if let _ = UserDefaultManager.getCurrentUserObject() {
 

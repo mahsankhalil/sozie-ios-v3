@@ -86,6 +86,11 @@
 		61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A20A5621E5DDAC00B27C8E /* SingleTextFieldCell.xib */; };
 		61A20A5B21E5DDBF00B27C8E /* DoubleTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */; };
 		61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */; };
+		61B9D1C8222548BA007C6326 /* SozieRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B9D1C7222548BA007C6326 /* SozieRequest.swift */; };
+		61B9D1CA22254EA0007C6326 /* MyRequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B9D1C922254EA0007C6326 /* MyRequestCellViewModel.swift */; };
+		61B9D1CC22254F82007C6326 /* SubtitleViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B9D1CB22254F82007C6326 /* SubtitleViewModeling.swift */; };
+		61B9D1CE2225501A007C6326 /* PriceProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B9D1CD2225501A007C6326 /* PriceProviding.swift */; };
+		61B9D1D02226A22C007C6326 /* SozieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B9D1CF2226A22C007C6326 /* SozieCellViewModel.swift */; };
 		61BC873721E76C62000AEA06 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BC873621E76C62000AEA06 /* Brand.swift */; };
 		61C40CF8221D766700FBD7FF /* FollowViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C40CF7221D766700FBD7FF /* FollowViewModeling.swift */; };
 		61C40D01221E7DE900FBD7FF /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C40CFB221E7DE800FBD7FF /* TabView.xib */; };
@@ -228,6 +233,11 @@
 		61A20A5621E5DDAC00B27C8E /* SingleTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleTextFieldCell.xib; sourceTree = "<group>"; };
 		61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextFieldCell.swift; sourceTree = "<group>"; };
 		61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleTextFieldCell.xib; sourceTree = "<group>"; };
+		61B9D1C7222548BA007C6326 /* SozieRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieRequest.swift; sourceTree = "<group>"; };
+		61B9D1C922254EA0007C6326 /* MyRequestCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestCellViewModel.swift; sourceTree = "<group>"; };
+		61B9D1CB22254F82007C6326 /* SubtitleViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleViewModeling.swift; sourceTree = "<group>"; };
+		61B9D1CD2225501A007C6326 /* PriceProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceProviding.swift; sourceTree = "<group>"; };
+		61B9D1CF2226A22C007C6326 /* SozieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieCellViewModel.swift; sourceTree = "<group>"; };
 		61BC873621E76C62000AEA06 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		61C40CF7221D766700FBD7FF /* FollowViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModeling.swift; sourceTree = "<group>"; };
 		61C40CFB221E7DE800FBD7FF /* TabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabView.xib; sourceTree = "<group>"; };
@@ -537,6 +547,7 @@
 				61592036220D884F00816034 /* SubCategory.swift */,
 				6197726522169B08003A7091 /* Post.swift */,
 				613F40EA221FF852009AABA6 /* ProductSizeChart.swift */,
+				61B9D1C7222548BA007C6326 /* SozieRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -649,6 +660,10 @@
 				613F40E8221FDB0E009AABA6 /* ButtonProviding.swift */,
 				613F40EC222014B8009AABA6 /* SizeCellViewModel.swift */,
 				613F40EE22201567009AABA6 /* SelectionProviding.swift */,
+				61B9D1C922254EA0007C6326 /* MyRequestCellViewModel.swift */,
+				61B9D1CB22254F82007C6326 /* SubtitleViewModeling.swift */,
+				61B9D1CD2225501A007C6326 /* PriceProviding.swift */,
+				61B9D1CF2226A22C007C6326 /* SozieCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -890,6 +905,7 @@
 				612F00CF22084B390025DBEA /* SelectionPopupVC.swift in Sources */,
 				61592035220D882600816034 /* Category.swift in Sources */,
 				611E411F22145C0D007B1C62 /* PostCollectionViewCell.swift in Sources */,
+				61B9D1CE2225501A007C6326 /* PriceProviding.swift in Sources */,
 				612F00CD2208476A0025DBEA /* ListingPopupVC.swift in Sources */,
 				6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */,
 				612F00D122084B6D0025DBEA /* PopupNavController.swift in Sources */,
@@ -898,6 +914,7 @@
 				610A74372202DF6E00964886 /* ImageViewModeling.swift in Sources */,
 				69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */,
 				610A743D22031B7C00964886 /* Product.swift in Sources */,
+				61B9D1D02226A22C007C6326 /* SozieCellViewModel.swift in Sources */,
 				6108FB992201D1F30007A49F /* ImageCollectionViewCell.swift in Sources */,
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
 				611E412422147224007B1C62 /* PostCellViewModel.swift in Sources */,
@@ -907,11 +924,13 @@
 				6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */,
 				6197726622169B08003A7091 /* Post.swift in Sources */,
 				61E8E73322044FA9008C33BC /* ViewController.swift in Sources */,
+				61B9D1CA22254EA0007C6326 /* MyRequestCellViewModel.swift in Sources */,
 				610A7439220307D000964886 /* TitleImageViewModeling.swift in Sources */,
 				DA48CB1C21FC16F4006804B6 /* TextFieldDelegateProviding.swift in Sources */,
 				6944810C21C7A018001A11A2 /* DZImageView.swift in Sources */,
 				DA48CB1A21FADD8D006804B6 /* ErrorViewModeling.swift in Sources */,
 				61BC873721E76C62000AEA06 /* Brand.swift in Sources */,
+				61B9D1C8222548BA007C6326 /* SozieRequest.swift in Sources */,
 				611E41222214719F007B1C62 /* ProductDetailCellViewModel.swift in Sources */,
 				61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */,
 				613F897D21E8C5FB00EB48D2 /* CustomError.swift in Sources */,
@@ -919,6 +938,7 @@
 				614CEA4621F1E48600FE5F9D /* SocialAuthManager.swift in Sources */,
 				694480EA21C7A018001A11A2 /* Constants.swift in Sources */,
 				61C40D0A221E843900FBD7FF /* RequestsVC.swift in Sources */,
+				61B9D1CC22254F82007C6326 /* SubtitleViewModeling.swift in Sources */,
 				613F40E9221FDB0E009AABA6 /* ButtonProviding.swift in Sources */,
 				D738BF6321F3D72600302FE5 /* Array.swift in Sources */,
 				D738BF7421F43A3900302FE5 /* RowViewModel.swift in Sources */,

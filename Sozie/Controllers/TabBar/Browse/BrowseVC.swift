@@ -91,6 +91,7 @@ class BrowseVC: BaseViewController {
                 productViewModels.append(viewModel)
             }
             productsCollectionVu.reloadData()
+            print(productsCollectionVu.contentOffset)
         }
     }
     private var brandViewModels: [ImageCellViewModel] = []
@@ -117,7 +118,7 @@ class BrowseVC: BaseViewController {
                 }
             }
         }
-        
+
         fetchBrandsFromServer()
         fetchProductCount()
         setupViews()
@@ -183,6 +184,7 @@ class BrowseVC: BaseViewController {
         filterCategoryIds = nil
         filterBySozies = false
         clearFilterButton.isHidden = true
+        productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
         productList.removeAll()
         fetchProductsFromServer()
         fetchProductCount()
@@ -245,6 +247,7 @@ class BrowseVC: BaseViewController {
 
             if isSuccess {
                 self.productList.append(contentsOf: response as! [Product])
+                self.productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 50
             } else {
 
             }
@@ -252,9 +255,9 @@ class BrowseVC: BaseViewController {
     }
 
     func filterByBrand(brandId: Int?) {
-        self.filterCategoryIds = nil
+//        self.filterCategoryIds = nil
         self.filterBrandId = brandId
-        self.filterBySozies = false
+//        self.filterBySozies = false
     }
     func fetchFilteredData() {
         self.isFirstPage = true
@@ -392,6 +395,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else {
             let currentBrand = brandList[indexPath.row]
+            productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
             productList.removeAll()
             filterByBrand(brandId: currentBrand.brandId)
             fetchFilteredData()
@@ -412,18 +416,19 @@ extension BrowseVC: WaterfallLayoutDelegate {
 
 extension BrowseVC: PopupNavControllerDelegate {
     func doneButtonTapped(type: FilterType?, id: Int?) {
+        productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
         productList.removeAll()
         if type == FilterType.filter {
             filterByBrand(brandId: id)
         } else if type == FilterType.category {
             if let catId = id {
                 self.filterCategoryIds = [catId]
-                self.filterBrandId = nil
-                self.filterBySozies = false
+//                self.filterBrandId = nil
+//                self.filterBySozies = false
             }
         } else if type == FilterType.sozie {
-            self.filterCategoryIds = nil
-            self.filterBrandId = nil
+//            self.filterCategoryIds = nil
+//            self.filterBrandId = nil
             self.filterBySozies = true
         }
         fetchFilteredData()

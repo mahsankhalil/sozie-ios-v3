@@ -33,7 +33,8 @@ class ServerManager: NSObject {
     static let reportURL = ServerManager.serverURL + "post/report/"
     static let followURL = ServerManager.serverURL + "user/follow/"
     static let blockURL = ServerManager.serverURL + "user/block/"
-    static let requestURL = ServerManager.serverURL + "productrequest/request/"
+    static let requestURL = ServerManager.serverURL + "productrequest/user/request/"
+    static let soziesURL = ServerManager.serverURL + "user/sozie/list"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -385,6 +386,50 @@ class ServerManager: NSObject {
         Alamofire.request(ServerManager.requestURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func getMyRequests(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        var url = ServerManager.requestURL
+        if let nextURL = params["next"] as? String {
+            url = nextURL
+            if let isFilled = params["is_filled"] {
+                url = url + "&is_filled=" + String((isFilled as! Bool) ? 1:0)
+            }
+        } else {
+            if let isFilled = params["is_filled"] {
+                url = url + "?is_filled=" + String((isFilled as! Bool) ? 1:0)
+            }
+
+        }
+//        var parameters = [String: Any]()
+//        parameters["is_filled"] = params["is_filled"]
+        Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.queryString, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<RequestsPaginatedResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func getMySozies(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.soziesURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<[User]> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }

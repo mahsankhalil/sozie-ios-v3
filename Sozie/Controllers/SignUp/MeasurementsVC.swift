@@ -88,14 +88,13 @@ class MeasurementsVC: UIViewController {
     @IBAction func uploadBtnTapped(_ sender: Any) {
         if isValidMeasurements() {
             var dataDict = [String: Any]()
-            dataDict["height"] = currentMeasurement.height!
-            dataDict["waist"] = currentMeasurement.waist!
-            dataDict["hip"] = currentMeasurement.hip!
-            dataDict["bra"] = currentMeasurement.bra!
+            dataDict["height"] = Int(Double(currentMeasurement.height!)!)
+            dataDict["waist"] = Int(currentMeasurement.waist!)
+            dataDict["hip"] = Int(currentMeasurement.hip!)
+            dataDict["bra"] = Int(currentMeasurement.bra!)
             dataDict["cup"] = currentMeasurement.cup!
-            let paramDict = ["measurement": dataDict]
             SVProgressHUD.show()
-            ServerManager.sharedInstance.updateProfile(params: paramDict, imageData: nil) { (isSuccess, response) in
+            ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     self.performSegue(withIdentifier: "toUploadProfilePic", sender: self)

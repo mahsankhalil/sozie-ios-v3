@@ -387,11 +387,11 @@
             <objects>
                 <viewController id="Shc-8z-rMy" customClass="ProductDetailVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jq1-I5-k9d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7L-ct-lfX">
-                                <rect key="frame" x="0.0" y="445" width="375" height="109"/>
+                                <rect key="frame" x="0.0" y="558" width="375" height="109"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UA8-P9-2dS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
@@ -483,13 +483,13 @@
                                         <rect key="frame" x="0.0" y="47" width="375" height="62"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwg-bq-Msw">
-                                                <rect key="frame" x="329.5" y="5" width="30.5" height="21"/>
+                                                <rect key="frame" x="328.5" y="5" width="31.5" height="24"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="18"/>
                                                 <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-yn-n4E">
-                                                <rect key="frame" x="15" y="0.0" width="307" height="62"/>
+                                                <rect key="frame" x="15" y="0.0" width="306" height="62"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -521,10 +521,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ob-KC-dSl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="445"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="538"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ApC-rC-p13">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="445"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="538"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jgf-jI-gg4">
                                             <size key="itemSize" width="50" height="50"/>
@@ -548,7 +548,7 @@
                                         </connections>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yf5-ou-rod">
-                                        <rect key="frame" x="247" y="374" width="128" height="71"/>
+                                        <rect key="frame" x="247" y="467" width="128" height="71"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to see Sozie pictures" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdO-Km-FNP">
                                                 <rect key="frame" x="0.0" y="25.5" width="112" height="37.5"/>
@@ -1329,6 +1329,7 @@
                         <outlet property="noDataLabel" destination="HgY-4F-H4k" id="154-P0-M30"/>
                         <outlet property="searchCountLabel" destination="22r-z8-xM1" id="6WX-4g-bab"/>
                         <outlet property="tableView" destination="kzD-bc-8I5" id="9YU-Nv-IWS"/>
+                        <segue destination="Shc-8z-rMy" kind="show" identifier="toProductDetail" id="Pz3-HK-hHh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jds-aZ-gSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1506,6 +1507,6 @@
         <image name="right2" width="30" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fhc-UN-Ju3"/>
+        <segue reference="Pz3-HK-hHh"/>
     </inferredMetricsTieBreakers>
 </document>

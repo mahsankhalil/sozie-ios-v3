@@ -44,6 +44,9 @@
                                     <constraint firstAttribute="height" constant="26" id="Mgl-uO-Jon"/>
                                 </constraints>
                                 <state key="normal" title="Buy"/>
+                                <connections>
+                                    <action selector="buyButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eTR-7b-kNs"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size Requested: (L)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I13-Ze-HZE">
                                 <rect key="frame" x="157" y="29" width="99" height="22"/>
@@ -71,7 +74,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Viy-bq-CtJ">
-                                <rect key="frame" x="304" y="105.5" width="25" height="19"/>
+                                <rect key="frame" x="304.5" y="105.5" width="24.5" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="9P5-kH-TMv"/>
                                 </constraints>
@@ -80,7 +83,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grey Girl Crush Tee" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hm2-1j-x2N">
-                                <rect key="frame" x="157" y="73" width="100.5" height="22"/>
+                                <rect key="frame" x="157" y="73" width="186" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="qcT-pD-iZ3"/>
                                 </constraints>
@@ -105,6 +108,7 @@
                             <constraint firstItem="Hm2-1j-x2N" firstAttribute="leading" secondItem="p39-Nm-nXB" secondAttribute="trailing" constant="10" id="hEJ-Bi-1Pe"/>
                             <constraint firstItem="I13-Ze-HZE" firstAttribute="leading" secondItem="p39-Nm-nXB" secondAttribute="trailing" constant="10" id="heJ-7n-lUL"/>
                             <constraint firstItem="Kiq-Oo-2em" firstAttribute="top" secondItem="I13-Ze-HZE" secondAttribute="bottom" id="t8Z-Wm-GNt"/>
+                            <constraint firstAttribute="trailing" secondItem="Hm2-1j-x2N" secondAttribute="trailing" id="zBp-SV-EZz"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -118,6 +122,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="backgroudView" destination="veT-Lf-unz" id="87d-hf-di4"/>
+                <outlet property="buyButton" destination="JYl-7I-3jX" id="X6H-A6-yAj"/>
                 <outlet property="priceLabel" destination="Viy-bq-CtJ" id="2ez-6C-ueE"/>
                 <outlet property="productImageView" destination="p39-Nm-nXB" id="2Fo-RR-XSb"/>
                 <outlet property="productTitleLabel" destination="Hm2-1j-x2N" id="OAu-YI-LjO"/>

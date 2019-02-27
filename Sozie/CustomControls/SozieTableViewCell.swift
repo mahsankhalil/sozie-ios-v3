@@ -37,3 +37,40 @@ class SozieTableViewCell: UITableViewCell {
     }
     
 }
+extension SozieTableViewCell: CellConfigurable {
+    func setup(_ viewModel: RowViewModel) {
+
+        if let titleImgModel = viewModel as? TitleImageViewModeling {
+            titleImageView.sd_setImage(with: titleImgModel.titleImageURL, completed: nil)
+        }
+        if let titleModel = viewModel as? TitleViewModeling {
+            nameLabel.text = titleModel.title!
+        }
+        if let followModel = viewModel as? FollowViewModeling {
+            if let isFollowed = followModel.isFollow {
+                if isFollowed == true {
+                    self.followButton.isHidden = true
+                } else {
+                    self.followButton.isHidden = false
+                }
+            }
+        }
+        if let measurementModel = viewModel as? MeasurementViewModeling {
+            if let bra = measurementModel.bra, let cup = measurementModel.cup {
+                braLabel.text = "Bra Size: " + String(bra) + cup
+            }
+            if let height = measurementModel.height {
+                let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+                let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
+                heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
+                
+            }
+            if let hip = measurementModel.hip {
+                hipLabel.text = "Hip: " + String(hip) + "  |"
+            }
+            if let waist = measurementModel.waist {
+                waistLabel.text = "Waist: " + String(waist) + "  |"
+            }
+        }
+    }
+}

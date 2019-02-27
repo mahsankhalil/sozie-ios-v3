@@ -66,6 +66,7 @@ class SizeChartPopUpVC: UIViewController {
     var delegate: SizeChartPopupVCDelegate?
     var type: MeasurementType?
     var currentProductId: String?
+    var currentBrandId: Int?
     var productSizeChart: ProductSizeChart? {
         didSet {
             if let sizeChart = productSizeChart {
@@ -209,6 +210,7 @@ class SizeChartPopUpVC: UIViewController {
             }
         }
         dataDict["product_id"] = currentProductId
+        dataDict["brand"] = currentBrandId
         SVProgressHUD.show()
         ServerManager.sharedInstance.makePostRequest(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -233,7 +235,7 @@ class SizeChartPopUpVC: UIViewController {
         }
     }
 
-    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: ProductSizeChart?, currentProductId: String? = nil) -> SizeChartPopUpVC {
+    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: ProductSizeChart?, currentProductId: String? = nil , brandid: Int? = nil) -> SizeChartPopUpVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "SizeChartPopUpVC") as! SizeChartPopUpVC
         instnce.sizeChartList = arrayOfSizeChart
@@ -243,6 +245,7 @@ class SizeChartPopUpVC: UIViewController {
         instnce.view.clipsToBounds = true
         instnce.type = type
         instnce.currentProductId = currentProductId
+        instnce.currentBrandId = brandid
         return instnce
     }
 }

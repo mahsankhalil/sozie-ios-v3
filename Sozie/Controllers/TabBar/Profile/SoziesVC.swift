@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 class SoziesVC: UIViewController {
     var reuseableIdentifier = "SozieTableViewCell"
     @IBOutlet weak var searchTextField: UITextField!
@@ -19,11 +19,34 @@ class SoziesVC: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
+    var viewModels: [SozieCellViewModel] = []
+    var users: [User] = [] {
+        didSet {
+            for user in users {
+                var brandImageURL = ""
+                if let brandId = user.brand {
+                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+                        brandImageURL = brand.titleImage
+                    }
+                }
+                let viewModel = SozieCellViewModel(isFollow: user.isFollowed, title: user.username, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), bra: user.measurement?.bra, height: user.measurement?.height, hip: user.measurement?.hip, cup: user.measurement?.cup, waist: user.measurement?.waist, imageURL: nil )
+                viewModels.append(viewModel)
+            }
+            if viewModels.count == 0 {
+                noDataLabel.isHidden = false
+            } else {
+                noDataLabel.isHidden = true
+            }
+            self.tableView.reloadData()
+        }
+    }
+    var dataDict = [String: Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupViews()
+        fetchDataFromServer()
     }
     //MARK: - Custom Methods
     func setupViews() {
@@ -39,6 +62,15 @@ class SoziesVC: UIViewController {
             self.searchVuHeightConstraint.constant = 47.0
             self.view.layoutIfNeeded()
             self.searchView.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+        }
+    }
+    func fetchDataFromServer() {
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.getMySozies(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                self.users = response as! [User]
+            }
         }
     }
     @objc func dismissKeyboard() {
@@ -104,10 +136,11 @@ extension SoziesVC: UITextFieldDelegate {
 extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
         
         if tableViewCell == nil {
@@ -116,7 +149,9 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         guard let cell = tableViewCell else { return UITableViewCell() }
-        
+        if let cellConfigurable = cell as? CellConfigurable {
+            cellConfigurable.setup(viewModel)
+        }
         cell.selectionStyle = .none
         return cell
     }
