@@ -12,15 +12,24 @@ class ProfileTabsPageVC: TabPageViewController {
 
     var soziesVC: SoziesVC?
     var requestsVC: RequestsVC?
+    var sozieRequestsVC: SozieRequestsVC?
+    var myUploadsVC: MyUploadsVC?
 
     override init() {
         super.init()
-        soziesVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SoziesVC") as? SoziesVC
-        requestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "RequestsVC") as? RequestsVC
-        tabItems = [(soziesVC, "Sozies"), (requestsVC, "Requests")] as! [(viewController: UIViewController, title: String)]
+        if UserDefaultManager.getIfShopper() {
+            soziesVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SoziesVC") as? SoziesVC
+            requestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "RequestsVC") as? RequestsVC
+            tabItems = [(soziesVC, "Sozies"), (requestsVC, "Requests")] as! [(viewController: UIViewController, title: String)]
+        } else {
+            sozieRequestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SozieRequestsVC") as? SozieRequestsVC
+            myUploadsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "MyUploadsVC") as? MyUploadsVC
+            tabItems = [(sozieRequestsVC, "Sozie Requests"), (myUploadsVC, "My Uploads")] as! [(viewController: UIViewController, title: String)]
+        }
+        
         option.tabWidth = UIScreen.main.bounds.size.width / CGFloat(tabItems.count)
         option.tabHeight = 44.0
-        option.currentColor = UIColor.init(hex: "FC8C8C")
+        option.currentColor = UIColor(hex: "FC8C8C")
         option.defaultColor = UIColor(hex: "888888")
         option.pageBackgoundColor = UIColor.clear
         option.font = UIFont(name: Font.standard.rawValue, size: 13.0)!

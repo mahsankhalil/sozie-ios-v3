@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol SozieTableViewCellDelegate {
+    func followButtonTapped(button: UIButton)
+}
 class SozieTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -18,6 +20,7 @@ class SozieTableViewCell: UITableViewCell {
     @IBOutlet weak var braLabel: UILabel!
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var backgroudView: UIView!
+    var delegate: SozieTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,10 +33,27 @@ class SozieTableViewCell: UITableViewCell {
         followButton.layer.cornerRadius = 3.0
     }
 
+    func makeButtonFollow() {
+        followButton.setTitle("Follow", for: .normal)
+        followButton.backgroundColor = UIColor(hex: "7EA7E5")
+        followButton.setTitleColor(UIColor.white, for: .normal)
+        followButton.layer.cornerRadius = 3.0
+    }
+    func makeButtonFollowing() {
+        followButton.setTitle("Following", for: .normal)
+        followButton.backgroundColor = UIColor.white
+        followButton.setTitleColor(UIColor(hex: "7EA7E5"), for: .normal)
+        followButton.layer.borderWidth = 1.0
+        followButton.layer.borderColor = UIColor(hex: "7EA7E5").cgColor
+        followButton.layer.cornerRadius = 3.0
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func followButtonTapped(_ sender: Any) {
+        delegate?.followButtonTapped(button: sender as! UIButton)
     }
     
 }
@@ -49,9 +69,9 @@ extension SozieTableViewCell: CellConfigurable {
         if let followModel = viewModel as? FollowViewModeling {
             if let isFollowed = followModel.isFollow {
                 if isFollowed == true {
-                    self.followButton.isHidden = true
+                    makeButtonFollowing()
                 } else {
-                    self.followButton.isHidden = false
+                    makeButtonFollow()
                 }
             }
         }
@@ -72,5 +92,10 @@ extension SozieTableViewCell: CellConfigurable {
                 waistLabel.text = "Waist: " + String(waist) + "  |"
             }
         }
+    }
+}
+extension SozieTableViewCell: ButtonProviding {
+    func assignTagWith(_ index: Int) {
+        followButton.tag = index
     }
 }

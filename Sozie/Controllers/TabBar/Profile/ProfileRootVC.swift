@@ -11,6 +11,12 @@ import SideMenu
 class ProfileRootVC: BaseViewController {
     var tabVC : ProfileTabsPageVC?
     @IBOutlet weak var tabView: UIView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var waistLabel: UILabel!
+    @IBOutlet weak var hipLabel: UILabel!
+    @IBOutlet weak var braLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +33,30 @@ class ProfileRootVC: BaseViewController {
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuWidth = UIScreen.main.bounds.size.width - 60.0
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
+        populateCurrentUserData()
+    }
+    func populateCurrentUserData() {
+        if let currentUser = UserDefaultManager.getCurrentUserObject() {
+            self.nameLabel.text = currentUser.username
+            if let measurement = currentUser.measurement {
+                if let bra = measurement.bra, let cup = measurement.cup {
+                    braLabel.text = "Bra Size: " + String(bra) + cup
+                }
+                if let height = measurement.height {
+                    let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+                    let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
+                    heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
+                    
+                }
+                if let hip = measurement.hip {
+                    hipLabel.text = "Hip: " + String(hip) + "  |"
+                }
+                if let waist = measurement.waist {
+                    waistLabel.text = "Waist: " + String(waist) + "  |"
+                }
+            }
+            
+        }
     }
 
     /*

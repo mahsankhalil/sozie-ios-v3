@@ -1,24 +1,22 @@
 //
-//  RequestsVC.swift
+//  SozieRequestsVC.swift
 //  Sozie
 //
-//  Created by Zaighum Ghazali Khan on 2/21/19.
+//  Created by Zaighum Ghazali Khan on 2/28/19.
 //  Copyright © 2019 Danial Zahid. All rights reserved.
 //
 
 import UIKit
-import CCBottomRefreshControl
-
-class RequestsVC: UIViewController {
-    var reuseableIdentifier = "RequestTableViewCell"
+import SVProgressHUD
+class SozieRequestsVC: UIViewController {
+    var reuseableIdentifier = "SozieRequestTableViewCell"
     @IBOutlet weak var searchCountLabel: UILabel!
-    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var noDataLabel: UILabel!
-    var serverParams: [String: Any] = [String: Any]()
-    var viewModels: [MyRequestCellViewModel] = []
+    var nextURL: String?
+    var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
+    var serverParams: [String: Any] = [String: Any]()
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -36,22 +34,10 @@ class RequestsVC: UIViewController {
                         }
                     }
                 }
-                var brandImageURL = ""
-                if let brandId = request.requestedProduct.brandId {
-                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                        brandImageURL = brand.titleImage
-                    }
-                }
-                var searchPrice = 0.0
-                if let price = request.requestedProduct.searchPrice {
-                    searchPrice = Double(price)
-                }
-                var priceString = ""
-                if let currency = request.requestedProduct.currency?.getCurrencySymbol() {
-                    priceString = currency + " " + String(format: "%0.2f", searchPrice)
-                }
-
-                let viewModel = MyRequestCellViewModel(price: priceString, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), title: request.requestedProduct.productName, attributedTitle: nil, isSelected: request.isFilled, subtitle: "Size Requested: " + request.sizeValue)
+                let subtitle = "Size Requested: (" + request.sizeValue + ")"
+                let title = "Requested by "
+                let description =  " Measurements:"
+                let viewModel = SozieRequestCellViewModel(description: description, subtitle: subtitle, isSelected: request.isAccepted, title: title, attributedTitle: nil, bra: nil, height: nil, hip: nil, cup: nil, waist: nil, imageURL: URL(string: imageURL))
                 viewModels.append(viewModel)
             }
             if viewModels.count == 0 {
@@ -61,9 +47,7 @@ class RequestsVC: UIViewController {
             }
             tableView.reloadData()
         }
-        
     }
-    var nextURL: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,35 +56,31 @@ class RequestsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
+        fetchAllSozieRequests()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        requests.removeAll()
-        getMyRequestsFromServer(dataDict: [:])
-    }
-
     @objc func loadNextPage() {
         if let nextUrl = self.nextURL {
             serverParams["next"] = nextUrl
-            getMyRequestsFromServer(dataDict: serverParams)
+            fetchAllSozieRequests()
         } else {
             serverParams.removeValue(forKey: "next")
         }
     }
-    func getMyRequestsFromServer(dataDict: [String: Any]) {
-
-        ServerManager.sharedInstance.getMyRequests(params: dataDict) { (isSuccess, response) in
-            self.tableView.bottomRefreshControl?.endRefreshing()
+    
+    func fetchAllSozieRequests() {
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
             if isSuccess {
                 let paginatedData = response as! RequestsPaginatedResponse
                 self.requests.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
-                self.searchCountLabel.text = String(paginatedData.count) + " Requests"
+                self.searchCountLabel.text = String(paginatedData.count) + " REQUESTS"
             }
+            
         }
     }
-    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -112,41 +92,17 @@ class RequestsVC: UIViewController {
             destVC?.currentProduct = selectedProduct
         }
     }
-    
-    @IBAction func filterButtonTapped(_ sender: Any) {
-        let popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.request )
-        popUpInstnc?.popupDelegate = self
-        let popUpVC = PopupController
-            .create(self.tabBarController!)
-        let options = PopupCustomOption.layout(.bottom)
-        popUpVC.cornerRadius = 0.0
-        _ = popUpVC.customize([options])
-        _ = popUpVC.show(popUpInstnc!)
-        popUpInstnc!.navigationHandler = { []  in
-            UIView.animate(withDuration: 0.6, animations: {
-                popUpVC.updatePopUpSize()
-            })
-        }
-        popUpInstnc?.closeHandler = { [] in
-            popUpVC.dismiss()
-        }
-    }
-    @IBAction func crossButtonTapped(_ sender: Any) {
-        requests.removeAll()
-        getMyRequestsFromServer(dataDict: [:])
-    }
-    
 }
-extension RequestsVC: UITableViewDelegate, UITableViewDataSource {
-
+extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
-
+        
         if tableViewCell == nil {
             tableView.register(UINib(nibName: reuseableIdentifier, bundle: nil), forCellReuseIdentifier: reuseableIdentifier)
             tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
@@ -159,7 +115,7 @@ extension RequestsVC: UITableViewDelegate, UITableViewDataSource {
         if let cellIndexing = cell as? ButtonProviding {
             cellIndexing.assignTagWith(indexPath.row)
         }
-        if let currentCell = cell as? RequestTableViewCell {
+        if let currentCell = cell as? SozieRequestTableViewCell {
             currentCell.delegate = self
         }
         cell.selectionStyle = .none
@@ -170,31 +126,9 @@ extension RequestsVC: UITableViewDelegate, UITableViewDataSource {
         performSegue(withIdentifier: "toProductDetail", sender: self)
     }
 }
-extension RequestsVC: RequestTableViewCellDelegate {
-    func buyButtonTapped(button: UIButton) {
+extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
+    func acceptRequestButtonTapped(button: UIButton) {
         let currentProduct = requests[button.tag].requestedProduct
-        if let productURL = currentProduct.deepLink {
-            guard let url = URL(string: productURL) else { return }
-            UIApplication.shared.open(url)
-        }
-    }
-}
-extension RequestsVC: PopupNavControllerDelegate {
-    func doneButtonTapped(type: FilterType?, id: Int?) {
-        requests.removeAll()
-        if let filterType = type {
-            if filterType == FilterType.request {
-                if let typeId = id {
-                    if typeId == 0 {
-                        serverParams["is_filled"] = true
-                    } else {
-                        serverParams["is_filled"] = false
-                    }
-                }
-            }
-        }
-        serverParams.removeValue(forKey: "next")
-        crossButton.isHidden = false
-        getMyRequestsFromServer(dataDict: serverParams)
+        
     }
 }

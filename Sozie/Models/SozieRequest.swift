@@ -17,7 +17,7 @@ struct SozieRequest: Codable {
     var requestedProduct: Product
     var brandId: Int
     var isFilled: Bool
-
+    var isAccepted: Bool
     enum CodingKeys: String, CodingKey {
         case requestId = "id"
         case userId = "user"
@@ -27,6 +27,7 @@ struct SozieRequest: Codable {
         case requestedProduct = "requested_product"
         case brandId = "brand"
         case isFilled = "is_filled"
+        case isAccepted = "is_accepted"
     }
 
     init(from decoder: Decoder) throws {
@@ -39,6 +40,7 @@ struct SozieRequest: Codable {
         requestedProduct = try values.decode(Product.self, forKey: .requestedProduct)
         brandId = try values.decode(Int.self, forKey: .brandId)
         isFilled = try values.decode(Bool.self, forKey: .isFilled)
+        isAccepted = try values.decode(Bool.self, forKey: .isAccepted)
     }
 
 }

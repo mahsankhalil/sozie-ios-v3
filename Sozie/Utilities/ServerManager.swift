@@ -35,6 +35,7 @@ class ServerManager: NSObject {
     static let blockURL = ServerManager.serverURL + "user/block/"
     static let requestURL = ServerManager.serverURL + "productrequest/user/request/"
     static let soziesURL = ServerManager.serverURL + "user/sozie/list"
+    static let sozieRequestsURL = ServerManager.serverURL + "productrequest/sozie/request/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -430,6 +431,25 @@ class ServerManager: NSObject {
         Alamofire.request(ServerManager.soziesURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<[User]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func getSozieRequest(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        var url = ServerManager.sozieRequestsURL
+        if let nextURL = params["next"] as? String {
+            url = nextURL
+        }
+        Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<RequestsPaginatedResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }

@@ -86,5 +86,15 @@ class UserDefaultManager: NSObject {
             return nil
         }
     }
+    static func getIfShopper() -> Bool {
+        if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.shopper.rawValue {
+                return true
+            } else {
+                return false
+            }
+        }
+        return true
+    }
 
 }

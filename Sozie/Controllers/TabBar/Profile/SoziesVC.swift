@@ -19,9 +19,11 @@ class SoziesVC: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
+    var serverParams = [String: Any]()
     var viewModels: [SozieCellViewModel] = []
     var users: [User] = [] {
         didSet {
+            viewModels.removeAll()
             for user in users {
                 var brandImageURL = ""
                 if let brandId = user.brand {
@@ -36,6 +38,16 @@ class SoziesVC: UIViewController {
                 noDataLabel.isHidden = false
             } else {
                 noDataLabel.isHidden = true
+            }
+            if let _ = dataDict["filter_by"] {
+                searchLabel.text = String(viewModels.count) + " SOZIES FOLLOWED"
+                self.crossButton.isHidden = false
+            } else if let queryBy = dataDict["query"] as? String {
+                searchLabel.text = queryBy
+                self.crossButton.isHidden = false
+            } else {
+                searchLabel.text = "ALL SOZIES"
+                self.crossButton.isHidden = true
             }
             self.tableView.reloadData()
         }
@@ -62,6 +74,7 @@ class SoziesVC: UIViewController {
             self.searchVuHeightConstraint.constant = 47.0
             self.view.layoutIfNeeded()
             self.searchView.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+            self.searchTextField.becomeFirstResponder()
         }
     }
     func fetchDataFromServer() {
@@ -96,10 +109,13 @@ class SoziesVC: UIViewController {
     }
     */
     @IBAction func crossButtonTapped(_ sender: Any) {
+        users.removeAll()
+        dataDict.removeAll()
+        fetchDataFromServer()
     }
     @IBAction func filterButtonTapped(_ sender: Any) {
         let popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.mySozies )
-//        popUpInstnc?.popupDelegate = self
+        popUpInstnc?.popupDelegate = self
         let popUpVC = PopupController
             .create(self.tabBarController!)
         let options = PopupCustomOption.layout(.bottom)
@@ -129,6 +145,9 @@ extension SoziesVC: UITextFieldDelegate {
         hideSearchVu()
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dataDict.removeValue(forKey: "filter_by")
+        dataDict["query"] = textField.text
+        fetchDataFromServer()
         hideSearchVu()
         return true
     }
@@ -142,7 +161,6 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
-        
         if tableViewCell == nil {
             tableView.register(UINib(nibName: reuseableIdentifier, bundle: nil), forCellReuseIdentifier: reuseableIdentifier)
             tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
@@ -152,7 +170,49 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
         }
+        if let cellIndexing = cell as? ButtonProviding {
+            cellIndexing.assignTagWith(indexPath.row)
+        }
+        if let currentCell = cell as? SozieTableViewCell {
+            currentCell.delegate = self
+        }
         cell.selectionStyle = .none
         return cell
+    }
+}
+extension SoziesVC: PopupNavControllerDelegate {
+    func doneButtonTapped(type: FilterType?, id: Int?) {
+        users.removeAll()
+        if let filterType = type {
+            if filterType == FilterType.mySozies {
+                if let typeId = id {
+                    if typeId == 0 {
+                        dataDict["filter_by"] = "only_followed"
+                    }
+                }
+            }
+        }
+        crossButton.isHidden = false
+        fetchDataFromServer()
+    }
+}
+extension SoziesVC: SozieTableViewCellDelegate {
+    func followButtonTapped(button: UIButton) {
+        let currentUser = users[button.tag]
+        if currentUser.isFollowed == false {
+            var dataDict = [String: Any]()
+            let userId = currentUser.userId
+            dataDict["user"] = userId
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.followUser(params: dataDict) { (isSuccess, _) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.users[button.tag].isFollowed = true
+                    self.viewModels[button.tag].isFollow = true
+                    self.tableView.reloadRows(at: [IndexPath(item: button.tag, section: 0)], with: .automatic)
+                }
+            }
+
+        }
     }
 }
