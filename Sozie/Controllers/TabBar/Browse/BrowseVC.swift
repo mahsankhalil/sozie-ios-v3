@@ -167,7 +167,7 @@ class BrowseVC: BaseViewController {
         ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.brandList = response as? [Brand] ?? []
+                self.brandList = self.removeTargetIfUS(brands: (response as? [Brand]) ?? []) 
                 _ = UserDefaultManager.saveAllBrands(brands: self.brandList)
                 self.brandsCollectionVu.reloadData()
             }
@@ -265,6 +265,22 @@ class BrowseVC: BaseViewController {
         self.productsCollectionVu.refreshControl?.beginRefreshing()
         fetchProductCount()
         fetchProductsFromServer()
+    }
+    func removeTargetIfUS(brands: [Brand]) -> [Brand] {
+        var brandsList: [Brand] = []
+        for brand in brands {
+            if let user = UserDefaultManager.getCurrentUserObject() {
+                if let countryId = user.country {
+                    if countryId == 1 {
+                        if brand.brandId == 10 {
+                            continue
+                        }
+                    }
+                }
+            }
+            brandsList.append(brand)
+        }
+        return brandsList
     }
 
     // MARK: - Navigation

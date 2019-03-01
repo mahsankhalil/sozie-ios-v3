@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="segoeui.ttf">
+            <string>SegoeUI</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PostSizeCollectionViewCell" customModule="Sozie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgC-aZ-UeW">
+                        <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TDQ-m4-nEq">
+                                <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFC-SD-IAZ">
+                                <rect key="frame" x="72" y="111" width="53" height="14"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size Worn: US-33" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHS-uq-WBB">
+                                        <rect key="frame" x="9.5" y="0.0" width="38.5" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="bgd-rn-iRZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="5"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.70133692781690138" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="08w-7Z-nh6"/>
+                                    <constraint firstAttribute="trailing" secondItem="oHS-uq-WBB" secondAttribute="trailing" constant="5" id="1ms-dZ-ZvN"/>
+                                    <constraint firstAttribute="bottom" secondItem="oHS-uq-WBB" secondAttribute="bottom" id="4Bl-Gy-DSl"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="EQF-Ui-WvA"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="53" id="FIw-ep-Mw5"/>
+                                    <constraint firstAttribute="height" constant="14" id="gny-Oc-VR8"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TDQ-m4-nEq" firstAttribute="top" secondItem="WgC-aZ-UeW" secondAttribute="top" id="MvG-2w-hzJ"/>
+                            <constraint firstItem="TDQ-m4-nEq" firstAttribute="leading" secondItem="WgC-aZ-UeW" secondAttribute="leading" id="mGC-M2-Rca"/>
+                            <constraint firstAttribute="trailing" secondItem="TDQ-m4-nEq" secondAttribute="trailing" id="odp-vG-aHc"/>
+                            <constraint firstAttribute="bottom" secondItem="TDQ-m4-nEq" secondAttribute="bottom" id="sZg-08-mnq"/>
+                            <constraint firstAttribute="trailing" secondItem="GFC-SD-IAZ" secondAttribute="trailing" id="uR8-KL-yV7"/>
+                            <constraint firstAttribute="bottom" secondItem="GFC-SD-IAZ" secondAttribute="bottom" id="uZX-tP-yT9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="WgC-aZ-UeW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="9Yj-hf-Cnl"/>
+                <constraint firstAttribute="bottom" secondItem="WgC-aZ-UeW" secondAttribute="bottom" id="WG8-Jh-8VT"/>
+                <constraint firstItem="WgC-aZ-UeW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gqL-cX-4I1"/>
+                <constraint firstAttribute="trailing" secondItem="WgC-aZ-UeW" secondAttribute="trailing" id="ujm-Yo-LCf"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="imageView" destination="TDQ-m4-nEq" id="hYf-qX-ISt"/>
+                <outlet property="labelBackgroundView" destination="GFC-SD-IAZ" id="4t9-aX-NuR"/>
+                <outlet property="sizeLabel" destination="oHS-uq-WBB" id="dPs-hZ-8zI"/>
+            </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="106.59670164917542"/>
+        </collectionViewCell>
+    </objects>
+</document>

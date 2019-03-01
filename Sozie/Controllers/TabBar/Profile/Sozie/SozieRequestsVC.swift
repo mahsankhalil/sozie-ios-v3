@@ -35,9 +35,9 @@ class SozieRequestsVC: UIViewController {
                     }
                 }
                 let subtitle = "Size Requested: (" + request.sizeValue + ")"
-                let title = "Requested by "
-                let description =  " Measurements:"
-                let viewModel = SozieRequestCellViewModel(description: description, subtitle: subtitle, isSelected: request.isAccepted, title: title, attributedTitle: nil, bra: nil, height: nil, hip: nil, cup: nil, waist: nil, imageURL: URL(string: imageURL))
+                let title = "Requested by " + request.user.username
+                let description = request.user.username +  " Measurements:"
+                let viewModel = SozieRequestCellViewModel(description: description, subtitle: subtitle, isSelected: request.isAccepted, title: title, attributedTitle: nil, bra: request.user.measurement?.bra, height: request.user.measurement?.height, hip: request.user.measurement?.hip, cup: request.user.measurement?.cup, waist: request.user.measurement?.waist, imageURL: URL(string: imageURL))
                 viewModels.append(viewModel)
             }
             if viewModels.count == 0 {

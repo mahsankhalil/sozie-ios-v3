@@ -64,6 +64,23 @@ extension SozieRequestTableViewCell: CellConfigurable {
         if let descriptionModel = viewModel as? DescriptionViewModeling {
             descriptionLabel.text = descriptionModel.description
         }
+        if let measurementModel = viewModel as? MeasurementViewModeling {
+            if let bra = measurementModel.bra, let cup = measurementModel.cup {
+                braLabel.text = "Bra Size: " + String(bra) + cup
+            }
+            if let height = measurementModel.height {
+                let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+                let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
+                heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
+                
+            }
+            if let hip = measurementModel.hip {
+                hipLabel.text = "Hip: " + String(hip) + "'  | "
+            }
+            if let waist = measurementModel.waist {
+                waistLabel.text = "Waist: " + String(waist) + "'  |"
+            }
+        }
     }
 }
 extension SozieRequestTableViewCell: ButtonProviding {

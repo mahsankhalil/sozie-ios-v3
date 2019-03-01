@@ -36,6 +36,7 @@ class ServerManager: NSObject {
     static let requestURL = ServerManager.serverURL + "productrequest/user/request/"
     static let soziesURL = ServerManager.serverURL + "user/sozie/list"
     static let sozieRequestsURL = ServerManager.serverURL + "productrequest/sozie/request/"
+    static let postURL = ServerManager.serverURL + "post/list/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -450,6 +451,33 @@ class ServerManager: NSObject {
         Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<RequestsPaginatedResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func getUserPosts(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        var url = ServerManager.postURL
+        if let nextURL = params["next"] as? String {
+            url = nextURL
+            if let userId = params["user_id"] {
+                url = url + "&user_id=" + String(userId as! Int)
+            }
+        } else {
+            if let userId = params["user_id"] {
+                url = url + "?user_id=" + String(userId as! Int)
+            }
+            
+        }
+        Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<PostPaginatedResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }
