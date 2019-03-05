@@ -23,13 +23,18 @@ class UploadPostVC: BaseViewController {
     @IBOutlet weak var sizeWornLabel: UILabel!
     @IBOutlet weak var sizeView: UIView!
     @IBOutlet weak var bottomButtom: DZGradientButton!
-    var currentProduct : Product?
+    var currentRequest: SozieRequest?
     var selectedImage: UIImage?
+    var isSizeSelected = false
+    var selectedSizeType: String?
+    var selectedSizeValue: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         fetchProductDetailFromServer()
+        self.sizeView.isHidden = true
+        populateSizeData()
         if let image = selectedImage {
             self.postImageView.image = image
         }
@@ -37,13 +42,11 @@ class UploadPostVC: BaseViewController {
             let imgData: NSData = NSData(data: image.jpegData(compressionQuality: 1.0)!)
             let imageSize: Int = imgData.length
             let imageSizeKbs = Double(imageSize) / 1024.0
-            self.fileSizeLabel.text = "File size:" + String(format: "%0.0f",imageSizeKbs) + "kb"
+            self.fileSizeLabel.text = "File size:" + String(format: "%0.0f", imageSizeKbs) + "kb"
         }
-        
-
     }
     func fetchProductDetailFromServer () {
-        if let productId = currentProduct?.productStringId {
+        if let productId = currentRequest?.requestedProduct.productStringId {
             SVProgressHUD.show()
             ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
@@ -55,13 +58,20 @@ class UploadPostVC: BaseViewController {
         }
     }
     func updateCurrentProductObject(product: Product) {
-        currentProduct?.isFavourite = product.isFavourite
-        currentProduct?.posts = product.posts
-        currentProduct?.sizeChart = product.sizeChart
+        currentRequest?.requestedProduct.isFavourite = product.isFavourite
+        currentRequest?.requestedProduct.posts = product.posts
+        currentRequest?.requestedProduct.sizeChart = product.sizeChart
+    }
+    func populateSizeData() {
+//        if let request = currentRequest {
+//            sizeLabel.text = request.sizeType + " " + request.sizeValue
+//            bottomButtom.setTitle("Publish", for: .normal)
+//        }
     }
     func populateProductData() {
         var priceString = ""
         var searchPrice = 0.0
+        let currentProduct = currentRequest?.requestedProduct
         if let price = currentProduct?.searchPrice {
             searchPrice = Double(price)
         }
@@ -74,7 +84,7 @@ class UploadPostVC: BaseViewController {
         }
         if let brandId = currentProduct?.brandId {
             if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                brandImageView.sd_setImage(with:  URL(string: brand.titleImage), completed: nil)
+                brandImageView.sd_setImage(with: URL(string: brand.titleImage), completed: nil)
             }
         }
         if let imageURL = currentProduct?.merchantImageURL {
@@ -82,16 +92,14 @@ class UploadPostVC: BaseViewController {
                 if feedId == 18857 {
                     let delimeter = "|"
                     let url = imageURL.components(separatedBy: delimeter)
-                    productImageView.sd_setImage(with:  URL(string: url[0]), completed: nil)
+                    productImageView.sd_setImage(with: URL(string: url[0]), completed: nil)
                 } else {
-                    productImageView.sd_setImage(with:  URL(string: imageURL), completed: nil)
+                    productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
                 }
             } else {
-                productImageView.sd_setImage(with:  URL(string: imageURL), completed: nil)
+                productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
             }
         }
-        
-        
     }
     /*
     // MARK: - Navigation
@@ -103,10 +111,64 @@ class UploadPostVC: BaseViewController {
     }
     */
     @IBAction func bottomButtonTapped(_ sender: Any) {
+        if isSizeSelected == false {
+            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentRequest?.requestedProduct.sizeChart, currentProductId: currentRequest?.requestedProduct.productStringId, brandid: currentRequest?.requestedProduct.brandId)
+            let popUpVC = PopupController
+                .create(self.tabBarController ?? self)
+                .show(popUpInstnc)
+            popUpInstnc.delegate = self
+            popUpInstnc.closeHandler = { []  in
+                popUpVC.dismiss()
+            }
+        } else {
+            var dataDict = [String: Any]()
+            dataDict["product_id"] = currentRequest?.requestedProduct.productStringId
+            dataDict["size_type"] = selectedSizeType
+            dataDict["size_value"] = selectedSizeValue
+            dataDict["product_request"] = currentRequest?.requestId
+            let imageData = selectedImage?.jpegData(compressionQuality: 1.0)
+            let thumbData = selectedImage?.jpegData(compressionQuality: 0.1)
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.addPost(params: dataDict, imageData: imageData, thumbImageData: thumbData) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+                }
+            }
+        }
     }
     @IBAction func postMakButtonTapped(_ sender: Any) {
+        let photoEditor = self.storyboard?.instantiateViewController(withIdentifier: "PhotoEditorViewController") as! PhotoEditorViewController
+        photoEditor.photoEditorDelegate = self
+        photoEditor.image = selectedImage
+        present(photoEditor, animated: true, completion: nil)
     }
     @IBAction func postDeleteButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+}
+extension UploadPostVC: SizeChartPopupVCDelegate {
+    func selectedValueFromPopUp(value: Int?, type: MeasurementType?, sizeType: SizeType?, sizeValue: String?) {
+        selectedSizeType = sizeType?.rawValue
+        selectedSizeValue = sizeValue
+        if let currentSizeType = selectedSizeType, let currentSizeValue = selectedSizeValue {
+            sizeLabel.text = currentSizeType + " " + currentSizeValue
+            bottomButtom.setTitle("Publish", for: .normal)
+            self.sizeView.isHidden = false
+            isSizeSelected = true
+        }
+    }
+}
+extension UploadPostVC: PhotoEditorDelegate {
+    
+    func doneEditing(image: UIImage) {
+        selectedImage = image
+        postImageView.image = image
     }
     
+    func canceledEditing() {
+        print("Canceled")
+    }
 }

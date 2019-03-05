@@ -89,12 +89,9 @@ extension MyUploadsVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         }
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         var availableWidth: Int = Int(UIScreen.main.bounds.size.width - 6 )
-    
-        
         let widthPerItem = Double(availableWidth/3)
         return CGSize(width: widthPerItem, height: widthPerItem )
     }
@@ -104,7 +101,7 @@ extension MyUploadsVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }
@@ -112,8 +109,7 @@ extension MyUploadsVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
     }
 }

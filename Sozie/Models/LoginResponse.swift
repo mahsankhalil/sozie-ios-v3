@@ -45,7 +45,7 @@ struct ValidateRespose: Codable {
     }
 }
 
-struct CountResponse : Codable {
+struct CountResponse: Codable {
     var count: Int
     
     enum CodingKeys: String, CodingKey {

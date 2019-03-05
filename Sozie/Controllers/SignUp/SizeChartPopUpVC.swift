@@ -128,20 +128,33 @@ class SizeChartPopUpVC: UIViewController {
 
     @IBAction func selectBtnTapped(_ sender: Any) {
         if let _ = productSizeChart {
-//            if isSelectedFromGeneral {
-//                if let index = generalSelectedIndex {
-//                    delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.general, sizeValue: generalViewModels[index].title)
-//                }
-//
-//            } else if isUKSelected {
-//                if let index = ukSelectedIndex {
-//                    delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.uk, sizeValue: generalViewModels[index].title)
-//                }
-//            } else {
-//                if let index = usSelectedIndex {
-//                    delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.us, sizeValue: generalViewModels[index].title)
-//                }
-//            }
+            if isSelectedFromGeneral {
+                if let index = generalSelectedIndex {
+                    if delegate != nil {
+                        delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.general, sizeValue: generalViewModels[index].title)
+                        closeHandler?()
+                        return
+                    }
+                    
+                }
+
+            } else if isUKSelected {
+                if let index = ukSelectedIndex {
+                    if delegate != nil {
+                        delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.uk, sizeValue: ukViewModels[index].title)
+                        closeHandler?()
+                        return
+                    }
+                }
+            } else {
+                if let index = usSelectedIndex {
+                    if delegate != nil {
+                        delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.us, sizeValue: usViewModels[index].title)
+                        closeHandler?()
+                        return
+                    }
+                }
+            }
             self.makePostRequestToServer()
         } else {
             if isSelectedFromGeneral {
@@ -167,7 +180,6 @@ class SizeChartPopUpVC: UIViewController {
                 } else {
                     currentSelection = sizeChart[usSelectedIndex!]
                 }
-                
                 switch type! {
                 case .hips:
                     delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips, sizeType: nil, sizeValue: nil)
@@ -177,10 +189,8 @@ class SizeChartPopUpVC: UIViewController {
                     break
                 }
             }
-            
             closeHandler?()
         }
-        
     }
 
     func makePostRequestToServer() {

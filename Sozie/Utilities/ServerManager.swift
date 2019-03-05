@@ -36,6 +36,7 @@ class ServerManager: NSObject {
     static let requestURL = ServerManager.serverURL + "productrequest/user/request/"
     static let soziesURL = ServerManager.serverURL + "user/sozie/list"
     static let sozieRequestsURL = ServerManager.serverURL + "productrequest/sozie/request/"
+    static let addPostURL = ServerManager.serverURL + "post/add/"
     static let postURL = ServerManager.serverURL + "post/list/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
@@ -483,6 +484,43 @@ class ServerManager: NSObject {
             }
             obj.ifFailure {
                 block!(false, obj.error!)
+            }
+        }
+    }
+    func addPost(params: [String: Any]?, imageData: Data?, thumbImageData: Data?, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
+            "Content-type": "multipart/form-data"
+        ]
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for (key, value) in (params ?? [:]) {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            
+            if let data = imageData {
+                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
+            }
+            if let thumbdata = thumbImageData {
+                multipartFormData.append(thumbdata, withName: "thumb_image", fileName: "image.png", mimeType: "image/png")
+            }
+        }, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
+            
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseData { response in
+                    let decoder = JSONDecoder()
+                    let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+                    obj.ifSuccess {
+                        block!(true, obj.value!)
+                    }
+                    obj.ifFailure {
+                        block!(false, obj.error!)
+                    }
+                    
+                }
+            case .failure(let error):
+                block!(false, error)
             }
         }
     }
