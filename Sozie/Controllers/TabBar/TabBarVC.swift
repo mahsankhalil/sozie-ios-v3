@@ -42,7 +42,13 @@ class TabBarVC: UITabBarController {
         self.viewControllers = ([browseNC, cameraVc, profileNC] as! [UIViewController])
 
     }
-
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if self.customizableViewControllers?.index(of: viewController) == 1 {
+            UtilityManager.openImagePickerActionSheetFrom(vc: self)
+            return false
+        }
+        return true
+    }
     /*
     // MARK: - Navigation
 
@@ -53,4 +59,9 @@ class TabBarVC: UITabBarController {
     }
     */
 
+}
+extension TabBarVC:  UINavigationControllerDelegate , UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+    }
 }

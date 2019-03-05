@@ -54,6 +54,8 @@ class BaseViewController: UIViewController {
     func setupBackgroundImage() {
     self.navigationController?.navigationBar.setBackgroundImage(UIImage().resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), resizingMode: UIImage.ResizingMode.stretch), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+
     }
     
 //    func sideMenuBtnTapped()

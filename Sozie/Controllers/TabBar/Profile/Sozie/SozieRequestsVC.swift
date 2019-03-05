@@ -17,6 +17,7 @@ class SozieRequestsVC: UIViewController {
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
     var serverParams: [String: Any] = [String: Any]()
+    var requestedProduct: Product?
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -128,7 +129,22 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func acceptRequestButtonTapped(button: UIButton) {
-        let currentProduct = requests[button.tag].requestedProduct
-        
+        requestedProduct = requests[button.tag].requestedProduct
+        UtilityManager.openImagePickerActionSheetFrom(vc: self)
+    }
+}
+extension SozieRequestsVC:  UINavigationControllerDelegate , UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostVC") as? UploadPostVC {
+            if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+                    let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 1024, height: 512))
+                    uploadPostVC.currentProduct = requestedProduct
+                    uploadPostVC.selectedImage = scaledImg
+                    profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
+                }
+            }
+            picker.dismiss(animated: true, completion: nil)
+        }
     }
 }

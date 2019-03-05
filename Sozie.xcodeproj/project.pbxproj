@@ -21,6 +21,7 @@
 		6103E1B121FF330400C7E7CF /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6103E1AF21FF330400C7E7CF /* TitleCell.xib */; };
 		6103E1B421FF33CC00C7E7CF /* TitleAndSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6103E1B221FF33CC00C7E7CF /* TitleAndSwitchCell.swift */; };
 		6103E1B521FF33CC00C7E7CF /* TitleAndSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6103E1B321FF33CC00C7E7CF /* TitleAndSwitchCell.xib */; };
+		61064592222D392100AE41C3 /* UploadPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61064591222D392100AE41C3 /* UploadPostVC.swift */; };
 		6108FB992201D1F30007A49F /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6108FB982201D1F20007A49F /* ImageCollectionViewCell.swift */; };
 		610A74372202DF6E00964886 /* ImageViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A74362202DF6E00964886 /* ImageViewModeling.swift */; };
 		610A7439220307D000964886 /* TitleImageViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A7438220307D000964886 /* TitleImageViewModeling.swift */; };
@@ -177,6 +178,7 @@
 		6103E1AF21FF330400C7E7CF /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
 		6103E1B221FF33CC00C7E7CF /* TitleAndSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndSwitchCell.swift; sourceTree = "<group>"; };
 		6103E1B321FF33CC00C7E7CF /* TitleAndSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleAndSwitchCell.xib; sourceTree = "<group>"; };
+		61064591222D392100AE41C3 /* UploadPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostVC.swift; sourceTree = "<group>"; };
 		6108FB982201D1F20007A49F /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		610A74362202DF6E00964886 /* ImageViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModeling.swift; sourceTree = "<group>"; };
 		610A7438220307D000964886 /* TitleImageViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageViewModeling.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		6103E18F21FAF1E500C7E7CF /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				61064590222D390200AE41C3 /* UploadPost */,
 				6103E19321FAF91D00C7E7CF /* Browse */,
 				6103E19421FAF91D00C7E7CF /* Profile */,
 				6103E19221FAF91D00C7E7CF /* WishList */,
@@ -404,6 +407,14 @@
 				6103E1A621FEDBEB00C7E7CF /* PopupController.swift */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		61064590222D390200AE41C3 /* UploadPost */ = {
+			isa = PBXGroup;
+			children = (
+				61064591222D392100AE41C3 /* UploadPostVC.swift */,
+			);
+			path = UploadPost;
 			sourceTree = "<group>";
 		};
 		6122289721F5D33500D4D747 /* SignIn */ = {
@@ -972,6 +983,7 @@
 				6944810C21C7A018001A11A2 /* DZImageView.swift in Sources */,
 				DA48CB1A21FADD8D006804B6 /* ErrorViewModeling.swift in Sources */,
 				61BC873721E76C62000AEA06 /* Brand.swift in Sources */,
+				61064592222D392100AE41C3 /* UploadPostVC.swift in Sources */,
 				61B9D1C8222548BA007C6326 /* SozieRequest.swift in Sources */,
 				611E41222214719F007B1C62 /* ProductDetailCellViewModel.swift in Sources */,
 				61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */,
