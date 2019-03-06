@@ -179,6 +179,14 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            let sozieProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SozieProfileVC") as! SozieProfileVC
+            let currentUser = users[indexPath.row]
+            sozieProfileVC.user = currentUser
+            profileParentVC.navigationController?.pushViewController(sozieProfileVC, animated: true)
+        }
+    }
 }
 extension SoziesVC: PopupNavControllerDelegate {
     func doneButtonTapped(type: FilterType?, id: Int?) {

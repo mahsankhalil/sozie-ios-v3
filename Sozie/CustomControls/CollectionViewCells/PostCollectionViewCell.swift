@@ -53,6 +53,9 @@ extension PostCollectionViewCell: CellConfigurable {
                 nameLabel.attributedText = title
             }
         }
+        if let descriptionViewModel = viewModel as? DescriptionViewModeling {
+            sizeWornLabel.text = descriptionViewModel.description
+        }
         if let measurementModel = viewModel as? MeasurementViewModeling {
             if let bra = measurementModel.bra, let cup = measurementModel.cup {
                 braLabel.text = "Bra Size: " + String(bra) + cup

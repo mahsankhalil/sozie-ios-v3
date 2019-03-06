@@ -45,7 +45,33 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.layer.borderWidth = 1.0
         navigationController?.navigationBar.layer.borderColor = UIColor(hex: "707070").cgColor.copy(alpha: 0.05)
     }
-    
+    func showCancelButton() {
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        cancelButton.tintColor = UIColor(hex: "888888")
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+    func showTagItemButton() {
+        let tagItemButton = UIBarButtonItem(title: "Tag Item", style: .plain, target: self, action: #selector(tagItemButtonTapped))
+        tagItemButton.tintColor = UIColor(hex: "888888")
+        navigationItem.rightBarButtonItem = tagItemButton
+    }
+    @objc func tagItemButtonTapped() {
+        
+    }
+    @objc func cancelButtonTapped() {
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.imageTaken = nil
+    }
+    func showNextButton() {
+        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextButtonTapped))
+        nextButton.tintColor = UIColor(hex: "888888")
+        navigationItem.rightBarButtonItem = nextButton
+    }
+    @objc func nextButtonTapped() {
+        
+    }
     func setupProfileNavBar() {
         setupBackgroundImage()
         navigationItem.titleView = nil

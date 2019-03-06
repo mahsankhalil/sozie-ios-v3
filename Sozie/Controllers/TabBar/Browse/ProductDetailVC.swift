@@ -20,9 +20,11 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var swipeToSeeView: UIView!
+    @IBOutlet weak var heartButtonWidthConstraint: NSLayoutConstraint!
     var currentProduct: Product?
     var viewModels: [PostCellViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
+    var currentPostId: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +34,25 @@ class ProductDetailVC: BaseViewController {
         fetchProductDetailFromServer()
         collectionView.register(UINib(nibName: "PostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostCollectionViewCell")
         collectionView.register(UINib(nibName: "ProductDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductDetailCollectionViewCell")
+        buyButton.layer.cornerRadius = 3.0
+        requestSozieButton.layer.cornerRadius = 3.0
         pageControl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        if UserDefaultManager.getIfShopper() {
+            heartButtonWidthConstraint.constant = 32.0
+            heartButton.isHidden = false
+            buyButton.isHidden = false
+            requestSozieButton.isHidden = false
+        } else {
+            heartButtonWidthConstraint.constant = 0.0
+            heartButton.isHidden = true
+            buyButton.isHidden = true
+            requestSozieButton.isHidden = true
+        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let _ = appDelegate.imageTaken {
+            self.showTagItemButton()
+            self.showCancelButton()
+        }
 
     }
     override func viewDidLayoutSubviews() {
@@ -92,24 +112,28 @@ class ProductDetailVC: BaseViewController {
             heartButton.setImage(UIImage(named: "Filled Heart"), for: .normal)
         }
         makePostCellViewModel()
-        pageControl.currentPage = 0
-        if let posts = currentProduct?.posts {
-            if posts.count == 0 {
-                swipeToSeeView.isHidden = true
-            } else {
-                swipeToSeeView.isHidden = false
-            }
-            pageControl.numberOfPages = posts.count + 1
-        } else {
-            pageControl.numberOfPages = 1
-            swipeToSeeView.isHidden = true
-        }
+//        pageControl.currentPage = 0
+//        if let posts = currentProduct?.posts {
+//            if posts.count == 0 {
+//                swipeToSeeView.isHidden = true
+//            } else {
+//                swipeToSeeView.isHidden = false
+//            }
+//            pageControl.numberOfPages = posts.count + 1
+//        } else {
+//            pageControl.numberOfPages = 1
+//            swipeToSeeView.isHidden = true
+//        }
     }
     func makePostCellViewModel() {
         viewModels.removeAll()
+        var indexOfPost = 0
         if let posts = currentProduct?.posts {
             var index = 0
             for post in posts {
+                if post.postId == currentPostId {
+                    indexOfPost = index + 1
+                }
                 var viewModel = PostCellViewModel()
                 viewModel.title = post.user.username
                 viewModel.imageURL = URL(string: post.imageURL)
@@ -120,11 +144,20 @@ class ProductDetailVC: BaseViewController {
                 viewModel.waist = post.user.measurement?.waist
                 viewModel.index = index
                 viewModel.isFollow = post.userFollowedByMe
+                viewModel.description = "Size Worn: " + post.sizeType + "-" + post.sizeValue
                 viewModels.append(viewModel)
                 index = index + 1
             }
         }
         self.collectionView.reloadData()
+        self.collectionView.scrollToItem(at: IndexPath(item: indexOfPost, section: 0), at: .centeredHorizontally, animated: false)
+        pageControl.numberOfPages = viewModels.count + 1
+        self.pageControl.currentPage = indexOfPost
+        if indexOfPost > 0 {
+            swipeToSeeView.isHidden = true
+        } else {
+            swipeToSeeView.isHidden = false
+        }
     }
 
     func populateDummyData() {
@@ -135,20 +168,23 @@ class ProductDetailVC: BaseViewController {
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toUploadPost" {
+            let uploadPostVC = segue.destination as! UploadPostVC
+        }
     }
-    */
+    
 
     // MARK: - Actions
 
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
-        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId,brandid: currentProduct?.brandId)
+        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
         let popUpVC = PopupController
             .create(self.tabBarController ?? self)
             .show(popUpInstnc)
@@ -206,6 +242,13 @@ class ProductDetailVC: BaseViewController {
                 }
             }
         }
+    }
+    override func tagItemButtonTapped() {
+        self.performSegue(withIdentifier: "toUploadPost", sender: self)
+    }
+    override func cancelButtonTapped() {
+        super.cancelButtonTapped()
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

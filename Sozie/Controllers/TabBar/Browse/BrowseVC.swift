@@ -132,6 +132,12 @@ class BrowseVC: BaseViewController {
         productsCollectionVu.refreshControl = upperRefreshControl
         self.refreshData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken == nil {
+            super.cancelButtonTapped()
+        }
+    }
     // MARK: - Custom Methods
 
     func setupViews() {
@@ -330,6 +336,9 @@ class BrowseVC: BaseViewController {
     @IBAction func categoryBtnTapped(_ sender: Any) {
         showPopUpWithTitle(type: .category)
     }
+    @objc override func nextButtonTapped() {
+        performSegue(withIdentifier: "toProductDetail", sender: self)
+    }
 }
 extension BrowseVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -408,6 +417,11 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == productsCollectionVu {
             selectedProduct = productList[indexPath.row]
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if let image = appDelegate.imageTaken {
+                self.showNextButton()
+                return
+            }
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else {
             let currentBrand = brandList[indexPath.row]

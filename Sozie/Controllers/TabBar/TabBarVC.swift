@@ -57,15 +57,26 @@ class TabBarVC: UITabBarController {
 }
 extension TabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if self.customizableViewControllers?.index(of: viewController) == 1 {
-            UtilityManager.openImagePickerActionSheetFrom(vc: self)
-            return false
+        if UserDefaultManager.getIfShopper() == false {
+            if self.customizableViewControllers?.index(of: viewController) == 1 {
+                UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                return false
+            }
         }
         return true
     }
 }
-extension TabBarVC:  UINavigationControllerDelegate , UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+extension TabBarVC:  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.imageTaken = scaledImg
+            self.selectedIndex = 0
+            if let browseVC = ((self.viewControllers![0] as? UINavigationController)?.viewControllers[0]) as? BrowseVC {
+                browseVC.showCancelButton()
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }

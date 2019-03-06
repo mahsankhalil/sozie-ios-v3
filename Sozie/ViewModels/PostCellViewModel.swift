@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling , ReuseIdentifierProviding , MeasurementViewModeling, FollowViewModeling {
+struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling , ReuseIdentifierProviding , MeasurementViewModeling, FollowViewModeling, DescriptionViewModeling {
+    var description: String?
     var isFollow: Bool?
     var bra: Int?
     var height: Int?
