@@ -26,6 +26,7 @@ extension UIViewController {
         UIView.transition(with: window, duration: 1.0, options: .transitionFlipFromRight, animations: {
             window.rootViewController = viewCOntroller
         }, completion: nil)
+        self.view.endEditing(true)
     }
     func changeRootVCToLoginNC() {
         guard let window = UIApplication.shared.keyWindow else {

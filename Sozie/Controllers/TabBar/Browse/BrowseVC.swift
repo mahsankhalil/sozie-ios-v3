@@ -42,6 +42,7 @@ class BrowseVC: BaseViewController {
     var filterCategoryIds: [Int]?
     var filterBrandId: Int?
     var filterBySozies = false
+    var selectedIndex: Int?
     private var brandList: [Brand] = [] {
         didSet {
             brandViewModels.removeAll()
@@ -87,7 +88,7 @@ class BrowseVC: BaseViewController {
                 if let currency = product.currency?.getCurrencySymbol() {
                     priceString = currency + " " + String(format: "%0.2f", searchPrice)
                 }
-                let viewModel = ProductImageCellViewModel(count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: nil, reuseIdentifier: "ProductCell")
+                let viewModel = ProductImageCellViewModel(isSelected: false, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: nil, reuseIdentifier: "ProductCell")
                 productViewModels.append(viewModel)
             }
             productsCollectionVu.reloadData()
@@ -112,7 +113,7 @@ class BrowseVC: BaseViewController {
                 if let user = UserDefaultManager.getCurrentUserObject() {
                     if let brandId = user.brand {
                         if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                            setupBrandNavBar(imageURL: brand.titleImage)
+                            setupBrandNavBar(imageURL: brand.titleImageCentred)
                         }
                     }
                 }
@@ -136,7 +137,13 @@ class BrowseVC: BaseViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken == nil {
             super.cancelButtonTapped()
+            if let index = selectedIndex {
+                productViewModels[index].isSelected = false
+                productsCollectionVu.reloadItems(at: [IndexPath(item: index, section: 0)])
+
+            }
         }
+        
     }
     // MARK: - Custom Methods
 
@@ -419,7 +426,17 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             selectedProduct = productList[indexPath.row]
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if let image = appDelegate.imageTaken {
+                productViewModels[indexPath.row].isSelected = true
+                var indexPathToReload = [indexPath]
+                if let index = selectedIndex {
+                    if index != indexPath.row {
+                        productViewModels[index].isSelected = false
+                        indexPathToReload.append(IndexPath(item: index, section: 0))
+                    }
+                }
+                self.productsCollectionVu.reloadItems(at: indexPathToReload)
                 self.showNextButton()
+                selectedIndex = indexPath.row
                 return
             }
             performSegue(withIdentifier: "toProductDetail", sender: self)

@@ -7,16 +7,27 @@
 //
 
 import UIKit
-
+protocol ProductDetailCollectionViewCellDelegate {
+    func cameraButtonTapped(button: UIButton)
+}
 class ProductDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var brandImageView: UIImageView!
     @IBOutlet weak var productImageView: UIImageView!
-
+    @IBOutlet weak var cameraButton: UIButton!
+    var delegate: ProductDetailCollectionViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        if UserDefaultManager.getIfShopper() {
+            cameraButton.isHidden = true
+        } else {
+            cameraButton.isHidden = false
+        }
     }
-
+    @IBAction func cameraButtonTapped(_ sender: Any) {
+        delegate?.cameraButtonTapped(button: sender as! UIButton)
+    }
+    
 }
 extension ProductDetailCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {

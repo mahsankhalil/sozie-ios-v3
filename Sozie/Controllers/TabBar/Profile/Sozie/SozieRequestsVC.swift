@@ -65,6 +65,7 @@ class SozieRequestsVC: UIViewController {
             fetchAllSozieRequests()
         } else {
             serverParams.removeValue(forKey: "next")
+            tableView.bottomRefreshControl?.endRefreshing()
         }
     }
     
@@ -72,6 +73,7 @@ class SozieRequestsVC: UIViewController {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
+            self.tableView.bottomRefreshControl?.endRefreshing()
             if isSuccess {
                 let paginatedData = response as! RequestsPaginatedResponse
                 self.requests.append(contentsOf: paginatedData.results)
@@ -95,11 +97,11 @@ class SozieRequestsVC: UIViewController {
     }
 }
 extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)

@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewModeling, TitleImageViewModeling, ReuseIdentifierProviding, CountViewModeling, DescriptionViewModeling {
+struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewModeling, TitleImageViewModeling, ReuseIdentifierProviding, CountViewModeling, DescriptionViewModeling, SelectionProviding {
+    var isSelected: Bool
     var count: Int
     var title: String?
     var attributedTitle: NSAttributedString?

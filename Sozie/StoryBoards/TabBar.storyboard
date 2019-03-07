@@ -275,10 +275,18 @@
                                                                         <constraint firstAttribute="height" constant="37" id="N9Y-up-5Qr"/>
                                                                     </constraints>
                                                                 </imageView>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkedSmall" translatesAutoresizingMaskIntoConstraints="NO" id="kuj-9r-gwc">
+                                                                    <rect key="frame" x="140" y="36" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="15" id="bqe-SO-E4P"/>
+                                                                        <constraint firstAttribute="width" constant="15" id="n2E-Be-b5z"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                             </subviews>
                                                         </view>
                                                         <constraints>
                                                             <constraint firstItem="qx0-4y-7Tv" firstAttribute="top" secondItem="IQS-yO-C7B" secondAttribute="bottom" constant="4" id="92d-tm-dqL"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="kuj-9r-gwc" secondAttribute="trailing" constant="2.5" id="F1e-4z-vgi"/>
                                                             <constraint firstAttribute="trailing" secondItem="qx0-4y-7Tv" secondAttribute="trailing" id="No6-ud-MuT"/>
                                                             <constraint firstItem="IQS-yO-C7B" firstAttribute="top" secondItem="jJj-pQ-tSf" secondAttribute="bottom" constant="3" id="RUR-Ad-dwn"/>
                                                             <constraint firstItem="Krp-jo-qzF" firstAttribute="leading" secondItem="skI-SI-4x1" secondAttribute="leading" id="Thv-iP-QB1"/>
@@ -286,12 +294,14 @@
                                                             <constraint firstItem="jJj-pQ-tSf" firstAttribute="leading" secondItem="skI-SI-4x1" secondAttribute="leading" id="ZOQ-8N-AgQ"/>
                                                             <constraint firstItem="qx0-4y-7Tv" firstAttribute="leading" secondItem="skI-SI-4x1" secondAttribute="leading" id="hx1-xB-hgh"/>
                                                             <constraint firstItem="IQS-yO-C7B" firstAttribute="leading" secondItem="skI-SI-4x1" secondAttribute="leading" id="ky4-HJ-RSf"/>
+                                                            <constraint firstItem="kuj-9r-gwc" firstAttribute="top" secondItem="IQS-yO-C7B" secondAttribute="top" constant="16" id="n7o-Lp-Wra"/>
                                                             <constraint firstItem="Krp-jo-qzF" firstAttribute="top" secondItem="jJj-pQ-tSf" secondAttribute="bottom" constant="11" id="sEY-8g-S10"/>
                                                             <constraint firstAttribute="bottom" secondItem="qx0-4y-7Tv" secondAttribute="bottom" constant="4" id="vl8-NB-aNE"/>
                                                             <constraint firstAttribute="trailing" secondItem="IQS-yO-C7B" secondAttribute="trailing" id="yVq-ET-prx"/>
                                                         </constraints>
                                                         <size key="customSize" width="165.5" height="221"/>
                                                         <connections>
+                                                            <outlet property="checkMarkImageView" destination="kuj-9r-gwc" id="FGC-zR-uYw"/>
                                                             <outlet property="imgVuHeightConstraint" destination="ISP-yc-UWj" id="Y55-AT-gts"/>
                                                             <outlet property="imgVuWidthConstraint" destination="qzv-Gl-Nok" id="To3-RJ-c8h"/>
                                                             <outlet property="maskImageView" destination="Krp-jo-qzF" id="U7Z-fD-RvK"/>
@@ -320,7 +330,7 @@
                                         <rect key="frame" x="0.0" y="121" width="375" height="47"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What are you looking for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-qA-8H8">
-                                                <rect key="frame" x="20" y="17.5" width="335" height="12"/>
+                                                <rect key="frame" x="20" y="16.5" width="335" height="14"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="10"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -483,13 +493,13 @@
                                         <rect key="frame" x="0.0" y="47" width="375" height="62"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwg-bq-Msw">
-                                                <rect key="frame" x="329.5" y="5" width="30.5" height="21"/>
+                                                <rect key="frame" x="328.5" y="5" width="31.5" height="24"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="18"/>
                                                 <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-yn-n4E">
-                                                <rect key="frame" x="15" y="0.0" width="307" height="62"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-yn-n4E">
+                                                <rect key="frame" x="15" y="0.0" width="306" height="62"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1523,6 +1533,84 @@
             </objects>
             <point key="canvasLocation" x="1165.5999999999999" y="3173.1634182908547"/>
         </scene>
+        <!--Terms Of ServiceVC-->
+        <scene sceneID="MWX-zQ-CFD">
+            <objects>
+                <viewController storyboardIdentifier="TermsOfServiceVC" id="DSR-7R-66B" customClass="TermsOfServiceVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="egW-oI-9lI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQJ-N0-DCL" userLabel="Back Button">
+                                <rect key="frame" x="18" y="42" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="YQl-7F-YOv"/>
+                                    <constraint firstAttribute="width" constant="45" id="lMZ-4G-miG"/>
+                                </constraints>
+                                <state key="normal" image="back-button-white"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="DSR-7R-66B" eventType="touchUpInside" id="mbv-UE-Cxp"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdM-xm-6Up">
+                                <rect key="frame" x="25" y="99" width="200" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="ER0-Rd-icv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="34"/>
+                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="RA0-nT-j9D">
+                                <rect key="frame" x="19" y="165" width="78" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="78" id="afP-ZI-wHU"/>
+                                    <constraint firstAttribute="height" constant="49" id="tUT-tN-qQ6"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Sosie!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPc-wH-fhh">
+                                <rect key="frame" x="19" y="241" width="107" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="E80-jz-hu0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                <color key="textColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-26-MAm">
+                                <rect key="frame" x="19" y="268" width="337" height="399"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, - Lorum ipsum totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, - Lorum ipsum totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,</mutableString>
+                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RA0-nT-j9D" firstAttribute="top" secondItem="sdM-xm-6Up" secondAttribute="bottom" constant="20" id="0Ae-f4-FyD"/>
+                            <constraint firstItem="pQJ-N0-DCL" firstAttribute="leading" secondItem="GJV-VU-5Pa" secondAttribute="leading" constant="18" id="2IN-1J-BLf"/>
+                            <constraint firstItem="cPc-wH-fhh" firstAttribute="top" secondItem="RA0-nT-j9D" secondAttribute="bottom" constant="27" id="4jn-v3-UeK"/>
+                            <constraint firstItem="pQJ-N0-DCL" firstAttribute="top" secondItem="GJV-VU-5Pa" secondAttribute="top" constant="22" id="9Cb-qP-8bj"/>
+                            <constraint firstItem="kKw-26-MAm" firstAttribute="bottom" secondItem="GJV-VU-5Pa" secondAttribute="bottom" id="CEm-iD-wDw"/>
+                            <constraint firstItem="cPc-wH-fhh" firstAttribute="leading" secondItem="GJV-VU-5Pa" secondAttribute="leading" constant="19" id="Onw-1f-60I"/>
+                            <constraint firstItem="kKw-26-MAm" firstAttribute="leading" secondItem="GJV-VU-5Pa" secondAttribute="leading" constant="19" id="VQd-oM-MfX"/>
+                            <constraint firstItem="RA0-nT-j9D" firstAttribute="leading" secondItem="GJV-VU-5Pa" secondAttribute="leading" constant="19" id="eJH-xo-nXA"/>
+                            <constraint firstItem="sdM-xm-6Up" firstAttribute="leading" secondItem="GJV-VU-5Pa" secondAttribute="leading" constant="25" id="g5Q-e2-VSG"/>
+                            <constraint firstItem="sdM-xm-6Up" firstAttribute="top" secondItem="pQJ-N0-DCL" secondAttribute="bottom" constant="12" id="jXi-qN-amG"/>
+                            <constraint firstItem="kKw-26-MAm" firstAttribute="top" secondItem="cPc-wH-fhh" secondAttribute="bottom" constant="9" id="jZn-xd-Mko"/>
+                            <constraint firstItem="GJV-VU-5Pa" firstAttribute="trailing" secondItem="kKw-26-MAm" secondAttribute="trailing" constant="19" id="r3F-ni-1Ba"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GJV-VU-5Pa"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="pQJ-N0-DCL" id="jTo-zJ-tb9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="weT-mm-Sd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1172" y="3890.1049475262371"/>
+        </scene>
         <!--Photo Editor View Controller-->
         <scene sceneID="1Qx-KX-xoY">
             <objects>
@@ -2016,7 +2104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iX8-pM-2V4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2816.8000000000002" y="1800.4497751124438"/>
+            <point key="canvasLocation" x="2569" y="1782"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="nZx-7N-uvg">
@@ -2190,11 +2278,13 @@
         <image name="Whish List" width="28" height="25.5"/>
         <image name="Wish List Selected" width="27" height="24.5"/>
         <image name="back-button-white" width="22" height="10"/>
+        <image name="checkedSmall" width="15" height="15"/>
         <image name="crossIcon" width="11" height="12"/>
+        <image name="login-logo" width="142" height="86.5"/>
         <image name="right2" width="30" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="567-1Z-O12"/>
-        <segue reference="fhc-UN-Ju3"/>
+        <segue reference="ANr-fN-ARm"/>
     </inferredMetricsTieBreakers>
 </document>

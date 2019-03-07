@@ -28,8 +28,24 @@ class RequestTableViewCell: UITableViewCell {
         backgroudView.applyShadowWith(radius: 4, shadowOffSet: CGSize(width: -4, height: 4), opacity: 0.1)
         productImageView.layer.borderWidth = 1.0
         productImageView.layer.borderColor = UIColor(hex: "DDDDDD").cgColor
+        makeAttributedLabel()
     }
-
+    func makeAttributedLabel() {
+        let imageAttachment =  NSTextAttachment()
+        imageAttachment.image = UIImage(named: "checkedSmall")
+        //Set bound to reposition
+        let imageOffsetY: CGFloat = -5.0
+        imageAttachment.bounds = CGRect(x: 0, y: imageOffsetY, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
+        //Create string with attachment
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //Initialize mutable string
+        let completeText = NSMutableAttributedString(string: "Your Sozie picture is ready ")
+        //Add image to mutable string
+        completeText.append(attachmentString)
+        //Add your text to mutable string
+        self.sozieReadyLabel.textAlignment = .left
+        self.sozieReadyLabel.attributedText = completeText
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

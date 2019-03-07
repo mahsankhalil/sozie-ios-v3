@@ -43,7 +43,7 @@ class WishListVC: BaseViewController {
                 if let description = product.description {
                     productDescription = description
                 }
-                let viewModel = ProductImageCellViewModel(count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: productDescription, reuseIdentifier: "WishTableViewCell")
+                let viewModel = ProductImageCellViewModel(isSelected: false, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: productDescription, reuseIdentifier: "WishTableViewCell")
                 viewModels.append(viewModel)
             }
             if viewModels.count == 0 {

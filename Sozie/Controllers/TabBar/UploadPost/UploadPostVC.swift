@@ -24,6 +24,7 @@ class UploadPostVC: BaseViewController {
     @IBOutlet weak var sizeView: UIView!
     @IBOutlet weak var bottomButtom: DZGradientButton!
     var currentRequest: SozieRequest?
+    var currentProduct: Product?
     var selectedImage: UIImage?
     var isSizeSelected = false
     var selectedSizeType: String?
@@ -32,7 +33,14 @@ class UploadPostVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        fetchProductDetailFromServer()
+    
+        if currentProduct == nil {
+            currentProduct = currentRequest?.requestedProduct
+            fetchProductDetailFromServer()
+        } else {
+            populateProductData()
+        }
+        
         self.sizeView.isHidden = true
         populateSizeData()
         if let image = selectedImage {
@@ -46,7 +54,7 @@ class UploadPostVC: BaseViewController {
         }
     }
     func fetchProductDetailFromServer () {
-        if let productId = currentRequest?.requestedProduct.productStringId {
+        if let productId = currentProduct?.productStringId {
             SVProgressHUD.show()
             ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
@@ -58,9 +66,9 @@ class UploadPostVC: BaseViewController {
         }
     }
     func updateCurrentProductObject(product: Product) {
-        currentRequest?.requestedProduct.isFavourite = product.isFavourite
-        currentRequest?.requestedProduct.posts = product.posts
-        currentRequest?.requestedProduct.sizeChart = product.sizeChart
+        currentProduct?.isFavourite = product.isFavourite
+        currentProduct?.posts = product.posts
+        currentProduct?.sizeChart = product.sizeChart
     }
     func populateSizeData() {
 //        if let request = currentRequest {
@@ -71,7 +79,7 @@ class UploadPostVC: BaseViewController {
     func populateProductData() {
         var priceString = ""
         var searchPrice = 0.0
-        let currentProduct = currentRequest?.requestedProduct
+//        let currentProduct = self.currentProduct
         if let price = currentProduct?.searchPrice {
             searchPrice = Double(price)
         }
@@ -112,7 +120,7 @@ class UploadPostVC: BaseViewController {
     */
     @IBAction func bottomButtonTapped(_ sender: Any) {
         if isSizeSelected == false {
-            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentRequest?.requestedProduct.sizeChart, currentProductId: currentRequest?.requestedProduct.productStringId, brandid: currentRequest?.requestedProduct.brandId)
+            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
             let popUpVC = PopupController
                 .create(self.tabBarController ?? self)
                 .show(popUpInstnc)
@@ -122,17 +130,22 @@ class UploadPostVC: BaseViewController {
             }
         } else {
             var dataDict = [String: Any]()
-            dataDict["product_id"] = currentRequest?.requestedProduct.productStringId
+            dataDict["product_id"] = currentProduct?.productStringId
             dataDict["size_type"] = selectedSizeType
             dataDict["size_value"] = selectedSizeValue
-            dataDict["product_request"] = currentRequest?.requestId
+            if let request = currentRequest {
+                dataDict["product_request"] = request.requestId
+            }
             let imageData = selectedImage?.jpegData(compressionQuality: 1.0)
             let thumbData = selectedImage?.jpegData(compressionQuality: 0.1)
             SVProgressHUD.show()
             ServerManager.sharedInstance.addPost(params: dataDict, imageData: imageData, thumbImageData: thumbData) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
-                    self.navigationController?.popViewController(animated: true)
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.imageTaken = nil
+                    self.navigationController?.popToRootViewController(animated: true)
+                    
                 } else {
                     UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
                 }
@@ -146,7 +159,7 @@ class UploadPostVC: BaseViewController {
         present(photoEditor, animated: true, completion: nil)
     }
     @IBAction func postDeleteButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 extension UploadPostVC: SizeChartPopupVCDelegate {

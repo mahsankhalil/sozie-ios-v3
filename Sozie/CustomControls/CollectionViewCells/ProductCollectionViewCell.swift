@@ -17,6 +17,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var maskImageView: UIImageView!
     @IBOutlet weak var titleImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var checkMarkImageView: UIImageView!
     
     override func awakeFromNib() {
         productImageView.layer.cornerRadius = 5.0
@@ -56,6 +57,13 @@ extension ProductCollectionViewCell: CellConfigurable {
                 maskImageView.isHidden = false
             } else {
                 maskImageView.isHidden = true
+            }
+        }
+        if let selectionViewModel = viewModel as? SelectionProviding {
+            if selectionViewModel.isSelected == true {
+                checkMarkImageView.isHidden = false
+            } else {
+                checkMarkImageView.isHidden = true
             }
         }
     }

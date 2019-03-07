@@ -29,6 +29,7 @@ class ProductDetailVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        swipeToSeeView.roundCorners(corners: [.topLeft], radius: 20.0)
         setupSozieLogoNavBar()
 //        populateProductData()
         fetchProductDetailFromServer()
@@ -168,7 +169,6 @@ class ProductDetailVC: BaseViewController {
         }
     }
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -177,10 +177,11 @@ class ProductDetailVC: BaseViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "toUploadPost" {
             let uploadPostVC = segue.destination as! UploadPostVC
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            uploadPostVC.selectedImage = appDelegate.imageTaken
+            uploadPostVC.currentProduct = currentProduct
         }
     }
-    
-
     // MARK: - Actions
 
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
@@ -310,6 +311,10 @@ extension ProductDetailVC: UIScrollViewDelegate {
     }
 }
 extension ProductDetailVC: PostCollectionViewCellDelegate {
+    func cameraButtonTapped(button: UIButton) {
+        
+    }
+    
     func moreButtonTapped(button: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Report", style: .default, handler: { _ in
@@ -354,6 +359,9 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
     func followButtonTapped(button: UIButton) {
         var dataDict = [String: Any]()
         if let posts = currentProduct?.posts {
+            if posts[button.tag].user.isFollowed == true {
+                return
+            }
             let userId = posts[button.tag].user.userId
             dataDict["user"] = userId
             SVProgressHUD.show()

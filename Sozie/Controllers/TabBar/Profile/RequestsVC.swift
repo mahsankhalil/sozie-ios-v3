@@ -86,6 +86,7 @@ class RequestsVC: UIViewController {
             getMyRequestsFromServer(dataDict: serverParams)
         } else {
             serverParams.removeValue(forKey: "next")
+            tableView.bottomRefreshControl?.endRefreshing()
         }
     }
     func getMyRequestsFromServer(dataDict: [String: Any]) {

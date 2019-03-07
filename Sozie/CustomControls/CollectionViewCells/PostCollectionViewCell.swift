@@ -10,6 +10,7 @@ import UIKit
 protocol PostCollectionViewCellDelegate {
     func moreButtonTapped(button: UIButton)
     func followButtonTapped(button: UIButton)
+    func cameraButtonTapped(button: UIButton)
 }
 class PostCollectionViewCell: UICollectionViewCell {
     var delegate: PostCollectionViewCellDelegate?
@@ -24,18 +25,45 @@ class PostCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var sizeWornView: UIView!
     @IBOutlet weak var sizeWornLabel: UILabel!
+    @IBOutlet weak var followButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cameraButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         profileImageView.makeViewCircle()
         profileImageView.applyStandardBorder(hexColor: "A6A6A6")
+        sizeWornView.roundCorners(corners: [.topLeft], radius: 20.0)
+        if UserDefaultManager.getIfShopper() {
+            followButtonWidthConstraint.constant = 60.0
+            cameraButton.isHidden = true
+        } else {
+            followButtonWidthConstraint.constant = 0.0
+            followButton.isHidden = true
+            cameraButton.isHidden = false
+        }
     }
     @IBAction func followButtonTapped(_ sender: Any) {
-        
         delegate?.followButtonTapped(button: sender as! UIButton)
     }
     @IBAction func moreButtonTapped(_ sender: Any) {
         delegate?.moreButtonTapped(button: sender as! UIButton)
+    }
+    @IBAction func cameraButtonTapped(_ sender: Any) {
+        delegate?.cameraButtonTapped(button: sender as! UIButton)
+    }
+    func makeButtonFollow() {
+        followButton.setTitle("Follow", for: .normal)
+        followButton.backgroundColor = UIColor(hex: "7EA7E5")
+        followButton.setTitleColor(UIColor.white, for: .normal)
+        followButton.layer.cornerRadius = 3.0
+    }
+    func makeButtonFollowing() {
+        followButton.setTitle("Following", for: .normal)
+        followButton.backgroundColor = UIColor.white
+        followButton.setTitleColor(UIColor(hex: "7EA7E5"), for: .normal)
+        followButton.layer.borderWidth = 1.0
+        followButton.layer.borderColor = UIColor(hex: "7EA7E5").cgColor
+        followButton.layer.cornerRadius = 3.0
     }
 
 }
@@ -76,15 +104,16 @@ extension PostCollectionViewCell: CellConfigurable {
                 if let index = indexModel.index {
                     followButton.tag = index
                     moreButton.tag = index
+                    cameraButton.tag = index
                 }
                 
             }
             if let followModel = viewModel as? FollowViewModeling {
                 if let isFollowed = followModel.isFollow {
                     if isFollowed == true {
-                        self.followButton.isHidden = true
+                        makeButtonFollowing()
                     } else {
-                        self.followButton.isHidden = false
+                        makeButtonFollow()
                     }
                 }
             }
