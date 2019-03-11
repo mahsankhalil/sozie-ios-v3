@@ -41,7 +41,26 @@ class MeasurementsVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        currentMeasurement = LocalMeasurement()
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            currentMeasurement = LocalMeasurement()
+            if let bra = user.measurement?.bra {
+                currentMeasurement.bra = String(bra)
+            }
+            if let height = user.measurement?.height {
+                currentMeasurement.height = String(height)
+            }
+            if let hip = user.measurement?.hip {
+                currentMeasurement.hip = String(hip)
+            }
+            if let cup = user.measurement?.cup {
+                currentMeasurement.cup = cup
+            }
+            if let waist = user.measurement?.waist {
+                currentMeasurement.waist = String(waist)
+            }
+        } else {
+            currentMeasurement = LocalMeasurement()
+        }
         fetchDataFromServer()
     }
 
@@ -52,13 +71,28 @@ class MeasurementsVC: UIViewController {
             if isSuccess {
                 guard let size = response as? Size else { return }
 
-                let heightViewModel = DoubleTextFieldCellViewModel(title: "HEIGHT", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
+                var heightInches: String?
+                var heightFeet: String?
+                var waist: String?
+                var hip: String?
+                var bra: String?
+                var cup: String?
+                if let height = self.currentMeasurement.height {
+                    heightInches = Double(height)?.inchesToRemainingInches()
+                    heightFeet = Double(height)?.inchesToFeet()
+                }
+                waist = self.currentMeasurement.waist
+                hip = self.currentMeasurement.hip
+                bra = self.currentMeasurement.bra
+                cup = self.currentMeasurement.cup
                 
-                let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: nil, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
+                let heightViewModel = DoubleTextFieldCellViewModel(text1: heightFeet, text2: heightInches, title: "HEIGHT", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
+                
+                let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: waist, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
 
-                let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: nil, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
+                let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: hip, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
 
-                let braViewModel = DoubleTextFieldCellViewModel(title: "BRA SIZE", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
+                let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title: "BRA SIZE", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
 
                 self.rowViewModels = [heightViewModel, waistViewModel, hipsViewModel, braViewModel]
                 self.sizes = size
@@ -97,7 +131,11 @@ class MeasurementsVC: UIViewController {
             ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
-                    self.performSegue(withIdentifier: "toUploadProfilePic", sender: self)
+                    if let _ = UserDefaultManager.getCurrentUserObject() {
+                        self.navigationController?.popViewController(animated: true)
+                    } else {
+                        self.performSegue(withIdentifier: "toUploadProfilePic", sender: self)
+                    }
                 } else {
                     let error = response as! Error
                     UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
@@ -120,9 +158,13 @@ class MeasurementsVC: UIViewController {
             tblVu.reloadData()
         }
     }
-    
+
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if let _ = UserDefaultManager.getCurrentUserObject() {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

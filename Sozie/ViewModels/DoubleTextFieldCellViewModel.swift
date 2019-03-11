@@ -10,6 +10,8 @@ import Foundation
 
 struct DoubleTextFieldCellViewModel: DoubleTextFieldCellViewModeling, ErrorMessageViewModeling, ReuseIdentifierProviding,
 ErrorViewModeling, MeasurementTypeProviding, RowViewModel {
+    var text1: String?
+    var text2: String?
     var title: String
     var columnUnit: [String]
     var columnPlaceholder: [String]

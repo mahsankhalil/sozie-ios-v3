@@ -8,23 +8,24 @@
 
 import UIKit
 import SVProgressHUD
-struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling {
+import StoreKit
+import SideMenu
+import MessageUI
+struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewModeling {
     var title: String?
     var attributedTitle: NSAttributedString?
     let reuseIdentifier = "TitleCell"
-
 }
 //struct AboutSectionCellViewModel : RowViewModel, TitleViewModeling {
 //    var title: String?
 //    var attributedTitle: NSAttributedString?
 //}
-struct TitleCellWithSwitchViewModel : RowViewModel , SwitchProviding , TitleViewModeling , ReuseIdentifierProviding {
+struct TitleCellWithSwitchViewModel : RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding {
     var title: String?
     var attributedTitle: NSAttributedString?
-    var isSwitchOn : Bool?
+    var isSwitchOn: Bool?
     let reuseIdentifier = "TitleAndSwitchCell"
 }
-
 
 class ProfileSideMenuVC: BaseViewController {
 
@@ -39,9 +40,9 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
     
-    let accountTitles = ["Edit Profile" , "Update Profile Picture" , "Change Password" , "My Measurements"]
-    let settingTitles = ["Push Notifications" , "Reset first-time use Guide" , "Blocked Accounts"]
-    let aboutTitles = ["Invite Friends" , "Rate Sozie app" , "Send Feedback" , "Privacy Policy" , "Terms and Conditions of use"]
+    let accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
+    let settingTitles = ["Push Notifications", "Reset first-time use Guide", "Blocked Accounts"]
+    let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
 
@@ -49,7 +50,6 @@ class ProfileSideMenuVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         func setupViewModels(_ titles: [String]) -> [RowViewModel] {
             var viewModels: [RowViewModel] = []
             for title in titles {
@@ -63,7 +63,6 @@ class ProfileSideMenuVC: BaseViewController {
             }
             return viewModels
         }
-        
         let accountViewModels = setupViewModels(accountTitles)
         let accountSection = Section(title: "ACCOUNT", rowViewModels: accountViewModels)
         sections.append(accountSection)
@@ -79,10 +78,9 @@ class ProfileSideMenuVC: BaseViewController {
     }
     
 
-    func logout()
-    {
+    func logout() {
         SVProgressHUD.show()
-        var dataDict = [String : Any]()
+        var dataDict = [String: Any]()
         dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
         ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -99,38 +97,84 @@ class ProfileSideMenuVC: BaseViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func rateThisApp() {
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        } else {
+            rateApp(appId: "id1363346896") { (_) in
+            }
+        }
+    }
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId) else {
+            completion(false)
+            return
+        }
+        guard #available(iOS 10, *) else {
+            completion(UIApplication.shared.openURL(url))
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+    }
+    func showInviteFriendsVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVC") as! InviteFriendsVC
+        inviteVC.isFromSideMenu = true
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func showUploadPhotoVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "UploadProfilePictureVC") as! UploadProfilePictureVC
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func showChangePasswordVC() {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "ChangePasswordVC") as! ChangePasswordVC
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func sendFeedbackWithEmail() {
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        
+        // Configure the fields of the interface.
+        composeVC.setToRecipients(["contact@sozie.com"])
+        composeVC.setSubject("Feedback")
+        
+        // Present the view controller modally.
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    func showMeasurementVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let measurementVC = storyBoard.instantiateViewController(withIdentifier: "MeasurementsVC") as! MeasurementsVC
+        self.navigationController?.pushViewController(measurementVC, animated: true)
 
+    }
     @IBAction func menuBtnTapped(_ sender: Any) {
+
     }
     @IBAction func logoutBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
 
         let window = UIApplication.shared.keyWindow
-        
         UtilityManager.showMessageWith(title: "Logout", body: "Are you sure you want to Log Out?", in: (window?.rootViewController)!, okBtnTitle: "Yes", cancelBtnTitle: "No") {
             self.logout()
         }
-    
-
     }
 }
 extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rowViewModels.count
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0
-        {
+        if section == 0 {
             return 26.0
-        }
-        else
-        {
+        } else {
             return 32.0
         }
     }
@@ -143,36 +187,30 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         headerVu.addSubview(lbl)
         return headerVu
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let section = sections[indexPath.section]
         let rowViewModel = section.rowViewModels[indexPath.row]
-        
         var reuseIdentifier: String? = nil
         if let reuseIdentifierProvider = rowViewModel as? ReuseIdentifierProviding {
             reuseIdentifier = reuseIdentifierProvider.reuseIdentifier
         }
-        
         guard let identifier = reuseIdentifier else { return UITableViewCell() }
-        
         var tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
-        
         if tableViewcell == nil {
             tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
             tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
         }
-        
         guard let cell = tableViewcell else { return UITableViewCell() }
-        
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(rowViewModel)
         }
 
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let tabBarstoryBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
@@ -183,30 +221,43 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
                 self.navigationController?.pushViewController(editProfileVC, animated: true)
+            case 1:
+                showUploadPhotoVC()
+            case 2:
+                showChangePasswordVC()
+            case 3:
+                showMeasurementVC()
             default:
                 return
-                
             }
         case 1:
             return
         case 2:
             switch indexPath.row {
+            case 0:
+                showInviteFriendsVC()
+            case 1:
+                rateThisApp()
+            case 2:
+                sendFeedbackWithEmail()
             case 3:
-                let editProfileVC = tabBarstoryBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
-                self.navigationController?.pushViewController(editProfileVC, animated: true)
+                let tosVC = tabBarstoryBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
+                tosVC.type = TOSType.privacyPolicy
+                self.navigationController?.pushViewController(tosVC, animated: true)
             case 4:
-                let editProfileVC = tabBarstoryBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
-                self.navigationController?.pushViewController(editProfileVC, animated: true)
+                let tosVC = tabBarstoryBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
+                tosVC.type = TOSType.termsCondition
+                self.navigationController?.pushViewController(tosVC, animated: true)
             default:
                 return
-                
             }
-            return
         default:
             return
-        
         }
-        
     }
-    
+}
+extension ProfileSideMenuVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }

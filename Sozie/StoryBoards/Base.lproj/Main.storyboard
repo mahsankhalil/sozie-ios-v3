@@ -948,7 +948,7 @@
         <!--Upload Profile PictureVC-->
         <scene sceneID="DEP-3s-Pwm">
             <objects>
-                <viewController id="nsU-Bf-Cm8" customClass="UploadProfilePictureVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UploadProfilePictureVC" id="nsU-Bf-Cm8" customClass="UploadProfilePictureVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0DX-98-27p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1069,7 +1069,7 @@
         <!--Invite FriendsVC-->
         <scene sceneID="GyX-Oa-4R8">
             <objects>
-                <viewController id="Jow-Nv-fR8" customClass="InviteFriendsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteFriendsVC" id="Jow-Nv-fR8" customClass="InviteFriendsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ab9-if-jiQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1198,6 +1198,7 @@
                     <connections>
                         <outlet property="backBtn" destination="Ket-Qs-MaW" id="UYf-Nb-TDv"/>
                         <outlet property="inviteBtn" destination="lfy-kS-chd" id="3OC-xW-PYL"/>
+                        <outlet property="inviteLaterLabel" destination="vS1-gy-5De" id="tPo-3h-c59"/>
                         <outlet property="skipBtn" destination="7WU-uJ-atu" id="H43-NO-XUS"/>
                     </connections>
                 </viewController>
@@ -1935,7 +1936,7 @@
         <!--MeasurementsVC-->
         <scene sceneID="3Fm-GT-P9y">
             <objects>
-                <viewController id="Rft-Ix-kIG" customClass="MeasurementsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeasurementsVC" id="Rft-Ix-kIG" customClass="MeasurementsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vRv-o0-wdD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -15,18 +15,31 @@ class ServerResponsePopUp: UIViewController {
     @IBOutlet weak var detailTxtLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var titleImgVu: UIImageView!
+    
+    var titleImageName: String?
+    var titleName: String?
+    var detail: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if let imageName = titleImageName {
+            self.titleImgVu.image = UIImage(named: imageName)
+        }
+        if let currentTitle = titleName {
+            self.titleLbl.text = currentTitle
+        }
+        if let description = detail {
+            self.detailTxtLbl.text = description
+        }
     }
     
-    class func instance(imageName : String, title : String , description : String) -> ServerResponsePopUp {
+    class func instance(imageName: String, title: String, description: String) -> ServerResponsePopUp {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "ServerResponsePopUp") as! ServerResponsePopUp
-        instnce.titleImgVu.image = UIImage(named: imageName)
-        instnce.titleLbl.text = title
-        instnce.detailTxtLbl.text = description
+        instnce.titleImageName = imageName
+        instnce.titleName = title
+        instnce.detail = description
         return instnce
     }
     /*

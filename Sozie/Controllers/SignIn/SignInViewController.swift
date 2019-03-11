@@ -164,7 +164,6 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     }
     
     @IBAction func forgotPasswordBtnTapped(_ sender: Any) {
-        
         let popUpInstnc = ForgotPasswordEmailPopUp.instance()
         let popUpVC = PopupController
             .create(self)

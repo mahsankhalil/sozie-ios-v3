@@ -13,13 +13,19 @@ class InviteFriendsVC: UIViewController {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var inviteBtn: DZGradientButton!
     @IBOutlet weak var skipBtn: UIButton!
-
+    @IBOutlet weak var inviteLaterLabel: UILabel!
+    var isFromSideMenu: Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if let fromMenu = isFromSideMenu {
+            if fromMenu == true {
+                inviteLaterLabel.isHidden = true
+                skipBtn.isHidden = true
+            }
+        }
     }
-    
 
     /*
     // MARK: - Navigation
@@ -33,7 +39,13 @@ class InviteFriendsVC: UIViewController {
     
     // MARK: - Actions
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if let fromMenu = isFromSideMenu {
+            if fromMenu == true {
+                self.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func inviteBtnTapped(_ sender: Any) {

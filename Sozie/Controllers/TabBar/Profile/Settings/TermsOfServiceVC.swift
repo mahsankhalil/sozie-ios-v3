@@ -7,14 +7,23 @@
 //
 
 import UIKit
-
+public enum TOSType: String {
+    case privacyPolicy = "Privacy Policy"
+    case termsCondition = "Terms and Conditions"
+}
 class TermsOfServiceVC: UIViewController {
 
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    var type: TOSType?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if let currentType = type {
+            titleLabel.text = currentType.rawValue
+        }
     }
     /*
     // MARK: - Navigation

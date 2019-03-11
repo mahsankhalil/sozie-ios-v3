@@ -34,6 +34,23 @@ class UtilityManager: NSObject {
         newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         return newDateFormatter.string(from: dateFormatter.date(from: dateString)!)
     }
+    static func changeRootVCToLoginNC() {
+        guard let window = UIApplication.shared.keyWindow else {
+            return
+        }
+        guard let rootViewController = window.rootViewController else {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewCOntroller = storyboard.instantiateViewController(withIdentifier: "LandingViewController")
+        viewCOntroller.view.frame = rootViewController.view.frame
+        viewCOntroller.view.layoutIfNeeded()
+        
+        UIView.transition(with: window, duration: 1.0, options: .transitionFlipFromLeft, animations: {
+            window.rootViewController = viewCOntroller
+        }, completion: nil)
+    }
     
     //MARK: - Other Methods
   

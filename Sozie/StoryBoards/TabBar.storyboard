@@ -330,7 +330,7 @@
                                         <rect key="frame" x="0.0" y="121" width="375" height="47"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What are you looking for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-qA-8H8">
-                                                <rect key="frame" x="20" y="16.5" width="335" height="14"/>
+                                                <rect key="frame" x="20" y="17.5" width="335" height="12"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="10"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -493,13 +493,13 @@
                                         <rect key="frame" x="0.0" y="47" width="375" height="62"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwg-bq-Msw">
-                                                <rect key="frame" x="328.5" y="5" width="31.5" height="24"/>
+                                                <rect key="frame" x="329.5" y="5" width="30.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="18"/>
                                                 <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-yn-n4E">
-                                                <rect key="frame" x="15" y="0.0" width="306" height="62"/>
+                                                <rect key="frame" x="15" y="0.0" width="307" height="62"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1553,7 +1553,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdM-xm-6Up">
-                                <rect key="frame" x="25" y="99" width="200" height="46"/>
+                                <rect key="frame" x="25" y="99" width="213" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="ER0-Rd-icv"/>
                                 </constraints>
@@ -1569,7 +1569,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Sosie!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPc-wH-fhh">
-                                <rect key="frame" x="19" y="241" width="107" height="18"/>
+                                <rect key="frame" x="19" y="241" width="108.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="E80-jz-hu0"/>
                                 </constraints>
@@ -1577,10 +1577,10 @@
                                 <color key="textColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-26-MAm">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-26-MAm">
                                 <rect key="frame" x="19" y="268" width="337" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, - Lorum ipsum totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, - Lorum ipsum totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,</mutableString>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, - Lorum ipsum totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, - Lorum ipsum totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,</string>
                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1605,6 +1605,8 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="pQJ-N0-DCL" id="jTo-zJ-tb9"/>
+                        <outlet property="descriptionTextView" destination="kKw-26-MAm" id="q9d-jV-BST"/>
+                        <outlet property="titleLabel" destination="sdM-xm-6Up" id="ocP-Ry-N7k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weT-mm-Sd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2259,6 +2261,144 @@
             </objects>
             <point key="canvasLocation" x="326" y="54"/>
         </scene>
+        <!--Change PasswordVC-->
+        <scene sceneID="Pcm-Q0-xum">
+            <objects>
+                <viewController storyboardIdentifier="ChangePasswordVC" automaticallyAdjustsScrollViewInsets="NO" id="zyO-i7-tWT" customClass="ChangePasswordVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GCc-05-qz6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAi-2b-w4D" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="roU-nz-9fq">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcX-6Z-pQH">
+                                                <rect key="frame" x="25" y="99" width="325" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="HRN-ii-m6w"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wK6-ya-FR2" userLabel="Back Button">
+                                                <rect key="frame" x="18" y="42" width="45" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="3By-dY-nQM"/>
+                                                    <constraint firstAttribute="width" constant="45" id="WDB-Kl-Sn1"/>
+                                                </constraints>
+                                                <state key="normal" image="back-button-white"/>
+                                                <connections>
+                                                    <action selector="backBtnTapped:" destination="zyO-i7-tWT" eventType="touchUpInside" id="lTz-Gg-ArX"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-37-bLi" customClass="MFTextField">
+                                                <rect key="frame" x="24" y="251" width="327" height="34.5"/>
+                                                <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="textPadding">
+                                                        <size key="value" width="0.0" height="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F8M-8y-sRN" customClass="MFTextField">
+                                                <rect key="frame" x="24" y="311" width="327" height="35"/>
+                                                <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="textPadding">
+                                                        <size key="value" width="0.0" height="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KbI-Yk-nlC" customClass="MFTextField">
+                                                <rect key="frame" x="24" y="191" width="327" height="34.5"/>
+                                                <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="textPadding">
+                                                        <size key="value" width="0.0" height="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nh7-M4-tEm" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                                <rect key="frame" x="30" y="544" width="315" height="48"/>
+                                                <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="lVb-Fb-S2w"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                <state key="normal" title="Save">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="saveBtnTapped:" destination="zyO-i7-tWT" eventType="touchUpInside" id="XvW-Ro-SBf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="wK6-ya-FR2" firstAttribute="top" secondItem="jC0-P4-XYe" secondAttribute="top" constant="22" id="3Gx-sm-jkg"/>
+                                            <constraint firstItem="hcX-6Z-pQH" firstAttribute="leading" secondItem="jC0-P4-XYe" secondAttribute="leading" constant="25" id="962-ZR-DGm"/>
+                                            <constraint firstItem="KbI-Yk-nlC" firstAttribute="leading" secondItem="jC0-P4-XYe" secondAttribute="leading" constant="24" id="Cvs-eA-CZW"/>
+                                            <constraint firstItem="4rV-37-bLi" firstAttribute="top" secondItem="KbI-Yk-nlC" secondAttribute="bottom" constant="25.5" id="DXh-50-xZU"/>
+                                            <constraint firstItem="wK6-ya-FR2" firstAttribute="leading" secondItem="jC0-P4-XYe" secondAttribute="leading" constant="18" id="FdU-HS-daB"/>
+                                            <constraint firstItem="jC0-P4-XYe" firstAttribute="trailing" secondItem="Nh7-M4-tEm" secondAttribute="trailing" constant="30" id="I24-sg-Yd3"/>
+                                            <constraint firstItem="F8M-8y-sRN" firstAttribute="top" secondItem="4rV-37-bLi" secondAttribute="bottom" constant="25.5" id="Kdf-l6-wPr"/>
+                                            <constraint firstItem="jC0-P4-XYe" firstAttribute="trailing" secondItem="F8M-8y-sRN" secondAttribute="trailing" constant="24" id="NzG-Cy-Bhq"/>
+                                            <constraint firstItem="jC0-P4-XYe" firstAttribute="trailing" secondItem="4rV-37-bLi" secondAttribute="trailing" constant="24" id="VZo-fM-jCV"/>
+                                            <constraint firstItem="jC0-P4-XYe" firstAttribute="trailing" secondItem="KbI-Yk-nlC" secondAttribute="trailing" constant="24" id="WLn-KB-nmK"/>
+                                            <constraint firstItem="Nh7-M4-tEm" firstAttribute="leading" secondItem="jC0-P4-XYe" secondAttribute="leading" constant="30" id="cHK-u7-Ucd"/>
+                                            <constraint firstItem="F8M-8y-sRN" firstAttribute="leading" secondItem="jC0-P4-XYe" secondAttribute="leading" constant="24" id="dOR-zc-SUN"/>
+                                            <constraint firstItem="hcX-6Z-pQH" firstAttribute="top" secondItem="wK6-ya-FR2" secondAttribute="bottom" constant="12" id="eRT-WD-lur"/>
+                                            <constraint firstItem="KbI-Yk-nlC" firstAttribute="top" secondItem="hcX-6Z-pQH" secondAttribute="bottom" constant="46" id="er6-eS-KKc"/>
+                                            <constraint firstItem="4rV-37-bLi" firstAttribute="leading" secondItem="jC0-P4-XYe" secondAttribute="leading" constant="24" id="fwH-ia-oF8"/>
+                                            <constraint firstItem="jC0-P4-XYe" firstAttribute="bottom" secondItem="Nh7-M4-tEm" secondAttribute="bottom" constant="75" id="gUY-p4-aLX"/>
+                                            <constraint firstItem="4rV-37-bLi" firstAttribute="top" secondItem="KbI-Yk-nlC" secondAttribute="bottom" constant="25.5" id="nSv-1I-15S"/>
+                                            <constraint firstItem="jC0-P4-XYe" firstAttribute="trailing" secondItem="hcX-6Z-pQH" secondAttribute="trailing" constant="25" id="sFi-tc-dG8"/>
+                                            <constraint firstItem="hcX-6Z-pQH" firstAttribute="top" secondItem="wK6-ya-FR2" secondAttribute="bottom" constant="12" id="whr-fU-htO"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="jC0-P4-XYe"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="roU-nz-9fq" firstAttribute="centerX" secondItem="mAi-2b-w4D" secondAttribute="centerX" id="Bds-C7-GMh"/>
+                                    <constraint firstItem="roU-nz-9fq" firstAttribute="top" secondItem="mAi-2b-w4D" secondAttribute="top" id="DPf-tT-mVe"/>
+                                    <constraint firstAttribute="trailing" secondItem="roU-nz-9fq" secondAttribute="trailing" id="Itb-Dg-4zp"/>
+                                    <constraint firstItem="roU-nz-9fq" firstAttribute="leading" secondItem="mAi-2b-w4D" secondAttribute="leading" id="Ob8-bw-2fO"/>
+                                    <constraint firstItem="roU-nz-9fq" firstAttribute="centerY" secondItem="mAi-2b-w4D" secondAttribute="centerY" id="etw-dS-z4E"/>
+                                    <constraint firstAttribute="bottom" secondItem="roU-nz-9fq" secondAttribute="bottom" id="f3V-bo-M8C"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mAi-2b-w4D" firstAttribute="trailing" secondItem="iTE-Oi-sMZ" secondAttribute="trailing" id="Vuw-uj-6ka"/>
+                            <constraint firstItem="mAi-2b-w4D" firstAttribute="bottom" secondItem="iTE-Oi-sMZ" secondAttribute="bottom" id="X9r-7O-gMJ"/>
+                            <constraint firstItem="mAi-2b-w4D" firstAttribute="top" secondItem="GCc-05-qz6" secondAttribute="top" id="gzQ-KP-8gj"/>
+                            <constraint firstItem="mAi-2b-w4D" firstAttribute="leading" secondItem="iTE-Oi-sMZ" secondAttribute="leading" id="huO-yI-AwR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iTE-Oi-sMZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="backBtn" destination="wK6-ya-FR2" id="O2W-sC-BUr"/>
+                        <outlet property="currentPasswordTxtFld" destination="KbI-Yk-nlC" id="ypF-PX-ROI"/>
+                        <outlet property="passwordTxtFld" destination="4rV-37-bLi" id="lzH-im-7uB"/>
+                        <outlet property="retypePasswordTxtFld" destination="F8M-8y-sRN" id="a8I-6H-ii1"/>
+                        <outlet property="saveBtn" destination="Nh7-M4-tEm" id="xa6-Rz-tSY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Pq-GU-DI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2018" y="3890"/>
+        </scene>
     </scenes>
     <resources>
         <image name="3 Dots" width="3" height="13"/>
@@ -2284,7 +2424,7 @@
         <image name="right2" width="30" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="567-1Z-O12"/>
+        <segue reference="LXu-v3-0l3"/>
         <segue reference="ANr-fN-ARm"/>
     </inferredMetricsTieBreakers>
 </document>

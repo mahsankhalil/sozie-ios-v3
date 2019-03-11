@@ -38,6 +38,7 @@ class ServerManager: NSObject {
     static let sozieRequestsURL = ServerManager.serverURL + "productrequest/sozie/request/"
     static let addPostURL = ServerManager.serverURL + "post/add/"
     static let postURL = ServerManager.serverURL + "post/list/"
+    static let changePasswordURL = ServerManager.serverURL + "user/change_password/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -521,6 +522,21 @@ class ServerManager: NSObject {
                 }
             case .failure(let error):
                 block!(false, error)
+            }
+        }
+    }
+    func changePassword(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.changePasswordURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
             }
         }
     }

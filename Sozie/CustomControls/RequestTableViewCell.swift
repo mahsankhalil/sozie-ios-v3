@@ -54,7 +54,6 @@ class RequestTableViewCell: UITableViewCell {
     @IBAction func buyButtonTapped(_ sender: Any) {
         delegate?.buyButtonTapped(button: sender as! UIButton)
     }
-    
 }
 extension RequestTableViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {

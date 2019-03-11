@@ -19,4 +19,12 @@ extension Double {
         let inches = NSMeasurement(doubleValue: self - rounded, unit: UnitLength.feet).converting(to: UnitLength.inches)
         return ("\(formatter.string(from: feet as Measurement)) \(formatter.string(from: inches as Measurement))")
     }
+    func inchesToFeet() -> String {
+        let feet = Int(self)/12
+        return String(feet)
+    }
+    func inchesToRemainingInches() -> String {
+        let feet = Int(self)%12
+        return String(feet)
+    }
 }
