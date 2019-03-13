@@ -2145,8 +2145,36 @@
                                             <action selector="menuBtnTapped:" destination="77b-ez-nUK" eventType="touchUpInside" id="4ar-Oc-A50"/>
                                         </connections>
                                     </button>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0RB-il-JcJ">
+                                        <rect key="frame" x="0.0" y="52" width="375" height="50"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDG-WS-hum" customClass="DZGradientView" customModule="Sozie" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9i1-JX-HJB">
+                                                        <rect key="frame" x="21" y="6" width="149" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <inset key="titleEdgeInsets" minX="-57" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="120" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <state key="normal" title="MY BALANCE" image="My Balance">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="myBalanceButtonTapped:" destination="77b-ez-nUK" eventType="touchUpInside" id="9uB-L6-270"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="rsD-6K-Uin"/>
+                                        </constraints>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vuA-GP-hoS">
-                                        <rect key="frame" x="0.0" y="52" width="375" height="563"/>
+                                        <rect key="frame" x="0.0" y="102" width="375" height="513"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataSource" destination="77b-ez-nUK" id="bBg-eB-jlE"/>
@@ -2173,11 +2201,14 @@
                                     <constraint firstItem="nxh-LR-Fbt" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="4em-yE-yDP"/>
                                     <constraint firstItem="9WL-Ri-f6Q" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="DCh-Cm-n6S"/>
                                     <constraint firstItem="nxh-LR-Fbt" firstAttribute="bottom" secondItem="g2K-iV-vEO" secondAttribute="bottom" id="F0D-1j-YCI"/>
-                                    <constraint firstItem="vuA-GP-hoS" firstAttribute="top" secondItem="9WL-Ri-f6Q" secondAttribute="bottom" id="KK3-Zb-X9d"/>
                                     <constraint firstItem="nxh-LR-Fbt" firstAttribute="top" secondItem="vuA-GP-hoS" secondAttribute="bottom" id="X2a-tb-KPl"/>
+                                    <constraint firstItem="0RB-il-JcJ" firstAttribute="top" secondItem="9WL-Ri-f6Q" secondAttribute="bottom" id="bFU-VM-dee"/>
                                     <constraint firstItem="vuA-GP-hoS" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="jQv-9O-Hz3"/>
                                     <constraint firstItem="9WL-Ri-f6Q" firstAttribute="top" secondItem="g2K-iV-vEO" secondAttribute="top" constant="14" id="oVi-2J-01K"/>
+                                    <constraint firstItem="vuA-GP-hoS" firstAttribute="top" secondItem="0RB-il-JcJ" secondAttribute="bottom" id="omr-QS-iC1"/>
                                     <constraint firstItem="vuA-GP-hoS" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="r4k-SK-1d5"/>
+                                    <constraint firstItem="0RB-il-JcJ" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="xle-p5-1P8"/>
+                                    <constraint firstItem="0RB-il-JcJ" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="yBr-4S-hki"/>
                                     <constraint firstItem="nxh-LR-Fbt" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="zCt-0T-5kr"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="g2K-iV-vEO"/>
@@ -2197,6 +2228,10 @@
                     <connections>
                         <outlet property="logoutBtn" destination="nxh-LR-Fbt" id="CDX-GP-7Qb"/>
                         <outlet property="menuBtn" destination="9WL-Ri-f6Q" id="Tsp-w1-CgF"/>
+                        <outlet property="myBalanceButton" destination="9i1-JX-HJB" id="52x-Ua-Mm8"/>
+                        <outlet property="myBalanceGradientView" destination="rDG-WS-hum" id="4QS-Ae-CyY"/>
+                        <outlet property="myBalanceView" destination="0RB-il-JcJ" id="wOl-yj-bcs"/>
+                        <outlet property="myBalanceViewHeightContraint" destination="rsD-6K-Uin" id="0Gt-E0-qdu"/>
                         <outlet property="tblVu" destination="vuA-GP-hoS" id="Vec-fJ-C25"/>
                     </connections>
                 </viewController>
@@ -2399,6 +2434,93 @@
             </objects>
             <point key="canvasLocation" x="2018" y="3890"/>
         </scene>
+        <!--Block ListVC-->
+        <scene sceneID="Alf-HO-MgF">
+            <objects>
+                <viewController storyboardIdentifier="BlockListVC" automaticallyAdjustsScrollViewInsets="NO" id="ToN-fq-gSt" customClass="BlockListVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dqj-ID-rp8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E29-64-Cmb" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8z-Iy-kLc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blocked Accounts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tA1-Bn-n0L">
+                                                <rect key="frame" x="25" y="99" width="325" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="Q1U-uH-9zG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRV-kA-p0q" userLabel="Back Button">
+                                                <rect key="frame" x="18" y="42" width="45" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="45" id="Vvh-u0-lZj"/>
+                                                    <constraint firstAttribute="height" constant="45" id="mxo-75-zAO"/>
+                                                </constraints>
+                                                <state key="normal" image="back-button-white"/>
+                                                <connections>
+                                                    <action selector="backBtnTapped:" destination="ToN-fq-gSt" eventType="touchUpInside" id="Mf2-kN-jhx"/>
+                                                </connections>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T8u-fY-mVb">
+                                                <rect key="frame" x="0.0" y="167" width="375" height="500"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="ToN-fq-gSt" id="7x3-3u-KQO"/>
+                                                    <outlet property="delegate" destination="ToN-fq-gSt" id="Xx5-Em-U9t"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="T8u-fY-mVb" firstAttribute="leading" secondItem="8Go-BO-8FX" secondAttribute="leading" id="AaG-9Y-UT3"/>
+                                            <constraint firstItem="tA1-Bn-n0L" firstAttribute="top" secondItem="rRV-kA-p0q" secondAttribute="bottom" constant="12" id="Kya-Sg-Ac3"/>
+                                            <constraint firstItem="rRV-kA-p0q" firstAttribute="leading" secondItem="8Go-BO-8FX" secondAttribute="leading" constant="18" id="QlV-YL-5GA"/>
+                                            <constraint firstItem="rRV-kA-p0q" firstAttribute="top" secondItem="8Go-BO-8FX" secondAttribute="top" constant="22" id="Ttf-zm-aRM"/>
+                                            <constraint firstItem="T8u-fY-mVb" firstAttribute="bottom" secondItem="8Go-BO-8FX" secondAttribute="bottom" id="cCy-qn-sOJ"/>
+                                            <constraint firstItem="tA1-Bn-n0L" firstAttribute="leading" secondItem="8Go-BO-8FX" secondAttribute="leading" constant="25" id="gJk-UQ-JXp"/>
+                                            <constraint firstItem="T8u-fY-mVb" firstAttribute="top" secondItem="tA1-Bn-n0L" secondAttribute="bottom" constant="22" id="oKM-Vt-Era"/>
+                                            <constraint firstItem="T8u-fY-mVb" firstAttribute="trailing" secondItem="8Go-BO-8FX" secondAttribute="trailing" id="oxO-Xh-0hy"/>
+                                            <constraint firstItem="8Go-BO-8FX" firstAttribute="trailing" secondItem="tA1-Bn-n0L" secondAttribute="trailing" constant="25" id="ti0-l0-QFi"/>
+                                            <constraint firstItem="tA1-Bn-n0L" firstAttribute="top" secondItem="rRV-kA-p0q" secondAttribute="bottom" constant="12" id="wrT-Dc-DEz"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="8Go-BO-8FX"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="p8z-Iy-kLc" firstAttribute="top" secondItem="E29-64-Cmb" secondAttribute="top" id="3NG-Xw-1tf"/>
+                                    <constraint firstItem="p8z-Iy-kLc" firstAttribute="centerY" secondItem="E29-64-Cmb" secondAttribute="centerY" id="VjN-ak-qPI"/>
+                                    <constraint firstAttribute="bottom" secondItem="p8z-Iy-kLc" secondAttribute="bottom" id="YSK-zW-6pf"/>
+                                    <constraint firstItem="p8z-Iy-kLc" firstAttribute="leading" secondItem="E29-64-Cmb" secondAttribute="leading" id="fRx-BN-VTx"/>
+                                    <constraint firstItem="p8z-Iy-kLc" firstAttribute="centerX" secondItem="E29-64-Cmb" secondAttribute="centerX" id="kh1-NW-GAh"/>
+                                    <constraint firstAttribute="trailing" secondItem="p8z-Iy-kLc" secondAttribute="trailing" id="szQ-7I-8ud"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="E29-64-Cmb" firstAttribute="top" secondItem="dqj-ID-rp8" secondAttribute="top" id="1er-yI-JAd"/>
+                            <constraint firstItem="E29-64-Cmb" firstAttribute="trailing" secondItem="4Kw-mQ-QBl" secondAttribute="trailing" id="716-hc-IoM"/>
+                            <constraint firstItem="E29-64-Cmb" firstAttribute="bottom" secondItem="4Kw-mQ-QBl" secondAttribute="bottom" id="fFX-c9-rJF"/>
+                            <constraint firstItem="E29-64-Cmb" firstAttribute="leading" secondItem="4Kw-mQ-QBl" secondAttribute="leading" id="yEm-dl-WNw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4Kw-mQ-QBl"/>
+                    </view>
+                    <connections>
+                        <outlet property="backBtn" destination="rRV-kA-p0q" id="D6v-F5-h0c"/>
+                        <outlet property="tableView" destination="T8u-fY-mVb" id="vl3-h3-wlh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M4T-kF-Sv1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1172" y="4566.5667166416797"/>
+        </scene>
     </scenes>
     <resources>
         <image name="3 Dots" width="3" height="13"/>
@@ -2408,6 +2530,7 @@
         <image name="Mask" width="33" height="27.5"/>
         <image name="Mask-1" width="28.5" height="28.5"/>
         <image name="Menu Icon" width="18" height="18"/>
+        <image name="My Balance" width="20" height="20"/>
         <image name="Profile icon" width="29" height="29"/>
         <image name="Profile icon-Selected" width="29" height="29"/>
         <image name="SearchIconBrowse" width="15" height="15"/>

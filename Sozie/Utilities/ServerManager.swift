@@ -10,9 +10,7 @@ import UIKit
 import Alamofire
 
 class ServerManager: NSObject {
-
     static let sharedInstance = ServerManager()
-
     static let serverURL = "http://35.177.203.47/api/v1/"
 //    static let serverURL = "http://172.16.12.58:8000/api/v1/"
     static let loginURL = ServerManager.serverURL + "user/login/"
@@ -39,6 +37,9 @@ class ServerManager: NSObject {
     static let addPostURL = ServerManager.serverURL + "post/add/"
     static let postURL = ServerManager.serverURL + "post/list/"
     static let changePasswordURL = ServerManager.serverURL + "user/change_password/"
+    static let blockListURL = ServerManager.serverURL + "user/blocked/list"
+    static let unBlockURL = ServerManager.serverURL + "user/unblock/"
+    static let preferenceURL = ServerManager.serverURL + "user/update_preferences/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -530,6 +531,52 @@ class ServerManager: NSObject {
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
         Alamofire.request(ServerManager.changePasswordURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func blockedList(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.blockListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<[User]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func unBlockUser(userId: Int, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.unBlockURL + String(userId) + "/"
+        Alamofire.request(url, method: .delete, parameters: nil, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func updatePrefernce(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.preferenceURL, method: .patch, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

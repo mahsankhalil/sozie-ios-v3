@@ -53,7 +53,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             lastNameTxtFld.text = lastName as? String
         }
     }
-    
+
     func populateCurrentUserData() {
 
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
@@ -137,6 +137,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
+                let user = response as! User
+                UserDefaultManager.updateUserObject(user: user)
                 self.navigationController?.popViewController(animated: true)
             } else {
                 let error = response as! Error

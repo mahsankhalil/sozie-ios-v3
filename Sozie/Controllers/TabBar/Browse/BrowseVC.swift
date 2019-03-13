@@ -101,6 +101,7 @@ class BrowseVC: BaseViewController {
     var pagesPerRequest = 3
     var isFirstPage = true
     var selectedProduct: Product?
+    var currentSozieBrandId: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -115,6 +116,7 @@ class BrowseVC: BaseViewController {
                         if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
                             setupBrandNavBar(imageURL: brand.titleImageCentred)
                         }
+                        currentSozieBrandId = brandId
                     }
                 }
             }
@@ -134,6 +136,19 @@ class BrowseVC: BaseViewController {
         self.refreshData()
     }
     override func viewWillAppear(_ animated: Bool) {
+        if UserDefaultManager.getIfShopper() == false {
+            if let user = UserDefaultManager.getCurrentUserObject() {
+                if let brandId = user.brand {
+                    if currentSozieBrandId != brandId {
+                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+                            setupBrandNavBar(imageURL: brand.titleImageCentred)
+                        }
+                        refreshData()
+                    }
+                    
+                }
+            }
+        }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken == nil {
             super.cancelButtonTapped()

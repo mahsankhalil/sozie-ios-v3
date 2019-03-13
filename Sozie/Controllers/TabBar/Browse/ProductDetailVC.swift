@@ -169,6 +169,7 @@ class ProductDetailVC: BaseViewController {
         }
     }
 
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -273,6 +274,9 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         if let postCollectionCell = cell as? PostCollectionViewCell {
             postCollectionCell.delegate = self
         }
+        if let productCollectionCell = cell as? ProductDetailCollectionViewCell {
+            productCollectionCell.delegate = self
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -312,9 +316,9 @@ extension ProductDetailVC: UIScrollViewDelegate {
 }
 extension ProductDetailVC: PostCollectionViewCellDelegate {
     func cameraButtonTapped(button: UIButton) {
-        
+        UtilityManager.openImagePickerActionSheetFrom(vc: self)
     }
-    
+
     func moreButtonTapped(button: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Report", style: .default, handler: { _ in
@@ -334,7 +338,7 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
         }))
 
         alert.addAction(UIAlertAction(title: "Block", style: .default, handler: { _ in
-            
+
             if let posts = self.currentProduct?.posts {
                 UtilityManager.showMessageWith(title: "Block " + posts[button.tag].user.username, body: "Are you sure you want to Block?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", block: {
                     let userIdToBlock = posts[button.tag].user.userId
@@ -373,6 +377,24 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
                     self.collectionView.reloadItems(at: [IndexPath(item: button.tag + 1, section: 0)])
                 }
             }
+        }
+    }
+}
+extension ProductDetailVC: ProductDetailCollectionViewCellDelegate {
+    func productCameraButtonTapped(button: UIButton) {
+        UtilityManager.openImagePickerActionSheetFrom(vc: self)
+    }
+}
+extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostVC") as? UploadPostVC {
+            if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+                uploadPostVC.selectedImage = scaledImg
+                uploadPostVC.currentProduct = currentProduct
+                self.navigationController?.pushViewController(uploadPostVC, animated: true)
+            }
+            picker.dismiss(animated: true, completion: nil)
         }
     }
 }

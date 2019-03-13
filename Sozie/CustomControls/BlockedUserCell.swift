@@ -23,6 +23,8 @@ class BlockedUserCell: UITableViewCell {
         unblockButton.layer.cornerRadius = 3.0
         profileImageView.layer.cornerRadius = profileImageView.frame.width/2.0
         profileImageView.clipsToBounds = true
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
         
     }
 

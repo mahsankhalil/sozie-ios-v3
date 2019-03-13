@@ -8,7 +8,7 @@
 
 import UIKit
 protocol ProductDetailCollectionViewCellDelegate {
-    func cameraButtonTapped(button: UIButton)
+    func productCameraButtonTapped(button: UIButton)
 }
 class ProductDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var brandImageView: UIImageView!
@@ -21,11 +21,16 @@ class ProductDetailCollectionViewCell: UICollectionViewCell {
         if UserDefaultManager.getIfShopper() {
             cameraButton.isHidden = true
         } else {
-            cameraButton.isHidden = false
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if let _ = appDelegate.imageTaken {
+                cameraButton.isHidden = true
+            } else {
+                cameraButton.isHidden = false
+            }
         }
     }
     @IBAction func cameraButtonTapped(_ sender: Any) {
-        delegate?.cameraButtonTapped(button: sender as! UIButton)
+        delegate?.productCameraButtonTapped(button: sender as! UIButton)
     }
     
 }

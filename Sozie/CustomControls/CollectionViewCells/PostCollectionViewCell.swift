@@ -37,9 +37,14 @@ class PostCollectionViewCell: UICollectionViewCell {
             followButtonWidthConstraint.constant = 60.0
             cameraButton.isHidden = true
         } else {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if let _ = appDelegate.imageTaken {
+                cameraButton.isHidden = true
+            } else {
+                cameraButton.isHidden = false
+            }
             followButtonWidthConstraint.constant = 0.0
             followButton.isHidden = true
-            cameraButton.isHidden = false
         }
     }
     @IBAction func followButtonTapped(_ sender: Any) {

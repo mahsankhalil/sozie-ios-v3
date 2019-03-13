@@ -132,6 +132,8 @@ class MeasurementsVC: UIViewController {
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     if let _ = UserDefaultManager.getCurrentUserObject() {
+                        let user = response as! User
+                        UserDefaultManager.updateUserObject(user: user)
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         self.performSegue(withIdentifier: "toUploadProfilePic", sender: self)

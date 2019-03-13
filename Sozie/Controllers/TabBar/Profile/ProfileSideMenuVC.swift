@@ -36,11 +36,15 @@ class ProfileSideMenuVC: BaseViewController {
     
     var sections: [Section] = []
 
+    @IBOutlet weak var myBalanceButton: UIButton!
+    @IBOutlet weak var myBalanceGradientView: DZGradientView!
+    @IBOutlet weak var myBalanceViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet weak var myBalanceView: UIView!
     @IBOutlet weak var logoutBtn: DZGradientButton!
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
-    
-    let accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
+
+    var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
     let settingTitles = ["Push Notifications", "Reset first-time use Guide", "Blocked Accounts"]
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
@@ -50,34 +54,47 @@ class ProfileSideMenuVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        func setupViewModels(_ titles: [String]) -> [RowViewModel] {
-            var viewModels: [RowViewModel] = []
-            for title in titles {
-                var viewModel: RowViewModel
-                if title == "Push Notifications" || title == "Reset first-time use Guide" {
-                    viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: false)
-                } else {
-                    viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
-                }
-                viewModels.append(viewModel)
-            }
-            return viewModels
+        if UserDefaultManager.getIfShopper() {
+            self.myBalanceViewHeightContraint.constant = 0.0
+        } else {
+            self.myBalanceViewHeightContraint.constant = 50.0
+            accountTitles = ["Edit Profile", "Change My Workplace", "Update Profile Picture", "Change Password", "My Measurements"]
+
         }
         let accountViewModels = setupViewModels(accountTitles)
         let accountSection = Section(title: "ACCOUNT", rowViewModels: accountViewModels)
         sections.append(accountSection)
-        
         let settingViewModels = setupViewModels(settingTitles)
         let settingSection = Section(title: "SETTINGS", rowViewModels: settingViewModels)
         sections.append(settingSection)
         let aboutViewModels = setupViewModels(aboutTitles)
         let aboutSection = Section(title: "ABOUT", rowViewModels: aboutViewModels)
         sections.append(aboutSection)
-    
         logoutBtn.cornerRadius = 0.0
     }
-    
 
+    func setupViewModels(_ titles: [String]) -> [RowViewModel] {
+        var viewModels: [RowViewModel] = []
+        for title in titles {
+            var viewModel: RowViewModel
+            if title == "Push Notifications" || title == "Reset first-time use Guide" {
+                var notificationStatus = false
+                if title == "Push Notifications" {
+                    if let user = UserDefaultManager.getCurrentUserObject() {
+                        if let notfStatus = user.preferences?.pushNotificationEnabled {
+                            notificationStatus = notfStatus
+                        }
+                    }
+
+                }
+                viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: notificationStatus)
+                            } else {
+                viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
+            }
+            viewModels.append(viewModel)
+        }
+        return viewModels
+    }
     func logout() {
         SVProgressHUD.show()
         var dataDict = [String: Any]()
@@ -149,8 +166,31 @@ class ProfileSideMenuVC: BaseViewController {
         self.navigationController?.pushViewController(measurementVC, animated: true)
 
     }
+    func showBlockedListVC() {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "BlockListVC") as! BlockListVC
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func showUpdateWorkPlaceVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let measurementVC = storyBoard.instantiateViewController(withIdentifier: "SelectWorkVC") as! SelectWorkVC
+        self.navigationController?.pushViewController(measurementVC, animated: true)
+    }
+    func showEditProfileVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        self.navigationController?.pushViewController(editProfileVC, animated: true)
+    }
+    func showTOSVC(type: TOSType) {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
+        tosVC.type = type
+        self.navigationController?.pushViewController(tosVC, animated: true)
+    }
     @IBAction func menuBtnTapped(_ sender: Any) {
 
+    }
+    @IBAction func myBalanceButtonTapped(_ sender: Any) {
     }
     @IBAction func logoutBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -206,32 +246,28 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(rowViewModel)
         }
+        if let buttonProvidingCell = cell as? ButtonProviding {
+            buttonProvidingCell.assignTagWith(indexPath.row)
+        }
+        if let switchCell = cell as? TitleAndSwitchCell {
+            switchCell.delegate = self
+        }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let tabBarstoryBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
-
         switch indexPath.section {
         case 0:
+            performSectionOneActions(row: indexPath.row)
+        case 1:
             switch indexPath.row {
-            case 0:
-                let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-                self.navigationController?.pushViewController(editProfileVC, animated: true)
-            case 1:
-                showUploadPhotoVC()
             case 2:
-                showChangePasswordVC()
-            case 3:
-                showMeasurementVC()
+                showBlockedListVC()
             default:
                 return
             }
-        case 1:
-            return
         case 2:
             switch indexPath.row {
             case 0:
@@ -241,16 +277,40 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
             case 2:
                 sendFeedbackWithEmail()
             case 3:
-                let tosVC = tabBarstoryBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
-                tosVC.type = TOSType.privacyPolicy
-                self.navigationController?.pushViewController(tosVC, animated: true)
+                showTOSVC(type: TOSType.privacyPolicy)
             case 4:
-                let tosVC = tabBarstoryBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
-                tosVC.type = TOSType.termsCondition
-                self.navigationController?.pushViewController(tosVC, animated: true)
+                showTOSVC(type: TOSType.termsCondition)
             default:
                 return
             }
+        default:
+            return
+        }
+    }
+    func performSectionOneActions(row: Int) {
+        switch row {
+        case 0:
+            showEditProfileVC()
+        case 1:
+            if UserDefaultManager.getIfShopper() {
+                showUploadPhotoVC()
+            } else {
+                showUpdateWorkPlaceVC()
+            }
+        case 2:
+            if UserDefaultManager.getIfShopper() {
+                showChangePasswordVC()
+            } else {
+                showUploadPhotoVC()
+            }
+        case 3:
+            if UserDefaultManager.getIfShopper() {
+                showMeasurementVC()
+            } else {
+                showChangePasswordVC()
+            }
+        case 4:
+            showMeasurementVC()
         default:
             return
         }
@@ -259,5 +319,23 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
 extension ProfileSideMenuVC: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
+    func switchValueChanged(switchButton: UISwitch) {
+        var dataDict = [String: Any]()
+        dataDict["enable_notifications"] = switchButton.isOn
+        ServerManager.sharedInstance.updatePrefernce(params: dataDict) { (isSuccess, response) in
+            if isSuccess {
+                if var currentUser = UserDefaultManager.getCurrentUserObject() {
+                    if let preferences = currentUser.preferences {
+                        currentUser.preferences?.pushNotificationEnabled = switchButton.isOn
+                        UserDefaultManager.updateUserObject(user: currentUser)
+                    }
+                }
+            } else {
+                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+            }
+        }
     }
 }
