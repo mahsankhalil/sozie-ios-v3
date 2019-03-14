@@ -78,16 +78,17 @@ class ProfileSideMenuVC: BaseViewController {
         for title in titles {
             var viewModel: RowViewModel
             if title == "Push Notifications" || title == "Reset first-time use Guide" {
-                var notificationStatus = false
+                var flag = false
                 if title == "Push Notifications" {
                     if let user = UserDefaultManager.getCurrentUserObject() {
                         if let notfStatus = user.preferences?.pushNotificationEnabled {
-                            notificationStatus = notfStatus
+                            flag = notfStatus
                         }
                     }
-
+                } else if title == "Reset first-time use Guide" {
+                    flag = !UserDefaultManager.isUserGuideDisabled()
                 }
-                viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: notificationStatus)
+                viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: flag)
                             } else {
                 viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
             }
@@ -191,6 +192,9 @@ class ProfileSideMenuVC: BaseViewController {
 
     }
     @IBAction func myBalanceButtonTapped(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let balanceVC = storyBoard.instantiateViewController(withIdentifier: "MyBalanceVC") as! MyBalanceVC
+        self.navigationController?.pushViewController(balanceVC, animated: true)
     }
     @IBAction func logoutBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -323,19 +327,28 @@ extension ProfileSideMenuVC: MFMailComposeViewControllerDelegate {
 }
 extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
     func switchValueChanged(switchButton: UISwitch) {
-        var dataDict = [String: Any]()
-        dataDict["enable_notifications"] = switchButton.isOn
-        ServerManager.sharedInstance.updatePrefernce(params: dataDict) { (isSuccess, response) in
-            if isSuccess {
-                if var currentUser = UserDefaultManager.getCurrentUserObject() {
-                    if let preferences = currentUser.preferences {
-                        currentUser.preferences?.pushNotificationEnabled = switchButton.isOn
-                        UserDefaultManager.updateUserObject(user: currentUser)
+        if switchButton.tag == 0 {
+            var dataDict = [String: Any]()
+            dataDict["enable_notifications"] = switchButton.isOn
+            ServerManager.sharedInstance.updatePrefernce(params: dataDict) { (isSuccess, response) in
+                if isSuccess {
+                    if var currentUser = UserDefaultManager.getCurrentUserObject() {
+                        if let preferences = currentUser.preferences {
+                            currentUser.preferences?.pushNotificationEnabled = switchButton.isOn
+                            UserDefaultManager.updateUserObject(user: currentUser)
+                        }
                     }
+                } else {
+                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
                 }
+            }
+        } else {
+            if switchButton.isOn {
+                UserDefaultManager.makeUserGuideEnable()
             } else {
-                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+                UserDefaultManager.makeUserGuideDisabled()
             }
         }
+        
     }
 }

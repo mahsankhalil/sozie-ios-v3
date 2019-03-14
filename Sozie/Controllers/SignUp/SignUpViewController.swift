@@ -217,24 +217,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
 
     @IBAction func maleBtnTapped(_ sender: Any) {
         tipView?.dismiss()
-        var preferences = EasyTipView.globalPreferences
-        preferences.drawing.foregroundColor = UIColor.white
-        preferences.drawing.backgroundColor = UIColor(hex: "5CCEC4")
-        preferences.drawing.font = UIFont(name: "SegoeUI", size: 11)!
-        preferences.drawing.textAlignment = NSTextAlignment.left
-
-        preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
-        preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: 15)
-        preferences.animating.showInitialAlpha = 0
-        preferences.animating.showDuration = 1
-        preferences.animating.dismissDuration = 1.0
-        preferences.drawing.arrowPosition = .bottom
-        preferences.drawing.cornerRadius = 10.0
-        preferences.positioning.maxWidth = 143
 
         let text = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
 
-        tipView = EasyTipView(text: text, preferences: preferences, delegate: nil)
+        tipView = EasyTipView(text: text, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
         tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
     }
 

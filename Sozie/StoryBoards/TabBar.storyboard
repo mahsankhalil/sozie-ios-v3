@@ -610,6 +610,7 @@
                         <viewLayoutGuide key="safeArea" id="sRM-8U-giY"/>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="M7L-ct-lfX" id="DS1-7x-bid"/>
                         <outlet property="buyButton" destination="z4u-hJ-9Tk" id="KTG-m1-L0l"/>
                         <outlet property="collectionView" destination="ApC-rC-p13" id="9SC-4k-rn1"/>
                         <outlet property="descriptionTextView" destination="GCS-yn-n4E" id="4Sb-db-jzG"/>
@@ -2454,7 +2455,7 @@
                                                     <constraint firstAttribute="height" constant="46" id="Q1U-uH-9zG"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="34"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRV-kA-p0q" userLabel="Back Button">
@@ -2521,6 +2522,144 @@
             </objects>
             <point key="canvasLocation" x="1172" y="4566.5667166416797"/>
         </scene>
+        <!--My BalanceVC-->
+        <scene sceneID="hSW-8f-Sw1">
+            <objects>
+                <viewController storyboardIdentifier="MyBalanceVC" automaticallyAdjustsScrollViewInsets="NO" id="9VM-Mo-ZVu" customClass="MyBalanceVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uMd-ha-j0M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I24-gV-OLK" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWV-au-6NI">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAl-Va-g6x">
+                                                <rect key="frame" x="25" y="99" width="325" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="dPG-Te-KUt"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="34"/>
+                                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdY-WM-LKW" userLabel="Back Button">
+                                                <rect key="frame" x="18" y="42" width="45" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="45" id="gwi-v0-G2e"/>
+                                                    <constraint firstAttribute="height" constant="45" id="tC1-jX-kcg"/>
+                                                </constraints>
+                                                <state key="normal" image="back-button-white"/>
+                                                <connections>
+                                                    <action selector="backButtonTapped:" destination="9VM-Mo-ZVu" eventType="touchUpInside" id="cdb-ox-6x8"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You earn money every time someone buys an item from one of your posts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Q-tL-wVc">
+                                                <rect key="frame" x="25" y="146" width="290" height="35"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XtM-Fk-ksd" customClass="DZGradientView" customModule="Sozie" customModuleProvider="target">
+                                                <rect key="frame" x="80" y="229" width="215" height="118"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zH-Xc-d4c">
+                                                        <rect key="frame" x="0.0" y="17" width="215" height="33"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="26"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$45.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaI-L3-OR8">
+                                                        <rect key="frame" x="0.0" y="50" width="215" height="48"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="44"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="118" id="jxi-6g-znc"/>
+                                                    <constraint firstAttribute="width" constant="215" id="qCh-aB-TS1"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;You must have at least $10 to be paid out&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-Ix-I0e">
+                                                <rect key="frame" x="25" y="377" width="325" height="19"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="14"/>
+                                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETQ-fa-GJ6" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                                <rect key="frame" x="30" y="601" width="315" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="DxC-2S-7bp"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="150" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="175" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Cash Out with" image="Paypal icon"/>
+                                                <connections>
+                                                    <action selector="checkoutButtonTapped:" destination="9VM-Mo-ZVu" eventType="touchUpInside" id="Bld-aw-HwB"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="C6Q-tL-wVc" secondAttribute="trailing" constant="60" id="5PN-vv-HbL"/>
+                                            <constraint firstItem="ETQ-fa-GJ6" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="30" id="Dbc-Rg-UpI"/>
+                                            <constraint firstItem="jAl-Va-g6x" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="25" id="LJ2-2l-EPP"/>
+                                            <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="jAl-Va-g6x" secondAttribute="trailing" constant="25" id="MuK-Dy-UdT"/>
+                                            <constraint firstItem="C6Q-tL-wVc" firstAttribute="top" secondItem="jAl-Va-g6x" secondAttribute="bottom" constant="1" id="O8O-os-TR1"/>
+                                            <constraint firstItem="jAl-Va-g6x" firstAttribute="top" secondItem="LdY-WM-LKW" secondAttribute="bottom" constant="12" id="Pgd-97-fFx"/>
+                                            <constraint firstItem="LdY-WM-LKW" firstAttribute="top" secondItem="Pg3-rB-oeQ" secondAttribute="top" constant="22" id="Pqe-k3-PmX"/>
+                                            <constraint firstItem="XtM-Fk-ksd" firstAttribute="top" secondItem="C6Q-tL-wVc" secondAttribute="bottom" constant="48" id="Ybw-mN-3J4"/>
+                                            <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="hIt-Ix-I0e" secondAttribute="trailing" constant="25" id="ags-Mt-phN"/>
+                                            <constraint firstItem="XtM-Fk-ksd" firstAttribute="centerX" secondItem="bWV-au-6NI" secondAttribute="centerX" id="cY3-Ad-VCx"/>
+                                            <constraint firstItem="hIt-Ix-I0e" firstAttribute="top" secondItem="XtM-Fk-ksd" secondAttribute="bottom" constant="30" id="fPq-t7-ufR"/>
+                                            <constraint firstItem="C6Q-tL-wVc" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="25" id="gln-dN-Ajp"/>
+                                            <constraint firstItem="LdY-WM-LKW" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="18" id="kun-Pq-bSW"/>
+                                            <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="ETQ-fa-GJ6" secondAttribute="trailing" constant="30" id="opa-Ax-ACs"/>
+                                            <constraint firstItem="hIt-Ix-I0e" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="25" id="qBd-Nu-GYg"/>
+                                            <constraint firstItem="jAl-Va-g6x" firstAttribute="top" secondItem="LdY-WM-LKW" secondAttribute="bottom" constant="12" id="uzL-e6-5Wt"/>
+                                            <constraint firstItem="Pg3-rB-oeQ" firstAttribute="bottom" secondItem="ETQ-fa-GJ6" secondAttribute="bottom" constant="18" id="ygU-Ip-d7p"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="Pg3-rB-oeQ"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="bWV-au-6NI" secondAttribute="trailing" id="8ND-ZV-7PF"/>
+                                    <constraint firstItem="bWV-au-6NI" firstAttribute="centerX" secondItem="I24-gV-OLK" secondAttribute="centerX" id="FNI-Yn-R23"/>
+                                    <constraint firstItem="bWV-au-6NI" firstAttribute="top" secondItem="I24-gV-OLK" secondAttribute="top" id="PhA-lG-qVa"/>
+                                    <constraint firstItem="bWV-au-6NI" firstAttribute="centerY" secondItem="I24-gV-OLK" secondAttribute="centerY" id="TVz-LP-TGj"/>
+                                    <constraint firstItem="bWV-au-6NI" firstAttribute="leading" secondItem="I24-gV-OLK" secondAttribute="leading" id="ciy-LK-Ry7"/>
+                                    <constraint firstAttribute="bottom" secondItem="bWV-au-6NI" secondAttribute="bottom" id="yxC-XS-dmu"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="I24-gV-OLK" firstAttribute="bottom" secondItem="yqc-RM-4PN" secondAttribute="bottom" id="Lhi-RJ-7wz"/>
+                            <constraint firstItem="I24-gV-OLK" firstAttribute="top" secondItem="uMd-ha-j0M" secondAttribute="top" id="Opy-Qm-shw"/>
+                            <constraint firstItem="I24-gV-OLK" firstAttribute="leading" secondItem="yqc-RM-4PN" secondAttribute="leading" id="Rdh-l8-kmJ"/>
+                            <constraint firstItem="I24-gV-OLK" firstAttribute="trailing" secondItem="yqc-RM-4PN" secondAttribute="trailing" id="tnW-NN-Ib7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yqc-RM-4PN"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="LdY-WM-LKW" id="NT2-BF-XXI"/>
+                        <outlet property="balanceLabel" destination="yaI-L3-OR8" id="E7m-xx-OUj"/>
+                        <outlet property="checkoutButton" destination="ETQ-fa-GJ6" id="Zcp-P8-QLK"/>
+                        <outlet property="minimumBalanceLabel" destination="hIt-Ix-I0e" id="Znm-Vd-7k6"/>
+                        <outlet property="totalBalanceBackgroundView" destination="XtM-Fk-ksd" id="6pw-5P-bd2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KVH-2T-ONN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2045.5999999999999" y="4566.5667166416797"/>
+        </scene>
     </scenes>
     <resources>
         <image name="3 Dots" width="3" height="13"/>
@@ -2531,6 +2670,7 @@
         <image name="Mask-1" width="28.5" height="28.5"/>
         <image name="Menu Icon" width="18" height="18"/>
         <image name="My Balance" width="20" height="20"/>
+        <image name="Paypal icon" width="64" height="32"/>
         <image name="Profile icon" width="29" height="29"/>
         <image name="Profile icon-Selected" width="29" height="29"/>
         <image name="SearchIconBrowse" width="15" height="15"/>
@@ -2547,7 +2687,7 @@
         <image name="right2" width="30" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LXu-v3-0l3"/>
-        <segue reference="ANr-fN-ARm"/>
+        <segue reference="567-1Z-O12"/>
+        <segue reference="fhc-UN-Ju3"/>
     </inferredMetricsTieBreakers>
 </document>

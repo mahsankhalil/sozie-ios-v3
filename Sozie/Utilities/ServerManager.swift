@@ -40,6 +40,8 @@ class ServerManager: NSObject {
     static let blockListURL = ServerManager.serverURL + "user/blocked/list"
     static let unBlockURL = ServerManager.serverURL + "user/unblock/"
     static let preferenceURL = ServerManager.serverURL + "user/update_preferences/"
+    static let balanceURL = ServerManager.serverURL + "user/balance/"
+    static let cashoutURL = ServerManager.serverURL + "user/sozie/cashout"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -577,6 +579,36 @@ class ServerManager: NSObject {
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
         Alamofire.request(ServerManager.preferenceURL, method: .patch, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func getCurrentBalance(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.balanceURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<BalanceResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func cashOut(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.cashoutURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

@@ -55,6 +55,21 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.refresh
     }
+    static func isUserGuideDisabled() -> Bool {
+        if (UserDefaults.standard.bool(forKey: UserDefaultKey.userGuide) as? Bool) == true {
+            return true
+        } else {
+            return false
+        }
+    }
+    static func makeUserGuideDisabled() {
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.userGuide)
+        UserDefaults.standard.synchronize()
+    }
+    static func makeUserGuideEnable() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.userGuide)
+        UserDefaults.standard.synchronize()
+    }
 
     static func saveLoginResponse(loginResp: LoginResponse) -> Bool {
         let encoder = JSONEncoder()

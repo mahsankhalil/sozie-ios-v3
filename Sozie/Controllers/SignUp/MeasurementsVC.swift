@@ -9,7 +9,7 @@
 import UIKit
 import MaterialTextField
 import SVProgressHUD
-
+import EasyTipView
 public enum MeasurementType: Int {
     case height
     case waist
@@ -37,6 +37,7 @@ class MeasurementsVC: UIViewController {
     
     var rowViewModels: [RowViewModel] = []
 
+    @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,8 +63,18 @@ class MeasurementsVC: UIViewController {
             currentMeasurement = LocalMeasurement()
         }
         fetchDataFromServer()
+        showTipView()
     }
-
+    func showTipView() {
+        if UserDefaultManager.isUserGuideDisabled() == false {
+            let text = "Filling these will help us match you to your Sozies!"
+            var prefer = UtilityManager.tipViewGlobalPreferences()
+            prefer.drawing.arrowPosition = .left
+            prefer.positioning.maxWidth = 96
+            let tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+            tipView.show(animated: true, forView: self.titleLabel, withinSuperview: self.view)
+        }
+    }
     func fetchDataFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getSizeCharts(params: [:]) { (isSuccess, response) in

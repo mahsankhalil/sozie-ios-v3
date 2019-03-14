@@ -75,6 +75,7 @@ extension TabBarVC:  UINavigationControllerDelegate, UIImagePickerControllerDele
             self.selectedIndex = 0
             if let browseVC = ((self.viewControllers![0] as? UINavigationController)?.viewControllers[0]) as? BrowseVC {
                 browseVC.showCancelButton()
+                browseVC.showTipView()
             }
         }
         picker.dismiss(animated: true, completion: nil)

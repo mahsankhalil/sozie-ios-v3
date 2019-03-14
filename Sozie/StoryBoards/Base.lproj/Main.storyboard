@@ -1948,7 +1948,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measurements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4FQ-14-O9L">
-                                                <rect key="frame" x="25" y="79" width="325" height="46"/>
+                                                <rect key="frame" x="25" y="79" width="221" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="gir-oI-ahx"/>
                                                 </constraints>
@@ -2012,7 +2012,6 @@
                                             <constraint firstItem="UUx-dl-z50" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="30" id="6so-0z-9Hb"/>
                                             <constraint firstItem="4FQ-14-O9L" firstAttribute="top" secondItem="DGa-Do-dEv" secondAttribute="top" constant="79" id="Ba1-v8-9BN"/>
                                             <constraint firstAttribute="bottom" secondItem="UUx-dl-z50" secondAttribute="bottom" constant="14" id="IFw-PI-xVc"/>
-                                            <constraint firstAttribute="trailing" secondItem="4FQ-14-O9L" secondAttribute="trailing" constant="25" id="Q91-IP-C8j"/>
                                             <constraint firstAttribute="trailing" secondItem="UUx-dl-z50" secondAttribute="trailing" constant="30" id="VNa-TU-XKa"/>
                                             <constraint firstItem="jbN-b4-NnX" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="25" id="aqK-eU-kUk"/>
                                             <constraint firstItem="oIT-6i-FxZ" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="25" id="bNd-mF-xVl"/>
@@ -2060,6 +2059,7 @@
                     <connections>
                         <outlet property="backBtn" destination="bvC-1f-lfT" id="ccs-3R-N5K"/>
                         <outlet property="tblVu" destination="jbN-b4-NnX" id="88G-FT-2cn"/>
+                        <outlet property="titleLabel" destination="4FQ-14-O9L" id="1W1-87-HNy"/>
                         <outlet property="uploadBtn" destination="Zja-wb-SkP" id="9RQ-JJ-0M0"/>
                     </connections>
                 </viewController>

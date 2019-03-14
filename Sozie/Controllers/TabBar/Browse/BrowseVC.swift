@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 import WaterfallLayout
 import CCBottomRefreshControl
-
+import EasyTipView
 public enum PopupType: String {
     case category = "CATEGORY"
     case filter = "FILTER"
@@ -102,6 +102,8 @@ class BrowseVC: BaseViewController {
     var isFirstPage = true
     var selectedProduct: Product?
     var currentSozieBrandId: Int?
+    var cancelTipView: EasyTipView?
+    var collectionTipView: EasyTipView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -135,6 +137,39 @@ class BrowseVC: BaseViewController {
         productsCollectionVu.refreshControl = upperRefreshControl
         self.refreshData()
     }
+    func showTipView() {
+        if UserDefaultManager.isUserGuideDisabled() == false {
+            let text = "To tag your photo, select model picture."
+            var prefer = UtilityManager.tipViewGlobalPreferences()
+            prefer.drawing.arrowPosition = .bottom
+            prefer.positioning.maxWidth = 110
+            collectionTipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+            collectionTipView?.show(animated: true, forView: self.productsCollectionVu, withinSuperview: self.view)
+        }
+    }
+    override func showCancelButtonTipView() {
+        if UserDefaultManager.isUserGuideDisabled() == false {
+            let text = "You can cancel if you don't want to tag photo."
+            var prefer = UtilityManager.tipViewGlobalPreferences()
+            prefer.drawing.arrowPosition = .top
+            prefer.positioning.maxWidth = 110
+            prefer.positioning.bubbleVInset = 0
+            cancelTipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+            cancelTipView?.show(animated: true, forView: self.itemsCountLbl, withinSuperview: self.view)
+            if let tipView = cancelTipView {
+                tipView.frame = CGRect(x: tipView.frame.origin.x, y: tipView.frame.origin.y - 35.0, width: tipView.frame.width, height: tipView.frame.height)
+            }
+        }
+    }
+    override func cancelButtonTapped() {
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.imageTaken = nil
+        cancelTipView?.dismiss()
+        collectionTipView?.dismiss()
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         if UserDefaultManager.getIfShopper() == false {
             if let user = UserDefaultManager.getCurrentUserObject() {
@@ -152,6 +187,8 @@ class BrowseVC: BaseViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken == nil {
             super.cancelButtonTapped()
+            cancelTipView?.dismiss()
+            collectionTipView?.dismiss()
             if let index = selectedIndex {
                 productViewModels[index].isSelected = false
                 productsCollectionVu.reloadItems(at: [IndexPath(item: index, section: 0)])
@@ -395,7 +432,9 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         } else {
             return UICollectionViewCell()
         }
-
+        if let cellIndexable = cell as? ButtonProviding {
+            cellIndexable.assignTagWith(indexPath.row)
+        }
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(rowViewModel)
         }

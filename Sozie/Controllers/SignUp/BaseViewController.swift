@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import EasyTipView
 class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -51,6 +51,10 @@ class BaseViewController: UIViewController {
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
         cancelButton.tintColor = UIColor(hex: "888888")
         navigationItem.leftBarButtonItem = cancelButton
+        showCancelButtonTipView()
+    }
+    func showCancelButtonTipView() {
+        
     }
     func showTagItemButton() {
         let tagItemButton = UIBarButtonItem(title: "Tag Item", style: .plain, target: self, action: #selector(tagItemButtonTapped))

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import EasyTipView
+
 protocol PostCollectionViewCellDelegate {
     func moreButtonTapped(button: UIButton)
     func followButtonTapped(button: UIButton)
@@ -27,6 +29,9 @@ class PostCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var sizeWornLabel: UILabel!
     @IBOutlet weak var followButtonWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var topView: UIView!
+    var tipView: EasyTipView?
+    var isFirstTime = true
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -45,6 +50,21 @@ class PostCollectionViewCell: UICollectionViewCell {
             }
             followButtonWidthConstraint.constant = 0.0
             followButton.isHidden = true
+        }
+    }
+    func showTipView() {
+        if UserDefaultManager.isUserGuideDisabled() == false {
+            if (self.followButton.tag == 1 && (self.followButton.isHidden == false)) {
+                if isFirstTime {
+                    let text = "Click here to Follow this Sozie"
+                    var prefer = UtilityManager.tipViewGlobalPreferences()
+                    prefer.drawing.arrowPosition = .bottom
+                    prefer.positioning.maxWidth = 110
+                    tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+                    tipView?.show(animated: true, forView: self.followButton, withinSuperview: self.topView)
+                    isFirstTime = false
+                }
+            }
         }
     }
     @IBAction func followButtonTapped(_ sender: Any) {
@@ -123,6 +143,21 @@ extension PostCollectionViewCell: CellConfigurable {
                 }
             }
         }
+        if UserDefaultManager.getIfShopper() {
+            if followButton.tag == 1 {
+                tipView?.isHidden = false
+            } else {
+                tipView?.isHidden = true
+            }
+            showTipView()
+        }
     }
 
+}
+extension PostCollectionViewCell: ButtonProviding {
+    func assignTagWith(_ index: Int) {
+        followButton.tag = index
+        moreButton.tag = index
+        cameraButton.tag = index
+    }
 }

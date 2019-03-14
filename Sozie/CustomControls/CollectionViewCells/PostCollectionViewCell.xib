@@ -214,6 +214,7 @@
                 <outlet property="profileImageView" destination="G3F-yW-PBc" id="FuB-zH-Ut7"/>
                 <outlet property="sizeWornLabel" destination="x1Y-BU-sw9" id="eg7-XV-BIN"/>
                 <outlet property="sizeWornView" destination="RIV-8g-jx0" id="MLd-Hk-Z7m"/>
+                <outlet property="topView" destination="hK5-gK-sLw" id="kcb-tO-8Ms"/>
                 <outlet property="waistLabel" destination="UzR-o8-zMd" id="bX4-dD-jyZ"/>
             </connections>
             <point key="canvasLocation" x="-0.80000000000000004" y="13.943028485757123"/>

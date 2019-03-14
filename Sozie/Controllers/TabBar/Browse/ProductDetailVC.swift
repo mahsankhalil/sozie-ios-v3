@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import SVProgressHUD
+import EasyTipView
 class ProductDetailVC: BaseViewController {
 
     @IBOutlet weak var priceLabel: UILabel!
@@ -25,6 +26,7 @@ class ProductDetailVC: BaseViewController {
     var viewModels: [PostCellViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
     var currentPostId: Int?
+    @IBOutlet weak var bottomView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +45,7 @@ class ProductDetailVC: BaseViewController {
             heartButton.isHidden = false
             buyButton.isHidden = false
             requestSozieButton.isHidden = false
+            showTipView()
         } else {
             heartButtonWidthConstraint.constant = 0.0
             heartButton.isHidden = true
@@ -54,7 +57,16 @@ class ProductDetailVC: BaseViewController {
             self.showTagItemButton()
             self.showCancelButton()
         }
-
+    }
+    func showTipView() {
+        if UserDefaultManager.isUserGuideDisabled() == false {
+            let text = "After swiping, if you still don't see your size tried on, click above!"
+            var prefer = UtilityManager.tipViewGlobalPreferences()
+            prefer.drawing.arrowPosition = .bottom
+            prefer.positioning.maxWidth = 110
+            let tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+            tipView.show(animated: true, forView: self.requestSozieButton, withinSuperview: self.bottomView)
+        }
     }
     override func viewDidLayoutSubviews() {
         descriptionTextView.setContentOffset(.zero, animated: false)
@@ -268,6 +280,9 @@ extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource,
         }
         let collectionViewCell: UICollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier, for: indexPath)
         guard let cell = collectionViewCell else { return UICollectionViewCell() }
+        if let buttonProviderCell = cell as? ButtonProviding {
+            buttonProviderCell.assignTagWith(indexPath.row)
+        }
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel as! RowViewModel)
         }

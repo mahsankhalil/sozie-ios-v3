@@ -9,9 +9,25 @@
 import UIKit
 import SnapKit
 import SVProgressHUD
-
+import EasyTipView
 class UtilityManager: NSObject {
-    
+
+    static func tipViewGlobalPreferences() -> EasyTipView.Preferences {
+        var preferences = EasyTipView.globalPreferences
+        preferences.drawing.foregroundColor = UIColor.white
+        preferences.drawing.backgroundColor = UIColor(hex: "5CCEC4")
+        preferences.drawing.font = UIFont(name: "SegoeUI", size: 11)!
+        preferences.drawing.textAlignment = NSTextAlignment.left
+        preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
+        preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: 15)
+        preferences.animating.showInitialAlpha = 0
+        preferences.animating.showDuration = 1
+        preferences.animating.dismissDuration = 1.0
+        preferences.drawing.arrowPosition = .bottom
+        preferences.drawing.cornerRadius = 10.0
+        preferences.positioning.maxWidth = 143
+        return preferences
+    }
     static func stringFromNSDateWithFormat(date: NSDate, format : String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -23,12 +39,11 @@ class UtilityManager: NSObject {
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: date)! as NSDate
     }
-    
+
     static func serverDateStringFromAppDateString(dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constant.appDateFormat
         dateFormatter.timeZone = NSTimeZone.local
-        
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = Constant.serverDateFormat
         newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
@@ -55,26 +70,24 @@ class UtilityManager: NSObject {
     //MARK: - Other Methods
   
     static func openImagePickerActionSheetFrom(vc: UIViewController) {
-        let alert = UIAlertController(title: nil , message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             UtilityManager.openCameraFrom(vc: vc)
         }))
-        
+
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
             UtilityManager.openGalleryFrom(vc: vc)
         }))
-        
+
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        
+
         vc.present(alert, animated: true, completion: nil)
     }
-    
-    
-    
+
     static func openCameraFrom(vc : UIViewController) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
             imagePicker.allowsEditing = false
             vc.present(imagePicker, animated: true, completion: nil)
@@ -84,8 +97,8 @@ class UtilityManager: NSObject {
             vc.present(alert, animated: true, completion: nil)
         }
     }
-    
-    static func openGalleryFrom(vc : UIViewController) {
+
+    static func openGalleryFrom(vc: UIViewController) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = vc as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -113,7 +126,6 @@ class UtilityManager: NSObject {
             make.centerX.equalTo(view.snp.centerX)
             make.centerY.equalTo(view.snp.centerY).offset(-40)
         }
-        
         return activityIndicator
     }
     

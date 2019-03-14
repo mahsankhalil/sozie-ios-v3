@@ -63,6 +63,7 @@
 		614374DC2236919200DBD295 /* BlockedUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614374DA2236919200DBD295 /* BlockedUserCell.xib */; };
 		614374DE22369A5400DBD295 /* BlockListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374DD22369A5400DBD295 /* BlockListVC.swift */; };
 		614374E022378C6500DBD295 /* BlockedUserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374DF22378C6500DBD295 /* BlockedUserCellViewModel.swift */; };
+		614374E222390EAE00DBD295 /* MyBalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374E122390EAE00DBD295 /* MyBalanceVC.swift */; };
 		614CEA4321F1E08F00FE5F9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 614CEA4221F1E08F00FE5F9D /* GoogleService-Info.plist */; };
 		614CEA4621F1E48600FE5F9D /* SocialAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */; };
 		6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6158DC272201881500CB78EC /* SwitchProviding.swift */; };
@@ -231,6 +232,7 @@
 		614374DA2236919200DBD295 /* BlockedUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockedUserCell.xib; sourceTree = "<group>"; };
 		614374DD22369A5400DBD295 /* BlockListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListVC.swift; sourceTree = "<group>"; };
 		614374DF22378C6500DBD295 /* BlockedUserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserCellViewModel.swift; sourceTree = "<group>"; };
+		614374E122390EAE00DBD295 /* MyBalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceVC.swift; sourceTree = "<group>"; };
 		614CEA4221F1E08F00FE5F9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthManager.swift; sourceTree = "<group>"; };
 		6158DC272201881500CB78EC /* SwitchProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchProviding.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				6166813F22315796009DD1D0 /* TermsOfServiceVC.swift */,
 				615A039422365FD300E64C23 /* ChangePasswordVC.swift */,
 				614374DD22369A5400DBD295 /* BlockListVC.swift */,
+				614374E122390EAE00DBD295 /* MyBalanceVC.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1027,6 +1030,7 @@
 				DA48CB1A21FADD8D006804B6 /* ErrorViewModeling.swift in Sources */,
 				61BC873721E76C62000AEA06 /* Brand.swift in Sources */,
 				61064592222D392100AE41C3 /* UploadPostVC.swift in Sources */,
+				614374E222390EAE00DBD295 /* MyBalanceVC.swift in Sources */,
 				61B9D1C8222548BA007C6326 /* SozieRequest.swift in Sources */,
 				611E41222214719F007B1C62 /* ProductDetailCellViewModel.swift in Sources */,
 				61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */,

@@ -29,7 +29,7 @@ struct User: Codable {
     var socialToken: String?
     var measurement: Measurements?
     var isFollowed: Bool?
-    var preferences: Preferences?
+    var preferences: UserPreferences?
     enum CodingKeys: String, CodingKey {
         case username
         case email
@@ -72,10 +72,10 @@ struct User: Codable {
         signUpMedium = try? values.decode(String.self, forKey: .signUpMedium)
         measurement = try? values.decode(Measurements.self, forKey: .measurement)
         isFollowed = try? values.decode(Bool.self, forKey: .isFollowed)
-        preferences = try? values.decode(Preferences.self, forKey: .preferences)
+        preferences = try? values.decode(UserPreferences.self, forKey: .preferences)
     }
 }
-struct Preferences: Codable {
+struct UserPreferences: Codable {
     var userId: Int
     var pushNotificationEnabled: Bool
     

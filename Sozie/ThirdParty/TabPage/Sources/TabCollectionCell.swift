@@ -7,10 +7,12 @@
 //
 
 import UIKit
-
+import EasyTipView
 class TabCollectionCell: UICollectionViewCell {
 
     var tabItemButtonPressedBlock: (() -> ())?
+    var tipView: EasyTipView?
+    var isFirstTime = true
     var option: TabPageOption = TabPageOption() {
         didSet {
             currentBarViewHeightConstraint.constant = option.currentBarHeight
@@ -33,6 +35,16 @@ class TabCollectionCell: UICollectionViewCell {
             }
             currentBarView.backgroundColor = option.currentColor
             layoutIfNeeded()
+            if isCurrent == true && item == "Sozies" {
+//                tipView?.dismiss()
+                tipView?.isHidden = false
+                self.showTipViewSozie()
+            } else if isCurrent == true && item == "Requests" {
+                tipView?.isHidden = false
+                self.showTipViewRequests()
+            } else {
+                tipView?.isHidden = true
+            }
         }
     }
 
@@ -44,8 +56,8 @@ class TabCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
 
         currentBarView.isHidden = true
+        
     }
-
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         if item.characters.count == 0 {
             return CGSize.zero
@@ -70,7 +82,6 @@ extension TabCollectionCell {
         } else {
             width = itemLabel.intrinsicContentSize.width + option.tabMargin * 2
         }
-
         let size = CGSize(width: width, height: option.tabHeight)
         return size
     }
@@ -92,6 +103,47 @@ extension TabCollectionCell {
         itemLabel.textColor = option.defaultColor
         itemLabel.font = option.font
     }
+    func showTipViewRequests() {
+        if UserDefaultManager.isUserGuideDisabled() == false {
+            if self.item == "Requests" {
+                if isFirstTime {
+                    let text = "This is where all the requests you have made are kept"
+                    var prefer = UtilityManager.tipViewGlobalPreferences()
+                    prefer.drawing.arrowPosition = .top
+                    prefer.positioning.maxWidth = 110
+                    //                prefer.positioning.bubbleVInset = 120
+                    tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+                    tipView?.show(animated: true, forView: self, withinSuperview: self.superview?.superview)
+                    isFirstTime = false
+                }
+            }
+        }
+    }
+    func showTipViewSozie() {
+        if UserDefaultManager.isUserGuideDisabled() == false {
+            if self.item == "Sozies" {
+                if isFirstTime {
+                    let text = "Click here to see your Sozie matches and Sozies that you are following"
+                    var prefer = UtilityManager.tipViewGlobalPreferences()
+                    prefer.drawing.arrowPosition = .bottom
+                    prefer.positioning.maxWidth = 110
+                    prefer.positioning.bubbleVInset = 120
+                    tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+                    tipView?.show(animated: true, forView: self, withinSuperview: self.superview)
+                    isFirstTime = false
+                }
+            }
+        }
+    }
+//    func showTipView() {
+//        let text = "After swiping, if you still don't see your size tried on, click above!"
+//        var prefer = UtilityManager.tipViewGlobalPreferences()
+//        prefer.drawing.arrowPosition = .bottom
+//        prefer.positioning.maxWidth = 110
+//        prefer.positioning.bubbleVInset = 120
+//        let tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+//        tipView.show(animated: true, forView: self, withinSuperview: self.superview)
+//    }
 }
 
 
