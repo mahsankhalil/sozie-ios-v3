@@ -31,7 +31,8 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var uploadBtn: DZGradientButton!
-
+    @IBOutlet weak var skipButton: UIButton!
+    
     var sizes: Size?
     var currentMeasurement = LocalMeasurement()
     
@@ -59,6 +60,8 @@ class MeasurementsVC: UIViewController {
             if let waist = user.measurement?.waist {
                 currentMeasurement.waist = String(waist)
             }
+            skipButton.isHidden = true
+            uploadBtn.setTitle("Save", for: .normal)
         } else {
             currentMeasurement = LocalMeasurement()
         }

@@ -425,6 +425,10 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 
         } else {
             rowViewModel = productViewModels[indexPath.row]
+            if indexPath.row == productViewModels.count - 3 {
+                loadNextPage()
+            }
+
         }
         var cell: UICollectionViewCell
         if let viewModel = rowViewModel as? ReuseIdentifierProviding {

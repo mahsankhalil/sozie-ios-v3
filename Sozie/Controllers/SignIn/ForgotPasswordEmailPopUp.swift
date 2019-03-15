@@ -25,7 +25,7 @@ class ForgotPasswordEmailPopUp: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        emailTxtFld.becomeFirstResponder()
+//        emailTxtFld.becomeFirstResponder()
     }
     
     class func instance() -> ForgotPasswordEmailPopUp {

@@ -328,6 +328,14 @@ extension ProductDetailVC: UIScrollViewDelegate {
         }
 
     }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetX = scrollView.contentOffset.x
+        if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
+            if UserDefaultManager.getIfShopper() == false {
+                UtilityManager.openImagePickerActionSheetFrom(vc: self)
+            }
+        }
+    }
 }
 extension ProductDetailVC: PostCollectionViewCellDelegate {
     func cameraButtonTapped(button: UIButton) {

@@ -141,6 +141,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     
     @IBAction func googleBtnTapped(_ sender: Any) {
         SVProgressHUD.show()
+        GIDSignIn.sharedInstance()?.signOut()
         GIDSignIn.sharedInstance()?.signIn()
     }
     

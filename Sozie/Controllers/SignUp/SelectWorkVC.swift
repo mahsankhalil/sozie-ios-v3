@@ -123,7 +123,8 @@ class SelectWorkVC: UIViewController {
             return
         }
         selectedBrandId = nil
-        searchList = brands.filter { $0.label.range(of: searchText, options: .caseInsensitive) != nil}
+        selectedViewModelIndex = nil
+        searchList = brands.filter { $0.label.lowercased().hasPrefix(searchText.lowercased()) }
         self.tableView.reloadData()
     }
     // MARK: - Navigation
