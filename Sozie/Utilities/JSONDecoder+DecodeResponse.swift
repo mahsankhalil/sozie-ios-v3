@@ -24,7 +24,7 @@ extension JSONDecoder {
 
         }
         if response.response?.statusCode == 401 {
-            if let _ = UserDefaultManager.getCurrentUserObject() {
+            if UserDefaultManager.isUserLoggedIn() {
                 self.logout()
                 UserDefaultManager.deleteLoginResponse()
             }

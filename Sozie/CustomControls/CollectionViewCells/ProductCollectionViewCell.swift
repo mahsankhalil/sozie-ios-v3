@@ -87,7 +87,7 @@ extension ProductCollectionViewCell: CellConfigurable {
             }
         }
         if UserDefaultManager.getIfShopper() {
-            if maskImageView.tag == 0 {
+            if maskImageView.tag == 0 && maskImageView.isHidden == false {
                 tipView?.isHidden = false
             } else {
                 tipView?.isHidden = true

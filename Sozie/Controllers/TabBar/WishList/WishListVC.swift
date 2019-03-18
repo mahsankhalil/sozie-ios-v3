@@ -17,40 +17,10 @@ class WishListVC: BaseViewController {
         didSet {
             viewModels.removeAll()
             for product in productList {
-                var imageURL = ""
-                if let productImageURL = product.imageURL {
-                    imageURL = productImageURL.getActualSizeImageURL() ?? ""
-                }
-                var brandImageURL = ""
-                if let brandId = product.brandId {
-                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                        brandImageURL = brand.titleImage
-                    }
-                }
-                var searchPrice = 0.0
-                if let price = product.searchPrice {
-                    searchPrice = Double(price)
-                }
-                var postCount = 0
-                if let count = product.postCount {
-                    postCount = count
-                }
-                var priceString = ""
-                if let currency = product.currency?.getCurrencySymbol() {
-                    priceString = currency + " " + String(format: "%0.2f", searchPrice)
-                }
-                var productDescription = ""
-                if let description = product.description {
-                    productDescription = description
-                }
-                let viewModel = ProductImageCellViewModel(isSelected: false, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: productDescription, reuseIdentifier: "WishTableViewCell")
+                let viewModel = ProductImageCellViewModel(product: product, identifier: "WishTableViewCell")
                 viewModels.append(viewModel)
             }
-            if viewModels.count == 0 {
-                noProductLabel.isHidden = false
-            } else {
-                noProductLabel.isHidden = true
-            }
+            noProductLabel.isHidden = viewModels.count != 0
             self.tableView.reloadData()
         }
     }

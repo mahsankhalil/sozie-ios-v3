@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GIDSignIn.sharedInstance().clientID = "943339111983-3cca64ei8g4gukhudc5lurr6cpi0k91f.apps.googleusercontent.com"
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 
-        if UserDefaultManager.getCurrentUserObject() != nil {
+        if UserDefaultManager.isUserLoggedIn() {
             let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
             self.window?.rootViewController = rootViewController

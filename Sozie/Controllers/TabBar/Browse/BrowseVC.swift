@@ -57,38 +57,39 @@ class BrowseVC: BaseViewController {
         didSet {
             productViewModels.removeAll()
             for product in productList {
-                var imageURL = ""
-                if let productImageURL = product.imageURL {
-                    imageURL = productImageURL.getActualSizeImageURL() ?? ""
-                }
-                if let feedId = product.feedId {
-                    if feedId == 18857 {
-                        if let merchantImageURL = product.merchantImageURL {
-                            let delimeter = "|"
-                            let url = merchantImageURL.components(separatedBy: delimeter)
-                            imageURL = url[0]
-                        }
-                    }
-                }
-                var brandImageURL = ""
-                if let brandId = product.brandId {
-                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                        brandImageURL = brand.titleImage
-                    }
-                }
-                var searchPrice = 0.0
-                if let price = product.searchPrice {
-                    searchPrice = Double(price)
-                }
-                var postCount = 0
-                if let count = product.postCount {
-                    postCount = count
-                }
-                var priceString = ""
-                if let currency = product.currency?.getCurrencySymbol() {
-                    priceString = currency + " " + String(format: "%0.2f", searchPrice)
-                }
-                let viewModel = ProductImageCellViewModel(isSelected: false, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: nil, reuseIdentifier: "ProductCell")
+//                var imageURL = ""
+//                if let productImageURL = product.imageURL {
+//                    imageURL = productImageURL.getActualSizeImageURL() ?? ""
+//                }
+//                if let feedId = product.feedId {
+//                    if feedId == 18857 {
+//                        if let merchantImageURL = product.merchantImageURL {
+//                            let delimeter = "|"
+//                            let url = merchantImageURL.components(separatedBy: delimeter)
+//                            imageURL = url[0]
+//                        }
+//                    }
+//                }
+//                var brandImageURL = ""
+//                if let brandId = product.brandId {
+//                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+//                        brandImageURL = brand.titleImage
+//                    }
+//                }
+//                var searchPrice = 0.0
+//                if let price = product.searchPrice {
+//                    searchPrice = Double(price)
+//                }
+//                var postCount = 0
+//                if let count = product.postCount {
+//                    postCount = count
+//                }
+//                var priceString = ""
+//                if let currency = product.currency?.getCurrencySymbol() {
+//                    priceString = currency + " " + String(format: "%0.2f", searchPrice)
+//                }
+//                let viewModel = ProductImageCellViewModel(isSelected: false, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: nil, reuseIdentifier: "ProductCell")
+                let viewModel = ProductImageCellViewModel(product: product, identifier: "ProductCell")
                 productViewModels.append(viewModel)
             }
             productsCollectionVu.reloadData()
@@ -180,7 +181,6 @@ class BrowseVC: BaseViewController {
                         }
                         refreshData()
                     }
-                    
                 }
             }
         }

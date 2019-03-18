@@ -180,65 +180,12 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if popupType == PopupType.category {
-            let currentCategory = categoriesList[indexPath.row]
-            if currentCategory.subCategories.count == 0 {
-                var indexPathsToReload = [indexPath]
-                if let previousSelectedIndex = selectedViewModelIndex {
-                    viewModels[previousSelectedIndex].isCheckmarkHidden = true
-                    indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
-                    viewModels[indexPath.row].isCheckmarkHidden = false
-                    selectedViewModelIndex = indexPath.row
-                    self.doneButton.isHidden = false
-                } else {
-                    viewModels[indexPath.row].isCheckmarkHidden = false
-                    selectedViewModelIndex = indexPath.row
-                    self.doneButton.isHidden = false
-                }
-                tableView.reloadRows(at: indexPathsToReload, with: .automatic)
-                return
-            } else {
-                selectedCategory = categoriesList[indexPath.row]
-            }
-        } else if filterType == FilterType.mySozies || filterType == FilterType.request {
+    func reloadIndexPaths(indexPath: IndexPath, isDoneHidden: Bool) {
             var indexPathsToReload = [indexPath]
             if let previousSelectedIndex = selectedViewModelIndex {
                 viewModels[previousSelectedIndex].isCheckmarkHidden = true
                 indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
-                selectedViewModelIndex = indexPath.row
-                viewModels[indexPath.row].isCheckmarkHidden = false
-                self.doneButton.isHidden = false
-            } else {
-                viewModels[indexPath.row].isCheckmarkHidden = false
-                selectedViewModelIndex = indexPath.row
-                self.doneButton.isHidden = false
-            }
-            tableView.reloadRows(at: indexPathsToReload, with: .automatic)
-            return
-        } else if let userType = UserDefaultManager.getCurrentUserType() {
-            if userType == UserType.sozie.rawValue {
-                if indexPath.row == 0 {
-                    var indexPathsToReload = [indexPath]
-                    if let previousSelectedIndex = selectedViewModelIndex {
-                        viewModels[previousSelectedIndex].isCheckmarkHidden = true
-                        indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
-                        selectedViewModelIndex = nil
-                        self.doneButton.isHidden = true
-                    } else {
-                        viewModels[indexPath.row].isCheckmarkHidden = false
-                        selectedViewModelIndex = indexPath.row
-                        self.doneButton.isHidden = false
-                    }
-                    tableView.reloadRows(at: indexPathsToReload, with: .automatic)
-                    return
-                }
-            } else if indexPath.row == 1 {
-                var indexPathsToReload = [indexPath]
-                if let previousSelectedIndex = selectedViewModelIndex {
-                    viewModels[previousSelectedIndex].isCheckmarkHidden = true
-                    indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
+                if isDoneHidden {
                     selectedViewModelIndex = nil
                     self.doneButton.isHidden = true
                 } else {
@@ -246,8 +193,35 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
                     selectedViewModelIndex = indexPath.row
                     self.doneButton.isHidden = false
                 }
-                tableView.reloadRows(at: indexPathsToReload, with: .automatic)
                 
+            } else {
+                viewModels[indexPath.row].isCheckmarkHidden = false
+                selectedViewModelIndex = indexPath.row
+                self.doneButton.isHidden = false
+            }
+            tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if popupType == PopupType.category {
+            let currentCategory = categoriesList[indexPath.row]
+            if currentCategory.subCategories.count == 0 {
+                reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
+                return
+            } else {
+                selectedCategory = categoriesList[indexPath.row]
+            }
+        } else if filterType == FilterType.mySozies || filterType == FilterType.request {
+            reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
+            return
+        } else if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.sozie.rawValue {
+                if indexPath.row == 0 {
+                    reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
+                    return
+                }
+            } else if indexPath.row == 1 {
+                reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
                 return
             }
         }

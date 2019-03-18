@@ -59,10 +59,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
             firstNameTxtFld.text = currentUser.firstName
             lastNameTxtFld.text = currentUser.lastName
-            dateOfBirtTxtFld.text = currentUser.birthday
+            let birthday = UtilityManager.dateFromStringWithFormat(date: currentUser.birthday, format: "yyyy-MM-dd")
+            dateOfBirtTxtFld.text = UtilityManager.stringFromNSDateWithFormat(date: birthday, format: Constant.appDateFormat)
             dateOfBirtTxtFld.date = UtilityManager.dateFromStringWithFormat(date: currentUser.birthday, format: "yyyy-MM-dd") as Date
+            dateOfBirtTxtFld.pickerView.date = dateOfBirtTxtFld.date!
             userNameTxtFld.text = currentUser.username
-            if currentUser.gender == "Female" {
+            if currentUser.gender == "F" {
                 applyFemaleSelection()
             }
             signUpButton.setTitle("Save", for: .normal)
@@ -131,7 +133,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         dataDict[User.CodingKeys.username.stringValue] = userNameTxtFld.text
         dataDict[User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
         if isFemaleSelected {
-            dataDict[User.CodingKeys.gender.stringValue] = "Female"
+            dataDict[User.CodingKeys.gender.stringValue] = "F"
         }
         SVProgressHUD.show()
         ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
@@ -154,8 +156,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if !isFemaleSelected {
             UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
         } else {
-            if let _ = UserDefaultManager.getCurrentUserObject() {
-
+            if UserDefaultManager.isUserLoggedIn() {
                 updateProfile()
             } else {
                 verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
@@ -225,8 +226,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {
-        if let _ = UserDefaultManager.getCurrentUserObject() {
-
+        if UserDefaultManager.isUserLoggedIn() {
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)

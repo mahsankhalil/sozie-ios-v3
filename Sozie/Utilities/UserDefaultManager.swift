@@ -62,6 +62,13 @@ class UserDefaultManager: NSObject {
             return false
         }
     }
+    static func isUserLoggedIn() -> Bool {
+        if UserDefaultManager.getCurrentUserObject() != nil {
+            return true
+        } else {
+            return false
+        }
+    }
     static func makeUserGuideDisabled() {
         UserDefaults.standard.set(true, forKey: UserDefaultKey.userGuide)
         UserDefaults.standard.synchronize()

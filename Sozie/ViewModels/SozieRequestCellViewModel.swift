@@ -20,4 +20,33 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var cup: String?
     var waist: Int?
     var imageURL: URL?
+    
+    init (request: SozieRequest) {
+        var imageURL = ""
+        if let productImageURL = request.requestedProduct.imageURL {
+            imageURL = productImageURL.getActualSizeImageURL() ?? ""
+        }
+        if let feedId = request.requestedProduct.feedId {
+            if feedId == 18857 {
+                if let merchantImageURL = request.requestedProduct.merchantImageURL {
+                    let delimeter = "|"
+                    let url = merchantImageURL.components(separatedBy: delimeter)
+                    imageURL = url[0]
+                }
+            }
+        }
+        let subtitle = "Size Requested: (" + request.sizeValue + ")"
+        let title = "Requested by " + request.user.username
+        let description = request.user.username +  " Measurements:"
+        self.description = description
+        self.subtitle = subtitle
+        self.isSelected = request.isAccepted
+        self.title = title
+        self.bra = request.user.measurement?.bra
+        self.height = request.user.measurement?.height
+        self.hip = request.user.measurement?.hip
+        self.cup = request.user.measurement?.cup
+        self.waist = request.user.measurement?.waist
+        self.imageURL = URL(string: imageURL)
+    }
 }

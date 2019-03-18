@@ -10,7 +10,8 @@ import UIKit
 import CCBottomRefreshControl
 
 class RequestsVC: UIViewController {
-    var reuseableIdentifier = "RequestTableViewCell"
+    private let reuseableIdentifier = "RequestTableViewCell"
+
     @IBOutlet weak var searchCountLabel: UILabel!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -54,11 +55,7 @@ class RequestsVC: UIViewController {
                 let viewModel = MyRequestCellViewModel(price: priceString, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), title: request.requestedProduct.productName, attributedTitle: nil, isSelected: request.isFilled, subtitle: "Size Requested: " + request.sizeValue)
                 viewModels.append(viewModel)
             }
-            if viewModels.count == 0 {
-                noDataLabel.isHidden = false
-            } else {
-                noDataLabel.isHidden = true
-            }
+            noDataLabel.isHidden = viewModels.count != 0
             tableView.reloadData()
         }
         
@@ -132,6 +129,7 @@ class RequestsVC: UIViewController {
             popUpVC.dismiss()
         }
     }
+
     @IBAction func crossButtonTapped(_ sender: Any) {
         requests.removeAll()
         getMyRequestsFromServer(dataDict: [:])
@@ -186,11 +184,7 @@ extension RequestsVC: PopupNavControllerDelegate {
         if let filterType = type {
             if filterType == FilterType.request {
                 if let typeId = id {
-                    if typeId == 0 {
-                        serverParams["is_filled"] = true
-                    } else {
-                        serverParams["is_filled"] = false
-                    }
+                    serverParams["is_filled"] = typeId == 0
                 }
             }
         }

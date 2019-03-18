@@ -67,12 +67,10 @@ extension SozieTableViewCell: CellConfigurable {
             nameLabel.text = titleModel.title!
         }
         if let followModel = viewModel as? FollowViewModeling {
-            if let isFollowed = followModel.isFollow {
-                if isFollowed == true {
-                    makeButtonFollowing()
-                } else {
-                    makeButtonFollow()
-                }
+            if followModel.isFollow  == true {
+                makeButtonFollowing()
+            } else {
+                makeButtonFollow()
             }
         }
         if let measurementModel = viewModel as? MeasurementViewModeling {

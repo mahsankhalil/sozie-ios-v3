@@ -95,9 +95,7 @@ class PostCollectionViewCell: UICollectionViewCell {
 extension PostCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
-            postImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
-                
-            }
+            postImageView.sd_setImage(with: imgModel.imageURL, completed: nil)
         }
         if let titleModel = viewModel as? TitleViewModeling {
             if let title = titleModel.title {
@@ -125,21 +123,11 @@ extension PostCollectionViewCell: CellConfigurable {
             if let waist = measurementModel.waist {
                 waistLabel.text = "Waist: " + String(waist) + "  |"
             }
-            if let indexModel = viewModel as? IndexViewModeling {
-                if let index = indexModel.index {
-                    followButton.tag = index
-                    moreButton.tag = index
-                    cameraButton.tag = index
-                }
-                
-            }
             if let followModel = viewModel as? FollowViewModeling {
-                if let isFollowed = followModel.isFollow {
-                    if isFollowed == true {
-                        makeButtonFollowing()
-                    } else {
-                        makeButtonFollow()
-                    }
+                if followModel.isFollow  == true {
+                    makeButtonFollowing()
+                } else {
+                    makeButtonFollow()
                 }
             }
         }

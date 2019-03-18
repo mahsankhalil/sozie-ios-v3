@@ -62,7 +62,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
                 ServerManager.sharedInstance.updateProfile(params: nil, imageData: imgData) { (isSuccess, response) in
                     SVProgressHUD.dismiss()
                     if isSuccess {
-                        if let _ = UserDefaultManager.getCurrentUserObject() {
+                        if UserDefaultManager.isUserLoggedIn() {
                             let user = response as! User
                             UserDefaultManager.updateUserObject(user: user)
                             self.navigationController?.popViewController(animated: true)
@@ -84,7 +84,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {
-        if let _ = UserDefaultManager.getCurrentUserObject() {
+        if UserDefaultManager.isUserLoggedIn() {
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)

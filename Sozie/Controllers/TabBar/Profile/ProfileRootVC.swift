@@ -9,7 +9,7 @@
 import UIKit
 import SideMenu
 class ProfileRootVC: BaseViewController {
-    var tabVC : ProfileTabsPageVC?
+    var tabViewController: ProfileTabsPageVC?
     @IBOutlet weak var tabView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -21,12 +21,12 @@ class ProfileRootVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tabVC = ProfileTabsPageVC()
-        tabVC?.view.backgroundColor = UIColor.clear
-        tabView.addSubview((tabVC?.view)!)
+        tabViewController = ProfileTabsPageVC()
+        tabViewController?.view.backgroundColor = UIColor.clear
+        tabView.addSubview((tabViewController?.view)!)
         tabView.autoresizesSubviews = true
-        tabVC?.view.frame = CGRect(x: 0.0, y: 0.0, width: tabView.frame.size.width, height: tabView.frame.size.height)
-        self.addChild(tabVC!)
+        tabViewController?.view.frame = CGRect(x: 0.0, y: 0.0, width: tabView.frame.size.width, height: tabView.frame.size.height)
+        self.addChild(tabViewController!)
         setupProfileNavBar()
         SideMenuManager.default.menuRightNavigationController = storyboard!.instantiateViewController(withIdentifier: "RightMenuNavigationController") as? UISideMenuNavigationController
         SideMenuManager.default.menuPresentMode = .menuSlideIn
@@ -46,7 +46,6 @@ class ProfileRootVC: BaseViewController {
                     let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                     let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                     heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
-                    
                 }
                 if let hip = measurement.hip {
                     hipLabel.text = "Hip: " + String(hip) + "  |"
@@ -55,7 +54,6 @@ class ProfileRootVC: BaseViewController {
                     waistLabel.text = "Waist: " + String(waist) + "  |"
                 }
             }
-            
         }
     }
 

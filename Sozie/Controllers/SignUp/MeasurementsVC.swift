@@ -145,7 +145,7 @@ class MeasurementsVC: UIViewController {
             ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
-                    if let _ = UserDefaultManager.getCurrentUserObject() {
+                    if UserDefaultManager.isUserLoggedIn() {
                         let user = response as! User
                         UserDefaultManager.updateUserObject(user: user)
                         self.navigationController?.popViewController(animated: true)
@@ -176,7 +176,7 @@ class MeasurementsVC: UIViewController {
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {
-        if let _ = UserDefaultManager.getCurrentUserObject() {
+        if UserDefaultManager.isUserLoggedIn() {
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)

@@ -22,30 +22,10 @@ class SozieRequestsVC: UIViewController {
         didSet {
             viewModels.removeAll()
             for request in requests {
-                var imageURL = ""
-                if let productImageURL = request.requestedProduct.imageURL {
-                    imageURL = productImageURL.getActualSizeImageURL() ?? ""
-                }
-                if let feedId = request.requestedProduct.feedId {
-                    if feedId == 18857 {
-                        if let merchantImageURL = request.requestedProduct.merchantImageURL {
-                            let delimeter = "|"
-                            let url = merchantImageURL.components(separatedBy: delimeter)
-                            imageURL = url[0]
-                        }
-                    }
-                }
-                let subtitle = "Size Requested: (" + request.sizeValue + ")"
-                let title = "Requested by " + request.user.username
-                let description = request.user.username +  " Measurements:"
-                let viewModel = SozieRequestCellViewModel(description: description, subtitle: subtitle, isSelected: request.isAccepted, title: title, attributedTitle: nil, bra: request.user.measurement?.bra, height: request.user.measurement?.height, hip: request.user.measurement?.hip, cup: request.user.measurement?.cup, waist: request.user.measurement?.waist, imageURL: URL(string: imageURL))
+                let viewModel = SozieRequestCellViewModel(request: request)
                 viewModels.append(viewModel)
             }
-            if viewModels.count == 0 {
-                noDataLabel.isHidden = false
-            } else {
-                noDataLabel.isHidden = true
-            }
+            noDataLabel.isHidden = viewModels.count != 0
             tableView.reloadData()
         }
     }

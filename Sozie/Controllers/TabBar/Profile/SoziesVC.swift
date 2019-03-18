@@ -10,9 +10,10 @@ import UIKit
 import SVProgressHUD
 class SoziesVC: UIViewController {
     var reuseableIdentifier = "SozieTableViewCell"
+    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchView: UIView!
-    @IBOutlet weak var searchVuHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchLabel: UILabel!
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
@@ -31,14 +32,10 @@ class SoziesVC: UIViewController {
                         brandImageURL = brand.titleImage
                     }
                 }
-                let viewModel = SozieCellViewModel(isFollow: user.isFollowed, title: user.username, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), bra: user.measurement?.bra, height: user.measurement?.height, hip: user.measurement?.hip, cup: user.measurement?.cup, waist: user.measurement?.waist, imageURL: nil )
+                let viewModel = SozieCellViewModel(user: user, brandImageURL: brandImageURL)
                 viewModels.append(viewModel)
             }
-            if viewModels.count == 0 {
-                noDataLabel.isHidden = false
-            } else {
-                noDataLabel.isHidden = true
-            }
+            noDataLabel.isHidden = viewModels.count != 0
             if let _ = dataDict["filter_by"] {
                 searchLabel.text = String(viewModels.count) + " SOZIES FOLLOWED"
                 self.crossButton.isHidden = false
@@ -53,6 +50,7 @@ class SoziesVC: UIViewController {
         }
     }
     var dataDict = [String: Any]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,20 +61,22 @@ class SoziesVC: UIViewController {
     //MARK: - Custom Methods
     func setupViews() {
         searchTextField.delegate = self
-        searchVuHeightConstraint.constant = 0.0
+        searchViewHeightConstraint.constant = 0.0
         let gstrRcgnzr = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         gstrRcgnzr.cancelsTouchesInView = false
         self.view.addGestureRecognizer(gstrRcgnzr)
     }
+
     func showSearchVu() {
-        searchVuHeightConstraint.constant = 0.0
+        searchViewHeightConstraint.constant = 0.0
         UIView.animate(withDuration: 0.3) {
-            self.searchVuHeightConstraint.constant = 47.0
+            self.searchViewHeightConstraint.constant = 47.0
             self.view.layoutIfNeeded()
             self.searchView.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
             self.searchTextField.becomeFirstResponder()
         }
     }
+
     func fetchDataFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getMySozies(params: dataDict) { (isSuccess, response) in
@@ -86,13 +86,15 @@ class SoziesVC: UIViewController {
             }
         }
     }
+
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
+
     func hideSearchVu() {
-        searchVuHeightConstraint.constant = 47.0
+        searchViewHeightConstraint.constant = 47.0
         UIView.animate(withDuration: 0.3) {
-            self.searchVuHeightConstraint.constant = 0.0
+            self.searchViewHeightConstraint.constant = 0.0
             self.searchView.clipsToBounds = true
             self.dismissKeyboard()
             self.view.layoutIfNeeded()
@@ -113,6 +115,7 @@ class SoziesVC: UIViewController {
         dataDict.removeAll()
         fetchDataFromServer()
     }
+    
     @IBAction func filterButtonTapped(_ sender: Any) {
         let popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.mySozies )
         popUpInstnc?.popupDelegate = self
@@ -131,8 +134,9 @@ class SoziesVC: UIViewController {
             popUpVC.dismiss()
         }
     }
+    
     @IBAction func searchButtonTapped(_ sender: Any) {
-        if searchVuHeightConstraint.constant == 0 {
+        if searchViewHeightConstraint.constant == 0 {
             showSearchVu()
         } else {
             hideSearchVu()
@@ -140,10 +144,13 @@ class SoziesVC: UIViewController {
     }
     
 }
+
 extension SoziesVC: UITextFieldDelegate {
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         hideSearchVu()
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         dataDict.removeValue(forKey: "filter_by")
         dataDict["query"] = textField.text
@@ -152,6 +159,7 @@ extension SoziesVC: UITextFieldDelegate {
         return true
     }
 }
+
 extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -165,7 +173,6 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
             tableView.register(UINib(nibName: reuseableIdentifier, bundle: nil), forCellReuseIdentifier: reuseableIdentifier)
             tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
         }
-        
         guard let cell = tableViewCell else { return UITableViewCell() }
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
@@ -179,6 +186,7 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
             let sozieProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SozieProfileVC") as! SozieProfileVC
@@ -189,6 +197,7 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension SoziesVC: PopupNavControllerDelegate {
+    
     func doneButtonTapped(type: FilterType?, id: Int?) {
         users.removeAll()
         if let filterType = type {
@@ -205,6 +214,7 @@ extension SoziesVC: PopupNavControllerDelegate {
     }
 }
 extension SoziesVC: SozieTableViewCellDelegate {
+    
     func followButtonTapped(button: UIButton) {
         let currentUser = users[button.tag]
         if currentUser.isFollowed == false {

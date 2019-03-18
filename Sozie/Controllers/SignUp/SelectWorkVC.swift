@@ -140,7 +140,7 @@ class SelectWorkVC: UIViewController {
     }
     // MARK: - Actions
     @IBAction func nextBtnTapped(_ sender: Any) {
-        if let _ = UserDefaultManager.getCurrentUserObject() {
+        if UserDefaultManager.isUserLoggedIn() {
             if let brandId = selectedBrandId {
                 updateProfile(brandId: brandId)
             }
@@ -154,7 +154,7 @@ class SelectWorkVC: UIViewController {
         }
     }
     @IBAction func backBtnTapped(_ sender: Any) {
-        if let _ = UserDefaultManager.getCurrentUserObject() {
+        if UserDefaultManager.isUserLoggedIn() {
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)

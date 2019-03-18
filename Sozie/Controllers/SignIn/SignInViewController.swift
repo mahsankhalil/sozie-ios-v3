@@ -111,6 +111,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBAction func signinButtonPressed(_ sender: Any) {
         validator.validate(self)
     }
+
     @IBAction func backButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -118,6 +119,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBAction func signUpButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+
     @IBAction func facebookButtonPressed(sender: AnyObject) {
         SVProgressHUD.show()
         SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in
@@ -146,7 +148,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             sender.setImage(UIImage(named: "eye-icon-white"), for: .normal)
         }
     }
-    
+
     @IBAction func forgotPasswordBtnTapped(_ sender: Any) {
         let popUpInstnc = ForgotPasswordEmailPopUp.instance()
         let popUpVC = PopupController
@@ -158,6 +160,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         }
         popUpInstnc.delegate = self
     }
+
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         SVProgressHUD.dismiss()
         if error == nil {
@@ -173,7 +176,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         // ...
         SVProgressHUD.dismiss()
     }
-    //MARK:- Delegates
+    //MARK: -Delegates
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string == " " && textField == emailField {
             return false
@@ -191,7 +194,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     func successfulLogin(response: [String: AnyObject]) {
         SVProgressHUD.dismiss()
     }
-    
+
     func forgotPassword(email: String) {
         let dataDict = ["email": email]
         SVProgressHUD.show()

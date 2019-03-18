@@ -106,18 +106,15 @@ class ProductDetailVC: BaseViewController {
                 productViewModel.titleImageURL = URL(string: brand.titleImage)
             }
         }
-        if let imageURL = currentProduct?.merchantImageURL {
-            if let feedId = currentProduct?.feedId {
+        if var imageURL = currentProduct?.merchantImageURL {
+            if let feedId = currentProduct?.feedId, feedId == 18857 {
                 if feedId == 18857 {
                     let delimeter = "|"
                     let url = imageURL.components(separatedBy: delimeter)
-                    productViewModel.imageURL = URL(string: url[0])
-                } else {
-                    productViewModel.imageURL = URL(string: imageURL)
+                    imageURL = url[0]
                 }
-            } else {
-                productViewModel.imageURL = URL(string: imageURL)
             }
+            productViewModel.imageURL = URL(string: imageURL)
         }
         if currentProduct?.isFavourite == false {
             heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
@@ -147,17 +144,7 @@ class ProductDetailVC: BaseViewController {
                 if post.postId == currentPostId {
                     indexOfPost = index + 1
                 }
-                var viewModel = PostCellViewModel()
-                viewModel.title = post.user.username
-                viewModel.imageURL = URL(string: post.imageURL)
-                viewModel.bra = post.user.measurement?.bra
-                viewModel.height = post.user.measurement?.height
-                viewModel.hip = post.user.measurement?.hip
-                viewModel.cup = post.user.measurement?.cup
-                viewModel.waist = post.user.measurement?.waist
-                viewModel.index = index
-                viewModel.isFollow = post.userFollowedByMe
-                viewModel.description = "Size Worn: " + post.sizeType + "-" + post.sizeValue
+                let viewModel = PostCellViewModel(post: post)
                 viewModels.append(viewModel)
                 index = index + 1
             }
@@ -173,13 +160,6 @@ class ProductDetailVC: BaseViewController {
         }
     }
 
-    func populateDummyData() {
-        for _ in 0...4 {
-            var viewModel = PostCellViewModel()
-            viewModel.title = "test"
-            viewModels.append(viewModel)
-        }
-    }
 
 
     // MARK: - Navigation
@@ -319,14 +299,8 @@ extension ProductDetailVC: UIScrollViewDelegate {
         let xAxis = scrollView.contentOffset.x
         let width = scrollView.bounds.size.width
         let currentPage = Int(ceil(xAxis/width))
-
         pageControl.currentPage = currentPage
-        if currentPage > 0 {
-            swipeToSeeView.isHidden = true
-        } else {
-            swipeToSeeView.isHidden = false
-        }
-
+        swipeToSeeView.isHidden = currentPage > 0
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetX = scrollView.contentOffset.x
@@ -346,7 +320,7 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Report", style: .default, handler: { _ in
             if let posts = self.currentProduct?.posts {
-                let postId = posts[button.tag].postId
+                let postId = posts[button.tag - 1].postId
                 var dataDict = [String: Any]()
                 dataDict["post"] = postId
                 dataDict["user"] = UserDefaultManager.getCurrentUserId()
@@ -384,20 +358,20 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
     }
 
     func followButtonTapped(button: UIButton) {
-        var dataDict = [String: Any]()
         if let posts = currentProduct?.posts {
-            if posts[button.tag].user.isFollowed == true {
+            if posts[button.tag - 1].user.isFollowed == true {
                 return
             }
-            let userId = posts[button.tag].user.userId
+            var dataDict = [String: Any]()
+            let userId = posts[button.tag - 1].user.userId
             dataDict["user"] = userId
             SVProgressHUD.show()
             ServerManager.sharedInstance.followUser(params: dataDict) { (isSuccess, _) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
-                    self.currentProduct?.posts![button.tag].userFollowedByMe = true
-                    self.viewModels[button.tag].isFollow = true
-                    self.collectionView.reloadItems(at: [IndexPath(item: button.tag + 1, section: 0)])
+                    self.currentProduct?.posts![button.tag - 1].userFollowedByMe = true
+                    self.viewModels[button.tag - 1].isFollow = true
+                    self.collectionView.reloadItems(at: [IndexPath(item: button.tag, section: 0)])
                 }
             }
         }

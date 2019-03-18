@@ -9,5 +9,5 @@
 import UIKit
 
 protocol FollowViewModeling {
-    var isFollow: Bool? { get set }
+    var isFollow: Bool { get set }
 }

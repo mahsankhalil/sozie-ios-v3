@@ -10,7 +10,7 @@ import UIKit
 
 struct SozieCellViewModel: RowViewModel, FollowViewModeling, TitleViewModeling, TitleImageViewModeling, MeasurementViewModeling, ImageViewModeling {
 
-    var isFollow: Bool?
+    var isFollow: Bool
     var title: String?
     var attributedTitle: NSAttributedString?
     var titleImageURL: URL?
@@ -20,4 +20,15 @@ struct SozieCellViewModel: RowViewModel, FollowViewModeling, TitleViewModeling, 
     var cup: String?
     var waist: Int?
     var imageURL: URL?
+    
+    init (user: User, brandImageURL: String) {
+        self.isFollow = user.isFollowed ?? false
+        self.title = user.username
+        self.titleImageURL = URL(string: brandImageURL)
+        self.bra = user.measurement?.bra
+        self.height = user.measurement?.height
+        self.hip = user.measurement?.hip
+        self.cup = user.measurement?.cup
+        self.waist = user.measurement?.waist
+    }
 }

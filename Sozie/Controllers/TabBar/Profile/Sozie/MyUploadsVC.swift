@@ -25,11 +25,7 @@ class MyUploadsVC: UIViewController {
                 let viewModel = UserPostCellViewModel(subtitle: sizeString, imageURL: URL(string: post.thumbURL))
                 viewModels.append(viewModel)
             }
-            if viewModels.count == 0 {
-                self.noDataLabel.isHidden = false
-            } else {
-                self.noDataLabel.isHidden = true
-            }
+            noDataLabel.isHidden = viewModels.count != 0
             self.collectionView.reloadData()
         }
     }
