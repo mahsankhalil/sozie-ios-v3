@@ -52,7 +52,10 @@ class PostCollectionViewCell: UICollectionViewCell {
             followButton.isHidden = true
         }
     }
-    func showTipView() {
+    override func layoutIfNeeded() {
+        
+    }
+    @objc func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
             if (self.followButton.tag == 1 && (self.followButton.isHidden == false)) {
                 if isFirstTime {
@@ -63,6 +66,7 @@ class PostCollectionViewCell: UICollectionViewCell {
                     tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
                     tipView?.show(animated: true, forView: self.followButton, withinSuperview: self.topView)
                     isFirstTime = false
+                    UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.followButtonUserGuide)
                 }
             }
         }
@@ -137,7 +141,9 @@ extension PostCollectionViewCell: CellConfigurable {
             } else {
                 tipView?.isHidden = true
             }
-            showTipView()
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.followButtonUserGuide) == false {
+                perform(#selector(showTipView), with: nil, afterDelay: 0.5)
+            }
         }
     }
 

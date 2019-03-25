@@ -37,12 +37,20 @@ class MeasurementsVC: UIViewController {
     var currentMeasurement = LocalMeasurement()
     
     var rowViewModels: [RowViewModel] = []
+    var isFromSignUp = false
 
     @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if isFromSignUp {
+            backBtn.isHidden = true
+        } else {
+            skipButton.isHidden = true
+            uploadBtn.setTitle("Save", for: .normal)
+            backBtn.isHidden = false
+        }
         if let user = UserDefaultManager.getCurrentUserObject() {
             currentMeasurement = LocalMeasurement()
             if let bra = user.measurement?.bra {
@@ -60,13 +68,13 @@ class MeasurementsVC: UIViewController {
             if let waist = user.measurement?.waist {
                 currentMeasurement.waist = String(waist)
             }
-            skipButton.isHidden = true
-            uploadBtn.setTitle("Save", for: .normal)
         } else {
             currentMeasurement = LocalMeasurement()
         }
         fetchDataFromServer()
-        showTipView()
+        if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.measurementUserGuide) == false {
+            showTipView()
+        }
     }
     func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
@@ -76,6 +84,7 @@ class MeasurementsVC: UIViewController {
             prefer.positioning.maxWidth = 96
             let tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
             tipView.show(animated: true, forView: self.titleLabel, withinSuperview: self.view)
+            UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.measurementUserGuide)
         }
     }
     func fetchDataFromServer() {
@@ -99,7 +108,6 @@ class MeasurementsVC: UIViewController {
                 hip = self.currentMeasurement.hip
                 bra = self.currentMeasurement.bra
                 cup = self.currentMeasurement.cup
-                
                 let heightViewModel = DoubleTextFieldCellViewModel(text1: heightFeet, text2: heightInches, title: "HEIGHT", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
                 
                 let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: waist, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
@@ -118,15 +126,17 @@ class MeasurementsVC: UIViewController {
         }
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "toUploadProfilePic" {
+            let destVC = segue.destination as? UploadProfilePictureVC
+            destVC?.isFromSignUp = true
+        }
     }
-    */
 
     private func isValidMeasurements() -> Bool {
         return currentMeasurement.height != nil && currentMeasurement.waist != nil &&
@@ -145,7 +155,7 @@ class MeasurementsVC: UIViewController {
             ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
-                    if UserDefaultManager.isUserLoggedIn() {
+                    if self.isFromSignUp == false {
                         let user = response as! User
                         UserDefaultManager.updateUserObject(user: user)
                         self.navigationController?.popViewController(animated: true)
@@ -192,8 +202,7 @@ extension MeasurementsVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rowViewModel = rowViewModels[indexPath.row]
-
-        var reuseIdentifier: String? = nil
+        var reuseIdentifier: String?
         if let reuseIdentifierProvider = rowViewModel as? ReuseIdentifierProviding {
             reuseIdentifier = reuseIdentifierProvider.reuseIdentifier
         }
@@ -293,15 +302,14 @@ extension MeasurementsVC: SizeChartPopupVCDelegate {
             }
             return false
         }
-        
         if let index = index {
-            updateCurrentMeasurement(index, text: String(describing: value))
-            
-            if var singleTextFieldCellViewModel = rowViewModels[index] as? SingleTextFieldCellViewModel {
-                singleTextFieldCellViewModel.text = String(describing: value)
-                rowViewModels[index] = singleTextFieldCellViewModel
+            if let integerValue = value {
+                updateCurrentMeasurement(index, text: String(describing: integerValue))
+                if var singleTextFieldCellViewModel = rowViewModels[index] as? SingleTextFieldCellViewModel {
+                    singleTextFieldCellViewModel.text = String(describing: integerValue)
+                    rowViewModels[index] = singleTextFieldCellViewModel
+                }
             }
-            
             let indexPath = IndexPath(row: index, section: 0)
             tblVu.reloadRows(at: [indexPath], with: .automatic)
         }

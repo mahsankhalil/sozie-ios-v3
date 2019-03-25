@@ -20,6 +20,7 @@ class PopupNavController: UINavigationController {
     var popupDelegate: PopupNavControllerDelegate?
     var closeHandler: (() -> Void)?
     var filterType: FilterType?
+    var selectedBrandId: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,12 +28,13 @@ class PopupNavController: UINavigationController {
         self.delegate = self
     }
     
-    class func instance(type: PopupType?, brandList: [Brand]?, filterType: FilterType? = nil) -> PopupNavController {
+    class func instance(type: PopupType?, brandList: [Brand]?, filterType: FilterType? = nil, brandId: Int? = nil) -> PopupNavController {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "PopupNavController") as! PopupNavController
         instnce.popupType = type
         instnce.brandList = brandList
         instnce.filterType = filterType
+        instnce.selectedBrandId = brandId
         return instnce
     }
     /*
@@ -73,6 +75,7 @@ extension PopupNavController: UINavigationControllerDelegate {
         navigationHandler!()
         if let vc = self.viewControllers[0] as? ListingPopupVC {
             vc.filterType = filterType
+            vc.selectedBrandId = selectedBrandId
             vc.setPopupType(type: popupType, brandList: brandList,filterType: filterType)
             vc.delegate = self
         }

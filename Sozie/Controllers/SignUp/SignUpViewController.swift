@@ -22,6 +22,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var userNameTxtFld: MFTextField!
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     @IBOutlet weak var signUpButton: DZGradientButton!
+    @IBOutlet weak var backButton: UIButton!
 
     let validator = Validator()
     var isFemaleSelected = false
@@ -48,7 +49,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if let firstName = signUpDict?[User.CodingKeys.firstName.stringValue] {
             firstNameTxtFld.text = firstName as? String
         }
-        
         if let lastName = signUpDict?[User.CodingKeys.lastName.stringValue] {
             lastNameTxtFld.text = lastName as? String
         }
@@ -68,10 +68,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                 applyFemaleSelection()
             }
             signUpButton.setTitle("Save", for: .normal)
+        } else {
+            backButton.isHidden = true
         }
     }
-    
-    //MARK: - Custom Methods
+    //MARK: -Custom Methods
 
     func applyValidators() {
         validator.registerField(firstNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule])
@@ -79,7 +80,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         validator.registerField(userNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Username can't be empty") as Rule])
         validator.registerField(dateOfBirtTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Date of Birth can't be empty") as Rule])
 
-        [firstNameTxtFld, lastNameTxtFld, userNameTxtFld ].forEach { (field) in
+        [firstNameTxtFld, lastNameTxtFld, userNameTxtFld, dateOfBirtTxtFld ].forEach { (field) in
             field?.delegate = self
         }
     }
@@ -126,8 +127,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     func updateProfile() {
-        var dataDict = [String : Any]()
-
+        var dataDict = [String: Any]()
         dataDict[User.CodingKeys.firstName.stringValue] = firstNameTxtFld.text
         dataDict[User.CodingKeys.lastName.stringValue] = lastNameTxtFld.text
         dataDict[User.CodingKeys.username.stringValue] = userNameTxtFld.text
@@ -148,7 +148,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             }
         }
     }
-    
     // MARK: - Validation CallBacks
 
     func validationSuccessful() {
@@ -174,11 +173,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     // MARK: - Text Field Delegates
-
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tipView?.dismiss()
+    }
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let txtFld  = textField as? MFTextField {
             txtFld.setError(nil, animated: true)
         }
+        tipView?.dismiss()
     }
 
     override func didReceiveMemoryWarning() {
@@ -230,6 +232,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMeasurementVC" {
+            let destVC = segue.destination as? MeasurementsVC
+            destVC?.isFromSignUp = true
         }
     }
 }

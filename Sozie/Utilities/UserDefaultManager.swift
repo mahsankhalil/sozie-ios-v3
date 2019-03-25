@@ -69,6 +69,7 @@ class UserDefaultManager: NSObject {
             return false
         }
     }
+    
     static func makeUserGuideDisabled() {
         UserDefaults.standard.set(true, forKey: UserDefaultKey.userGuide)
         UserDefaults.standard.synchronize()
@@ -122,6 +123,42 @@ class UserDefaultManager: NSObject {
             }
         }
         return true
+    }
+    static func getIfUserGuideShownFor(userGuide: String) -> Bool {
+        if UserDefaults.standard.bool(forKey: userGuide) == true {
+            return true
+        } else {
+            return false
+        }
+    }
+    static func setUserGuideShown(userGuide: String) {
+        UserDefaults.standard.set(true, forKey: userGuide)
+        UserDefaults.standard.synchronize()
+        UserDefaultManager.checkIfALLUserGuidesShownThenDisableUserGuide()
+    }
+    static func checkIfALLUserGuidesShownThenDisableUserGuide() {
+        if UserDefaults.standard.bool(forKey: UserDefaultKey.measurementUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.browseUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.requestSozieButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.followButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.mySoziesUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.myRequestsUserGuide) == true {
+            makeUserGuideDisabled()
+        }
+
+    }
+    static func removeAllUserGuidesShown() {
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.measurementUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.browseUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.requestSozieButtonUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.followButtonUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.mySoziesUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.myRequestsUserGuide)
+        UserDefaults.standard.synchronize()
+    }
+    static func markAllUserGuidesNotShown() {
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.measurementUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.browseUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.requestSozieButtonUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.followButtonUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.mySoziesUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.myRequestsUserGuide)
+        UserDefaults.standard.synchronize()
     }
 
 }

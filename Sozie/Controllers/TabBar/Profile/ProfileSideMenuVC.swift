@@ -11,7 +11,8 @@ import SVProgressHUD
 import StoreKit
 import SideMenu
 import MessageUI
-struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewModeling {
+struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewModeling,LineProviding {
+    var isHidden: Bool
     var title: String?
     var attributedTitle: NSAttributedString?
     let reuseIdentifier = "TitleCell"
@@ -20,7 +21,8 @@ struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewMod
 //    var title: String?
 //    var attributedTitle: NSAttributedString?
 //}
-struct TitleCellWithSwitchViewModel : RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding {
+struct TitleCellWithSwitchViewModel : RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding,LineProviding {
+    var isHidden: Bool
     var title: String?
     var attributedTitle: NSAttributedString?
     var isSwitchOn: Bool?
@@ -45,7 +47,7 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var menuBtn: UIButton!
 
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
-    let settingTitles = ["Push Notifications", "Reset first-time use Guide", "Blocked Accounts"]
+    let settingTitles = ["Push Notifications", "Reset first time use guide", "Blocked Accounts"]
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
@@ -75,9 +77,14 @@ class ProfileSideMenuVC: BaseViewController {
 
     func setupViewModels(_ titles: [String]) -> [RowViewModel] {
         var viewModels: [RowViewModel] = []
+        var index = 0
         for title in titles {
             var viewModel: RowViewModel
-            if title == "Push Notifications" || title == "Reset first-time use Guide" {
+            var bottomLineHidden = false
+            if index == titles.count - 1 {
+                bottomLineHidden = true
+            }
+            if title == "Push Notifications" || title == "Reset first time use guide" {
                 var flag = false
                 if title == "Push Notifications" {
                     if let user = UserDefaultManager.getCurrentUserObject() {
@@ -85,14 +92,16 @@ class ProfileSideMenuVC: BaseViewController {
                             flag = notfStatus
                         }
                     }
-                } else if title == "Reset first-time use Guide" {
+                } else if title == "Reset first time use guide" {
                     flag = !UserDefaultManager.isUserGuideDisabled()
                 }
-                viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: flag)
+                
+                viewModel = TitleCellWithSwitchViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil, isSwitchOn: flag)
                             } else {
-                viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
+                viewModel = TitleCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
             }
             viewModels.append(viewModel)
+            index = index + 1
         }
         return viewModels
     }
@@ -345,8 +354,10 @@ extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
         } else {
             if switchButton.isOn {
                 UserDefaultManager.makeUserGuideEnable()
+                UserDefaultManager.removeAllUserGuidesShown()
             } else {
                 UserDefaultManager.makeUserGuideDisabled()
+                UserDefaultManager.markAllUserGuidesNotShown()
             }
         }
         

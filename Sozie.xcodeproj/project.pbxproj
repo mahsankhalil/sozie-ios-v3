@@ -45,6 +45,7 @@
 		611E412422147224007B1C62 /* PostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E412322147224007B1C62 /* PostCellViewModel.swift */; };
 		611EDFD5221AF0DB00FB2DBE /* WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EDFD3221AF0DB00FB2DBE /* WishTableViewCell.swift */; };
 		611EDFD6221AF0DB00FB2DBE /* WishTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EDFD4221AF0DB00FB2DBE /* WishTableViewCell.xib */; };
+		612089F02243A2A2005516D1 /* LineProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612089EF2243A2A2005516D1 /* LineProviding.swift */; };
 		6122289921F5D33500D4D747 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289821F5D33500D4D747 /* SignInViewController.swift */; };
 		6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */; };
 		6122289D21F5D3D500D4D747 /* ServerResponsePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289C21F5D3D500D4D747 /* ServerResponsePopUp.swift */; };
@@ -213,6 +214,7 @@
 		611E412322147224007B1C62 /* PostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellViewModel.swift; sourceTree = "<group>"; };
 		611EDFD3221AF0DB00FB2DBE /* WishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishTableViewCell.swift; sourceTree = "<group>"; };
 		611EDFD4221AF0DB00FB2DBE /* WishTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WishTableViewCell.xib; sourceTree = "<group>"; };
+		612089EF2243A2A2005516D1 /* LineProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineProviding.swift; sourceTree = "<group>"; };
 		6122289821F5D33500D4D747 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailPopUp.swift; sourceTree = "<group>"; };
 		6122289C21F5D3D500D4D747 /* ServerResponsePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponsePopUp.swift; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				617FF0B0222810F70096597E /* SozieRequestCellViewModel.swift */,
 				61943341222949B80096B219 /* UserPostCellViewModel.swift */,
 				614374DF22378C6500DBD295 /* BlockedUserCellViewModel.swift */,
+				612089EF2243A2A2005516D1 /* LineProviding.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1010,6 +1013,7 @@
 				61B647F72227FEC7007A6370 /* SozieRequestTableViewCell.swift in Sources */,
 				610A743D22031B7C00964886 /* Product.swift in Sources */,
 				61B9D1D02226A22C007C6326 /* SozieCellViewModel.swift in Sources */,
+				612089F02243A2A2005516D1 /* LineProviding.swift in Sources */,
 				6108FB992201D1F30007A49F /* ImageCollectionViewCell.swift in Sources */,
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
 				611E412422147224007B1C62 /* PostCellViewModel.swift in Sources */,

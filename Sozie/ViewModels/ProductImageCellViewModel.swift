@@ -50,7 +50,7 @@ struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewMode
         }
         var priceString = ""
         if let currency = product.currency?.getCurrencySymbol() {
-            priceString = currency + " " + String(format: "%0.2f", searchPrice)
+            priceString = currency + String(format: "%0.2f", searchPrice)
         }
         var productDescription = ""
         if let description = product.description {

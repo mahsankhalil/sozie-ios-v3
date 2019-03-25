@@ -46,17 +46,18 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="4vH-0J-JIW" firstAttribute="leading" secondItem="iMa-qq-IkP" secondAttribute="trailing" constant="16" id="48i-Hg-LPY"/>
-                    <constraint firstItem="iMa-qq-IkP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="8uS-2f-LE7"/>
                     <constraint firstItem="iMa-qq-IkP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="AyJ-j6-bIj"/>
                     <constraint firstItem="R08-4c-rPR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="FTS-yc-SbO"/>
                     <constraint firstItem="4vH-0J-JIW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IW9-EN-8vN"/>
                     <constraint firstAttribute="bottom" secondItem="R08-4c-rPR" secondAttribute="bottom" constant="0.5" id="Mtl-eg-s5c"/>
+                    <constraint firstItem="iMa-qq-IkP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="c2h-mr-qUh"/>
                     <constraint firstAttribute="trailing" secondItem="4vH-0J-JIW" secondAttribute="trailing" constant="9" id="hzR-eI-SPe"/>
                     <constraint firstAttribute="trailing" secondItem="R08-4c-rPR" secondAttribute="trailing" id="yBg-fF-ovs"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bottomLine" destination="R08-4c-rPR" id="RWV-Z1-hsZ"/>
                 <outlet property="switchControl" destination="4vH-0J-JIW" id="j8S-9L-4pA"/>
                 <outlet property="titleLabel" destination="iMa-qq-IkP" id="TGx-Yq-K3u"/>
             </connections>

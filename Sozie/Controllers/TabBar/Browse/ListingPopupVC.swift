@@ -39,6 +39,7 @@ class ListingPopupVC: UIViewController {
     var selectedCategory: Category?
     var filterType: FilterType?
     private var selectedViewModelIndex: Int?
+    var selectedBrandId: Int?
     private var categoriesList: [Category] = [] {
         didSet {
             viewModels.removeAll()
@@ -61,6 +62,9 @@ class ListingPopupVC: UIViewController {
 
     }
     func setPopupType(type: PopupType?, brandList: [Brand]?, filterType: FilterType?) {
+        if selectedViewModelIndex != nil {
+            return
+        }
         self.popupType = type
         self.brandList = brandList
         if let type = type {
@@ -145,6 +149,7 @@ class ListingPopupVC: UIViewController {
         if segue.identifier == "toSubcategory" {
             let vc = segue.destination as! SelectionPopupVC
             vc.popupType = popupType
+            vc.selectedBrandId = selectedBrandId
             if popupType == PopupType.category {
                 vc.category = selectedCategory
             } else {
@@ -186,8 +191,14 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
                 viewModels[previousSelectedIndex].isCheckmarkHidden = true
                 indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
                 if isDoneHidden {
-                    selectedViewModelIndex = nil
-                    self.doneButton.isHidden = true
+                    if previousSelectedIndex == indexPath.row {
+                        selectedViewModelIndex = nil
+                        self.doneButton.isHidden = true
+                    } else {
+                        viewModels[indexPath.row].isCheckmarkHidden = false
+                        selectedViewModelIndex = indexPath.row
+                        self.doneButton.isHidden = false
+                    }
                 } else {
                     viewModels[indexPath.row].isCheckmarkHidden = false
                     selectedViewModelIndex = indexPath.row
@@ -206,13 +217,13 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         if popupType == PopupType.category {
             let currentCategory = categoriesList[indexPath.row]
             if currentCategory.subCategories.count == 0 {
-                reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
+                reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
                 return
             } else {
                 selectedCategory = categoriesList[indexPath.row]
             }
         } else if filterType == FilterType.mySozies || filterType == FilterType.request {
-            reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
+            reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
             return
         } else if let userType = UserDefaultManager.getCurrentUserType() {
             if userType == UserType.sozie.rawValue {

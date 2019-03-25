@@ -20,6 +20,12 @@ public class UserDefaultKey: NSObject {
     static let loginResponse = "loginResponse"
     static let brands = "brands"
     static let userGuide = "userGuide"
+    static let measurementUserGuide = "mesurementUserGuide"
+    static let browseUserGuide = "browseUserGuide"
+    static let requestSozieButtonUserGuide = "requestSozieButtonUserGuide"
+    static let followButtonUserGuide = "followButtonUserGuide"
+    static let mySoziesUserGuide = "mySoziesUserGuide"
+    static let myRequestsUserGuide = "myRequestsUserGuide"
 }
 
 public class Constant: NSObject {

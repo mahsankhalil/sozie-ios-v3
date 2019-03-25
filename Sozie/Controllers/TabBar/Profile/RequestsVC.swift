@@ -20,6 +20,7 @@ class RequestsVC: UIViewController {
     var serverParams: [String: Any] = [String: Any]()
     var viewModels: [MyRequestCellViewModel] = []
     var selectedProduct: Product?
+    var popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.request )
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -58,7 +59,6 @@ class RequestsVC: UIViewController {
             noDataLabel.isHidden = viewModels.count != 0
             tableView.reloadData()
         }
-        
     }
     var nextURL: String?
     override func viewDidLoad() {
@@ -98,7 +98,7 @@ class RequestsVC: UIViewController {
             }
         }
     }
-    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -110,10 +110,10 @@ class RequestsVC: UIViewController {
             destVC?.currentProduct = selectedProduct
         }
     }
-    
+
     @IBAction func filterButtonTapped(_ sender: Any) {
-        let popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.request )
         popUpInstnc?.popupDelegate = self
+        popUpInstnc?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
         let popUpVC = PopupController
             .create(self.tabBarController!)
         let options = PopupCustomOption.layout(.bottom)
@@ -132,9 +132,10 @@ class RequestsVC: UIViewController {
 
     @IBAction func crossButtonTapped(_ sender: Any) {
         requests.removeAll()
+        crossButton.isHidden = true
         getMyRequestsFromServer(dataDict: [:])
+        popUpInstnc = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.request)
     }
-    
 }
 extension RequestsVC: UITableViewDelegate, UITableViewDataSource {
 
@@ -150,7 +151,6 @@ extension RequestsVC: UITableViewDelegate, UITableViewDataSource {
             tableView.register(UINib(nibName: reuseableIdentifier, bundle: nil), forCellReuseIdentifier: reuseableIdentifier)
             tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
         }
-        
         guard let cell = tableViewCell else { return UITableViewCell() }
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)

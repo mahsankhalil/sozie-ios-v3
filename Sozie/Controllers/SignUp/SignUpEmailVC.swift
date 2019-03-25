@@ -46,7 +46,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     
     //MARK: - Custom Methods
     func applyValidators() {
-        validator.registerField(emailTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule,EmailRule(message: "Invalid email")])
+        validator.registerField(emailTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Please enter a valid email address") as Rule, EmailRule(message: "Invalid email")])
         validator.registerField(passwordTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 9) as Rule, MaxLengthRule(length: 20) as Rule])
         
         [emailTxtFld, passwordTxtFld].forEach { (field) in
@@ -72,7 +72,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     // MARK: - Validation CallBacks
     func validationSuccessful() {
         if passwordTxtFld.text != confirmPasswordTxtFld.text {
-            confirmPasswordTxtFld.setError(CustomError(str: "Password and Confirm do not match"), animated: true)
+            UtilityManager.showMessageWith(title: "Passwords do not match", body: "", in: self)
         } else {
             signUpDict![User.CodingKeys.email.stringValue] = emailTxtFld.text
             signUpDict!["password"] = passwordTxtFld.text
@@ -117,9 +117,10 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
             let dataDict = SocialAuthManager.sharedInstance.convertGoogleUserToAppDict(user: user)
             self.signUpDict = self.signUpDict!.merging(dataDict) { (_, new) in new }
             self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
-        } else {
-            UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
         }
+//        else {
+//            UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+//        }
     }
     
     // MARK: - Actions
@@ -132,10 +133,11 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
                 let resp = response as! [String : Any]
                 self.signUpDict = self.signUpDict!.merging(resp) { (_, new) in new }
                 self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
-            } else {
-                let err = response as! Error
-                UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
             }
+//            else {
+//                let err = response as! Error
+//                UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
+//            }
         }
     }
     

@@ -45,9 +45,14 @@ class ProductCollectionViewCell: UICollectionViewCell {
                     tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
                     tipView?.show(animated: true, forView: self.maskImageView, withinSuperview: self)
                     isFirstTime = false
+                    UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.browseUserGuide)
+                    perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)
                 }
             }
         }
+    }
+    @objc func dismissTipView() {
+        tipView?.dismiss(withCompletion: nil)
     }
 }
 extension ProductCollectionViewCell: ButtonProviding {
@@ -92,7 +97,9 @@ extension ProductCollectionViewCell: CellConfigurable {
             } else {
                 tipView?.isHidden = true
             }
-            showTipView()
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.browseUserGuide) == false {
+                showTipView()
+            }
         }
     }
 

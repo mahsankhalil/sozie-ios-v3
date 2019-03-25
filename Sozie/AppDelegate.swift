@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import GoogleSignIn
-
+import Appsee
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
             self.window?.rootViewController = rootViewController
         }
+        Appsee.start()
         return true
     }
 

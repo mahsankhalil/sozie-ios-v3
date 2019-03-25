@@ -22,11 +22,15 @@ class ServerManager: NSObject {
     static let signUpURL = ServerManager.serverURL + "user/signup/"
     static let forgotPasswordURL = ServerManager.serverURL + "user/forgot_password/"
     static let resetPassword = ServerManager.serverURL + "user/reset_password/"
+//    static let productListURL = ServerManager.serverURL + "product/browse/v2/feed/get/"
     static let productListURL = ServerManager.serverURL + "product/browse/feed/get/"
+
     static let logoutURL = ServerManager.serverURL + "user/logout/"
     static let categoriesURL = ServerManager.serverURL + "common/categories"
     static let productDetailURL = ServerManager.serverURL + "product/detail/"
     static let productCountURL = ServerManager.serverURL + "product/browse/feed/count/"
+//    static let productCountURL = ServerManager.serverURL + "product/browse/feed/v2/count/"
+
     static let favProductURL = ServerManager.serverURL + "product/favourite/"
     static let reportURL = ServerManager.serverURL + "post/report/"
     static let followURL = ServerManager.serverURL + "user/follow/"

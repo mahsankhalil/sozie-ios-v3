@@ -13,6 +13,7 @@ protocol TitleAndSwitchCellDelegate {
 class TitleAndSwitchCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var switchControl: UISwitch!
+    @IBOutlet weak var bottomLine: UIView!
     var delegate: TitleAndSwitchCellDelegate?
     
     override func awakeFromNib() {
@@ -47,6 +48,9 @@ extension TitleAndSwitchCell: CellConfigurable {
         
         if let switchModel = viewModel as? SwitchProviding {
             switchControl.setOn(switchModel.isSwitchOn ?? false, animated: true)
+        }
+        if let lineModel = viewModel as? LineProviding {
+            bottomLine.isHidden = lineModel.isHidden
         }
         
         

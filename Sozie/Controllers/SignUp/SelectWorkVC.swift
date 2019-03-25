@@ -77,7 +77,8 @@ class SelectWorkVC: UIViewController {
         ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.brandList = self.removeTargetIfUS(brands: response as! [Brand])
+//                self.brandList = self.removeTargetIfUS(brands: response as! [Brand])
+                self.brandList = response as! [Brand]
                 self.searchList = self.brandList ?? []
                 self.tableView.reloadData()
             }

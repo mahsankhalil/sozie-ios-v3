@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.0)
+  - Appsee (2.5.1)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -40,6 +41,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Appsee (~> 2.5.1)
   - CCBottomRefreshControl
   - EasyTipView (~> 2.0.0)
   - FBSDKCoreKit
@@ -59,6 +61,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Appsee
     - Bolts
     - CCBottomRefreshControl
     - EasyTipView
@@ -89,6 +92,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Appsee: 939b7bac5d89c9e4215e45c92aa85dacbdb95917
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CCBottomRefreshControl: 389780b4488321c91d18f66a6da5ef9606df6de5
   EasyTipView: 1515544456d6e943240012e9be5d25d1bb766603
@@ -108,6 +112,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: 5831d4a61bff142bef652424583256463478ae0a
+PODFILE CHECKSUM: f624fe56662e1cc4e217e66996779a4130ec29a6
 
 COCOAPODS: 1.5.3
