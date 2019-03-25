@@ -244,10 +244,12 @@ private extension PopupController {
     func updateLayouts() {
         guard let child = self.children.last as? PopupContentViewController else { return }
         popupView.frame.size = child.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
-        popupView.frame.origin.x = layout.origin(popupView).x
-        baseScrollView.frame = view.frame
-        baseScrollView.contentInset.top = layout.origin(popupView).y
-        defaultContentOffset.y = -baseScrollView.contentInset.top
+        if !isShowingKeyboard {
+            popupView.frame.origin.x = layout.origin(popupView).x
+            baseScrollView.frame = view.frame
+            baseScrollView.contentInset.top = layout.origin(popupView).y
+            defaultContentOffset.y = -baseScrollView.contentInset.top
+        }
     }
     
     func updateBackgroundStyle(_ style: PopupBackgroundStyle) {
@@ -449,7 +451,7 @@ extension PopupController: UIScrollViewDelegate {
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let delta: CGFloat = defaultContentOffset.y - scrollView.contentOffset.y
-        if delta > 20 && isShowingKeyboard {
+        if delta > 20 && !isShowingKeyboard {
             popupView.endEditing(true)
             return
         }

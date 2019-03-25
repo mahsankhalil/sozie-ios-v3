@@ -7,10 +7,13 @@
 //
 
 import UIKit
-
+protocol TitleAndSwitchCellDelegate {
+    func switchValueChanged(switchButton: UISwitch)
+}
 class TitleAndSwitchCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var switchControl: UISwitch!
+    var delegate: TitleAndSwitchCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +25,9 @@ class TitleAndSwitchCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func switchValueChanged(_ sender: Any) {
+        delegate?.switchValueChanged(switchButton: sender as! UISwitch)
     }
     
 }
@@ -44,5 +50,11 @@ extension TitleAndSwitchCell: CellConfigurable {
         }
         
         
+    }
+}
+
+extension TitleAndSwitchCell: ButtonProviding {
+    func assignTagWith(_ index: Int) {
+        switchControl.tag = index
     }
 }

@@ -139,8 +139,8 @@ extension UIView {
         layer.borderColor = UIColor(hex: "BFBFBF").cgColor
         layer.masksToBounds = true
     }
-
-    func applyStandardBorder(hexColor: String = "DADADA") {
+    
+    func applyStandardBorder(hexColor : String = "DADADA") {
         layer.borderWidth = 1.0
         layer.borderColor = UIColor(hex: hexColor).cgColor
     }

@@ -33,7 +33,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hK5-gK-sLw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mask" translatesAutoresizingMaskIntoConstraints="NO" id="G3F-yW-PBc">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mask" translatesAutoresizingMaskIntoConstraints="NO" id="G3F-yW-PBc">
                                         <rect key="frame" x="21" y="12" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="BdH-Bh-5aB"/>
@@ -112,10 +112,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUP-Xa-L6c">
+                                        <rect key="frame" x="250" y="8" width="31" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="31" id="906-kB-WZd"/>
+                                            <constraint firstAttribute="height" constant="24" id="vb1-Ex-jDc"/>
+                                        </constraints>
+                                        <state key="normal" image="CameraSmall"/>
+                                        <connections>
+                                            <action selector="cameraButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="msR-gD-yYy"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="670-Lk-XAg"/>
+                                    <constraint firstItem="jUP-Xa-L6c" firstAttribute="top" secondItem="hK5-gK-sLw" secondAttribute="top" constant="8" id="6xL-55-ga8"/>
                                     <constraint firstItem="OYf-zw-C8W" firstAttribute="top" secondItem="hK5-gK-sLw" secondAttribute="top" constant="8" id="M4c-4s-2AV"/>
                                     <constraint firstItem="Djo-KL-rUX" firstAttribute="leading" secondItem="OYf-zw-C8W" secondAttribute="trailing" id="NfW-EX-kcw"/>
                                     <constraint firstItem="Mgo-6Z-Ffu" firstAttribute="top" secondItem="hK5-gK-sLw" secondAttribute="top" constant="12" id="iCz-ej-IA1"/>
@@ -125,13 +137,14 @@
                                     <constraint firstItem="0ok-4a-us2" firstAttribute="top" secondItem="Mgo-6Z-Ffu" secondAttribute="bottom" constant="2" id="oGB-sv-35S"/>
                                     <constraint firstItem="0ok-4a-us2" firstAttribute="leading" secondItem="G3F-yW-PBc" secondAttribute="trailing" constant="10" id="tJN-Sd-JTL"/>
                                     <constraint firstItem="G3F-yW-PBc" firstAttribute="centerY" secondItem="hK5-gK-sLw" secondAttribute="centerY" id="tLB-Xg-PcE"/>
+                                    <constraint firstItem="OYf-zw-C8W" firstAttribute="leading" secondItem="jUP-Xa-L6c" secondAttribute="trailing" id="vyv-ot-Z6T"/>
                                     <constraint firstAttribute="trailing" secondItem="Djo-KL-rUX" secondAttribute="trailing" constant="8" id="zKv-jU-DCS"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9X-n3-tXu">
                                 <rect key="frame" x="0.0" y="64" width="375" height="381"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NC0-6I-U89">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NC0-6I-U89">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="381"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIV-8g-jx0">
@@ -190,7 +203,9 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
                 <outlet property="braLabel" destination="vW0-gt-E7C" id="emR-xI-NmR"/>
+                <outlet property="cameraButton" destination="jUP-Xa-L6c" id="nsf-jC-ScH"/>
                 <outlet property="followButton" destination="OYf-zw-C8W" id="uxw-jY-h1z"/>
+                <outlet property="followButtonWidthConstraint" destination="4e2-dD-jZE" id="QqZ-6e-T3b"/>
                 <outlet property="heightLabel" destination="CeJ-3N-fGR" id="rdG-Bj-Vbj"/>
                 <outlet property="hipLabel" destination="Wky-OA-tUH" id="L1L-jj-fpZ"/>
                 <outlet property="moreButton" destination="Djo-KL-rUX" id="fo0-9I-v7P"/>
@@ -199,6 +214,7 @@
                 <outlet property="profileImageView" destination="G3F-yW-PBc" id="FuB-zH-Ut7"/>
                 <outlet property="sizeWornLabel" destination="x1Y-BU-sw9" id="eg7-XV-BIN"/>
                 <outlet property="sizeWornView" destination="RIV-8g-jx0" id="MLd-Hk-Z7m"/>
+                <outlet property="topView" destination="hK5-gK-sLw" id="kcb-tO-8Ms"/>
                 <outlet property="waistLabel" destination="UzR-o8-zMd" id="bX4-dD-jyZ"/>
             </connections>
             <point key="canvasLocation" x="-0.80000000000000004" y="13.943028485757123"/>
@@ -206,6 +222,7 @@
     </objects>
     <resources>
         <image name="3 Dots" width="3" height="13"/>
+        <image name="CameraSmall" width="20" height="15"/>
         <image name="Mask" width="33" height="27.5"/>
     </resources>
 </document>

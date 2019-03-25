@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-
+import SVProgressHUD
 extension JSONDecoder {
     func decodeResponse<T: Decodable>(from response: DataResponse<Data>) -> Result<T> {
         guard response.error == nil else {
@@ -22,6 +22,13 @@ extension JSONDecoder {
 //                "Did not get data in response"))
             return .failure(CustomError(str: "Did not get data in response"))
 
+        }
+        if response.response?.statusCode == 401 {
+            if UserDefaultManager.isUserLoggedIn() {
+                self.logout()
+                UserDefaultManager.deleteLoginResponse()
+            }
+            return .failure(CustomError(str: "Token has been expired"))
         }
         if !((response.response?.statusCode == 200) || (response.response?.statusCode == 201)) {
             do {
@@ -67,5 +74,14 @@ extension JSONDecoder {
         }
         return CustomError(str: "Something Went Wrong")
 //        return BackendError.objectSerialization(reason: "Something Went Wrong")
+    }
+    func logout() {
+        SVProgressHUD.show()
+        var dataDict = [String: Any]()
+        dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
+        ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            UtilityManager.changeRootVCToLoginNC()
+        }
     }
 }

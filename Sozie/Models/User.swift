@@ -28,7 +28,8 @@ struct User: Codable {
     var signUpMedium: String?
     var socialToken: String?
     var measurement: Measurements?
-    
+    var isFollowed: Bool?
+    var preferences: UserPreferences?
     enum CodingKeys: String, CodingKey {
         case username
         case email
@@ -47,6 +48,8 @@ struct User: Codable {
         case socialId = "social_id"
         case signUpMedium = "signup_medium"
         case socialToken = "social_token"
+        case isFollowed = "is_followed"
+        case preferences
     }
     
     init(from decoder: Decoder) throws {
@@ -67,11 +70,26 @@ struct User: Codable {
         socialId = try? values.decode(String.self, forKey: .socialId)
         socialToken = try? values.decode(String.self, forKey: .socialToken)
         signUpMedium = try? values.decode(String.self, forKey: .signUpMedium)
-
         measurement = try? values.decode(Measurements.self, forKey: .measurement)
+        isFollowed = try? values.decode(Bool.self, forKey: .isFollowed)
+        preferences = try? values.decode(UserPreferences.self, forKey: .preferences)
     }
 }
+struct UserPreferences: Codable {
+    var userId: Int
+    var pushNotificationEnabled: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case pushNotificationEnabled = "enable_notifications"
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        userId = try values.decode(Int.self, forKey: .userId)
+        pushNotificationEnabled = try values.decode(Bool.self, forKey: .pushNotificationEnabled)
 
+    }
+}
 struct Measurements: Codable {
     var bra: Int?
     var height: Int?
@@ -88,7 +106,7 @@ struct Measurements: Codable {
         case cup
         case waist
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         bra = try? values.decode(Int.self, forKey: .bra)

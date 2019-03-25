@@ -15,12 +15,16 @@ struct Product: Codable {
     var brandId: Int?
     var searchPrice: Float?
     var imageURL: String?
-    var description : String?
-    var categoryId : Int?
-    var postCount : Int?
-    var currency : String?
-    var posts : [Post]?
-    var isFavourite : Bool?
+    var description: String?
+    var categoryId: Int?
+    var postCount: Int?
+    var currency: String?
+    var posts: [Post]?
+    var isFavourite: Bool?
+    var feedId: Int?
+    var merchantImageURL: String?
+    var productStringId: String?
+    var sizeChart: ProductSizeChart?
     enum CodingKeys: String, CodingKey {
         case productId = "id"
         case productName = "product_name"
@@ -34,7 +38,11 @@ struct Product: Codable {
         case currency
         case posts
         case isFavourite = "is_favourite"
-        
+        case feedId = "feed_id"
+        case merchantImageURL = "merchant_image_url"
+        case productStringId = "product_id"
+        case sizeChart = "size_chart"
+
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -50,6 +58,10 @@ struct Product: Codable {
         currency = try? values.decode(String.self, forKey: .currency)
         posts = try? values.decode([Post].self, forKey: .posts)
         isFavourite = try? values.decode(Bool.self, forKey: .isFavourite)
+        feedId = try? values.decode(Int.self, forKey: .feedId)
+        merchantImageURL = try? values.decode(String.self, forKey: .merchantImageURL)
+        productStringId = try? values.decode(String.self, forKey: .productStringId)
+        sizeChart = try? values.decode(ProductSizeChart.self, forKey: .sizeChart)
 
     }
 }

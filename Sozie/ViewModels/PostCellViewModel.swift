@@ -8,7 +8,9 @@
 
 import UIKit
 
-struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling , ReuseIdentifierProviding , MeasurementViewModeling {
+struct PostCellViewModel: RowViewModel, ImageViewModeling, TitleViewModeling, ReuseIdentifierProviding, MeasurementViewModeling, FollowViewModeling, DescriptionViewModeling {
+    var isFollow: Bool
+    var description: String?
     var bra: Int?
     var height: Int?
     var hip: Int?
@@ -18,4 +20,16 @@ struct PostCellViewModel : RowViewModel , ImageViewModeling , TitleViewModeling 
     var attributedTitle: NSAttributedString?
     var imageURL: URL?
     let reuseIdentifier: String = "PostCollectionViewCell"
+    
+    init(post: Post) {
+        self.title = post.user.username
+        self.imageURL = URL(string: post.imageURL)
+        self.bra = post.user.measurement?.bra
+        self.height = post.user.measurement?.height
+        self.hip = post.user.measurement?.hip
+        self.cup = post.user.measurement?.cup
+        self.waist = post.user.measurement?.waist
+        self.isFollow = post.userFollowedByMe ?? false
+        self.description = "Size Worn: " + post.sizeType + "-" + post.sizeValue
+    }
 }

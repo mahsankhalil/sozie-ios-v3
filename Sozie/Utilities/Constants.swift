@@ -19,6 +19,7 @@ public class UserDefaultKey: NSObject {
     static let userId = "user_id"
     static let loginResponse = "loginResponse"
     static let brands = "brands"
+    static let userGuide = "userGuide"
 }
 
 public class Constant: NSObject {

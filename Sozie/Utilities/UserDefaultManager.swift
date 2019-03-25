@@ -25,6 +25,11 @@ class UserDefaultManager: NSObject {
         return loginResponse.user
     }
     
+    static func updateUserObject(user: User) {
+        guard var loginResponse = loginResponse() else { return  }
+        loginResponse.user = user
+        _ = UserDefaultManager.saveLoginResponse(loginResp: loginResponse)
+    }
     static func getCurrentUserId() -> Int? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.userId
@@ -50,8 +55,30 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.refresh
     }
-    
-    static func saveLoginResponse(loginResp : LoginResponse) -> Bool {
+    static func isUserGuideDisabled() -> Bool {
+        if (UserDefaults.standard.bool(forKey: UserDefaultKey.userGuide) as? Bool) == true {
+            return true
+        } else {
+            return false
+        }
+    }
+    static func isUserLoggedIn() -> Bool {
+        if UserDefaultManager.getCurrentUserObject() != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    static func makeUserGuideDisabled() {
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.userGuide)
+        UserDefaults.standard.synchronize()
+    }
+    static func makeUserGuideEnable() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.userGuide)
+        UserDefaults.standard.synchronize()
+    }
+
+    static func saveLoginResponse(loginResp: LoginResponse) -> Bool {
         let encoder = JSONEncoder()
         if let loginResp = try? encoder.encode(loginResp) {
             UserDefaults.standard.set(loginResp, forKey: UserDefaultKey.loginResponse)
@@ -60,7 +87,7 @@ class UserDefaultManager: NSObject {
         }
         return false
     }
-    static func saveAllBrands(brands : [Brand]) -> Bool {
+    static func saveAllBrands(brands: [Brand]) -> Bool {
         let encoder = JSONEncoder()
         if let brandsList = try? encoder.encode(brands) {
             UserDefaults.standard.set(brandsList, forKey: UserDefaultKey.brands)
@@ -68,7 +95,7 @@ class UserDefaultManager: NSObject {
         }
         return false
     }
-    
+
     private static func brandList () -> [Brand]? {
         if let brandList = UserDefaults.standard.data(forKey: UserDefaultKey.brands) {
             let decoder = JSONDecoder()
@@ -78,13 +105,23 @@ class UserDefaultManager: NSObject {
         }
         return nil
     }
-    static func getBrandWithId(brandId : Int) -> Brand? {
+    static func getBrandWithId(brandId: Int) -> Brand? {
         guard let brands = brandList() else { return nil }
         if let brand = brands.first(where: {$0.brandId == brandId}) {
             return brand
         } else {
             return nil
         }
+    }
+    static func getIfShopper() -> Bool {
+        if let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.shopper.rawValue {
+                return true
+            } else {
+                return false
+            }
+        }
+        return true
     }
 
 }

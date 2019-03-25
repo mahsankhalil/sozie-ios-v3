@@ -31,5 +31,19 @@ extension String {
             return urlComponents?.string
         }
     }
+    
+    public func getCurrencySymbol() -> String {
+        switch self {
+        case "GBP":
+            return "£"
+        case "USD":
+            return "$"
+        case "EUR":
+            return "€"
+        default:
+            return ""
+        }
+    }
+
 
 }

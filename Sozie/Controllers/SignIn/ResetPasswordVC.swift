@@ -10,7 +10,7 @@ import UIKit
 import MaterialTextField
 import SwiftValidator
 import SVProgressHUD
-class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate {
+class ResetPasswordVC: UIViewController , UITextFieldDelegate, ValidationDelegate {
 
     @IBOutlet weak var saveBtn: DZGradientButton!
     @IBOutlet weak var retypePasswordTxtFld: MFTextField!
@@ -19,7 +19,7 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate,ValidationDelegate
     
     let validator = Validator()
 
-    var params : [String : Any]?
+    var params : [String: Any]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

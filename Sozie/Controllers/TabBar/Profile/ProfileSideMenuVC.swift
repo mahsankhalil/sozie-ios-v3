@@ -8,23 +8,24 @@
 
 import UIKit
 import SVProgressHUD
-struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling {
+import StoreKit
+import SideMenu
+import MessageUI
+struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewModeling {
     var title: String?
     var attributedTitle: NSAttributedString?
     let reuseIdentifier = "TitleCell"
-
 }
 //struct AboutSectionCellViewModel : RowViewModel, TitleViewModeling {
 //    var title: String?
 //    var attributedTitle: NSAttributedString?
 //}
-struct TitleCellWithSwitchViewModel : RowViewModel , SwitchProviding , TitleViewModeling , ReuseIdentifierProviding {
+struct TitleCellWithSwitchViewModel : RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding {
     var title: String?
     var attributedTitle: NSAttributedString?
-    var isSwitchOn : Bool?
+    var isSwitchOn: Bool?
     let reuseIdentifier = "TitleAndSwitchCell"
 }
-
 
 class ProfileSideMenuVC: BaseViewController {
 
@@ -35,13 +36,17 @@ class ProfileSideMenuVC: BaseViewController {
     
     var sections: [Section] = []
 
+    @IBOutlet weak var myBalanceButton: UIButton!
+    @IBOutlet weak var myBalanceGradientView: DZGradientView!
+    @IBOutlet weak var myBalanceViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet weak var myBalanceView: UIView!
     @IBOutlet weak var logoutBtn: DZGradientButton!
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
-    
-    let accountTitles = ["Edit Profile" , "Update Profile Picture" , "Change Password" , "My Measurements"]
-    let settingTitles = ["Push Notifications" , "Reset first-time use Guide" , "Blocked Accounts"]
-    let aboutTitles = ["Invite Friends" , "Rate Sozie app" , "Send Feedback" , "Privacy Policy" , "Terms and Conditions of use"]
+
+    var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
+    let settingTitles = ["Push Notifications", "Reset first-time use Guide", "Blocked Accounts"]
+    let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
 
@@ -49,40 +54,51 @@ class ProfileSideMenuVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        func setupViewModels(_ titles: [String]) -> [RowViewModel] {
-            var viewModels: [RowViewModel] = []
-            for title in titles {
-                var viewModel: RowViewModel
-                if title == "Push Notifications" || title == "Reset first-time use Guide" {
-                    viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: false)
-                } else {
-                    viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
-                }
-                viewModels.append(viewModel)
-            }
-            return viewModels
+        if UserDefaultManager.getIfShopper() {
+            self.myBalanceViewHeightContraint.constant = 0.0
+        } else {
+            self.myBalanceViewHeightContraint.constant = 50.0
+            accountTitles = ["Edit Profile", "Change My Workplace", "Update Profile Picture", "Change Password", "My Measurements"]
+
         }
-        
         let accountViewModels = setupViewModels(accountTitles)
         let accountSection = Section(title: "ACCOUNT", rowViewModels: accountViewModels)
         sections.append(accountSection)
-        
         let settingViewModels = setupViewModels(settingTitles)
         let settingSection = Section(title: "SETTINGS", rowViewModels: settingViewModels)
         sections.append(settingSection)
         let aboutViewModels = setupViewModels(aboutTitles)
         let aboutSection = Section(title: "ABOUT", rowViewModels: aboutViewModels)
         sections.append(aboutSection)
-    
         logoutBtn.cornerRadius = 0.0
     }
-    
 
-    func logout()
-    {
+    func setupViewModels(_ titles: [String]) -> [RowViewModel] {
+        var viewModels: [RowViewModel] = []
+        for title in titles {
+            var viewModel: RowViewModel
+            if title == "Push Notifications" || title == "Reset first-time use Guide" {
+                var flag = false
+                if title == "Push Notifications" {
+                    if let user = UserDefaultManager.getCurrentUserObject() {
+                        if let notfStatus = user.preferences?.pushNotificationEnabled {
+                            flag = notfStatus
+                        }
+                    }
+                } else if title == "Reset first-time use Guide" {
+                    flag = !UserDefaultManager.isUserGuideDisabled()
+                }
+                viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: flag)
+                            } else {
+                viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
+            }
+            viewModels.append(viewModel)
+        }
+        return viewModels
+    }
+    func logout() {
         SVProgressHUD.show()
-        var dataDict = [String : Any]()
+        var dataDict = [String: Any]()
         dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
         ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -99,38 +115,110 @@ class ProfileSideMenuVC: BaseViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func rateThisApp() {
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        } else {
+            rateApp(appId: "id1363346896") { (_) in
+            }
+        }
+    }
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId) else {
+            completion(false)
+            return
+        }
+        guard #available(iOS 10, *) else {
+            completion(UIApplication.shared.openURL(url))
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+    }
+    func showInviteFriendsVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVC") as! InviteFriendsVC
+        inviteVC.isFromSideMenu = true
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func showUploadPhotoVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "UploadProfilePictureVC") as! UploadProfilePictureVC
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func showChangePasswordVC() {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "ChangePasswordVC") as! ChangePasswordVC
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func sendFeedbackWithEmail() {
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        
+        // Configure the fields of the interface.
+        composeVC.setToRecipients(["contact@sozie.com"])
+        composeVC.setSubject("Feedback")
+        
+        // Present the view controller modally.
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    func showMeasurementVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let measurementVC = storyBoard.instantiateViewController(withIdentifier: "MeasurementsVC") as! MeasurementsVC
+        self.navigationController?.pushViewController(measurementVC, animated: true)
 
+    }
+    func showBlockedListVC() {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let inviteVC = storyBoard.instantiateViewController(withIdentifier: "BlockListVC") as! BlockListVC
+        self.navigationController?.pushViewController(inviteVC, animated: true)
+    }
+    func showUpdateWorkPlaceVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let measurementVC = storyBoard.instantiateViewController(withIdentifier: "SelectWorkVC") as! SelectWorkVC
+        self.navigationController?.pushViewController(measurementVC, animated: true)
+    }
+    func showEditProfileVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        self.navigationController?.pushViewController(editProfileVC, animated: true)
+    }
+    func showTOSVC(type: TOSType) {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
+        tosVC.type = type
+        self.navigationController?.pushViewController(tosVC, animated: true)
+    }
     @IBAction func menuBtnTapped(_ sender: Any) {
+
+    }
+    @IBAction func myBalanceButtonTapped(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let balanceVC = storyBoard.instantiateViewController(withIdentifier: "MyBalanceVC") as! MyBalanceVC
+        self.navigationController?.pushViewController(balanceVC, animated: true)
     }
     @IBAction func logoutBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
 
         let window = UIApplication.shared.keyWindow
-        
         UtilityManager.showMessageWith(title: "Logout", body: "Are you sure you want to Log Out?", in: (window?.rootViewController)!, okBtnTitle: "Yes", cancelBtnTitle: "No") {
             self.logout()
         }
-    
-
     }
 }
 extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rowViewModels.count
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0
-        {
+        if section == 0 {
             return 26.0
-        }
-        else
-        {
+        } else {
             return 32.0
         }
     }
@@ -143,46 +231,124 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         headerVu.addSubview(lbl)
         return headerVu
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let section = sections[indexPath.section]
         let rowViewModel = section.rowViewModels[indexPath.row]
-        
         var reuseIdentifier: String? = nil
         if let reuseIdentifierProvider = rowViewModel as? ReuseIdentifierProviding {
             reuseIdentifier = reuseIdentifierProvider.reuseIdentifier
         }
-        
         guard let identifier = reuseIdentifier else { return UITableViewCell() }
-        
         var tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
-        
         if tableViewcell == nil {
             tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
             tableViewcell = tableView.dequeueReusableCell(withIdentifier: identifier)
         }
-        
         guard let cell = tableViewcell else { return UITableViewCell() }
-        
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(rowViewModel)
+        }
+        if let buttonProvidingCell = cell as? ButtonProviding {
+            buttonProvidingCell.assignTagWith(indexPath.row)
+        }
+        if let switchCell = cell as? TitleAndSwitchCell {
+            switchCell.delegate = self
         }
 
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
-            let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-            self.navigationController?.pushViewController(editProfileVC, animated: true)
+            performSectionOneActions(row: indexPath.row)
+        case 1:
+            switch indexPath.row {
+            case 2:
+                showBlockedListVC()
+            default:
+                return
+            }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                showInviteFriendsVC()
+            case 1:
+                rateThisApp()
+            case 2:
+                sendFeedbackWithEmail()
+            case 3:
+                showTOSVC(type: TOSType.privacyPolicy)
+            case 4:
+                showTOSVC(type: TOSType.termsCondition)
+            default:
+                return
+            }
         default:
             return
-            
         }
     }
-    
+    func performSectionOneActions(row: Int) {
+        switch row {
+        case 0:
+            showEditProfileVC()
+        case 1:
+            if UserDefaultManager.getIfShopper() {
+                showUploadPhotoVC()
+            } else {
+                showUpdateWorkPlaceVC()
+            }
+        case 2:
+            if UserDefaultManager.getIfShopper() {
+                showChangePasswordVC()
+            } else {
+                showUploadPhotoVC()
+            }
+        case 3:
+            if UserDefaultManager.getIfShopper() {
+                showMeasurementVC()
+            } else {
+                showChangePasswordVC()
+            }
+        case 4:
+            showMeasurementVC()
+        default:
+            return
+        }
+    }
+}
+extension ProfileSideMenuVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
+    func switchValueChanged(switchButton: UISwitch) {
+        if switchButton.tag == 0 {
+            var dataDict = [String: Any]()
+            dataDict["enable_notifications"] = switchButton.isOn
+            ServerManager.sharedInstance.updatePrefernce(params: dataDict) { (isSuccess, response) in
+                if isSuccess {
+                    if var currentUser = UserDefaultManager.getCurrentUserObject() {
+                        if let preferences = currentUser.preferences {
+                            currentUser.preferences?.pushNotificationEnabled = switchButton.isOn
+                            UserDefaultManager.updateUserObject(user: currentUser)
+                        }
+                    }
+                } else {
+                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+                }
+            }
+        } else {
+            if switchButton.isOn {
+                UserDefaultManager.makeUserGuideEnable()
+            } else {
+                UserDefaultManager.makeUserGuideDisabled()
+            }
+        }
+        
+    }
 }

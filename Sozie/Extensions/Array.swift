@@ -16,4 +16,13 @@ extension Array where Element == Int {
         }
         return arrayOfString
     }
+    func makeArrayJSON() -> String {
+        var json = "["
+        for elem in self {
+            json = json + String(elem) + ","
+        }
+        json.remove(at: json.index(before: json.endIndex))
+        json = json + "]"
+        return json
+    }
 }

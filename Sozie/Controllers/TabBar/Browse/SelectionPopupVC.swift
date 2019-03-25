@@ -118,10 +118,10 @@ extension SelectionPopupVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         var indexPathsToReload = [indexPath]
         if let previousSelectedIndex = selectedViewModelIndex {
             viewModels[previousSelectedIndex].isCheckmarkHidden = true
@@ -131,5 +131,4 @@ extension SelectionPopupVC: UITableViewDelegate, UITableViewDataSource {
         selectedViewModelIndex = indexPath.row
         tableView.reloadRows(at: indexPathsToReload, with: .automatic)
     }
-    
 }

@@ -11,6 +11,8 @@ import Foundation
 protocol DoubleTextFieldCellViewModeling {
  
     var title: String { get }
+    var text1: String? {get}
+    var text2: String? {get}
     var columnUnit: [String] { get }
     var columnPlaceholder: [String] { get }
     var columnValueSuffix: [String] { get }

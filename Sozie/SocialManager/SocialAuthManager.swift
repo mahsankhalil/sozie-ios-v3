@@ -43,52 +43,41 @@ class SocialAuthManager: NSObject {
                     parameters: ["fields": "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
                 request?.start(completionHandler: { (_, result, error) in
                     // Handle the result
-                    if error == nil, let fbDict = result as? [String: Any]  {
+                    if error == nil, let fbDict = result as? [String: Any] {
                         let dataDict = self.convertFacebookDictToAppDict(fbDict: fbDict, token: token.tokenString)
-                        block!(true , dataDict)
+                        block!(true, dataDict)
                     } else {
-                        block!(false , error!)
+                        block!(false, error!)
                     }
                 })
             } else {
-                block!(false , error!)
+                block!(false, error!)
             }
         }
     }
-    
-    func convertFacebookDictToAppDict (fbDict : [String : Any] , token : String) -> [String: Any] {
-        var dataDict = [String : Any]()
-        
+    func convertFacebookDictToAppDict (fbDict: [String: Any], token: String) -> [String: Any] {
+        var dataDict = [String: Any]()
         if let firstName = fbDict["first_name"] {
             dataDict[User.CodingKeys.firstName.stringValue] = firstName
         }
-        
         if let lastName = fbDict["last_name"] {
             dataDict[User.CodingKeys.lastName.stringValue] = lastName
         }
-        
         if let email = fbDict["email"] {
             dataDict[User.CodingKeys.email.stringValue] = email
         }
-        
         if let birthday = fbDict["birthday"] {
             dataDict[User.CodingKeys.firstName.stringValue] = birthday
-
         }
-        
         if let userId = fbDict["id"] {
             dataDict[User.CodingKeys.socialId.stringValue] = userId
         }
-        
         dataDict[User.CodingKeys.socialToken.stringValue] = token
         dataDict[User.CodingKeys.signUpMedium.stringValue] = "FB"
-        
         return dataDict
     }
-    
-    func convertGoogleUserToAppDict(user: GIDGoogleUser) -> [String : Any] {
+    func convertGoogleUserToAppDict(user: GIDGoogleUser) -> [String: Any] {
         var dataDict = [String: String]()
-
         let fullName = user.profile.name
         var components = fullName?.components(separatedBy: " ")
         if((components?.count)! > 0) {
@@ -99,7 +88,6 @@ class SocialAuthManager: NSObject {
         } else {
             dataDict[User.CodingKeys.firstName.stringValue] = user.profile.name
         }
-        
         dataDict[User.CodingKeys.socialId.stringValue] = user.userID
         dataDict[User.CodingKeys.email.stringValue] = user.profile.email
         dataDict["image_path"] = user.profile.imageURL(withDimension: 200).absoluteString

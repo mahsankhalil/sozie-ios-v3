@@ -22,12 +22,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var userNameTxtFld: MFTextField!
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     @IBOutlet weak var signUpButton: DZGradientButton!
-    
+
     let validator = Validator()
     var isFemaleSelected = false
     var signUpDict: [String: Any]?
     var tipView: EasyTipView?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,20 +55,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     func populateCurrentUserData() {
+
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
             firstNameTxtFld.text = currentUser.firstName
             lastNameTxtFld.text = currentUser.lastName
-            dateOfBirtTxtFld.text = currentUser.birthday
+            let birthday = UtilityManager.dateFromStringWithFormat(date: currentUser.birthday, format: "yyyy-MM-dd")
+            dateOfBirtTxtFld.text = UtilityManager.stringFromNSDateWithFormat(date: birthday, format: Constant.appDateFormat)
             dateOfBirtTxtFld.date = UtilityManager.dateFromStringWithFormat(date: currentUser.birthday, format: "yyyy-MM-dd") as Date
+            dateOfBirtTxtFld.pickerView.date = dateOfBirtTxtFld.date!
             userNameTxtFld.text = currentUser.username
-            if currentUser.gender == "Female" {
+            if currentUser.gender == "F" {
                 applyFemaleSelection()
             }
             signUpButton.setTitle("Save", for: .normal)
         }
     }
+    
+    //MARK: - Custom Methods
 
-    // MARK: - Custom Methods
     func applyValidators() {
         validator.registerField(firstNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule])
         validator.registerField(lastNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Last Name can't be empty") as Rule])
@@ -102,9 +106,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         signUpDict![User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
 
         if isFemaleSelected {
-            signUpDict![User.CodingKeys.gender.stringValue] = "Female"
+            signUpDict![User.CodingKeys.gender.stringValue] = "F"
         }
-        
+
         SVProgressHUD.show()
         ServerManager.sharedInstance.signUpUserWith(params: signUpDict!) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -122,27 +126,29 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     func updateProfile() {
-        var dataDict = [String: Any]()
+        var dataDict = [String : Any]()
+
         dataDict[User.CodingKeys.firstName.stringValue] = firstNameTxtFld.text
         dataDict[User.CodingKeys.lastName.stringValue] = lastNameTxtFld.text
         dataDict[User.CodingKeys.username.stringValue] = userNameTxtFld.text
         dataDict[User.CodingKeys.birthday.stringValue] = UtilityManager.stringFromNSDateWithFormat(date: dateOfBirtTxtFld.date! as NSDate, format: "YYYY-MM-dd")
         if isFemaleSelected {
-            dataDict[User.CodingKeys.gender.stringValue] = "Female"
+            dataDict[User.CodingKeys.gender.stringValue] = "F"
         }
         SVProgressHUD.show()
         ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
+                let user = response as! User
+                UserDefaultManager.updateUserObject(user: user)
                 self.navigationController?.popViewController(animated: true)
             } else {
-                if let error = response as? Error {
-                    UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
-                }
+                let error = response as! Error
+                UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
             }
         }
     }
-
+    
     // MARK: - Validation CallBacks
 
     func validationSuccessful() {
@@ -150,7 +156,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if !isFemaleSelected {
             UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
         } else {
-            if UserDefaultManager.getCurrentUserObject() != nil {
+            if UserDefaultManager.isUserLoggedIn() {
                 updateProfile()
             } else {
                 verifyUsernameUniquenessFromServer(username: userNameTxtFld.text)
@@ -207,33 +213,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
 
     @IBAction func femaleBtnTapped(_ sender: Any) {
         applyFemaleSelection()
+
     }
 
     @IBAction func maleBtnTapped(_ sender: Any) {
         tipView?.dismiss()
-        var preferences = EasyTipView.globalPreferences
-        preferences.drawing.foregroundColor = UIColor.white
-        preferences.drawing.backgroundColor = UIColor(hex: "5CCEC4")
-        preferences.drawing.font = UIFont(name: "SegoeUI", size: 11)!
-        preferences.drawing.textAlignment = NSTextAlignment.left
-
-        preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
-        preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: 15)
-        preferences.animating.showInitialAlpha = 0
-        preferences.animating.showDuration = 1
-        preferences.animating.dismissDuration = 1.0
-        preferences.drawing.arrowPosition = .bottom
-        preferences.drawing.cornerRadius = 10.0
-        preferences.positioning.maxWidth = 143
 
         let text = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
-        
-        tipView = EasyTipView(text: text, preferences: preferences, delegate: nil)
+
+        tipView = EasyTipView(text: text, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
         tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
     }
-    
+
     @IBAction func backBtnTapped(_ sender: Any) {
-        if UserDefaultManager.getCurrentUserObject() != nil {
+        if UserDefaultManager.isUserLoggedIn() {
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)
