@@ -38,7 +38,7 @@ class LandingViewController: UIViewController {
         currentUserType = .shopper
         performSegue(withIdentifier: "toCountryVC", sender: self)
     }
-    
+
     @IBAction func signUpSozieBtnTapped(_ sender: Any) {
         currentUserType = .sozie
         performSegue(withIdentifier: "toCountryVC", sender: self)

@@ -72,7 +72,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             backButton.isHidden = true
         }
     }
-    //MARK: -Custom Methods
+    // MARK: - Custom Methods
 
     func applyValidators() {
         validator.registerField(firstNameTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule])

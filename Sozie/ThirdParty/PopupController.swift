@@ -24,7 +24,6 @@ typealias PopupAnimateCompletion =  () -> ()
     Every ViewController which is added on the PopupController must need to be conformed this protocol.
  */
 public protocol PopupContentViewController {
-    
     /** sizeForPopup(popupController: size: showingKeyboard:):
         return view's size
      */
@@ -32,7 +31,7 @@ public protocol PopupContentViewController {
 }
 
 open class PopupController: UIViewController {
-    
+
     public enum PopupLayout {
         case top, center, bottom
         
@@ -44,18 +43,17 @@ open class PopupController: UIViewController {
             }
         }
     }
-    
+
     public enum PopupAnimation {
         case fadeIn, slideUp
     }
-    
+
     public enum PopupBackgroundStyle {
         case blackFilter(alpha: CGFloat)
     }
-    
     // MARK: - Public variables
     open var popupView: UIView!
-    open var cornerRadius : CGFloat = 10.0
+    open var cornerRadius: CGFloat = 10.0
     // MARK: - Private variables
     fileprivate var movesAlongWithKeyboard: Bool = true
     fileprivate var scrollable: Bool = true {
@@ -79,15 +77,14 @@ open class PopupController: UIViewController {
     }
     fileprivate var layout: PopupLayout = .center
     fileprivate var animation: PopupAnimation = .fadeIn
-    
+
     fileprivate let margin: CGFloat = 16
     fileprivate let baseScrollView = UIScrollView()
     fileprivate var isShowingKeyboard: Bool = false
     fileprivate var defaultContentOffset = CGPoint.zero
     fileprivate var closedHandler: ((PopupController) -> Void)?
     fileprivate var showedHandler: ((PopupController) -> Void)?
-    
-    
+
     fileprivate var maximumSize: CGSize {
         get {
             return CGSize(
@@ -96,78 +93,71 @@ open class PopupController: UIViewController {
             )
         }
     }
-    
+
     deinit {
         self.removeFromParent()
     }
-    
     // MARK: Overrides
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         registerNotification()
     }
-    
+
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         unregisterNotification()
     }
-    
+
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateLayouts()
     }
-    
+
 }
 
 // MARK: - Publics
 public extension PopupController {
-    
     // MARK: Classes
     public class func create(_ parentViewController: UIViewController) -> PopupController {
         let controller = PopupController()
         controller.defaultConfigure()
-        
         parentViewController.addChild(controller)
         parentViewController.view.addSubview(controller.view)
         controller.didMove(toParent: parentViewController)
-        
         return controller
     }
-    
+
     public func updatePopUpSize() {
         updateLayouts()
     }
-    
+
     public func customize(_ options: [PopupCustomOption]) -> PopupController {
         customOptions(options)
         return self
     }
-    
+
     public func show(_ childViewController: UIViewController) -> PopupController {
         self.addChild(childViewController)
         popupView = childViewController.view
         configure()
-        
         childViewController.didMove(toParent: self)
-        
         show(layout, animation: animation) {
             self.defaultContentOffset = self.baseScrollView.contentOffset
             self.showedHandler?(self)
         }
-        
         return self
     }
-    
+
     public func didShowHandler(_ handler: @escaping (PopupController) -> Void) -> PopupController {
         self.showedHandler = handler
         return self
     }
-    
+
     public func didCloseHandler(_ handler: @escaping (PopupController) -> Void) -> PopupController {
         self.closedHandler = handler
         return self
     }
-    
+
     public func dismiss(_ completion: (() -> Void)? = nil) {
         if isShowingKeyboard {
             popupView.endEditing(true)
@@ -178,37 +168,34 @@ public extension PopupController {
 
 // MARK: Privates
 private extension PopupController {
-    
+
     func defaultConfigure() {
         scrollable = true
         dismissWhenTaps = true
         backgroundStyle = .blackFilter(alpha: 0.4)
     }
-    
+
     func configure() {
         view.isHidden = true
         view.frame = UIScreen.main.bounds
-        
         baseScrollView.frame = view.frame
         view.addSubview(baseScrollView)
-        
         popupView.layer.cornerRadius = cornerRadius
         popupView.layer.masksToBounds = true
         popupView.frame.origin.y = 0
-        
         baseScrollView.addSubview(popupView)
     }
-    
+
     func registerNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(PopupController.popupControllerWillShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PopupController.popupControllerWillHideKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PopupController.popupControllerDidHideKeyboard(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
-    
+
     func unregisterNotification() {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     func customOptions(_ options: [PopupCustomOption]) {
         for option in options {
             switch option {
@@ -227,20 +214,19 @@ private extension PopupController {
             }
         }
     }
-    
+
     func registerTapGesture() {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PopupController.didTapGesture(_:)))
-        
         gestureRecognizer.delegate = self
         baseScrollView.addGestureRecognizer(gestureRecognizer)
     }
-    
+
     func unregisterTapGesture() {
         for recognizer in baseScrollView.gestureRecognizers ?? [] {
             baseScrollView.removeGestureRecognizer(recognizer)
         }
     }
-    
+
     func updateLayouts() {
         guard let child = self.children.last as? PopupContentViewController else { return }
         popupView.frame.size = child.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
@@ -251,72 +237,65 @@ private extension PopupController {
             defaultContentOffset.y = -baseScrollView.contentInset.top
         }
     }
-    
+
     func updateBackgroundStyle(_ style: PopupBackgroundStyle) {
         switch style {
         case .blackFilter(let alpha):
             baseScrollView.backgroundColor = UIColor.black.withAlphaComponent(alpha)
         }
     }
-    
+
     func updateScrollable() {
         baseScrollView.isScrollEnabled = scrollable
         baseScrollView.alwaysBounceVertical = scrollable
-        
         if scrollable {
             baseScrollView.delegate = self
         }
     }
-    
+
     @objc func popupControllerWillShowKeyboard(_ notification: Notification) {
         isShowingKeyboard = true
         let obj = (notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
-        
         if needsToMoveFrom(obj.cgRectValue.origin) {
             move(obj.cgRectValue.origin)
         }
     }
-    
+
     @objc func popupControllerWillHideKeyboard(_ notification: Notification) {
         back()
     }
-    
+
     @objc func popupControllerDidHideKeyboard(_ notification: Notification) {
         self.isShowingKeyboard = false
     }
-    
+
     // Tap Gesture
     @objc func didTapGesture(_ sender: UITapGestureRecognizer) {
         self.closePopup(nil)
     }
-    
+
     func closePopup(_ completion: (() -> Void)?) {
         hide(animation) {
             completion?()
             self.didClosePopup()
         }
     }
-    
+
     func didClosePopup() {
         popupView.endEditing(true)
         popupView.removeFromSuperview()
-        
         children.forEach { $0.removeFromParent() }
-        
         view.isHidden = true
         self.closedHandler?(self)
-        
         self.removeFromParent()
     }
-    
+
     func show(_ layout: PopupLayout, animation: PopupAnimation, completion: @escaping PopupAnimateCompletion) {
         guard let childViewController = children.last as? PopupContentViewController else {
             return
         }
-        
         popupView.frame.size = childViewController.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
         popupView.frame.origin.x = layout.origin(popupView!).x
-        
         switch animation {
         case .fadeIn:
             fadeIn(layout, completion: { () -> Void in
@@ -328,15 +307,13 @@ private extension PopupController {
             })
         }
     }
-    
+
     func hide(_ animation: PopupAnimation, completion: @escaping PopupAnimateCompletion) {
         guard let child = children.last as? PopupContentViewController else {
             return
         }
-        
         popupView.frame.size = child.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
         popupView.frame.origin.x = layout.origin(popupView).x
-        
         switch animation {
         case .fadeIn:
             self.fadeOut({ () -> Void in
@@ -349,16 +326,15 @@ private extension PopupController {
                 completion()
             })
         }
-        
     }
-    
+
     func needsToMoveFrom(_ origin: CGPoint) -> Bool {
         guard movesAlongWithKeyboard else {
             return false
         }
         return (popupView.frame.maxY + layout.origin(popupView).y) > origin.y
     }
-    
+
     func move(_ origin: CGPoint) {
         guard let child = children.last as? PopupContentViewController else {
             return
@@ -368,7 +344,7 @@ private extension PopupController {
         baseScrollView.contentOffset.y = -baseScrollView.contentInset.top
         defaultContentOffset = baseScrollView.contentOffset
     }
-    
+
     func back() {
         guard let child = children.last as? PopupContentViewController else {
             return
@@ -377,26 +353,23 @@ private extension PopupController {
         baseScrollView.contentInset.top = layout.origin(popupView).y
         defaultContentOffset.y = -baseScrollView.contentInset.top
     }
-    
+
     func clean() {
         popupView.endEditing(true)
         popupView.removeFromSuperview()
         baseScrollView.removeFromSuperview()
     }
-    
 }
 
 // MARK: Animations
 private extension PopupController {
-    
+
     func fadeIn(_ layout: PopupLayout, completion: @escaping () -> Void) {
         baseScrollView.contentInset.top = layout.origin(popupView).y
-        
         view.isHidden = false
         popupView.alpha = 0.0
         popupView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         baseScrollView.alpha = 0.0
-        
         UIView.animate(withDuration: 0.3, delay: 0.1, options: UIView.AnimationOptions(), animations: { () -> Void in
             self.popupView.alpha = 1.0
             self.baseScrollView.alpha = 1.0
@@ -405,16 +378,14 @@ private extension PopupController {
                 completion()
         }
     }
-    
+
     func slideUp(_ layout: PopupLayout, completion: @escaping () -> Void) {
         view.isHidden = false
         baseScrollView.backgroundColor = UIColor.clear
         baseScrollView.contentInset.top = layout.origin(popupView).y
         baseScrollView.contentOffset.y = -UIScreen.main.bounds.height
-        
         UIView.animate(
             withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: { () -> Void in
-                
                 self.updateBackgroundStyle(self.backgroundStyle)
                 self.baseScrollView.contentOffset.y = -layout.origin(self.popupView).y
                 self.defaultContentOffset = self.baseScrollView.contentOffset
@@ -422,9 +393,8 @@ private extension PopupController {
                 completion()
         })
     }
-    
+
     func fadeOut(_ completion: @escaping () -> Void) {
-        
         UIView.animate(
             withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions(), animations: { () -> Void in
                 self.popupView.alpha = 0.0
@@ -434,9 +404,8 @@ private extension PopupController {
                 completion()
         }
     }
-    
+
     func slideOut(_ completion: @escaping () -> Void) {
-        
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: { () -> Void in
             self.popupView.frame.origin.y = UIScreen.main.bounds.height
             self.baseScrollView.alpha = 0.0
@@ -448,7 +417,7 @@ private extension PopupController {
 
 // MARK: UIScrollViewDelegate methods
 extension PopupController: UIScrollViewDelegate {
-    
+
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let delta: CGFloat = defaultContentOffset.y - scrollView.contentOffset.y
         if delta > 20 && !isShowingKeyboard {
@@ -456,7 +425,7 @@ extension PopupController: UIScrollViewDelegate {
             return
         }
     }
-    
+
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let delta: CGFloat = defaultContentOffset.y - scrollView.contentOffset.y
         if delta > 50 {
@@ -465,7 +434,6 @@ extension PopupController: UIScrollViewDelegate {
             self.closePopup { [weak self] in }
         }
     }
-    
 }
 
 extension PopupController: UIGestureRecognizerDelegate {

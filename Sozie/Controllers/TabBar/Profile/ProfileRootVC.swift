@@ -33,6 +33,10 @@ class ProfileRootVC: BaseViewController {
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuWidth = UIScreen.main.bounds.size.width - 60.0
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
+        profileImageView.layer.cornerRadius = profileImageView.frame.width/2.0
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
+        profileImageView.clipsToBounds = true
         populateCurrentUserData()
     }
     func populateCurrentUserData() {
@@ -53,6 +57,9 @@ class ProfileRootVC: BaseViewController {
                 if let waist = measurement.waist {
                     waistLabel.text = "Waist: " + String(waist) + "  |"
                 }
+            }
+            if let imageURL = currentUser.picture {
+                profileImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
             }
         }
     }

@@ -135,9 +135,7 @@ class SizeChartPopUpVC: UIViewController {
                         closeHandler?()
                         return
                     }
-                    
                 }
-
             } else if isUKSelected {
                 if let index = ukSelectedIndex {
                     if delegate != nil {
@@ -245,7 +243,7 @@ class SizeChartPopUpVC: UIViewController {
         }
     }
 
-    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: ProductSizeChart?, currentProductId: String? = nil , brandid: Int? = nil) -> SizeChartPopUpVC {
+    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: ProductSizeChart?, currentProductId: String? = nil, brandid: Int? = nil) -> SizeChartPopUpVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "SizeChartPopUpVC") as! SizeChartPopUpVC
         instnce.sizeChartList = arrayOfSizeChart
@@ -335,7 +333,6 @@ extension SizeChartPopUpVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var indexPathsToReload = [indexPath]
         clearAllSelections()
         if collectionView == sizesCollectionVu {
             isSelectedFromGeneral = true

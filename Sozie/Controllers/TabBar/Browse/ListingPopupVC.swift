@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum FilterType : String {
+public enum FilterType: String {
     case category = "CATEGORY"
     case filter = "FILTER"
     case sozie = "SOZIE"
@@ -16,11 +16,11 @@ public enum FilterType : String {
     case request = "REQUESTS"
 }
 
-struct DisclosureCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling , CheckmarkViewModeling {
+struct DisclosureCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewModeling, CheckmarkViewModeling {
     var isCheckmarkHidden: Bool = true
     var title: String?
     var attributedTitle: NSAttributedString?
-    var reuseIdentifier : String = "DisclosureCell"
+    var reuseIdentifier: String = "DisclosureCell"
 }
 
 protocol ListingPopupVCDelegate {
@@ -124,7 +124,6 @@ class ListingPopupVC: UIViewController {
     }
 
     @IBAction func doneButtonTapped(_ sender: Any) {
-        
         if popupType == PopupType.category {
             if let index = selectedViewModelIndex {
                 let currentCategory = categoriesList[index]
@@ -147,15 +146,15 @@ class ListingPopupVC: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "toSubcategory" {
-            let vc = segue.destination as! SelectionPopupVC
-            vc.popupType = popupType
-            vc.selectedBrandId = selectedBrandId
+            let destVC = segue.destination as! SelectionPopupVC
+            destVC.popupType = popupType
+            destVC.selectedBrandId = selectedBrandId
             if popupType == PopupType.category {
-                vc.category = selectedCategory
+                destVC.category = selectedCategory
             } else {
-                vc.brandList = brandList
+                destVC.brandList = brandList
             }
-            vc.delegate = self
+            destVC.delegate = self
         }
     }
 
@@ -204,7 +203,6 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
                     selectedViewModelIndex = indexPath.row
                     self.doneButton.isHidden = false
                 }
-                
             } else {
                 viewModels[indexPath.row].isCheckmarkHidden = false
                 selectedViewModelIndex = indexPath.row

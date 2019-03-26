@@ -142,7 +142,6 @@ class BrowseVC: BaseViewController {
         appDelegate.imageTaken = nil
         cancelTipView?.dismiss()
         collectionTipView?.dismiss()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         if UserDefaultManager.getIfShopper() == false {
@@ -474,7 +473,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                     tipView.dismiss()
                 }
             }
-            if let image = appDelegate.imageTaken {
+            if appDelegate.imageTaken != nil {
                 productViewModels[indexPath.row].isSelected = true
                 var indexPathToReload = [indexPath]
                 if let index = selectedIndex {

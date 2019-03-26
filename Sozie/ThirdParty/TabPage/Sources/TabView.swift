@@ -239,6 +239,12 @@ extension TabView {
             collectionViewContentOffsetX = 0.0
             currentBarViewWidth = 0.0
         }
+        if beforeIndex != currentIndex {
+            let beforeIndexPath = IndexPath(item: beforeIndex, section: 0)
+            if let cell = collectionView.cellForItem(at: beforeIndexPath) as? TabCollectionCell {
+                cell.dismissTipView()
+            }
+        }
         if let cell = collectionView.cellForItem(at: indexPath) as? TabCollectionCell {
             currentBarView.isHidden = false
             if animated && shouldScroll {
@@ -255,9 +261,9 @@ extension TabView {
                     if !animated && shouldScroll {
                         cell.isCurrent = true
                     }
-                    
                     self.updateCollectionViewUserInteractionEnabled(true)
             })
+            cell.showTipView()
         }
         beforeIndex = currentIndex
     }
@@ -294,6 +300,7 @@ extension TabView: UICollectionViewDataSource {
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabCollectionCell.cellIdentifier(), for: indexPath) as! TabCollectionCell
         configureCell(cell, indexPath: indexPath)
+//        cell.showTipView()
         return cell
     }
 

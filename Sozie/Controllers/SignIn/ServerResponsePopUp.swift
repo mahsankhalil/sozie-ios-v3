@@ -9,13 +9,13 @@
 import UIKit
 
 class ServerResponsePopUp: UIViewController {
-   
+
     var closeHandler: (() -> Void)?
     @IBOutlet weak var okBtn: DZGradientButton!
     @IBOutlet weak var detailTxtLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var titleImgVu: UIImageView!
-    
+
     var titleImageName: String?
     var titleName: String?
     var detail: String?
@@ -33,7 +33,7 @@ class ServerResponsePopUp: UIViewController {
             self.detailTxtLbl.text = description
         }
     }
-    
+
     class func instance(imageName: String, title: String, description: String) -> ServerResponsePopUp {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "ServerResponsePopUp") as! ServerResponsePopUp
@@ -54,10 +54,10 @@ class ServerResponsePopUp: UIViewController {
     @IBAction func okBtnTapped(_ sender: Any) {
         closeHandler!()
     }
-    
+
 }
 extension ServerResponsePopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width - 26.0 ,height: 300.0)
+        return CGSize(width: UIScreen.main.bounds.size.width - 26.0, height: 300.0)
     }
 }

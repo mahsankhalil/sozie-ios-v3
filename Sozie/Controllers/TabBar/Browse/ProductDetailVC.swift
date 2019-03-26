@@ -34,7 +34,7 @@ class ProductDetailVC: BaseViewController {
         swipeToSeeView.roundCorners(corners: [.topLeft], radius: 20.0)
         setupSozieLogoNavBar()
 //        populateProductData()
-        fetchProductDetailFromServer()
+//        fetchProductDetailFromServer()
         collectionView.register(UINib(nibName: "PostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostCollectionViewCell")
         collectionView.register(UINib(nibName: "ProductDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductDetailCollectionViewCell")
         buyButton.layer.cornerRadius = 3.0
@@ -56,6 +56,10 @@ class ProductDetailVC: BaseViewController {
             self.showTagItemButton()
             self.showCancelButton()
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProductDetailFromServer()
     }
     override func viewDidAppear(_ animated: Bool) {
         if UserDefaultManager.getIfShopper() {
@@ -121,12 +125,10 @@ class ProductDetailVC: BaseViewController {
                     productViewModel.imageURL = URL(string: imageURLTarget)
                 }
             } else {
-                if let feedId = currentProduct?.feedId, feedId == 18857 {
-                    if feedId == 18857 {
-                        let delimeter = "|"
-                        let url = imageURL.components(separatedBy: delimeter)
-                        imageURL = url[0]
-                    }
+                if imageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = imageURL.components(separatedBy: delimeter)
+                    imageURL = url[0]
                 }
                 productViewModel.imageURL = URL(string: imageURL)
             }
@@ -176,9 +178,6 @@ class ProductDetailVC: BaseViewController {
             }
         }
     }
-
-
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -402,7 +401,7 @@ extension ProductDetailVC: ProductDetailCollectionViewCellDelegate {
     }
 }
 extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostVC") as? UploadPostVC {
             if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))

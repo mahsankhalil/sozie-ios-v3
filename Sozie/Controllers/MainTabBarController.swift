@@ -18,7 +18,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(self.notificationReceived), name: NSNotification.Name(rawValue: "pushNotificationReceived"), object: nil)
-        
         if ApplicationManager.sharedInstance.user == nil {
 //            SVProgressHUD.show()
 //            RequestManager.getUser(successBlock: { (response) in
@@ -44,13 +43,12 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let tabbarItem = self.tabBar.items![0]
         tabbarItem.badgeValue = "1"
     }
-    
+
     override func viewWillLayoutSubviews() {
         var tabFrame = self.tabBar.frame
         // - 40 is editable , the default value is 49 px, below lowers the tabbar and above increases the tab bar size
         tabFrame.size.height = 40
         tabFrame.origin.y = self.view.frame.size.height - 40
-        
         self.tabBar.frame = tabFrame
     }
 

@@ -35,20 +35,6 @@ class TabCollectionCell: UICollectionViewCell {
             }
             currentBarView.backgroundColor = option.currentColor
             layoutIfNeeded()
-            if isCurrent == true && item == "Sozies" {
-//                tipView?.dismiss()
-                tipView?.isHidden = false
-                if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.mySoziesUserGuide) == false {
-                    self.showTipViewSozie()
-                }
-            } else if isCurrent == true && item == "Requests" {
-                tipView?.isHidden = false
-                if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.myRequestsUserGuide) == false {
-                    self.showTipViewRequests()
-                }
-            } else {
-                tipView?.isHidden = true
-            }
         }
     }
 
@@ -58,9 +44,7 @@ class TabCollectionCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         currentBarView.isHidden = true
-        
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         if item.characters.count == 0 {
@@ -70,18 +54,33 @@ class TabCollectionCell: UICollectionViewCell {
         return intrinsicContentSize
     }
 
+    func showTipView() {
+        if isCurrent == true && item == "Sozies" {
+            //                tipView?.dismiss()
+            tipView?.isHidden = false
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.mySoziesUserGuide) == false {
+                self.showTipViewSozie()
+            }
+        } else if isCurrent == true && item == "Requests" {
+            tipView?.isHidden = false
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.myRequestsUserGuide) == false {
+                self.showTipViewRequests()
+            }
+        } else {
+            tipView?.isHidden = true
+        }
+    }
     class func cellIdentifier() -> String {
         return "TabCollectionCell"
     }
 }
 
-
 // MARK: - View
 
 extension TabCollectionCell {
-    override var intrinsicContentSize : CGSize {
+    override var intrinsicContentSize: CGSize {
         let width: CGFloat
-        if let tabWidth = option.tabWidth , tabWidth > 0.0 {
+        if let tabWidth = option.tabWidth, tabWidth > 0.0 {
             width = tabWidth
         } else {
             width = itemLabel.intrinsicContentSize.width + option.tabMargin * 2
@@ -131,17 +130,16 @@ extension TabCollectionCell {
                 if isFirstTime {
                     let text = "Click here to see your Sozie matches and Sozies that you are following"
                     var prefer = UtilityManager.tipViewGlobalPreferences()
-                    prefer.drawing.arrowPosition = .bottom
+                    prefer.drawing.arrowPosition = .left
                     prefer.positioning.maxWidth = 110
-                    prefer.positioning.bubbleVInset = 120
+                    //        prefer.positioning.bubbleVInset = 120
                     tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
-                    tipView?.show(animated: true, forView: self, withinSuperview: self.superview?.superview)
+                    tipView?.show(animated: true, forView: self.itemLabel, withinSuperview: self.superview?.superview)
                     isFirstTime = false
                     if self.superview?.superview != nil {
                         UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.mySoziesUserGuide)
                     }
-                    perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)
-                }
+                    perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)                }
             }
         }
     }
@@ -158,7 +156,6 @@ extension TabCollectionCell {
 //        tipView.show(animated: true, forView: self, withinSuperview: self.superview)
 //    }
 }
-
 
 // MARK: - IBAction
 

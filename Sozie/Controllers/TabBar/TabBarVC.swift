@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 class TabBarVC: UITabBarController {
 
     override func viewDidLoad() {
@@ -37,7 +37,6 @@ class TabBarVC: UITabBarController {
         browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Browse icon"), selectedImage: UIImage(named: "Browse icon-Selected"))
         let cameraVc = UIViewController()
         cameraVc.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
-        
         let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
         profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "Profile icon"), selectedImage: UIImage(named: "Profile icon-Selected"))
         self.viewControllers = ([browseNC, cameraVc, profileNC] as! [UIViewController])

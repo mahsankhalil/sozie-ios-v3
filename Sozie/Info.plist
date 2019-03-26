@@ -16,8 +16,6 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>3.0</string>
-    <key>com.appsee.ApiKey</key>
-    <string>668f4ee2336f4a89b9e8c42e7e98e1a0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -44,7 +42,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>31</string>
+	<string>32</string>
 	<key>FacebookAppID</key>
 	<string>785424855123561</string>
 	<key>FacebookDisplayName</key>
@@ -102,5 +100,7 @@
 		<key>test</key>
 		<string>key_test_mpIpjSQp8qCCC23ii7WdviieqwcWAHJN</string>
 	</dict>
+	<key>com.appsee.ApiKey</key>
+	<string>668f4ee2336f4a89b9e8c42e7e98e1a0</string>
 </dict>
 </plist>

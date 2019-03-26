@@ -11,7 +11,7 @@ import SVProgressHUD
 import StoreKit
 import SideMenu
 import MessageUI
-struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewModeling,LineProviding {
+struct TitleCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewModeling, LineProviding {
     var isHidden: Bool
     var title: String?
     var attributedTitle: NSAttributedString?
@@ -21,7 +21,7 @@ struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewMod
 //    var title: String?
 //    var attributedTitle: NSAttributedString?
 //}
-struct TitleCellWithSwitchViewModel : RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding,LineProviding {
+struct TitleCellWithSwitchViewModel: RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding, LineProviding {
     var isHidden: Bool
     var title: String?
     var attributedTitle: NSAttributedString?
@@ -35,7 +35,6 @@ class ProfileSideMenuVC: BaseViewController {
         var title: String
         var rowViewModels: [RowViewModel]
     }
-    
     var sections: [Section] = []
 
     @IBOutlet weak var myBalanceButton: UIButton!
@@ -60,7 +59,7 @@ class ProfileSideMenuVC: BaseViewController {
             self.myBalanceViewHeightContraint.constant = 0.0
         } else {
             self.myBalanceViewHeightContraint.constant = 50.0
-            accountTitles = ["Edit Profile", "Change My Workplace", "Update Profile Picture", "Change Password", "My Measurements"]
+            accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements", "Change My Workplace"]
 
         }
         let accountViewModels = setupViewModels(accountTitles)
@@ -95,7 +94,6 @@ class ProfileSideMenuVC: BaseViewController {
                 } else if title == "Reset first time use guide" {
                     flag = !UserDefaultManager.isUserGuideDisabled()
                 }
-                
                 viewModel = TitleCellWithSwitchViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil, isSwitchOn: flag)
                             } else {
                 viewModel = TitleCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
@@ -109,7 +107,7 @@ class ProfileSideMenuVC: BaseViewController {
         SVProgressHUD.show()
         var dataDict = [String: Any]()
         dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
-        ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
+        ServerManager.sharedInstance.logoutUser(params: dataDict) { (_, _) in
             SVProgressHUD.dismiss()
             UserDefaultManager.deleteLoginResponse()
             self.changeRootVCToLoginNC()
@@ -133,7 +131,7 @@ class ProfileSideMenuVC: BaseViewController {
         }
     }
     func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
-        guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId) else {
+        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
             completion(false)
             return
         }
@@ -162,11 +160,9 @@ class ProfileSideMenuVC: BaseViewController {
     func sendFeedbackWithEmail() {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
-        
         // Configure the fields of the interface.
         composeVC.setToRecipients(["contact@sozie.com"])
         composeVC.setSubject("Feedback")
-        
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
     }
@@ -223,7 +219,7 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 26.0
@@ -245,7 +241,7 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
 
         let section = sections[indexPath.section]
         let rowViewModel = section.rowViewModels[indexPath.row]
-        var reuseIdentifier: String? = nil
+        var reuseIdentifier: String?
         if let reuseIdentifierProvider = rowViewModel as? ReuseIdentifierProviding {
             reuseIdentifier = reuseIdentifierProvider.reuseIdentifier
         }
@@ -305,25 +301,25 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             showEditProfileVC()
         case 1:
-            if UserDefaultManager.getIfShopper() {
-                showUploadPhotoVC()
-            } else {
-                showUpdateWorkPlaceVC()
-            }
+//            if UserDefaultManager.getIfShopper() {
+            showUploadPhotoVC()
+//            } else {
+//                showUpdateWorkPlaceVC()
+//            }
         case 2:
-            if UserDefaultManager.getIfShopper() {
-                showChangePasswordVC()
-            } else {
-                showUploadPhotoVC()
-            }
+//            if UserDefaultManager.getIfShopper() {
+            showChangePasswordVC()
+//            } else {
+//                showUploadPhotoVC()
+//            }
         case 3:
-            if UserDefaultManager.getIfShopper() {
-                showMeasurementVC()
-            } else {
-                showChangePasswordVC()
-            }
-        case 4:
+//            if UserDefaultManager.getIfShopper() {
             showMeasurementVC()
+//            } else {
+//                showChangePasswordVC()
+//            }
+        case 4:
+            showUpdateWorkPlaceVC()
         default:
             return
         }
@@ -342,7 +338,7 @@ extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
             ServerManager.sharedInstance.updatePrefernce(params: dataDict) { (isSuccess, response) in
                 if isSuccess {
                     if var currentUser = UserDefaultManager.getCurrentUserObject() {
-                        if let preferences = currentUser.preferences {
+                        if currentUser.preferences != nil {
                             currentUser.preferences?.pushNotificationEnabled = switchButton.isOn
                             UserDefaultManager.updateUserObject(user: currentUser)
                         }
@@ -360,6 +356,5 @@ extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
                 UserDefaultManager.markAllUserGuidesNotShown()
             }
         }
-        
     }
 }

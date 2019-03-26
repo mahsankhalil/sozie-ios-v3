@@ -78,7 +78,7 @@ class SelectWorkVC: UIViewController {
             SVProgressHUD.dismiss()
             if isSuccess {
 //                self.brandList = self.removeTargetIfUS(brands: response as! [Brand])
-                self.brandList = response as! [Brand]
+                self.brandList = (response as! [Brand])
                 self.searchList = self.brandList ?? []
                 self.tableView.reloadData()
             }
@@ -113,7 +113,7 @@ class SelectWorkVC: UIViewController {
         }
         return brandsList
     }
-    // MARK: -Text Field Delegate
+    // MARK: - Text Field Delegate
 
     @objc func textFieldDidChange(textField: UITextField) {
         searchList.removeAll()
@@ -135,8 +135,8 @@ class SelectWorkVC: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "toSignUpEmailVC" {
-            let vc = segue.destination as! SignUpEmailVC
-            vc.signUpDict = signUpDict
+            let destVC = segue.destination as! SignUpEmailVC
+            destVC.signUpDict = signUpDict
         }
     }
     // MARK: - Actions
@@ -168,7 +168,7 @@ extension SelectWorkVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
 
@@ -184,6 +184,7 @@ extension SelectWorkVC: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !searchList.isEmpty {
             selectedBrandId = searchList[indexPath.row].brandId

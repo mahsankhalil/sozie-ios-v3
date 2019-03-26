@@ -9,11 +9,11 @@
 import UIKit
 
 protocol PopupNavControllerDelegate {
-    func doneButtonTapped(type : FilterType? , id : Int?)
+    func doneButtonTapped(type: FilterType?, id: Int?)
 }
 
 class PopupNavController: UINavigationController {
-    
+
     var navigationHandler: (() -> Void)?
     var popupType: PopupType?
     var brandList: [Brand]?
@@ -27,7 +27,7 @@ class PopupNavController: UINavigationController {
         // Do any additional setup after loading the view.
         self.delegate = self
     }
-    
+
     class func instance(type: PopupType?, brandList: [Brand]?, filterType: FilterType? = nil, brandId: Int? = nil) -> PopupNavController {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "PopupNavController") as! PopupNavController
@@ -73,11 +73,11 @@ extension PopupNavController: PopupContentViewController {
 extension PopupNavController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         navigationHandler!()
-        if let vc = self.viewControllers[0] as? ListingPopupVC {
-            vc.filterType = filterType
-            vc.selectedBrandId = selectedBrandId
-            vc.setPopupType(type: popupType, brandList: brandList,filterType: filterType)
-            vc.delegate = self
+        if let destVC = self.viewControllers[0] as? ListingPopupVC {
+            destVC.filterType = filterType
+            destVC.selectedBrandId = selectedBrandId
+            destVC.setPopupType(type: popupType, brandList: brandList, filterType: filterType)
+            destVC.delegate = self
         }
     }
 }
@@ -85,5 +85,5 @@ extension PopupNavController: ListingPopupVCDelegate {
     func doneButtonTapped(type: FilterType?, id: Int?) {
         popupDelegate?.doneButtonTapped(type: type, id: id)
         closeHandler!()
-    }  
+    }
 }

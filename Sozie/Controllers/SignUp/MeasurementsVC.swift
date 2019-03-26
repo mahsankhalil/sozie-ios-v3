@@ -32,10 +32,9 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var uploadBtn: DZGradientButton!
     @IBOutlet weak var skipButton: UIButton!
-    
+
     var sizes: Size?
     var currentMeasurement = LocalMeasurement()
-    
     var rowViewModels: [RowViewModel] = []
     var isFromSignUp = false
 
@@ -109,7 +108,6 @@ class MeasurementsVC: UIViewController {
                 bra = self.currentMeasurement.bra
                 cup = self.currentMeasurement.cup
                 let heightViewModel = DoubleTextFieldCellViewModel(text1: heightFeet, text2: heightInches, title: "HEIGHT", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
-                
                 let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: waist, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
 
                 let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: hip, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
@@ -218,7 +216,6 @@ extension MeasurementsVC: UITableViewDelegate, UITableViewDataSource {
 
         guard let cell = tableViewcell else { return UITableViewCell() }
         cell.tag = indexPath.row
-        
         if let cell = cell as? CellConfigurable {
             cell.setup(rowViewModel)
         }
@@ -236,7 +233,7 @@ extension MeasurementsVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         let rowViewModel = rowViewModels[indexPath.row]
-        if let _ = rowViewModel as? DoubleTextFieldCellViewModel {
+        if ((rowViewModel as? DoubleTextFieldCellViewModel) != nil) {
             return 71.0
         }
         return 83.0
@@ -257,9 +254,10 @@ extension MeasurementsVC: TextFieldDelegate {
                 currentMeasurement.bra = text
                 currentMeasurement.cup = text2
             case .height:
-                let heightInches = (Double(text2 ?? "1.0") ?? 1.0)/12.0
-                let inchesStr = String(format: "%0.4f", heightInches)
-                currentMeasurement.height = text + inchesStr
+                let heightInches = (Int(text2 ?? "") ?? 0) + ((Int(text) ?? 0) * 12)
+//                let heightInches = (Double(text2 ?? "1.0") ?? 1.0)/12.0
+                let inchesStr = String(heightInches)
+                currentMeasurement.height = inchesStr
             }
         }
     }
