@@ -50,7 +50,7 @@ class RequestsVC: UIViewController {
                 }
                 var priceString = ""
                 if let currency = request.requestedProduct.currency?.getCurrencySymbol() {
-                    priceString = currency + " " + String(format: "%0.2f", searchPrice)
+                    priceString = currency + String(format: "%0.2f", searchPrice)
                 }
 
                 let viewModel = MyRequestCellViewModel(price: priceString, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), title: request.requestedProduct.productName, attributedTitle: nil, isSelected: request.isFilled, subtitle: "Size Requested: " + request.sizeValue)

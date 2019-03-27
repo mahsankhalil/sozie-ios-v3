@@ -43,7 +43,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     // MARK: - Custom Methods
     func applyValidators() {
         validator.registerField(emailTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Please enter a valid email address") as Rule, EmailRule(message: "Invalid email")])
-        validator.registerField(passwordTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 9) as Rule, MaxLengthRule(length: 20) as Rule])
+        validator.registerField(passwordTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule])
         [emailTxtFld, passwordTxtFld].forEach { (field) in
             field?.delegate = self
         }

@@ -111,7 +111,10 @@ class BrowseVC: BaseViewController {
 //        productsCollectionVu.refreshControl = upperRefreshControl
         self.refreshData()
     }
-    func showTipView() {
+    func showTipeViewAfterDelay() {
+        perform(#selector(showTipView), with: nil, afterDelay: 0.5)
+    }
+    @objc func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
             let text = "To tag your photo, select model picture."
             var prefer = UtilityManager.tipViewGlobalPreferences()
@@ -345,7 +348,7 @@ class BrowseVC: BaseViewController {
 //        let popUpInstnc: PopupNavController? = PopupNavController.instance(type: type, brandList: brandList)
         popUpInstnc?.popupDelegate = self
         let popUpVC = PopupController
-            .create(self.tabBarController!)
+            .create(self.tabBarController!.navigationController!)
 
         let options = PopupCustomOption.layout(.bottom)
         popUpVC.cornerRadius = 0.0
@@ -407,13 +410,8 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         var rowViewModel: RowViewModel
         if collectionView == brandsCollectionVu {
             rowViewModel = brandViewModels[indexPath.row]
-
         } else {
             rowViewModel = productViewModels[indexPath.row]
-            if indexPath.row == productViewModels.count - 10 {
-                loadNextPage()
-            }
-
         }
         var cell: UICollectionViewCell
         if let viewModel = rowViewModel as? ReuseIdentifierProviding {
@@ -463,7 +461,11 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12.0
     }
-
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == productList.count - 10 {
+            loadNextPage()
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == productsCollectionVu {
             selectedProduct = productList[indexPath.row]

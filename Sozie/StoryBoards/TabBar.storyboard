@@ -397,20 +397,20 @@
             <objects>
                 <viewController id="Shc-8z-rMy" customClass="ProductDetailVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jq1-I5-k9d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZP-UX-q60">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7R-Sl-oeQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ob-KC-dSl">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="445"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="538"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ApC-rC-p13">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="445"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="538"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jgf-jI-gg4">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -434,7 +434,7 @@
                                                         </connections>
                                                     </collectionView>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yf5-ou-rod">
-                                                        <rect key="frame" x="247" y="374" width="128" height="71"/>
+                                                        <rect key="frame" x="247" y="467" width="128" height="71"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to see Sozie pictures" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdO-Km-FNP">
                                                                 <rect key="frame" x="0.0" y="25.5" width="112" height="37.5"/>
@@ -473,7 +473,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7L-ct-lfX">
-                                                <rect key="frame" x="0.0" y="445" width="375" height="109"/>
+                                                <rect key="frame" x="0.0" y="538" width="375" height="109"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UA8-P9-2dS">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
@@ -1819,7 +1819,7 @@
                                             <outlet property="delegate" destination="ioW-95-cLw" id="2rN-CM-Wij"/>
                                         </connections>
                                     </collectionView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make some upload to show data over here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fS-iS-YP0">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload pictures to create your gallery and earn money!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fS-iS-YP0">
                                         <rect key="frame" x="64" y="216.5" width="247" height="38.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="247" id="0zd-ru-ay8"/>
@@ -1933,7 +1933,7 @@
                                             <outlet property="delegate" destination="6kZ-Fh-i1K" id="dGs-rx-YNR"/>
                                         </connections>
                                     </tableView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Follow some Sozies! Go to Browse and look for pictures with masks on them.&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgY-4F-H4k">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No requests found, When a user will make a request it will be shown over here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgY-4F-H4k">
                                         <rect key="frame" x="28" y="214" width="319" height="37.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="319" id="flt-DD-Hrk"/>
@@ -2743,6 +2743,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LXu-v3-0l3"/>
-        <segue reference="nh1-29-RIS"/>
+        <segue reference="Pz3-HK-hHh"/>
     </inferredMetricsTieBreakers>
 </document>

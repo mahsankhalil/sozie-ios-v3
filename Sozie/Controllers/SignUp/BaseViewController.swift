@@ -47,7 +47,10 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.layer.borderWidth = 1.0
         navigationController?.navigationBar.layer.borderColor = UIColor(hex: "707070").cgColor.copy(alpha: 0.05)
     }
-    func showCancelButton() {
+    func showCancelButtonAfterDelay() {
+        perform(#selector(showCancelButton), with: nil, afterDelay: 0.5)
+    }
+    @objc func showCancelButton() {
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
         cancelButton.tintColor = UIColor(hex: "888888")
         navigationItem.leftBarButtonItem = cancelButton

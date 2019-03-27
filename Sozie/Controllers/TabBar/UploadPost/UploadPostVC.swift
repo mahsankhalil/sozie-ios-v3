@@ -84,7 +84,7 @@ class UploadPostVC: BaseViewController {
             searchPrice = Double(price)
         }
         if let currency = currentProduct?.currency?.getCurrencySymbol() {
-            priceString = currency + " " + String(format: "%0.2f", searchPrice)
+            priceString = currency + String(format: "%0.2f", searchPrice)
         }
         productPriceLabel.text = priceString
         if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {

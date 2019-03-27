@@ -65,17 +65,22 @@ extension TabBarVC: UITabBarControllerDelegate {
         return true
     }
 }
-extension TabBarVC:  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension TabBarVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.imageTaken = scaledImg
-            self.selectedIndex = 0
-            if let browseVC = ((self.viewControllers![0] as? UINavigationController)?.viewControllers[0]) as? BrowseVC {
-                browseVC.showCancelButton()
-                browseVC.showTipView()
+            if let browseNC = (self.viewControllers![0] as? UINavigationController) {
+                if browseNC.viewControllers.count > 1 {
+                    browseNC.popToRootViewController(animated: true)
+                }
+                if let browseVC = (browseNC.viewControllers[0]) as? BrowseVC {
+                    browseVC.showCancelButtonAfterDelay()
+                    browseVC.showTipeViewAfterDelay()
+                }
             }
+            self.selectedIndex = 0
         }
         picker.dismiss(animated: true, completion: nil)
     }

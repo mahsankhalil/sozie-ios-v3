@@ -142,13 +142,16 @@ class ProductDetailVC: BaseViewController {
         if let posts = currentProduct?.posts {
             if posts.count == 0 {
                 swipeToSeeView.isHidden = true
+                pageControl.isHidden = true
             } else {
                 swipeToSeeView.isHidden = false
+                pageControl.isHidden = false
             }
             pageControl.numberOfPages = posts.count + 1
         } else {
             pageControl.numberOfPages = 1
             swipeToSeeView.isHidden = true
+            pageControl.isHidden = true
         }
         makePostCellViewModel()
     }

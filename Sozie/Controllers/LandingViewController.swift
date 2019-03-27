@@ -16,7 +16,7 @@ public enum UserType: String {
 class LandingViewController: UIViewController {
 
     var currentUserType: UserType?
-
+    var signUpDict: [String: Any] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,19 +29,29 @@ class LandingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "toCountryVC", let selectCountryViewController = segue.destination as? SelectCountryVC {
-            selectCountryViewController.currentUserType = currentUserType
+        if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
+            signUpInfoProvider.signUpInfo = signUpDict
         }
+//        if segue.identifier == "toCountryVC", let selectCountryViewController = segue.destination as? SelectCountryVC {
+//            selectCountryViewController.currentUserType = currentUserType
+//        }
     }
 
     @IBAction func signupShopperBtnTapped(_ sender: Any) {
         currentUserType = .shopper
-        performSegue(withIdentifier: "toCountryVC", sender: self)
+        signUpDict[User.CodingKeys.country.stringValue] = 2
+        signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+//        performSegue(withIdentifier: "toCountryVC", sender: self)
     }
 
     @IBAction func signUpSozieBtnTapped(_ sender: Any) {
         currentUserType = .sozie
-        performSegue(withIdentifier: "toCountryVC", sender: self)
+        signUpDict[User.CodingKeys.country.stringValue] = 2
+        signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+        performSegue(withIdentifier: "toWorkVC", sender: self)
+
+//        performSegue(withIdentifier: "toCountryVC", sender: self)
     }
 
 }

@@ -293,7 +293,8 @@
                         <viewLayoutGuide key="safeArea" id="Mvu-Ij-rm4"/>
                     </view>
                     <connections>
-                        <segue destination="AQI-I8-YSA" kind="show" identifier="toCountryVC" id="Zib-hA-pya"/>
+                        <segue destination="5ua-jO-hcB" kind="show" identifier="toWorkVC" id="eNn-VW-0gA"/>
+                        <segue destination="CgK-3q-Hir" kind="show" identifier="toSignUpEmailVC" id="HaJ-aD-hEf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykC-Q8-OlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2083,7 +2084,8 @@
         <image name="login-logo" width="142" height="86.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9OJ-ih-pcb"/>
-        <segue reference="DE9-Vg-jdy"/>
+        <segue reference="eNn-VW-0gA"/>
+        <segue reference="HaJ-aD-hEf"/>
+        <segue reference="90n-N6-YqP"/>
     </inferredMetricsTieBreakers>
 </document>
