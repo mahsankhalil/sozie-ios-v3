@@ -75,6 +75,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 // Do something after login
                 let res = response as! LoginResponse
                 _ = UserDefaultManager.saveLoginResponse(loginResp: res)
+                UtilityManager.registerUserOnIntercom()
                 self.changeRootVCToTabBarNC()
             } else {
                 let error = response as! Error

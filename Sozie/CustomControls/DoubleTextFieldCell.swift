@@ -11,7 +11,7 @@ class DoubleTextFieldCell: UITableViewCell, CustomPickerTextFieldDelegate {
 
     @IBOutlet weak var secondTxtFld: CustomPickerTextField!
     @IBOutlet weak var firstTxtFld: CustomPickerTextField!
-    
+
     weak var textFieldDelegate: TextFieldDelegate?
     
     override func awakeFromNib() {
@@ -37,7 +37,6 @@ extension DoubleTextFieldCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let doubleTextFieldCellViewModel = viewModel as? DoubleTextFieldCellViewModeling {
             firstTxtFld.configure(title: doubleTextFieldCellViewModel.title, rightTitle: doubleTextFieldCellViewModel.columnUnit[0], placeholder: doubleTextFieldCellViewModel.columnPlaceholder[0], values1: doubleTextFieldCellViewModel.columnValues[0], values1Suffix: doubleTextFieldCellViewModel.columnValueSuffix[0], values2: doubleTextFieldCellViewModel.columnValues[1], values2Suffix: doubleTextFieldCellViewModel.columnValueSuffix[1])
-            
             secondTxtFld.configure(title: doubleTextFieldCellViewModel.title, rightTitle: doubleTextFieldCellViewModel.columnUnit[1], placeholder: doubleTextFieldCellViewModel.columnPlaceholder[1], values1: doubleTextFieldCellViewModel.columnValues[0], values1Suffix: doubleTextFieldCellViewModel.columnValueSuffix[0], values2: doubleTextFieldCellViewModel.columnValues[1], values2Suffix: doubleTextFieldCellViewModel.columnValueSuffix[1])
             if let text = doubleTextFieldCellViewModel.text1 {
                 firstTxtFld.text = text

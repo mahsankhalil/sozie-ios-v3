@@ -9,13 +9,13 @@
 import UIKit
 
 class SizeCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var sideLine: UIView!
     @IBOutlet weak var bottomLine: UIView!
-    
+
     func hideShowLinesInCell(indexPath: IndexPath, count: Int) {
-        if (indexPath.row % 5 == 4) {
+        if indexPath.row % 5 == 4 {
             sideLine.isHidden = true
         } else {
             sideLine.isHidden = false
@@ -47,7 +47,6 @@ extension SizeCell: CellConfigurable {
                 self.titleLbl.attributedText = attributedTitle
             }
         }
-        
         if let selectionViewModel = viewModel as? SelectionProviding {
             if selectionViewModel.isSelected {
                 self.titleLbl.textColor = UIColor(hex: "FC8888")

@@ -26,4 +26,3 @@ struct Category: Codable {
         subCategories = try values.decode([SubCategory].self, forKey: .subCategories)
     }
 }
-

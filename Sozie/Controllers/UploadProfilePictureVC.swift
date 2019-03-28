@@ -84,7 +84,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
             UtilityManager.showErrorMessage(body: "Please select Image", in: self)
         }
     }
-    
+
     @IBAction func skipBtnTapped(_ sender: Any) {
     }
 

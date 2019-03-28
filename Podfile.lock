@@ -27,6 +27,7 @@ PODS:
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - GTMSessionFetcher/Core (1.2.1)
   - Hex (6.0.0)
+  - Intercom (5.2.1)
   - MaterialTextField (1.0.1)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - GoogleSignIn
   - Hex
+  - Intercom
   - MaterialTextField (~> 1.0)
   - SDWebImage (~> 4.0)
   - SideMenu
@@ -71,6 +73,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - Hex
+    - Intercom
     - MaterialTextField
     - SDWebImage
     - SideMenu
@@ -102,6 +105,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   Hex: 3888e06c29fe725b12e33d434e31b06beb4112db
+  Intercom: 53f07c24f0ca18c1e910750e79b75f9c9867338f
   MaterialTextField: f1a0786588e4d3610cb9bb62d2adbe9777cebbf9
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
@@ -112,6 +116,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: f624fe56662e1cc4e217e66996779a4130ec29a6
+PODFILE CHECKSUM: 55f5ba9cf6be75068c0ca5f796057e7e43293709
 
 COCOAPODS: 1.5.3

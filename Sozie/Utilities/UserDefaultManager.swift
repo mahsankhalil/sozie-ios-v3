@@ -34,29 +34,29 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.userId
     }
-    
-    static func getCurrentUserType() -> String?
-    {
+
+    static func getCurrentUserType() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.type
     }
-    
+
     static func deleteLoginResponse() {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginResponse)
         UserDefaults.standard.synchronize()
     }
-    
+
     static func getAccessToken() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.access
     }
-    
+
     static func getRefreshToken() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.refresh
     }
+
     static func isUserGuideDisabled() -> Bool {
-        if (UserDefaults.standard.bool(forKey: UserDefaultKey.userGuide) as? Bool) == true {
+        if UserDefaults.standard.bool(forKey: UserDefaultKey.userGuide) == true {
             return true
         } else {
             return false
@@ -69,7 +69,7 @@ class UserDefaultManager: NSObject {
             return false
         }
     }
-    
+
     static func makeUserGuideDisabled() {
         UserDefaults.standard.set(true, forKey: UserDefaultKey.userGuide)
         UserDefaults.standard.synchronize()

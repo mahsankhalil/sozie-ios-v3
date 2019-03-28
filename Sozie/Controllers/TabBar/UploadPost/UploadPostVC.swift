@@ -145,7 +145,6 @@ class UploadPostVC: BaseViewController {
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.imageTaken = nil
                     self.navigationController?.popToRootViewController(animated: true)
-                    
                 } else {
                     UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
                 }
@@ -175,12 +174,12 @@ extension UploadPostVC: SizeChartPopupVCDelegate {
     }
 }
 extension UploadPostVC: PhotoEditorDelegate {
-    
+
     func doneEditing(image: UIImage) {
         selectedImage = image
         postImageView.image = image
     }
-    
+
     func canceledEditing() {
         print("Canceled")
     }

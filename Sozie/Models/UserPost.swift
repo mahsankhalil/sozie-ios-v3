@@ -22,7 +22,6 @@ struct UserPost: Codable {
     var product: Product
     
     enum CodingKeys: String, CodingKey {
-        
         case postId = "id"
         case imageURL = "image"
         case userId = "user"
@@ -58,7 +57,7 @@ struct PostPaginatedResponse: Codable {
         case previous
         case results
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         count = try values.decode(Int.self, forKey: .count)

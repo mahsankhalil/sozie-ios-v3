@@ -15,7 +15,7 @@ class TitleAndSwitchCell: UITableViewCell {
     @IBOutlet weak var switchControl: UISwitch!
     @IBOutlet weak var bottomLine: UIView!
     var delegate: TitleAndSwitchCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,12 +30,10 @@ class TitleAndSwitchCell: UITableViewCell {
     @IBAction func switchValueChanged(_ sender: Any) {
         delegate?.switchValueChanged(switchButton: sender as! UISwitch)
     }
-    
 }
 
 extension TitleAndSwitchCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
-        
         // Check for TitleViewModeling
         if let titleModel = viewModel as? TitleViewModeling {
             if let title = titleModel.title {
@@ -45,15 +43,12 @@ extension TitleAndSwitchCell: CellConfigurable {
                 titleLabel.attributedText = attributedTitle
             }
         }
-        
         if let switchModel = viewModel as? SwitchProviding {
             switchControl.setOn(switchModel.isSwitchOn ?? false, animated: true)
         }
         if let lineModel = viewModel as? LineProviding {
             bottomLine.isHidden = lineModel.isHidden
         }
-        
-        
     }
 }
 

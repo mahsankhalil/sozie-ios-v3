@@ -170,7 +170,6 @@ class BrowseVC: BaseViewController {
 
             }
         }
-        
     }
     // MARK: - Custom Methods
 

@@ -26,7 +26,6 @@ extension TitleAndCheckmarkCell: CellConfigurable {
                 titleLabel.attributedText = attributedTitle
             }
         }
-        
         // Check for CheckmarkViewModeling
         checkmarkImageView.isHidden = true
         if let checkmarkModel = viewModel as? CheckmarkViewModeling {

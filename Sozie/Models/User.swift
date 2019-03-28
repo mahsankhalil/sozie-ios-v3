@@ -78,7 +78,7 @@ struct User: Codable {
 struct UserPreferences: Codable {
     var userId: Int
     var pushNotificationEnabled: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
         case pushNotificationEnabled = "enable_notifications"
@@ -97,7 +97,7 @@ struct Measurements: Codable {
     var hip: Int?
     var cup: String?
     var waist: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case bra
         case height

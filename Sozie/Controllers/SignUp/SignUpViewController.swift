@@ -116,6 +116,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             if isSuccess {
                 if let loginResponse = response as? LoginResponse {
                     _ = UserDefaultManager.saveLoginResponse(loginResp: loginResponse)
+                    UtilityManager.registerUserOnIntercom()
                 }
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {

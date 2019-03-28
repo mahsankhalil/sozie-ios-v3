@@ -29,7 +29,7 @@ import MobileCoreServices
     override func drawRect(rect: CGRect) {
         // Drawing code
     }*/
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.isUserInteractionEnabled = true
@@ -44,30 +44,27 @@ import MobileCoreServices
         super.init(frame: frame)
     }
     
-    @objc func imageViewTapped(sender: UITapGestureRecognizer){
+    @objc func imageViewTapped(sender: UITapGestureRecognizer) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         
         // add cancel action
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) -> Void in
         }))
         
         // add upload camera action
-        actionSheet.addAction(UIAlertAction(title: "Upload from Camera", style: .default, handler: { (action) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Upload from Camera", style: .default, handler: { (_) -> Void in
             self.selectFromCameraPressed()
         }))
         
         // add upload gallery action
-        actionSheet.addAction(UIAlertAction(title: "Upload from Gallery", style: .default, handler: { (action) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "Upload from Gallery", style: .default, handler: { (_) -> Void in
             self.selectFromGalleryPressed()
         }))
-        
         actionSheet.popoverPresentationController?.sourceView = self.parentController?.view
-
         self.parentController?.present(actionSheet, animated: true, completion: nil)
     }
 
-    func selectFromCameraPressed(){
-        
+    func selectFromCameraPressed() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.navigationBar.barTintColor = Styles.sharedStyles.primaryColor
@@ -78,13 +75,13 @@ import MobileCoreServices
             self.parentController?.present(imagePicker, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "No Camera detected", message: "No Camera was detected on this device", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) -> Void in
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (_) -> Void in
             }))
             self.parentController?.present(alert, animated: true, completion: nil)
         }
     }
-    
-    func selectFromGalleryPressed(){
+
+    func selectFromGalleryPressed() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
             let imagePicker = UIImagePickerController()
             imagePicker.navigationBar.barTintColor = Styles.sharedStyles.primaryColor
@@ -95,27 +92,26 @@ import MobileCoreServices
             self.parentController?.present(imagePicker, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "Gallery ", message: "No Camera was detected on this device", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) -> Void in
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (_) -> Void in
             }))
             self.parentController?.present(alert, animated: true, completion: nil)
         }
     }
-    
+
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.image = image
         imageChanged = true
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        var newImage : UIImage!
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        var newImage: UIImage!
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             newImage = editedImage
         }
         if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             newImage = originalImage
         }
-        
         self.image = newImage
         picker.dismiss(animated: true, completion: nil)
     }
@@ -127,7 +123,6 @@ extension UIImage {
     func resizeImageWith(newSize: CGSize) -> UIImage {
         let horizontalRatio = newSize.width / size.width
         let verticalRatio = newSize.height / size.height
-        
         let ratio = max(horizontalRatio, verticalRatio)
         let newSize = CGSize(width: size.width * ratio, height: size.height * ratio)
         UIGraphicsBeginImageContextWithOptions(newSize, true, 0)

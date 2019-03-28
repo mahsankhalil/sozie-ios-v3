@@ -233,7 +233,7 @@ extension MeasurementsVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         let rowViewModel = rowViewModels[indexPath.row]
-        if ((rowViewModel as? DoubleTextFieldCellViewModel) != nil) {
+        if (rowViewModel as? DoubleTextFieldCellViewModel) != nil {
             return 71.0
         }
         return 83.0

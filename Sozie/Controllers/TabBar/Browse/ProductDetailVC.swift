@@ -52,7 +52,7 @@ class ProductDetailVC: BaseViewController {
             requestSozieButton.isHidden = true
         }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if let _ = appDelegate.imageTaken {
+        if appDelegate.imageTaken != nil {
             self.showTagItemButton()
             self.showCancelButton()
         }

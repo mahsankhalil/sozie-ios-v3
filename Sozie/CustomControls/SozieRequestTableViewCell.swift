@@ -43,7 +43,6 @@ class SozieRequestTableViewCell: UITableViewCell {
     @IBAction func acceptButtonTapped(_ sender: Any) {
         delegate?.acceptRequestButtonTapped(button: sender as! UIButton)
     }
-    
 }
 extension SozieRequestTableViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
@@ -54,9 +53,6 @@ extension SozieRequestTableViewCell: CellConfigurable {
         
         if let titleModel = viewModel as? TitleViewModeling {
             titleLabel.text = titleModel.title!
-        }
-        if let selectionModel = viewModel as? SelectionProviding {
-            
         }
         if let subTitleModel = viewModel as? SubtitleViewModeling {
             sizeRequestedLabel.text = subTitleModel.subtitle
@@ -72,7 +68,6 @@ extension SozieRequestTableViewCell: CellConfigurable {
                 let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                 let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                 heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
-                
             }
             if let hip = measurementModel.hip {
                 hipLabel.text = "Hip: " + String(hip) + "'  | "

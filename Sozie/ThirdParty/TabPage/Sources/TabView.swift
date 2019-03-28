@@ -122,7 +122,6 @@ internal class TabView: UIView {
     }
 }
 
-
 // MARK: - View
 
 extension TabView {
@@ -288,7 +287,6 @@ extension TabView {
     }
 }
 
-
 // MARK: - UICollectionViewDataSource
 
 extension TabView: UICollectionViewDataSource {
@@ -333,14 +331,12 @@ extension TabView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        // FIXME: Tabs are not displayed when processing is performed during introduction display
         if let cell = cell as? TabCollectionCell, layouted {
             let fixedIndex = isInfinity ? indexPath.item % pageTabItemsCount : indexPath.item
             cell.isCurrent = fixedIndex == (currentIndex % pageTabItemsCount)
         }
     }
 }
-
 
 // MARK: - UIScrollViewDelegate
 
@@ -385,7 +381,6 @@ extension TabView: UICollectionViewDelegate {
         }
     }
 }
-
 
 // MARK: - UICollectionViewDelegateFlowLayout
 

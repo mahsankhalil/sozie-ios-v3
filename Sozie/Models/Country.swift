@@ -18,7 +18,7 @@ struct Country: Codable {
         case name
         case code
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         countryId = try values.decode(Int.self, forKey: .countryId)

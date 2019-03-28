@@ -121,7 +121,7 @@ extension WishListVC: WishTableViewCellDelegate {
             UIApplication.shared.open(url)
         }
     }
-    
+
     func crossButonTapped(btn: UIButton) {
         let index = btn.tag
         if let productId = productList[index].productStringId {

@@ -74,6 +74,4 @@ struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewMode
         reuseIdentifier = identifier
 //        let viewModel = ProductImageCellViewModel(isSelected: false, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: productDescription, reuseIdentifier: "WishTableViewCell")
     }
-
-    
 }

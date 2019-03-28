@@ -36,7 +36,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
-            if (self.maskImageView.tag == 0 && (self.maskImageView.isHidden == false)) {
+            if (self.maskImageView.tag == 0) && (self.maskImageView.isHidden == false) {
                 if isFirstTime {
                     let text = "You're in! Click on pictures with a mask to see Sozie images"
                     var prefer = UtilityManager.tipViewGlobalPreferences()
@@ -63,7 +63,7 @@ extension ProductCollectionViewCell: ButtonProviding {
 extension ProductCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
-            productImageView.sd_setImage(with: imgModel.imageURL) { (img, err, cacheType, url) in
+            productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
                 self.adjustLayoutOfImageView()
                 UIView.animate(withDuration: 0.3, animations: {
                     (self.superview as? UICollectionView)?.collectionViewLayout.invalidateLayout()

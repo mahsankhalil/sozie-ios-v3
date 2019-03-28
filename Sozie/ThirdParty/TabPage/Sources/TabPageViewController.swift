@@ -116,7 +116,6 @@ extension TabPageViewController {
                                animated: false,
                                completion: nil)
         }
-       
     }
 
     fileprivate func setupScrollView() {

@@ -55,7 +55,6 @@ class SozieTableViewCell: UITableViewCell {
     @IBAction func followButtonTapped(_ sender: Any) {
         delegate?.followButtonTapped(button: sender as! UIButton)
     }
-    
 }
 extension SozieTableViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {

@@ -127,7 +127,7 @@ class SizeChartPopUpVC: UIViewController {
     }
 
     @IBAction func selectBtnTapped(_ sender: Any) {
-        if let _ = productSizeChart {
+        if productSizeChart != nil {
             if isSelectedFromGeneral {
                 if let index = generalSelectedIndex {
                     if delegate != nil {
@@ -162,7 +162,6 @@ class SizeChartPopUpVC: UIViewController {
                     delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips, sizeType: nil, sizeValue: nil)
                 case .waist:
                     delegate?.selectedValueFromPopUp(value: Int(currentSelection.waist.inch), type: .waist, sizeType: nil, sizeValue: nil)
-                    
                 default:
                     break
                 }

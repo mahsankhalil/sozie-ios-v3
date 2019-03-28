@@ -43,7 +43,7 @@ class PostCollectionViewCell: UICollectionViewCell {
             cameraButton.isHidden = true
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if let _ = appDelegate.imageTaken {
+            if appDelegate.imageTaken != nil {
                 cameraButton.isHidden = true
             } else {
                 cameraButton.isHidden = false
@@ -53,11 +53,10 @@ class PostCollectionViewCell: UICollectionViewCell {
         }
     }
     override func layoutIfNeeded() {
-        
     }
     @objc func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
-            if (self.followButton.tag == 1 && (self.followButton.isHidden == false)) {
+            if (self.followButton.tag == 1) && (self.followButton.isHidden == false) {
                 if isFirstTime {
                     let text = "Click here to Follow this Sozie"
                     var prefer = UtilityManager.tipViewGlobalPreferences()

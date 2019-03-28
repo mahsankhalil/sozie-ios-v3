@@ -374,7 +374,7 @@ private extension PopupController {
             self.popupView.alpha = 1.0
             self.baseScrollView.alpha = 1.0
             self.popupView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            }) { (finished) -> Void in
+            }) { (_) -> Void in
                 completion()
         }
     }
@@ -389,7 +389,7 @@ private extension PopupController {
                 self.updateBackgroundStyle(self.backgroundStyle)
                 self.baseScrollView.contentOffset.y = -layout.origin(self.popupView).y
                 self.defaultContentOffset = self.baseScrollView.contentOffset
-            }, completion: { (isFinished) -> Void in
+            }, completion: { (_) -> Void in
                 completion()
         })
     }
@@ -400,7 +400,7 @@ private extension PopupController {
                 self.popupView.alpha = 0.0
                 self.baseScrollView.alpha = 0.0
                 self.popupView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }) { (finished) -> Void in
+            }) { (_) -> Void in
                 completion()
         }
     }
@@ -409,7 +409,7 @@ private extension PopupController {
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: { () -> Void in
             self.popupView.frame.origin.y = UIScreen.main.bounds.height
             self.baseScrollView.alpha = 0.0
-            }, completion: { (isFinished) -> Void in
+            }, completion: { (_) -> Void in
                 completion()
         })
     }

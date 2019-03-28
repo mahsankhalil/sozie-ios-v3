@@ -21,7 +21,6 @@ class DisclosureCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }
 extension DisclosureCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {

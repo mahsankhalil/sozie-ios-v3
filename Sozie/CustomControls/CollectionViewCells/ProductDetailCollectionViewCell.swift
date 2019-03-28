@@ -22,7 +22,7 @@ class ProductDetailCollectionViewCell: UICollectionViewCell {
             cameraButton.isHidden = true
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if let _ = appDelegate.imageTaken {
+            if appDelegate.imageTaken != nil {
                 cameraButton.isHidden = true
             } else {
                 cameraButton.isHidden = false
@@ -32,13 +32,11 @@ class ProductDetailCollectionViewCell: UICollectionViewCell {
     @IBAction func cameraButtonTapped(_ sender: Any) {
         delegate?.productCameraButtonTapped(button: sender as! UIButton)
     }
-    
 }
 extension ProductDetailCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
             productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
-            
             }
         }
         if let titleImgModel = viewModel as? TitleImageViewModeling {
@@ -46,5 +44,4 @@ extension ProductDetailCollectionViewCell: CellConfigurable {
         }
 
     }
-    
 }

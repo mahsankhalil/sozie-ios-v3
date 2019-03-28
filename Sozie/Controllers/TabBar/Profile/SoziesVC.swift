@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 class SoziesVC: UIViewController {
     var reuseableIdentifier = "SozieTableViewCell"
-    
+
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
@@ -38,7 +38,7 @@ class SoziesVC: UIViewController {
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0
-            if let _ = dataDict["filter_by"] {
+            if dataDict["filter_by"] != nil {
                 searchLabel.text = String(viewModels.count) + " SOZIES FOLLOWED"
                 self.crossButton.isHidden = false
             } else if let queryBy = dataDict["query"] as? String {
@@ -60,7 +60,7 @@ class SoziesVC: UIViewController {
         setupViews()
         fetchDataFromServer()
     }
-    //MARK: -Custom Methods
+    // MARK: - Custom Methods
     func setupViews() {
         searchTextField.delegate = self
         searchViewHeightConstraint.constant = 0.0

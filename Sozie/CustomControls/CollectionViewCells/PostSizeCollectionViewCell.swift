@@ -12,7 +12,7 @@ class PostSizeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelBackgroundView: UIView!
     @IBOutlet weak var sizeLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,7 +24,6 @@ extension PostSizeCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
             imageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
-                
             }
         }
         if let subtitleModel = viewModel as? SubtitleViewModeling {

@@ -13,13 +13,12 @@ class SingleTextFieldCell: UITableViewCell {
 
     @IBOutlet weak var textField: CustomPickerTextField!
     @IBOutlet weak var notSureButton: UIButton!
-    
+
     private var buttonTappedDelegate: ButtonTappedDelegate?
     private var textFieldDelegate: TextFieldDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         // Initialization code
         textField.setupAppDesign()
         textField.pickerDelegate = self
@@ -51,12 +50,10 @@ extension SingleTextFieldCell: CellConfigurable {
             textField.configure(title: model.title, placeholder: model.placeholder, values: model.values, valuesSuffix: model.valueSuffix)
             self.buttonTappedDelegate = model.buttonTappedDelegate
             self.textFieldDelegate = model.textFieldDelegate
-            
             if let text = model.text {
                 textField.text = text
             }
         }
-        
         if let errorModel = viewModel as? ErrorViewModeling {
             if errorModel.displayError, let errorMessageModel = viewModel as? ErrorMessageViewModeling {
                 textField.setError(CustomError(str: errorMessageModel.errorMessage), animated: true)

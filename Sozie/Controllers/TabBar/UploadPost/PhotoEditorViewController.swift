@@ -87,7 +87,7 @@ class PhotoEditorViewController: UIViewController {
                                                     action: #selector(PhotoEditorViewController.pinchGesture))
         pinchGesture.delegate = self
         view.addGestureRecognizer(pinchGesture)
-        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self, action:#selector(PhotoEditorViewController.rotationGesture) )
+        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self, action:#selector(PhotoEditorViewController.rotationGesture))
         rotationGestureRecognizer.delegate = self
         view.addGestureRecognizer(rotationGestureRecognizer)
 
@@ -112,5 +112,4 @@ class PhotoEditorViewController: UIViewController {
         photoEditorDelegate?.doneEditing(image: img)
         self.dismiss(animated: true, completion: nil)
     }
-    
 }

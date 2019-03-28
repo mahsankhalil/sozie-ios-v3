@@ -42,7 +42,6 @@ class TabBarVC: UITabBarController {
         self.viewControllers = ([browseNC, cameraVc, profileNC] as! [UIViewController])
 
     }
-    
     /*
     // MARK: - Navigation
 

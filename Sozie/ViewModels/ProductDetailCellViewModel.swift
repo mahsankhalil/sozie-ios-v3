@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ProductDetailCellViewModel : RowViewModel , ImageViewModeling , TitleImageViewModeling , ReuseIdentifierProviding {
+struct ProductDetailCellViewModel: RowViewModel, ImageViewModeling, TitleImageViewModeling, ReuseIdentifierProviding {
     var imageURL: URL?
     var titleImageURL: URL?
     let reuseIdentifier: String  = "ProductDetailCollectionViewCell"
