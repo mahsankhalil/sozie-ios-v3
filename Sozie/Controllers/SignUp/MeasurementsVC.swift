@@ -153,9 +153,9 @@ class MeasurementsVC: UIViewController {
             ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
+                    let user = response as! User
+                    UserDefaultManager.updateUserObject(user: user)
                     if self.isFromSignUp == false {
-                        let user = response as! User
-                        UserDefaultManager.updateUserObject(user: user)
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         self.performSegue(withIdentifier: "toUploadProfilePic", sender: self)

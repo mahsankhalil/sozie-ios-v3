@@ -38,6 +38,12 @@ class MyUploadsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         collectionView.bottomRefreshControl = refreshControl
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        serverParams.removeAll()
+        posts.removeAll()
+        viewModels.removeAll()
         getPostsFromServer()
     }
     @objc func loadNextPage() {

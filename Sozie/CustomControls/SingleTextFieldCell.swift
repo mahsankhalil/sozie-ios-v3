@@ -51,6 +51,7 @@ extension SingleTextFieldCell: CellConfigurable {
             self.buttonTappedDelegate = model.buttonTappedDelegate
             self.textFieldDelegate = model.textFieldDelegate
             if let text = model.text {
+                textField.currentValue1 = text
                 textField.text = text
             }
         }

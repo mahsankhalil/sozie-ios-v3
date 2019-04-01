@@ -18,7 +18,8 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     var pickerView: UIPickerView!
     var values1: [String]?
     var values2: [String]?
-    var currentValue: String?
+    var currentValue1: String?
+    var currentValue2: String?
     var titleLabel: UILabel?
     var title: String?
     var firstColumnAppendingString: String?
@@ -66,6 +67,14 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         self.values2 = values2
         self.secondColumnAppendingString = values2Suffix
     }
+    func getindexInArray(allValues: [String], currentValue: String) -> Int {
+        for index in 0..<allValues.count {
+            if currentValue == allValues[index] {
+                return index
+            }
+        }
+        return 0
+    }
 
     func updateValues() {
         guard let delegate = pickerDelegate else { return  }
@@ -112,6 +121,14 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         titleLabel?.text = title
+        if let values = values1, let currentValue = currentValue1 {
+            let index = getindexInArray(allValues: values, currentValue: currentValue)
+            pickerView.selectRow(index, inComponent: 0, animated: false)
+        }
+        if let values = values2, let currentValue = currentValue2 {
+            let index = getindexInArray(allValues: values, currentValue: currentValue)
+            pickerView.selectRow(index, inComponent: 1, animated: false)
+        }
         updateValues()
     }
 

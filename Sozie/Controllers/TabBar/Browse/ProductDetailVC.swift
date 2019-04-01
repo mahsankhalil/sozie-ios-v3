@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import SVProgressHUD
 import EasyTipView
+import SafariServices
 class ProductDetailVC: BaseViewController {
 
     @IBOutlet weak var priceLabel: UILabel!
@@ -170,7 +171,6 @@ class ProductDetailVC: BaseViewController {
             }
         }
         self.collectionView.reloadData()
-        self.collectionView.scrollToItem(at: IndexPath(item: indexOfPost, section: 0), at: .centeredHorizontally, animated: false)
         pageControl.numberOfPages = viewModels.count + 1
         self.pageControl.currentPage = indexOfPost
         if currentProduct?.posts?.count != 0 {
@@ -179,6 +179,19 @@ class ProductDetailVC: BaseViewController {
             } else {
                 swipeToSeeView.isHidden = false
             }
+        }
+        self.collectionView.scrollToItem(at: IndexPath(item: indexOfPost, section: 0), at: .centeredHorizontally, animated: false)
+
+    }
+
+    @objc func showSuccessPopUp() {
+        var popUpInstnc: ServerResponsePopUp?
+        popUpInstnc = ServerResponsePopUp.instance(imageName: "checked", title: "Request Sent", description: "Look out for filled requests in your profile.", height: 200, isOkButtonHidded: true)
+        let popUpVC = PopupController
+            .create(self.tabBarController ?? self)
+            .show(popUpInstnc!)
+        popUpInstnc!.closeHandler = { []  in
+            popUpVC.dismiss()
         }
     }
     // MARK: - Navigation
@@ -193,6 +206,12 @@ class ProductDetailVC: BaseViewController {
             uploadPostVC.selectedImage = appDelegate.imageTaken
             uploadPostVC.currentProduct = currentProduct
         }
+        if segue.identifier == "toWebVC" {
+            let webVC = segue.destination as! WebVC
+            if let link = currentProduct?.deepLink {
+                webVC.url = URL(string: link)
+            }
+        }
     }
     // MARK: - Actions
 
@@ -204,17 +223,45 @@ class ProductDetailVC: BaseViewController {
 //        popUpInstnc.delegate = self
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()
+            DispatchQueue.main.async {
+                self.showSuccessPopUp()
+            }
+//            self.perform(#selector(self.showSuccessPopUp), with: nil, afterDelay: 1.0)
         }
     }
     @IBAction func butButtonTapped(_ sender: Any) {
+//        if let productURL = self.currentProduct?.deepLink {
+//            guard let url = URL(string: productURL) else { return }
+//            let svc = SFSafariViewController(url: url)
+//            svc.modalPresentationStyle = .pageSheet
+//            self.tabBarController?.navigationController?.present(svc, animated: true, completion: nil)
+////            self.present(svc, animated: true, completion: nil)
+////            guard let url = URL(string: productURL) else { return }
+////            UIApplication.shared.open(url)
+//        }
+//        self.performSegue(withIdentifier: "toWebVC", sender: self)
         if let productURL = self.currentProduct?.deepLink {
-            guard let url = URL(string: productURL) else { return }
-            UIApplication.shared.open(url)
+
+            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
+            webVC.url = URL(string: productURL)
+            webVC.modalPresentationStyle = .overFullScreen
+            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
         }
 
     }
     @IBAction func shareButtonTapped(_ sender: Any) {
-        if let imageURL = currentProduct?.merchantImageURL {
+        if var imageURL = currentProduct?.merchantImageURL {
+            if imageURL == "" {
+                if let imageURLTarget = currentProduct?.imageURL {
+                    imageURL =  imageURLTarget
+                }
+            } else {
+                if imageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = imageURL.components(separatedBy: delimeter)
+                    imageURL = url[0]
+                }
+            }
             SVProgressHUD.show()
             SDWebImageDownloader.shared().downloadImage(with: URL(string: imageURL), options: SDWebImageDownloaderOptions.highPriority, progress: nil) { (image, _, _, _) in
                 SVProgressHUD.dismiss()
@@ -327,7 +374,9 @@ extension ProductDetailVC: UIScrollViewDelegate {
         let contentOffsetX = scrollView.contentOffset.x
         if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
             if UserDefaultManager.getIfShopper() == false {
-                UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                if (scrollView.contentSize.width - scrollView.bounds.width) != 0 {
+                    UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                }
             }
         }
     }

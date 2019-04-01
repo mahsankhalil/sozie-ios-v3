@@ -39,6 +39,10 @@ class ProfileRootVC: BaseViewController {
         profileImageView.clipsToBounds = true
         populateCurrentUserData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        populateCurrentUserData()
+    }
     func populateCurrentUserData() {
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
             self.nameLabel.text = currentUser.username

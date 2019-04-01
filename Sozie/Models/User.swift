@@ -51,7 +51,7 @@ struct User: Codable {
         case isFollowed = "is_followed"
         case preferences
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         username = try values.decode(String.self, forKey: .username)

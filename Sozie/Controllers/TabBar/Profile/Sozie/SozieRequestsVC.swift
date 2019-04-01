@@ -37,7 +37,13 @@ class SozieRequestsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        serverParams.removeAll()
+        requests.removeAll()
         fetchAllSozieRequests()
+
     }
     @objc func loadNextPage() {
         if let nextUrl = self.nextURL {

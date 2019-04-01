@@ -40,9 +40,18 @@ extension DoubleTextFieldCell: CellConfigurable {
             secondTxtFld.configure(title: doubleTextFieldCellViewModel.title, rightTitle: doubleTextFieldCellViewModel.columnUnit[1], placeholder: doubleTextFieldCellViewModel.columnPlaceholder[1], values1: doubleTextFieldCellViewModel.columnValues[0], values1Suffix: doubleTextFieldCellViewModel.columnValueSuffix[0], values2: doubleTextFieldCellViewModel.columnValues[1], values2Suffix: doubleTextFieldCellViewModel.columnValueSuffix[1])
             if let text = doubleTextFieldCellViewModel.text1 {
                 firstTxtFld.text = text
+                firstTxtFld.currentValue1 = text
+                if let text2 = doubleTextFieldCellViewModel.text2 {
+                    firstTxtFld.currentValue2 = text2
+                }
             }
             if let text = doubleTextFieldCellViewModel.text2 {
                 secondTxtFld.text = text
+                secondTxtFld.currentValue2 = text
+                if let text2 = doubleTextFieldCellViewModel.text1 {
+                    secondTxtFld.currentValue1 = text2
+                }
+
             }
             self.textFieldDelegate = doubleTextFieldCellViewModel.textFieldDelegate
         }

@@ -31,9 +31,7 @@ class UploadPostVC: BaseViewController {
     var selectedSizeValue: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-    
         if currentProduct == nil {
             currentProduct = currentRequest?.requestedProduct
             fetchProductDetailFromServer()
@@ -144,6 +142,10 @@ class UploadPostVC: BaseViewController {
                 if isSuccess {
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.imageTaken = nil
+                    if let postCount = self.currentProduct?.posts?.count {
+                        self.currentProduct?.postCount = postCount + 1
+                        appDelegate.updatedProduct = self.currentProduct
+                    }
                     self.navigationController?.popToRootViewController(animated: true)
                 } else {
                     UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
@@ -170,7 +172,7 @@ extension UploadPostVC: SizeChartPopupVCDelegate {
             bottomButtom.setTitle("Publish", for: .normal)
             self.sizeView.isHidden = false
             isSizeSelected = true
-        }
+        }        
     }
 }
 extension UploadPostVC: PhotoEditorDelegate {

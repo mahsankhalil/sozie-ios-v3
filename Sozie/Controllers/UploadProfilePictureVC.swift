@@ -67,12 +67,12 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
                 ServerManager.sharedInstance.updateProfile(params: nil, imageData: imgData) { (isSuccess, response) in
                     SVProgressHUD.dismiss()
                     if isSuccess {
-                        if UserDefaultManager.isUserLoggedIn() {
+                        if self.isFromSignUp {
+                            self.performSegue(withIdentifier: "toInviteFriends", sender: self)
+                        } else {
                             let user = response as! User
                             UserDefaultManager.updateUserObject(user: user)
                             self.navigationController?.popViewController(animated: true)
-                        } else {
-                            self.performSegue(withIdentifier: "toInviteFriends", sender: self)
                         }
                     } else {
                         let error = response as! Error

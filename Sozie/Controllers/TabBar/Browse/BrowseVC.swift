@@ -77,6 +77,7 @@ class BrowseVC: BaseViewController {
     var currentSozieBrandId: Int?
     var cancelTipView: EasyTipView?
     var collectionTipView: EasyTipView?
+    var gstrRcgnzr: UIGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -146,7 +147,20 @@ class BrowseVC: BaseViewController {
         cancelTipView?.dismiss()
         collectionTipView?.dismiss()
     }
+    func updateCellModelIfChangeMadeInVisibleCells() {
+        let visibleIndexPaths = productsCollectionVu.indexPathsForVisibleItems
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        for index in 0..<productList.count {
+            if productList[index].productId == appDelegate.updatedProduct?.productId {
+                productList[index].postCount = appDelegate.updatedProduct?.postCount
+                productViewModels[index].count = productList[index].postCount ?? 0
+            }
+        }
+        productsCollectionVu.reloadItems(at: visibleIndexPaths)
+    }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCellModelIfChangeMadeInVisibleCells()
         if UserDefaultManager.getIfShopper() == false {
             if let user = UserDefaultManager.getCurrentUserObject() {
                 if let brandId = user.brand {
@@ -154,6 +168,7 @@ class BrowseVC: BaseViewController {
                         if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
                             setupBrandNavBar(imageURL: brand.titleImageCentred)
                         }
+                        currentSozieBrandId = brandId
                         refreshData()
                     }
                 }
@@ -165,9 +180,10 @@ class BrowseVC: BaseViewController {
             cancelTipView?.dismiss()
             collectionTipView?.dismiss()
             if let index = selectedIndex {
-                productViewModels[index].isSelected = false
-                productsCollectionVu.reloadItems(at: [IndexPath(item: index, section: 0)])
-
+                if index < productViewModels.count {
+                    productViewModels[index].isSelected = false
+                    productsCollectionVu.reloadItems(at: [IndexPath(item: index, section: 0)])
+                }
             }
         }
     }
@@ -176,20 +192,27 @@ class BrowseVC: BaseViewController {
     func setupViews() {
         searchTxtFld.delegate = self
         searchVuHeightConstraint.constant = 0.0
-        let gstrRcgnzr = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        gstrRcgnzr.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(gstrRcgnzr)
+//        let gstrRcgnzr = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+//        gstrRcgnzr.cancelsTouchesInView = false
+//        self.view.addGestureRecognizer(gstrRcgnzr)
     }
     func showSearchVu() {
         searchVuHeightConstraint.constant = 0.0
+        gstrRcgnzr = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        gstrRcgnzr?.cancelsTouchesInView = true
+        self.view.addGestureRecognizer(gstrRcgnzr!)
         UIView.animate(withDuration: 0.3) {
             self.searchVuHeightConstraint.constant = 47.0
             self.view.layoutIfNeeded()
             self.searchVu.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+            self.searchTxtFld.becomeFirstResponder()
         }
     }
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
+        if let rcgnizer = gstrRcgnzr {
+            self.view.removeGestureRecognizer(rcgnizer)
+        }
     }
     func hideSearchVu() {
         searchVuHeightConstraint.constant = 47.0

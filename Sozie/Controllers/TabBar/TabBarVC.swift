@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 class TabBarVC: UITabBarController {
 
+    var currentBrandId: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +19,7 @@ class TabBarVC: UITabBarController {
             populateUIOfShopperType()
         } else {
             populateUIOfSozieType()
+            currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
         }
         self.delegate = self
     }
@@ -59,6 +61,13 @@ extension TabBarVC: UITabBarControllerDelegate {
             if self.customizableViewControllers?.index(of: viewController) == 1 {
                 UtilityManager.openImagePickerActionSheetFrom(vc: self)
                 return false
+            } else if self.customizableViewControllers?.index(of: viewController) == 0 {
+                if currentBrandId != UserDefaultManager.getCurrentUserObject()?.brand {
+                    if let navCntrlr = viewController as? UINavigationController {
+                        navCntrlr.popToRootViewController(animated: true)
+                    }
+                    currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
+                }
             }
         }
         return true
