@@ -10,7 +10,7 @@ import UIKit
 import EasyTipView
 class TabCollectionCell: UICollectionViewCell {
 
-    var tabItemButtonPressedBlock: (() -> ())?
+    var tabItemButtonPressedBlock: (() -> Void)?
     var tipView: EasyTipView?
     var isFirstTime = true
     var option: TabPageOption = TabPageOption() {
@@ -47,7 +47,7 @@ class TabCollectionCell: UICollectionViewCell {
         currentBarView.isHidden = true
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        if item.characters.count == 0 {
+        if item.count == 0 {
             return CGSize.zero
         }
 

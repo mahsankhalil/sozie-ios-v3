@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PopupNavControllerDelegate {
+protocol PopupNavControllerDelegate: class {
     func doneButtonTapped(type: FilterType?, id: Int?)
 }
 

@@ -22,7 +22,7 @@ struct Brand: Codable {
         case titleImage = "title_image"
         case titleImageCentred = "title_image_centered"
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         brandId = try values.decode(Int.self, forKey: .brandId)

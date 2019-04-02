@@ -47,11 +47,11 @@ struct ValidateRespose: Codable {
 
 struct CountResponse: Codable {
     var count: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case count
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         count = try values.decode(Int.self, forKey: .count)

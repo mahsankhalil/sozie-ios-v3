@@ -7,7 +7,7 @@
 //
 
 import UIKit
-protocol WishTableViewCellDelegate {
+protocol WishTableViewCellDelegate: class {
     func crossButonTapped(btn: UIButton)
     func buyButtonTapped(button: UIButton)
 }
@@ -21,7 +21,7 @@ class WishTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var backgroudView: UIView!
     @IBOutlet weak var buyButton: DZGradientButton!
-    var delegate: WishTableViewCellDelegate?
+    weak var delegate: WishTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +38,7 @@ class WishTableViewCell: UITableViewCell {
     @IBAction func buyButtonTapped(_ sender: Any) {
         delegate?.buyButtonTapped(button: sender as! UIButton)
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -72,7 +72,6 @@ extension WishTableViewCell: CellConfigurable {
                 descriptionLabel.text = ""
             }
         }
-        
     }
 }
 extension WishTableViewCell: ButtonProviding {

@@ -23,7 +23,7 @@ class TabBarVC: UITabBarController {
         }
         self.delegate = self
     }
-    
+
     // MARK: - Custom Methods
     func populateUIOfShopperType() {
         let shopNC = self.storyboard?.instantiateViewController(withIdentifier: "BrowseNC")

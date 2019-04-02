@@ -10,10 +10,9 @@ import UIKit
 import MobileCoreServices
 
 @IBDesignable class DZImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+
     var parentController: UIViewController?
     var imageChanged = false
-    
     var lockAspect = true
     var aspectRatio: String = "1:1"
 
@@ -22,7 +21,6 @@ import MobileCoreServices
             self.image = placeholderImage
         }
     }
-    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -35,27 +33,23 @@ import MobileCoreServices
         self.isUserInteractionEnabled = true
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped(sender:)))
         self.addGestureRecognizer(singleTap)
-        
         self.layer.cornerRadius = self.frame.height/2
         self.layer.masksToBounds = true
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     @objc func imageViewTapped(sender: UITapGestureRecognizer) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        
         // add cancel action
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) -> Void in
         }))
-        
         // add upload camera action
         actionSheet.addAction(UIAlertAction(title: "Upload from Camera", style: .default, handler: { (_) -> Void in
             self.selectFromCameraPressed()
         }))
-        
         // add upload gallery action
         actionSheet.addAction(UIAlertAction(title: "Upload from Gallery", style: .default, handler: { (_) -> Void in
             self.selectFromGalleryPressed()
@@ -98,7 +92,7 @@ import MobileCoreServices
         }
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String: AnyObject]?) {
         self.image = image
         imageChanged = true
         picker.dismiss(animated: true, completion: nil)
@@ -119,7 +113,7 @@ import MobileCoreServices
 }
 
 extension UIImage {
-    
+
     func resizeImageWith(newSize: CGSize) -> UIImage {
         let horizontalRatio = newSize.width / size.width
         let verticalRatio = newSize.height / size.height

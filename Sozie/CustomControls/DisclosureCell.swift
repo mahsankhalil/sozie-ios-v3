@@ -24,7 +24,6 @@ class DisclosureCell: UITableViewCell {
 }
 extension DisclosureCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
-        
         // Check for TitleViewModeling
         if let titleModel = viewModel as? TitleViewModeling {
             if let title = titleModel.title {
@@ -34,8 +33,6 @@ extension DisclosureCell: CellConfigurable {
                 titleLabel.attributedText = attributedTitle
             }
         }
-        
         // Check for CheckmarkViewModeling
-        
     }
 }

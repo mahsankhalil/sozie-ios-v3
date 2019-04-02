@@ -202,10 +202,8 @@ extension PhotoEditorViewController: UIGestureRecognizerDelegate {
 
     func subImageViews(view: UIView) -> [UIImageView] {
         var imageviews: [UIImageView] = []
-        for imageView in view.subviews {
-            if imageView is UIImageView {
-                imageviews.append(imageView as! UIImageView)
-            }
+        for imageView in view.subviews where imageView is UIImageView {
+            imageviews.append(imageView as! UIImageView)
         }
         return imageviews
     }

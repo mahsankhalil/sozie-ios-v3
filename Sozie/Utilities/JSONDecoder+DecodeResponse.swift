@@ -15,13 +15,12 @@ extension JSONDecoder {
             print(response.error!)
             return .failure(response.error!)
         }
-        
+
         guard let responseData = response.data else {
             print("didn't get any data from API")
 //            return .failure(BackendError.objectSerialization(reason:
 //                "Did not get data in response"))
             return .failure(CustomError(str: "Did not get data in response"))
-
         }
         if response.response?.statusCode == 401 {
             if UserDefaultManager.isUserLoggedIn() {
@@ -52,7 +51,7 @@ extension JSONDecoder {
             return .failure(error)
         }
     }
-    
+
     func getServerErrorFrom(json: [String: Any]) -> Error {
         if let nonFieldsError = json["non_field_errors"] as? [String] {
             return CustomError(str: nonFieldsError[0])

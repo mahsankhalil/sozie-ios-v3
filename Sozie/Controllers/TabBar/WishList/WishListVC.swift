@@ -116,9 +116,15 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
 extension WishListVC: WishTableViewCellDelegate {
     func buyButtonTapped(button: UIButton) {
         let currentProduct = productList[button.tag]
+//        if let productURL = currentProduct.deepLink {
+//            guard let url = URL(string: productURL) else { return }
+//            UIApplication.shared.open(url)
+//        }
         if let productURL = currentProduct.deepLink {
-            guard let url = URL(string: productURL) else { return }
-            UIApplication.shared.open(url)
+            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
+            webVC.url = URL(string: productURL)
+            webVC.modalPresentationStyle = .overFullScreen
+            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
         }
     }
 

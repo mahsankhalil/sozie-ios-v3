@@ -17,7 +17,7 @@ public enum PopupCustomOption {
     case movesAlongWithKeyboard(Bool)
 }
 
-typealias PopupAnimateCompletion =  () -> ()
+typealias PopupAnimateCompletion =  () -> Void
 
 // MARK: - Protocols
 /** PopupContentViewController:
@@ -34,7 +34,7 @@ open class PopupController: UIViewController {
 
     public enum PopupLayout {
         case top, center, bottom
-        
+
         func origin(_ view: UIView, size: CGSize = UIScreen.main.bounds.size) -> CGPoint {
             switch self {
             case .top: return CGPoint(x: (size.width - view.frame.width) / 2, y: 0)
@@ -86,12 +86,10 @@ open class PopupController: UIViewController {
     fileprivate var showedHandler: ((PopupController) -> Void)?
 
     fileprivate var maximumSize: CGSize {
-        get {
-            return CGSize(
-                width: UIScreen.main.bounds.size.width - margin * 2,
-                height: UIScreen.main.bounds.size.height - margin * 2
-            )
-        }
+        return CGSize(
+            width: UIScreen.main.bounds.size.width - margin * 2,
+            height: UIScreen.main.bounds.size.height - margin * 2
+        )
     }
 
     deinit {
@@ -431,7 +429,7 @@ extension PopupController: UIScrollViewDelegate {
         if delta > 50 {
             baseScrollView.contentInset.top = -scrollView.contentOffset.y
             animation = .slideUp
-            self.closePopup { [weak self] in }
+            self.closePopup { }
         }
     }
 }
@@ -441,13 +439,3 @@ extension PopupController: UIGestureRecognizerDelegate {
         return gestureRecognizer.view == touch.view
     }
 }
-
-//extension UIViewController {
-//    func popupController() -> PopupController? {
-//        var parent = parent
-//        while !(parent is PopupController || parent == nil) {
-//            parent = parent!.parent
-//        }
-//        return parent as? PopupController
-//    }
-//}

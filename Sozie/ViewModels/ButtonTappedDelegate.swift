@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ButtonTappedDelegate {
+protocol ButtonTappedDelegate: class {
     func onButtonTappedDelegate(_ sender: Any?)
 }

@@ -34,7 +34,7 @@ class UtilityManager: NSObject {
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: date as Date)
     }
-    
+
     static func dateFromStringWithFormat(date: String, format: String) -> NSDate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -181,7 +181,7 @@ class UtilityManager: NSObject {
         return randomString
     }
 
-    static func delay(delay: Double, closure: @escaping () -> ()) {
+    static func delay(delay: Double, closure: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             closure()
         }

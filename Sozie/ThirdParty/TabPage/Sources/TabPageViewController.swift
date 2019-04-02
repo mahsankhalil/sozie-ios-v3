@@ -35,7 +35,7 @@ open class TabPageViewController: UIPageViewController {
     public init() {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
@@ -55,7 +55,7 @@ open class TabPageViewController: UIPageViewController {
             tabView = configuredTabView()
         }
 
-        if let currentIndex = currentIndex , isInfinity {
+        if let currentIndex = currentIndex, isInfinity {
             tabView.updateCurrentIndex(currentIndex, shouldScroll: true)
         }
     }
@@ -120,7 +120,7 @@ extension TabPageViewController {
 
     fileprivate func setupScrollView() {
         // Disable PageViewController's ScrollView bounce
-        let scrollView = view.subviews.flatMap { $0 as? UIScrollView }.first
+        let scrollView = view.subviews.compactMap { $0 as? UIScrollView }.first
         scrollView?.scrollsToTop = false
         scrollView?.delegate = self
         scrollView?.backgroundColor = option.pageBackgoundColor
@@ -219,7 +219,6 @@ extension TabPageViewController {
                                        attribute: .trailing,
                                        multiplier: 1.0,
                                        constant: 0.0)
-
         let height = NSLayoutConstraint(item: statusView,
                                         attribute: .height,
                                         relatedBy: .equal,

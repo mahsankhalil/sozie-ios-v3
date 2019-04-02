@@ -14,7 +14,7 @@ class SingleTextFieldCell: UITableViewCell {
     @IBOutlet weak var textField: CustomPickerTextField!
     @IBOutlet weak var notSureButton: UIButton!
 
-    private var buttonTappedDelegate: ButtonTappedDelegate?
+    weak private var buttonTappedDelegate: ButtonTappedDelegate?
     private var textFieldDelegate: TextFieldDelegate?
 
     override func awakeFromNib() {
@@ -23,7 +23,7 @@ class SingleTextFieldCell: UITableViewCell {
         textField.setupAppDesign()
         textField.pickerDelegate = self
     }
-    
+
     @IBAction func onButtonTapped(_ sender: Any) {
         buttonTappedDelegate?.onButtonTappedDelegate(sender)
     }

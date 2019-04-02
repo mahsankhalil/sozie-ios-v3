@@ -9,7 +9,7 @@
 import UIKit
 import EasyTipView
 class ProductCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var imgVuWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imgVuHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleImageView: UIImageView!

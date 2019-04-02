@@ -12,13 +12,13 @@ struct Category: Codable {
     
     var categoryId: Int
     var categoryName: String
-    var subCategories : [SubCategory]
+    var subCategories: [SubCategory]
     enum CodingKeys: String, CodingKey {
         case categoryId = "id"
         case categoryName = "name"
         case subCategories = "sub_categories"
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         categoryId = try values.decode(Int.self, forKey: .categoryId)

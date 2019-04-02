@@ -82,7 +82,7 @@ class BrowseVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+
         if let userType = UserDefaultManager.getCurrentUserType() {
             if userType == UserType.shopper.rawValue {
                 setupSozieLogoNavBar()
@@ -150,11 +150,11 @@ class BrowseVC: BaseViewController {
     func updateCellModelIfChangeMadeInVisibleCells() {
         let visibleIndexPaths = productsCollectionVu.indexPathsForVisibleItems
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        for index in 0..<productList.count {
-            if productList[index].productId == appDelegate.updatedProduct?.productId {
+        for index in 0..<productList.count where productList[index].productId == appDelegate.updatedProduct?.productId {
+//            if productList[index].productId == appDelegate.updatedProduct?.productId {
                 productList[index].postCount = appDelegate.updatedProduct?.postCount
                 productViewModels[index].count = productList[index].postCount ?? 0
-            }
+//            }
         }
         productsCollectionVu.reloadItems(at: visibleIndexPaths)
     }

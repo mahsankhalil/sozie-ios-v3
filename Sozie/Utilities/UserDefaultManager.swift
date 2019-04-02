@@ -24,7 +24,7 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user
     }
-    
+
     static func updateUserObject(user: User) {
         guard var loginResponse = loginResponse() else { return  }
         loginResponse.user = user

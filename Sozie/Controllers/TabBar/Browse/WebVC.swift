@@ -37,7 +37,6 @@ class WebVC: UIViewController {
     }
     private func setupWebview(url: URL) {
         let request = URLRequest(url: url)
-        
         webView.navigationDelegate = self
         webView.load(request)
     }

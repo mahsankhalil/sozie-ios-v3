@@ -53,7 +53,6 @@ class SizeChartPopUpVC: UIViewController {
                     generalViewModels.append(viewModel)
                 }
             }
-            
         }
     }
     var generalViewModels: [SizeCellViewModel] = []

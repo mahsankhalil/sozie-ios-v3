@@ -30,7 +30,7 @@ class BlockListVC: UIViewController {
         // Do any additional setup after loading the view.
         fetchListFromServer()
     }
-    
+
     func fetchListFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.blockedList(params: [:]) { (isSuccess, response) in
@@ -78,7 +78,6 @@ extension BlockListVC: UITableViewDelegate, UITableViewDataSource {
         if let currentCell = cell as? BlockedUserCell {
             currentCell.delegate = self
         }
-        
         return cell
     }
 }

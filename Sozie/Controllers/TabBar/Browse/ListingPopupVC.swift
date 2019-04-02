@@ -23,12 +23,12 @@ struct DisclosureCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleVie
     var reuseIdentifier: String = "DisclosureCell"
 }
 
-protocol ListingPopupVCDelegate {
+protocol ListingPopupVCDelegate: class {
     func doneButtonTapped(type: FilterType?, id: Int?)
 }
 
 class ListingPopupVC: UIViewController {
-    var delegate: ListingPopupVCDelegate?
+    weak var delegate: ListingPopupVCDelegate?
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var titleLabel: UILabel!

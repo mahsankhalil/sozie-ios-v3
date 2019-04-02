@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 struct UserPost: Codable {
     var postId: Int
     var imageURL: String
@@ -50,7 +48,7 @@ struct PostPaginatedResponse: Codable {
     var next: String?
     var previous: String?
     var results: [UserPost]
-    
+
     enum CodingKeys: String, CodingKey {
         case count
         case next

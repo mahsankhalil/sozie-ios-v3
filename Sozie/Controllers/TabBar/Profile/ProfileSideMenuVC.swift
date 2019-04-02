@@ -132,7 +132,7 @@ class ProfileSideMenuVC: BaseViewController {
             }
         }
     }
-    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool) -> Void)) {
         guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
             completion(false)
             return
@@ -273,27 +273,9 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             performSectionOneActions(row: indexPath.row)
         case 1:
-            switch indexPath.row {
-            case 2:
-                showBlockedListVC()
-            default:
-                return
-            }
+            performSectionTwoActions(row: indexPath.row)
         case 2:
-            switch indexPath.row {
-            case 0:
-                showInviteFriendsVC()
-            case 1:
-                rateThisApp()
-            case 2:
-                sendFeedbackWithEmail()
-            case 3:
-                showTOSVC(type: TOSType.privacyPolicy)
-            case 4:
-                showTOSVC(type: TOSType.termsCondition)
-            default:
-                return
-            }
+            performSectionThreeActions(row: indexPath.row)
         default:
             return
         }
@@ -303,29 +285,42 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             showEditProfileVC()
         case 1:
-//            if UserDefaultManager.getIfShopper() {
             showUploadPhotoVC()
-//            } else {
-//                showUpdateWorkPlaceVC()
-//            }
         case 2:
-//            if UserDefaultManager.getIfShopper() {
             showChangePasswordVC()
-//            } else {
-//                showUploadPhotoVC()
-//            }
         case 3:
-//            if UserDefaultManager.getIfShopper() {
             showMeasurementVC()
-//            } else {
-//                showChangePasswordVC()
-//            }
         case 4:
             showUpdateWorkPlaceVC()
         default:
             return
         }
     }
+    func performSectionTwoActions(row: Int) {
+        switch row {
+        case 2:
+            showBlockedListVC()
+        default:
+            return
+        }
+    }
+    func performSectionThreeActions(row: Int) {
+        switch row {
+        case 0:
+            showInviteFriendsVC()
+        case 1:
+            rateThisApp()
+        case 2:
+            sendFeedbackWithEmail()
+        case 3:
+            showTOSVC(type: TOSType.privacyPolicy)
+        case 4:
+            showTOSVC(type: TOSType.termsCondition)
+        default:
+            return
+        }
+    }
+
 }
 extension ProfileSideMenuVC: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

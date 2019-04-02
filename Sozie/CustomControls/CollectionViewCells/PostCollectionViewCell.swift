@@ -9,13 +9,13 @@
 import UIKit
 import EasyTipView
 
-protocol PostCollectionViewCellDelegate {
+protocol PostCollectionViewCellDelegate: class {
     func moreButtonTapped(button: UIButton)
     func followButtonTapped(button: UIButton)
     func cameraButtonTapped(button: UIButton)
 }
 class PostCollectionViewCell: UICollectionViewCell {
-    var delegate: PostCollectionViewCellDelegate?
+    weak var delegate: PostCollectionViewCellDelegate?
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!

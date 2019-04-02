@@ -38,7 +38,6 @@ class UploadPostVC: BaseViewController {
         } else {
             populateProductData()
         }
-        
         self.sizeView.isHidden = true
         populateSizeData()
         if let image = selectedImage {
@@ -172,7 +171,7 @@ extension UploadPostVC: SizeChartPopupVCDelegate {
             bottomButtom.setTitle("Publish", for: .normal)
             self.sizeView.isHidden = false
             isSizeSelected = true
-        }        
+        }
     }
 }
 extension UploadPostVC: PhotoEditorDelegate {

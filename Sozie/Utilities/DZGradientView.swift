@@ -14,12 +14,10 @@ import UIKit
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
-        
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [gradientStartColor.cgColor, gradientEndColor.cgColor]
         gradient.opacity = 1.0
-        
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
         self.layer.insertSublayer(gradient, at: 0)

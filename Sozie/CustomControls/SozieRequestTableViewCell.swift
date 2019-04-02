@@ -7,11 +7,11 @@
 //
 
 import UIKit
-protocol SozieRequestTableViewCellDelegate {
+protocol SozieRequestTableViewCellDelegate: class {
     func acceptRequestButtonTapped(button: UIButton)
 }
 class SozieRequestTableViewCell: UITableViewCell {
-    var delegate: SozieRequestTableViewCellDelegate?
+    weak var delegate: SozieRequestTableViewCellDelegate?
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var backgroudView: UIView!
     @IBOutlet weak var sizeRequestedLabel: UILabel!
@@ -50,7 +50,6 @@ extension SozieRequestTableViewCell: CellConfigurable {
             productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
             }
         }
-        
         if let titleModel = viewModel as? TitleViewModeling {
             titleLabel.text = titleModel.title!
         }

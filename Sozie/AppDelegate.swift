@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        
         if url.absoluteString.hasPrefix("sozie://resetpwd") {
             if let params = url.queryParameters {
                 showResetPasswordVC(with: params)
@@ -72,7 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
-                application.registerForRemoteNotifications()
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
                 print("Notifications permission granted.")
             } else {
                 print("Notifications permission denied because: \(error?.localizedDescription ?? "").")

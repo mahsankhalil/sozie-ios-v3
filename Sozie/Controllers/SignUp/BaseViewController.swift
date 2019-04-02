@@ -26,7 +26,7 @@ class BaseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func setupSozieLogoNavBar() {
         let logo = UIImage(named: "NavBarLogo")
         setupBackgroundImage()

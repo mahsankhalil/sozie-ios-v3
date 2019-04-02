@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SelectionPopupVCDelegate {
+protocol SelectionPopupVCDelegate: class {
     func doneButtonTapped(type: FilterType?, id: Int?)
 }
 
@@ -21,7 +21,7 @@ class SelectionPopupVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private var selectedViewModelIndex: Int?
-    var delegate: SelectionPopupVCDelegate?
+    weak var delegate: SelectionPopupVCDelegate?
     var selectedBrandId: Int?
     var popupType: PopupType?
     var category: Category? = nil {

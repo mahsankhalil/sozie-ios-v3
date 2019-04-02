@@ -13,14 +13,12 @@ class DoubleTextFieldCell: UITableViewCell, CustomPickerTextFieldDelegate {
     @IBOutlet weak var firstTxtFld: CustomPickerTextField!
 
     weak var textFieldDelegate: TextFieldDelegate?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         // Initialization code
         firstTxtFld.setupAppDesign()
         secondTxtFld.setupAppDesign()
-    
         firstTxtFld.pickerDelegate = self
         secondTxtFld.pickerDelegate = self
     }
@@ -55,7 +53,6 @@ extension DoubleTextFieldCell: CellConfigurable {
             }
             self.textFieldDelegate = doubleTextFieldCellViewModel.textFieldDelegate
         }
-        
         if let errorModel = viewModel as? ErrorViewModeling {
             if errorModel.displayError, let errorMessageModel = viewModel as? ErrorMessageViewModeling {
                 firstTxtFld.setError(CustomError(str: errorMessageModel.errorMessage), animated: true)

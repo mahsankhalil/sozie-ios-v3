@@ -68,10 +68,8 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         self.secondColumnAppendingString = values2Suffix
     }
     func getindexInArray(allValues: [String], currentValue: String) -> Int {
-        for index in 0..<allValues.count {
-            if currentValue == allValues[index] {
-                return index
-            }
+        for index in 0..<allValues.count where currentValue == allValues[index] {
+            return index
         }
         return 0
     }
