@@ -30,8 +30,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, ValidationDelegat
         applyRightVuToPassword(passwordField: passwordTxtFld)
         applyRightVuToPassword(passwordField: retypePasswordTxtFld)
     }
-    func applyRightVuToPassword(passwordField: MFTextField)
-    {
+    func applyRightVuToPassword(passwordField: MFTextField) {
         let eyeBtn = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 19.0, height: 22.0))
         eyeBtn.setImage(UIImage(named: "eye-icon-white"), for: .normal)
         eyeBtn.tag = passwordField.tag
@@ -39,7 +38,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, ValidationDelegat
         passwordField.rightViewMode = .always
         passwordField.rightView = eyeBtn
     }
-    @objc func eyeBtnTapped(sender : UIButton) {
+    @objc func eyeBtnTapped(sender: UIButton) {
         var txtField: MFTextField?
         if sender.tag == 0 {
             txtField = currentPasswordTxtFld
@@ -48,13 +47,10 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, ValidationDelegat
         } else {
             txtField = retypePasswordTxtFld
         }
-        if txtField!.isSecureTextEntry
-        {
+        if txtField!.isSecureTextEntry {
             txtField!.isSecureTextEntry = false
             sender.setImage(UIImage(named: "eyeIconHide"), for: .normal)
-        }
-        else
-        {
+        } else {
             txtField!.isSecureTextEntry = true
             sender.setImage(UIImage(named: "eye-icon-white"), for: .normal)
         }
@@ -89,11 +85,10 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, ValidationDelegat
             }
         }
     }
-    
+
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
             if let field = field as? MFTextField {
-                
                 _ = field.resignFirstResponder()
                 field.setError(CustomError(str: error.errorMessage), animated: true)
             }
@@ -109,8 +104,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate, ValidationDelegat
         // Pass the selected object to the new view controller.
     }
     */
-    //MARK: -Text Field Delegates
-    
+    // MARK: - Text Field Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txtFld  = textField as! MFTextField
         txtFld.setError(nil, animated: true)

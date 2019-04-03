@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 struct UserPost: Codable {
     var postId: Int
     var imageURL: String
@@ -22,7 +20,6 @@ struct UserPost: Codable {
     var product: Product
     
     enum CodingKeys: String, CodingKey {
-        
         case postId = "id"
         case imageURL = "image"
         case userId = "user"
@@ -51,14 +48,14 @@ struct PostPaginatedResponse: Codable {
     var next: String?
     var previous: String?
     var results: [UserPost]
-    
+
     enum CodingKeys: String, CodingKey {
         case count
         case next
         case previous
         case results
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         count = try values.decode(Int.self, forKey: .count)

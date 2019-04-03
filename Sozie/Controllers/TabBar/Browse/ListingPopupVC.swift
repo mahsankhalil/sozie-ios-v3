@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum FilterType : String {
+public enum FilterType: String {
     case category = "CATEGORY"
     case filter = "FILTER"
     case sozie = "SOZIE"
@@ -16,19 +16,19 @@ public enum FilterType : String {
     case request = "REQUESTS"
 }
 
-struct DisclosureCellViewModel : RowViewModel, ReuseIdentifierProviding , TitleViewModeling , CheckmarkViewModeling {
+struct DisclosureCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewModeling, CheckmarkViewModeling {
     var isCheckmarkHidden: Bool = true
     var title: String?
     var attributedTitle: NSAttributedString?
-    var reuseIdentifier : String = "DisclosureCell"
+    var reuseIdentifier: String = "DisclosureCell"
 }
 
-protocol ListingPopupVCDelegate {
+protocol ListingPopupVCDelegate: class {
     func doneButtonTapped(type: FilterType?, id: Int?)
 }
 
 class ListingPopupVC: UIViewController {
-    var delegate: ListingPopupVCDelegate?
+    weak var delegate: ListingPopupVCDelegate?
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -39,6 +39,7 @@ class ListingPopupVC: UIViewController {
     var selectedCategory: Category?
     var filterType: FilterType?
     private var selectedViewModelIndex: Int?
+    var selectedBrandId: Int?
     private var categoriesList: [Category] = [] {
         didSet {
             viewModels.removeAll()
@@ -61,6 +62,9 @@ class ListingPopupVC: UIViewController {
 
     }
     func setPopupType(type: PopupType?, brandList: [Brand]?, filterType: FilterType?) {
+        if selectedViewModelIndex != nil {
+            return
+        }
         self.popupType = type
         self.brandList = brandList
         if let type = type {
@@ -120,7 +124,6 @@ class ListingPopupVC: UIViewController {
     }
 
     @IBAction func doneButtonTapped(_ sender: Any) {
-        
         if popupType == PopupType.category {
             if let index = selectedViewModelIndex {
                 let currentCategory = categoriesList[index]
@@ -143,14 +146,15 @@ class ListingPopupVC: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "toSubcategory" {
-            let vc = segue.destination as! SelectionPopupVC
-            vc.popupType = popupType
+            let destVC = segue.destination as! SelectionPopupVC
+            destVC.popupType = popupType
+            destVC.selectedBrandId = selectedBrandId
             if popupType == PopupType.category {
-                vc.category = selectedCategory
+                destVC.category = selectedCategory
             } else {
-                vc.brandList = brandList
+                destVC.brandList = brandList
             }
-            vc.delegate = self
+            destVC.delegate = self
         }
     }
 
@@ -186,14 +190,19 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
                 viewModels[previousSelectedIndex].isCheckmarkHidden = true
                 indexPathsToReload.append(IndexPath(row: previousSelectedIndex, section: 0))
                 if isDoneHidden {
-                    selectedViewModelIndex = nil
-                    self.doneButton.isHidden = true
+                    if previousSelectedIndex == indexPath.row {
+                        selectedViewModelIndex = nil
+                        self.doneButton.isHidden = true
+                    } else {
+                        viewModels[indexPath.row].isCheckmarkHidden = false
+                        selectedViewModelIndex = indexPath.row
+                        self.doneButton.isHidden = false
+                    }
                 } else {
                     viewModels[indexPath.row].isCheckmarkHidden = false
                     selectedViewModelIndex = indexPath.row
                     self.doneButton.isHidden = false
                 }
-                
             } else {
                 viewModels[indexPath.row].isCheckmarkHidden = false
                 selectedViewModelIndex = indexPath.row
@@ -206,13 +215,13 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         if popupType == PopupType.category {
             let currentCategory = categoriesList[indexPath.row]
             if currentCategory.subCategories.count == 0 {
-                reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
+                reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
                 return
             } else {
                 selectedCategory = categoriesList[indexPath.row]
             }
         } else if filterType == FilterType.mySozies || filterType == FilterType.request {
-            reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
+            reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
             return
         } else if let userType = UserDefaultManager.getCurrentUserType() {
             if userType == UserType.sozie.rawValue {

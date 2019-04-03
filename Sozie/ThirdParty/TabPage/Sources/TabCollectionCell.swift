@@ -10,7 +10,7 @@ import UIKit
 import EasyTipView
 class TabCollectionCell: UICollectionViewCell {
 
-    var tabItemButtonPressedBlock: (() -> ())?
+    var tabItemButtonPressedBlock: (() -> Void)?
     var tipView: EasyTipView?
     var isFirstTime = true
     var option: TabPageOption = TabPageOption() {
@@ -35,16 +35,6 @@ class TabCollectionCell: UICollectionViewCell {
             }
             currentBarView.backgroundColor = option.currentColor
             layoutIfNeeded()
-            if isCurrent == true && item == "Sozies" {
-//                tipView?.dismiss()
-                tipView?.isHidden = false
-                self.showTipViewSozie()
-            } else if isCurrent == true && item == "Requests" {
-                tipView?.isHidden = false
-                self.showTipViewRequests()
-            } else {
-                tipView?.isHidden = true
-            }
         }
     }
 
@@ -54,30 +44,43 @@ class TabCollectionCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         currentBarView.isHidden = true
-        
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        if item.characters.count == 0 {
+        if item.count == 0 {
             return CGSize.zero
         }
 
         return intrinsicContentSize
     }
 
+    func showTipView() {
+        if isCurrent == true && item == "Sozies" {
+            //                tipView?.dismiss()
+            tipView?.isHidden = false
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.mySoziesUserGuide) == false {
+                self.showTipViewSozie()
+            }
+        } else if isCurrent == true && item == "Requests" {
+            tipView?.isHidden = false
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.myRequestsUserGuide) == false {
+                self.showTipViewRequests()
+            }
+        } else {
+            tipView?.isHidden = true
+        }
+    }
     class func cellIdentifier() -> String {
         return "TabCollectionCell"
     }
 }
 
-
 // MARK: - View
 
 extension TabCollectionCell {
-    override var intrinsicContentSize : CGSize {
+    override var intrinsicContentSize: CGSize {
         let width: CGFloat
-        if let tabWidth = option.tabWidth , tabWidth > 0.0 {
+        if let tabWidth = option.tabWidth, tabWidth > 0.0 {
             width = tabWidth
         } else {
             width = itemLabel.intrinsicContentSize.width + option.tabMargin * 2
@@ -113,8 +116,10 @@ extension TabCollectionCell {
                     prefer.positioning.maxWidth = 110
                     //                prefer.positioning.bubbleVInset = 120
                     tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
-                    tipView?.show(animated: true, forView: self, withinSuperview: self.superview?.superview)
+                    tipView?.show(animated: true, forView: self.itemLabel, withinSuperview: self.superview?.superview)
                     isFirstTime = false
+                    UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.myRequestsUserGuide)
+                    perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)
                 }
             }
         }
@@ -125,15 +130,21 @@ extension TabCollectionCell {
                 if isFirstTime {
                     let text = "Click here to see your Sozie matches and Sozies that you are following"
                     var prefer = UtilityManager.tipViewGlobalPreferences()
-                    prefer.drawing.arrowPosition = .bottom
+                    prefer.drawing.arrowPosition = .left
                     prefer.positioning.maxWidth = 110
-                    prefer.positioning.bubbleVInset = 120
+                    //        prefer.positioning.bubbleVInset = 120
                     tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
-                    tipView?.show(animated: true, forView: self, withinSuperview: self.superview)
+                    tipView?.show(animated: true, forView: self.itemLabel, withinSuperview: self.superview?.superview)
                     isFirstTime = false
-                }
+                    if self.superview?.superview != nil {
+                        UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.mySoziesUserGuide)
+                    }
+                    perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)                }
             }
         }
+    }
+    @objc func dismissTipView() {
+        tipView?.dismiss()
     }
 //    func showTipView() {
 //        let text = "After swiping, if you still don't see your size tried on, click above!"
@@ -145,7 +156,6 @@ extension TabCollectionCell {
 //        tipView.show(animated: true, forView: self, withinSuperview: self.superview)
 //    }
 }
-
 
 // MARK: - IBAction
 

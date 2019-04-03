@@ -9,14 +9,12 @@
 import UIKit
 
 class TitleAndCheckmarkCell: UITableViewCell {
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkmarkImageView: UIImageView!
 }
 
 extension TitleAndCheckmarkCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
-        
         // Check for TitleViewModeling
         if let titleModel = viewModel as? TitleViewModeling {
             if let title = titleModel.title {
@@ -26,7 +24,6 @@ extension TitleAndCheckmarkCell: CellConfigurable {
                 titleLabel.attributedText = attributedTitle
             }
         }
-        
         // Check for CheckmarkViewModeling
         checkmarkImageView.isHidden = true
         if let checkmarkModel = viewModel as? CheckmarkViewModeling {

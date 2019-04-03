@@ -10,7 +10,7 @@ import UIKit
 import MaterialTextField
 import SwiftValidator
 import SVProgressHUD
-class ResetPasswordVC: UIViewController , UITextFieldDelegate, ValidationDelegate {
+class ResetPasswordVC: UIViewController, UITextFieldDelegate, ValidationDelegate {
 
     @IBOutlet weak var saveBtn: DZGradientButton!
     @IBOutlet weak var retypePasswordTxtFld: MFTextField!
@@ -19,8 +19,8 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate, ValidationDelegat
     
     let validator = Validator()
 
-    var params : [String: Any]?
-    
+    var params: [String: Any]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,64 +29,47 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate, ValidationDelegat
         retypePasswordTxtFld.setupAppDesign()
         applyValidators()
     }
-    
+
     func applyValidators() {
-        
         validator.registerField(passwordTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 9) as Rule, MaxLengthRule(length: 20) as Rule])
-        
         [passwordTxtFld].forEach { (field) in
             field?.delegate = self
         }
     }
-    
-    
+
     // MARK: - Validation CallBacks
     func validationSuccessful() {
-        
-        if passwordTxtFld.text != retypePasswordTxtFld.text
-        {
+        if passwordTxtFld.text != retypePasswordTxtFld.text {
             retypePasswordTxtFld.setError(CustomError(str: "Password and Retype password do not match"), animated: true)
-        }
-        else
-        {
+        } else {
             params!["new_password"] = self.passwordTxtFld.text
             params!["token"] = params!["user_token"]
             params?.removeValue(forKey: "user_token")
             SVProgressHUD.show()
             ServerManager.sharedInstance.resetPasswordWith(params: params!) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
-                if isSuccess
-                {
+                if isSuccess {
                     let resp = response as! ValidateRespose
                     UtilityManager.showMessageWith(title: "Success!", body: resp.detail, in: self, block: {
                         self.dismiss(animated: true, completion: nil)
                     })
-                }
-                else
-                {
+                } else {
                     let err = response as! Error
                     UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
                 }
             }
         }
-        
-        
     }
-    
+
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         for (field, error) in errors {
             if let field = field as? MFTextField {
-                
                 _ = field.resignFirstResponder()
                 field.setError(CustomError(str: error.errorMessage), animated: true)
-                
-                
             }
         }
     }
-    
-    //MARK: - Text Field Delegates
-    
+    // MARK: - Text Field Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txtFld  = textField as! MFTextField
         txtFld.setError(nil, animated: true)
@@ -107,5 +90,4 @@ class ResetPasswordVC: UIViewController , UITextFieldDelegate, ValidationDelegat
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    
 }

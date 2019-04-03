@@ -14,12 +14,11 @@ struct ProductSizeChart: Codable {
     var usSize: [HasPost]
     
     enum CodingKeys: String, CodingKey {
-        
         case generalSize = "GN"
         case ukSize = "UK"
         case usSize = "US"
-
     }
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         generalSize = try values.decode([HasPost].self, forKey: .generalSize)
@@ -28,15 +27,13 @@ struct ProductSizeChart: Codable {
 
     }
 }
-struct HasPost : Codable {
+struct HasPost: Codable {
     var name: String
-    var hasPosts : Bool
-    
+    var hasPosts: Bool
+
     enum CodingKeys: String, CodingKey {
-        
         case name
         case hasPosts = "has_posts"
-        
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

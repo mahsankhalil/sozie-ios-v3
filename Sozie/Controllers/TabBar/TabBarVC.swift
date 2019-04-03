@@ -7,9 +7,10 @@
 //
 
 import UIKit
-
+import SDWebImage
 class TabBarVC: UITabBarController {
 
+    var currentBrandId: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,10 +19,11 @@ class TabBarVC: UITabBarController {
             populateUIOfShopperType()
         } else {
             populateUIOfSozieType()
+            currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
         }
         self.delegate = self
     }
-    
+
     // MARK: - Custom Methods
     func populateUIOfShopperType() {
         let shopNC = self.storyboard?.instantiateViewController(withIdentifier: "BrowseNC")
@@ -37,13 +39,11 @@ class TabBarVC: UITabBarController {
         browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Browse icon"), selectedImage: UIImage(named: "Browse icon-Selected"))
         let cameraVc = UIViewController()
         cameraVc.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
-        
         let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
         profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "Profile icon"), selectedImage: UIImage(named: "Profile icon-Selected"))
         self.viewControllers = ([browseNC, cameraVc, profileNC] as! [UIViewController])
 
     }
-    
     /*
     // MARK: - Navigation
 
@@ -61,22 +61,34 @@ extension TabBarVC: UITabBarControllerDelegate {
             if self.customizableViewControllers?.index(of: viewController) == 1 {
                 UtilityManager.openImagePickerActionSheetFrom(vc: self)
                 return false
+            } else if self.customizableViewControllers?.index(of: viewController) == 0 {
+                if currentBrandId != UserDefaultManager.getCurrentUserObject()?.brand {
+                    if let navCntrlr = viewController as? UINavigationController {
+                        navCntrlr.popToRootViewController(animated: true)
+                    }
+                    currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
+                }
             }
         }
         return true
     }
 }
-extension TabBarVC:  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension TabBarVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.imageTaken = scaledImg
-            self.selectedIndex = 0
-            if let browseVC = ((self.viewControllers![0] as? UINavigationController)?.viewControllers[0]) as? BrowseVC {
-                browseVC.showCancelButton()
-                browseVC.showTipView()
+            if let browseNC = (self.viewControllers![0] as? UINavigationController) {
+                if browseNC.viewControllers.count > 1 {
+                    browseNC.popToRootViewController(animated: true)
+                }
+                if let browseVC = (browseNC.viewControllers[0]) as? BrowseVC {
+                    browseVC.showCancelButtonAfterDelay()
+                    browseVC.showTipeViewAfterDelay()
+                }
             }
+            self.selectedIndex = 0
         }
         picker.dismiss(animated: true, completion: nil)
     }

@@ -36,7 +36,6 @@ class InviteFriendsVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
     // MARK: - Actions
     @IBAction func backBtnTapped(_ sender: Any) {
         if let fromMenu = isFromSideMenu {
@@ -47,12 +46,12 @@ class InviteFriendsVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
+
     @IBAction func inviteBtnTapped(_ sender: Any) {
         let objectsToShare = ["https://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8"]
         UtilityManager.showActivityControllerWith(objectsToShare: objectsToShare, vc: self)
     }
-    
+
     @IBAction func skipBtnTapped(_ sender: Any) {
         self.changeRootVCToTabBarNC()
 

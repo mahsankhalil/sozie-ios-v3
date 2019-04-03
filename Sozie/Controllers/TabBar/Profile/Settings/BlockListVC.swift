@@ -30,7 +30,7 @@ class BlockListVC: UIViewController {
         // Do any additional setup after loading the view.
         fetchListFromServer()
     }
-    
+
     func fetchListFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.blockedList(params: [:]) { (isSuccess, response) in
@@ -63,14 +63,11 @@ extension BlockListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
-        
         if tableViewCell == nil {
             tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
             tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
         }
-        
         guard let cell = tableViewCell else { return UITableViewCell() }
-        
         cell.selectionStyle = .none
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
@@ -81,7 +78,6 @@ extension BlockListVC: UITableViewDelegate, UITableViewDataSource {
         if let currentCell = cell as? BlockedUserCell {
             currentCell.delegate = self
         }
-        
         return cell
     }
 }

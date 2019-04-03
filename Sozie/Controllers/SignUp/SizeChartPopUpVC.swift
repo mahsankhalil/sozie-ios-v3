@@ -53,7 +53,6 @@ class SizeChartPopUpVC: UIViewController {
                     generalViewModels.append(viewModel)
                 }
             }
-            
         }
     }
     var generalViewModels: [SizeCellViewModel] = []
@@ -127,7 +126,7 @@ class SizeChartPopUpVC: UIViewController {
     }
 
     @IBAction func selectBtnTapped(_ sender: Any) {
-        if let _ = productSizeChart {
+        if productSizeChart != nil {
             if isSelectedFromGeneral {
                 if let index = generalSelectedIndex {
                     if delegate != nil {
@@ -135,9 +134,7 @@ class SizeChartPopUpVC: UIViewController {
                         closeHandler?()
                         return
                     }
-                    
                 }
-
             } else if isUKSelected {
                 if let index = ukSelectedIndex {
                     if delegate != nil {
@@ -164,7 +161,6 @@ class SizeChartPopUpVC: UIViewController {
                     delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips, sizeType: nil, sizeValue: nil)
                 case .waist:
                     delegate?.selectedValueFromPopUp(value: Int(currentSelection.waist.inch), type: .waist, sizeType: nil, sizeValue: nil)
-                    
                 default:
                     break
                 }
@@ -245,7 +241,7 @@ class SizeChartPopUpVC: UIViewController {
         }
     }
 
-    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: ProductSizeChart?, currentProductId: String? = nil , brandid: Int? = nil) -> SizeChartPopUpVC {
+    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: ProductSizeChart?, currentProductId: String? = nil, brandid: Int? = nil) -> SizeChartPopUpVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "SizeChartPopUpVC") as! SizeChartPopUpVC
         instnce.sizeChartList = arrayOfSizeChart
@@ -335,7 +331,6 @@ extension SizeChartPopUpVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var indexPathsToReload = [indexPath]
         clearAllSelections()
         if collectionView == sizesCollectionVu {
             isSelectedFromGeneral = true

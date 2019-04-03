@@ -24,6 +24,7 @@ struct Post: Codable {
         case sizeType = "size_type"
         case sizeValue = "size_value"
     }
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         postId = try values.decode(Int.self, forKey: .postId)

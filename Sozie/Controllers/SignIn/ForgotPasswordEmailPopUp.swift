@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ForgotPasswordEmailPopupDelegate {
-    func recoverPasswordBtnTapped(email : String)
+    func recoverPasswordBtnTapped(email: String)
 }
 class ForgotPasswordEmailPopUp: UIViewController {
 
@@ -20,14 +20,14 @@ class ForgotPasswordEmailPopUp: UIViewController {
     @IBOutlet weak var emailTxtFld: UITextField!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var errorLbl: UILabel!
-    var delegate : ForgotPasswordEmailPopupDelegate?
+    var delegate: ForgotPasswordEmailPopupDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 //        emailTxtFld.becomeFirstResponder()
     }
-    
+
     class func instance() -> ForgotPasswordEmailPopUp {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordEmailPopUp") as! ForgotPasswordEmailPopUp
@@ -43,27 +43,21 @@ class ForgotPasswordEmailPopUp: UIViewController {
     }
     */
     @IBAction func recoverPasswordBtnTapped(_ sender: Any) {
-        if self.emailTxtFld.text!.isValidEmail()
-        {
+        if self.emailTxtFld.text!.isValidEmail() {
             self.errorLbl.isHidden = true
             closeHandler!()
             delegate?.recoverPasswordBtnTapped(email: emailTxtFld.text!)
-
-        }
-        else
-        {
+        } else {
             self.errorLbl.isHidden = false
         }
     }
     @IBAction func closeBtnTapped(_ sender: Any) {
         closeHandler!()
     }
-    
 }
-
 
 extension ForgotPasswordEmailPopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width - 26.0 ,height: 270.0)
+        return CGSize(width: UIScreen.main.bounds.size.width - 26.0, height: 270.0)
     }
 }

@@ -97,11 +97,11 @@ class Styles {
         return 8.0
     }
 
-    var standardHorizontalMargin : CGFloat {
+    var standardHorizontalMargin: CGFloat {
         return 8.0
     }
 
-    var boxCornerRadius : CGFloat {
+    var boxCornerRadius: CGFloat {
         return 8.0
     }
 
@@ -126,7 +126,7 @@ extension UIView {
     }
 
     func applyShadowWith(radius: CGFloat, shadowOffSet: CGSize, opacity: Float) {
-        layer.shadowColor = UIColor.black.cgColor;
+        layer.shadowColor = UIColor.black.cgColor
         layer.shadowRadius = radius
         layer.shadowOffset = shadowOffSet
         layer.shadowOpacity = opacity
@@ -139,8 +139,8 @@ extension UIView {
         layer.borderColor = UIColor(hex: "BFBFBF").cgColor
         layer.masksToBounds = true
     }
-    
-    func applyStandardBorder(hexColor : String = "DADADA") {
+
+    func applyStandardBorder(hexColor: String = "DADADA") {
         layer.borderWidth = 1.0
         layer.borderColor = UIColor(hex: hexColor).cgColor
     }
@@ -161,7 +161,7 @@ extension MFTextField {
     }
 
     func applyRightVuLblWith(title: String ) {
-        let lbl = InsetLabel(frame: CGRect(x: 0.0, y: 0.0, width: 38.0 , height: 40.0))
+        let lbl = InsetLabel(frame: CGRect(x: 0.0, y: 0.0, width: 38.0, height: 40.0))
         lbl.text = title
         lbl.textAlignment = .right
         lbl.font = UIFont(name: "SegoeUI", size: 12.0)
@@ -189,7 +189,7 @@ extension UIButton {
         self.layer.borderWidth = 1.0
         self.clipsToBounds = false
     }
-    
+
     func applyButtonUnSelected() {
         self.layer.borderColor = UIColor(displayP3Red: 166.0/255.0, green: 166.0/255.0, blue: 166.0/255.0, alpha: 0.8).cgColor
         self.layer.cornerRadius = 2.0
@@ -206,7 +206,7 @@ extension UIButton {
         self.titleLabel?.font = UIFont(font: Font.standard, size: 16.0)
         self.setTitleColor(UIColor(hex: "323232"), for: .normal)
     }
-    
+
     func applyButtonShadow() {
         self.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
         self.layer.shadowRadius = 4.0

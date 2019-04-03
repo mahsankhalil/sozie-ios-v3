@@ -20,7 +20,7 @@ struct PostCellViewModel: RowViewModel, ImageViewModeling, TitleViewModeling, Re
     var attributedTitle: NSAttributedString?
     var imageURL: URL?
     let reuseIdentifier: String = "PostCollectionViewCell"
-    
+
     init(post: Post) {
         self.title = post.user.username
         self.imageURL = URL(string: post.imageURL)

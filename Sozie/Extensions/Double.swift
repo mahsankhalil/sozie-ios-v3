@@ -13,7 +13,6 @@ extension Double {
         let formatter = MeasurementFormatter()
         formatter.unitOptions = .providedUnit
         formatter.unitStyle = .short
-        
         let rounded = self.rounded(.towardZero)
         let feet = NSMeasurement(doubleValue: rounded, unit: UnitLength.feet)
         let inches = NSMeasurement(doubleValue: self - rounded, unit: UnitLength.feet).converting(to: UnitLength.inches)

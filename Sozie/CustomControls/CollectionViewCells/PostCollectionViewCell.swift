@@ -9,13 +9,13 @@
 import UIKit
 import EasyTipView
 
-protocol PostCollectionViewCellDelegate {
+protocol PostCollectionViewCellDelegate: class {
     func moreButtonTapped(button: UIButton)
     func followButtonTapped(button: UIButton)
     func cameraButtonTapped(button: UIButton)
 }
 class PostCollectionViewCell: UICollectionViewCell {
-    var delegate: PostCollectionViewCellDelegate?
+    weak var delegate: PostCollectionViewCellDelegate?
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
@@ -43,7 +43,7 @@ class PostCollectionViewCell: UICollectionViewCell {
             cameraButton.isHidden = true
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if let _ = appDelegate.imageTaken {
+            if appDelegate.imageTaken != nil {
                 cameraButton.isHidden = true
             } else {
                 cameraButton.isHidden = false
@@ -52,9 +52,11 @@ class PostCollectionViewCell: UICollectionViewCell {
             followButton.isHidden = true
         }
     }
-    func showTipView() {
+    override func layoutIfNeeded() {
+    }
+    @objc func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
-            if (self.followButton.tag == 1 && (self.followButton.isHidden == false)) {
+            if (self.followButton.tag == 1) && (self.followButton.isHidden == false) {
                 if isFirstTime {
                     let text = "Click here to Follow this Sozie"
                     var prefer = UtilityManager.tipViewGlobalPreferences()
@@ -63,6 +65,7 @@ class PostCollectionViewCell: UICollectionViewCell {
                     tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
                     tipView?.show(animated: true, forView: self.followButton, withinSuperview: self.topView)
                     isFirstTime = false
+                    UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.followButtonUserGuide)
                 }
             }
         }
@@ -137,7 +140,9 @@ extension PostCollectionViewCell: CellConfigurable {
             } else {
                 tipView?.isHidden = true
             }
-            showTipView()
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.followButtonUserGuide) == false {
+                perform(#selector(showTipView), with: nil, afterDelay: 0.5)
+            }
         }
     }
 

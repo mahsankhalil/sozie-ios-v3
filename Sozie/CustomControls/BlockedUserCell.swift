@@ -25,7 +25,6 @@ class BlockedUserCell: UITableViewCell {
         profileImageView.clipsToBounds = true
         profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,7 +32,7 @@ class BlockedUserCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     @IBAction func unblockButtonTapped(_ sender: Any) {
         delegate?.unblockButtonTapped(button: sender as! UIButton)
     }

@@ -11,7 +11,7 @@ import UIKit
 struct SubCategory: Codable {
     var subCategoryId: Int
     var subCategoryName: String
-    
+
     enum CodingKeys: String, CodingKey {
         case subCategoryId = "id"
         case subCategoryName = "name"

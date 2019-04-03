@@ -9,5 +9,5 @@
 import UIKit
 
 protocol SwitchProviding {
-    var isSwitchOn : Bool? { get set }
+    var isSwitchOn: Bool? { get set }
 }

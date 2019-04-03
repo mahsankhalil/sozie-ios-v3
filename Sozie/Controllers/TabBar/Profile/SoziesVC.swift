@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 class SoziesVC: UIViewController {
     var reuseableIdentifier = "SozieTableViewCell"
-    
+
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
@@ -20,6 +20,8 @@ class SoziesVC: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
+    var popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.mySozies )
+    var popUpVC: PopupController?
     var serverParams = [String: Any]()
     var viewModels: [SozieCellViewModel] = []
     var users: [User] = [] {
@@ -36,7 +38,7 @@ class SoziesVC: UIViewController {
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0
-            if let _ = dataDict["filter_by"] {
+            if dataDict["filter_by"] != nil {
                 searchLabel.text = String(viewModels.count) + " SOZIES FOLLOWED"
                 self.crossButton.isHidden = false
             } else if let queryBy = dataDict["query"] as? String {
@@ -58,7 +60,7 @@ class SoziesVC: UIViewController {
         setupViews()
         fetchDataFromServer()
     }
-    //MARK: - Custom Methods
+    // MARK: - Custom Methods
     func setupViews() {
         searchTextField.delegate = self
         searchViewHeightConstraint.constant = 0.0
@@ -114,27 +116,32 @@ class SoziesVC: UIViewController {
         users.removeAll()
         dataDict.removeAll()
         fetchDataFromServer()
+        popUpInstnc = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.mySozies )
     }
-    
+
     @IBAction func filterButtonTapped(_ sender: Any) {
-        let popUpInstnc: PopupNavController? = PopupNavController.instance(type: nil, brandList: nil, filterType: FilterType.mySozies )
         popUpInstnc?.popupDelegate = self
-        let popUpVC = PopupController
-            .create(self.tabBarController!)
-        let options = PopupCustomOption.layout(.bottom)
-        popUpVC.cornerRadius = 0.0
-        _ = popUpVC.customize([options])
-        _ = popUpVC.show(popUpInstnc!)
+        if popUpVC == nil {
+            popUpVC = PopupController
+                .create(self.tabBarController!)
+            let options = PopupCustomOption.layout(.bottom)
+            _ = popUpVC?.customize([options])
+        }
+        popUpVC?.cornerRadius = 0.0
+        popUpInstnc?.view.frame = UIScreen.main.bounds
+        popUpInstnc?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+
+        _ = popUpVC?.show(popUpInstnc!)
         popUpInstnc!.navigationHandler = { []  in
             UIView.animate(withDuration: 0.6, animations: {
-                popUpVC.updatePopUpSize()
+                self.popUpVC?.updatePopUpSize()
             })
         }
         popUpInstnc?.closeHandler = { [] in
-            popUpVC.dismiss()
+            self.popUpVC?.dismiss()
         }
     }
-    
+
     @IBAction func searchButtonTapped(_ sender: Any) {
         if searchViewHeightConstraint.constant == 0 {
             showSearchVu()
@@ -142,15 +149,14 @@ class SoziesVC: UIViewController {
             hideSearchVu()
         }
     }
-    
 }
 
 extension SoziesVC: UITextFieldDelegate {
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         hideSearchVu()
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         dataDict.removeValue(forKey: "filter_by")
         dataDict["query"] = textField.text
@@ -161,11 +167,11 @@ extension SoziesVC: UITextFieldDelegate {
 }
 
 extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
@@ -186,7 +192,7 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
             let sozieProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SozieProfileVC") as! SozieProfileVC
@@ -197,9 +203,8 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension SoziesVC: PopupNavControllerDelegate {
-    
+
     func doneButtonTapped(type: FilterType?, id: Int?) {
-        users.removeAll()
         if let filterType = type {
             if filterType == FilterType.mySozies {
                 if let typeId = id {
@@ -211,10 +216,12 @@ extension SoziesVC: PopupNavControllerDelegate {
         }
         crossButton.isHidden = false
         fetchDataFromServer()
+        users.removeAll()
+
     }
 }
 extension SoziesVC: SozieTableViewCellDelegate {
-    
+
     func followButtonTapped(button: UIButton) {
         let currentUser = users[button.tag]
         if currentUser.isFollowed == false {

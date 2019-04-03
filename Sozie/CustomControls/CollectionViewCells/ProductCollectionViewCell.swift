@@ -9,7 +9,7 @@
 import UIKit
 import EasyTipView
 class ProductCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var imgVuWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imgVuHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleImageView: UIImageView!
@@ -36,7 +36,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
-            if (self.maskImageView.tag == 0 && (self.maskImageView.isHidden == false)) {
+            if (self.maskImageView.tag == 0) && (self.maskImageView.isHidden == false) {
                 if isFirstTime {
                     let text = "You're in! Click on pictures with a mask to see Sozie images"
                     var prefer = UtilityManager.tipViewGlobalPreferences()
@@ -45,9 +45,14 @@ class ProductCollectionViewCell: UICollectionViewCell {
                     tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
                     tipView?.show(animated: true, forView: self.maskImageView, withinSuperview: self)
                     isFirstTime = false
+                    UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.browseUserGuide)
+                    perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)
                 }
             }
         }
+    }
+    @objc func dismissTipView() {
+        tipView?.dismiss(withCompletion: nil)
     }
 }
 extension ProductCollectionViewCell: ButtonProviding {
@@ -58,7 +63,7 @@ extension ProductCollectionViewCell: ButtonProviding {
 extension ProductCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
-            productImageView.sd_setImage(with: imgModel.imageURL) { (img, err, cacheType, url) in
+            productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
                 self.adjustLayoutOfImageView()
                 UIView.animate(withDuration: 0.3, animations: {
                     (self.superview as? UICollectionView)?.collectionViewLayout.invalidateLayout()
@@ -92,7 +97,9 @@ extension ProductCollectionViewCell: CellConfigurable {
             } else {
                 tipView?.isHidden = true
             }
-            showTipView()
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.browseUserGuide) == false {
+                showTipView()
+            }
         }
     }
 

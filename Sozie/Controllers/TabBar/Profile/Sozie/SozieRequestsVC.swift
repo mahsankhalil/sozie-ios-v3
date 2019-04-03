@@ -37,7 +37,13 @@ class SozieRequestsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        serverParams.removeAll()
+        requests.removeAll()
         fetchAllSozieRequests()
+
     }
     @objc func loadNextPage() {
         if let nextUrl = self.nextURL {
@@ -48,7 +54,7 @@ class SozieRequestsVC: UIViewController {
             tableView.bottomRefreshControl?.endRefreshing()
         }
     }
-    
+
     func fetchAllSozieRequests() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
@@ -60,7 +66,6 @@ class SozieRequestsVC: UIViewController {
                 self.nextURL = paginatedData.next
                 self.searchCountLabel.text = String(paginatedData.count) + " REQUESTS"
             }
-            
         }
     }
 
@@ -85,12 +90,10 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
-        
         if tableViewCell == nil {
             tableView.register(UINib(nibName: reuseableIdentifier, bundle: nil), forCellReuseIdentifier: reuseableIdentifier)
             tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
         }
-        
         guard let cell = tableViewCell else { return UITableViewCell() }
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
@@ -115,8 +118,8 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         UtilityManager.openImagePickerActionSheetFrom(vc: self)
     }
 }
-extension SozieRequestsVC:  UINavigationControllerDelegate , UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostVC") as? UploadPostVC {
             if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 if let profileParentVC = self.parent?.parent as? ProfileRootVC {

@@ -9,12 +9,15 @@
 import UIKit
 import FBSDKCoreKit
 import GoogleSignIn
-
+import Appsee
+import Intercom
+import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var imageTaken: UIImage?
+    var updatedProduct: Product?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
@@ -26,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
             self.window?.rootViewController = rootViewController
         }
+        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
+        UtilityManager.registerUserOnIntercom()
+        Appsee.start()
         return true
     }
 
@@ -33,9 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
-    
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        
         if url.absoluteString.hasPrefix("sozie://resetpwd") {
             if let params = url.queryParameters {
                 showResetPasswordVC(with: params)
@@ -64,6 +69,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+                print("Notifications permission granted.")
+            } else {
+                print("Notifications permission denied because: \(error?.localizedDescription ?? "").")
+            }
+        }
+    }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Intercom.setDeviceToken(deviceToken)
+    }
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if Intercom.isIntercomPushNotification(userInfo) {
+            Intercom.handlePushNotification(userInfo)
+        }
+        completionHandler(.noData)
     }
 
     func showResetPasswordVC(with params: [String: Any]) {

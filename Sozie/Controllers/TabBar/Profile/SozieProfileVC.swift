@@ -39,7 +39,6 @@ class SozieProfileVC: BaseViewController {
 
         // Do any additional setup after loading the view.
         collectionView.register(UINib(nibName: "PostSizeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostSizeCollectionViewCell")
-        
         let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
@@ -58,7 +57,6 @@ class SozieProfileVC: BaseViewController {
                     let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                     let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                     heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
-                    
                 }
                 if let hip = measurement.hip {
                     hipLabel.text = "Hip: " + String(hip) + "  |"
@@ -106,8 +104,6 @@ class SozieProfileVC: BaseViewController {
         followButton.layer.borderColor = UIColor(hex: "7EA7E5").cgColor
         followButton.layer.cornerRadius = 3.0
     }
-
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -138,27 +134,23 @@ class SozieProfileVC: BaseViewController {
             }
         }
     }
-    
 }
 extension SozieProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModels.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var rowViewModel = viewModels[indexPath.row]
-        
+        let rowViewModel = viewModels[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostSizeCollectionViewCell", for: indexPath)
-        
-        
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(rowViewModel)
         }
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var availableWidth: Int = Int(UIScreen.main.bounds.size.width - 6 )
+        let availableWidth: Int = Int(UIScreen.main.bounds.size.width - 6 )
         let widthPerItem = Double(availableWidth/3)
         return CGSize(width: widthPerItem, height: widthPerItem )
     }
@@ -168,7 +160,7 @@ extension SozieProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, 
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }
@@ -176,7 +168,7 @@ extension SozieProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currentPost = posts[indexPath.row]
         self.performSegue(withIdentifier: "toProductDetail", sender: self)

@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back-button-white")
         navigationItem.backBarButtonItem?.width = 80
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -26,17 +26,17 @@ class BaseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func setupSozieLogoNavBar() {
         let logo = UIImage(named: "NavBarLogo")
         setupBackgroundImage()
-        let imageView = UIImageView(image:logo)
+        let imageView = UIImageView(image: logo)
         navigationItem.titleView = imageView
         navigationController?.navigationBar.layer.borderWidth = 1.0
         navigationController?.navigationBar.layer.borderColor = UIColor(hex: "707070").cgColor.copy(alpha: 0.05)
 
     }
-    
+
     func setupBrandNavBar(imageURL: String) {
         let titleView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 150.0, height: 19.5))
         let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 150.0, height: 19.5))
@@ -47,14 +47,16 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.layer.borderWidth = 1.0
         navigationController?.navigationBar.layer.borderColor = UIColor(hex: "707070").cgColor.copy(alpha: 0.05)
     }
-    func showCancelButton() {
+    func showCancelButtonAfterDelay() {
+        perform(#selector(showCancelButton), with: nil, afterDelay: 0.5)
+    }
+    @objc func showCancelButton() {
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
         cancelButton.tintColor = UIColor(hex: "888888")
         navigationItem.leftBarButtonItem = cancelButton
         showCancelButtonTipView()
     }
     func showCancelButtonTipView() {
-        
     }
     func showTagItemButton() {
         let tagItemButton = UIBarButtonItem(title: "Tag Item", style: .plain, target: self, action: #selector(tagItemButtonTapped))
@@ -62,7 +64,6 @@ class BaseViewController: UIViewController {
         navigationItem.rightBarButtonItem = tagItemButton
     }
     @objc func tagItemButtonTapped() {
-        
     }
     @objc func cancelButtonTapped() {
         navigationItem.leftBarButtonItem = nil
@@ -75,21 +76,22 @@ class BaseViewController: UIViewController {
         nextButton.tintColor = UIColor(hex: "888888")
         navigationItem.rightBarButtonItem = nextButton
     }
+
     @objc func nextButtonTapped() {
-        
     }
+
     func setupProfileNavBar() {
         setupBackgroundImage()
         navigationItem.titleView = nil
     }
-    
+
     func setupBackgroundImage() {
     self.navigationController?.navigationBar.setBackgroundImage(UIImage().resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), resizingMode: UIImage.ResizingMode.stretch), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
 
     }
-    
+
 //    func sideMenuBtnTapped()
 //    {
 //

@@ -29,10 +29,19 @@ struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewMode
         self.reuseIdentifier = reuseIdentifier
     }
     init(product: Product, identifier: String) {
-
         var imageURL = ""
-        if let productImageURL = product.imageURL {
-            imageURL = productImageURL.getActualSizeImageURL() ?? ""
+        if product.brandId == 4 {
+            if let productImageURL = product.merchantImageURL {
+                if productImageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = productImageURL.components(separatedBy: delimeter)
+                    imageURL = url[0]
+                }
+            }
+        } else {
+            if let productImageURL = product.imageURL {
+                imageURL = productImageURL.getActualSizeImageURL() ?? ""
+            }
         }
         var brandImageURL = ""
         if let brandId = product.brandId {
@@ -50,7 +59,7 @@ struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewMode
         }
         var priceString = ""
         if let currency = product.currency?.getCurrencySymbol() {
-            priceString = currency + " " + String(format: "%0.2f", searchPrice)
+            priceString = currency + String(format: "%0.2f", searchPrice)
         }
         var productDescription = ""
         if let description = product.description {
@@ -65,6 +74,4 @@ struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewMode
         reuseIdentifier = identifier
 //        let viewModel = ProductImageCellViewModel(isSelected: false, count: postCount, title: priceString, attributedTitle: nil, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), description: productDescription, reuseIdentifier: "WishTableViewCell")
     }
-
-    
 }

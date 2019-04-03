@@ -51,27 +51,23 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    //MARK: -Field Validation
+    // MARK: - Field Validation
     func applyValidators() {
         validator.registerField(emailField, errorLabel: nil, rules: [RequiredRule(message: "Email can't be empty") as Rule, EmailRule(message: "Invalid email")])
         validator.registerField(passwordField, errorLabel: nil, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule])
-        
         [emailField, passwordField].forEach { (field) in
             field?.delegate = self
         }
     }
 
     func validationSuccessful() {
-        
         var params = [String: String]()
         params["email"] = emailField.text
         params["password"] = passwordField.text
         signInWithDict(dataDict: params)
-
     }
 
-    func signInWithDict(dataDict : [String : Any]) {
+    func signInWithDict(dataDict: [String: Any]) {
         SVProgressHUD.show()
         ServerManager.sharedInstance.loginWith(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -79,6 +75,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 // Do something after login
                 let res = response as! LoginResponse
                 _ = UserDefaultManager.saveLoginResponse(loginResp: res)
+                UtilityManager.registerUserOnIntercom()
                 self.changeRootVCToTabBarNC()
             } else {
                 let error = response as! Error
@@ -95,19 +92,12 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             }
         }
     }
-    
-    func navigateToTabBar() {
-        
-    }
-
-    //MARK: - Text Field Delegates
-    
+    // MARK: - Text Field Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txtFld  = textField as! MFTextField
         txtFld.setError(nil, animated: true)
     }
-    
-    //MARK: -IBActions
+    // MARK: - IBActions
     @IBAction func signinButtonPressed(_ sender: Any) {
         validator.validate(self)
     }
@@ -138,7 +128,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         GIDSignIn.sharedInstance()?.signOut()
         GIDSignIn.sharedInstance()?.signIn()
     }
-    
+
     @objc func eyeBtnTapped(sender: UIButton) {
         if passwordField.isSecureTextEntry {
             passwordField.isSecureTextEntry = false
@@ -176,7 +166,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         // ...
         SVProgressHUD.dismiss()
     }
-    //MARK: -Delegates
+    // MARK: - Delegates
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string == " " && textField == emailField {
             return false

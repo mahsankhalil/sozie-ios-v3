@@ -7,7 +7,7 @@
 //
 
 import UIKit
-public protocol PhotoEditorDelegate {
+public protocol PhotoEditorDelegate: class {
     /**
      - Parameter image: edited Image
      */
@@ -26,7 +26,7 @@ class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButton: UIButton!
     var lastPoint: CGPoint!
-    public var photoEditorDelegate: PhotoEditorDelegate?
+    weak public var photoEditorDelegate: PhotoEditorDelegate?
     var lastPanPoint: CGPoint?
     var imageViewToPan: UIImageView?
     public var image: UIImage?
@@ -36,7 +36,6 @@ class PhotoEditorViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.setImageView(image: image!)
-        
         deleteView.layer.cornerRadius = deleteView.bounds.height / 2
         deleteView.layer.borderWidth = 2.0
         deleteView.layer.borderColor = UIColor.white.cgColor
@@ -87,7 +86,7 @@ class PhotoEditorViewController: UIViewController {
                                                     action: #selector(PhotoEditorViewController.pinchGesture))
         pinchGesture.delegate = self
         view.addGestureRecognizer(pinchGesture)
-        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self, action:#selector(PhotoEditorViewController.rotationGesture) )
+        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(PhotoEditorViewController.rotationGesture))
         rotationGestureRecognizer.delegate = self
         view.addGestureRecognizer(rotationGestureRecognizer)
 
@@ -112,5 +111,4 @@ class PhotoEditorViewController: UIViewController {
         photoEditorDelegate?.doneEditing(image: img)
         self.dismiss(animated: true, completion: nil)
     }
-    
 }

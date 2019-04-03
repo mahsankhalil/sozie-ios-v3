@@ -24,7 +24,7 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user
     }
-    
+
     static func updateUserObject(user: User) {
         guard var loginResponse = loginResponse() else { return  }
         loginResponse.user = user
@@ -34,29 +34,29 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.userId
     }
-    
-    static func getCurrentUserType() -> String?
-    {
+
+    static func getCurrentUserType() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.type
     }
-    
+
     static func deleteLoginResponse() {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginResponse)
         UserDefaults.standard.synchronize()
     }
-    
+
     static func getAccessToken() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.access
     }
-    
+
     static func getRefreshToken() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.refresh
     }
+
     static func isUserGuideDisabled() -> Bool {
-        if (UserDefaults.standard.bool(forKey: UserDefaultKey.userGuide) as? Bool) == true {
+        if UserDefaults.standard.bool(forKey: UserDefaultKey.userGuide) == true {
             return true
         } else {
             return false
@@ -69,6 +69,7 @@ class UserDefaultManager: NSObject {
             return false
         }
     }
+
     static func makeUserGuideDisabled() {
         UserDefaults.standard.set(true, forKey: UserDefaultKey.userGuide)
         UserDefaults.standard.synchronize()
@@ -122,6 +123,42 @@ class UserDefaultManager: NSObject {
             }
         }
         return true
+    }
+    static func getIfUserGuideShownFor(userGuide: String) -> Bool {
+        if UserDefaults.standard.bool(forKey: userGuide) == true {
+            return true
+        } else {
+            return false
+        }
+    }
+    static func setUserGuideShown(userGuide: String) {
+        UserDefaults.standard.set(true, forKey: userGuide)
+        UserDefaults.standard.synchronize()
+        UserDefaultManager.checkIfALLUserGuidesShownThenDisableUserGuide()
+    }
+    static func checkIfALLUserGuidesShownThenDisableUserGuide() {
+        if UserDefaults.standard.bool(forKey: UserDefaultKey.measurementUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.browseUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.requestSozieButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.followButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.mySoziesUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.myRequestsUserGuide) == true {
+            makeUserGuideDisabled()
+        }
+
+    }
+    static func removeAllUserGuidesShown() {
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.measurementUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.browseUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.requestSozieButtonUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.followButtonUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.mySoziesUserGuide)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.myRequestsUserGuide)
+        UserDefaults.standard.synchronize()
+    }
+    static func markAllUserGuidesNotShown() {
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.measurementUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.browseUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.requestSozieButtonUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.followButtonUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.mySoziesUserGuide)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.myRequestsUserGuide)
+        UserDefaults.standard.synchronize()
     }
 
 }

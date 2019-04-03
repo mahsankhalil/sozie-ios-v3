@@ -10,11 +10,11 @@ import UIKit
 
 class CustomError: NSObject, LocalizedError {
     var desc = ""
-    
+
     init(str: String) {
         desc = str
     }
-    
+
     override var description: String {
         get {
             return desc

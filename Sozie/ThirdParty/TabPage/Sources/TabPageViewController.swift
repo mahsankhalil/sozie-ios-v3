@@ -17,7 +17,7 @@ open class TabPageViewController: UIPageViewController {
         guard let viewController = viewControllers?.first else {
             return nil
         }
-        return tabItems.map{ $0.viewController }.index(of: viewController)
+        return tabItems.map { $0.viewController}.index( of: viewController)
     }
     fileprivate var beforeIndex: Int = 0
     fileprivate var tabItemsCount: Int {
@@ -35,7 +35,7 @@ open class TabPageViewController: UIPageViewController {
     public init() {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
@@ -55,7 +55,7 @@ open class TabPageViewController: UIPageViewController {
             tabView = configuredTabView()
         }
 
-        if let currentIndex = currentIndex , isInfinity {
+        if let currentIndex = currentIndex, isInfinity {
             tabView.updateCurrentIndex(currentIndex, shouldScroll: true)
         }
     }
@@ -74,7 +74,6 @@ open class TabPageViewController: UIPageViewController {
 //        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
     }
 }
-
 
 // MARK: - Public Interface
 
@@ -102,7 +101,6 @@ public extension TabPageViewController {
     }
 }
 
-
 // MARK: - View
 
 extension TabPageViewController {
@@ -112,19 +110,17 @@ extension TabPageViewController {
         delegate = self
         automaticallyAdjustsScrollViewInsets = false
 
-        if tabItems.count > 0
-        {
+        if tabItems.count > 0 {
             setViewControllers([tabItems[beforeIndex].viewController],
                                direction: .forward,
                                animated: false,
                                completion: nil)
         }
-       
     }
 
     fileprivate func setupScrollView() {
         // Disable PageViewController's ScrollView bounce
-        let scrollView = view.subviews.flatMap { $0 as? UIScrollView }.first
+        let scrollView = view.subviews.compactMap { $0 as? UIScrollView }.first
         scrollView?.scrollsToTop = false
         scrollView?.delegate = self
         scrollView?.backgroundColor = option.pageBackgoundColor
@@ -139,8 +135,6 @@ extension TabPageViewController {
             navigationBar.shadowImage = UIImage()
             navigationBar.isTranslucent = option.isTranslucent
         }
-        
-        
     }
 
     fileprivate func configuredTabView() -> TabView {
@@ -163,7 +157,7 @@ extension TabPageViewController {
                                      relatedBy: .equal,
                                      toItem: topLayoutGuide,
                                      attribute: .bottom,
-                                     multiplier:1.0,
+                                     multiplier: 1.0,
                                      constant: 0.0)
 
         let left = NSLayoutConstraint(item: tabView,
@@ -207,7 +201,7 @@ extension TabPageViewController {
                                      relatedBy: .equal,
                                      toItem: view,
                                      attribute: .top,
-                                     multiplier:1.0,
+                                     multiplier: 1.0,
                                      constant: 0.0)
 
         let left = NSLayoutConstraint(item: statusView,
@@ -225,7 +219,6 @@ extension TabPageViewController {
                                        attribute: .trailing,
                                        multiplier: 1.0,
                                        constant: 0.0)
-
         let height = NSLayoutConstraint(item: statusView,
                                         attribute: .height,
                                         relatedBy: .equal,
@@ -282,7 +275,6 @@ extension TabPageViewController {
         }
 
         navigationController.setNavigationBarHidden(false, animated: true)
-        
     }
 
     private func updateTabBarOrigin(hidden: Bool) {
@@ -294,7 +286,6 @@ extension TabPageViewController {
         }
     }
 }
-
 
 // MARK: - UIPageViewControllerDataSource
 
@@ -335,7 +326,6 @@ extension TabPageViewController: UIPageViewControllerDataSource {
     }
 }
 
-
 // MARK: - UIPageViewControllerDelegate
 
 extension TabPageViewController: UIPageViewControllerDelegate {
@@ -349,7 +339,7 @@ extension TabPageViewController: UIPageViewControllerDelegate {
     }
 
     public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if let currentIndex = currentIndex , currentIndex < tabItemsCount {
+        if let currentIndex = currentIndex, currentIndex < tabItemsCount {
             tabView.updateCurrentIndex(currentIndex, shouldScroll: false)
             beforeIndex = currentIndex
         }
@@ -357,7 +347,6 @@ extension TabPageViewController: UIPageViewControllerDelegate {
         tabView.updateCollectionViewUserInteractionEnabled(true)
     }
 }
-
 
 // MARK: - UIScrollViewDelegate
 
@@ -375,7 +364,7 @@ extension TabPageViewController: UIScrollViewDelegate {
         } else {
             index = beforeIndex - 1
         }
-        
+
         if index == tabItemsCount {
             index = 0
         } else if index < 0 {

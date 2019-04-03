@@ -8,6 +8,6 @@
 
 import UIKit
 
-class LineProviding: NSObject {
-
+protocol LineProviding {
+    var isHidden: Bool {get set}
 }

@@ -7,11 +7,11 @@
 //
 
 import UIKit
-protocol SozieRequestTableViewCellDelegate {
+protocol SozieRequestTableViewCellDelegate: class {
     func acceptRequestButtonTapped(button: UIButton)
 }
 class SozieRequestTableViewCell: UITableViewCell {
-    var delegate: SozieRequestTableViewCellDelegate?
+    weak var delegate: SozieRequestTableViewCellDelegate?
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var backgroudView: UIView!
     @IBOutlet weak var sizeRequestedLabel: UILabel!
@@ -43,7 +43,6 @@ class SozieRequestTableViewCell: UITableViewCell {
     @IBAction func acceptButtonTapped(_ sender: Any) {
         delegate?.acceptRequestButtonTapped(button: sender as! UIButton)
     }
-    
 }
 extension SozieRequestTableViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
@@ -51,12 +50,8 @@ extension SozieRequestTableViewCell: CellConfigurable {
             productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
             }
         }
-        
         if let titleModel = viewModel as? TitleViewModeling {
             titleLabel.text = titleModel.title!
-        }
-        if let selectionModel = viewModel as? SelectionProviding {
-            
         }
         if let subTitleModel = viewModel as? SubtitleViewModeling {
             sizeRequestedLabel.text = subTitleModel.subtitle
@@ -72,7 +67,6 @@ extension SozieRequestTableViewCell: CellConfigurable {
                 let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                 let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                 heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
-                
             }
             if let hip = measurementModel.hip {
                 hipLabel.text = "Hip: " + String(hip) + "'  | "

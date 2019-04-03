@@ -20,7 +20,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var cup: String?
     var waist: Int?
     var imageURL: URL?
-    
+
     init (request: SozieRequest) {
         var imageURL = ""
         if let productImageURL = request.requestedProduct.imageURL {

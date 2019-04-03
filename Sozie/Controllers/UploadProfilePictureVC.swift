@@ -16,17 +16,22 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var imgVu: UIImageView!
     var pickedImage: UIImage?
+    var isFromSignUp = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         imgVu.applyCornerRadiusAndBorder()
-        if let currentUser = UserDefaultManager.getCurrentUserObject() {
-            if let picture = currentUser.picture {
-                imgVu.sd_setImage(with: URL(string: picture), completed: nil)
+        if isFromSignUp {
+            skipBtn.isHidden = false
+            backBtn.isHidden = true
+        } else {
+            if let currentUser = UserDefaultManager.getCurrentUserObject() {
+                if let picture = currentUser.picture {
+                    imgVu.sd_setImage(with: URL(string: picture), completed: nil)
+                }
+                skipBtn.isHidden = true
             }
-            skipBtn.isHidden = true
         }
     }
 
@@ -41,7 +46,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
      */
     // MARK: - Image Picker Delegate
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let pickdImg = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             pickedImage = pickdImg
             imgVu.image = pickdImg
@@ -62,12 +67,12 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
                 ServerManager.sharedInstance.updateProfile(params: nil, imageData: imgData) { (isSuccess, response) in
                     SVProgressHUD.dismiss()
                     if isSuccess {
-                        if UserDefaultManager.isUserLoggedIn() {
+                        if self.isFromSignUp {
+                            self.performSegue(withIdentifier: "toInviteFriends", sender: self)
+                        } else {
                             let user = response as! User
                             UserDefaultManager.updateUserObject(user: user)
                             self.navigationController?.popViewController(animated: true)
-                        } else {
-                            self.performSegue(withIdentifier: "toInviteFriends", sender: self)
                         }
                     } else {
                         let error = response as! Error
@@ -79,12 +84,12 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
             UtilityManager.showErrorMessage(body: "Please select Image", in: self)
         }
     }
-    
+
     @IBAction func skipBtnTapped(_ sender: Any) {
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {
-        if UserDefaultManager.isUserLoggedIn() {
+        if isFromSignUp == false {
             self.navigationController?.popViewController(animated: true)
         } else {
             self.dismiss(animated: true, completion: nil)

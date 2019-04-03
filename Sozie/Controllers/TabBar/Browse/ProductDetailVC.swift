@@ -10,10 +10,11 @@ import UIKit
 import SDWebImage
 import SVProgressHUD
 import EasyTipView
+import SafariServices
 class ProductDetailVC: BaseViewController {
 
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var descriptionTextLabel: UILabel!
     @IBOutlet weak var requestSozieButton: DZGradientButton!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var buyButton: DZGradientButton!
@@ -34,7 +35,7 @@ class ProductDetailVC: BaseViewController {
         swipeToSeeView.roundCorners(corners: [.topLeft], radius: 20.0)
         setupSozieLogoNavBar()
 //        populateProductData()
-        fetchProductDetailFromServer()
+//        fetchProductDetailFromServer()
         collectionView.register(UINib(nibName: "PostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostCollectionViewCell")
         collectionView.register(UINib(nibName: "ProductDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductDetailCollectionViewCell")
         buyButton.layer.cornerRadius = 3.0
@@ -45,7 +46,6 @@ class ProductDetailVC: BaseViewController {
             heartButton.isHidden = false
             buyButton.isHidden = false
             requestSozieButton.isHidden = false
-            showTipView()
         } else {
             heartButtonWidthConstraint.constant = 0.0
             heartButton.isHidden = true
@@ -53,28 +53,42 @@ class ProductDetailVC: BaseViewController {
             requestSozieButton.isHidden = true
         }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if let _ = appDelegate.imageTaken {
+        if appDelegate.imageTaken != nil {
             self.showTagItemButton()
             self.showCancelButton()
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProductDetailFromServer()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaultManager.getIfShopper() {
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.requestSozieButtonUserGuide) == false {
+                showTipView()
+            }
         }
     }
     func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
             let text = "After swiping, if you still don't see your size tried on, click above!"
             var prefer = UtilityManager.tipViewGlobalPreferences()
-            prefer.drawing.arrowPosition = .bottom
+            prefer.drawing.arrowPosition = .top
             prefer.positioning.maxWidth = 110
             let tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
             tipView.show(animated: true, forView: self.requestSozieButton, withinSuperview: self.bottomView)
+            UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.requestSozieButtonUserGuide)
         }
     }
     override func viewDidLayoutSubviews() {
-        descriptionTextView.setContentOffset(.zero, animated: false)
+//        descriptionTextLabel.setContentOffset(.zero, animated: false)
     }
 
     func fetchProductDetailFromServer () {
         if let productId = currentProduct?.productStringId {
+            SVProgressHUD.show()
             ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
                 if isSuccess {
                     self.updateCurrentProductObject(product: response as! Product)
                     self.populateProductData()
@@ -94,12 +108,12 @@ class ProductDetailVC: BaseViewController {
             searchPrice = Double(price)
         }
         if let currency = currentProduct?.currency?.getCurrencySymbol() {
-            priceString = currency + " " + String(format: "%0.2f", searchPrice)
+            priceString = currency + String(format: "%0.2f", searchPrice)
         }
         priceLabel.text = priceString
         if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {
-            descriptionTextView.text = productName + "\n" +  productDescription
-            descriptionTextView.setContentOffset(.zero, animated: true)
+            descriptionTextLabel.text = productName + "\n" +  productDescription
+//            descriptionTextView.setContentOffset(.zero, animated: true)
         }
         if let brandId = currentProduct?.brandId {
             if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
@@ -107,33 +121,40 @@ class ProductDetailVC: BaseViewController {
             }
         }
         if var imageURL = currentProduct?.merchantImageURL {
-            if let feedId = currentProduct?.feedId, feedId == 18857 {
-                if feedId == 18857 {
+            if imageURL == "" {
+                if let imageURLTarget = currentProduct?.imageURL {
+                    productViewModel.imageURL = URL(string: imageURLTarget)
+                }
+            } else {
+                if imageURL.contains("|") {
                     let delimeter = "|"
                     let url = imageURL.components(separatedBy: delimeter)
                     imageURL = url[0]
                 }
+                productViewModel.imageURL = URL(string: imageURL)
             }
-            productViewModel.imageURL = URL(string: imageURL)
         }
         if currentProduct?.isFavourite == false {
             heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
         } else {
             heartButton.setImage(UIImage(named: "Filled Heart"), for: .normal)
         }
-        makePostCellViewModel()
 //        pageControl.currentPage = 0
-//        if let posts = currentProduct?.posts {
-//            if posts.count == 0 {
-//                swipeToSeeView.isHidden = true
-//            } else {
-//                swipeToSeeView.isHidden = false
-//            }
-//            pageControl.numberOfPages = posts.count + 1
-//        } else {
-//            pageControl.numberOfPages = 1
-//            swipeToSeeView.isHidden = true
-//        }
+        if let posts = currentProduct?.posts {
+            if posts.count == 0 {
+                swipeToSeeView.isHidden = true
+                pageControl.isHidden = true
+            } else {
+                swipeToSeeView.isHidden = false
+                pageControl.isHidden = false
+            }
+            pageControl.numberOfPages = posts.count + 1
+        } else {
+            pageControl.numberOfPages = 1
+            swipeToSeeView.isHidden = true
+            pageControl.isHidden = true
+        }
+        makePostCellViewModel()
     }
     func makePostCellViewModel() {
         viewModels.removeAll()
@@ -150,18 +171,29 @@ class ProductDetailVC: BaseViewController {
             }
         }
         self.collectionView.reloadData()
-        self.collectionView.scrollToItem(at: IndexPath(item: indexOfPost, section: 0), at: .centeredHorizontally, animated: false)
         pageControl.numberOfPages = viewModels.count + 1
         self.pageControl.currentPage = indexOfPost
-        if indexOfPost > 0 {
-            swipeToSeeView.isHidden = true
-        } else {
-            swipeToSeeView.isHidden = false
+        if currentProduct?.posts?.count != 0 {
+            if indexOfPost > 0 {
+                swipeToSeeView.isHidden = true
+            } else {
+                swipeToSeeView.isHidden = false
+            }
         }
+        self.collectionView.scrollToItem(at: IndexPath(item: indexOfPost, section: 0), at: .centeredHorizontally, animated: false)
+
     }
 
-
-
+    @objc func showSuccessPopUp() {
+        var popUpInstnc: ServerResponsePopUp?
+        popUpInstnc = ServerResponsePopUp.instance(imageName: "checked", title: "Request Sent", description: "Look out for filled requests in your profile.", height: 200, isOkButtonHidded: true)
+        let popUpVC = PopupController
+            .create(self.tabBarController ?? self)
+            .show(popUpInstnc!)
+        popUpInstnc!.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -174,6 +206,12 @@ class ProductDetailVC: BaseViewController {
             uploadPostVC.selectedImage = appDelegate.imageTaken
             uploadPostVC.currentProduct = currentProduct
         }
+        if segue.identifier == "toWebVC" {
+            let webVC = segue.destination as! WebVC
+            if let link = currentProduct?.deepLink {
+                webVC.url = URL(string: link)
+            }
+        }
     }
     // MARK: - Actions
 
@@ -185,17 +223,45 @@ class ProductDetailVC: BaseViewController {
 //        popUpInstnc.delegate = self
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()
+            DispatchQueue.main.async {
+                self.showSuccessPopUp()
+            }
+//            self.perform(#selector(self.showSuccessPopUp), with: nil, afterDelay: 1.0)
         }
     }
     @IBAction func butButtonTapped(_ sender: Any) {
+//        if let productURL = self.currentProduct?.deepLink {
+//            guard let url = URL(string: productURL) else { return }
+//            let svc = SFSafariViewController(url: url)
+//            svc.modalPresentationStyle = .pageSheet
+//            self.tabBarController?.navigationController?.present(svc, animated: true, completion: nil)
+////            self.present(svc, animated: true, completion: nil)
+////            guard let url = URL(string: productURL) else { return }
+////            UIApplication.shared.open(url)
+//        }
+//        self.performSegue(withIdentifier: "toWebVC", sender: self)
         if let productURL = self.currentProduct?.deepLink {
-            guard let url = URL(string: productURL) else { return }
-            UIApplication.shared.open(url)
+
+            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
+            webVC.url = URL(string: productURL)
+            webVC.modalPresentationStyle = .overFullScreen
+            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
         }
 
     }
     @IBAction func shareButtonTapped(_ sender: Any) {
-        if let imageURL = currentProduct?.merchantImageURL {
+        if var imageURL = currentProduct?.merchantImageURL {
+            if imageURL == "" {
+                if let imageURLTarget = currentProduct?.imageURL {
+                    imageURL =  imageURLTarget
+                }
+            } else {
+                if imageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = imageURL.components(separatedBy: delimeter)
+                    imageURL = url[0]
+                }
+            }
             SVProgressHUD.show()
             SDWebImageDownloader.shared().downloadImage(with: URL(string: imageURL), options: SDWebImageDownloaderOptions.highPriority, progress: nil) { (image, _, _, _) in
                 SVProgressHUD.dismiss()
@@ -300,13 +366,17 @@ extension ProductDetailVC: UIScrollViewDelegate {
         let width = scrollView.bounds.size.width
         let currentPage = Int(ceil(xAxis/width))
         pageControl.currentPage = currentPage
-        swipeToSeeView.isHidden = currentPage > 0
+        if (currentProduct?.posts?.count)! > 0 {
+            swipeToSeeView.isHidden = currentPage > 0
+        }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetX = scrollView.contentOffset.x
         if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
             if UserDefaultManager.getIfShopper() == false {
-                UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                if (scrollView.contentSize.width - scrollView.bounds.width) != 0 {
+                    UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                }
             }
         }
     }
@@ -383,7 +453,7 @@ extension ProductDetailVC: ProductDetailCollectionViewCellDelegate {
     }
 }
 extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostVC") as? UploadPostVC {
             if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))

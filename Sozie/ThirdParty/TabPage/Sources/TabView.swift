@@ -85,7 +85,7 @@ internal class TabView: UIView {
         let bundle = Bundle(for: TabView.self)
         let nib = UINib(nibName: TabCollectionCell.cellIdentifier(), bundle: bundle)
         collectionView.register(nib, forCellWithReuseIdentifier: TabCollectionCell.cellIdentifier())
-        cellForSize = nib.instantiate(withOwner: nil, options: nil).first as! TabCollectionCell
+        cellForSize = (nib.instantiate(withOwner: nil, options: nil).first as! TabCollectionCell)
 
         collectionView.scrollsToTop = false
 
@@ -121,7 +121,6 @@ internal class TabView: UIView {
         super.init(coder: aDecoder)
     }
 }
-
 
 // MARK: - View
 
@@ -161,7 +160,7 @@ extension TabView {
             let distance = (currentCell.frame.width / 2.0) + (nextCell.frame.width / 2.0)
             let scrollRate = contentOffsetX / frame.width
 
-            if fabs(scrollRate) > 0.6 {
+            if abs(scrollRate) > 0.6 {
                 nextCell.highlightTitle()
                 currentCell.unHighlightTitle()
             } else {
@@ -169,7 +168,7 @@ extension TabView {
                 currentCell.highlightTitle()
             }
 
-            let width = fabs(scrollRate) * (nextCell.frame.width - currentCell.frame.width)
+            let width = abs(scrollRate) * (nextCell.frame.width - currentCell.frame.width)
             if isInfinity {
                 let scroll = scrollRate * distance
                 collectionView.contentOffset.x = collectionViewContentOffsetX + scroll
@@ -239,6 +238,12 @@ extension TabView {
             collectionViewContentOffsetX = 0.0
             currentBarViewWidth = 0.0
         }
+        if beforeIndex != currentIndex {
+            let beforeIndexPath = IndexPath(item: beforeIndex, section: 0)
+            if let cell = collectionView.cellForItem(at: beforeIndexPath) as? TabCollectionCell {
+                cell.dismissTipView()
+            }
+        }
         if let cell = collectionView.cellForItem(at: indexPath) as? TabCollectionCell {
             currentBarView.isHidden = false
             if animated && shouldScroll {
@@ -255,9 +260,9 @@ extension TabView {
                     if !animated && shouldScroll {
                         cell.isCurrent = true
                     }
-                    
                     self.updateCollectionViewUserInteractionEnabled(true)
             })
+            cell.showTipView()
         }
         beforeIndex = currentIndex
     }
@@ -277,11 +282,10 @@ extension TabView {
     fileprivate func deselectVisibleCells() {
         collectionView
             .visibleCells
-            .flatMap { $0 as? TabCollectionCell }
+            .compactMap { $0 as? TabCollectionCell }
             .forEach { $0.isCurrent = false }
     }
 }
-
 
 // MARK: - UICollectionViewDataSource
 
@@ -294,6 +298,7 @@ extension TabView: UICollectionViewDataSource {
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabCollectionCell.cellIdentifier(), for: indexPath) as! TabCollectionCell
         configureCell(cell, indexPath: indexPath)
+//        cell.showTipView()
         return cell
     }
 
@@ -326,14 +331,12 @@ extension TabView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        // FIXME: Tabs are not displayed when processing is performed during introduction display
         if let cell = cell as? TabCollectionCell, layouted {
             let fixedIndex = isInfinity ? indexPath.item % pageTabItemsCount : indexPath.item
             cell.isCurrent = fixedIndex == (currentIndex % pageTabItemsCount)
         }
     }
 }
-
 
 // MARK: - UIScrollViewDelegate
 
@@ -378,7 +381,6 @@ extension TabView: UICollectionViewDelegate {
         }
     }
 }
-
 
 // MARK: - UICollectionViewDelegateFlowLayout
 

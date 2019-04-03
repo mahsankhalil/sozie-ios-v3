@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
-    
+
     override func awakeFromNib() {
         self.applyShadowWith(radius: 10.0, shadowOffSet: CGSize(width: 0.0, height: 15.0), opacity: 0.25)
     }

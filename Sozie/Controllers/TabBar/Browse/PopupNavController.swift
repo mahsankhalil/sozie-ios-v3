@@ -8,31 +8,33 @@
 
 import UIKit
 
-protocol PopupNavControllerDelegate {
-    func doneButtonTapped(type : FilterType? , id : Int?)
+protocol PopupNavControllerDelegate: class {
+    func doneButtonTapped(type: FilterType?, id: Int?)
 }
 
 class PopupNavController: UINavigationController {
-    
+
     var navigationHandler: (() -> Void)?
     var popupType: PopupType?
     var brandList: [Brand]?
     var popupDelegate: PopupNavControllerDelegate?
     var closeHandler: (() -> Void)?
     var filterType: FilterType?
+    var selectedBrandId: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.delegate = self
     }
-    
-    class func instance(type: PopupType?, brandList: [Brand]?, filterType: FilterType? = nil) -> PopupNavController {
+
+    class func instance(type: PopupType?, brandList: [Brand]?, filterType: FilterType? = nil, brandId: Int? = nil) -> PopupNavController {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "PopupNavController") as! PopupNavController
         instnce.popupType = type
         instnce.brandList = brandList
         instnce.filterType = filterType
+        instnce.selectedBrandId = brandId
         return instnce
     }
     /*
@@ -71,10 +73,11 @@ extension PopupNavController: PopupContentViewController {
 extension PopupNavController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         navigationHandler!()
-        if let vc = self.viewControllers[0] as? ListingPopupVC {
-            vc.filterType = filterType
-            vc.setPopupType(type: popupType, brandList: brandList,filterType: filterType)
-            vc.delegate = self
+        if let destVC = self.viewControllers[0] as? ListingPopupVC {
+            destVC.filterType = filterType
+            destVC.selectedBrandId = selectedBrandId
+            destVC.setPopupType(type: popupType, brandList: brandList, filterType: filterType)
+            destVC.delegate = self
         }
     }
 }
@@ -82,5 +85,5 @@ extension PopupNavController: ListingPopupVCDelegate {
     func doneButtonTapped(type: FilterType?, id: Int?) {
         popupDelegate?.doneButtonTapped(type: type, id: id)
         closeHandler!()
-    }  
+    }
 }

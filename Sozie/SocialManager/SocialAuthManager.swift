@@ -80,7 +80,7 @@ class SocialAuthManager: NSObject {
         var dataDict = [String: String]()
         let fullName = user.profile.name
         var components = fullName?.components(separatedBy: " ")
-        if((components?.count)! > 0) {
+        if (components?.count)! > 0 {
             let firstName = components?.removeFirst()
             let lastName = components?.joined(separator: " ")
             dataDict[User.CodingKeys.firstName.stringValue] = firstName

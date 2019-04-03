@@ -10,10 +10,11 @@ import UIKit
 import SVProgressHUD
 class MyBalanceVC: UIViewController {
 
+    @IBOutlet weak var checkoutBackgroundView: DZGradientView!
     @IBOutlet weak var totalBalanceBackgroundView: DZGradientView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var minimumBalanceLabel: UILabel!
-    @IBOutlet weak var checkoutButton: DZGradientButton!
+    @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var balanceLabel: UILabel!
     var currentbalance: Float = 0.0
     override func viewDidLoad() {
@@ -21,8 +22,9 @@ class MyBalanceVC: UIViewController {
 
         // Do any additional setup after loading the view.
         fetchDataFromServer()
+        checkoutBackgroundView.layer.cornerRadius = Styles.sharedStyles.buttonCornerRadius
     }
-    
+
     func fetchDataFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getCurrentBalance(params: [:]) { (isSuccess, response) in
@@ -30,7 +32,7 @@ class MyBalanceVC: UIViewController {
             if isSuccess {
                 let balance = (response as! BalanceResponse).balance
                 self.currentbalance = balance
-                self.balanceLabel.text = "$" + String(balance)
+                self.balanceLabel.text = "$" + String(format: "%0.2f", balance)
             } else {
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
@@ -64,5 +66,4 @@ class MyBalanceVC: UIViewController {
             }
         }
     }
-    
 }

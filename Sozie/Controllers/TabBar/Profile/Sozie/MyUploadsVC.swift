@@ -38,6 +38,12 @@ class MyUploadsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         collectionView.bottomRefreshControl = refreshControl
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        serverParams.removeAll()
+        posts.removeAll()
+        viewModels.removeAll()
         getPostsFromServer()
     }
     @objc func loadNextPage() {
@@ -72,20 +78,15 @@ class MyUploadsVC: UIViewController {
             destVC?.currentPostId = currentPost?.postId
         }
     }
-
-
 }
 extension MyUploadsVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModels.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var rowViewModel = viewModels[indexPath.row]
-        
+        let rowViewModel = viewModels[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostSizeCollectionViewCell", for: indexPath)
-        
-        
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(rowViewModel)
         }
@@ -93,7 +94,7 @@ extension MyUploadsVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var availableWidth: Int = Int(UIScreen.main.bounds.size.width - 6 )
+        let availableWidth: Int = Int(UIScreen.main.bounds.size.width - 6 )
         let widthPerItem = Double(availableWidth/3)
         return CGSize(width: widthPerItem, height: widthPerItem )
     }

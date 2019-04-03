@@ -42,7 +42,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>30</string>
+	<string>34</string>
 	<key>FacebookAppID</key>
 	<string>785424855123561</string>
 	<key>FacebookDisplayName</key>
@@ -74,6 +74,10 @@
 		<string>seguisb.ttf</string>
 		<string>SEGOEUII_1.TTF</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -100,5 +104,7 @@
 		<key>test</key>
 		<string>key_test_mpIpjSQp8qCCC23ii7WdviieqwcWAHJN</string>
 	</dict>
+	<key>com.appsee.ApiKey</key>
+	<string>668f4ee2336f4a89b9e8c42e7e98e1a0</string>
 </dict>
 </plist>

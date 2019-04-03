@@ -22,7 +22,8 @@ pod 'Hex'
 pod 'WaterfallLayout', '~> 0.1'
 pod 'CCBottomRefreshControl'
 pod 'SwiftLint'
-
+pod 'Appsee', '~> 2.5.1'
+pod 'Intercom'
 end
 
 post_install do |installer|

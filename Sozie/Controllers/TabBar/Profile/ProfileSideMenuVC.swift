@@ -11,7 +11,9 @@ import SVProgressHUD
 import StoreKit
 import SideMenu
 import MessageUI
-struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewModeling {
+import Intercom
+struct TitleCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewModeling, LineProviding {
+    var isHidden: Bool
     var title: String?
     var attributedTitle: NSAttributedString?
     let reuseIdentifier = "TitleCell"
@@ -20,7 +22,8 @@ struct TitleCellViewModel : RowViewModel, ReuseIdentifierProviding, TitleViewMod
 //    var title: String?
 //    var attributedTitle: NSAttributedString?
 //}
-struct TitleCellWithSwitchViewModel : RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding {
+struct TitleCellWithSwitchViewModel: RowViewModel, SwitchProviding, TitleViewModeling, ReuseIdentifierProviding, LineProviding {
+    var isHidden: Bool
     var title: String?
     var attributedTitle: NSAttributedString?
     var isSwitchOn: Bool?
@@ -33,7 +36,6 @@ class ProfileSideMenuVC: BaseViewController {
         var title: String
         var rowViewModels: [RowViewModel]
     }
-    
     var sections: [Section] = []
 
     @IBOutlet weak var myBalanceButton: UIButton!
@@ -45,7 +47,7 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var menuBtn: UIButton!
 
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
-    let settingTitles = ["Push Notifications", "Reset first-time use Guide", "Blocked Accounts"]
+    let settingTitles = ["Push Notifications", "Reset first time use guide", "Blocked Accounts"]
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
@@ -58,7 +60,7 @@ class ProfileSideMenuVC: BaseViewController {
             self.myBalanceViewHeightContraint.constant = 0.0
         } else {
             self.myBalanceViewHeightContraint.constant = 50.0
-            accountTitles = ["Edit Profile", "Change My Workplace", "Update Profile Picture", "Change Password", "My Measurements"]
+            accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements", "Change My Workplace"]
 
         }
         let accountViewModels = setupViewModels(accountTitles)
@@ -75,9 +77,14 @@ class ProfileSideMenuVC: BaseViewController {
 
     func setupViewModels(_ titles: [String]) -> [RowViewModel] {
         var viewModels: [RowViewModel] = []
+        var index = 0
         for title in titles {
             var viewModel: RowViewModel
-            if title == "Push Notifications" || title == "Reset first-time use Guide" {
+            var bottomLineHidden = false
+            if index == titles.count - 1 {
+                bottomLineHidden = true
+            }
+            if title == "Push Notifications" || title == "Reset first time use guide" {
                 var flag = false
                 if title == "Push Notifications" {
                     if let user = UserDefaultManager.getCurrentUserObject() {
@@ -85,14 +92,15 @@ class ProfileSideMenuVC: BaseViewController {
                             flag = notfStatus
                         }
                     }
-                } else if title == "Reset first-time use Guide" {
+                } else if title == "Reset first time use guide" {
                     flag = !UserDefaultManager.isUserGuideDisabled()
                 }
-                viewModel = TitleCellWithSwitchViewModel(title: title, attributedTitle: nil, isSwitchOn: flag)
+                viewModel = TitleCellWithSwitchViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil, isSwitchOn: flag)
                             } else {
-                viewModel = TitleCellViewModel(title: title, attributedTitle: nil)
+                viewModel = TitleCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
             }
             viewModels.append(viewModel)
+            index = index + 1
         }
         return viewModels
     }
@@ -100,9 +108,10 @@ class ProfileSideMenuVC: BaseViewController {
         SVProgressHUD.show()
         var dataDict = [String: Any]()
         dataDict["refresh"] =  UserDefaultManager.getRefreshToken()
-        ServerManager.sharedInstance.logoutUser(params: dataDict) { (isSuccess, response) in
+        ServerManager.sharedInstance.logoutUser(params: dataDict) { (_, _) in
             SVProgressHUD.dismiss()
             UserDefaultManager.deleteLoginResponse()
+            Intercom.logout()
             self.changeRootVCToLoginNC()
         }
     }
@@ -123,8 +132,8 @@ class ProfileSideMenuVC: BaseViewController {
             }
         }
     }
-    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
-        guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId) else {
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool) -> Void)) {
+        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
             completion(false)
             return
         }
@@ -153,11 +162,9 @@ class ProfileSideMenuVC: BaseViewController {
     func sendFeedbackWithEmail() {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
-        
         // Configure the fields of the interface.
         composeVC.setToRecipients(["contact@sozie.com"])
         composeVC.setSubject("Feedback")
-        
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
     }
@@ -214,7 +221,7 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 26.0
@@ -236,7 +243,7 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
 
         let section = sections[indexPath.section]
         let rowViewModel = section.rowViewModels[indexPath.row]
-        var reuseIdentifier: String? = nil
+        var reuseIdentifier: String?
         if let reuseIdentifierProvider = rowViewModel as? ReuseIdentifierProviding {
             reuseIdentifier = reuseIdentifierProvider.reuseIdentifier
         }
@@ -266,27 +273,9 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             performSectionOneActions(row: indexPath.row)
         case 1:
-            switch indexPath.row {
-            case 2:
-                showBlockedListVC()
-            default:
-                return
-            }
+            performSectionTwoActions(row: indexPath.row)
         case 2:
-            switch indexPath.row {
-            case 0:
-                showInviteFriendsVC()
-            case 1:
-                rateThisApp()
-            case 2:
-                sendFeedbackWithEmail()
-            case 3:
-                showTOSVC(type: TOSType.privacyPolicy)
-            case 4:
-                showTOSVC(type: TOSType.termsCondition)
-            default:
-                return
-            }
+            performSectionThreeActions(row: indexPath.row)
         default:
             return
         }
@@ -296,29 +285,42 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             showEditProfileVC()
         case 1:
-            if UserDefaultManager.getIfShopper() {
-                showUploadPhotoVC()
-            } else {
-                showUpdateWorkPlaceVC()
-            }
+            showUploadPhotoVC()
         case 2:
-            if UserDefaultManager.getIfShopper() {
-                showChangePasswordVC()
-            } else {
-                showUploadPhotoVC()
-            }
+            showChangePasswordVC()
         case 3:
-            if UserDefaultManager.getIfShopper() {
-                showMeasurementVC()
-            } else {
-                showChangePasswordVC()
-            }
-        case 4:
             showMeasurementVC()
+        case 4:
+            showUpdateWorkPlaceVC()
         default:
             return
         }
     }
+    func performSectionTwoActions(row: Int) {
+        switch row {
+        case 2:
+            showBlockedListVC()
+        default:
+            return
+        }
+    }
+    func performSectionThreeActions(row: Int) {
+        switch row {
+        case 0:
+            showInviteFriendsVC()
+        case 1:
+            rateThisApp()
+        case 2:
+            sendFeedbackWithEmail()
+        case 3:
+            showTOSVC(type: TOSType.privacyPolicy)
+        case 4:
+            showTOSVC(type: TOSType.termsCondition)
+        default:
+            return
+        }
+    }
+
 }
 extension ProfileSideMenuVC: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -333,7 +335,7 @@ extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
             ServerManager.sharedInstance.updatePrefernce(params: dataDict) { (isSuccess, response) in
                 if isSuccess {
                     if var currentUser = UserDefaultManager.getCurrentUserObject() {
-                        if let preferences = currentUser.preferences {
+                        if currentUser.preferences != nil {
                             currentUser.preferences?.pushNotificationEnabled = switchButton.isOn
                             UserDefaultManager.updateUserObject(user: currentUser)
                         }
@@ -345,10 +347,11 @@ extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
         } else {
             if switchButton.isOn {
                 UserDefaultManager.makeUserGuideEnable()
+                UserDefaultManager.removeAllUserGuidesShown()
             } else {
                 UserDefaultManager.makeUserGuideDisabled()
+                UserDefaultManager.markAllUserGuidesNotShown()
             }
         }
-        
     }
 }

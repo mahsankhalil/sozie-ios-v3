@@ -31,16 +31,13 @@ class UploadPostVC: BaseViewController {
     var selectedSizeValue: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-    
         if currentProduct == nil {
             currentProduct = currentRequest?.requestedProduct
             fetchProductDetailFromServer()
         } else {
             populateProductData()
         }
-        
         self.sizeView.isHidden = true
         populateSizeData()
         if let image = selectedImage {
@@ -84,7 +81,7 @@ class UploadPostVC: BaseViewController {
             searchPrice = Double(price)
         }
         if let currency = currentProduct?.currency?.getCurrencySymbol() {
-            priceString = currency + " " + String(format: "%0.2f", searchPrice)
+            priceString = currency + String(format: "%0.2f", searchPrice)
         }
         productPriceLabel.text = priceString
         if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {
@@ -144,8 +141,11 @@ class UploadPostVC: BaseViewController {
                 if isSuccess {
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.imageTaken = nil
+                    if let postCount = self.currentProduct?.posts?.count {
+                        self.currentProduct?.postCount = postCount + 1
+                        appDelegate.updatedProduct = self.currentProduct
+                    }
                     self.navigationController?.popToRootViewController(animated: true)
-                    
                 } else {
                     UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
                 }
@@ -175,12 +175,12 @@ extension UploadPostVC: SizeChartPopupVCDelegate {
     }
 }
 extension UploadPostVC: PhotoEditorDelegate {
-    
+
     func doneEditing(image: UIImage) {
         selectedImage = image
         postImageView.image = image
     }
-    
+
     func canceledEditing() {
         print("Canceled")
     }

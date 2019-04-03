@@ -7,7 +7,7 @@
 //
 
 import UIKit
-protocol SozieTableViewCellDelegate {
+protocol SozieTableViewCellDelegate: class {
     func followButtonTapped(button: UIButton)
 }
 class SozieTableViewCell: UITableViewCell {
@@ -20,7 +20,7 @@ class SozieTableViewCell: UITableViewCell {
     @IBOutlet weak var braLabel: UILabel!
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var backgroudView: UIView!
-    var delegate: SozieTableViewCellDelegate?
+    weak var delegate: SozieTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -55,7 +55,6 @@ class SozieTableViewCell: UITableViewCell {
     @IBAction func followButtonTapped(_ sender: Any) {
         delegate?.followButtonTapped(button: sender as! UIButton)
     }
-    
 }
 extension SozieTableViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
@@ -81,7 +80,6 @@ extension SozieTableViewCell: CellConfigurable {
                 let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                 let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                 heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
-                
             }
             if let hip = measurementModel.hip {
                 hipLabel.text = "Hip: " + String(hip) + "  |"

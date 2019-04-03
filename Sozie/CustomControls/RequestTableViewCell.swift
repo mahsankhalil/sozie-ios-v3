@@ -7,7 +7,7 @@
 //
 
 import UIKit
-protocol RequestTableViewCellDelegate {
+protocol RequestTableViewCellDelegate: class {
     func buyButtonTapped(button: UIButton)
 }
 class RequestTableViewCell: UITableViewCell {
@@ -19,7 +19,7 @@ class RequestTableViewCell: UITableViewCell {
     @IBOutlet weak var sozieReadyLabel: UILabel!
     @IBOutlet weak var productTitleLabel: UILabel!
     @IBOutlet weak var buyButton: DZGradientButton!
-    var delegate: RequestTableViewCellDelegate?
+    weak var delegate: RequestTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

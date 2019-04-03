@@ -22,26 +22,25 @@ struct CountryCellViewModel: RowViewModel, TitleViewModeling, CheckmarkViewModel
 class SelectCountryVC: UIViewController {
 
     private let reuseIdentifier = "TitleAndCheckmarkCell"
-    
+
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var signUpBtn: DZGradientButton!
     @IBOutlet weak var tableView: UITableView!
-    
+
     var selectedCountryId: Int?
     var currentUserType: UserType?
     var signUpDict: [String: Any] = [:]
-    
+
     var countries: [Country]? {
         didSet {
             guard let countries = countries else { return }
-            
             for country in countries {
                 let viewModel = CountryCellViewModel(title: country.code, attributedTitle: nil, isCheckmarkHidden: true)
                 viewModels.append(viewModel)
             }
         }
     }
-    
+
     private var viewModels: [CountryCellViewModel] = []
     private var selectedViewModelIndex: Int?
 
@@ -53,7 +52,7 @@ class SelectCountryVC: UIViewController {
     }
 
     // MARK: - Custom Methods
-    
+
     func fetchDataFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getCountriesList(params: [:]) { (isSuccess, response) in
@@ -77,7 +76,7 @@ class SelectCountryVC: UIViewController {
     }
 
     // MARK: - Actions
-    
+
     @IBAction func nextBtnTapped(_ sender: Any) {
         if let countryid = selectedCountryId {
             signUpDict[User.CodingKeys.country.stringValue] = countryid
@@ -98,34 +97,29 @@ class SelectCountryVC: UIViewController {
 }
 
 extension SelectCountryVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countries?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
-        
         if tableViewCell == nil {
             tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier:reuseIdentifier)
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
         }
-        
         guard let cell = tableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        
         let viewModel = viewModels[indexPath.row]
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         guard let countries = countries else { return }
-        
         self.selectedCountryId = countries[indexPath.row].countryId
         var indexPathsToReload = [indexPath]
         if let previousSelectedIndex = selectedViewModelIndex {
