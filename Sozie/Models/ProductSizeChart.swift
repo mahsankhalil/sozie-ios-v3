@@ -12,7 +12,7 @@ struct ProductSizeChart: Codable {
     var generalSize: [HasPost]
     var ukSize: [HasPost]
     var usSize: [HasPost]
-    
+
     enum CodingKeys: String, CodingKey {
         case generalSize = "GN"
         case ukSize = "UK"

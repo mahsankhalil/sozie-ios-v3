@@ -39,7 +39,7 @@ class SoziesVC: UIViewController {
             }
             noDataLabel.isHidden = viewModels.count != 0
             if dataDict["filter_by"] != nil {
-                searchLabel.text = String(viewModels.count) + " SOZIES FOLLOWED"
+                searchLabel.text = String(viewModels.count) + (viewModels.count <= 1 ? " SOZIE FOLLOWED" : " SOZIES FOLLOWED")
                 self.crossButton.isHidden = false
             } else if let queryBy = dataDict["query"] as? String {
                 searchLabel.text = queryBy
@@ -58,6 +58,9 @@ class SoziesVC: UIViewController {
 
         // Do any additional setup after loading the view.
         setupViews()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchDataFromServer()
     }
     // MARK: - Custom Methods
@@ -204,10 +207,10 @@ extension SoziesVC: UITableViewDelegate, UITableViewDataSource {
 }
 extension SoziesVC: PopupNavControllerDelegate {
 
-    func doneButtonTapped(type: FilterType?, id: Int?) {
+    func doneButtonTapped(type: FilterType?, objId: Int?) {
         if let filterType = type {
             if filterType == FilterType.mySozies {
-                if let typeId = id {
+                if let typeId = objId {
                     if typeId == 0 {
                         dataDict["filter_by"] = "only_followed"
                     }
@@ -238,6 +241,19 @@ extension SoziesVC: SozieTableViewCellDelegate {
                 }
             }
 
+        } else {
+            var dataDict = [String: Any]()
+            let userId = currentUser.userId
+            dataDict["user"] = userId
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.unFollowUser(params: dataDict) { (isSuccess, _) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.users[button.tag].isFollowed = false
+                    self.viewModels[button.tag].isFollow = false
+                    self.tableView.reloadRows(at: [IndexPath(item: button.tag, section: 0)], with: .automatic)
+                }
+            }
         }
     }
 }

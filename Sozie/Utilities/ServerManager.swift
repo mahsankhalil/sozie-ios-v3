@@ -358,6 +358,22 @@ class ServerManager: NSObject {
             }
         }
     }
+    func unFollowUser(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        var url = ServerManager.followURL
+        Alamofire.request(url, method: .delete, parameters: params, encoding: URLEncoding.httpBody, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
     func blockUser(params: [String: Any], block: CompletionHandler) {
 
         let headers: HTTPHeaders = [

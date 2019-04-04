@@ -20,7 +20,7 @@ struct SozieCellViewModel: RowViewModel, FollowViewModeling, TitleViewModeling, 
     var cup: String?
     var waist: Int?
     var imageURL: URL?
-    
+
     init (user: User, brandImageURL: String) {
         self.isFollow = user.isFollowed ?? false
         self.title = user.username

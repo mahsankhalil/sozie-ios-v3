@@ -59,7 +59,7 @@ extension JSONDecoder {
         } else if let errors = json["errors"] as? [String: Any] {
             for key in errors.keys {
                 if let keyErrors = errors[key] as? [String] {
-                    return CustomError(str: keyErrors[0])
+                    return CustomError(str: key + ":" + keyErrors[0])
 //                    return BackendError.objectSerialization(reason: keyErrors[0])
                 } else {
                     return CustomError(str: "Something Went Wrong")

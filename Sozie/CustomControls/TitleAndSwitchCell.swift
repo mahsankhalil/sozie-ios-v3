@@ -7,14 +7,14 @@
 //
 
 import UIKit
-protocol TitleAndSwitchCellDelegate {
+protocol TitleAndSwitchCellDelegate: class {
     func switchValueChanged(switchButton: UISwitch)
 }
 class TitleAndSwitchCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var switchControl: UISwitch!
     @IBOutlet weak var bottomLine: UIView!
-    var delegate: TitleAndSwitchCellDelegate?
+    weak var delegate: TitleAndSwitchCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()

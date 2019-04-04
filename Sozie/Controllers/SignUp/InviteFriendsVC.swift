@@ -49,7 +49,7 @@ class InviteFriendsVC: UIViewController {
 
     @IBAction func inviteBtnTapped(_ sender: Any) {
         let objectsToShare = ["https://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8"]
-        UtilityManager.showActivityControllerWith(objectsToShare: objectsToShare, vc: self)
+        UtilityManager.showActivityControllerWith(objectsToShare: objectsToShare, viewController: self)
     }
 
     @IBAction func skipBtnTapped(_ sender: Any) {

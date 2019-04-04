@@ -33,7 +33,6 @@ PODS:
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
   - SideMenu (5.0.3)
-  - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.30.0)
   - SwiftValidator (4.0.0)
@@ -53,7 +52,6 @@ DEPENDENCIES:
   - MaterialTextField (~> 1.0)
   - SDWebImage (~> 4.0)
   - SideMenu
-  - SnapKit (~> 4.0.0)
   - SVProgressHUD
   - SwiftLint
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
@@ -77,7 +75,6 @@ SPEC REPOS:
     - MaterialTextField
     - SDWebImage
     - SideMenu
-    - SnapKit
     - SVProgressHUD
     - SwiftLint
     - TPKeyboardAvoiding
@@ -109,13 +106,12 @@ SPEC CHECKSUMS:
   MaterialTextField: f1a0786588e4d3610cb9bb62d2adbe9777cebbf9
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
-  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 4e37cb5cd33435170dfd09fba089f41fdbf64d53
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: 55f5ba9cf6be75068c0ca5f796057e7e43293709
+PODFILE CHECKSUM: d7f60a0c36c35261553223ad29ce63f6a69b5a43
 
 COCOAPODS: 1.5.3

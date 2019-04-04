@@ -68,6 +68,7 @@
 		614374E222390EAE00DBD295 /* MyBalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374E122390EAE00DBD295 /* MyBalanceVC.swift */; };
 		614CEA4321F1E08F00FE5F9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 614CEA4221F1E08F00FE5F9D /* GoogleService-Info.plist */; };
 		614CEA4621F1E48600FE5F9D /* SocialAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */; };
+		615790E52254CBEB007B8532 /* signup.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 615790E42254CBEB007B8532 /* signup.mp4 */; };
 		6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6158DC272201881500CB78EC /* SwitchProviding.swift */; };
 		61592031220C172C00816034 /* ImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61592030220C172C00816034 /* ImageCellViewModel.swift */; };
 		61592033220C176500816034 /* ProductImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61592032220C176500816034 /* ProductImageCellViewModel.swift */; };
@@ -238,6 +239,7 @@
 		614374E122390EAE00DBD295 /* MyBalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceVC.swift; sourceTree = "<group>"; };
 		614CEA4221F1E08F00FE5F9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthManager.swift; sourceTree = "<group>"; };
+		615790E42254CBEB007B8532 /* signup.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = signup.mp4; sourceTree = "<group>"; };
 		6158DC272201881500CB78EC /* SwitchProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchProviding.swift; sourceTree = "<group>"; };
 		61592030220C172C00816034 /* ImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellViewModel.swift; sourceTree = "<group>"; };
 		61592032220C176500816034 /* ProductImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCellViewModel.swift; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				615790E42254CBEB007B8532 /* signup.mp4 */,
 				6103E1A521FEDBEB00C7E7CF /* ThirdParty */,
 				6103E18621F9E98800C7E7CF /* StoryBoards */,
 				D738BF6121F3D6E100302FE5 /* Extensions */,
@@ -859,6 +862,7 @@
 				6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
 				6103E1B521FF33CC00C7E7CF /* TitleAndSwitchCell.xib in Resources */,
+				615790E52254CBEB007B8532 /* signup.mp4 in Resources */,
 				61B647F82227FEC7007A6370 /* SozieRequestTableViewCell.xib in Resources */,
 				611EDFD6221AF0DB00FB2DBE /* WishTableViewCell.xib in Resources */,
 				6103E1B121FF330400C7E7CF /* TitleCell.xib in Resources */,
@@ -895,7 +899,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/WaterfallLayout/WaterfallLayout.framework",
@@ -917,7 +920,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WaterfallLayout.framework",

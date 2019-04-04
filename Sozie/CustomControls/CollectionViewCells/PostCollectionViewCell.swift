@@ -110,6 +110,19 @@ extension PostCollectionViewCell: CellConfigurable {
         if let descriptionViewModel = viewModel as? DescriptionViewModeling {
             sizeWornLabel.text = descriptionViewModel.description
         }
+        assignMeasurements(viewModel: viewModel)
+        if UserDefaultManager.getIfShopper() {
+            if followButton.tag == 1 {
+                tipView?.isHidden = false
+            } else {
+                tipView?.isHidden = true
+            }
+            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.followButtonUserGuide) == false {
+                perform(#selector(showTipView), with: nil, afterDelay: 0.5)
+            }
+        }
+    }
+    func assignMeasurements(viewModel: RowViewModel) {
         if let measurementModel = viewModel as? MeasurementViewModeling {
             if let bra = measurementModel.bra, let cup = measurementModel.cup {
                 braLabel.text = "Bra Size: " + String(bra) + cup
@@ -118,7 +131,6 @@ extension PostCollectionViewCell: CellConfigurable {
                 let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                 let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                 heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
-
             }
             if let hip = measurementModel.hip {
                 hipLabel.text = "Hip: " + String(hip) + "  |"
@@ -134,16 +146,7 @@ extension PostCollectionViewCell: CellConfigurable {
                 }
             }
         }
-        if UserDefaultManager.getIfShopper() {
-            if followButton.tag == 1 {
-                tipView?.isHidden = false
-            } else {
-                tipView?.isHidden = true
-            }
-            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.followButtonUserGuide) == false {
-                perform(#selector(showTipView), with: nil, afterDelay: 0.5)
-            }
-        }
+
     }
 
 }

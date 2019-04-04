@@ -19,6 +19,9 @@
         <array key="segoeuib.ttf">
             <string>SegoeUI-Bold</string>
         </array>
+        <array key="seguisb.ttf">
+            <string>SegoeUI-SemiBold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Sign In View Controller-->
@@ -216,21 +219,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr4-cf-Obz" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="65.5" y="448" width="244" height="45"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient Shadow" translatesAutoresizingMaskIntoConstraints="NO" id="3xP-qc-lKu">
+                                <rect key="frame" x="0.0" y="377" width="375" height="290"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
-                                <state key="normal" title="Sign Up as a Shopper"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="290" id="x4K-Xm-Bin"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
+                                <rect key="frame" x="116.5" y="235.5" width="142" height="86"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr4-cf-Obz">
+                                <rect key="frame" x="30" y="384" width="315" height="45"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="YC8-1M-zHP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="15"/>
+                                <state key="normal" title="Sign Up as a Shopper">
+                                    <color key="titleColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="signupShopperBtnTapped:" destination="qhF-if-nqj" eventType="touchUpInside" id="tle-bg-eb0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhn-R8-v2N" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="65.5" y="513" width="244" height="45"/>
+                                <rect key="frame" x="30" y="495" width="315" height="45"/>
                                 <color key="backgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="75b-8e-pxN"/>
+                                    <constraint firstAttribute="height" constant="45" id="AFL-5c-s39"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="15"/>
                                 <state key="normal" title="Sign Up as a Sozie"/>
                                 <connections>
                                     <action selector="signUpSozieBtnTapped:" destination="qhF-if-nqj" eventType="touchUpInside" id="GKS-9d-jKJ"/>
@@ -245,24 +264,49 @@
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="Already have an account?">
+                                        <fragment content="Already have an account">
                                             <attributes>
-                                                <color key="NSColor" red="0.63921568627450975" green="0.63921568627450975" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" metaFont="system" size="14"/>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="SegoeUI-SemiBold"/>
+                                                <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="?">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="SegoeUI-SemiBold"/>
+                                                <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name="SegoeUI-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content=" ">
                                             <attributes>
                                                 <color key="NSColor" red="0.36376700129533679" green="0.36376700129533679" blue="0.36376700129533679" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" metaFont="system" size="14"/>
+                                                <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                                <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="Sign In">
                                             <attributes>
                                                 <color key="NSColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" metaFont="system" size="14"/>
+                                                <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                                <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -272,27 +316,46 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="90n-N6-YqP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
-                                <rect key="frame" x="116.5" y="80" width="142" height="86"/>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browse fashion in-stores and ask your Sozies to try things on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
+                                <rect key="frame" x="53" y="439" width="269" height="35"/>
+                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try things on for shoppers and earn money for your service." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-kk-0qU">
+                                <rect key="frame" x="53" y="550" width="269" height="35"/>
+                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="f90-z6-p2F" firstAttribute="top" secondItem="Mvu-Ij-rm4" secondAttribute="top" constant="60" id="15W-MM-Dop"/>
-                            <constraint firstItem="f90-z6-p2F" firstAttribute="centerX" secondItem="Mvu-Ij-rm4" secondAttribute="centerX" id="6N9-o0-wF9"/>
-                            <constraint firstItem="Dr4-cf-Obz" firstAttribute="centerX" secondItem="Mhn-R8-v2N" secondAttribute="centerX" id="Fxo-NF-ZfM"/>
-                            <constraint firstItem="Dr4-cf-Obz" firstAttribute="height" secondItem="Mhn-R8-v2N" secondAttribute="height" id="GQZ-O6-KKr"/>
-                            <constraint firstItem="GPx-l4-byK" firstAttribute="top" secondItem="Mhn-R8-v2N" secondAttribute="bottom" constant="59" id="OES-e2-Bet"/>
-                            <constraint firstItem="Mhn-R8-v2N" firstAttribute="width" secondItem="Jyu-xw-oc8" secondAttribute="width" multiplier="0.65" id="RaW-wc-D9a"/>
+                            <constraint firstItem="GPx-l4-byK" firstAttribute="top" secondItem="Y9R-kk-0qU" secondAttribute="bottom" constant="32" id="6ek-QA-f7i"/>
+                            <constraint firstItem="f90-z6-p2F" firstAttribute="centerX" secondItem="Jyu-xw-oc8" secondAttribute="centerX" id="8I3-86-cF4"/>
+                            <constraint firstItem="Mhn-R8-v2N" firstAttribute="top" secondItem="hdO-jk-SKW" secondAttribute="bottom" constant="21" id="9Ns-AB-3td"/>
+                            <constraint firstItem="3xP-qc-lKu" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" id="BRp-zD-Ir3"/>
+                            <constraint firstItem="Dr4-cf-Obz" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="30" id="IOw-2z-RId"/>
+                            <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="Mhn-R8-v2N" secondAttribute="trailing" constant="30" id="MqJ-kO-1JM"/>
+                            <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="Y9R-kk-0qU" secondAttribute="trailing" constant="53" id="NYb-vF-aVr"/>
+                            <constraint firstItem="hdO-jk-SKW" firstAttribute="top" secondItem="Dr4-cf-Obz" secondAttribute="bottom" constant="10" id="QOw-iI-RIK"/>
                             <constraint firstItem="GPx-l4-byK" firstAttribute="centerX" secondItem="Mvu-Ij-rm4" secondAttribute="centerX" id="XSB-RG-Fnh"/>
-                            <constraint firstItem="Mhn-R8-v2N" firstAttribute="centerX" secondItem="GPx-l4-byK" secondAttribute="centerX" id="aUc-7m-qJy"/>
-                            <constraint firstItem="Mhn-R8-v2N" firstAttribute="top" secondItem="Dr4-cf-Obz" secondAttribute="bottom" constant="20" id="aZ2-Kq-E6U"/>
-                            <constraint firstItem="Dr4-cf-Obz" firstAttribute="width" secondItem="Mhn-R8-v2N" secondAttribute="width" id="dJR-iQ-ZEB"/>
+                            <constraint firstItem="Y9R-kk-0qU" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="53" id="fFP-Kr-Knm"/>
+                            <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="Dr4-cf-Obz" secondAttribute="trailing" constant="30" id="fwb-XQ-p25"/>
+                            <constraint firstItem="3xP-qc-lKu" firstAttribute="trailing" secondItem="Mvu-Ij-rm4" secondAttribute="trailing" id="iH6-bR-Csq"/>
+                            <constraint firstItem="3xP-qc-lKu" firstAttribute="bottom" secondItem="Mvu-Ij-rm4" secondAttribute="bottom" id="j4y-0w-xVd"/>
+                            <constraint firstItem="Mhn-R8-v2N" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="30" id="khc-9E-6Xc"/>
+                            <constraint firstItem="Y9R-kk-0qU" firstAttribute="top" secondItem="Mhn-R8-v2N" secondAttribute="bottom" constant="10" id="nm0-Kh-x3b"/>
+                            <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="hdO-jk-SKW" secondAttribute="trailing" constant="53" id="pCc-jQ-4uQ"/>
+                            <constraint firstItem="f90-z6-p2F" firstAttribute="centerY" secondItem="Jyu-xw-oc8" secondAttribute="centerY" constant="-55" id="rp8-hE-7si"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="bottom" secondItem="GPx-l4-byK" secondAttribute="bottom" constant="15" id="tfB-7a-j1G"/>
+                            <constraint firstItem="hdO-jk-SKW" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="53" id="vEI-Ec-yyo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mvu-Ij-rm4"/>
                     </view>
                     <connections>
+                        <outlet property="shopperButton" destination="Dr4-cf-Obz" id="B0A-Xo-cxo"/>
+                        <outlet property="sozieButton" destination="Mhn-R8-v2N" id="oW4-jQ-gaE"/>
                         <segue destination="5ua-jO-hcB" kind="show" identifier="toWorkVC" id="eNn-VW-0gA"/>
                         <segue destination="CgK-3q-Hir" kind="show" identifier="toSignUpEmailVC" id="HaJ-aD-hEf"/>
                     </connections>
@@ -1655,13 +1718,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Email Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eue-O7-Rfr">
-                                <rect key="frame" x="16" y="28" width="318" height="21"/>
+                                <rect key="frame" x="16" y="28" width="318" height="24"/>
                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="18"/>
                                 <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWe-6r-xe0">
-                                <rect key="frame" x="35" y="111" width="280" height="29"/>
+                                <rect key="frame" x="35" y="114" width="280" height="29"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IoM-xY-7H6">
                                         <rect key="frame" x="0.0" y="28" width="280" height="1"/>
@@ -1703,7 +1766,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter valid email address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhs-tg-cZr">
-                                <rect key="frame" x="35" y="140" width="280" height="13"/>
+                                <rect key="frame" x="35" y="143" width="280" height="15"/>
                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="11"/>
                                 <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2074,6 +2137,7 @@
     <resources>
         <image name="Cancel icon" width="13" height="15"/>
         <image name="Emoji" width="60" height="62"/>
+        <image name="Gradient Shadow" width="375" height="259"/>
         <image name="Plus Sign" width="35" height="40"/>
         <image name="Search icon" width="15" height="15"/>
         <image name="back-button-white" width="22" height="10"/>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 public enum UserType: String {
     case sozie = "SZ"
@@ -15,14 +16,41 @@ public enum UserType: String {
 
 class LandingViewController: UIViewController {
 
+    @IBOutlet weak var sozieButton: DZGradientButton!
+    @IBOutlet weak var shopperButton: UIButton!
     var currentUserType: UserType?
     var signUpDict: [String: Any] = [:]
+    var avPlayer: AVPlayer!
+    var avPlayerLayer: AVPlayerLayer!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        sozieButton.shadowAdded = true
+        sozieButton.layer.borderWidth = 0.5
+        sozieButton.layer.borderColor = UIColor(hex: "979797").cgColor
+        shopperButton.layer.cornerRadius = 6.0
+        shopperButton.layer.borderWidth = 0.5
+        shopperButton.layer.borderColor = UIColor(hex: "979797").cgColor
+        loadBackgroundVideo()
     }
-
+    func loadBackgroundVideo() {
+        let url = Bundle.main.url(forResource: "signup", withExtension: "mp4")
+        avPlayer = AVPlayer(url: url!)
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        avPlayer.volume = 0
+        avPlayer.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
+        avPlayerLayer.frame = view.layer.bounds
+        view.backgroundColor = UIColor.clear
+        view.layer.insertSublayer(avPlayerLayer, at: 0)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
+        avPlayer.play()
+    }
+    @objc func playerItemDidReachEnd() {
+        avPlayer.seek(to: CMTime.zero)
+        avPlayer.play()
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

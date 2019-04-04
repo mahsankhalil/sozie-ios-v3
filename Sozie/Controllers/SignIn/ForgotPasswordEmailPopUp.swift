@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ForgotPasswordEmailPopupDelegate {
+protocol ForgotPasswordEmailPopupDelegate: class {
     func recoverPasswordBtnTapped(email: String)
 }
 class ForgotPasswordEmailPopUp: UIViewController {
@@ -20,7 +20,7 @@ class ForgotPasswordEmailPopUp: UIViewController {
     @IBOutlet weak var emailTxtFld: UITextField!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var errorLbl: UILabel!
-    var delegate: ForgotPasswordEmailPopupDelegate?
+    weak var delegate: ForgotPasswordEmailPopupDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 

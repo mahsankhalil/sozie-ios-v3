@@ -59,7 +59,7 @@ extension TabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if UserDefaultManager.getIfShopper() == false {
             if self.customizableViewControllers?.index(of: viewController) == 1 {
-                UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                UtilityManager.openImagePickerActionSheetFrom(viewController: self)
                 return false
             } else if self.customizableViewControllers?.index(of: viewController) == 0 {
                 if currentBrandId != UserDefaultManager.getCurrentUserObject()?.brand {

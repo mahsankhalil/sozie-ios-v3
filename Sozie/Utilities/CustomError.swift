@@ -16,14 +16,10 @@ class CustomError: NSObject, LocalizedError {
     }
 
     override var description: String {
-        get {
             return desc
-        }
     }
     //You need to implement `errorDescription`, not `localizedDescription`.
     var errorDescription: String? {
-        get {
             return self.description
-        }
     }
 }

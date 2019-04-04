@@ -92,16 +92,20 @@ class UploadPostVC: BaseViewController {
                 brandImageView.sd_setImage(with: URL(string: brand.titleImage), completed: nil)
             }
         }
-        if let imageURL = currentProduct?.merchantImageURL {
-            if let feedId = currentProduct?.feedId {
-                if feedId == 18857 {
-                    let delimeter = "|"
-                    let url = imageURL.components(separatedBy: delimeter)
-                    productImageView.sd_setImage(with: URL(string: url[0]), completed: nil)
-                } else {
-                    productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
+        assignImageURL()
+    }
+    func assignImageURL() {
+        if var imageURL = currentProduct?.merchantImageURL {
+            if imageURL == "" {
+                if let imageURLTarget = currentProduct?.imageURL {
+                    productImageView.sd_setImage(with: URL(string: imageURLTarget), completed: nil)
                 }
             } else {
+                if imageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = imageURL.components(separatedBy: delimeter)
+                    imageURL = url[0]
+                }
                 productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
             }
         }

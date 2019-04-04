@@ -56,7 +56,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
     }
     // MARK: - Actions
     @IBAction func addBtnTapped(_ sender: Any) {
-        UtilityManager.openImagePickerActionSheetFrom(vc: self)
+        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 
     @IBAction func uploadBtnTapped(_ sender: Any) {

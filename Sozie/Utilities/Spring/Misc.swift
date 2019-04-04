@@ -42,7 +42,7 @@ public func htmlToAttributedString(text: String) -> NSAttributedString! {
         return NSAttributedString() }
     let htmlString: NSAttributedString?
     do {
-        htmlString = try NSAttributedString(data: htmlData, options: [NSAttributedString.DocumentReadingOptionKey.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
+        htmlString = try NSAttributedString(data: htmlData, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
     } catch _ {
         htmlString = nil
     }
@@ -176,9 +176,8 @@ extension UIImageView {
                     self.image = placeholderImage
                     return
             }
-            DispatchQueue.main.async() { () -> Void in
+            DispatchQueue.main.async {
                 self.image = image
-                
             }
             }.resume()
     }

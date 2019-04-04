@@ -19,7 +19,7 @@ class UserDefaultManager: NSObject {
         }
         return nil
     }
-    
+
     static func getCurrentUserObject() -> User? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user

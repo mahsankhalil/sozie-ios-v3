@@ -61,7 +61,7 @@ class MyUploadsVC: UIViewController {
                 let paginatedData = response as! PostPaginatedResponse
                 self.posts.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
-                self.countLabel.text = String(paginatedData.count) + " Uploads"
+                self.countLabel.text = String(paginatedData.count) + ( paginatedData.count <= 1 ? " Upload" : " Uploads")
             }
         }
     }

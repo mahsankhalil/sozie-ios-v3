@@ -9,7 +9,7 @@
 import UIKit
 import MaterialTextField
 
-protocol CustomPickerTextFieldDelegate {
+protocol CustomPickerTextFieldDelegate: class {
     func customPickerValueChanges(value1: String?, value2: String?)
 }
 
@@ -24,7 +24,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     var title: String?
     var firstColumnAppendingString: String?
     var secondColumnAppendingString: String?
-    var pickerDelegate: CustomPickerTextFieldDelegate?
+    weak var pickerDelegate: CustomPickerTextFieldDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()

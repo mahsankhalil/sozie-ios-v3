@@ -2704,7 +2704,7 @@
                                                     <action selector="backButtonTapped:" destination="9VM-Mo-ZVu" eventType="touchUpInside" id="cdb-ox-6x8"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You earn money every time someone buys an item from one of your posts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Q-tL-wVc">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You earn cash money for creating posts that help others shop online!." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Q-tL-wVc">
                                                 <rect key="frame" x="25" y="146" width="290" height="35"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -2720,7 +2720,7 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$45.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaI-L3-OR8">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="£45.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaI-L3-OR8">
                                                         <rect key="frame" x="0.0" y="50" width="215" height="48"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="44"/>
@@ -2734,7 +2734,7 @@
                                                     <constraint firstAttribute="width" constant="215" id="qCh-aB-TS1"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;You must have at least $10 to be paid out&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-Ix-I0e">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;You must have at least £10 to be paid out&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-Ix-I0e">
                                                 <rect key="frame" x="25" y="377" width="325" height="19"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -2779,11 +2779,19 @@
                                                     <constraint firstAttribute="bottom" secondItem="ETQ-fa-GJ6" secondAttribute="bottom" id="r07-j6-hzn"/>
                                                 </constraints>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your posts will be reviewed for accuracy before you are paid out." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8G-au-E7m">
+                                                <rect key="frame" x="55" y="416" width="265" height="35"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                                <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="gXh-bR-AnA" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="30" id="00d-oV-A22"/>
+                                            <constraint firstItem="U8G-au-E7m" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="55" id="5ON-rY-3zi"/>
                                             <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="C6Q-tL-wVc" secondAttribute="trailing" constant="60" id="5PN-vv-HbL"/>
+                                            <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="U8G-au-E7m" secondAttribute="trailing" constant="55" id="CHC-f3-RBf"/>
                                             <constraint firstItem="Pg3-rB-oeQ" firstAttribute="bottom" secondItem="gXh-bR-AnA" secondAttribute="bottom" constant="18" id="COM-oe-jRb"/>
                                             <constraint firstItem="jAl-Va-g6x" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="25" id="LJ2-2l-EPP"/>
                                             <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="jAl-Va-g6x" secondAttribute="trailing" constant="25" id="MuK-Dy-UdT"/>
@@ -2793,6 +2801,7 @@
                                             <constraint firstItem="XtM-Fk-ksd" firstAttribute="top" secondItem="C6Q-tL-wVc" secondAttribute="bottom" constant="48" id="Ybw-mN-3J4"/>
                                             <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="hIt-Ix-I0e" secondAttribute="trailing" constant="25" id="ags-Mt-phN"/>
                                             <constraint firstItem="XtM-Fk-ksd" firstAttribute="centerX" secondItem="bWV-au-6NI" secondAttribute="centerX" id="cY3-Ad-VCx"/>
+                                            <constraint firstItem="U8G-au-E7m" firstAttribute="top" secondItem="hIt-Ix-I0e" secondAttribute="bottom" constant="20" id="dwk-SU-AQS"/>
                                             <constraint firstItem="hIt-Ix-I0e" firstAttribute="top" secondItem="XtM-Fk-ksd" secondAttribute="bottom" constant="30" id="fPq-t7-ufR"/>
                                             <constraint firstItem="C6Q-tL-wVc" firstAttribute="leading" secondItem="Pg3-rB-oeQ" secondAttribute="leading" constant="25" id="gln-dN-Ajp"/>
                                             <constraint firstItem="Pg3-rB-oeQ" firstAttribute="trailing" secondItem="gXh-bR-AnA" secondAttribute="trailing" constant="30" id="kaD-h9-G1B"/>

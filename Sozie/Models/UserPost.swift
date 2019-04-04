@@ -18,7 +18,7 @@ struct UserPost: Codable {
     var sizeValue: String
     var productRequest: Int?
     var product: Product
-    
+
     enum CodingKeys: String, CodingKey {
         case postId = "id"
         case imageURL = "image"

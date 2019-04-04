@@ -131,6 +131,18 @@ class SozieProfileVC: BaseViewController {
                         self.makeButtonFollowing()
                     }
                 }
+            } else {
+                var dataDict = [String: Any]()
+                let userId = currentUser.userId
+                dataDict["user"] = userId
+                SVProgressHUD.show()
+                ServerManager.sharedInstance.unFollowUser(params: dataDict) { (isSuccess, _) in
+                    SVProgressHUD.dismiss()
+                    if isSuccess {
+                        self.user?.isFollowed = false
+                        self.makeButtonFollow()
+                    }
+                }
             }
         }
     }

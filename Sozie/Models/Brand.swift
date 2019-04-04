@@ -9,7 +9,7 @@
 import UIKit
 
 struct Brand: Codable {
-    
+
     var brandId: Int
     var label: String
     var logo: String
