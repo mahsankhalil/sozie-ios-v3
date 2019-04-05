@@ -48,7 +48,6 @@ class SoziesVC: UIViewController {
                 searchLabel.text = "ALL SOZIES"
                 self.crossButton.isHidden = true
             }
-            self.tableView.reloadData()
         }
     }
     var dataDict = [String: Any]()
@@ -88,6 +87,7 @@ class SoziesVC: UIViewController {
             SVProgressHUD.dismiss()
             if isSuccess {
                 self.users = response as! [User]
+                self.tableView.reloadData()
             }
         }
     }
@@ -237,7 +237,7 @@ extension SoziesVC: SozieTableViewCellDelegate {
                 if isSuccess {
                     self.users[button.tag].isFollowed = true
                     self.viewModels[button.tag].isFollow = true
-                    self.tableView.reloadRows(at: [IndexPath(item: button.tag, section: 0)], with: .automatic)
+                    self.tableView.reloadRows(at: [IndexPath(item: button.tag, section: 0)], with: .none)
                 }
             }
 
@@ -251,7 +251,7 @@ extension SoziesVC: SozieTableViewCellDelegate {
                 if isSuccess {
                     self.users[button.tag].isFollowed = false
                     self.viewModels[button.tag].isFollow = false
-                    self.tableView.reloadRows(at: [IndexPath(item: button.tag, section: 0)], with: .automatic)
+                    self.tableView.reloadRows(at: [IndexPath(item: button.tag, section: 0)], with: .none)
                 }
             }
         }

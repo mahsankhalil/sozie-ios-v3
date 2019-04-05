@@ -100,6 +100,7 @@ class ProductDetailVC: BaseViewController {
         currentProduct?.isFavourite = product.isFavourite
         currentProduct?.posts = product.posts
         currentProduct?.sizeChart = product.sizeChart
+        currentProduct?.postCount = product.posts?.count
     }
     func populateProductData() {
         var priceString = ""
@@ -369,8 +370,10 @@ extension ProductDetailVC: UIScrollViewDelegate {
         let width = scrollView.bounds.size.width
         let currentPage = Int(ceil(xAxis/width))
         pageControl.currentPage = currentPage
-        if (currentProduct?.posts?.count)! > 0 {
-            swipeToSeeView.isHidden = currentPage > 0
+        if let posts = currentProduct?.posts {
+            if posts.count > 0 {
+                swipeToSeeView.isHidden = currentPage > 0
+            }
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -385,6 +388,16 @@ extension ProductDetailVC: UIScrollViewDelegate {
     }
 }
 extension ProductDetailVC: PostCollectionViewCellDelegate {
+    func profileButtonTapped(button: UIButton) {
+        if let posts = self.currentProduct?.posts {
+            let sozieProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SozieProfileVC") as! SozieProfileVC
+            let currentUser = posts[button.tag - 1].user
+            currentPostId = posts[button.tag - 1].postId
+            sozieProfileVC.user = currentUser
+            self.navigationController?.pushViewController(sozieProfileVC, animated: true)
+        }
+    }
+
     func cameraButtonTapped(button: UIButton) {
         UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
@@ -410,13 +423,15 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
         alert.addAction(UIAlertAction(title: "Block", style: .default, handler: { _ in
 
             if let posts = self.currentProduct?.posts {
-                UtilityManager.showMessageWith(title: "Block " + posts[button.tag].user.username, body: "Are you sure you want to Block?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", block: {
-                    let userIdToBlock = posts[button.tag].user.userId
+                UtilityManager.showMessageWith(title: "Block " + posts[button.tag - 1].user.username, body: "Are you sure you want to Block?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", block: {
+                    let userIdToBlock = posts[button.tag - 1].user.userId
                     var dataDict = [String: Any]()
                     dataDict["blocker"] = UserDefaultManager.getCurrentUserId()
                     dataDict["user"] = userIdToBlock
                     SVProgressHUD.show()
                     ServerManager.sharedInstance.blockUser(params: dataDict, block: { (_, _ ) in
+                        self.fetchProductDetailFromServer()
+                        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "RefreshBrowseData")))
                         SVProgressHUD.dismiss()
 
                     })

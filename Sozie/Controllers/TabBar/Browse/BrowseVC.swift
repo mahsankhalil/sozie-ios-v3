@@ -102,6 +102,7 @@ class BrowseVC: BaseViewController {
         fetchBrandsFromServer()
         fetchProductCount()
         setupViews()
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name(rawValue: "RefreshBrowseData"), object: nil)
         self.refreshData()
     }
     func showTipeViewAfterDelay() {

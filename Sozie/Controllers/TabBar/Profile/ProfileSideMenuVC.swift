@@ -348,6 +348,8 @@ extension ProfileSideMenuVC: TitleAndSwitchCellDelegate {
             if switchButton.isOn {
                 UserDefaultManager.makeUserGuideEnable()
                 UserDefaultManager.removeAllUserGuidesShown()
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ResetFirstTime")))
+
             } else {
                 UserDefaultManager.makeUserGuideDisabled()
                 UserDefaultManager.markAllUserGuidesNotShown()

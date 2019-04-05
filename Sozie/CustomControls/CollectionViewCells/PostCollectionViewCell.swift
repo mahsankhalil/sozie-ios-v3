@@ -13,6 +13,7 @@ protocol PostCollectionViewCellDelegate: class {
     func moreButtonTapped(button: UIButton)
     func followButtonTapped(button: UIButton)
     func cameraButtonTapped(button: UIButton)
+    func profileButtonTapped(button: UIButton)
 }
 class PostCollectionViewCell: UICollectionViewCell {
     weak var delegate: PostCollectionViewCellDelegate?
@@ -30,6 +31,8 @@ class PostCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var followButtonWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var usernameButton: UIButton!
     var tipView: EasyTipView?
     var isFirstTime = true
     override func awakeFromNib() {
@@ -69,6 +72,9 @@ class PostCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
+    }
+    @IBAction func profileButtonTapped(_ sender: Any) {
+        delegate?.profileButtonTapped(button: sender as! UIButton)
     }
     @IBAction func followButtonTapped(_ sender: Any) {
         delegate?.followButtonTapped(button: sender as! UIButton)
@@ -155,5 +161,7 @@ extension PostCollectionViewCell: ButtonProviding {
         followButton.tag = index
         moreButton.tag = index
         cameraButton.tag = index
+        profileButton.tag = index
+        usernameButton.tag = index
     }
 }

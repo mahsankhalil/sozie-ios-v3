@@ -45,6 +45,12 @@ class TabCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         currentBarView.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
+
+    }
+    @objc func resetFirstTime() {
+        isFirstTime = true
+        showTipView()
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         if item.count == 0 {
