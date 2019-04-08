@@ -8,8 +8,8 @@
 
 import UIKit
 
-public extension UIImage {    
-    /**
+public extension UIImage {
+/**
      Suitable size for specific height or width to keep same image ratio
      */
     func suitableSize(heightLimit: CGFloat? = nil,

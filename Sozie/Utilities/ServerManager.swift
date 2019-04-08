@@ -143,15 +143,15 @@ class ServerManager: NSObject {
             "Content-type": "multipart/form-data"
         ]
 
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        let formData: (MultipartFormData) -> Void = { (multipartFormData) in
             for (key, value) in (params ?? [:]) {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
             }
-
             if let data = imageData {
                 multipartFormData.append(data, withName: "picture", fileName: "image.png", mimeType: "image/png")
             }
-        }, usingThreshold: UInt64.init(), to: ServerManager.profileURL + String(UserDefaultManager.getCurrentUserId()!) + "/", method: .patch, headers: headers) { (result) in
+        }
+        Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.profileURL + String(UserDefaultManager.getCurrentUserId()!) + "/", method: .patch, headers: headers) { (result) in
 
             switch result {
             case .success(let upload, _, _):
@@ -362,7 +362,7 @@ class ServerManager: NSObject {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
-        var url = ServerManager.followURL
+        let url = ServerManager.followURL
         Alamofire.request(url, method: .delete, parameters: params, encoding: URLEncoding.httpBody, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
@@ -515,7 +515,7 @@ class ServerManager: NSObject {
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
             "Content-type": "multipart/form-data"
         ]
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        let formData: (MultipartFormData) -> Void = { (multipartFormData) in
             for (key, value) in (params ?? [:]) {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
             }
@@ -525,7 +525,8 @@ class ServerManager: NSObject {
             if let thumbdata = thumbImageData {
                 multipartFormData.append(thumbdata, withName: "thumb_image", fileName: "image.png", mimeType: "image/png")
             }
-        }, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
+        }
+        Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
             switch result {
             case .success(let upload, _, _):
                 upload.responseData { response in

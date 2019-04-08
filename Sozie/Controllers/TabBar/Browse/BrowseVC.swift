@@ -11,6 +11,7 @@ import SVProgressHUD
 import WaterfallLayout
 import CCBottomRefreshControl
 import EasyTipView
+
 public enum PopupType: String {
     case category = "CATEGORY"
     case filter = "FILTER"
@@ -37,7 +38,7 @@ class BrowseVC: BaseViewController {
             productsCollectionVu.dataSource = self
         }
     }
-    @IBOutlet weak var brandsCollectionVu: UICollectionView!
+    @IBOutlet weak var brandsCollectionVu: InfiniteScrollCollectionView!
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
     var categoryPopupInstance: PopupNavController?
     var filterPopupInstance: PopupNavController?
@@ -82,7 +83,8 @@ class BrowseVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
+        self.brandsCollectionVu.infiniteScrollDelegate = self
+        _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         if let userType = UserDefaultManager.getCurrentUserType() {
             if userType == UserType.shopper.rawValue {
                 setupSozieLogoNavBar()
@@ -219,11 +221,15 @@ class BrowseVC: BaseViewController {
             if isSuccess {
                 self.brandList = response as! [Brand]
                 _ = UserDefaultManager.saveAllBrands(brands: self.brandList)
+                self.brandList = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: self.brandList) as! [Brand]
                 self.brandsCollectionVu.reloadData()
+                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
             }
         }
     }
-
+    @objc func setInitialOffsetToBrandsCollectionView() {
+        self.brandsCollectionVu.setInitialOffset()
+    }
     @objc func loadNextPage() {
         isFirstPage = false
         fetchProductsFromServer()
@@ -389,6 +395,18 @@ class BrowseVC: BaseViewController {
     }
     @objc override func nextButtonTapped() {
         performSegue(withIdentifier: "toProductDetail", sender: self)
+    }
+}
+extension BrowseVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == brandsCollectionVu {
+            brandsCollectionVu.infiniteScrollViewDidScroll(scrollView: scrollView)
+        }
+    }
+}
+extension BrowseVC: InfiniteScrollCollectionViewDelegatge {
+    func uniformItemSizeIn(collectionView: UICollectionView) -> CGSize {
+        return CGSize(width: 95.0, height: 54.0 )
     }
 }
 extension BrowseVC: UITextFieldDelegate {

@@ -150,7 +150,7 @@ class SelectWorkVC: UIViewController {
                 signUpDict![User.CodingKeys.brand.stringValue] = brandId
                 performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
             } else {
-                UtilityManager.showErrorMessage(body: "Please select Brand where you work.", in: self)
+                UtilityManager.showMessageWith(title: "To signup as a Sozie", body: "Please select a brand from the list below.", in: self)
             }
         }
     }

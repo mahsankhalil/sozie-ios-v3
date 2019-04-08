@@ -9,7 +9,6 @@
 import UIKit
 
 class DZValidator: NSObject {
-    
 //    static func validateEmail(email: String) -> (isValid: Bool, errorMessage: String) {
 //        if email.length > 0 {
 //            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

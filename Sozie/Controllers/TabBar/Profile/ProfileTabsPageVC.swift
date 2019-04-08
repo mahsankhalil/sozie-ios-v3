@@ -20,7 +20,7 @@ class ProfileTabsPageVC: TabPageViewController {
         if UserDefaultManager.getIfShopper() {
             soziesVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SoziesVC") as? SoziesVC
             requestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "RequestsVC") as? RequestsVC
-            tabItems = [(soziesVC, "Sozies"), (requestsVC, "Requests")] as! [(viewController: UIViewController, title: String)]
+            tabItems = [(soziesVC, "SOZIES"), (requestsVC, "REQUESTS")] as! [(viewController: UIViewController, title: String)]
         } else {
             sozieRequestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SozieRequestsVC") as? SozieRequestsVC
             myUploadsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "MyUploadsVC") as? MyUploadsVC
