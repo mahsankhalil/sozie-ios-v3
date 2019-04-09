@@ -224,6 +224,13 @@ class BrowseVC: BaseViewController {
                 self.brandList = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: self.brandList) as! [Brand]
                 self.brandsCollectionVu.reloadData()
                 self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
+                if let user = UserDefaultManager.getCurrentUserObject() {
+                    if let brandId = user.brand {
+                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+                            self.setupBrandNavBar(imageURL: brand.titleImageCentred)
+                        }
+                    }
+                }
             }
         }
     }
