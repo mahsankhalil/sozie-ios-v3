@@ -115,7 +115,7 @@ class RequestsVC: UIViewController {
         popUpInstnc?.popupDelegate = self
         popUpInstnc?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
         let popUpVC = PopupController
-            .create(self.tabBarController!)
+            .create(self.tabBarController?.navigationController ?? self)
         let options = PopupCustomOption.layout(.bottom)
         popUpVC.cornerRadius = 0.0
         _ = popUpVC.customize([options])

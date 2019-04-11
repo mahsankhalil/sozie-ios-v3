@@ -126,7 +126,7 @@ class SoziesVC: UIViewController {
         popUpInstnc?.popupDelegate = self
         if popUpVC == nil {
             popUpVC = PopupController
-                .create(self.tabBarController!)
+                .create(self.tabBarController?.navigationController ?? self)
             let options = PopupCustomOption.layout(.bottom)
             _ = popUpVC?.customize([options])
         }

@@ -192,7 +192,7 @@ class ProductDetailVC: BaseViewController {
         var popUpInstnc: ServerResponsePopUp?
         popUpInstnc = ServerResponsePopUp.instance(imageName: "checked", title: "Request Sent", description: "Look out for filled requests in your profile.", height: 200, isOkButtonHidded: true)
         let popUpVC = PopupController
-            .create(self.tabBarController ?? self)
+            .create(self.tabBarController?.navigationController ?? self)
             .show(popUpInstnc!)
         popUpInstnc!.closeHandler = { []  in
             popUpVC.dismiss()
@@ -222,7 +222,7 @@ class ProductDetailVC: BaseViewController {
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
         let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
         let popUpVC = PopupController
-            .create(self.tabBarController ?? self)
+            .create(self.tabBarController?.navigationController ?? self)
             .show(popUpInstnc)
 //        popUpInstnc.delegate = self
         popUpInstnc.closeHandler = { []  in

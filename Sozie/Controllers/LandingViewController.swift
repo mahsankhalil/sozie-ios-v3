@@ -18,6 +18,8 @@ class LandingViewController: UIViewController {
 
     @IBOutlet weak var sozieButton: DZGradientButton!
     @IBOutlet weak var shopperButton: UIButton!
+    @IBOutlet weak var shopperLabel: UILabel!
+    @IBOutlet weak var sozieLabel: UILabel!
     var currentUserType: UserType?
     var signUpDict: [String: Any] = [:]
     var avPlayer: AVPlayer!
@@ -33,6 +35,9 @@ class LandingViewController: UIViewController {
         shopperButton.layer.borderWidth = 0.5
         shopperButton.layer.borderColor = UIColor(hex: "979797").cgColor
         loadBackgroundVideo()
+        shopperLabel.lblShadow(color: UIColor.black, radius: 5, opacity: 0.84)
+        sozieLabel.lblShadow(color: UIColor.black, radius: 5, opacity: 0.84)
+
     }
     func loadBackgroundVideo() {
         let url = Bundle.main.url(forResource: "signup", withExtension: "mp4")

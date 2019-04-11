@@ -226,11 +226,11 @@
                                     <constraint firstAttribute="height" constant="290" id="x4K-Xm-Bin"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
                                 <rect key="frame" x="116.5" y="235.5" width="142" height="86"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr4-cf-Obz">
-                                <rect key="frame" x="30" y="384" width="315" height="45"/>
+                                <rect key="frame" x="30" y="401.5" width="315" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="YC8-1M-zHP"/>
@@ -244,7 +244,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhn-R8-v2N" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="30" y="495" width="315" height="45"/>
+                                <rect key="frame" x="30" y="512.5" width="315" height="45"/>
                                 <color key="backgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="AFL-5c-s39"/>
@@ -316,14 +316,15 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="90n-N6-YqP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browse fashion in-stores and ask your Sozies to try things on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
-                                <rect key="frame" x="53" y="439" width="269" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find fashion in-stores and ask your Sozies to try things on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
+                                <rect key="frame" x="53" y="450.5" width="269" height="35"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try things on for shoppers and earn money for your service." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-kk-0qU">
-                                <rect key="frame" x="53" y="550" width="269" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try clothes on for shoppers and earn money" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-kk-0qU">
+                                <rect key="frame" x="53" y="564.5" width="269" height="17.5"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -331,21 +332,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="GPx-l4-byK" firstAttribute="top" secondItem="Y9R-kk-0qU" secondAttribute="bottom" constant="32" id="6ek-QA-f7i"/>
+                            <constraint firstItem="GPx-l4-byK" firstAttribute="top" secondItem="Y9R-kk-0qU" secondAttribute="bottom" constant="35" id="6ek-QA-f7i"/>
                             <constraint firstItem="f90-z6-p2F" firstAttribute="centerX" secondItem="Jyu-xw-oc8" secondAttribute="centerX" id="8I3-86-cF4"/>
-                            <constraint firstItem="Mhn-R8-v2N" firstAttribute="top" secondItem="hdO-jk-SKW" secondAttribute="bottom" constant="21" id="9Ns-AB-3td"/>
+                            <constraint firstItem="Mhn-R8-v2N" firstAttribute="top" secondItem="hdO-jk-SKW" secondAttribute="bottom" constant="27" id="9Ns-AB-3td"/>
                             <constraint firstItem="3xP-qc-lKu" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" id="BRp-zD-Ir3"/>
                             <constraint firstItem="Dr4-cf-Obz" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="30" id="IOw-2z-RId"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="Mhn-R8-v2N" secondAttribute="trailing" constant="30" id="MqJ-kO-1JM"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="Y9R-kk-0qU" secondAttribute="trailing" constant="53" id="NYb-vF-aVr"/>
-                            <constraint firstItem="hdO-jk-SKW" firstAttribute="top" secondItem="Dr4-cf-Obz" secondAttribute="bottom" constant="10" id="QOw-iI-RIK"/>
+                            <constraint firstItem="hdO-jk-SKW" firstAttribute="top" secondItem="Dr4-cf-Obz" secondAttribute="bottom" constant="4" id="QOw-iI-RIK"/>
                             <constraint firstItem="GPx-l4-byK" firstAttribute="centerX" secondItem="Mvu-Ij-rm4" secondAttribute="centerX" id="XSB-RG-Fnh"/>
                             <constraint firstItem="Y9R-kk-0qU" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="53" id="fFP-Kr-Knm"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="Dr4-cf-Obz" secondAttribute="trailing" constant="30" id="fwb-XQ-p25"/>
                             <constraint firstItem="3xP-qc-lKu" firstAttribute="trailing" secondItem="Mvu-Ij-rm4" secondAttribute="trailing" id="iH6-bR-Csq"/>
                             <constraint firstItem="3xP-qc-lKu" firstAttribute="bottom" secondItem="Mvu-Ij-rm4" secondAttribute="bottom" id="j4y-0w-xVd"/>
                             <constraint firstItem="Mhn-R8-v2N" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="30" id="khc-9E-6Xc"/>
-                            <constraint firstItem="Y9R-kk-0qU" firstAttribute="top" secondItem="Mhn-R8-v2N" secondAttribute="bottom" constant="10" id="nm0-Kh-x3b"/>
+                            <constraint firstItem="Y9R-kk-0qU" firstAttribute="top" secondItem="Mhn-R8-v2N" secondAttribute="bottom" constant="7" id="nm0-Kh-x3b"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="hdO-jk-SKW" secondAttribute="trailing" constant="53" id="pCc-jQ-4uQ"/>
                             <constraint firstItem="f90-z6-p2F" firstAttribute="centerY" secondItem="Jyu-xw-oc8" secondAttribute="centerY" constant="-55" id="rp8-hE-7si"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="bottom" secondItem="GPx-l4-byK" secondAttribute="bottom" constant="15" id="tfB-7a-j1G"/>
@@ -355,7 +356,9 @@
                     </view>
                     <connections>
                         <outlet property="shopperButton" destination="Dr4-cf-Obz" id="B0A-Xo-cxo"/>
+                        <outlet property="shopperLabel" destination="hdO-jk-SKW" id="M8g-44-D3r"/>
                         <outlet property="sozieButton" destination="Mhn-R8-v2N" id="oW4-jQ-gaE"/>
+                        <outlet property="sozieLabel" destination="Y9R-kk-0qU" id="HWp-0d-kh8"/>
                         <segue destination="5ua-jO-hcB" kind="show" identifier="toWorkVC" id="eNn-VW-0gA"/>
                         <segue destination="CgK-3q-Hir" kind="show" identifier="toSignUpEmailVC" id="HaJ-aD-hEf"/>
                     </connections>
@@ -2149,8 +2152,8 @@
         <image name="login-logo" width="142" height="86.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nnF-cA-hto"/>
-        <segue reference="9OJ-ih-pcb"/>
-        <segue reference="DE9-Vg-jdy"/>
+        <segue reference="eNn-VW-0gA"/>
+        <segue reference="HaJ-aD-hEf"/>
+        <segue reference="90n-N6-YqP"/>
     </inferredMetricsTieBreakers>
 </document>

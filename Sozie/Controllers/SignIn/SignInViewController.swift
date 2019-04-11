@@ -119,7 +119,9 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 self.signInWithDict(dataDict: resp)
             } else {
                 let err = response as! Error
-                UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
+                if err.localizedDescription != "Token is empty." {
+                    UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
+                }
             }
         }
     }
