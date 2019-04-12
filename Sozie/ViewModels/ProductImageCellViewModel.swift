@@ -30,17 +30,18 @@ struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewMode
     }
     init(product: Product, identifier: String) {
         var imageURL = ""
-        if product.brandId == 4 {
-            if let productImageURL = product.merchantImageURL {
-                if productImageURL.contains("|") {
-                    let delimeter = "|"
-                    let url = productImageURL.components(separatedBy: delimeter)
-                    imageURL = url[0]
+        if var prodImageURL = product.merchantImageURL {
+            if prodImageURL == "" {
+                if let imageURLTarget = product.imageURL {
+                    imageURL = imageURLTarget
                 }
-            }
-        } else {
-            if let productImageURL = product.imageURL {
-                imageURL = productImageURL.getActualSizeImageURL() ?? ""
+            } else {
+                if prodImageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = prodImageURL.components(separatedBy: delimeter)
+                    prodImageURL = url[0]
+                }
+                imageURL = prodImageURL
             }
         }
         var brandImageURL = ""

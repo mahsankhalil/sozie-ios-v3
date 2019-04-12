@@ -45,6 +45,12 @@ class TabCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         currentBarView.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
+
+    }
+    @objc func resetFirstTime() {
+        isFirstTime = true
+        showTipView()
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         if item.count == 0 {
@@ -55,13 +61,13 @@ class TabCollectionCell: UICollectionViewCell {
     }
 
     func showTipView() {
-        if isCurrent == true && item == "Sozies" {
+        if isCurrent == true && item == "SOZIES" {
             //                tipView?.dismiss()
             tipView?.isHidden = false
             if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.mySoziesUserGuide) == false {
                 self.showTipViewSozie()
             }
-        } else if isCurrent == true && item == "Requests" {
+        } else if isCurrent == true && item == "REQUESTS" {
             tipView?.isHidden = false
             if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.myRequestsUserGuide) == false {
                 self.showTipViewRequests()
@@ -108,7 +114,7 @@ extension TabCollectionCell {
     }
     func showTipViewRequests() {
         if UserDefaultManager.isUserGuideDisabled() == false {
-            if self.item == "Requests" {
+            if self.item == "REQUESTS" {
                 if isFirstTime {
                     let text = "This is where all the requests you have made are kept"
                     var prefer = UtilityManager.tipViewGlobalPreferences()
@@ -126,7 +132,7 @@ extension TabCollectionCell {
     }
     func showTipViewSozie() {
         if UserDefaultManager.isUserGuideDisabled() == false {
-            if self.item == "Sozies" {
+            if self.item == "SOZIES" {
                 if isFirstTime {
                     let text = "Click here to see your Sozie matches and Sozies that you are following"
                     var prefer = UtilityManager.tipViewGlobalPreferences()

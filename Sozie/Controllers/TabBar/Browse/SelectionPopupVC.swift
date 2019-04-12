@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectionPopupVCDelegate: class {
-    func doneButtonTapped(type: FilterType?, id: Int?)
+    func doneButtonTapped(type: FilterType?, objId: Int?)
 }
 
 class SelectionPopupVC: UIViewController {
@@ -91,7 +91,7 @@ class SelectionPopupVC: UIViewController {
                 selectedId = brandList?[index].brandId
                 filterType = FilterType.filter
             }
-            delegate?.doneButtonTapped(type: filterType, id: selectedId)
+            delegate?.doneButtonTapped(type: filterType, objId: selectedId)
         }
     }
 }

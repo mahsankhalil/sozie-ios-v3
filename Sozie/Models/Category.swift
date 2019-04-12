@@ -9,7 +9,7 @@
 import UIKit
 
 struct Category: Codable {
-    
+
     var categoryId: Int
     var categoryName: String
     var subCategories: [SubCategory]

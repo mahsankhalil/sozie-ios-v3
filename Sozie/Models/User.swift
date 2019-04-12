@@ -37,7 +37,7 @@ struct User: Codable {
         case birthday
         case city
         case avatar
-        case picture
+        case picture = "public_picture_url"
         case country
         case type
         case brand

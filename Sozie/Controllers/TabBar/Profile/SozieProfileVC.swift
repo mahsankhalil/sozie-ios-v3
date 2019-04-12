@@ -117,6 +117,25 @@ class SozieProfileVC: BaseViewController {
         }
     }
 
+    @IBAction func moreButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Block", style: .default, handler: { _ in
+            UtilityManager.showMessageWith(title: "Block " + (self.user?.username ?? ""), body: "Are you sure you want to Block?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", block: {
+                let userIdToBlock = self.user?.userId
+                var dataDict = [String: Any]()
+                dataDict["blocker"] = UserDefaultManager.getCurrentUserId()
+                dataDict["user"] = userIdToBlock
+                SVProgressHUD.show()
+                ServerManager.sharedInstance.blockUser(params: dataDict, block: { (_, _ ) in
+                    self.navigationController?.popViewController(animated: true)
+                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "RefreshBrowseData")))
+                    SVProgressHUD.dismiss()
+                })
+            })
+        }))
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     @IBAction func followButtonTapped(_ sender: Any) {
         if let currentUser = user {
             if currentUser.isFollowed == false {
@@ -129,6 +148,18 @@ class SozieProfileVC: BaseViewController {
                     if isSuccess {
                         self.user?.isFollowed = true
                         self.makeButtonFollowing()
+                    }
+                }
+            } else {
+                var dataDict = [String: Any]()
+                let userId = currentUser.userId
+                dataDict["user"] = userId
+                SVProgressHUD.show()
+                ServerManager.sharedInstance.unFollowUser(params: dataDict) { (isSuccess, _) in
+                    SVProgressHUD.dismiss()
+                    if isSuccess {
+                        self.user?.isFollowed = false
+                        self.makeButtonFollow()
                     }
                 }
             }

@@ -10,13 +10,12 @@ import UIKit
 import SVProgressHUD
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Styles.sharedStyles.applyGlobalAppearance()
         self.selectedIndex = 0
         self.delegate = self
-        
 //        NotificationCenter.default.addObserver(self, selector: #selector(self.notificationReceived), name: NSNotification.Name(rawValue: "pushNotificationReceived"), object: nil)
         if ApplicationManager.sharedInstance.user == nil {
 //            SVProgressHUD.show()
@@ -38,7 +37,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @objc func notificationReceived() {
         let tabbarItem = self.tabBar.items![0]
         tabbarItem.badgeValue = "1"

@@ -8,12 +8,12 @@
 
 import UIKit
 import SVProgressHUD
-protocol SizeChartPopupVCDelegate {
+protocol SizeChartPopupVCDelegate: class {
     func selectedValueFromPopUp(value: Int?, type: MeasurementType?, sizeType: SizeType?, sizeValue: String?)
 }
 public enum SizeType: String {
-    case uk = "UK"
-    case us = "US"
+    case ukSize = "UK"
+    case usSize = "US"
     case general = "GN"
 }
 class SizeChartPopUpVC: UIViewController {
@@ -35,8 +35,8 @@ class SizeChartPopUpVC: UIViewController {
                 ukViewModels.removeAll()
                 usViewModels.removeAll()
                 for sizeChart in sizeCharts {
-                    let usViewModel = SizeCellViewModel(isSelected: false, title: sizeChart.us, attributedTitle: nil)
-                    let ukViewModel = SizeCellViewModel(isSelected: false, title: sizeChart.uk, attributedTitle: nil)
+                    let usViewModel = SizeCellViewModel(isSelected: false, title: sizeChart.usValue, attributedTitle: nil)
+                    let ukViewModel = SizeCellViewModel(isSelected: false, title: sizeChart.ukValue, attributedTitle: nil)
                     ukViewModels.append(ukViewModel)
                     usViewModels.append(usViewModel)
 
@@ -62,7 +62,7 @@ class SizeChartPopUpVC: UIViewController {
     var generalSelectedIndex: Int?
     var usSelectedIndex: Int?
     var ukSelectedIndex: Int?
-    var delegate: SizeChartPopupVCDelegate?
+    weak var delegate: SizeChartPopupVCDelegate?
     var type: MeasurementType?
     var currentProductId: String?
     var currentBrandId: Int?
@@ -127,66 +127,72 @@ class SizeChartPopUpVC: UIViewController {
 
     @IBAction func selectBtnTapped(_ sender: Any) {
         if productSizeChart != nil {
-            if isSelectedFromGeneral {
-                if let index = generalSelectedIndex {
-                    if delegate != nil {
-                        delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.general, sizeValue: generalViewModels[index].title)
-                        closeHandler?()
-                        return
-                    }
-                }
-            } else if isUKSelected {
-                if let index = ukSelectedIndex {
-                    if delegate != nil {
-                        delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.uk, sizeValue: ukViewModels[index].title)
-                        closeHandler?()
-                        return
-                    }
-                }
-            } else {
-                if let index = usSelectedIndex {
-                    if delegate != nil {
-                        delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.us, sizeValue: usViewModels[index].title)
-                        closeHandler?()
-                        return
-                    }
-                }
-            }
-            self.makePostRequestToServer()
+            makeProductSizeChartSelection()
         } else {
-            if isSelectedFromGeneral {
-                let currentSelection = generalList![generalSelectedIndex!]
-                switch type! {
-                case .hips:
-                    delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips, sizeType: nil, sizeValue: nil)
-                case .waist:
-                    delegate?.selectedValueFromPopUp(value: Int(currentSelection.waist.inch), type: .waist, sizeType: nil, sizeValue: nil)
-                default:
-                    break
-                }
+            makeMeasurementSizeChartSelection()
+        }
+    }
+    func makeMeasurementSizeChartSelection() {
+        if isSelectedFromGeneral {
+            let currentSelection = generalList![generalSelectedIndex!]
+            switch type! {
+            case .hips:
+                delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips, sizeType: nil, sizeValue: nil)
+            case .waist:
+                delegate?.selectedValueFromPopUp(value: Int(currentSelection.waist.inch), type: .waist, sizeType: nil, sizeValue: nil)
+            default:
+                break
+            }
+        } else {
+            guard let sizeChart = sizeChartList
+                else {
+                    closeHandler?()
+                    return
+            }
+            var currentSelection: SizeChart
+            if isUKSelected {
+                currentSelection = sizeChart[ukSelectedIndex!]
             } else {
-                guard let sizeChart = sizeChartList
-                    else {
-                        closeHandler?()
-                        return
-                }
-                var currentSelection: SizeChart
-                if isUKSelected {
-                    currentSelection = sizeChart[ukSelectedIndex!]
-                } else {
-                    currentSelection = sizeChart[usSelectedIndex!]
-                }
-                switch type! {
-                case .hips:
-                    delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips, sizeType: nil, sizeValue: nil)
-                case .waist:
-                    delegate?.selectedValueFromPopUp(value: Int(currentSelection.waist.inch), type: .waist, sizeType: nil, sizeValue: nil)
-                default:
-                    break
+                currentSelection = sizeChart[usSelectedIndex!]
+            }
+            switch type! {
+            case .hips:
+                delegate?.selectedValueFromPopUp(value: Int(currentSelection.hip.inch), type: .hips, sizeType: nil, sizeValue: nil)
+            case .waist:
+                delegate?.selectedValueFromPopUp(value: Int(currentSelection.waist.inch), type: .waist, sizeType: nil, sizeValue: nil)
+            default:
+                break
+            }
+        }
+        closeHandler?()
+    }
+    func makeProductSizeChartSelection() {
+        if isSelectedFromGeneral {
+            if let index = generalSelectedIndex {
+                if delegate != nil {
+                    delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.general, sizeValue: generalViewModels[index].title)
+                    closeHandler?()
+                    return
                 }
             }
-            closeHandler?()
+        } else if isUKSelected {
+            if let index = ukSelectedIndex {
+                if delegate != nil {
+                    delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.ukSize, sizeValue: ukViewModels[index].title)
+                    closeHandler?()
+                    return
+                }
+            }
+        } else {
+            if let index = usSelectedIndex {
+                if delegate != nil {
+                    delegate?.selectedValueFromPopUp(value: nil, type: nil, sizeType: SizeType.usSize, sizeValue: usViewModels[index].title)
+                    closeHandler?()
+                    return
+                }
+            }
         }
+        self.makePostRequestToServer()
     }
 
     func makePostRequestToServer() {
@@ -200,14 +206,14 @@ class SizeChartPopUpVC: UIViewController {
             }
         } else {
             if isUKSelected {
-                dataDict["size_type"] = SizeType.uk.rawValue
+                dataDict["size_type"] = SizeType.ukSize.rawValue
                 if let index = ukSelectedIndex {
                     dataDict["size_value"] = ukViewModels[index].title
                 } else {
                     UtilityManager.showErrorMessage(body: "Please select size.", in: self)
                 }
             } else {
-                dataDict["size_type"] = SizeType.us.rawValue
+                dataDict["size_type"] = SizeType.usSize.rawValue
                 if let index = usSelectedIndex {
                     dataDict["size_value"] = usViewModels[index].title
                 } else {

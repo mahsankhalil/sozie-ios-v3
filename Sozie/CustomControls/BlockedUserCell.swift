@@ -7,14 +7,14 @@
 //
 
 import UIKit
-protocol BlockedUserCellDelegate {
+protocol BlockedUserCellDelegate: class {
     func unblockButtonTapped(button: UIButton)
 }
 class BlockedUserCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var unblockButton: UIButton!
-    var delegate: BlockedUserCellDelegate?
+    weak var delegate: BlockedUserCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

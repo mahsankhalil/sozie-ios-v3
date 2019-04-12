@@ -16,7 +16,7 @@ class ResetPasswordVC: UIViewController, UITextFieldDelegate, ValidationDelegate
     @IBOutlet weak var retypePasswordTxtFld: MFTextField!
     @IBOutlet weak var passwordTxtFld: MFTextField!
     @IBOutlet weak var backBtn: UIButton!
-    
+
     let validator = Validator()
 
     var params: [String: Any]?

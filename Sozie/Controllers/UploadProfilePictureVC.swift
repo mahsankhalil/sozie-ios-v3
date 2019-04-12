@@ -56,7 +56,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
     }
     // MARK: - Actions
     @IBAction func addBtnTapped(_ sender: Any) {
-        UtilityManager.openImagePickerActionSheetFrom(vc: self)
+        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 
     @IBAction func uploadBtnTapped(_ sender: Any) {
@@ -67,11 +67,11 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
                 ServerManager.sharedInstance.updateProfile(params: nil, imageData: imgData) { (isSuccess, response) in
                     SVProgressHUD.dismiss()
                     if isSuccess {
+                        let user = response as! User
+                        UserDefaultManager.updateUserObject(user: user)
                         if self.isFromSignUp {
                             self.performSegue(withIdentifier: "toInviteFriends", sender: self)
                         } else {
-                            let user = response as! User
-                            UserDefaultManager.updateUserObject(user: user)
                             self.navigationController?.popViewController(animated: true)
                         }
                     } else {

@@ -24,7 +24,7 @@ struct DisclosureCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleVie
 }
 
 protocol ListingPopupVCDelegate: class {
-    func doneButtonTapped(type: FilterType?, id: Int?)
+    func doneButtonTapped(type: FilterType?, objId: Int?)
 }
 
 class ListingPopupVC: UIViewController {
@@ -72,7 +72,6 @@ class ListingPopupVC: UIViewController {
         } else {
             self.titleLabel.text = "FILTER"
         }
-//        self.titleLabel.text = popupType?.rawValue
         if popupType == PopupType.category {
             fetchCategoriesFromServer()
         } else {
@@ -127,15 +126,15 @@ class ListingPopupVC: UIViewController {
         if popupType == PopupType.category {
             if let index = selectedViewModelIndex {
                 let currentCategory = categoriesList[index]
-                delegate?.doneButtonTapped(type: FilterType.category, id: currentCategory.categoryId)
+                delegate?.doneButtonTapped(type: FilterType.category, objId: currentCategory.categoryId)
             }
         } else {
             if let type = filterType {
                 if let index = selectedViewModelIndex {
-                    delegate?.doneButtonTapped(type: type, id: index)
+                    delegate?.doneButtonTapped(type: type, objId: index)
                 }
             } else {
-                delegate?.doneButtonTapped(type: FilterType.sozie, id: nil)
+                delegate?.doneButtonTapped(type: FilterType.sozie, objId: nil)
             }
         }
     }
@@ -241,7 +240,7 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
 }
 extension ListingPopupVC: SelectionPopupVCDelegate {
 
-    func doneButtonTapped(type: FilterType?, id: Int?) {
-        delegate?.doneButtonTapped(type: type, id: id)
+    func doneButtonTapped(type: FilterType?, objId: Int?) {
+        delegate?.doneButtonTapped(type: type, objId: objId)
     }
 }

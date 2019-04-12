@@ -106,10 +106,9 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
             let dataDict = SocialAuthManager.sharedInstance.convertGoogleUserToAppDict(user: user)
             self.signUpDict = self.signUpDict!.merging(dataDict) { (_, new) in new }
             self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+        } else {
+            UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
         }
-//        else {
-//            UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
-//        }
     }
     // MARK: - Actions
     @IBAction func facebookBtnTapped(_ sender: Any) {
@@ -121,10 +120,12 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
                 self.signUpDict = self.signUpDict!.merging(resp) { (_, new) in new }
                 self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
             }
-//            else {
-//                let err = response as! Error
-//                UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
-//            }
+            else {
+                let err = response as! Error
+                if err.localizedDescription != "Token is empty." {
+                    UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)
+                }
+            }
         }
     }
 

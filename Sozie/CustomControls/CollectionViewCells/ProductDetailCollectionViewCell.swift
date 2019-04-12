@@ -7,14 +7,14 @@
 //
 
 import UIKit
-protocol ProductDetailCollectionViewCellDelegate {
+protocol ProductDetailCollectionViewCellDelegate: class {
     func productCameraButtonTapped(button: UIButton)
 }
 class ProductDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var brandImageView: UIImageView!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
-    var delegate: ProductDetailCollectionViewCellDelegate?
+    weak var delegate: ProductDetailCollectionViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

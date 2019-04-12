@@ -36,7 +36,7 @@ class TabBarVC: UITabBarController {
     }
     func populateUIOfSozieType() {
         let browseNC = self.storyboard?.instantiateViewController(withIdentifier: "BrowseNC")
-        browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Browse icon"), selectedImage: UIImage(named: "Browse icon-Selected"))
+        browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected"))
         let cameraVc = UIViewController()
         cameraVc.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
         let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
@@ -59,7 +59,7 @@ extension TabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if UserDefaultManager.getIfShopper() == false {
             if self.customizableViewControllers?.index(of: viewController) == 1 {
-                UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                UtilityManager.openImagePickerActionSheetFrom(viewController: self)
                 return false
             } else if self.customizableViewControllers?.index(of: viewController) == 0 {
                 if currentBrandId != UserDefaultManager.getCurrentUserObject()?.brand {

@@ -38,17 +38,17 @@ struct Size: Codable {
 }
 struct SizeChart: Codable {
 
-    var us: String
-    var uk: String
-    var eu: String
+    var usValue: String
+    var ukValue: String
+    var euValue: String
     var waist: Scales
     var hip: Scales
     var bust: Scales
 
     enum CodingKeys: String, CodingKey {
-        case us = "US"
-        case uk = "UK"
-        case eu = "EU"
+        case usValue = "US"
+        case ukValue = "UK"
+        case euValue = "EU"
         case waist = "WAIST"
         case hip = "HIPS"
         case bust = "BUST"
@@ -56,9 +56,9 @@ struct SizeChart: Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        us = try values.decode(String.self, forKey: .us)
-        uk = try values.decode(String.self, forKey: .uk)
-        eu = try values.decode(String.self, forKey: .eu)
+        usValue = try values.decode(String.self, forKey: .usValue)
+        ukValue = try values.decode(String.self, forKey: .ukValue)
+        euValue = try values.decode(String.self, forKey: .euValue)
         waist = try values.decode(Scales.self, forKey: .waist)
         hip = try values.decode(Scales.self, forKey: .hip)
         bust = try values.decode(Scales.self, forKey: .bust)

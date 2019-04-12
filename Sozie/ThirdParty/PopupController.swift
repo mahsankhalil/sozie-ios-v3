@@ -368,11 +368,12 @@ private extension PopupController {
         popupView.alpha = 0.0
         popupView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         baseScrollView.alpha = 0.0
-        UIView.animate(withDuration: 0.3, delay: 0.1, options: UIView.AnimationOptions(), animations: { () -> Void in
+        let animation: () -> Void = {
             self.popupView.alpha = 1.0
             self.baseScrollView.alpha = 1.0
             self.popupView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            }) { (_) -> Void in
+        }
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: UIView.AnimationOptions(), animations: animation) { (_) -> Void in
                 completion()
         }
     }
@@ -393,12 +394,13 @@ private extension PopupController {
     }
 
     func fadeOut(_ completion: @escaping () -> Void) {
+        let animation: () -> Void = {
+            self.popupView.alpha = 1.0
+            self.baseScrollView.alpha = 1.0
+            self.popupView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
         UIView.animate(
-            withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions(), animations: { () -> Void in
-                self.popupView.alpha = 0.0
-                self.baseScrollView.alpha = 0.0
-                self.popupView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }) { (_) -> Void in
+            withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions(), animations: animation) { (_) -> Void in
                 completion()
         }
     }

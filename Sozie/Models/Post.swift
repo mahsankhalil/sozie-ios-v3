@@ -18,7 +18,7 @@ struct Post: Codable {
     enum CodingKeys: String, CodingKey {
 
         case postId = "id"
-        case imageURL = "image"
+        case imageURL = "public_image_url"
         case user
         case userFollowedByMe = "poster_is_followed_by_me"
         case sizeType = "size_type"

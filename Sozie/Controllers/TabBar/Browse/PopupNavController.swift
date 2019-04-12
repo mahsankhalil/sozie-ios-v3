@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PopupNavControllerDelegate: class {
-    func doneButtonTapped(type: FilterType?, id: Int?)
+    func doneButtonTapped(type: FilterType?, objId: Int?)
 }
 
 class PopupNavController: UINavigationController {
@@ -82,8 +82,8 @@ extension PopupNavController: UINavigationControllerDelegate {
     }
 }
 extension PopupNavController: ListingPopupVCDelegate {
-    func doneButtonTapped(type: FilterType?, id: Int?) {
-        popupDelegate?.doneButtonTapped(type: type, id: id)
+    func doneButtonTapped(type: FilterType?, objId: Int?) {
+        popupDelegate?.doneButtonTapped(type: type, objId: objId)
         closeHandler!()
     }
 }

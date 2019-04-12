@@ -11,8 +11,9 @@ import Alamofire
 
 class ServerManager: NSObject {
     static let sharedInstance = ServerManager()
-    static let serverURL = "http://35.177.203.47/api/v1/"
+    //static let serverURL = "http://35.177.203.47/api/v1/"
 //    static let serverURL = "http://172.16.12.58:8000/api/v1/"
+    static let serverURL = "http://52.56.155.110/api/v1/"
     static let loginURL = ServerManager.serverURL + "user/login/"
     static let profileURL = ServerManager.serverURL + "user/profile/"
     static let sizeChartURL = ServerManager.serverURL + "common/sizechart"
@@ -143,15 +144,15 @@ class ServerManager: NSObject {
             "Content-type": "multipart/form-data"
         ]
 
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        let formData: (MultipartFormData) -> Void = { (multipartFormData) in
             for (key, value) in (params ?? [:]) {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
             }
-
             if let data = imageData {
                 multipartFormData.append(data, withName: "picture", fileName: "image.png", mimeType: "image/png")
             }
-        }, usingThreshold: UInt64.init(), to: ServerManager.profileURL + String(UserDefaultManager.getCurrentUserId()!) + "/", method: .patch, headers: headers) { (result) in
+        }
+        Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.profileURL + String(UserDefaultManager.getCurrentUserId()!) + "/", method: .patch, headers: headers) { (result) in
 
             switch result {
             case .success(let upload, _, _):
@@ -358,6 +359,22 @@ class ServerManager: NSObject {
             }
         }
     }
+    func unFollowUser(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.followURL
+        Alamofire.request(url, method: .delete, parameters: params, encoding: URLEncoding.httpBody, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
     func blockUser(params: [String: Any], block: CompletionHandler) {
 
         let headers: HTTPHeaders = [
@@ -499,7 +516,7 @@ class ServerManager: NSObject {
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
             "Content-type": "multipart/form-data"
         ]
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        let formData: (MultipartFormData) -> Void = { (multipartFormData) in
             for (key, value) in (params ?? [:]) {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
             }
@@ -509,7 +526,8 @@ class ServerManager: NSObject {
             if let thumbdata = thumbImageData {
                 multipartFormData.append(thumbdata, withName: "thumb_image", fileName: "image.png", mimeType: "image/png")
             }
-        }, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
+        }
+        Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
             switch result {
             case .success(let upload, _, _):
                 upload.responseData { response in

@@ -100,6 +100,7 @@ class ProductDetailVC: BaseViewController {
         currentProduct?.isFavourite = product.isFavourite
         currentProduct?.posts = product.posts
         currentProduct?.sizeChart = product.sizeChart
+        currentProduct?.postCount = product.posts?.count
     }
     func populateProductData() {
         var priceString = ""
@@ -120,20 +121,7 @@ class ProductDetailVC: BaseViewController {
                 productViewModel.titleImageURL = URL(string: brand.titleImage)
             }
         }
-        if var imageURL = currentProduct?.merchantImageURL {
-            if imageURL == "" {
-                if let imageURLTarget = currentProduct?.imageURL {
-                    productViewModel.imageURL = URL(string: imageURLTarget)
-                }
-            } else {
-                if imageURL.contains("|") {
-                    let delimeter = "|"
-                    let url = imageURL.components(separatedBy: delimeter)
-                    imageURL = url[0]
-                }
-                productViewModel.imageURL = URL(string: imageURL)
-            }
-        }
+        assignImageURL()
         if currentProduct?.isFavourite == false {
             heartButton.setImage(UIImage(named: "Blank Heart"), for: .normal)
         } else {
@@ -155,6 +143,22 @@ class ProductDetailVC: BaseViewController {
             pageControl.isHidden = true
         }
         makePostCellViewModel()
+    }
+    func assignImageURL() {
+        if var imageURL = currentProduct?.merchantImageURL {
+            if imageURL == "" {
+                if let imageURLTarget = currentProduct?.imageURL {
+                    productViewModel.imageURL = URL(string: imageURLTarget)
+                }
+            } else {
+                if imageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = imageURL.components(separatedBy: delimeter)
+                    imageURL = url[0]
+                }
+                productViewModel.imageURL = URL(string: imageURL)
+            }
+        }
     }
     func makePostCellViewModel() {
         viewModels.removeAll()
@@ -188,7 +192,7 @@ class ProductDetailVC: BaseViewController {
         var popUpInstnc: ServerResponsePopUp?
         popUpInstnc = ServerResponsePopUp.instance(imageName: "checked", title: "Request Sent", description: "Look out for filled requests in your profile.", height: 200, isOkButtonHidded: true)
         let popUpVC = PopupController
-            .create(self.tabBarController ?? self)
+            .create(self.tabBarController?.navigationController ?? self)
             .show(popUpInstnc!)
         popUpInstnc!.closeHandler = { []  in
             popUpVC.dismiss()
@@ -218,7 +222,7 @@ class ProductDetailVC: BaseViewController {
     @IBAction func requestSozieButtonTapped(_ sender: Any) {
         let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
         let popUpVC = PopupController
-            .create(self.tabBarController ?? self)
+            .create(self.tabBarController?.navigationController ?? self)
             .show(popUpInstnc)
 //        popUpInstnc.delegate = self
         popUpInstnc.closeHandler = { []  in
@@ -268,7 +272,7 @@ class ProductDetailVC: BaseViewController {
                 if let downloadedImage = image {
                     if let productURL = self.currentProduct?.deepLink {
                         if let appLink = URL(string: "https://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8") {
-                            UtilityManager.showActivityControllerWith(objectsToShare: [downloadedImage, productURL, appLink], vc: self)
+                            UtilityManager.showActivityControllerWith(objectsToShare: [downloadedImage, productURL, appLink], viewController: self)
                         }
 
                     }
@@ -366,8 +370,10 @@ extension ProductDetailVC: UIScrollViewDelegate {
         let width = scrollView.bounds.size.width
         let currentPage = Int(ceil(xAxis/width))
         pageControl.currentPage = currentPage
-        if (currentProduct?.posts?.count)! > 0 {
-            swipeToSeeView.isHidden = currentPage > 0
+        if let posts = currentProduct?.posts {
+            if posts.count > 0 {
+                swipeToSeeView.isHidden = currentPage > 0
+            }
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -375,15 +381,25 @@ extension ProductDetailVC: UIScrollViewDelegate {
         if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
             if UserDefaultManager.getIfShopper() == false {
                 if (scrollView.contentSize.width - scrollView.bounds.width) != 0 {
-                    UtilityManager.openImagePickerActionSheetFrom(vc: self)
+                    UtilityManager.openImagePickerActionSheetFrom(viewController: self)
                 }
             }
         }
     }
 }
 extension ProductDetailVC: PostCollectionViewCellDelegate {
+    func profileButtonTapped(button: UIButton) {
+        if let posts = self.currentProduct?.posts {
+            let sozieProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SozieProfileVC") as! SozieProfileVC
+            let currentUser = posts[button.tag - 1].user
+            currentPostId = posts[button.tag - 1].postId
+            sozieProfileVC.user = currentUser
+            self.navigationController?.pushViewController(sozieProfileVC, animated: true)
+        }
+    }
+
     func cameraButtonTapped(button: UIButton) {
-        UtilityManager.openImagePickerActionSheetFrom(vc: self)
+        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 
     func moreButtonTapped(button: UIButton) {
@@ -407,13 +423,15 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
         alert.addAction(UIAlertAction(title: "Block", style: .default, handler: { _ in
 
             if let posts = self.currentProduct?.posts {
-                UtilityManager.showMessageWith(title: "Block " + posts[button.tag].user.username, body: "Are you sure you want to Block?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", block: {
-                    let userIdToBlock = posts[button.tag].user.userId
+                UtilityManager.showMessageWith(title: "Block " + posts[button.tag - 1].user.username, body: "Are you sure you want to Block?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", block: {
+                    let userIdToBlock = posts[button.tag - 1].user.userId
                     var dataDict = [String: Any]()
                     dataDict["blocker"] = UserDefaultManager.getCurrentUserId()
                     dataDict["user"] = userIdToBlock
                     SVProgressHUD.show()
                     ServerManager.sharedInstance.blockUser(params: dataDict, block: { (_, _ ) in
+                        self.fetchProductDetailFromServer()
+                        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "RefreshBrowseData")))
                         SVProgressHUD.dismiss()
 
                     })
@@ -429,19 +447,29 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
 
     func followButtonTapped(button: UIButton) {
         if let posts = currentProduct?.posts {
-            if posts[button.tag - 1].user.isFollowed == true {
-                return
-            }
             var dataDict = [String: Any]()
             let userId = posts[button.tag - 1].user.userId
             dataDict["user"] = userId
-            SVProgressHUD.show()
-            ServerManager.sharedInstance.followUser(params: dataDict) { (isSuccess, _) in
-                SVProgressHUD.dismiss()
-                if isSuccess {
-                    self.currentProduct?.posts![button.tag - 1].userFollowedByMe = true
-                    self.viewModels[button.tag - 1].isFollow = true
-                    self.collectionView.reloadItems(at: [IndexPath(item: button.tag, section: 0)])
+            if self.viewModels[button.tag - 1].isFollow == true {
+                SVProgressHUD.show()
+                ServerManager.sharedInstance.unFollowUser(params: dataDict) { (isSuccess, _) in
+                    SVProgressHUD.dismiss()
+                    if isSuccess {
+                        self.currentProduct?.posts![button.tag - 1].userFollowedByMe = false
+                        self.currentProduct?.posts![button.tag - 1].user.isFollowed = false
+                        self.viewModels[button.tag - 1].isFollow = false
+                        self.collectionView.reloadItems(at: [IndexPath(item: button.tag, section: 0)])
+                    }
+                }
+            } else {
+                SVProgressHUD.show()
+                ServerManager.sharedInstance.followUser(params: dataDict) { (isSuccess, _) in
+                    SVProgressHUD.dismiss()
+                    if isSuccess {
+                        self.currentProduct?.posts![button.tag - 1].userFollowedByMe = true
+                        self.viewModels[button.tag - 1].isFollow = true
+                        self.collectionView.reloadItems(at: [IndexPath(item: button.tag, section: 0)])
+                    }
                 }
             }
         }
@@ -449,7 +477,7 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
 }
 extension ProductDetailVC: ProductDetailCollectionViewCellDelegate {
     func productCameraButtonTapped(button: UIButton) {
-        UtilityManager.openImagePickerActionSheetFrom(vc: self)
+        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 }
 extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

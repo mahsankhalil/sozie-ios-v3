@@ -64,7 +64,7 @@ class SozieRequestsVC: UIViewController {
                 let paginatedData = response as! RequestsPaginatedResponse
                 self.requests.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
-                self.searchCountLabel.text = String(paginatedData.count) + " REQUESTS"
+                self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS")
             }
         }
     }
@@ -115,7 +115,7 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
-        UtilityManager.openImagePickerActionSheetFrom(vc: self)
+        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 }
 extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

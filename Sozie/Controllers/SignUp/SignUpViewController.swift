@@ -221,9 +221,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
 
     @IBAction func maleBtnTapped(_ sender: Any) {
         tipView?.dismiss()
-
-        let text = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
-
+        let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
+        let shopperText = "“Hi guys, We are working hard on a Sozie solution for you! Please look out for the updated version of our app in the near future.”"
+        var text = sozietext
+        if UserDefaultManager.getCurrentUserObject() != nil, let userType = UserDefaultManager.getCurrentUserType() {
+            if userType == UserType.sozie.rawValue {
+                text = sozietext
+            } else {
+                text = shopperText
+            }
+        } else {
+            if let userType = signUpDict?[User.CodingKeys.type.stringValue] as? String {
+                if userType == UserType.sozie.rawValue {
+                    text = sozietext
+                } else {
+                    text = shopperText
+                }
+            }
+        }
         tipView = EasyTipView(text: text, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
         tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
     }

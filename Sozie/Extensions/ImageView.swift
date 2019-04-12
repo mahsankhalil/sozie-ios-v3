@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImageView {
-    
+
     func alphaAtPoint(_ point: CGPoint) -> CGFloat {
         var pixel: [UInt8] = [0, 0, 0, 0]
         let colorSpace = CGColorSpaceCreateDeviceRGB()

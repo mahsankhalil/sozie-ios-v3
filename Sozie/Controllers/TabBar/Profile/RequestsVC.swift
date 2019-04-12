@@ -94,7 +94,7 @@ class RequestsVC: UIViewController {
                 let paginatedData = response as! RequestsPaginatedResponse
                 self.requests.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
-                self.searchCountLabel.text = String(paginatedData.count) + " Requests"
+                self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " Request" : " Requests")
             }
         }
     }
@@ -115,7 +115,7 @@ class RequestsVC: UIViewController {
         popUpInstnc?.popupDelegate = self
         popUpInstnc?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
         let popUpVC = PopupController
-            .create(self.tabBarController!)
+            .create(self.tabBarController?.navigationController ?? self)
         let options = PopupCustomOption.layout(.bottom)
         popUpVC.cornerRadius = 0.0
         _ = popUpVC.customize([options])
@@ -185,11 +185,11 @@ extension RequestsVC: RequestTableViewCellDelegate {
     }
 }
 extension RequestsVC: PopupNavControllerDelegate {
-    func doneButtonTapped(type: FilterType?, id: Int?) {
+    func doneButtonTapped(type: FilterType?, objId: Int?) {
         requests.removeAll()
         if let filterType = type {
             if filterType == FilterType.request {
-                if let typeId = id {
+                if let typeId = objId {
                     serverParams["is_filled"] = typeId == 0
                 }
             }

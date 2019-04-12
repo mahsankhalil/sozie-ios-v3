@@ -46,42 +46,7 @@ internal class TabView: UIView {
         Bundle(for: TabView.self).loadNibNamed("TabView", owner: self, options: nil)
         addSubview(contentView)
         contentView.backgroundColor = option.tabBackgroundColor.withAlphaComponent(option.tabBarAlpha)
-
-        let top = NSLayoutConstraint(item: contentView,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: self,
-            attribute: .top,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let left = NSLayoutConstraint(item: contentView,
-            attribute: .leading,
-            relatedBy: .equal,
-            toItem: self,
-            attribute: .leading,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let bottom = NSLayoutConstraint (item: self,
-            attribute: .bottom,
-            relatedBy: .equal,
-            toItem: contentView,
-            attribute: .bottom,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let right = NSLayoutConstraint(item: self,
-            attribute: .trailing,
-            relatedBy: .equal,
-            toItem: contentView,
-            attribute: .trailing,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints([top, left, bottom, right])
-
+        assignCOnstraints()
         let bundle = Bundle(for: TabView.self)
         let nib = UINib(nibName: TabCollectionCell.cellIdentifier(), bundle: bundle)
         collectionView.register(nib, forCellWithReuseIdentifier: TabCollectionCell.cellIdentifier())
@@ -116,6 +81,38 @@ internal class TabView: UIView {
 
         bottomBarViewHeightConstraint.constant = 1.0 / UIScreen.main.scale
     }
+    func assignCOnstraints() {
+        let top = NSLayoutConstraint(item: contentView,
+                                     attribute: .top,
+                                     relatedBy: .equal,
+                                     toItem: self,
+                                     attribute: .top,
+                                     multiplier: 1.0,
+                                     constant: 0.0)
+        let left = NSLayoutConstraint(item: contentView,
+                                      attribute: .leading,
+                                      relatedBy: .equal,
+                                      toItem: self,
+                                      attribute: .leading,
+                                      multiplier: 1.0,
+                                      constant: 0.0)
+        let bottom = NSLayoutConstraint (item: self,
+                                         attribute: .bottom,
+                                         relatedBy: .equal,
+                                         toItem: contentView,
+                                         attribute: .bottom,
+                                         multiplier: 1.0,
+                                         constant: 0.0)
+        let right = NSLayoutConstraint(item: self,
+                                       attribute: .trailing,
+                                       relatedBy: .equal,
+                                       toItem: contentView,
+                                       attribute: .trailing,
+                                       multiplier: 1.0,
+                                       constant: 0.0)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.addConstraints([top, left, bottom, right])
+    }
 
     required internal init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -128,7 +125,6 @@ extension TabView {
 
     /**
      Called when you swipe in isInfinityTabPageViewController, moves the contentOffset of collectionView
-
      - parameter index: Next Index
      - parameter contentOffsetX: contentOffset.x of scrollView of isInfinityTabPageViewController
      */
@@ -141,11 +137,9 @@ extension TabView {
             // Calculate the index at the time of transition from the first item of pageTabItems to the last item
             nextIndex = pageTabItemsCount - 1
         }
-
         if collectionViewContentOffsetX == 0.0 {
             collectionViewContentOffsetX = collectionView.contentOffset.x
         }
-
         let currentIndexPath = IndexPath(item: currentIndex, section: 0)
         let nextIndexPath = IndexPath(item: nextIndex, section: 0)
         if let currentCell = collectionView.cellForItem(at: currentIndexPath) as? TabCollectionCell, let nextCell = collectionView.cellForItem(at: nextIndexPath) as? TabCollectionCell {
@@ -182,7 +176,6 @@ extension TabView {
             currentBarViewWidthConstraint.constant = currentBarViewWidth + width
         }
     }
-
     /**
      Center the current cell after page swipe
      */
@@ -191,7 +184,6 @@ extension TabView {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         collectionViewContentOffsetX = collectionView.contentOffset.x
     }
-
     /**
      Called in after the transition is complete pages in isInfinityTabPageViewController in the process of updating the current
 
@@ -207,8 +199,7 @@ extension TabView {
     }
 
     /**
-     Make the tapped cell the current if isInfinity is true
-
+     Make the tapped cell the current if isInfinity is tru
      - parameter index: Next IndexPath√
      */
     fileprivate func updateCurrentIndexForTap(_ index: Int) {
@@ -223,7 +214,6 @@ extension TabView {
         let indexPath = IndexPath(item: index, section: 0)
         moveCurrentBarView(indexPath, animated: true, shouldScroll: true)
     }
-
     /**
      Move the collectionView to IndexPath of Current
 
@@ -269,7 +259,6 @@ extension TabView {
 
     /**
      Touch event control of collectionView
-
      - parameter userInteractionEnabled: collectionViewに渡すuserInteractionEnabled
      */
     func updateCollectionViewUserInteractionEnabled(_ userInteractionEnabled: Bool) {
@@ -298,7 +287,6 @@ extension TabView: UICollectionViewDataSource {
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabCollectionCell.cellIdentifier(), for: indexPath) as! TabCollectionCell
         configureCell(cell, indexPath: indexPath)
-//        cell.showTipView()
         return cell
     }
 
@@ -381,9 +369,7 @@ extension TabView: UICollectionViewDelegate {
         }
     }
 }
-
 // MARK: - UICollectionViewDelegateFlowLayout
-
 extension TabView: UICollectionViewDelegateFlowLayout {
 
     internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
