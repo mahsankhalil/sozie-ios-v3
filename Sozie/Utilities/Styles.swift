@@ -158,6 +158,7 @@ extension MFTextField {
         self.placeholderColor = UIColor(hex: "888888")
         self.tintColor = UIColor(hex: "FC8888")
         self.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
+        self.errorFont = UIFont(name: "SegoeUI", size: 10.0)
     }
 
     func applyRightVuLblWith(title: String ) {

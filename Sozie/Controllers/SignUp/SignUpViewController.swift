@@ -64,6 +64,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             dateOfBirtTxtFld.date = UtilityManager.dateFromStringWithFormat(date: currentUser.birthday, format: "yyyy-MM-dd") as Date
             dateOfBirtTxtFld.pickerView.date = dateOfBirtTxtFld.date!
             userNameTxtFld.text = currentUser.username
+            userNameTxtFld.isUserInteractionEnabled = false
             if currentUser.gender == "F" {
                 applyFemaleSelection()
             }

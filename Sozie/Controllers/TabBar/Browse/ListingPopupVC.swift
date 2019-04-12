@@ -214,22 +214,22 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         if popupType == PopupType.category {
             let currentCategory = categoriesList[indexPath.row]
             if currentCategory.subCategories.count == 0 {
-                reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
+                reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
                 return
             } else {
                 selectedCategory = categoriesList[indexPath.row]
             }
         } else if filterType == FilterType.mySozies || filterType == FilterType.request {
-            reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
+            reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
             return
         } else if let userType = UserDefaultManager.getCurrentUserType() {
             if userType == UserType.sozie.rawValue {
                 if indexPath.row == 0 {
-                    reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
+                    reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
                     return
                 }
             } else if indexPath.row == 1 {
-                reloadIndexPaths(indexPath: indexPath, isDoneHidden: true)
+                reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
                 return
             }
         }

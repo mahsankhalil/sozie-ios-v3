@@ -226,8 +226,8 @@
                                     <constraint firstAttribute="height" constant="290" id="x4K-Xm-Bin"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
-                                <rect key="frame" x="116.5" y="235.5" width="142" height="86"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoSignup" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
+                                <rect key="frame" x="121" y="237" width="133" height="83"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr4-cf-Obz">
                                 <rect key="frame" x="30" y="401.5" width="315" height="45"/>
@@ -316,7 +316,7 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="90n-N6-YqP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find fashion in-stores and ask your Sozies to try things on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find fashion you love and ask your Sozies to try it on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
                                 <rect key="frame" x="53" y="450.5" width="269" height="35"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
                                 <nil key="textColor"/>
@@ -344,7 +344,7 @@
                             <constraint firstItem="Y9R-kk-0qU" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="53" id="fFP-Kr-Knm"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="Dr4-cf-Obz" secondAttribute="trailing" constant="30" id="fwb-XQ-p25"/>
                             <constraint firstItem="3xP-qc-lKu" firstAttribute="trailing" secondItem="Mvu-Ij-rm4" secondAttribute="trailing" id="iH6-bR-Csq"/>
-                            <constraint firstItem="3xP-qc-lKu" firstAttribute="bottom" secondItem="Mvu-Ij-rm4" secondAttribute="bottom" id="j4y-0w-xVd"/>
+                            <constraint firstItem="3xP-qc-lKu" firstAttribute="bottom" secondItem="Jyu-xw-oc8" secondAttribute="bottom" id="j4y-0w-xVd"/>
                             <constraint firstItem="Mhn-R8-v2N" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" constant="30" id="khc-9E-6Xc"/>
                             <constraint firstItem="Y9R-kk-0qU" firstAttribute="top" secondItem="Mhn-R8-v2N" secondAttribute="bottom" constant="7" id="nm0-Kh-x3b"/>
                             <constraint firstItem="Mvu-Ij-rm4" firstAttribute="trailing" secondItem="hdO-jk-SKW" secondAttribute="trailing" constant="53" id="pCc-jQ-4uQ"/>
@@ -2141,6 +2141,7 @@
         <image name="Cancel icon" width="13" height="15"/>
         <image name="Emoji" width="60" height="62"/>
         <image name="Gradient Shadow" width="375" height="259"/>
+        <image name="LogoSignup" width="133.5" height="83.5"/>
         <image name="Plus Sign" width="35" height="40"/>
         <image name="Search icon" width="15" height="15"/>
         <image name="back-button-white" width="22" height="10"/>

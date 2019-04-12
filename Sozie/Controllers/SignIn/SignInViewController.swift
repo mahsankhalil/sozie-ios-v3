@@ -159,7 +159,9 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             let dataDict = SocialAuthManager.sharedInstance.convertGoogleUserToAppDict(user: user)
             self.signInWithDict(dataDict: dataDict)
         } else {
-            UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+            if error.localizedDescription != "The user canceled the sign-in flow." {
+                UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+            }
         }
     }
 
