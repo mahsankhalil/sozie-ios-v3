@@ -102,6 +102,8 @@ class ListingPopupVC: UIViewController {
                         var viewModel1 = DisclosureCellViewModel()
                         viewModel1.title = "FILTER BY BRANDS"
                         viewModels.append(viewModel1)
+                    } else {
+                        viewModels.removeAll()
                     }
                 }
                 var viewModel2 = DisclosureCellViewModel()

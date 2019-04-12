@@ -53,8 +53,8 @@ class BrowseVC: BaseViewController {
                 let viewModel = ImageCellViewModel(imageURL: URL(string: brand.logo))
                 brandViewModels.append(viewModel)
             }
-            categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: brandList)
-            filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: brandList)
+            categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
+            filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
         }
     }
 
@@ -385,8 +385,8 @@ class BrowseVC: BaseViewController {
         showPopUpWithTitle(type: .filter)
     }
     @IBAction func clearFilterButtonTapped(_ sender: Any) {
-        categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: brandList)
-        filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: brandList)
+        categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
+        filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
         refreshData()
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
@@ -521,7 +521,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else {
             let currentBrand = brandList[indexPath.row]
-            filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: brandList)
+            filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
             productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
             productList.removeAll()
             filterByBrand(brandId: currentBrand.brandId)

@@ -96,6 +96,9 @@ class UserDefaultManager: NSObject {
         }
         return false
     }
+    static func getALlBrands() -> [Brand]? {
+        return brandList()
+    }
 
     private static func brandList () -> [Brand]? {
         if let brandList = UserDefaults.standard.data(forKey: UserDefaultKey.brands) {
