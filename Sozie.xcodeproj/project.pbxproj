@@ -63,6 +63,7 @@
 		613C462422621A0700AF77DF /* WelcomeRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C462322621A0700AF77DF /* WelcomeRootVC.swift */; };
 		613CFD312264B53D00841348 /* now_01.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 613CFD302264B53C00841348 /* now_01.mp4 */; };
 		613CFD332264B6FA00841348 /* now.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 613CFD322264B6F900841348 /* now.mp4 */; };
+		613CFD352266005D00841348 /* MeasurementTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613CFD342266005D00841348 /* MeasurementTutorialVC.swift */; };
 		613F40E9221FDB0E009AABA6 /* ButtonProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F40E8221FDB0E009AABA6 /* ButtonProviding.swift */; };
 		613F40EB221FF852009AABA6 /* ProductSizeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F40EA221FF852009AABA6 /* ProductSizeChart.swift */; };
 		613F40ED222014B8009AABA6 /* SizeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F40EC222014B8009AABA6 /* SizeCellViewModel.swift */; };
@@ -246,6 +247,7 @@
 		613C462322621A0700AF77DF /* WelcomeRootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRootVC.swift; sourceTree = "<group>"; };
 		613CFD302264B53C00841348 /* now_01.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = now_01.mp4; sourceTree = "<group>"; };
 		613CFD322264B6F900841348 /* now.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = now.mp4; sourceTree = "<group>"; };
+		613CFD342266005D00841348 /* MeasurementTutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementTutorialVC.swift; sourceTree = "<group>"; };
 		613F40E8221FDB0E009AABA6 /* ButtonProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonProviding.swift; sourceTree = "<group>"; };
 		613F40EA221FF852009AABA6 /* ProductSizeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSizeChart.swift; sourceTree = "<group>"; };
 		613F40EC222014B8009AABA6 /* SizeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellViewModel.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 				61A20A4F21E4B28A00B27C8E /* MeasurementsVC.swift */,
 				6183FFCD21E747790090393E /* InviteFriendsVC.swift */,
 				6188C70221EC98A000B51EA1 /* SizeChartPopUpVC.swift */,
+				613CFD342266005D00841348 /* MeasurementTutorialVC.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -1144,6 +1147,7 @@
 				6198D00321F725C50030B002 /* ResetPasswordVC.swift in Sources */,
 				6998E7DD21C77778009DFBEF /* AppDelegate.swift in Sources */,
 				DA48CB1221FAC04E006804B6 /* ButtonTappedDelegate.swift in Sources */,
+				613CFD352266005D00841348 /* MeasurementTutorialVC.swift in Sources */,
 				617AC4FE21D3595500655C3C /* UploadProfilePictureVC.swift in Sources */,
 				6103E19E21FB190100C7E7CF /* BrowseVC.swift in Sources */,
 				616DDD6D220B080000A7CCFA /* PopUpViewModel.swift in Sources */,

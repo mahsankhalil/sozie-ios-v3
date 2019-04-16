@@ -183,6 +183,9 @@ class MeasurementsVC: UIViewController {
         }
     }
 
+    @IBAction func clickHereButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toMeasurementTutorial", sender: self)
+    }
     @IBAction func backBtnTapped(_ sender: Any) {
         if UserDefaultManager.isUserLoggedIn() {
             self.navigationController?.popViewController(animated: true)

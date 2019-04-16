@@ -13,10 +13,15 @@ class FirstSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
     weak var delegate: WelcomeButtonActionsDelegate?
     var index: Int = 0
 
+    @IBOutlet weak var detailLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let formattedString = NSMutableAttributedString()
+        formattedString.normal("Sozies help shoppers by trying-on, taking pictures and reviewing fashion.\nThe more you help, the more you make.\n\nCheck your ").bold("Balance ").normal("to see how much you've made and ").bold("Cash out").normal("!")
+        detailLabel.attributedText = formattedString
+
     }
     /*
     // MARK: - Navigation
