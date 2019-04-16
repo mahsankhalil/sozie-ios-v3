@@ -53,6 +53,16 @@
 		612F00CD2208476A0025DBEA /* ListingPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00CC2208476A0025DBEA /* ListingPopupVC.swift */; };
 		612F00CF22084B390025DBEA /* SelectionPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00CE22084B390025DBEA /* SelectionPopupVC.swift */; };
 		612F00D122084B6D0025DBEA /* PopupNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00D022084B6D0025DBEA /* PopupNavController.swift */; };
+		613C4616226212D700AF77DF /* FirstShopperWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4615226212D700AF77DF /* FirstShopperWelcomeVC.swift */; };
+		613C4618226212E900AF77DF /* SecondShopperWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4617226212E900AF77DF /* SecondShopperWelcomeVC.swift */; };
+		613C461A226212FD00AF77DF /* ThirdShopperWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4619226212FD00AF77DF /* ThirdShopperWelcomeVC.swift */; };
+		613C461C2262131B00AF77DF /* FirstSozieWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C461B2262131B00AF77DF /* FirstSozieWelcomeVC.swift */; };
+		613C461E2262133100AF77DF /* SecondSozieWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C461D2262133100AF77DF /* SecondSozieWelcomeVC.swift */; };
+		613C46202262134400AF77DF /* ThirdSozieWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C461F2262134400AF77DF /* ThirdSozieWelcomeVC.swift */; };
+		613C4622226219CF00AF77DF /* WelcomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4621226219CF00AF77DF /* WelcomePageVC.swift */; };
+		613C462422621A0700AF77DF /* WelcomeRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C462322621A0700AF77DF /* WelcomeRootVC.swift */; };
+		613CFD312264B53D00841348 /* now_01.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 613CFD302264B53C00841348 /* now_01.mp4 */; };
+		613CFD332264B6FA00841348 /* now.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 613CFD322264B6F900841348 /* now.mp4 */; };
 		613F40E9221FDB0E009AABA6 /* ButtonProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F40E8221FDB0E009AABA6 /* ButtonProviding.swift */; };
 		613F40EB221FF852009AABA6 /* ProductSizeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F40EA221FF852009AABA6 /* ProductSizeChart.swift */; };
 		613F40ED222014B8009AABA6 /* SizeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F40EC222014B8009AABA6 /* SizeCellViewModel.swift */; };
@@ -226,6 +236,16 @@
 		612F00CC2208476A0025DBEA /* ListingPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingPopupVC.swift; sourceTree = "<group>"; };
 		612F00CE22084B390025DBEA /* SelectionPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPopupVC.swift; sourceTree = "<group>"; };
 		612F00D022084B6D0025DBEA /* PopupNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupNavController.swift; sourceTree = "<group>"; };
+		613C4615226212D700AF77DF /* FirstShopperWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstShopperWelcomeVC.swift; sourceTree = "<group>"; };
+		613C4617226212E900AF77DF /* SecondShopperWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondShopperWelcomeVC.swift; sourceTree = "<group>"; };
+		613C4619226212FD00AF77DF /* ThirdShopperWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdShopperWelcomeVC.swift; sourceTree = "<group>"; };
+		613C461B2262131B00AF77DF /* FirstSozieWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSozieWelcomeVC.swift; sourceTree = "<group>"; };
+		613C461D2262133100AF77DF /* SecondSozieWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSozieWelcomeVC.swift; sourceTree = "<group>"; };
+		613C461F2262134400AF77DF /* ThirdSozieWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdSozieWelcomeVC.swift; sourceTree = "<group>"; };
+		613C4621226219CF00AF77DF /* WelcomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
+		613C462322621A0700AF77DF /* WelcomeRootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRootVC.swift; sourceTree = "<group>"; };
+		613CFD302264B53C00841348 /* now_01.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = now_01.mp4; sourceTree = "<group>"; };
+		613CFD322264B6F900841348 /* now.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = now.mp4; sourceTree = "<group>"; };
 		613F40E8221FDB0E009AABA6 /* ButtonProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonProviding.swift; sourceTree = "<group>"; };
 		613F40EA221FF852009AABA6 /* ProductSizeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSizeChart.swift; sourceTree = "<group>"; };
 		613F40EC222014B8009AABA6 /* SizeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellViewModel.swift; sourceTree = "<group>"; };
@@ -466,6 +486,37 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
+		613C46122262129000AF77DF /* WalkThrough */ = {
+			isa = PBXGroup;
+			children = (
+				613C46132262129000AF77DF /* Shopper */,
+				613C46142262129000AF77DF /* Sozie */,
+				613C4621226219CF00AF77DF /* WelcomePageVC.swift */,
+				613C462322621A0700AF77DF /* WelcomeRootVC.swift */,
+			);
+			path = WalkThrough;
+			sourceTree = "<group>";
+		};
+		613C46132262129000AF77DF /* Shopper */ = {
+			isa = PBXGroup;
+			children = (
+				613C4615226212D700AF77DF /* FirstShopperWelcomeVC.swift */,
+				613C4617226212E900AF77DF /* SecondShopperWelcomeVC.swift */,
+				613C4619226212FD00AF77DF /* ThirdShopperWelcomeVC.swift */,
+			);
+			path = Shopper;
+			sourceTree = "<group>";
+		};
+		613C46142262129000AF77DF /* Sozie */ = {
+			isa = PBXGroup;
+			children = (
+				613C461B2262131B00AF77DF /* FirstSozieWelcomeVC.swift */,
+				613C461D2262133100AF77DF /* SecondSozieWelcomeVC.swift */,
+				613C461F2262134400AF77DF /* ThirdSozieWelcomeVC.swift */,
+			);
+			path = Sozie;
+			sourceTree = "<group>";
+		};
 		614CEA4121F1E08F00FE5F9D /* GooglePlist */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,6 +649,7 @@
 		69447FF221C7A017001A11A2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				613C46122262129000AF77DF /* WalkThrough */,
 				6103E18F21FAF1E500C7E7CF /* TabBar */,
 				6122289721F5D33500D4D747 /* SignIn */,
 				617CD12821DE284F00D4C885 /* SignUp */,
@@ -678,6 +730,8 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				613CFD322264B6F900841348 /* now.mp4 */,
+				613CFD302264B53C00841348 /* now_01.mp4 */,
 				615790E42254CBEB007B8532 /* signup.mp4 */,
 				6103E1A521FEDBEB00C7E7CF /* ThirdParty */,
 				6103E18621F9E98800C7E7CF /* StoryBoards */,
@@ -864,6 +918,7 @@
 				69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */,
 				611E411C22145BF2007B1C62 /* ProductDetailCollectionViewCell.xib in Resources */,
 				610A74452203303300964886 /* ProductImg.png in Resources */,
+				613CFD312264B53D00841348 /* now_01.mp4 in Resources */,
 				617FF0B722291C5F0096597E /* PostSizeCollectionViewCell.xib in Resources */,
 				6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
@@ -872,6 +927,7 @@
 				61B647F82227FEC7007A6370 /* SozieRequestTableViewCell.xib in Resources */,
 				611EDFD6221AF0DB00FB2DBE /* WishTableViewCell.xib in Resources */,
 				6103E1B121FF330400C7E7CF /* TitleCell.xib in Resources */,
+				613CFD332264B6FA00841348 /* now.mp4 in Resources */,
 				61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */,
 				616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */,
 				6103E18E21F9E9AB00C7E7CF /* TabBar.storyboard in Resources */,
@@ -1015,6 +1071,7 @@
 				D738BF7221F439EA00302FE5 /* CellConfigurable.swift in Sources */,
 				61A20A5221E4D24300B27C8E /* CustomPickerTextField.swift in Sources */,
 				61A20A5021E4B28A00B27C8E /* MeasurementsVC.swift in Sources */,
+				613C462422621A0700AF77DF /* WelcomeRootVC.swift in Sources */,
 				6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */,
 				61C40D0F221EAE1000FBD7FF /* SozieTableViewCell.swift in Sources */,
 				612F00CF22084B390025DBEA /* SelectionPopupVC.swift in Sources */,
@@ -1031,6 +1088,7 @@
 				61B647F72227FEC7007A6370 /* SozieRequestTableViewCell.swift in Sources */,
 				610A743D22031B7C00964886 /* Product.swift in Sources */,
 				61B9D1D02226A22C007C6326 /* SozieCellViewModel.swift in Sources */,
+				613C4618226212E900AF77DF /* SecondShopperWelcomeVC.swift in Sources */,
 				612089F02243A2A2005516D1 /* LineProviding.swift in Sources */,
 				6108FB992201D1F30007A49F /* ImageCollectionViewCell.swift in Sources */,
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
@@ -1096,6 +1154,7 @@
 				61592037220D884F00816034 /* SubCategory.swift in Sources */,
 				D738BF6721F3E3EA00302FE5 /* TitleAndCheckmarkCell.swift in Sources */,
 				6944817621C7A9ED001A11A2 /* LandingViewController.swift in Sources */,
+				613C461E2262133100AF77DF /* SecondSozieWelcomeVC.swift in Sources */,
 				61592031220C172C00816034 /* ImageCellViewModel.swift in Sources */,
 				618091C821EF43D0004B3347 /* UserDefaultManager.swift in Sources */,
 				6122289D21F5D3D500D4D747 /* ServerResponsePopUp.swift in Sources */,
@@ -1106,6 +1165,7 @@
 				611E411B22145BF2007B1C62 /* ProductDetailCollectionViewCell.swift in Sources */,
 				69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */,
 				61064598222E77BE00AE41C3 /* Image.swift in Sources */,
+				613C46202262134400AF77DF /* ThirdSozieWelcomeVC.swift in Sources */,
 				69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */,
 				6173E020221C068100AC9781 /* DescriptionViewModeling.swift in Sources */,
 				61145CC121DB926700062332 /* ServerManager.swift in Sources */,
@@ -1129,8 +1189,11 @@
 				61C40D05221E7DE900FBD7FF /* TabPageViewController.swift in Sources */,
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
 				6106459C222FD7DE00AE41C3 /* SozieProfileVC.swift in Sources */,
+				613C4616226212D700AF77DF /* FirstShopperWelcomeVC.swift in Sources */,
 				619772682216BF1E003A7091 /* MeasurementViewModeling.swift in Sources */,
 				6103E19121FAF24200C7E7CF /* TabBarVC.swift in Sources */,
+				613C4622226219CF00AF77DF /* WelcomePageVC.swift in Sources */,
+				613C461C2262131B00AF77DF /* FirstSozieWelcomeVC.swift in Sources */,
 				6106459A222E77CB00AE41C3 /* ImageView.swift in Sources */,
 				6103E1A421FB43B600C7E7CF /* ProfileSideMenuVC.swift in Sources */,
 				61C40D03221E7DE900FBD7FF /* TabView.swift in Sources */,
@@ -1140,6 +1203,7 @@
 				6183FFD021E756810090393E /* SelectWorkVC.swift in Sources */,
 				DA48CB1821FAD871006804B6 /* ReuseIdentifierProviding.swift in Sources */,
 				610A743B2203126600964886 /* ProductCollectionViewCell.swift in Sources */,
+				613C461A226212FD00AF77DF /* ThirdShopperWelcomeVC.swift in Sources */,
 				611EDFD5221AF0DB00FB2DBE /* WishTableViewCell.swift in Sources */,
 				DA48CB0E21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift in Sources */,
 				617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */,
