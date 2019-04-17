@@ -2228,12 +2228,12 @@ They will try on items of your choice so you can be sure of what size you want t
                                                     <action selector="backBtnTapped:" destination="5ua-jO-hcB" eventType="touchUpInside" id="Gyf-cb-uYC"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which store would you like to visit?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9ax-hb-fdg">
-                                                <rect key="frame" x="25" y="99" width="325" height="46"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which store would you like to visit?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ax-hb-fdg">
+                                                <rect key="frame" x="25" y="99" width="325" height="93"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="46" id="gwy-Pi-Udx"/>
+                                                    <constraint firstAttribute="height" constant="93" id="gwy-Pi-Udx"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="22"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="34"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -2259,7 +2259,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KG6-vN-jm7">
-                                                <rect key="frame" x="25" y="179" width="325" height="43"/>
+                                                <rect key="frame" x="25" y="200" width="325" height="43"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search icon" translatesAutoresizingMaskIntoConstraints="NO" id="uOz-RT-6Om">
                                                         <rect key="frame" x="0.0" y="14" width="15" height="15"/>
@@ -2325,7 +2325,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <constraint firstItem="LqJ-iI-gYO" firstAttribute="leading" secondItem="tUK-wJ-ySF" secondAttribute="leading" id="Wys-HM-e03"/>
                                             <constraint firstItem="NMI-ad-oWf" firstAttribute="trailing" secondItem="9ax-hb-fdg" secondAttribute="trailing" constant="25" id="XZh-tQ-ZaR"/>
                                             <constraint firstItem="mhC-Ir-t3x" firstAttribute="leading" secondItem="NMI-ad-oWf" secondAttribute="leading" constant="30" id="dqj-8y-NZC"/>
-                                            <constraint firstItem="KG6-vN-jm7" firstAttribute="top" secondItem="9ax-hb-fdg" secondAttribute="bottom" constant="34" id="iXs-ZM-Jhv"/>
+                                            <constraint firstItem="KG6-vN-jm7" firstAttribute="top" secondItem="9ax-hb-fdg" secondAttribute="bottom" constant="8" id="iXs-ZM-Jhv"/>
                                             <constraint firstItem="9ax-hb-fdg" firstAttribute="top" secondItem="CPA-iu-Uwb" secondAttribute="bottom" constant="12" id="njI-Kk-mrm"/>
                                             <constraint firstItem="NMI-ad-oWf" firstAttribute="trailing" secondItem="mhC-Ir-t3x" secondAttribute="trailing" constant="30" id="uNs-2Y-q4u"/>
                                             <constraint firstItem="NMI-ad-oWf" firstAttribute="bottom" secondItem="mhC-Ir-t3x" secondAttribute="bottom" constant="75" id="xCV-dU-iPq"/>
@@ -3314,6 +3314,6 @@ They will try on items of your choice so you can be sure of what size you want t
     <inferredMetricsTieBreakers>
         <segue reference="eNn-VW-0gA"/>
         <segue reference="M7a-TZ-jib"/>
-        <segue reference="90n-N6-YqP"/>
+        <segue reference="DE9-Vg-jdy"/>
     </inferredMetricsTieBreakers>
 </document>

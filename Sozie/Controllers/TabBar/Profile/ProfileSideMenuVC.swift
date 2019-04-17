@@ -93,7 +93,8 @@ class ProfileSideMenuVC: BaseViewController {
                         }
                     }
                 } else if title == "Reset first time use guide" {
-                    flag = !UserDefaultManager.isUserGuideDisabled()
+                    flag = false
+//                    flag = !UserDefaultManager.isUserGuideDisabled()
                 }
                 viewModel = TitleCellWithSwitchViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil, isSwitchOn: flag)
                             } else {
