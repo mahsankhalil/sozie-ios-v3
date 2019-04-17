@@ -4,8 +4,7 @@ platform :ios, '10.0'
 inhibit_all_warnings!
 use_frameworks!
 
-target 'Sozie' do
-    
+def all_pods
 pod 'TPKeyboardAvoiding'
 pod 'SVProgressHUD'
 pod 'SDWebImage', '~> 4.0'
@@ -23,6 +22,9 @@ pod 'CCBottomRefreshControl'
 pod 'SwiftLint'
 pod 'Appsee', '~> 2.5.1'
 pod 'Intercom'
+end
+target 'Sozie' do
+    all_pods
 end
 
 post_install do |installer|
