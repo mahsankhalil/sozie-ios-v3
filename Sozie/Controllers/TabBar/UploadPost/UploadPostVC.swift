@@ -121,7 +121,8 @@ class UploadPostVC: BaseViewController {
     */
     @IBAction func bottomButtonTapped(_ sender: Any) {
         if isSizeSelected == false {
-            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
+            let popUpInstnc = RequestSizeChartPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
+//            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
             let popUpVC = PopupController
                 .create(self.tabBarController?.navigationController ?? self)
                 .show(popUpInstnc)
@@ -132,8 +133,8 @@ class UploadPostVC: BaseViewController {
         } else {
             var dataDict = [String: Any]()
             dataDict["product_id"] = currentProduct?.productStringId
-            dataDict["size_type"] = selectedSizeType
-            dataDict["size_value"] = selectedSizeValue
+//            dataDict["size_type"] = selectedSizeType
+            dataDict["size_worn"] = selectedSizeValue
             if let request = currentRequest {
                 dataDict["product_request"] = request.requestId
             }
@@ -164,6 +165,15 @@ class UploadPostVC: BaseViewController {
     }
     @IBAction func postDeleteButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
+    }
+}
+extension UploadPostVC: RequestSizeChartPopupVCDelegate {
+    func selectedValueFromPopUp(value: String?) {
+        selectedSizeValue = value
+        sizeLabel.text = selectedSizeValue
+        bottomButtom.setTitle("Publish", for: .normal)
+        self.sizeView.isHidden = false
+        isSizeSelected = true
     }
 }
 extension UploadPostVC: SizeChartPopupVCDelegate {

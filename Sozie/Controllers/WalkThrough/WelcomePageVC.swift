@@ -56,7 +56,6 @@ class WelcomePageVC: UIPageViewController {
     private func viewCntrollerWith(identifier: String) -> UIViewController? {
         return self.storyboard?.instantiateViewController(withIdentifier: identifier)
     }
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -67,13 +66,14 @@ class WelcomePageVC: UIPageViewController {
             signUpInfoProvider.signUpInfo = signUpDict
         }
     }
-    
+
     func getIndexOfController(viewController: UIViewController) -> Int? {
         for index in 0..<orderedViewControllers.count where orderedViewControllers[index] == viewController {
             return index
         }
         return nil
     }
+
     func changePage(direction: NavigationDirection) {
         if let vcs = self.viewControllers {
             if let currentVC = vcs[0] as? IndexProviding {

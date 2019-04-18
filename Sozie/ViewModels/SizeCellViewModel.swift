@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct SizeCellViewModel: RowViewModel, TitleViewModeling, SelectionProviding {
+struct SizeCellViewModel: RowViewModel, TitleViewModeling, SelectionProviding, AvailabilityProviding {
+    var isAvailable: Bool
     var isSelected: Bool
     var title: String?
     var attributedTitle: NSAttributedString?

@@ -26,7 +26,7 @@ class TermsOfServiceVC: UIViewController {
         }
         populateText()
     }
-    
+
     func populateText() {
         if let currentType = type {
             if currentType == .termsCondition {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6102CDFE22688F5F0057D77A /* RequestSizeChartPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6102CDFD22688F5F0057D77A /* RequestSizeChartPopupVC.swift */; };
+		6102CE002268A9620057D77A /* AvailabilityProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6102CDFF2268A9620057D77A /* AvailabilityProviding.swift */; };
 		6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18721F9E98800C7E7CF /* LaunchScreen.storyboard */; };
 		6103E18C21F9E98800C7E7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18921F9E98800C7E7CF /* Main.storyboard */; };
 		6103E18E21F9E9AB00C7E7CF /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */; };
@@ -191,6 +193,8 @@
 
 /* Begin PBXFileReference section */
 		599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.debug.xcconfig"; sourceTree = "<group>"; };
+		6102CDFD22688F5F0057D77A /* RequestSizeChartPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSizeChartPopupVC.swift; sourceTree = "<group>"; };
+		6102CDFF2268A9620057D77A /* AvailabilityProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityProviding.swift; sourceTree = "<group>"; };
 		6103E18821F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6103E18A21F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 				612F00D022084B6D0025DBEA /* PopupNavController.swift */,
 				6140C07422117CD200D9CE4F /* ProductDetailVC.swift */,
 				6120D3C7225248C700998116 /* WebVC.swift */,
+				6102CDFD22688F5F0057D77A /* RequestSizeChartPopupVC.swift */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -828,6 +833,7 @@
 				61943341222949B80096B219 /* UserPostCellViewModel.swift */,
 				614374DF22378C6500DBD295 /* BlockedUserCellViewModel.swift */,
 				612089EF2243A2A2005516D1 /* LineProviding.swift */,
+				6102CDFF2268A9620057D77A /* AvailabilityProviding.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1189,6 +1195,7 @@
 				6944815921C7A018001A11A2 /* User.swift in Sources */,
 				617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
+				6102CDFE22688F5F0057D77A /* RequestSizeChartPopupVC.swift in Sources */,
 				61C40CF8221D766700FBD7FF /* FollowViewModeling.swift in Sources */,
 				6103E1A021FB191100C7E7CF /* ProfileRootVC.swift in Sources */,
 				619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */,
@@ -1201,6 +1208,7 @@
 				613C4622226219CF00AF77DF /* WelcomePageVC.swift in Sources */,
 				613C461C2262131B00AF77DF /* FirstSozieWelcomeVC.swift in Sources */,
 				6106459A222E77CB00AE41C3 /* ImageView.swift in Sources */,
+				6102CE002268A9620057D77A /* AvailabilityProviding.swift in Sources */,
 				6103E1A421FB43B600C7E7CF /* ProfileSideMenuVC.swift in Sources */,
 				61C40D03221E7DE900FBD7FF /* TabView.swift in Sources */,
 				6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */,

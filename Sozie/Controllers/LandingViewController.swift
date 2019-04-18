@@ -65,7 +65,7 @@ class LandingViewController: UIViewController {
         if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
             signUpInfoProvider.signUpInfo = signUpDict
         }
-        if var destVC = segue.destination as? WelcomeRootVC {
+        if let destVC = segue.destination as? WelcomeRootVC {
             destVC.userType = currentUserType
         }
 //        if segue.identifier == "toCountryVC", let selectCountryViewController = segue.destination as? SelectCountryVC {

@@ -35,8 +35,8 @@ class SizeChartPopUpVC: UIViewController {
                 ukViewModels.removeAll()
                 usViewModels.removeAll()
                 for sizeChart in sizeCharts {
-                    let usViewModel = SizeCellViewModel(isSelected: false, title: sizeChart.usValue, attributedTitle: nil)
-                    let ukViewModel = SizeCellViewModel(isSelected: false, title: sizeChart.ukValue, attributedTitle: nil)
+                    let usViewModel = SizeCellViewModel(isAvailable: true, isSelected: false, title: sizeChart.usValue, attributedTitle: nil)
+                    let ukViewModel = SizeCellViewModel(isAvailable: true, isSelected: false, title: sizeChart.ukValue, attributedTitle: nil)
                     ukViewModels.append(ukViewModel)
                     usViewModels.append(usViewModel)
 
@@ -49,7 +49,7 @@ class SizeChartPopUpVC: UIViewController {
             if let generals = generalList {
                 generalViewModels.removeAll()
                 for general in generals {
-                    let viewModel = SizeCellViewModel(isSelected: false, title: general.label, attributedTitle: nil)
+                    let viewModel = SizeCellViewModel(isAvailable: true, isSelected: false, title: general.label, attributedTitle: nil)
                     generalViewModels.append(viewModel)
                 }
             }
@@ -66,27 +66,28 @@ class SizeChartPopUpVC: UIViewController {
     var type: MeasurementType?
     var currentProductId: String?
     var currentBrandId: Int?
-    var productSizeChart: ProductSizeChart? {
-        didSet {
-            if let sizeChart = productSizeChart {
-                generalViewModels.removeAll()
-                for general in sizeChart.generalSize {
-                    let viewModel = SizeCellViewModel(isSelected: general.hasPosts, title: general.name, attributedTitle: nil)
-                    generalViewModels.append(viewModel)
-                }
-                ukViewModels.removeAll()
-                for ukSize in sizeChart.ukSize {
-                    let viewModel = SizeCellViewModel(isSelected: ukSize.hasPosts, title: ukSize.name, attributedTitle: nil)
-                    ukViewModels.append(viewModel)
-                }
-                usViewModels.removeAll()
-                for usSize in sizeChart.usSize {
-                    let viewModel = SizeCellViewModel(isSelected: usSize.hasPosts, title: usSize.name, attributedTitle: nil)
-                    usViewModels.append(viewModel)
-                }
-            }
-        }
-    }
+    var productSizeChart: [ProductSize]?
+//    {
+//        didSet {
+//            if let sizeChart = productSizeChart {
+//                generalViewModels.removeAll()
+//                for general in sizeChart.generalSize {
+//                    let viewModel = SizeCellViewModel(isSelected: general.hasPosts, title: general.name, attributedTitle: nil)
+//                    generalViewModels.append(viewModel)
+//                }
+//                ukViewModels.removeAll()
+//                for ukSize in sizeChart.ukSize {
+//                    let viewModel = SizeCellViewModel(isSelected: ukSize.hasPosts, title: ukSize.name, attributedTitle: nil)
+//                    ukViewModels.append(viewModel)
+//                }
+//                usViewModels.removeAll()
+//                for usSize in sizeChart.usSize {
+//                    let viewModel = SizeCellViewModel(isSelected: usSize.hasPosts, title: usSize.name, attributedTitle: nil)
+//                    usViewModels.append(viewModel)
+//                }
+//            }
+//        }
+//    }
 
     var closeHandler: (() -> Void)?
 
@@ -247,7 +248,7 @@ class SizeChartPopUpVC: UIViewController {
         }
     }
 
-    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: ProductSizeChart?, currentProductId: String? = nil, brandid: Int? = nil) -> SizeChartPopUpVC {
+    static func instance(arrayOfSizeChart: [SizeChart]?, arrayOfGeneral: [General]?, type: MeasurementType?, productSizeChart: [ProductSize]?, currentProductId: String? = nil, brandid: Int? = nil) -> SizeChartPopUpVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "SizeChartPopUpVC") as! SizeChartPopUpVC
         instnce.sizeChartList = arrayOfSizeChart
