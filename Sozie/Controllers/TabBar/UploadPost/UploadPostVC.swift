@@ -171,7 +171,11 @@ extension UploadPostVC: SizeChartPopupVCDelegate {
         selectedSizeType = sizeType?.rawValue
         selectedSizeValue = sizeValue
         if let currentSizeType = selectedSizeType, let currentSizeValue = selectedSizeValue {
-            sizeLabel.text = currentSizeType + " " + currentSizeValue
+            if currentSizeType == "GN" {
+                sizeLabel.text = currentSizeValue
+            } else {
+                sizeLabel.text = currentSizeType + " " + currentSizeValue
+            }
             bottomButtom.setTitle("Publish", for: .normal)
             self.sizeView.isHidden = false
             isSizeSelected = true

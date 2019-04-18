@@ -28,6 +28,7 @@ class ProductDetailVC: BaseViewController {
     var productViewModel = ProductDetailCellViewModel()
     var currentPostId: Int?
     @IBOutlet weak var bottomView: UIView!
+    var tipView: EasyTipView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -75,10 +76,14 @@ class ProductDetailVC: BaseViewController {
             var prefer = UtilityManager.tipViewGlobalPreferences()
             prefer.drawing.arrowPosition = .top
             prefer.positioning.maxWidth = 110
-            let tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
-            tipView.show(animated: true, forView: self.requestSozieButton, withinSuperview: self.bottomView)
+            tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
+            tipView?.show(animated: true, forView: self.requestSozieButton, withinSuperview: self.bottomView)
             UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.requestSozieButtonUserGuide)
+            perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)
         }
+    }
+    @objc func dismissTipView() {
+        tipView?.dismiss(withCompletion: nil)
     }
     override func viewDidLayoutSubviews() {
 //        descriptionTextLabel.setContentOffset(.zero, animated: false)

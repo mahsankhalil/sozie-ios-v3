@@ -65,6 +65,9 @@ class LandingViewController: UIViewController {
         if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
             signUpInfoProvider.signUpInfo = signUpDict
         }
+        if var destVC = segue.destination as? WelcomeRootVC {
+            destVC.userType = currentUserType
+        }
 //        if segue.identifier == "toCountryVC", let selectCountryViewController = segue.destination as? SelectCountryVC {
 //            selectCountryViewController.currentUserType = currentUserType
 //        }
@@ -74,15 +77,16 @@ class LandingViewController: UIViewController {
         currentUserType = .shopper
         signUpDict[User.CodingKeys.country.stringValue] = 2
         signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
-        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-//        performSegue(withIdentifier: "toCountryVC", sender: self)
+//        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+        performSegue(withIdentifier: "toWelcome", sender: self)
     }
 
     @IBAction func signUpSozieBtnTapped(_ sender: Any) {
         currentUserType = .sozie
         signUpDict[User.CodingKeys.country.stringValue] = 2
         signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
-        performSegue(withIdentifier: "toWorkVC", sender: self)
+//        performSegue(withIdentifier: "toWorkVC", sender: self)
+        performSegue(withIdentifier: "toWelcome", sender: self)
 
 //        performSegue(withIdentifier: "toCountryVC", sender: self)
     }

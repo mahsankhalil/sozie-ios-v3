@@ -107,7 +107,9 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
             self.signUpDict = self.signUpDict!.merging(dataDict) { (_, new) in new }
             self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
         } else {
-            UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+            if error.localizedDescription != "The user canceled the sign-in flow." {
+                UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+            }
         }
     }
     // MARK: - Actions
@@ -119,8 +121,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
                 let resp = response as! [String: Any]
                 self.signUpDict = self.signUpDict!.merging(resp) { (_, new) in new }
                 self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
-            }
-            else {
+            } else {
                 let err = response as! Error
                 if err.localizedDescription != "Token is empty." {
                     UtilityManager.showErrorMessage(body: err.localizedDescription, in: self)

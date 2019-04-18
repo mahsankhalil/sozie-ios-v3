@@ -55,6 +55,9 @@ class PostCollectionViewCell: UICollectionViewCell {
             followButton.isHidden = true
         }
     }
+    @objc func dismissTipView() {
+        tipView?.dismiss(withCompletion: nil)
+    }
     override func layoutIfNeeded() {
     }
     @objc func showTipView() {
@@ -69,6 +72,7 @@ class PostCollectionViewCell: UICollectionViewCell {
                     tipView?.show(animated: true, forView: self.followButton, withinSuperview: self.topView)
                     isFirstTime = false
                     UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.followButtonUserGuide)
+                    perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)
                 }
             }
         }

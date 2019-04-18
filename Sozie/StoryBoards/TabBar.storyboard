@@ -2035,7 +2035,7 @@
                                             <outlet property="delegate" destination="6kZ-Fh-i1K" id="dGs-rx-YNR"/>
                                         </connections>
                                     </tableView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No requests found, When a user will make a request it will be shown over here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgY-4F-H4k">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All requests that you make for Sozie pictures show up here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgY-4F-H4k">
                                         <rect key="frame" x="28" y="214" width="319" height="37.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="319" id="flt-DD-Hrk"/>

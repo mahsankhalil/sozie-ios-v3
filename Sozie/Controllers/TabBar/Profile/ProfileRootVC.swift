@@ -63,7 +63,9 @@ class ProfileRootVC: BaseViewController {
                 }
             }
             if let imageURL = currentUser.picture {
-                profileImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
+                if imageURL != "" {
+                    profileImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
+                }
             }
         }
     }
