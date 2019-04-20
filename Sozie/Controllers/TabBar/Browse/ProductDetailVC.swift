@@ -278,9 +278,8 @@ class ProductDetailVC: BaseViewController {
                 if let downloadedImage = image {
                     if let productURL = self.currentProduct?.deepLink {
                         if let appLink = URL(string: "https://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8") {
-                            UtilityManager.showActivityControllerWith(objectsToShare: [downloadedImage, productURL, appLink], viewController: self)
+                            UtilityManager.showActivityControllerWith(objectsToShare: [downloadedImage, "I’m obsessed with this look! What do you think?\n", productURL, "\nHave it tried on for you in your size by your Sozie!\nDownload ", appLink], viewController: self)
                         }
-
                     }
                 }
             }

@@ -1312,7 +1312,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 814AE7F56575BA4304684826 /* Pods-Sozie.stage.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;

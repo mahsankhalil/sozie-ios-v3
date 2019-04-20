@@ -155,6 +155,8 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         }
     }
 
+    @IBAction func signInButtoonTapped(_ sender: Any) {
+    }
     @IBAction func showConfirmPasswordBtnTapped(_ sender: Any) {
         if confirmPasswordTxtFld.isSecureTextEntry {
             confirmPasswordTxtFld.isSecureTextEntry = false

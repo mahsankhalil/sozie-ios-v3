@@ -1468,7 +1468,6 @@ They will try on items of your choice so you can be sure of what size you want t
                                                     </attributedString>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signInBtnTapped:" destination="CgK-3q-Hir" eventType="touchUpInside" id="ISv-Rm-NKu"/>
                                                     <segue destination="BYZ-38-t0r" kind="show" id="DE9-Vg-jdy"/>
                                                 </connections>
                                             </button>
@@ -2635,16 +2634,16 @@ They will try on items of your choice so you can be sure of what size you want t
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What size would you like to request a picture of?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TpI-Jd-84x">
-                                <rect key="frame" x="16" y="27" width="308" height="19"/>
+                                <rect key="frame" x="16" y="27" width="308" height="16.5"/>
                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arW-P1-vL4">
-                                <rect key="frame" x="13" y="75" width="314" height="215"/>
+                                <rect key="frame" x="13" y="72.5" width="314" height="217.5"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NwQ-1e-Aso">
-                                        <rect key="frame" x="10" y="8" width="294" height="199"/>
+                                        <rect key="frame" x="10" y="8" width="294" height="201.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="S6P-Ic-09y">
                                             <size key="itemSize" width="50" height="50"/>

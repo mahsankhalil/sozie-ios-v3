@@ -14,7 +14,6 @@ struct UserPost: Codable {
     var thumbURL: String
     var userId: Int
     var productId: String
-    var sizeType: String
     var sizeValue: String
     var productRequest: Int?
     var product: Product
@@ -25,8 +24,7 @@ struct UserPost: Codable {
         case userId = "user"
         case thumbURL = "public_thumb_image_url"
         case productId = "product_id"
-        case sizeType = "size_type"
-        case sizeValue = "size_value"
+        case sizeValue = "size_worn"
         case productRequest = "product_request"
         case product
     }
@@ -37,7 +35,6 @@ struct UserPost: Codable {
         userId = try values.decode(Int.self, forKey: .userId)
         thumbURL = try values.decode(String.self, forKey: .thumbURL)
         productId = try values.decode(String.self, forKey: .productId)
-        sizeType = try values.decode(String.self, forKey: .sizeType)
         sizeValue = try values.decode(String.self, forKey: .sizeValue)
         productRequest = try? values.decode(Int.self, forKey: .productRequest)
         product = try values.decode(Product.self, forKey: .product)

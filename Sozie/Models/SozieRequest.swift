@@ -11,7 +11,7 @@ import UIKit
 struct SozieRequest: Codable {
     var requestId: Int
     var user: User
-    var sizeType: String
+//    var sizeType: String
     var sizeValue: String
     var productId: String
     var requestedProduct: Product
@@ -21,8 +21,8 @@ struct SozieRequest: Codable {
     enum CodingKeys: String, CodingKey {
         case requestId = "id"
         case user = "user"
-        case sizeType = "size_type"
-        case sizeValue = "size_value"
+//        case sizeType = "size_type"
+        case sizeValue = "size_worn"
         case productId = "product_id"
         case requestedProduct = "requested_product"
         case brandId = "brand"
@@ -34,7 +34,7 @@ struct SozieRequest: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         requestId = try values.decode(Int.self, forKey: .requestId)
         user = try values.decode(User.self, forKey: .user)
-        sizeType = try values.decode(String.self, forKey: .sizeType)
+//        sizeType = try values.decode(String.self, forKey: .sizeType)
         sizeValue = try values.decode(String.self, forKey: .sizeValue)
         productId = try values.decode(String.self, forKey: .productId)
         requestedProduct = try values.decode(Product.self, forKey: .requestedProduct)
