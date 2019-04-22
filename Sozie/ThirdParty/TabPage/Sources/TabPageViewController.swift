@@ -108,7 +108,6 @@ extension TabPageViewController {
     fileprivate func setupPageViewController() {
         dataSource = self
         delegate = self
-        automaticallyAdjustsScrollViewInsets = false
 
         if tabItems.count > 0 {
             setViewControllers([tabItems[beforeIndex].viewController],

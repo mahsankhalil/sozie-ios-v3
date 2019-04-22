@@ -38,6 +38,11 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
 //        emailField.validationType = .afterEdit
 //        passwordField.validationType = .afterEdit
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+    }
 
     func applyRightVuToPassword() {
         let eyeBtn = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 19.0, height: 22.0))

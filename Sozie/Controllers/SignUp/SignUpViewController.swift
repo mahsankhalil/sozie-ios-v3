@@ -15,7 +15,7 @@ import EasyTipView
 class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDelegate {
 
     @IBOutlet weak var femaleBtn: UIButton!
-    @IBOutlet weak var maleBtn: UIButton!    
+    @IBOutlet weak var maleBtn: UIButton!
     @IBOutlet weak var lastNameTxtFld: MFTextField!
     @IBOutlet weak var firstNameTxtFld: MFTextField!
     @IBOutlet weak var userNameTxtFld: MFTextField!

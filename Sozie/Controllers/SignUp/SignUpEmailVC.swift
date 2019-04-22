@@ -32,13 +32,16 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
 
         applyValidators()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     // MARK: - Custom Methods
     func applyValidators() {
