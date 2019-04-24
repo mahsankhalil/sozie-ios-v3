@@ -286,6 +286,9 @@
 		617CD12921DE286700D4C885 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		617CD12B21DE288400D4C885 /* SelectCountryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryVC.swift; sourceTree = "<group>"; };
 		617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailVC.swift; sourceTree = "<group>"; };
+		617FA17B2270789F0055FD18 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		617FA17C227078AB0055FD18 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		617FA17D227078B50055FD18 /* Stage.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Stage.xcconfig; sourceTree = "<group>"; };
 		617FF0B0222810F70096597E /* SozieRequestCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieRequestCellViewModel.swift; sourceTree = "<group>"; };
 		617FF0B222291B770096597E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		617FF0B422291C5F0096597E /* PostSizeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSizeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -599,6 +602,16 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		617FA17A227078810055FD18 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				617FA17B2270789F0055FD18 /* Debug.xcconfig */,
+				617FA17C227078AB0055FD18 /* Release.xcconfig */,
+				617FA17D227078B50055FD18 /* Stage.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		6188C70421ECA2C200B51EA1 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,6 +753,7 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				617FA17A227078810055FD18 /* Config */,
 				613CFD322264B6F900841348 /* now.mp4 */,
 				613CFD302264B53C00841348 /* now_01.mp4 */,
 				615790E42254CBEB007B8532 /* signup.mp4 */,
@@ -1310,7 +1324,7 @@
 		};
 		61F5510E22673D32005D0743 /* Stage */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 814AE7F56575BA4304684826 /* Pods-Sozie.stage.xcconfig */;
+			baseConfigurationReference = 617FA17D227078B50055FD18 /* Stage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
@@ -1453,7 +1467,7 @@
 		};
 		6998E7EC21C77779009DFBEF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */;
+			baseConfigurationReference = 617FA17B2270789F0055FD18 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
@@ -1480,7 +1494,7 @@
 		};
 		6998E7ED21C77779009DFBEF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */;
+			baseConfigurationReference = 617FA17C227078AB0055FD18 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;

@@ -1,0 +1,13 @@
+//
+//  Stage.xcconfig
+//  Sozie
+//
+//  Created by Zaighum Ghazali Khan on 4/24/19.
+//  Copyright © 2019 Danial Zahid. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+#include "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.stage.xcconfig"
+SLASH = /
+SERVER_URL = http:$(SLASH)/35.177.203.47/api/v1/

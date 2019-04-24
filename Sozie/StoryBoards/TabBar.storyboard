@@ -533,15 +533,32 @@
                                                                     <action selector="butButtonTapped:" destination="Shc-8z-rMy" eventType="touchUpInside" id="bUR-PW-OnK"/>
                                                                 </connections>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0F-gj-WXy">
+                                                                <rect key="frame" x="279" y="10.5" width="80" height="26"/>
+                                                                <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="80" id="6G7-Da-HY8"/>
+                                                                    <constraint firstAttribute="height" constant="26" id="Dxv-im-dHh"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                                                <state key="normal" title="BUY">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="butButtonTapped:" destination="Shc-8z-rMy" eventType="touchUpInside" id="7ad-iQ-kWm"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="z4u-hJ-9Tk" firstAttribute="centerY" secondItem="UA8-P9-2dS" secondAttribute="centerY" id="6H5-fD-i3m"/>
+                                                            <constraint firstItem="v0F-gj-WXy" firstAttribute="centerY" secondItem="UA8-P9-2dS" secondAttribute="centerY" id="6tN-Py-R7m"/>
                                                             <constraint firstItem="yoB-gL-alp" firstAttribute="leading" secondItem="xLy-9j-GzS" secondAttribute="trailing" id="Fmp-Hh-PWc"/>
                                                             <constraint firstAttribute="height" constant="47" id="HWw-cc-hIt"/>
                                                             <constraint firstAttribute="trailing" secondItem="lsy-EL-fSg" secondAttribute="trailing" id="NV9-QT-fb7"/>
                                                             <constraint firstItem="ozV-A0-SdB" firstAttribute="centerY" secondItem="UA8-P9-2dS" secondAttribute="centerY" id="RJm-z4-bk7"/>
                                                             <constraint firstItem="xLy-9j-GzS" firstAttribute="leading" secondItem="UA8-P9-2dS" secondAttribute="leading" constant="12" id="cNj-3e-fBw"/>
+                                                            <constraint firstAttribute="trailing" secondItem="v0F-gj-WXy" secondAttribute="trailing" constant="16" id="hBC-6Q-gTe"/>
                                                             <constraint firstItem="lsy-EL-fSg" firstAttribute="leading" secondItem="UA8-P9-2dS" secondAttribute="leading" id="iPk-68-FmY"/>
                                                             <constraint firstAttribute="bottom" secondItem="lsy-EL-fSg" secondAttribute="bottom" id="iU4-CB-K7V"/>
                                                             <constraint firstItem="KW0-xI-QVV" firstAttribute="centerX" secondItem="UA8-P9-2dS" secondAttribute="centerX" id="jNY-N4-7dl"/>
@@ -639,6 +656,7 @@
                         <outlet property="priceLabel" destination="lwg-bq-Msw" id="Z3d-Ln-JaE"/>
                         <outlet property="requestSozieButton" destination="ozV-A0-SdB" id="kUH-OZ-0AY"/>
                         <outlet property="shareButton" destination="yoB-gL-alp" id="Wa5-KY-mVo"/>
+                        <outlet property="sozieBuyButton" destination="v0F-gj-WXy" id="L1k-Mb-hU2"/>
                         <outlet property="swipeToSeeView" destination="Yf5-ou-rod" id="JjM-eO-5QN"/>
                         <segue destination="EfA-he-4gM" kind="show" identifier="toUploadPost" id="567-1Z-O12"/>
                         <segue destination="UDD-yH-x4w" kind="presentation" identifier="toWebVC" modalPresentationStyle="overFullScreen" id="5CF-lV-hkA"/>

@@ -23,12 +23,14 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var swipeToSeeView: UIView!
     @IBOutlet weak var heartButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sozieBuyButton: UIButton!
     var currentProduct: Product?
     var viewModels: [PostCellViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
     var currentPostId: Int?
     @IBOutlet weak var bottomView: UIView!
     var tipView: EasyTipView?
+    var tapGesture: UITapGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,6 +42,7 @@ class ProductDetailVC: BaseViewController {
         collectionView.register(UINib(nibName: "PostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostCollectionViewCell")
         collectionView.register(UINib(nibName: "ProductDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductDetailCollectionViewCell")
         buyButton.layer.cornerRadius = 3.0
+        sozieBuyButton.layer.cornerRadius = 3.0
         requestSozieButton.layer.cornerRadius = 3.0
         pageControl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         if UserDefaultManager.getIfShopper() {
@@ -47,21 +50,36 @@ class ProductDetailVC: BaseViewController {
             heartButton.isHidden = false
             buyButton.isHidden = false
             requestSozieButton.isHidden = false
+            sozieBuyButton.isHidden = true
         } else {
-            heartButtonWidthConstraint.constant = 0.0
-            heartButton.isHidden = true
+//            heartButtonWidthConstraint.constant = 0.0
+//            heartButton.isHidden = true
             buyButton.isHidden = true
+            sozieBuyButton.isHidden = false
             requestSozieButton.isHidden = true
         }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken != nil {
-            self.showTagItemButton()
+//            self.showTagItemButton()
             self.showCancelButton()
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchProductDetailFromServer()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken != nil {
+            self.showTagThisItemViewAfterDelay()
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedOnScreen))
+            self.view.addGestureRecognizer(tapGesture!)
+        }
+    }
+    @objc func tappedOnScreen() {
+        self.tagThisItemView?.removeFromSuperview()
+        self.showSmallTagThisItemView()
+        if tapGesture != nil {
+            self.view.removeGestureRecognizer(tapGesture!)
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         if UserDefaultManager.getIfShopper() {
@@ -313,6 +331,8 @@ class ProductDetailVC: BaseViewController {
         }
     }
     override func tagItemButtonTapped() {
+        self.tagThisItemView?.removeFromSuperview()
+        self.smallTagThisItemView?.removeFromSuperview()
         self.performSegue(withIdentifier: "toUploadPost", sender: self)
     }
     override func cancelButtonTapped() {
@@ -382,6 +402,8 @@ extension ProductDetailVC: UIScrollViewDelegate {
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        tagThisItemView?.removeFromSuperview()
+        self.showSmallTagThisItemView()
         let contentOffsetX = scrollView.contentOffset.x
         if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
             if UserDefaultManager.getIfShopper() == false {
