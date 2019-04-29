@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
+
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var skipBtn: UIButton!
     @IBOutlet weak var uploadBtn: DZGradientButton!

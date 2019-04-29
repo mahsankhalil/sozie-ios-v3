@@ -51,7 +51,13 @@ extension SizeCell: CellConfigurable {
             if selectionViewModel.isSelected {
                 self.titleLbl.textColor = UIColor(hex: "FC8888")
             } else {
-                self.titleLbl.textColor = UIColor.black
+                if let availabilityViewModel = viewModel as? AvailabilityProviding {
+                    if availabilityViewModel.isAvailable {
+                        self.titleLbl.textColor = UIColor(hex: "323232")
+                    } else {
+                        self.titleLbl.textColor = UIColor(hex: "888888")
+                    }
+                }
             }
         }
     }

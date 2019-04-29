@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6102CDFE22688F5F0057D77A /* RequestSizeChartPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6102CDFD22688F5F0057D77A /* RequestSizeChartPopupVC.swift */; };
+		6102CE002268A9620057D77A /* AvailabilityProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6102CDFF2268A9620057D77A /* AvailabilityProviding.swift */; };
 		6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18721F9E98800C7E7CF /* LaunchScreen.storyboard */; };
 		6103E18C21F9E98800C7E7CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18921F9E98800C7E7CF /* Main.storyboard */; };
 		6103E18E21F9E9AB00C7E7CF /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */; };
@@ -191,6 +193,8 @@
 
 /* Begin PBXFileReference section */
 		599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.debug.xcconfig"; sourceTree = "<group>"; };
+		6102CDFD22688F5F0057D77A /* RequestSizeChartPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSizeChartPopupVC.swift; sourceTree = "<group>"; };
+		6102CDFF2268A9620057D77A /* AvailabilityProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityProviding.swift; sourceTree = "<group>"; };
 		6103E18821F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6103E18A21F9E98800C7E7CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6103E18D21F9E9AB00C7E7CF /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
@@ -282,6 +286,9 @@
 		617CD12921DE286700D4C885 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		617CD12B21DE288400D4C885 /* SelectCountryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryVC.swift; sourceTree = "<group>"; };
 		617CD12D21DE3B2900D4C885 /* SignUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailVC.swift; sourceTree = "<group>"; };
+		617FA17B2270789F0055FD18 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		617FA17C227078AB0055FD18 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		617FA17D227078B50055FD18 /* Stage.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Stage.xcconfig; sourceTree = "<group>"; };
 		617FF0B0222810F70096597E /* SozieRequestCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieRequestCellViewModel.swift; sourceTree = "<group>"; };
 		617FF0B222291B770096597E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		617FF0B422291C5F0096597E /* PostSizeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSizeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -354,6 +361,7 @@
 		6998E7E821C77779009DFBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DZValidator.swift; sourceTree = "<group>"; };
+		814AE7F56575BA4304684826 /* Pods-Sozie.stage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.stage.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.stage.xcconfig"; sourceTree = "<group>"; };
 		BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D738BF6221F3D72600302FE5 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D738BF6421F3E33A00302FE5 /* TitleAndCheckmarkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleAndCheckmarkCell.xib; sourceTree = "<group>"; };
@@ -395,6 +403,7 @@
 			children = (
 				599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */,
 				F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */,
+				814AE7F56575BA4304684826 /* Pods-Sozie.stage.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -438,6 +447,7 @@
 				612F00D022084B6D0025DBEA /* PopupNavController.swift */,
 				6140C07422117CD200D9CE4F /* ProductDetailVC.swift */,
 				6120D3C7225248C700998116 /* WebVC.swift */,
+				6102CDFD22688F5F0057D77A /* RequestSizeChartPopupVC.swift */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -592,6 +602,16 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		617FA17A227078810055FD18 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				617FA17B2270789F0055FD18 /* Debug.xcconfig */,
+				617FA17C227078AB0055FD18 /* Release.xcconfig */,
+				617FA17D227078B50055FD18 /* Stage.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		6188C70421ECA2C200B51EA1 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +753,7 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				617FA17A227078810055FD18 /* Config */,
 				613CFD322264B6F900841348 /* now.mp4 */,
 				613CFD302264B53C00841348 /* now_01.mp4 */,
 				615790E42254CBEB007B8532 /* signup.mp4 */,
@@ -826,6 +847,7 @@
 				61943341222949B80096B219 /* UserPostCellViewModel.swift */,
 				614374DF22378C6500DBD295 /* BlockedUserCellViewModel.swift */,
 				612089EF2243A2A2005516D1 /* LineProviding.swift */,
+				6102CDFF2268A9620057D77A /* AvailabilityProviding.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1187,6 +1209,7 @@
 				6944815921C7A018001A11A2 /* User.swift in Sources */,
 				617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
+				6102CDFE22688F5F0057D77A /* RequestSizeChartPopupVC.swift in Sources */,
 				61C40CF8221D766700FBD7FF /* FollowViewModeling.swift in Sources */,
 				6103E1A021FB191100C7E7CF /* ProfileRootVC.swift in Sources */,
 				619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */,
@@ -1199,6 +1222,7 @@
 				613C4622226219CF00AF77DF /* WelcomePageVC.swift in Sources */,
 				613C461C2262131B00AF77DF /* FirstSozieWelcomeVC.swift in Sources */,
 				6106459A222E77CB00AE41C3 /* ImageView.swift in Sources */,
+				6102CE002268A9620057D77A /* AvailabilityProviding.swift in Sources */,
 				6103E1A421FB43B600C7E7CF /* ProfileSideMenuVC.swift in Sources */,
 				61C40D03221E7DE900FBD7FF /* TabView.swift in Sources */,
 				6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */,
@@ -1237,6 +1261,94 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		61F5510D22673D32005D0743 /* Stage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Stage;
+		};
+		61F5510E22673D32005D0743 /* Stage */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 617FA17D227078B50055FD18 /* Stage.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8VJR2RYALF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Sozie/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
+				PRODUCT_MODULE_NAME = Sozie;
+				PRODUCT_NAME = "$(TARGET_NAME)-Stage";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Stage;
+		};
 		6998E7E921C77779009DFBEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1355,7 +1467,7 @@
 		};
 		6998E7EC21C77779009DFBEF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 599321E0048D21A225A2482B /* Pods-Sozie.debug.xcconfig */;
+			baseConfigurationReference = 617FA17B2270789F0055FD18 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
@@ -1382,7 +1494,7 @@
 		};
 		6998E7ED21C77779009DFBEF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F98D7C614A0527D488B85DC8 /* Pods-Sozie.release.xcconfig */;
+			baseConfigurationReference = 617FA17C227078AB0055FD18 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
@@ -1414,6 +1526,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6998E7E921C77779009DFBEF /* Debug */,
+				61F5510D22673D32005D0743 /* Stage */,
 				6998E7EA21C77779009DFBEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1423,6 +1536,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6998E7EC21C77779009DFBEF /* Debug */,
+				61F5510E22673D32005D0743 /* Stage */,
 				6998E7ED21C77779009DFBEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
+        print(Bundle.main.infoDictionary?["Configuration"] as! String)
         GIDSignIn.sharedInstance().clientID = "943339111983-3cca64ei8g4gukhudc5lurr6cpi0k91f.apps.googleusercontent.com"
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 

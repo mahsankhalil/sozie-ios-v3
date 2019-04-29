@@ -32,13 +32,16 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
 
         applyValidators()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     // MARK: - Custom Methods
     func applyValidators() {
@@ -105,7 +108,10 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         if error == nil {
             let dataDict = SocialAuthManager.sharedInstance.convertGoogleUserToAppDict(user: user)
             self.signUpDict = self.signUpDict!.merging(dataDict) { (_, new) in new }
-            self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+            if let email = self.signUpDict![User.CodingKeys.email.stringValue] as? String {
+                self.verifyEmailFromServer(email: email)
+            }
+//            self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
         } else {
             if error.localizedDescription != "The user canceled the sign-in flow." {
                 UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
@@ -120,7 +126,10 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
             if isSuccess {
                 let resp = response as! [String: Any]
                 self.signUpDict = self.signUpDict!.merging(resp) { (_, new) in new }
-                self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+                if let email = self.signUpDict![User.CodingKeys.email.stringValue] as? String {
+                    self.verifyEmailFromServer(email: email)
+                }
+//                self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
             } else {
                 let err = response as! Error
                 if err.localizedDescription != "Token is empty." {
@@ -155,6 +164,8 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         }
     }
 
+    @IBAction func signInButtoonTapped(_ sender: Any) {
+    }
     @IBAction func showConfirmPasswordBtnTapped(_ sender: Any) {
         if confirmPasswordTxtFld.isSecureTextEntry {
             confirmPasswordTxtFld.isSecureTextEntry = false

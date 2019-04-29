@@ -30,10 +30,6 @@ struct PostCellViewModel: RowViewModel, ImageViewModeling, TitleViewModeling, Re
         self.cup = post.user.measurement?.cup
         self.waist = post.user.measurement?.waist
         self.isFollow = post.userFollowedByMe ?? false
-        if post.sizeType == "GN" {
-            self.description = "Size Worn: " + post.sizeValue
-        } else {
-            self.description = "Size Worn: " + post.sizeType + " " + post.sizeValue
-        }
+        self.description = "Size Worn: " + post.sizeValue
     }
 }

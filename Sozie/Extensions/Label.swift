@@ -9,7 +9,7 @@
 import UIKit
 
 extension UILabel {
-    func lblShadow(color: UIColor, radius: CGFloat, opacity: Float){
+    func lblShadow(color: UIColor, radius: CGFloat, opacity: Float) {
 //        self.textColor = color
         self.layer.shadowColor = color.cgColor
         self.layer.masksToBounds = false

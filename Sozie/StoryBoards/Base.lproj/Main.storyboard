@@ -53,7 +53,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8om-TM-wT3">
-                                                <rect key="frame" x="16" y="40" width="343" height="48"/>
+                                                <rect key="frame" x="16" y="40" width="343" height="42"/>
                                                 <string key="text">Sozies are matched to shoppers who have similar bodies.
 
 Sozie means doppelgänger in French.</string>
@@ -77,7 +77,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euG-xD-ZyJ">
-                                                <rect key="frame" x="87" y="0.0" width="201.5" height="38"/>
+                                                <rect key="frame" x="83.5" y="0.0" width="208.5" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="tZy-BX-YMf"/>
                                                 </constraints>
@@ -263,7 +263,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="66p-Lh-8UL">
-                                                <rect key="frame" x="19" y="6" width="337" height="37.5"/>
+                                                <rect key="frame" x="19" y="6" width="337" height="33"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="How do you make ">
                                                         <attributes>
@@ -313,7 +313,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nr0-E2-AdA">
-                                                <rect key="frame" x="73.5" y="50.5" width="228" height="96"/>
+                                                <rect key="frame" x="73.5" y="46" width="228" height="84"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="228" id="wUb-NC-tCL"/>
                                                 </constraints>
@@ -469,7 +469,7 @@ Check your </string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIZ-5W-XvI">
-                                                <rect key="frame" x="19" y="6" width="337" height="37.5"/>
+                                                <rect key="frame" x="19" y="6" width="337" height="33"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="What is a ">
                                                         <attributes>
@@ -511,7 +511,7 @@ Check your </string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1r-BL-LIN">
-                                                <rect key="frame" x="19" y="50.5" width="337" height="48"/>
+                                                <rect key="frame" x="19" y="46" width="337" height="42"/>
                                                 <string key="text">Sozies are matched to shoppers who have similar bodies.
 
 Sozie means doppelgänger in French.</string>
@@ -596,7 +596,7 @@ Sozie means doppelgänger in French.</string>
                                         <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't worry! you'll be able to mask your face so people can't spot who you are. To be extra sure, create an anonymous username." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEi-Dg-uJy">
-                                                <rect key="frame" x="52" y="52" width="271" height="48"/>
+                                                <rect key="frame" x="52" y="47.5" width="271" height="42"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="271" id="q0a-xp-nyJ"/>
                                                 </constraints>
@@ -605,7 +605,7 @@ Sozie means doppelgänger in French.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CzN-xR-WW3">
-                                                <rect key="frame" x="19" y="6" width="337" height="35"/>
+                                                <rect key="frame" x="19" y="6" width="337" height="30.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Worried about your ">
                                                         <attributes>
@@ -744,7 +744,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always Returning?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryG-YJ-S3H">
-                                                <rect key="frame" x="74.5" y="0.0" width="226" height="38"/>
+                                                <rect key="frame" x="70.5" y="0.0" width="234" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="o18-BL-H8J"/>
                                                 </constraints>
@@ -753,7 +753,7 @@ Sozie means doppelgänger in French.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zI-zX-RrZ">
-                                                <rect key="frame" x="34" y="40" width="307" height="64"/>
+                                                <rect key="frame" x="34" y="40" width="307" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="307" id="0g4-SE-V2E"/>
                                                 </constraints>
@@ -866,13 +866,13 @@ Sozies will show you how clothes will really look on you. So you buy confidently
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unsure of what size to buy?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vjh-LQ-dVN">
-                                                <rect key="frame" x="18" y="0.0" width="339" height="37.5"/>
+                                                <rect key="frame" x="18" y="0.0" width="339" height="33"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGq-Av-Kkg">
-                                                <rect key="frame" x="43.5" y="39.5" width="288" height="64"/>
+                                                <rect key="frame" x="43.5" y="35" width="288" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="288" id="nP0-3t-NeB"/>
                                                 </constraints>
@@ -1050,7 +1050,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CyK-iU-Bfw">
-                                                <rect key="frame" x="257.5" y="290.5" width="88" height="28"/>
+                                                <rect key="frame" x="253.5" y="290.5" width="92" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="aRv-PM-XbN"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="12"/>
                                                 <state key="normal" title="Forgot Password">
                                                     <color key="titleColor" red="0.68627450980392157" green="0.84313725490196079" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1090,6 +1093,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <constraint firstItem="CyK-iU-Bfw" firstAttribute="trailing" secondItem="KXO-80-eao" secondAttribute="trailing" constant="-5" id="MoJ-0W-VGJ"/>
                                             <constraint firstItem="mPr-lP-iHn" firstAttribute="width" secondItem="d3u-GX-5Sl" secondAttribute="width" multiplier="0.84" id="NZT-cO-hyA"/>
                                             <constraint firstItem="khG-RI-cv9" firstAttribute="leading" secondItem="d3u-GX-5Sl" secondAttribute="leading" constant="18" id="Nc1-36-k2e"/>
+                                            <constraint firstItem="CyK-iU-Bfw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d3u-GX-5Sl" secondAttribute="leading" constant="20" symbolic="YES" id="ReI-VA-TdF"/>
                                             <constraint firstItem="CyK-iU-Bfw" firstAttribute="top" secondItem="KXO-80-eao" secondAttribute="bottom" constant="-6.5" id="Sez-px-1uX"/>
                                             <constraint firstItem="2bI-dV-Fca" firstAttribute="centerX" secondItem="3jW-hQ-oQE" secondAttribute="centerX" id="WW0-Jz-7dB"/>
                                             <constraint firstItem="Crl-7Y-OR1" firstAttribute="top" secondItem="KXO-80-eao" secondAttribute="bottom" constant="50" id="XrB-4v-296"/>
@@ -1468,7 +1472,6 @@ They will try on items of your choice so you can be sure of what size you want t
                                                     </attributedString>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signInBtnTapped:" destination="CgK-3q-Hir" eventType="touchUpInside" id="ISv-Rm-NKu"/>
                                                     <segue destination="BYZ-38-t0r" kind="show" id="DE9-Vg-jdy"/>
                                                 </connections>
                                             </button>
@@ -1563,7 +1566,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                         <constraints>
                                             <constraint firstItem="gxQ-8O-JIX" firstAttribute="top" secondItem="ytY-zG-3Qq" secondAttribute="bottom" constant="25" id="1d7-lU-ybX"/>
                                             <constraint firstItem="EHz-JK-vTW" firstAttribute="top" secondItem="l1y-dB-2qe" secondAttribute="bottom" constant="22" id="6U5-Ix-hrR"/>
-                                            <constraint firstItem="ubF-pe-nlU" firstAttribute="leading" secondItem="cem-kf-ded" secondAttribute="leading" constant="30" id="73d-Oe-cvz"/>
+                                            <constraint firstItem="ubF-pe-nlU" firstAttribute="leading" relation="lessThanOrEqual" secondItem="cem-kf-ded" secondAttribute="leading" constant="30" id="73d-Oe-cvz"/>
                                             <constraint firstItem="Iqw-9I-kR6" firstAttribute="centerY" secondItem="gxQ-8O-JIX" secondAttribute="centerY" constant="10.5" id="7iG-hX-O5Z"/>
                                             <constraint firstItem="y1b-7x-PVc" firstAttribute="top" secondItem="ubF-pe-nlU" secondAttribute="bottom" constant="20" id="Bgn-2M-Ny0"/>
                                             <constraint firstAttribute="trailing" secondItem="AmT-Y0-fou" secondAttribute="trailing" constant="25" id="I7h-vz-EgM"/>
@@ -1575,12 +1578,13 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <constraint firstItem="gxQ-8O-JIX" firstAttribute="leading" secondItem="cem-kf-ded" secondAttribute="leading" constant="24.5" id="WeU-U8-F2j"/>
                                             <constraint firstItem="InS-d4-4vn" firstAttribute="centerY" secondItem="l1y-dB-2qe" secondAttribute="centerY" constant="10.5" id="aQb-FK-ozL"/>
                                             <constraint firstAttribute="trailing" secondItem="gxQ-8O-JIX" secondAttribute="trailing" constant="24.5" id="ask-a9-w3y"/>
+                                            <constraint firstItem="ubF-pe-nlU" firstAttribute="centerX" secondItem="cem-kf-ded" secondAttribute="centerX" id="byp-4k-zdv"/>
                                             <constraint firstItem="ytY-zG-3Qq" firstAttribute="leading" secondItem="cem-kf-ded" secondAttribute="leading" constant="24.5" id="d3F-ca-vgc"/>
                                             <constraint firstItem="AmT-Y0-fou" firstAttribute="leading" secondItem="cem-kf-ded" secondAttribute="leading" constant="25" id="den-mb-vbN"/>
                                             <constraint firstAttribute="trailing" secondItem="ytY-zG-3Qq" secondAttribute="trailing" constant="24.5" id="i8z-81-pY1"/>
                                             <constraint firstItem="7HN-kf-RCf" firstAttribute="leading" secondItem="cem-kf-ded" secondAttribute="leading" constant="18" id="jjl-Ju-ItF"/>
                                             <constraint firstItem="aJ4-N9-vhG" firstAttribute="centerX" secondItem="cem-kf-ded" secondAttribute="centerX" id="lDv-e8-KvG"/>
-                                            <constraint firstAttribute="trailing" secondItem="ubF-pe-nlU" secondAttribute="trailing" constant="30" id="mW6-nj-q2y"/>
+                                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ubF-pe-nlU" secondAttribute="trailing" constant="30" id="mW6-nj-q2y"/>
                                             <constraint firstItem="aJ4-N9-vhG" firstAttribute="top" secondItem="EHz-JK-vTW" secondAttribute="bottom" constant="15" id="nj0-Ri-HmU"/>
                                             <constraint firstAttribute="trailing" secondItem="Iqw-9I-kR6" secondAttribute="trailing" constant="30" id="peT-Hb-5jy"/>
                                             <constraint firstAttribute="bottom" secondItem="y1b-7x-PVc" secondAttribute="bottom" constant="13" id="q2J-cS-Q8O"/>
@@ -1886,16 +1890,17 @@ They will try on items of your choice so you can be sure of what size you want t
                                         <constraints>
                                             <constraint firstItem="79U-qu-8ew" firstAttribute="top" secondItem="eIP-U0-pQd" secondAttribute="bottom" constant="20" id="5R5-Ho-qMP"/>
                                             <constraint firstAttribute="trailing" secondItem="eIP-U0-pQd" secondAttribute="trailing" constant="25" id="9J8-bx-XHA"/>
-                                            <constraint firstAttribute="trailing" secondItem="ubp-I4-qtT" secondAttribute="trailing" constant="30" id="JKf-UD-KKJ"/>
+                                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ubp-I4-qtT" secondAttribute="trailing" constant="30" id="JKf-UD-KKJ"/>
                                             <constraint firstItem="C7O-hf-Dvt" firstAttribute="top" secondItem="79U-qu-8ew" secondAttribute="bottom" id="LUV-uB-ByJ"/>
                                             <constraint firstAttribute="trailing" secondItem="C7O-hf-Dvt" secondAttribute="trailing" constant="25" id="MxX-Mz-iiR"/>
                                             <constraint firstItem="XMI-yt-sye" firstAttribute="top" secondItem="X8t-Wr-iHs" secondAttribute="bottom" constant="40" id="O2W-Ru-KPG"/>
                                             <constraint firstItem="XMI-yt-sye" firstAttribute="leading" secondItem="M2w-Wc-j8a" secondAttribute="leading" constant="25" id="PjE-aw-KHB"/>
                                             <constraint firstAttribute="trailing" secondItem="X8t-Wr-iHs" secondAttribute="trailing" constant="25" id="RsA-Nr-OpR"/>
-                                            <constraint firstItem="ubp-I4-qtT" firstAttribute="leading" secondItem="M2w-Wc-j8a" secondAttribute="leading" constant="30" id="Ue4-AJ-WKR"/>
+                                            <constraint firstItem="ubp-I4-qtT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="M2w-Wc-j8a" secondAttribute="leading" constant="30" id="Ue4-AJ-WKR"/>
                                             <constraint firstItem="X8t-Wr-iHs" firstAttribute="leading" secondItem="M2w-Wc-j8a" secondAttribute="leading" constant="25" id="Xce-HI-Exc"/>
                                             <constraint firstItem="tTR-Jv-1p8" firstAttribute="top" secondItem="M2w-Wc-j8a" secondAttribute="top" constant="22" id="aLs-W0-vR2"/>
                                             <constraint firstItem="C7O-hf-Dvt" firstAttribute="leading" secondItem="M2w-Wc-j8a" secondAttribute="leading" constant="25" id="cGH-vp-UIQ"/>
+                                            <constraint firstItem="ubp-I4-qtT" firstAttribute="centerX" secondItem="M2w-Wc-j8a" secondAttribute="centerX" id="g3p-Hi-llo"/>
                                             <constraint firstAttribute="trailing" secondItem="79U-qu-8ew" secondAttribute="trailing" constant="25" id="g8Z-Ai-Ij7"/>
                                             <constraint firstItem="79U-qu-8ew" firstAttribute="leading" secondItem="M2w-Wc-j8a" secondAttribute="leading" constant="25" id="jCa-pd-WO2"/>
                                             <constraint firstItem="tTR-Jv-1p8" firstAttribute="leading" secondItem="M2w-Wc-j8a" secondAttribute="leading" constant="18" id="jzl-rF-1Zh"/>
@@ -2374,13 +2379,13 @@ They will try on items of your choice so you can be sure of what size you want t
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIZE CHART" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25Y-ee-3E7">
-                                <rect key="frame" x="131.5" y="43" width="80.5" height="16.5"/>
+                                <rect key="frame" x="132.5" y="43" width="78.5" height="19"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="14"/>
                                 <color key="textColor" red="0.98823529409999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zf9-5B-bN3">
-                                <rect key="frame" x="14" y="79" width="315" height="80"/>
+                                <rect key="frame" x="14" y="81.5" width="315" height="80"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O7y-LR-Sa2">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="80"/>
@@ -2453,7 +2458,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-jM-Bx3">
-                                <rect key="frame" x="14" y="193" width="315" height="220"/>
+                                <rect key="frame" x="14" y="195.5" width="315" height="220"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-P4-zsZ">
                                         <rect key="frame" x="0.0" y="33" width="315" height="1"/>
@@ -2468,6 +2473,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tU-Ze-ufv">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="32"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="PsD-pe-VDB"/>
                                                     <constraint firstAttribute="height" constant="32" id="jJl-aS-xg4"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
@@ -2499,6 +2505,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <constraint firstItem="8tU-Ze-ufv" firstAttribute="top" secondItem="KWf-PM-Tz4" secondAttribute="top" id="Elp-6k-eNO"/>
                                             <constraint firstAttribute="height" constant="33" id="JbP-SS-l58"/>
                                             <constraint firstAttribute="width" constant="84" id="Q2Y-bS-31F"/>
+                                            <constraint firstItem="ED3-UD-MYZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8tU-Ze-ufv" secondAttribute="trailing" constant="8" symbolic="YES" id="Yk6-YB-v6Y"/>
                                             <constraint firstItem="8tU-Ze-ufv" firstAttribute="leading" secondItem="KWf-PM-Tz4" secondAttribute="leading" id="g5g-zD-uAt"/>
                                         </constraints>
                                     </view>
@@ -2625,6 +2632,136 @@ They will try on items of your choice so you can be sure of what size you want t
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5hm-KJ-cVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1576.8" y="1092.953523238381"/>
+        </scene>
+        <!--Request Size Chart PopupVC-->
+        <scene sceneID="Q4m-AI-Pcl">
+            <objects>
+                <viewController storyboardIdentifier="RequestSizeChartPopupVC" id="BMr-Xd-NqV" customClass="RequestSizeChartPopupVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QJf-lX-qSY">
+                        <rect key="frame" x="0.0" y="0.0" width="340" height="380"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What size would you like to request a picture of?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TpI-Jd-84x">
+                                <rect key="frame" x="16" y="27" width="308" height="16.5"/>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arW-P1-vL4">
+                                <rect key="frame" x="13" y="72.5" width="314" height="217.5"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NwQ-1e-Aso">
+                                        <rect key="frame" x="10" y="8" width="294" height="201.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="S6P-Ic-09y">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SizeCell" id="d9P-TM-o7X" customClass="SizeCell" customModule="Sozie" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkk-5m-UOu">
+                                                            <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
+                                                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jc-GI-R93">
+                                                            <rect key="frame" x="49" y="0.0" width="1" height="50"/>
+                                                            <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="1" id="ATr-ML-rAV"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pxi-hV-p43">
+                                                            <rect key="frame" x="0.0" y="49" width="50" height="1"/>
+                                                            <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="gYS-3D-fWK"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="Pxi-hV-p43" secondAttribute="trailing" id="0yX-Ml-kY1"/>
+                                                    <constraint firstItem="Kkk-5m-UOu" firstAttribute="leading" secondItem="d9P-TM-o7X" secondAttribute="leading" id="4gI-wc-PLL"/>
+                                                    <constraint firstItem="2jc-GI-R93" firstAttribute="leading" secondItem="Kkk-5m-UOu" secondAttribute="trailing" id="5rf-jB-mfe"/>
+                                                    <constraint firstItem="Pxi-hV-p43" firstAttribute="leading" secondItem="d9P-TM-o7X" secondAttribute="leading" id="6XR-ac-UYW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="2jc-GI-R93" secondAttribute="bottom" id="IHh-W1-4xT"/>
+                                                    <constraint firstItem="Kkk-5m-UOu" firstAttribute="top" secondItem="d9P-TM-o7X" secondAttribute="top" id="bF6-iG-Jze"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2jc-GI-R93" secondAttribute="trailing" id="plG-of-7E9"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Pxi-hV-p43" secondAttribute="bottom" id="qxc-rP-zyn"/>
+                                                    <constraint firstItem="2jc-GI-R93" firstAttribute="top" secondItem="d9P-TM-o7X" secondAttribute="top" id="sfc-4F-YTC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Kkk-5m-UOu" secondAttribute="bottom" id="vbN-5U-dp5"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="bottomLine" destination="Pxi-hV-p43" id="Xie-An-7DL"/>
+                                                    <outlet property="sideLine" destination="2jc-GI-R93" id="e2i-MR-D2D"/>
+                                                    <outlet property="titleLbl" destination="Kkk-5m-UOu" id="tsN-Iq-Axz"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BMr-Xd-NqV" id="oVj-vo-b23"/>
+                                            <outlet property="delegate" destination="BMr-Xd-NqV" id="Meo-65-Y7D"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="NwQ-1e-Aso" secondAttribute="bottom" constant="8" id="HrT-Oh-Y9O"/>
+                                    <constraint firstAttribute="trailing" secondItem="NwQ-1e-Aso" secondAttribute="trailing" constant="10" id="bLA-3c-hcT"/>
+                                    <constraint firstItem="NwQ-1e-Aso" firstAttribute="top" secondItem="arW-P1-vL4" secondAttribute="top" constant="8" id="cEp-0y-YXt"/>
+                                    <constraint firstItem="NwQ-1e-Aso" firstAttribute="leading" secondItem="arW-P1-vL4" secondAttribute="leading" constant="10" id="uYy-zR-10w"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IN5-n3-Mcw" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                <rect key="frame" x="94" y="311" width="152" height="48"/>
+                                <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="dOZ-mr-bEa"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="152" id="nnR-g8-U5B"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                <state key="normal" title="Send Request">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendRequestButtonTapped:" destination="BMr-Xd-NqV" eventType="touchUpInside" id="VDu-4F-Bgm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="arW-P1-vL4" firstAttribute="top" secondItem="TpI-Jd-84x" secondAttribute="bottom" constant="29" id="A3q-fE-3Fc"/>
+                            <constraint firstItem="9pY-wP-aFE" firstAttribute="bottom" secondItem="IN5-n3-Mcw" secondAttribute="bottom" constant="21" id="DBR-35-Z6y"/>
+                            <constraint firstItem="TpI-Jd-84x" firstAttribute="leading" secondItem="9pY-wP-aFE" secondAttribute="leading" constant="16" id="aEt-hP-Hh9"/>
+                            <constraint firstItem="arW-P1-vL4" firstAttribute="leading" secondItem="9pY-wP-aFE" secondAttribute="leading" constant="13" id="cYk-uL-oOd"/>
+                            <constraint firstItem="IN5-n3-Mcw" firstAttribute="top" secondItem="arW-P1-vL4" secondAttribute="bottom" constant="21" id="dwz-mk-fcy"/>
+                            <constraint firstItem="TpI-Jd-84x" firstAttribute="top" secondItem="9pY-wP-aFE" secondAttribute="top" constant="27" id="kqA-52-0U0"/>
+                            <constraint firstItem="9pY-wP-aFE" firstAttribute="trailing" secondItem="TpI-Jd-84x" secondAttribute="trailing" constant="16" id="uR4-eK-tDd"/>
+                            <constraint firstItem="IN5-n3-Mcw" firstAttribute="centerX" secondItem="QJf-lX-qSY" secondAttribute="centerX" id="wd2-n9-x99"/>
+                            <constraint firstItem="9pY-wP-aFE" firstAttribute="trailing" secondItem="arW-P1-vL4" secondAttribute="trailing" constant="13" id="ysV-J1-RBd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9pY-wP-aFE"/>
+                    </view>
+                    <size key="freeformSize" width="340" height="380"/>
+                    <connections>
+                        <outlet property="borderView" destination="arW-P1-vL4" id="LT5-dM-8ji"/>
+                        <outlet property="collectionView" destination="NwQ-1e-Aso" id="RU8-vx-coe"/>
+                        <outlet property="sendRequestButton" destination="IN5-n3-Mcw" id="PCR-EV-3tU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cBk-va-hr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1616" y="1714.5427286356824"/>
         </scene>
         <!--Forgot Password Email Pop Up-->
         <scene sceneID="IQb-1J-ogG">
@@ -2946,7 +3083,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measurements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4FQ-14-O9L">
-                                                <rect key="frame" x="25" y="79" width="221" height="46"/>
+                                                <rect key="frame" x="25" y="79" width="225" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="gir-oI-ahx"/>
                                                 </constraints>
@@ -3013,7 +3150,6 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6J-N3-J31">
                                                 <rect key="frame" x="213" y="160" width="56" height="17"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="56" id="Xgn-ju-qdV"/>
                                                     <constraint firstAttribute="height" constant="17" id="kFR-wa-wqw"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
@@ -3030,9 +3166,12 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <constraint firstItem="ZCW-fF-mUM" firstAttribute="top" secondItem="oIT-6i-FxZ" secondAttribute="bottom" constant="2" id="635-LQ-wn2"/>
                                             <constraint firstItem="UUx-dl-z50" firstAttribute="top" secondItem="Zja-wb-SkP" secondAttribute="bottom" constant="24" id="6FC-gW-Vcz"/>
                                             <constraint firstItem="jbN-b4-NnX" firstAttribute="top" secondItem="oIT-6i-FxZ" secondAttribute="bottom" constant="37" id="6Mz-RM-XuL"/>
-                                            <constraint firstItem="UUx-dl-z50" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="30" id="6so-0z-9Hb"/>
+                                            <constraint firstItem="UUx-dl-z50" firstAttribute="leading" relation="lessThanOrEqual" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="30" id="6so-0z-9Hb"/>
+                                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="4FQ-14-O9L" secondAttribute="trailing" constant="125" id="A3e-gM-Gzb"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oIT-6i-FxZ" secondAttribute="trailing" constant="20" symbolic="YES" id="AuN-Ie-cxK"/>
                                             <constraint firstItem="4FQ-14-O9L" firstAttribute="top" secondItem="DGa-Do-dEv" secondAttribute="top" constant="79" id="Ba1-v8-9BN"/>
                                             <constraint firstAttribute="bottom" secondItem="UUx-dl-z50" secondAttribute="bottom" constant="14" id="IFw-PI-xVc"/>
+                                            <constraint firstItem="UUx-dl-z50" firstAttribute="centerX" secondItem="DGa-Do-dEv" secondAttribute="centerX" id="N1G-5j-qK0"/>
                                             <constraint firstItem="ZCW-fF-mUM" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="25" id="Te1-8x-uAJ"/>
                                             <constraint firstAttribute="trailing" secondItem="UUx-dl-z50" secondAttribute="trailing" constant="30" id="VNa-TU-XKa"/>
                                             <constraint firstItem="J6J-N3-J31" firstAttribute="leading" secondItem="ZCW-fF-mUM" secondAttribute="trailing" constant="2.5" id="YRf-b6-o8D"/>
@@ -3042,9 +3181,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <constraint firstItem="4FQ-14-O9L" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="25" id="g2t-m8-CjE"/>
                                             <constraint firstAttribute="trailing" secondItem="jbN-b4-NnX" secondAttribute="trailing" constant="25" id="lUf-7F-AfO"/>
                                             <constraint firstItem="Zja-wb-SkP" firstAttribute="centerX" secondItem="DGa-Do-dEv" secondAttribute="centerX" id="mkJ-Vt-mpU"/>
-                                            <constraint firstItem="Zja-wb-SkP" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="30" id="rwG-ac-8UE"/>
+                                            <constraint firstItem="Zja-wb-SkP" firstAttribute="leading" relation="lessThanOrEqual" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="30" id="rwG-ac-8UE"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J6J-N3-J31" secondAttribute="trailing" constant="20" symbolic="YES" id="xoa-Fz-mv4"/>
                                             <constraint firstItem="oIT-6i-FxZ" firstAttribute="top" secondItem="4FQ-14-O9L" secondAttribute="bottom" constant="1" id="zIx-Ds-hFQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="Zja-wb-SkP" secondAttribute="trailing" constant="30" id="zXK-qv-Guv"/>
+                                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Zja-wb-SkP" secondAttribute="trailing" constant="30" id="zXK-qv-Guv"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvC-1f-lfT" userLabel="Back Button">
@@ -3105,7 +3245,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Measure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhB-0K-Zc8">
-                                        <rect key="frame" x="25" y="79" width="247" height="46"/>
+                                        <rect key="frame" x="25" y="79" width="250" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="6Wk-z8-JXL"/>
                                         </constraints>
@@ -3131,7 +3271,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbD-il-pTr">
-                                                <rect key="frame" x="56" y="12" width="46" height="18"/>
+                                                <rect key="frame" x="56" y="12" width="42" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="uLQ-oQ-TP5"/>
                                                 </constraints>
@@ -3140,7 +3280,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRI-Gw-k3c">
-                                                <rect key="frame" x="56" y="34" width="270.5" height="48"/>
+                                                <rect key="frame" x="56" y="34" width="271.5" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="G3v-gH-yOp"/>
                                                 </constraints>
@@ -3152,7 +3292,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hips:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6L-lk-cCB">
-                                                <rect key="frame" x="56" y="214" width="31" height="18"/>
+                                                <rect key="frame" x="56" y="220" width="31" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="0Bj-95-Uql"/>
                                                 </constraints>
@@ -3161,7 +3301,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-p1-YMc">
-                                                <rect key="frame" x="56" y="127" width="300.5" height="64"/>
+                                                <rect key="frame" x="56" y="127" width="280.5" height="70"/>
                                                 <string key="text">-Bend to one side to find the natural crease of your waist
 -This is the slimmest part of the waist
 -Measure across at this point
@@ -3171,7 +3311,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waist:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2r-ch-T6p">
-                                                <rect key="frame" x="56" y="105" width="38" height="18"/>
+                                                <rect key="frame" x="56" y="105" width="36" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="4FQ-VY-bxX"/>
                                                 </constraints>
@@ -3180,7 +3320,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HqO-r0-G7q">
-                                                <rect key="frame" x="56" y="236" width="278.5" height="48"/>
+                                                <rect key="frame" x="56" y="242" width="279.5" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="s1e-vZ-hp6"/>
                                                 </constraints>
@@ -3260,7 +3400,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measurement tips for the perfect fit." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXc-sC-RDe">
-                                <rect key="frame" x="25" y="125" width="223.5" height="19"/>
+                                <rect key="frame" x="25" y="125" width="224.5" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="XsE-uP-HUW"/>
                                 </constraints>

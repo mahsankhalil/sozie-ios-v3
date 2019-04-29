@@ -13,7 +13,7 @@ struct Post: Codable {
     var imageURL: String
     var user: User
     var userFollowedByMe: Bool?
-    var sizeType: String
+//    var sizeType: String
     var sizeValue: String
     enum CodingKeys: String, CodingKey {
 
@@ -21,8 +21,8 @@ struct Post: Codable {
         case imageURL = "public_image_url"
         case user
         case userFollowedByMe = "poster_is_followed_by_me"
-        case sizeType = "size_type"
-        case sizeValue = "size_value"
+//        case sizeType = "size_type"
+        case sizeValue = "size_worn"
     }
 
     init(from decoder: Decoder) throws {
@@ -31,7 +31,7 @@ struct Post: Codable {
         imageURL = try values.decode(String.self, forKey: .imageURL)
         user = try values.decode(User.self, forKey: .user)
         userFollowedByMe = try? values.decode(Bool.self, forKey: .userFollowedByMe)
-        sizeType = try values.decode(String.self, forKey: .sizeType)
+//        sizeType = try values.decode(String.self, forKey: .sizeType)
         sizeValue = try values.decode(String.self, forKey: .sizeValue)
     }
 }

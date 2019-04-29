@@ -85,21 +85,22 @@ class BrowseVC: BaseViewController {
         // Do any additional setup after loading the view.
         self.brandsCollectionVu.infiniteScrollDelegate = self
         _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
-        if let userType = UserDefaultManager.getCurrentUserType() {
-            if userType == UserType.shopper.rawValue {
-                setupSozieLogoNavBar()
-            } else {
-                brandsVuHeightConstraint.constant = 0.0
-                if let user = UserDefaultManager.getCurrentUserObject() {
-                    if let brandId = user.brand {
-                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                            setupBrandNavBar(imageURL: brand.titleImageCentred)
-                        }
-                        currentSozieBrandId = brandId
-                    }
-                }
-            }
-        }
+        setupSozieLogoNavBar()
+//        if let userType = UserDefaultManager.getCurrentUserType() {
+//            if userType == UserType.shopper.rawValue {
+//                setupSozieLogoNavBar()
+//            } else {
+//                brandsVuHeightConstraint.constant = 0.0
+//                if let user = UserDefaultManager.getCurrentUserObject() {
+//                    if let brandId = user.brand {
+//                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+//                            setupBrandNavBar(imageURL: brand.titleImageCentred)
+//                        }
+//                        currentSozieBrandId = brandId
+//                    }
+//                }
+//            }
+//        }
 
         fetchBrandsFromServer()
         fetchProductCount()
@@ -130,7 +131,7 @@ class BrowseVC: BaseViewController {
             cancelTipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
             cancelTipView?.show(animated: true, forView: self.itemsCountLbl, withinSuperview: self.view)
             if let tipView = cancelTipView {
-                tipView.frame = CGRect(x: tipView.frame.origin.x, y: tipView.frame.origin.y - 35.0, width: tipView.frame.width, height: tipView.frame.height)
+                tipView.frame = CGRect(x: tipView.frame.origin.x, y: tipView.frame.origin.y - 110.0, width: tipView.frame.width, height: tipView.frame.height)
             }
         }
     }
@@ -154,19 +155,19 @@ class BrowseVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCellModelIfChangeMadeInVisibleCells()
-        if UserDefaultManager.getIfShopper() == false {
-            if let user = UserDefaultManager.getCurrentUserObject() {
-                if let brandId = user.brand {
-                    if currentSozieBrandId != brandId {
-                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                            setupBrandNavBar(imageURL: brand.titleImageCentred)
-                        }
-                        currentSozieBrandId = brandId
-                        refreshData()
-                    }
-                }
-            }
-        }
+//        if UserDefaultManager.getIfShopper() == false {
+//            if let user = UserDefaultManager.getCurrentUserObject() {
+//                if let brandId = user.brand {
+//                    if currentSozieBrandId != brandId {
+//                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+//                            setupBrandNavBar(imageURL: brand.titleImageCentred)
+//                        }
+//                        currentSozieBrandId = brandId
+//                        refreshData()
+//                    }
+//                }
+//            }
+//        }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken == nil {
             super.cancelButtonTapped()
@@ -224,13 +225,13 @@ class BrowseVC: BaseViewController {
                 self.brandList = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: self.brandList) as! [Brand]
                 self.brandsCollectionVu.reloadData()
                 self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
-                if let user = UserDefaultManager.getCurrentUserObject() {
-                    if let brandId = user.brand {
-                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-                            self.setupBrandNavBar(imageURL: brand.titleImageCentred)
-                        }
-                    }
-                }
+//                if let user = UserDefaultManager.getCurrentUserObject() {
+//                    if let brandId = user.brand {
+//                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+//                            self.setupBrandNavBar(imageURL: brand.titleImageCentred)
+//                        }
+//                    }
+//                }
             }
         }
     }
@@ -266,11 +267,11 @@ class BrowseVC: BaseViewController {
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
         }
-        if let userType = UserDefaultManager.getCurrentUserType() {
-            if userType == UserType.sozie.rawValue {
-                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
-            }
-        }
+//        if let userType = UserDefaultManager.getCurrentUserType() {
+//            if userType == UserType.sozie.rawValue {
+//                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
+//            }
+//        }
         ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
             if isSuccess {
                 self.itemsCountLbl.text = String((response as! CountResponse).count) + ((response as! CountResponse).count <= 1 ? " ITEM" : " ITEMS")
@@ -296,11 +297,11 @@ class BrowseVC: BaseViewController {
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
         }
-        if let userType = UserDefaultManager.getCurrentUserType() {
-            if userType == UserType.sozie.rawValue {
-                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
-            }
-        }
+//        if let userType = UserDefaultManager.getCurrentUserType() {
+//            if userType == UserType.sozie.rawValue {
+//                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
+//            }
+//        }
         ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
 
             self.productsCollectionVu.refreshControl?.endRefreshing()
@@ -350,6 +351,7 @@ class BrowseVC: BaseViewController {
         // Pass the selected object to the new view controller.
         let destVC = segue.destination as? ProductDetailVC
         destVC?.currentProduct = selectedProduct
+        
     }
 
     func showPopUpWithTitle(type: PopupType) {
@@ -382,6 +384,8 @@ class BrowseVC: BaseViewController {
 
     // MARK: - Actions
     @IBAction func filterBtnTapped(_ sender: Any) {
+        largeBottomView?.removeFromSuperview()
+        showSmallBottomView()
         showPopUpWithTitle(type: .filter)
     }
     @IBAction func clearFilterButtonTapped(_ sender: Any) {
@@ -398,6 +402,8 @@ class BrowseVC: BaseViewController {
 //        }
     }
     @IBAction func categoryBtnTapped(_ sender: Any) {
+        largeBottomView?.removeFromSuperview()
+        showSmallBottomView()
         showPopUpWithTitle(type: .category)
     }
     @objc override func nextButtonTapped() {
@@ -406,6 +412,10 @@ class BrowseVC: BaseViewController {
 }
 extension BrowseVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken != nil {
+            showSmallBottomView()
+        }
         if scrollView == brandsCollectionVu {
             brandsCollectionVu.infiniteScrollViewDidScroll(scrollView: scrollView)
         }
@@ -498,26 +508,28 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == productsCollectionVu {
             selectedProduct = productList[indexPath.row]
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if let cell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? ProductCollectionViewCell {
                 if let tipView = cell.tipView {
                     tipView.dismiss()
                 }
             }
-            if appDelegate.imageTaken != nil {
-                productViewModels[indexPath.row].isSelected = true
-                var indexPathToReload = [indexPath]
-                if let index = selectedIndex {
-                    if index != indexPath.row {
-                        productViewModels[index].isSelected = false
-                        indexPathToReload.append(IndexPath(item: index, section: 0))
-                    }
-                }
-                self.productsCollectionVu.reloadItems(at: indexPathToReload)
-                self.showNextButton()
-                selectedIndex = indexPath.row
-                return
-            }
+//            if appDelegate.imageTaken != nil {
+//                productViewModels[indexPath.row].isSelected = true
+//                var indexPathToReload = [indexPath]
+//                if let index = selectedIndex {
+//                    if index != indexPath.row {
+//                        productViewModels[index].isSelected = false
+//                        indexPathToReload.append(IndexPath(item: index, section: 0))
+//                    }
+//                }
+//                self.productsCollectionVu.reloadItems(at: indexPathToReload)
+//                self.showNextButton()
+//                selectedIndex = indexPath.row
+//                return
+//            }
+            largeBottomView?.removeFromSuperview()
+            smallBottomView?.removeFromSuperview()
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else {
             let currentBrand = brandList[indexPath.row]

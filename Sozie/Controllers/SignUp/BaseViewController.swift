@@ -10,6 +10,10 @@ import UIKit
 import EasyTipView
 class BaseViewController: UIViewController {
 
+    var largeBottomView: DZGradientView?
+    var smallBottomView: DZGradientView?
+    var tagThisItemView: DZGradientView?
+    var smallTagThisItemView: DZGradientView?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -47,6 +51,70 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.layer.borderWidth = 1.0
         navigationController?.navigationBar.layer.borderColor = UIColor(hex: "707070").cgColor.copy(alpha: 0.05)
     }
+    func showBottomViewAfterDelay() {
+        perform(#selector(showBottomView), with: nil, afterDelay: 0.5)
+    }
+    func showTagThisItemViewAfterDelay() {
+        perform(#selector(showTagThisItemView), with: nil, afterDelay: 0.5)
+    }
+    @objc func showTagThisItemView() {
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height
+        let width = UIScreen.main.bounds.width
+        if tagThisItemView == nil {
+            tagThisItemView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height - (2 * tabBarHeight!), width: width, height: tabBarHeight!))
+        }
+        tagThisItemView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+        let tagButton = UIButton(frame: tagThisItemView!.bounds)
+        tagButton.setTitle("TAG THIS ITEM", for: .normal)
+        tagButton.addTarget(self, action: #selector(tagItemButtonTapped), for: .touchUpInside)
+        tagThisItemView?.addSubview(tagButton)
+        self.view.addSubview(tagThisItemView!)
+    }
+    func showSmallTagThisItemView() {
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height
+        let width = UIScreen.main.bounds.width
+        if smallTagThisItemView == nil {
+            smallTagThisItemView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height -  tabBarHeight! - 26.0, width: width, height: 26.0))
+        }
+        smallTagThisItemView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+        let tagButton = UIButton(frame: smallTagThisItemView!.bounds)
+        tagButton.setTitle("TAG THIS ITEM", for: .normal)
+        tagButton.addTarget(self, action: #selector(tagItemButtonTapped), for: .touchUpInside)
+        smallTagThisItemView?.addSubview(tagButton)
+        self.view.addSubview(smallTagThisItemView!)
+    }
+
+    func showSmallBottomView() {
+        largeBottomView?.removeFromSuperview()
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height
+        let width = UIScreen.main.bounds.width
+        if smallBottomView == nil {
+            smallBottomView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height - tabBarHeight! - 26.0, width: width, height: 26.0))
+        }
+        smallBottomView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+        let titleLabel = UILabel(frame: smallBottomView!.bounds)
+        titleLabel.text = "TAP AN ITEM TO TAG"
+        titleLabel.font =  UIFont(name: "SegoeUI", size: 16.0)
+        titleLabel.textColor = UIColor.white
+        titleLabel.textAlignment = .center
+        smallBottomView?.addSubview(titleLabel)
+        self.view.addSubview(smallBottomView!)
+    }
+    @objc func showBottomView() {
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height
+        let width = UIScreen.main.bounds.width
+        if largeBottomView == nil {
+            largeBottomView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height - (2 * tabBarHeight!), width: width, height: tabBarHeight!))
+        }
+        largeBottomView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+        let titleLabel = UILabel(frame: largeBottomView!.bounds)
+        titleLabel.text = "TAP AN ITEM TO TAG"
+        titleLabel.font =  UIFont(name: "SegoeUI", size: 16.0)
+        titleLabel.textColor = UIColor.white
+        titleLabel.textAlignment = .center
+        largeBottomView?.addSubview(titleLabel)
+        self.view.addSubview(largeBottomView!)
+    }
     func showCancelButtonAfterDelay() {
         perform(#selector(showCancelButton), with: nil, afterDelay: 0.5)
     }
@@ -70,6 +138,9 @@ class BaseViewController: UIViewController {
         navigationItem.rightBarButtonItem = nil
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.imageTaken = nil
+        largeBottomView?.removeFromSuperview()
+        smallBottomView?.removeFromSuperview()
+        tagThisItemView?.removeFromSuperview()
     }
     func showNextButton() {
         let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextButtonTapped))

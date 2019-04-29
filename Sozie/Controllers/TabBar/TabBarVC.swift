@@ -37,11 +37,13 @@ class TabBarVC: UITabBarController {
     func populateUIOfSozieType() {
         let browseNC = self.storyboard?.instantiateViewController(withIdentifier: "BrowseNC")
         browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected"))
+        let wishListNC = self.storyboard?.instantiateViewController(withIdentifier: "WishListNC")
+        wishListNC?.tabBarItem = UITabBarItem(title: "Wish List", image: UIImage(named: "Whish List"), selectedImage: UIImage(named: "Wish List Selected"))
         let cameraVc = UIViewController()
-        cameraVc.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
+        cameraVc.tabBarItem = UITabBarItem(title: "Camera", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
         let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
         profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "Profile icon"), selectedImage: UIImage(named: "Profile icon-Selected"))
-        self.viewControllers = ([browseNC, cameraVc, profileNC] as! [UIViewController])
+        self.viewControllers = ([browseNC, wishListNC, cameraVc, profileNC] as! [UIViewController])
 
     }
     /*
@@ -58,7 +60,7 @@ class TabBarVC: UITabBarController {
 extension TabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if UserDefaultManager.getIfShopper() == false {
-            if self.customizableViewControllers?.index(of: viewController) == 1 {
+            if self.customizableViewControllers?.index(of: viewController) == 2 {
                 UtilityManager.openImagePickerActionSheetFrom(viewController: self)
                 return false
             } else if self.customizableViewControllers?.index(of: viewController) == 0 {
@@ -86,6 +88,7 @@ extension TabBarVC: UINavigationControllerDelegate, UIImagePickerControllerDeleg
                 if let browseVC = (browseNC.viewControllers[0]) as? BrowseVC {
                     browseVC.showCancelButtonAfterDelay()
                     browseVC.showTipeViewAfterDelay()
+                    browseVC.showBottomViewAfterDelay()
                 }
             }
             self.selectedIndex = 0

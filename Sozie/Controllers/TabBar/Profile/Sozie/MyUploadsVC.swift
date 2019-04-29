@@ -22,11 +22,12 @@ class MyUploadsVC: UIViewController {
         didSet {
             for post in posts {
                 var sizeString = ""
-                if post.sizeType == "GN" {
-                    sizeString = "Size Worn: " + post.sizeValue
-                } else {
-                    sizeString = "Size Worn: " + post.sizeType + " " + post.sizeValue
-                }
+//                if post.sizeType == "GN" {
+//                    sizeString = "Size Worn: " + post.sizeValue
+//                } else {
+//                    sizeString = "Size Worn: " + post.sizeType + " " + post.sizeValue
+//                }
+                sizeString = "Size Worn: " + post.sizeValue
                 let viewModel = UserPostCellViewModel(subtitle: sizeString, imageURL: URL(string: post.thumbURL))
                 viewModels.append(viewModel)
             }

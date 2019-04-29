@@ -26,13 +26,15 @@ class ProductCollectionViewCell: UICollectionViewCell {
         productImageView.layer.borderWidth = 1.0
         productImageView.layer.borderColor = UIColor(hex: "DDDDDD").cgColor
         productImageView.clipsToBounds = true
-        if let userType = UserDefaultManager.getCurrentUserType() {
-            if userType == UserType.shopper.rawValue {
-                titleImageViewHeightConstraint.constant = 13.0
-            } else {
-                titleImageViewHeightConstraint.constant = 0.0
-            }
-        }
+        titleImageViewHeightConstraint.constant = 13.0
+
+//        if let userType = UserDefaultManager.getCurrentUserType() {
+//            if userType == UserType.shopper.rawValue {
+//                titleImageViewHeightConstraint.constant = 13.0
+//            } else {
+//                titleImageViewHeightConstraint.constant = 0.0
+//            }
+//        }
     }
     func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
