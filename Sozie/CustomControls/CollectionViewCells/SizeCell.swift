@@ -52,11 +52,8 @@ extension SizeCell: CellConfigurable {
                 self.titleLbl.textColor = UIColor(hex: "FC8888")
             } else {
                 if let availabilityViewModel = viewModel as? AvailabilityProviding {
-                    if availabilityViewModel.isAvailable {
-                        self.titleLbl.textColor = UIColor(hex: "323232")
-                    } else {
-                        self.titleLbl.textColor = UIColor(hex: "888888")
-                    }
+                    let colourHex = availabilityViewModel.isAvailable ? "323232" : "888888"
+                    self.titleLbl.textColor = UIColor(hex: colourHex)
                 }
             }
         }

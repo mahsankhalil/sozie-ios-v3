@@ -13,6 +13,7 @@ import EasyTipView
 import SafariServices
 class ProductDetailVC: BaseViewController {
 
+    @IBOutlet weak var topViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionTextLabel: UILabel!
     @IBOutlet weak var requestSozieButton: DZGradientButton!
@@ -23,20 +24,29 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var swipeToSeeView: UIView!
     @IBOutlet weak var heartButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var allReviewButton: UIButton!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var reviewButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var commentsTableView: UITableView!
     @IBOutlet weak var sozieBuyButton: UIButton!
+    @IBOutlet weak var addCommentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addCommentTextField: UITextField!
     var currentProduct: Product?
     var viewModels: [PostCellViewModel] = []
+    var commentViewModels: [CommentsViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
     var currentPostId: Int?
     @IBOutlet weak var bottomView: UIView!
     var tipView: EasyTipView?
     var tapGesture: UITapGestureRecognizer?
+    var currentIndex: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         swipeToSeeView.roundCorners(corners: [.topLeft], radius: 20.0)
         setupSozieLogoNavBar()
+        pageControl.currentPage = 0
 //        populateProductData()
 //        fetchProductDetailFromServer()
         collectionView.register(UINib(nibName: "PostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostCollectionViewCell")
@@ -45,6 +55,18 @@ class ProductDetailVC: BaseViewController {
         sozieBuyButton.layer.cornerRadius = 3.0
         requestSozieButton.layer.cornerRadius = 3.0
         pageControl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        reviewButtonHeightConstraint.constant = 0.0
+        addCommentHeightConstraint.constant = 0.0
+        allReviewButton.isHidden = true
+        commentsTableView.isHidden = true
+        addCommentTextField.delegate = self
+        tableViewHeightConstraint.constant = 0.0
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            let topPadding = window?.safeAreaInsets.top
+            let bottomPadding = window?.safeAreaInsets.bottom
+            topViewHeightConstraint.constant = UIScreen.main.bounds.size.height - topPadding! - bottomPadding! - (self.tabBarController?.tabBar.frame.height)! - (self.navigationController?.navigationBar.frame.height)! - 109
+        }
         if UserDefaultManager.getIfShopper() {
             heartButtonWidthConstraint.constant = 32.0
             heartButton.isHidden = false
@@ -114,6 +136,9 @@ class ProductDetailVC: BaseViewController {
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     self.updateCurrentProductObject(product: response as! Product)
+                    if self.currentIndex != 0 {
+//                        self.collectionView.scrollToItem(at: IndexPath(item: self.currentIndex, section: 0), at: .centeredHorizontally, animated: false)
+                    }
                     self.populateProductData()
                 }
             }
@@ -165,6 +190,7 @@ class ProductDetailVC: BaseViewController {
             swipeToSeeView.isHidden = true
             pageControl.isHidden = true
         }
+        updateCommentsView()
         makePostCellViewModel()
     }
     func assignImageURL() {
@@ -185,7 +211,7 @@ class ProductDetailVC: BaseViewController {
     }
     func makePostCellViewModel() {
         viewModels.removeAll()
-        var indexOfPost = 0
+        var indexOfPost = currentIndex
         if let posts = currentProduct?.posts {
             var index = 0
             for post in posts {
@@ -200,6 +226,7 @@ class ProductDetailVC: BaseViewController {
         self.collectionView.reloadData()
         pageControl.numberOfPages = viewModels.count + 1
         self.pageControl.currentPage = indexOfPost
+        currentIndex = indexOfPost
         if currentProduct?.posts?.count != 0 {
             if indexOfPost > 0 {
                 swipeToSeeView.isHidden = true
@@ -237,6 +264,15 @@ class ProductDetailVC: BaseViewController {
             let webVC = segue.destination as! WebVC
             if let link = currentProduct?.deepLink {
                 webVC.url = URL(string: link)
+            }
+        }
+        if segue.identifier == "toCommentsDetail" {
+            let commentVC = segue.destination as! CommentsVC
+            commentVC.currentProduct = currentProduct
+            if let allPosts = currentProduct?.posts {
+                if currentIndex != 0 {
+                    commentVC.currentPost = allPosts[currentIndex - 1]
+                }
             }
         }
     }
@@ -339,6 +375,9 @@ class ProductDetailVC: BaseViewController {
         super.cancelButtonTapped()
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func allReviewsButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "toCommentsDetail", sender: self)
+    }
 }
 
 extension ProductDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -400,10 +439,66 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 swipeToSeeView.isHidden = currentPage > 0
             }
         }
+        if currentPage != 0 {
+            tableViewHeightConstraint.constant = 128.0
+            reviewButtonHeightConstraint.constant = 18.0
+            allReviewButton.isHidden = false
+            commentsTableView.isHidden = false
+        } else {
+            tableViewHeightConstraint.constant = 0.0
+            reviewButtonHeightConstraint.constant = 0.0
+            addCommentHeightConstraint.constant = 0.0
+            allReviewButton.isHidden = true
+            commentsTableView.isHidden = true
+        }
+        currentIndex = currentPage
+        updateCommentsView()
+    }
+    func updateCommentsView() {
+        if currentIndex != 0 {
+            if let allPosts = currentProduct?.posts {
+                let currentPost = allPosts[currentIndex - 1]
+                if currentPost.canPostReview == true {
+                    addCommentHeightConstraint.constant = 24.0
+                } else {
+                    addCommentHeightConstraint.constant = 0.0
+                }
+                if let totalCount = currentPost.reviews?.totalCount {
+                    if totalCount <= 2 {
+                        allReviewButton.setTitle(String(currentPost.reviews?.totalCount ?? 0) + " Reviews", for: .normal)
+                    } else {
+                        allReviewButton.setTitle("View all " + String(currentPost.reviews?.totalCount ?? 0) + " reviews", for: .normal)
+                    }
+                }
+                if let reviews = allPosts[currentIndex - 1].reviews {
+                    commentViewModels.removeAll()
+                    for review in reviews.recent {
+                        let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
+                        commentViewModels.append(viewModel)
+                    }
+                    commentsTableView.reloadData()
+                }
+            }
+        } else {
+            reviewButtonHeightConstraint.constant = 0.0
+            addCommentHeightConstraint.constant = 0.0
+            tableViewHeightConstraint.constant = 0.0
+        }
+    }
+    func getAttributedStringWith(name: String, text: String) -> NSAttributedString {
+        let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "SegoeUI-Bold", size: 14.0)!, NSAttributedString.Key.foregroundColor: UIColor(hex: "282828") ]
+        let myString = NSMutableAttributedString(string: name + " ", attributes: myAttribute)
+        let myAttributeText = [ NSAttributedString.Key.font: UIFont(name: "SegoeUI", size: 14.0)!, NSAttributedString.Key.foregroundColor: UIColor(hex: "A6A6A6") ]
+        let myStringText = NSMutableAttributedString(string: text, attributes: myAttributeText)
+        myString.append(myStringText)
+        return myString
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         tagThisItemView?.removeFromSuperview()
-        self.showSmallTagThisItemView()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken != nil {
+            self.showSmallTagThisItemView()
+        }
         let contentOffsetX = scrollView.contentOffset.x
         if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
             if UserDefaultManager.getIfShopper() == false {
@@ -518,5 +613,96 @@ extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControll
             }
             picker.dismiss(animated: true, completion: nil)
         }
+    }
+}
+
+extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commentViewModels.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let viewModel = commentViewModels[indexPath.row]
+        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
+        if tableViewCell == nil {
+            tableView.register(UINib(nibName: viewModel.reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
+        }
+        guard let cell = tableViewCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        if let cellConfigurable = cell as? CellConfigurable {
+            cellConfigurable.setup(viewModel)
+        }
+        return cell
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 62.0
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let allPosts = currentProduct?.posts {
+                let currentPost = allPosts[currentIndex - 1]
+                if let currentReview = currentPost.reviews?.recent[indexPath.row] {
+                    if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
+                        ServerManager.sharedInstance.deleteReview(reviewId: currentReview.reviewId) { (isSuccess, response) in
+                            if isSuccess {
+                                tableView.beginUpdates()
+                                tableView.deleteRows(at: [indexPath], with: .automatic)
+                                self.commentViewModels.remove(at: indexPath.row)
+                                tableView.endUpdates()
+                                self.fetchProductDetailFromServer()
+                            } else {
+                                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if let allPosts = currentProduct?.posts {
+            let currentPost = allPosts[currentIndex - 1]
+            if let currentReview = currentPost.reviews?.recent[indexPath.row] {
+                if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        return false
+    }
+}
+extension ProductDetailVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text == "" {
+            UtilityManager.showMessageWith(title: "Warning!", body: "Please enter text.", in: self)
+        } else {
+            SVProgressHUD.show()
+            var dataDict = [String: Any]()
+            var currentPost: Post?
+            if let allPosts = currentProduct?.posts {
+                if currentIndex != 0 {
+                    currentPost = allPosts[currentIndex - 1]
+                }
+            }
+            dataDict["added_by"] = UserDefaultManager.getCurrentUserId()
+            dataDict["post"] = currentPost?.postId
+            dataDict["text"] = textField.text
+            ServerManager.sharedInstance.addReview(params: dataDict) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    textField.text = ""
+                    self.fetchProductDetailFromServer()
+                } else {
+                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+                }
+            }
+        }
+        textField.resignFirstResponder()
+        return true
     }
 }

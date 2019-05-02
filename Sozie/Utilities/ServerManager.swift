@@ -48,6 +48,7 @@ class ServerManager: NSObject {
     static let preferenceURL = ServerManager.serverURL + "user/update_preferences/"
     static let balanceURL = ServerManager.serverURL + "user/balance/"
     static let cashoutURL = ServerManager.serverURL + "user/sozie/cashout"
+    static let reviewURL = ServerManager.serverURL + "post/review/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -627,6 +628,54 @@ class ServerManager: NSObject {
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
         Alamofire.request(ServerManager.cashoutURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+
+    func reviewList(postId: Int, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.reviewURL + String(postId)
+        Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<[RecentReview]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func deleteReview(reviewId: Int, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.reviewURL + String(reviewId)
+        Alamofire.request(url, method: .delete, parameters: ["text": "test"], encoding: URLEncoding.httpBody, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func addReview(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.reviewURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

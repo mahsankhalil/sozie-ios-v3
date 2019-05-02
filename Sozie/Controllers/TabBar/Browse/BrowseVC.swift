@@ -351,7 +351,6 @@ class BrowseVC: BaseViewController {
         // Pass the selected object to the new view controller.
         let destVC = segue.destination as? ProductDetailVC
         destVC?.currentProduct = selectedProduct
-        
     }
 
     func showPopUpWithTitle(type: PopupType) {

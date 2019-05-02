@@ -22,7 +22,6 @@ class RequestSizeChartPopupVC: UIViewController {
     var closeHandler: (() -> Void)?
     var currentProductId: String?
     var currentBrandId: Int?
-    fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     var productSizeChart: [ProductSize]? {
         didSet {
             if let sizeChart = productSizeChart {
@@ -67,8 +66,8 @@ class RequestSizeChartPopupVC: UIViewController {
     */
     @IBAction func sendRequestButtonTapped(_ sender: Any) {
         if let index = selectedIndex {
-            if delegate != nil {
-                delegate?.selectedValueFromPopUp(value: viewModels[index].title)
+            if let popupDelegate = delegate {
+                popupDelegate.selectedValueFromPopUp(value: viewModels[index].title)
                 closeHandler?()
                 return
             }
@@ -85,8 +84,11 @@ class RequestSizeChartPopupVC: UIViewController {
         dataDict["product_id"] = currentProductId
         dataDict["brand"] = currentBrandId
         SVProgressHUD.show()
-        ServerManager.sharedInstance.makePostRequest(params: dataDict) { (isSuccess, response) in
+        ServerManager.sharedInstance.makePostRequest(params: dataDict) { [weak self] (isSuccess, response) in
             SVProgressHUD.dismiss()
+            guard let self = self else {
+                return
+            }
             if isSuccess {
                 self.closeHandler?()
             } else {
@@ -142,7 +144,7 @@ extension RequestSizeChartPopupVC: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
+        return UIEdgeInsets.zero
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
