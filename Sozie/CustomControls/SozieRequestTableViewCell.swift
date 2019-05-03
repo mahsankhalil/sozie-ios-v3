@@ -23,6 +23,7 @@ class SozieRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var waistLabel: UILabel!
     @IBOutlet weak var hipLabel: UILabel!
     @IBOutlet weak var braLabel: UILabel!
+    @IBOutlet weak var logoImageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,7 +73,43 @@ extension SozieRequestTableViewCell: CellConfigurable {
                 hipLabel.text = "Hip: " + String(hip) + "'  | "
             }
             if let waist = measurementModel.waist {
-                waistLabel.text = "Waist: " + String(waist) + "'  |"
+                waistLabel.text = "Waist: " + String(waist) + "'  | "
+            }
+        }
+        if let availabilityModel = viewModel as? AvailabilityProviding {
+            logoImageView.isHidden = !availabilityModel.isAvailable
+            backgroudView.layer.borderColor = availabilityModel.isAvailable ? UIColor(hex: "FC8787").cgColor : UIColor(hex: "A6A6A6").cgColor
+            if availabilityModel.isAvailable == true {
+                if let currentUser = UserDefaultManager.getCurrentUserObject() {
+                    if let brandId = currentUser.brand {
+                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
+                            self.titleLabel.text = "Requested by " + brand.label
+                        }
+                    }
+                }
+                self.populateCurrentUserMeasurements()
+                self.descriptionLabel.text = "Measurements:"
+            }
+        } else {
+            logoImageView.isHidden = true
+            backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
+        }
+    }
+    func populateCurrentUserMeasurements() {
+        if let currentUser = UserDefaultManager.getCurrentUserObject() {
+            if let bra = currentUser.measurement?.bra, let cup = currentUser.measurement?.cup {
+                braLabel.text = "Bra Size: " + String(bra) + cup
+            }
+            if let height = currentUser.measurement?.height {
+                let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+                let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
+                heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
+            }
+            if let hip = currentUser.measurement?.hip {
+                hipLabel.text = "Hip: " + String(hip) + "'  | "
+            }
+            if let waist = currentUser.measurement?.waist {
+                waistLabel.text = "Waist: " + String(waist) + "'  | "
             }
         }
     }

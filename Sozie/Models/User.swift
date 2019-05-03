@@ -29,6 +29,7 @@ struct User: Codable {
     var measurement: Measurements?
     var isFollowed: Bool?
     var preferences: UserPreferences?
+    var isSuperUser: Bool?
     enum CodingKeys: String, CodingKey {
         case username
         case email
@@ -49,6 +50,7 @@ struct User: Codable {
         case socialToken = "social_token"
         case isFollowed = "is_followed"
         case preferences
+        case isSuperUser = "is_superuser"
     }
 
     init(from decoder: Decoder) throws {
@@ -72,6 +74,7 @@ struct User: Codable {
         measurement = try? values.decode(Measurements.self, forKey: .measurement)
         isFollowed = try? values.decode(Bool.self, forKey: .isFollowed)
         preferences = try? values.decode(UserPreferences.self, forKey: .preferences)
+        isSuperUser = try? values.decode(Bool.self, forKey: .isSuperUser)
     }
 }
 struct UserPreferences: Codable {

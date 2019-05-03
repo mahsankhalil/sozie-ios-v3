@@ -190,7 +190,7 @@ class ProductDetailVC: BaseViewController {
             swipeToSeeView.isHidden = true
             pageControl.isHidden = true
         }
-        updateCommentsView()
+//        updateCommentsView()
         makePostCellViewModel()
     }
     func assignImageURL() {
@@ -235,6 +235,7 @@ class ProductDetailVC: BaseViewController {
             }
         }
         self.collectionView.scrollToItem(at: IndexPath(item: indexOfPost, section: 0), at: .centeredHorizontally, animated: false)
+        updateCommentsView()
 
     }
 
@@ -439,23 +440,15 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 swipeToSeeView.isHidden = currentPage > 0
             }
         }
-        if currentPage != 0 {
-            tableViewHeightConstraint.constant = 128.0
-            reviewButtonHeightConstraint.constant = 18.0
-            allReviewButton.isHidden = false
-            commentsTableView.isHidden = false
-        } else {
-            tableViewHeightConstraint.constant = 0.0
-            reviewButtonHeightConstraint.constant = 0.0
-            addCommentHeightConstraint.constant = 0.0
-            allReviewButton.isHidden = true
-            commentsTableView.isHidden = true
-        }
         currentIndex = currentPage
         updateCommentsView()
     }
     func updateCommentsView() {
         if currentIndex != 0 {
+            tableViewHeightConstraint.constant = 128.0
+            reviewButtonHeightConstraint.constant = 18.0
+            allReviewButton.isHidden = false
+            commentsTableView.isHidden = false
             if let allPosts = currentProduct?.posts {
                 let currentPost = allPosts[currentIndex - 1]
                 if currentPost.canPostReview == true {
@@ -480,9 +473,14 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 }
             }
         } else {
+            tableViewHeightConstraint.constant = 0.0
             reviewButtonHeightConstraint.constant = 0.0
             addCommentHeightConstraint.constant = 0.0
-            tableViewHeightConstraint.constant = 0.0
+            allReviewButton.isHidden = true
+            commentsTableView.isHidden = true
+//            reviewButtonHeightConstraint.constant = 0.0
+//            addCommentHeightConstraint.constant = 0.0
+//            tableViewHeightConstraint.constant = 0.0
         }
     }
     func getAttributedStringWith(name: String, text: String) -> NSAttributedString {
