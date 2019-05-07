@@ -149,6 +149,7 @@ class ProductDetailVC: BaseViewController {
         currentProduct?.posts = product.posts
         currentProduct?.sizeChart = product.sizeChart
         currentProduct?.postCount = product.posts?.count
+        currentProduct?.reviews = product.reviews
     }
     func populateProductData() {
         var priceString = ""
@@ -444,11 +445,11 @@ extension ProductDetailVC: UIScrollViewDelegate {
         updateCommentsView()
     }
     func updateCommentsView() {
+        tableViewHeightConstraint.constant = 128.0
+        reviewButtonHeightConstraint.constant = 18.0
+        allReviewButton.isHidden = false
+        commentsTableView.isHidden = false
         if currentIndex != 0 {
-            tableViewHeightConstraint.constant = 128.0
-            reviewButtonHeightConstraint.constant = 18.0
-            allReviewButton.isHidden = false
-            commentsTableView.isHidden = false
             if let allPosts = currentProduct?.posts {
                 let currentPost = allPosts[currentIndex - 1]
                 if currentPost.canPostReview == true {
@@ -473,14 +474,21 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 }
             }
         } else {
-            tableViewHeightConstraint.constant = 0.0
-            reviewButtonHeightConstraint.constant = 0.0
             addCommentHeightConstraint.constant = 0.0
-            allReviewButton.isHidden = true
-            commentsTableView.isHidden = true
-//            reviewButtonHeightConstraint.constant = 0.0
-//            addCommentHeightConstraint.constant = 0.0
-//            tableViewHeightConstraint.constant = 0.0
+            if let reviews = currentProduct?.reviews {
+                commentViewModels.removeAll()
+                let totalCount = reviews.totalCount
+                if totalCount <= 2 {
+                    allReviewButton.setTitle(String(reviews.totalCount) + " Reviews", for: .normal)
+                } else {
+                    allReviewButton.setTitle("View all " + String(reviews.totalCount) + " reviews", for: .normal)
+                }
+                for review in reviews.recent {
+                    let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
+                    commentViewModels.append(viewModel)
+                }
+                commentsTableView.reloadData()
+            }
         }
     }
     func getAttributedStringWith(name: String, text: String) -> NSAttributedString {
@@ -661,13 +669,15 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if let allPosts = currentProduct?.posts {
-            let currentPost = allPosts[currentIndex - 1]
-            if let currentReview = currentPost.reviews?.recent[indexPath.row] {
-                if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
-                    return true
-                } else {
-                    return false
+        if currentIndex != 0 {
+            if let allPosts = currentProduct?.posts {
+                let currentPost = allPosts[currentIndex - 1]
+                if let currentReview = currentPost.reviews?.recent[indexPath.row] {
+                    if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
+                        return true
+                    } else {
+                        return false
+                    }
                 }
             }
         }

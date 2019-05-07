@@ -8,6 +8,10 @@
 
 import UIKit
 import SVProgressHUD
+public enum CommentType: String {
+    case post = "post"
+    case product = "product"
+}
 class CommentsVC: UIViewController {
 
     @IBOutlet weak var addCommentTextField: UITextField!
@@ -84,15 +88,24 @@ class CommentsVC: UIViewController {
     }
 
     func fetchCommentsFromServer() {
+        var reviewType: CommentType = CommentType.post
+        var parentId: String = ""
         if let post = currentPost {
-            SVProgressHUD.show()
-            ServerManager.sharedInstance.reviewList(postId: post.postId) { (isSuccess, response) in
-                SVProgressHUD.dismiss()
-                if isSuccess {
-                    self.reviews = response as! [RecentReview]
-                } else {
-                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
-                }
+            reviewType = CommentType.post
+            parentId = String(post.postId)
+        } else {
+            reviewType = CommentType.product
+            if let prodId = currentProduct?.productStringId {
+                parentId = prodId
+            }
+        }
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.reviewList(postId: parentId, type: reviewType) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                self.reviews = response as! [RecentReview]
+            } else {
+                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
         }
 

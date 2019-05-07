@@ -639,11 +639,11 @@ class ServerManager: NSObject {
         }
     }
 
-    func reviewList(postId: Int, block: CompletionHandler) {
+    func reviewList(postId: String, type: CommentType, block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
-        let url = ServerManager.reviewURL + String(postId)
+        let url = ServerManager.reviewURL + postId + "?type=" + type.rawValue
         Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<[RecentReview]> = decoder.decodeResponse(from: response)
