@@ -466,7 +466,7 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 }
                 if let reviews = allPosts[currentIndex - 1].reviews {
                     commentViewModels.removeAll()
-                    for review in reviews.recent {
+                    for review in reviews.reviews {
                         let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
                         commentViewModels.append(viewModel)
                     }
@@ -483,7 +483,7 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 } else {
                     allReviewButton.setTitle("View all " + String(reviews.totalCount) + " reviews", for: .normal)
                 }
-                for review in reviews.recent {
+                for review in reviews.reviews {
                     let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
                     commentViewModels.append(viewModel)
                 }
@@ -650,7 +650,7 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             if let allPosts = currentProduct?.posts {
                 let currentPost = allPosts[currentIndex - 1]
-                if let currentReview = currentPost.reviews?.recent[indexPath.row] {
+                if let currentReview = currentPost.reviews?.reviews[indexPath.row] {
                     if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
                         ServerManager.sharedInstance.deleteReview(reviewId: currentReview.reviewId) { (isSuccess, response) in
                             if isSuccess {
@@ -672,7 +672,7 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
         if currentIndex != 0 {
             if let allPosts = currentProduct?.posts {
                 let currentPost = allPosts[currentIndex - 1]
-                if let currentReview = currentPost.reviews?.recent[indexPath.row] {
+                if let currentReview = currentPost.reviews?.reviews[indexPath.row] {
                     if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
                         return true
                     } else {

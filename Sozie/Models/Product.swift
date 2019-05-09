@@ -25,7 +25,7 @@ struct Product: Codable {
     var merchantImageURL: String?
     var productStringId: String?
     var sizeChart: [ProductSize]?
-    var reviews: Review?
+    var reviews: ReviewList?
     enum CodingKeys: String, CodingKey {
         case productId = "id"
         case productName = "product_name"
@@ -63,6 +63,6 @@ struct Product: Codable {
         merchantImageURL = try? values.decode(String.self, forKey: .merchantImageURL)
         productStringId = try? values.decode(String.self, forKey: .productStringId)
         sizeChart = try? values.decode([ProductSize].self, forKey: .sizeChart)
-        reviews = try? values.decode(Review.self, forKey: .reviews)
+        reviews = try? values.decode(ReviewList.self, forKey: .reviews)
     }
 }

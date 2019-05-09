@@ -24,19 +24,14 @@ class CommentsVC: UIViewController {
     var currentProduct: Product?
     var currentPost: Post?
     var commentsViewModel: [CommentsViewModel] = []
-    var reviews: [RecentReview] = [] {
+    var reviews: [Review] = [] {
         didSet {
             commentsViewModel.removeAll()
             for review in reviews {
                 let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
                 commentsViewModel.append(viewModel)
             }
-            let totalCount = reviews.count
-            if totalCount <= 2 {
-                allReviewButton.setTitle(String(totalCount ) + " Reviews", for: .normal)
-            } else {
-                allReviewButton.setTitle("View all " + String(totalCount) + " reviews", for: .normal)
-            }
+            setReviewButton(totalCount: reviews.count)
             tableView.reloadData()
         }
     }
@@ -77,16 +72,19 @@ class CommentsVC: UIViewController {
             addCommentHeightConstraint.constant = 0.0
         }
         if let totalCount = currentPost?.reviews?.totalCount {
-            if totalCount <= 2 {
-                allReviewButton.setTitle(String(totalCount ) + " Reviews", for: .normal)
-            } else {
-                allReviewButton.setTitle("View all " + String(totalCount) + " reviews", for: .normal)
-            }
+            setReviewButton(totalCount: totalCount)
         }
         addCommentTextField.delegate = self
         fetchCommentsFromServer()
     }
 
+    func setReviewButton(totalCount: Int) {
+        if totalCount <= 2 {
+            allReviewButton.setTitle(String(totalCount ) + " Reviews", for: .normal)
+        } else {
+            allReviewButton.setTitle("View all " + String(totalCount) + " reviews", for: .normal)
+        }
+    }
     func fetchCommentsFromServer() {
         var reviewType: CommentType = CommentType.post
         var parentId: String = ""
@@ -103,7 +101,7 @@ class CommentsVC: UIViewController {
         ServerManager.sharedInstance.reviewList(postId: parentId, type: reviewType) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.reviews = response as! [RecentReview]
+                self.reviews = response as! [Review]
             } else {
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
@@ -165,16 +163,12 @@ extension CommentsVC: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let currentReview = reviews[indexPath.row]
-        if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
-            return true
-        } else {
-            return false
-        }
+        return currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId()
     }
 }
 extension CommentsVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text == "" {
+        if textField.text?.isEmpty == true {
             UtilityManager.showMessageWith(title: "Warning!", body: "Please enter text.", in: self)
         } else {
             SVProgressHUD.show()

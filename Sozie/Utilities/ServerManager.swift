@@ -646,7 +646,7 @@ class ServerManager: NSObject {
         let url = ServerManager.reviewURL + postId + "?type=" + type.rawValue
         Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
-            let obj: Result<[RecentReview]> = decoder.decodeResponse(from: response)
+            let obj: Result<[Review]> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }

@@ -8,21 +8,21 @@
 
 import UIKit
 
-struct Review: Codable {
+struct ReviewList: Codable {
     var totalCount: Int
-    var recent: [RecentReview]
+    var reviews: [Review]
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
-        case recent
+        case reviews = "recent"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         totalCount = try values.decode(Int.self, forKey: .totalCount)
-        recent = try values.decode([RecentReview].self, forKey: .recent)
+        reviews = try values.decode([Review].self, forKey: .reviews)
     }
 }
 
-struct RecentReview: Codable {
+struct Review: Codable {
     var reviewId: Int
     var addedBy: ReviewUser
     var text: String

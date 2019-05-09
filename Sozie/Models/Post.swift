@@ -15,7 +15,7 @@ struct Post: Codable {
     var userFollowedByMe: Bool?
 //    var sizeType: String
     var sizeValue: String
-    var reviews: Review?
+    var reviews: ReviewList?
     var canPostReview: Bool?
     enum CodingKeys: String, CodingKey {
 
@@ -38,7 +38,7 @@ struct Post: Codable {
         userFollowedByMe = try? values.decode(Bool.self, forKey: .userFollowedByMe)
 //        sizeType = try values.decode(String.self, forKey: .sizeType)
         sizeValue = try values.decode(String.self, forKey: .sizeValue)
-        reviews = try values.decode(Review.self, forKey: .reviews)
+        reviews = try? values.decode(ReviewList.self, forKey: .reviews)
         canPostReview = try? values.decode(Bool.self, forKey: .canPostReview)
     }
 }

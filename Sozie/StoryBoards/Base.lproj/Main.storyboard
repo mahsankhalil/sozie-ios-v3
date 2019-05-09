@@ -1161,8 +1161,8 @@ They will try on items of your choice so you can be sure of what size you want t
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoSignup" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
                                 <rect key="frame" x="121" y="237" width="133" height="83"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr4-cf-Obz">
-                                <rect key="frame" x="30" y="408" width="315" height="45"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr4-cf-Obz">
+                                <rect key="frame" x="30" y="442.5" width="315" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="YC8-1M-zHP"/>
@@ -1176,13 +1176,13 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhn-R8-v2N" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="30" y="514.5" width="315" height="45"/>
+                                <rect key="frame" x="30" y="553.5" width="315" height="45"/>
                                 <color key="backgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="AFL-5c-s39"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="15"/>
-                                <state key="normal" title="Sign Up as a Sozie"/>
+                                <state key="normal" title="SIGNUP"/>
                                 <connections>
                                     <action selector="signUpSozieBtnTapped:" destination="qhF-if-nqj" eventType="touchUpInside" id="GKS-9d-jKJ"/>
                                 </connections>
@@ -1248,15 +1248,15 @@ They will try on items of your choice so you can be sure of what size you want t
                                     <segue destination="BYZ-38-t0r" kind="show" id="90n-N6-YqP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find fashion you love and ask your Sozies to try it on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
-                                <rect key="frame" x="53" y="457" width="269" height="30.5"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find fashion you love and ask your Sozies to try it on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
+                                <rect key="frame" x="53" y="491.5" width="269" height="35"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try clothes on for shoppers and earn money" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-kk-0qU">
-                                <rect key="frame" x="53" y="566.5" width="269" height="15.5"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try clothes on for shoppers and earn money" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-kk-0qU">
+                                <rect key="frame" x="53" y="605.5" width="269" height="17.5"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1264,7 +1264,7 @@ They will try on items of your choice so you can be sure of what size you want t
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="GPx-l4-byK" firstAttribute="top" secondItem="Y9R-kk-0qU" secondAttribute="bottom" constant="35" id="6ek-QA-f7i"/>
+                            <constraint firstItem="GPx-l4-byK" firstAttribute="top" secondItem="Y9R-kk-0qU" secondAttribute="bottom" constant="-6" id="6ek-QA-f7i"/>
                             <constraint firstItem="f90-z6-p2F" firstAttribute="centerX" secondItem="Jyu-xw-oc8" secondAttribute="centerX" id="8I3-86-cF4"/>
                             <constraint firstItem="Mhn-R8-v2N" firstAttribute="top" secondItem="hdO-jk-SKW" secondAttribute="bottom" constant="27" id="9Ns-AB-3td"/>
                             <constraint firstItem="3xP-qc-lKu" firstAttribute="leading" secondItem="Mvu-Ij-rm4" secondAttribute="leading" id="BRp-zD-Ir3"/>
@@ -2379,13 +2379,13 @@ They will try on items of your choice so you can be sure of what size you want t
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIZE CHART" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25Y-ee-3E7">
-                                <rect key="frame" x="132.5" y="43" width="78.5" height="19"/>
+                                <rect key="frame" x="131.5" y="43" width="80.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="14"/>
                                 <color key="textColor" red="0.98823529409999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zf9-5B-bN3">
-                                <rect key="frame" x="14" y="81.5" width="315" height="80"/>
+                                <rect key="frame" x="14" y="79" width="315" height="80"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O7y-LR-Sa2">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="80"/>
@@ -2458,7 +2458,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-jM-Bx3">
-                                <rect key="frame" x="14" y="195.5" width="315" height="220"/>
+                                <rect key="frame" x="14" y="193" width="315" height="220"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-P4-zsZ">
                                         <rect key="frame" x="0.0" y="33" width="315" height="1"/>
@@ -3245,7 +3245,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Measure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhB-0K-Zc8">
-                                        <rect key="frame" x="25" y="79" width="250" height="46"/>
+                                        <rect key="frame" x="25" y="79" width="247" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="6Wk-z8-JXL"/>
                                         </constraints>
@@ -3271,7 +3271,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbD-il-pTr">
-                                                <rect key="frame" x="56" y="12" width="42" height="18"/>
+                                                <rect key="frame" x="56" y="12" width="45.5" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="uLQ-oQ-TP5"/>
                                                 </constraints>
@@ -3280,7 +3280,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRI-Gw-k3c">
-                                                <rect key="frame" x="56" y="34" width="271.5" height="48"/>
+                                                <rect key="frame" x="56" y="34" width="270.5" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="G3v-gH-yOp"/>
                                                 </constraints>
@@ -3292,7 +3292,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hips:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6L-lk-cCB">
-                                                <rect key="frame" x="56" y="220" width="31" height="18"/>
+                                                <rect key="frame" x="56" y="214" width="31" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="0Bj-95-Uql"/>
                                                 </constraints>
@@ -3301,7 +3301,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-p1-YMc">
-                                                <rect key="frame" x="56" y="127" width="280.5" height="70"/>
+                                                <rect key="frame" x="56" y="127" width="300.5" height="64"/>
                                                 <string key="text">-Bend to one side to find the natural crease of your waist
 -This is the slimmest part of the waist
 -Measure across at this point
@@ -3311,7 +3311,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waist:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2r-ch-T6p">
-                                                <rect key="frame" x="56" y="105" width="36" height="18"/>
+                                                <rect key="frame" x="56" y="105" width="38" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="4FQ-VY-bxX"/>
                                                 </constraints>
@@ -3320,7 +3320,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HqO-r0-G7q">
-                                                <rect key="frame" x="56" y="242" width="279.5" height="48"/>
+                                                <rect key="frame" x="56" y="236" width="278.5" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="s1e-vZ-hp6"/>
                                                 </constraints>
@@ -3400,7 +3400,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measurement tips for the perfect fit." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXc-sC-RDe">
-                                <rect key="frame" x="25" y="125" width="224.5" height="19"/>
+                                <rect key="frame" x="25" y="125" width="223.5" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="XsE-uP-HUW"/>
                                 </constraints>
@@ -3453,7 +3453,7 @@ They will try on items of your choice so you can be sure of what size you want t
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eNn-VW-0gA"/>
-        <segue reference="M7a-TZ-jib"/>
-        <segue reference="DE9-Vg-jdy"/>
+        <segue reference="HaJ-aD-hEf"/>
+        <segue reference="90n-N6-YqP"/>
     </inferredMetricsTieBreakers>
 </document>
