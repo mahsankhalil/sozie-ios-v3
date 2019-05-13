@@ -121,11 +121,14 @@ class UploadPostVC: BaseViewController {
     */
     @IBAction func bottomButtonTapped(_ sender: Any) {
         if isSizeSelected == false {
-            let popUpInstnc = RequestSizeChartPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
+            let popUpInstnc = SizePickerPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
+//            let popUpInstnc = RequestSizeChartPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
 //            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
             let popUpVC = PopupController
                 .create(self.tabBarController?.navigationController ?? self)
                 .show(popUpInstnc)
+            let options = PopupCustomOption.layout(.bottom)
+            _ = popUpVC.customize([options])
             popUpInstnc.delegate = self
             popUpInstnc.closeHandler = { []  in
                 popUpVC.dismiss()
