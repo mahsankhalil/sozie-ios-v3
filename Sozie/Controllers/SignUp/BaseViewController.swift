@@ -85,35 +85,41 @@ class BaseViewController: UIViewController {
     }
 
     func showSmallBottomView() {
-        largeBottomView?.removeFromSuperview()
-        let tabBarHeight = self.tabBarController?.tabBar.frame.height
-        let width = UIScreen.main.bounds.width
-        if smallBottomView == nil {
-            smallBottomView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height - tabBarHeight! - 26.0, width: width, height: 26.0))
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken != nil {
+            largeBottomView?.removeFromSuperview()
+            let tabBarHeight = self.tabBarController?.tabBar.frame.height
+            let width = UIScreen.main.bounds.width
+            if smallBottomView == nil {
+                smallBottomView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height - tabBarHeight! - 26.0, width: width, height: 26.0))
+            }
+            smallBottomView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+            let titleLabel = UILabel(frame: smallBottomView!.bounds)
+            titleLabel.text = "TAP AN ITEM TO TAG"
+            titleLabel.font =  UIFont(name: "SegoeUI", size: 16.0)
+            titleLabel.textColor = UIColor.white
+            titleLabel.textAlignment = .center
+            smallBottomView?.addSubview(titleLabel)
+            self.view.addSubview(smallBottomView!)
         }
-        smallBottomView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
-        let titleLabel = UILabel(frame: smallBottomView!.bounds)
-        titleLabel.text = "TAP AN ITEM TO TAG"
-        titleLabel.font =  UIFont(name: "SegoeUI", size: 16.0)
-        titleLabel.textColor = UIColor.white
-        titleLabel.textAlignment = .center
-        smallBottomView?.addSubview(titleLabel)
-        self.view.addSubview(smallBottomView!)
     }
     @objc func showBottomView() {
-        let tabBarHeight = self.tabBarController?.tabBar.frame.height
-        let width = UIScreen.main.bounds.width
-        if largeBottomView == nil {
-            largeBottomView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height - (2 * tabBarHeight!), width: width, height: tabBarHeight!))
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken != nil {
+            let tabBarHeight = self.tabBarController?.tabBar.frame.height
+            let width = UIScreen.main.bounds.width
+            if largeBottomView == nil {
+                largeBottomView = DZGradientView(frame: CGRect(x: 0.0, y: UIScreen.main.bounds.height - (2 * tabBarHeight!), width: width, height: tabBarHeight!))
+            }
+            largeBottomView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+            let titleLabel = UILabel(frame: largeBottomView!.bounds)
+            titleLabel.text = "TAP AN ITEM TO TAG"
+            titleLabel.font =  UIFont(name: "SegoeUI", size: 16.0)
+            titleLabel.textColor = UIColor.white
+            titleLabel.textAlignment = .center
+            largeBottomView?.addSubview(titleLabel)
+            self.view.addSubview(largeBottomView!)
         }
-        largeBottomView?.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
-        let titleLabel = UILabel(frame: largeBottomView!.bounds)
-        titleLabel.text = "TAP AN ITEM TO TAG"
-        titleLabel.font =  UIFont(name: "SegoeUI", size: 16.0)
-        titleLabel.textColor = UIColor.white
-        titleLabel.textAlignment = .center
-        largeBottomView?.addSubview(titleLabel)
-        self.view.addSubview(largeBottomView!)
     }
     func showCancelButtonAfterDelay() {
         perform(#selector(showCancelButton), with: nil, afterDelay: 0.5)

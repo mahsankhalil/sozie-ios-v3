@@ -8,6 +8,19 @@
 
 import UIKit
 
+struct BrowseResponse: Codable {
+    var count: Int
+    var products: [Product]
+    enum CodingKeys: String, CodingKey {
+        case count
+        case products
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        count = try values.decode(Int.self, forKey: .count)
+        products = try values.decode([Product].self, forKey: .products)
+    }
+}
 struct Product: Codable {
     var productId: Int
     var productName: String?
