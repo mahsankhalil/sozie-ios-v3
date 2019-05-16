@@ -11,6 +11,7 @@ import SwiftValidator
 import MaterialTextField
 import SVProgressHUD
 import EasyTipView
+import TPKeyboardAvoiding
 
 class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDelegate {
 
@@ -22,7 +23,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     @IBOutlet weak var signUpButton: DZGradientButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     let validator = Validator()
     var isFemaleSelected = false
     var signUpDict: [String: Any]?
@@ -42,6 +45,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         applyValidators()
         populateCurrentUserData()
         populateSocialData()
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight < 667 {
+            viewHeightConstraint.constant = 647
+            scrollView.isScrollEnabled = true
+        } else {
+            viewHeightConstraint.constant = screenHeight - 20.0
+            scrollView.isScrollEnabled = false
+        }
     }
 
     func populateSocialData() {

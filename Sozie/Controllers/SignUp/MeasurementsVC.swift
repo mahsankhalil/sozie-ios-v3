@@ -10,6 +10,7 @@ import UIKit
 import MaterialTextField
 import SVProgressHUD
 import EasyTipView
+import TPKeyboardAvoiding
 public enum MeasurementType: Int {
     case height
     case waist
@@ -39,6 +40,8 @@ class MeasurementsVC: UIViewController {
     var isFromSignUp = false
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,6 +76,14 @@ class MeasurementsVC: UIViewController {
         fetchDataFromServer()
         if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.measurementUserGuide) == false {
             showTipView()
+        }
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight < 667 {
+            viewHeightConstraint.constant = 647
+            scrollView.isScrollEnabled = true
+        } else {
+            viewHeightConstraint.constant = screenHeight - 20.0
+            scrollView.isScrollEnabled = false
         }
     }
     func showTipView() {

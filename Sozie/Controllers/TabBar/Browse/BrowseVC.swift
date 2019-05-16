@@ -217,7 +217,6 @@ class BrowseVC: BaseViewController {
         } else {
             searchString = nil
         }
-        searchTxtFld.text = ""
         searchVuHeightConstraint.constant = 47.0
         UIView.animate(withDuration: 0.3) {
             self.searchVuHeightConstraint.constant = 0.0
@@ -257,6 +256,7 @@ class BrowseVC: BaseViewController {
 
     }
     @objc func refreshData() {
+        searchTxtFld.text = ""
         isFirstPage = true
         filterBrandId = nil
         filterCategoryIds = nil
@@ -548,7 +548,9 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 12.0
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == productList.count - 10 {
+        if productList.count < 10 && indexPath.row == productList.count - 1 {
+            loadNextPage()
+        } else if indexPath.row == productList.count - 10 {
             loadNextPage()
         }
     }

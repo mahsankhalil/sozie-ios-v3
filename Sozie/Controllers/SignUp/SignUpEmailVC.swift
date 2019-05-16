@@ -11,6 +11,7 @@ import MaterialTextField
 import SwiftValidator
 import SVProgressHUD
 import GoogleSignIn
+import TPKeyboardAvoiding
 class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
 
     @IBOutlet weak var signInBtn: UIButton!
@@ -20,6 +21,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     @IBOutlet weak var passwordTxtFld: MFTextField!
     @IBOutlet weak var confirmPasswordTxtFld: MFTextField!
 
+    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var facebookBtn: UIButton!
     @IBOutlet weak var showConfirmPasswordBtn: UIButton!
     @IBOutlet weak var showPasswordBtn: UIButton!
@@ -28,6 +30,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     let validator = Validator()
     var signUpDict: [String: Any]?
 
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,9 +38,17 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
-
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight < 667 {
+            viewHeightConstraint.constant = 647
+            scrollView.isScrollEnabled = true
+        } else {
+            viewHeightConstraint.constant = screenHeight - 20.0
+            scrollView.isScrollEnabled = false
+        }
         applyValidators()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GIDSignIn.sharedInstance().delegate = self

@@ -12,6 +12,7 @@ import GoogleSignIn
 import SVProgressHUD
 import MaterialTextField
 import FBSDKLoginKit
+import TPKeyboardAvoiding
 
 class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
 
@@ -21,7 +22,8 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var forgotPasswordBtn: UIButton!
-
+    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     let validator = Validator()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,14 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         emailField.setupAppDesign()
         passwordField.setupAppDesign()
         applyRightVuToPassword()
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight < 667 {
+            viewHeightConstraint.constant = 647
+            scrollView.isScrollEnabled = true
+        } else {
+            viewHeightConstraint.constant = screenHeight - 20.0
+            scrollView.isScrollEnabled = false
+        }
 //        emailField.validationType = .afterEdit
 //        passwordField.validationType = .afterEdit
     }
