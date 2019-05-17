@@ -37,14 +37,14 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         emailField.setupAppDesign()
         passwordField.setupAppDesign()
         applyRightVuToPassword()
-        let screenHeight = UIScreen.main.bounds.height
-        if screenHeight < 667 {
-            viewHeightConstraint.constant = 647
-            scrollView.isScrollEnabled = true
-        } else {
-            viewHeightConstraint.constant = screenHeight - 20.0
-            scrollView.isScrollEnabled = false
-        }
+//        let screenHeight = UIScreen.main.bounds.height
+//        if screenHeight < 667 {
+//            viewHeightConstraint.constant = 647
+//            scrollView.isScrollEnabled = true
+//        } else {
+//            viewHeightConstraint.constant = screenHeight - 20.0
+//            scrollView.isScrollEnabled = false
+//        }
 //        emailField.validationType = .afterEdit
 //        passwordField.validationType = .afterEdit
     }

@@ -38,14 +38,14 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
-        let screenHeight = UIScreen.main.bounds.height
-        if screenHeight < 667 {
-            viewHeightConstraint.constant = 647
-            scrollView.isScrollEnabled = true
-        } else {
-            viewHeightConstraint.constant = screenHeight - 20.0
-            scrollView.isScrollEnabled = false
-        }
+//        let screenHeight = UIScreen.main.bounds.height
+//        if screenHeight < 667 {
+//            viewHeightConstraint.constant = 647
+//            scrollView.isScrollEnabled = true
+//        } else {
+//            viewHeightConstraint.constant = screenHeight - 20.0
+//            scrollView.isScrollEnabled = false
+//        }
         applyValidators()
     }
 
