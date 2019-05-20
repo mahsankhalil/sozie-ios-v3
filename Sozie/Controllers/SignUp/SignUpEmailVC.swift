@@ -21,7 +21,6 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     @IBOutlet weak var passwordTxtFld: MFTextField!
     @IBOutlet weak var confirmPasswordTxtFld: MFTextField!
 
-    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var facebookBtn: UIButton!
     @IBOutlet weak var showConfirmPasswordBtn: UIButton!
     @IBOutlet weak var showPasswordBtn: UIButton!
@@ -38,14 +37,6 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
-//        let screenHeight = UIScreen.main.bounds.height
-//        if screenHeight < 667 {
-//            viewHeightConstraint.constant = 647
-//            scrollView.isScrollEnabled = true
-//        } else {
-//            viewHeightConstraint.constant = screenHeight - 20.0
-//            scrollView.isScrollEnabled = false
-//        }
         applyValidators()
     }
 
