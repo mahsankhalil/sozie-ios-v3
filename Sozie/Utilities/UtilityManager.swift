@@ -105,24 +105,19 @@ class UtilityManager: NSObject {
 
     static func openGalleryFrom(viewController: UIViewController) {
         //Photos
-        let photos = PHPhotoLibrary.authorizationStatus()
-        if photos == .notDetermined {
-            PHPhotoLibrary.requestAuthorization({ status in
-                if status == .authorized {
-                    let imagePicker = UIImagePickerController()
-                    imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                    imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-                    imagePicker.allowsEditing = false
-                    viewController.present(imagePicker, animated: true, completion: nil)
-                } else {
-                    UtilityManager.showPermissionAlertWith(title: "Gallery Unavailable!", message: "Please check to see if permissions granted in settings.", viewController: viewController)
-                }
-            })
-        } else {
-            UtilityManager.showPermissionAlertWith(title: "Gallery Unavailable!", message: "Please check to see if permissions granted in settings.", viewController: viewController)
-        }
+        PHPhotoLibrary.requestAuthorization({ status in
+            if status == .authorized {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                imagePicker.allowsEditing = false
+                viewController.present(imagePicker, animated: true, completion: nil)
+            } else {
+                UtilityManager.showPermissionAlertWith(title: "Gallery Unavailable!", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+            }
+        })
     }
-    static func showPermissionAlertWith(title: String, message: String ,viewController: UIViewController ) {
+    static func showPermissionAlertWith(title: String, message: String, viewController: UIViewController) {
         let permissionAlertController = UIAlertController (title: title, message: message, preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Settings", style: .destructive) { (_) -> Void in
             let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
