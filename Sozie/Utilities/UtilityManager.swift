@@ -11,6 +11,7 @@ import UIKit
 import SVProgressHUD
 import EasyTipView
 import Intercom
+import Photos
 class UtilityManager: NSObject {
 
     static func tipViewGlobalPreferences() -> EasyTipView.Preferences {
@@ -81,25 +82,55 @@ class UtilityManager: NSObject {
         viewController.present(alert, animated: true, completion: nil)
     }
     static func openCameraFrom(viewController: UIViewController) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-            imagePicker.sourceType = UIImagePickerController.SourceType.camera
-            imagePicker.allowsEditing = false
-            viewController.present(imagePicker, animated: true, completion: nil)
-        } else {
-            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            viewController.present(alert, animated: true, completion: nil)
+        //Camera
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                //access granted
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+                    imagePicker.sourceType = UIImagePickerController.SourceType.camera
+                    imagePicker.allowsEditing = false
+                    viewController.present(imagePicker, animated: true, completion: nil)
+                } else {
+                    let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    viewController.present(alert, animated: true, completion: nil)
+                }
+            } else {
+                UtilityManager.showPermissionAlertWith(title: "Camera Unavailable", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+            }
         }
     }
 
     static func openGalleryFrom(viewController: UIViewController) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        imagePicker.allowsEditing = false
-        viewController.present(imagePicker, animated: true, completion: nil)
+        //Photos
+        PHPhotoLibrary.requestAuthorization({ status in
+            if status == .authorized {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                imagePicker.allowsEditing = false
+                viewController.present(imagePicker, animated: true, completion: nil)
+            } else {
+                UtilityManager.showPermissionAlertWith(title: "Gallery Unavailable!", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+            }
+        })
+    }
+    static func showPermissionAlertWith(title: String, message: String, viewController: UIViewController) {
+        let permissionAlertController = UIAlertController (title: title, message: message, preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Settings", style: .destructive) { (_) -> Void in
+            let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
+            if let url = settingsUrl {
+                DispatchQueue.main.async {
+                    UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) //(url as URL)
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        permissionAlertController .addAction(settingsAction)
+        permissionAlertController .addAction(cancelAction)
+        viewController.present(permissionAlertController, animated: true, completion: nil)
     }
 
     static func showActivityControllerWith(objectsToShare: [Any], viewController: UIViewController) {

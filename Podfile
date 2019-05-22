@@ -22,6 +22,7 @@ pod 'CCBottomRefreshControl'
 pod 'SwiftLint'
 pod 'Appsee', '~> 2.5.1'
 pod 'Intercom'
+pod 'DLRadioButton', '~> 1.4'
 end
 target 'Sozie' do
     all_pods

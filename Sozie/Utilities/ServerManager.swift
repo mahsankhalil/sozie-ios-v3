@@ -26,7 +26,7 @@ class ServerManager: NSObject {
     static let resetPassword = ServerManager.serverURL + "user/reset_password/"
 //    static let productListURL = ServerManager.serverURL + "product/browse/v2/feed/get/"
     static let productListURL = ServerManager.serverURL + "product/browse/feed/get/"
-
+    static let browseSearchURL = ServerManager.serverURL + "product/browse/feed/search/"
     static let logoutURL = ServerManager.serverURL + "user/logout/"
     static let categoriesURL = ServerManager.serverURL + "common/categories"
     static let productDetailURL = ServerManager.serverURL + "product/detail/"
@@ -203,6 +203,26 @@ class ServerManager: NSObject {
         }
     }
 
+    func getALLProductV3(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        var url = ServerManager.browseSearchURL
+        if let isFirstPage = params["is_first_page"] as? Bool {
+            url = url + "?is_first_page=" + String(isFirstPage ? 1:0)
+        }
+        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            
+            let decoder = JSONDecoder()
+            let obj: Result<BrowseResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
     func getAllProducts(params: [String: Any], block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")

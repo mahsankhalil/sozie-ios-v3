@@ -22,6 +22,7 @@ class TabBarVC: UITabBarController {
             currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
         }
         self.delegate = self
+        self.view.backgroundColor = UIColor.white
     }
 
     // MARK: - Custom Methods

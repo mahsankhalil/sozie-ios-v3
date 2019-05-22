@@ -18,11 +18,18 @@ extension UIViewController {
             return
         }
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-        let viewCOntroller = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
-        viewCOntroller.view.frame = rootViewController.view.frame
-        viewCOntroller.view.layoutIfNeeded()
+        let viewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
+        viewController.view.frame = rootViewController.view.frame
+        viewController.view.layoutIfNeeded()
         UIView.transition(with: window, duration: 1.0, options: .transitionFlipFromRight, animations: {
-            window.rootViewController = viewCOntroller
+            let rootWindow = (UIApplication.shared.delegate as! AppDelegate).window
+            let presentedViewController = rootWindow?.rootViewController?.presentedViewController
+            presentedViewController?.present(viewController, animated: false) {
+                rootWindow?.rootViewController?.dismiss(animated: false) {
+                    rootWindow?.rootViewController = viewController
+                }
+            }
+
         }, completion: nil)
         self.view.endEditing(true)
     }

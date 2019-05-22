@@ -60,8 +60,7 @@ class ProfileSideMenuVC: BaseViewController {
             self.myBalanceViewHeightContraint.constant = 0.0
         } else {
             self.myBalanceViewHeightContraint.constant = 50.0
-            accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements", "Change My Workplace"]
-
+//            accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements", "Change My Workplace"]
         }
         let accountViewModels = setupViewModels(accountTitles)
         let accountSection = Section(title: "ACCOUNT", rowViewModels: accountViewModels)

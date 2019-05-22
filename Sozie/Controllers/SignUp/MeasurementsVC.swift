@@ -10,6 +10,7 @@ import UIKit
 import MaterialTextField
 import SVProgressHUD
 import EasyTipView
+import TPKeyboardAvoiding
 public enum MeasurementType: Int {
     case height
     case waist
@@ -39,6 +40,7 @@ class MeasurementsVC: UIViewController {
     var isFromSignUp = false
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
 

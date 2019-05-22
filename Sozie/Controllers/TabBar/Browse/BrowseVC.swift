@@ -42,10 +42,11 @@ class BrowseVC: BaseViewController {
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
     var categoryPopupInstance: PopupNavController?
     var filterPopupInstance: PopupNavController?
-    var filterCategoryIds: [Int]?
+    var filterCategoryIds: [Float]?
     var filterBrandId: Int?
     var filterBySozies = false
     var selectedIndex: Int?
+    var searchString: String?
     private var brandList: [Brand] = [] {
         didSet {
             brandViewModels.removeAll()
@@ -103,7 +104,7 @@ class BrowseVC: BaseViewController {
 //        }
 
         fetchBrandsFromServer()
-        fetchProductCount()
+//        fetchProductCount()
         setupViews()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name(rawValue: "RefreshBrowseData"), object: nil)
         self.refreshData()
@@ -136,12 +137,14 @@ class BrowseVC: BaseViewController {
         }
     }
     override func cancelButtonTapped() {
+        super.cancelButtonTapped()
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.imageTaken = nil
         cancelTipView?.dismiss()
         collectionTipView?.dismiss()
+
     }
     func updateCellModelIfChangeMadeInVisibleCells() {
         let visibleIndexPaths = productsCollectionVu.indexPathsForVisibleItems
@@ -206,6 +209,16 @@ class BrowseVC: BaseViewController {
         }
     }
     func hideSearchVu() {
+        if searchTxtFld.text?.isEmpty == false {
+            searchString = searchTxtFld.text
+            self.isFirstPage = true
+            self.clearFilterButton.isHidden = false
+            self.productList.removeAll()
+            self.productsCollectionVu.refreshControl?.beginRefreshing()
+            fetchProductsFromServerV3()
+        } else {
+            searchString = nil
+        }
         searchVuHeightConstraint.constant = 47.0
         UIView.animate(withDuration: 0.3) {
             self.searchVuHeightConstraint.constant = 0.0
@@ -240,18 +253,24 @@ class BrowseVC: BaseViewController {
     }
     @objc func loadNextPage() {
         isFirstPage = false
-        fetchProductsFromServer()
+//        fetchProductsFromServer()
+        fetchProductsFromServerV3()
+
     }
     @objc func refreshData() {
+        searchTxtFld.text = ""
         isFirstPage = true
         filterBrandId = nil
         filterCategoryIds = nil
         filterBySozies = false
         clearFilterButton.isHidden = true
+        searchString = nil
         productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
         productList.removeAll()
-        fetchProductCount()
-        fetchProductsFromServer()
+//        fetchProductCount()
+//        fetchProductsFromServer()
+        fetchProductsFromServerV3()
+
     }
 
     func fetchProductCount() {
@@ -315,6 +334,35 @@ class BrowseVC: BaseViewController {
             }
         }
     }
+    func fetchProductsFromServerV3() {
+        var dataDict = [String: Any]()
+        dataDict["pagesize"] = pageSize
+        dataDict["pages_per_request"] = pagesPerRequest
+        if isFirstPage {
+            dataDict["is_first_page"] = isFirstPage
+        }
+        if let brandId = filterBrandId {
+            dataDict["brand"] = brandId
+        }
+        if let categoryIds = filterCategoryIds {
+            dataDict["categories"] = categoryIds.makeArrayJSON()
+        }
+        if filterBySozies {
+            dataDict["filter_by_sozie"] = filterBySozies
+        }
+        if let string = searchString {
+            dataDict["query"] = string
+        }
+        ServerManager.sharedInstance.getALLProductV3(params: dataDict) { (isSuccess, response) in
+            self.productsCollectionVu.refreshControl?.endRefreshing()
+            self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
+            if isSuccess {
+                self.itemsCountLbl.text = String((response as! BrowseResponse).count) + ((response as! BrowseResponse).count <= 1 ? " ITEM" : " ITEMS")
+                self.productList.append(contentsOf: (response as! BrowseResponse).products)
+                self.productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 50
+            }
+        }
+    }
 
     func filterByBrand(brandId: Int?) {
         self.filterBrandId = brandId
@@ -323,8 +371,10 @@ class BrowseVC: BaseViewController {
         self.isFirstPage = true
         self.clearFilterButton.isHidden = false
         self.productsCollectionVu.refreshControl?.beginRefreshing()
-        fetchProductCount()
-        fetchProductsFromServer()
+//        fetchProductCount()
+//        fetchProductsFromServer()
+        fetchProductsFromServerV3()
+
     }
     func removeTargetIfUS(brands: [Brand]) -> [Brand] {
         var brandsList: [Brand] = []
@@ -393,12 +443,12 @@ class BrowseVC: BaseViewController {
         refreshData()
     }
     @IBAction func searchBtnTapped(_ sender: Any) {
-        UtilityManager.showMessageWith(title: "This Feature is Coming Soon.", body: "", in: self)
-//        if searchVuHeightConstraint.constant == 0 {
-//            showSearchVu()
-//        } else {
-//            hideSearchVu()
-//        }
+//        UtilityManager.showMessageWith(title: "This Feature is Coming Soon.", body: "", in: self)
+        if searchVuHeightConstraint.constant == 0 {
+            showSearchVu()
+        } else {
+            hideSearchVu()
+        }
     }
     @IBAction func categoryBtnTapped(_ sender: Any) {
         largeBottomView?.removeFromSuperview()
@@ -500,7 +550,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 12.0
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == productList.count - 10 {
+        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10)  {
             loadNextPage()
         }
     }
@@ -560,7 +610,7 @@ extension BrowseVC: PopupNavControllerDelegate {
             filterByBrand(brandId: objId)
         } else if type == FilterType.category {
             if let catId = objId {
-                self.filterCategoryIds = [catId]
+                self.filterCategoryIds = [Float(catId)]
 //                self.filterBrandId = nil
 //                self.filterBySozies = false
             }

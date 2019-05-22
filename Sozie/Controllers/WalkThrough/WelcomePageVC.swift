@@ -142,19 +142,21 @@ extension WelcomePageVC: WelcomeButtonActionsDelegate {
     }
 
     func skipButtonTapped() {
-        if userType == UserType.sozie {
-            performSegue(withIdentifier: "toWorkVC", sender: self)
-        } else {
-            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-        }
+//        if userType == UserType.sozie {
+//            performSegue(withIdentifier: "toWorkVC", sender: self)
+//        } else {
+//            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+//        }
+        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
 
     func shopTogetherButtonTapped() {
-        if userType == UserType.sozie {
-            performSegue(withIdentifier: "toWorkVC", sender: self)
-        } else {
-            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-        }
+//        if userType == UserType.sozie {
+//            performSegue(withIdentifier: "toWorkVC", sender: self)
+//        } else {
+//            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+//        }
+        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
 }
 extension WelcomePageVC: SignUpInfoProvider {

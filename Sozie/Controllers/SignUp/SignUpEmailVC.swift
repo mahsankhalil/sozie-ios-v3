@@ -11,6 +11,7 @@ import MaterialTextField
 import SwiftValidator
 import SVProgressHUD
 import GoogleSignIn
+import TPKeyboardAvoiding
 class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
 
     @IBOutlet weak var signInBtn: UIButton!
@@ -28,6 +29,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     let validator = Validator()
     var signUpDict: [String: Any]?
 
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,9 +37,9 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
-
         applyValidators()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GIDSignIn.sharedInstance().delegate = self

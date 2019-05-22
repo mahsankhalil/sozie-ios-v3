@@ -12,6 +12,7 @@ import GoogleSignIn
 import SVProgressHUD
 import MaterialTextField
 import FBSDKLoginKit
+import TPKeyboardAvoiding
 
 class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
 
@@ -21,7 +22,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var forgotPasswordBtn: UIButton!
-
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     let validator = Validator()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +36,6 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         emailField.setupAppDesign()
         passwordField.setupAppDesign()
         applyRightVuToPassword()
-//        emailField.validationType = .afterEdit
-//        passwordField.validationType = .afterEdit
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

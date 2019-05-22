@@ -11,6 +11,7 @@ import SwiftValidator
 import MaterialTextField
 import SVProgressHUD
 import EasyTipView
+import TPKeyboardAvoiding
 
 class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDelegate {
 
@@ -22,7 +23,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var dateOfBirtTxtFld: DatePickerTextField!
     @IBOutlet weak var signUpButton: DZGradientButton!
     @IBOutlet weak var backButton: UIButton!
-
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     let validator = Validator()
     var isFemaleSelected = false
     var signUpDict: [String: Any]?
