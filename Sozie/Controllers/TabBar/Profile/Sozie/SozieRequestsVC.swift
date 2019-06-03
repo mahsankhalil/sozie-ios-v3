@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 class SozieRequestsVC: UIViewController {
     var reuseableIdentifier = "SozieRequestTableViewCell"
+    var reuseableIdentifierTarget = "TargetRequestTableViewCell"
     @IBOutlet weak var searchCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
@@ -89,10 +90,14 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
-        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
+        var identifier = reuseableIdentifier
+        if viewModel.brandId == 10 {
+            identifier = reuseableIdentifierTarget
+        }
+        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier)
         if tableViewCell == nil {
-            tableView.register(UINib(nibName: reuseableIdentifier, bundle: nil), forCellReuseIdentifier: reuseableIdentifier)
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
+            tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier)
         }
         guard let cell = tableViewCell else { return UITableViewCell() }
         if let cellConfigurable = cell as? CellConfigurable {
@@ -104,6 +109,9 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         if let currentCell = cell as? SozieRequestTableViewCell {
             currentCell.delegate = self
         }
+        if let currentCell = cell as? TargetRequestTableViewCell {
+            currentCell.delegate = self
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -113,6 +121,39 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
+    func nearbyStoresButtonTapped(button: UIButton) {
+        let currentRequest = requests[button.tag]
+        
+        let product = currentRequest.requestedProduct
+        var imageURL = ""
+        if var prodImageURL = product.merchantImageURL {
+            if prodImageURL == "" {
+                if let imageURLTarget = product.imageURL {
+                    imageURL = imageURLTarget
+                }
+            } else {
+                if prodImageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = prodImageURL.components(separatedBy: delimeter)
+                    prodImageURL = url[0]
+                }
+                imageURL = prodImageURL
+            }
+        }
+        if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
+            let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL)
+            popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+            let popUpVC = PopupController
+                .create(self.tabBarController!.navigationController!)
+            //        let options = PopupCustomOption.layout(.bottom)
+            //        popUpVC.cornerRadius = 0.0
+            //        _ = popUpVC.customize([options])
+            _ = popUpVC.show(popUpInstnc)
+            popUpInstnc.closeHandler = { [] in
+                popUpVC.dismiss()
+            }
+        }
+    }
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
         UtilityManager.openImagePickerActionSheetFrom(viewController: self)

@@ -16,6 +16,8 @@ class PostSizeCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        imageView.sd_setShowActivityIndicatorView(true)
+        imageView.sd_setIndicatorStyle(.gray)
         labelBackgroundView.roundCorners(corners: [.topLeft], radius: 20.0)
     }
 

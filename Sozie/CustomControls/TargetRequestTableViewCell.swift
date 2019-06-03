@@ -1,30 +1,22 @@
 //
-//  SozieRequestTableViewCell.swift
+//  TargetRequestTableViewCell.swift
 //  Sozie
 //
-//  Created by Zaighum Ghazali Khan on 2/28/19.
+//  Created by Zaighum Ghazali Khan on 5/31/19.
 //  Copyright © 2019 Danial Zahid. All rights reserved.
 //
 
 import UIKit
-protocol SozieRequestTableViewCellDelegate: class {
-    func acceptRequestButtonTapped(button: UIButton)
-    func nearbyStoresButtonTapped(button: UIButton)
-}
-class SozieRequestTableViewCell: UITableViewCell {
+
+class TargetRequestTableViewCell: UITableViewCell {
     weak var delegate: SozieRequestTableViewCellDelegate?
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var backgroudView: UIView!
     @IBOutlet weak var sizeRequestedLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var sizeLabel: UILabel!
-    @IBOutlet weak var heightLabel: UILabel!
-    @IBOutlet weak var waistLabel: UILabel!
-    @IBOutlet weak var hipLabel: UILabel!
-    @IBOutlet weak var braLabel: UILabel!
     @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var checkStoresButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,8 +37,17 @@ class SozieRequestTableViewCell: UITableViewCell {
     @IBAction func acceptButtonTapped(_ sender: Any) {
         delegate?.acceptRequestButtonTapped(button: sender as! UIButton)
     }
+    @IBAction func checkStoresButtonTapped(_ sender: Any) {
+        delegate?.nearbyStoresButtonTapped(button: sender as! UIButton)
+    }
+    
 }
-extension SozieRequestTableViewCell: CellConfigurable {
+extension TargetRequestTableViewCell: ButtonProviding {
+    func assignTagWith(_ index: Int) {
+        acceptButton.tag = index
+    }
+}
+extension TargetRequestTableViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
             productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
@@ -57,25 +58,6 @@ extension SozieRequestTableViewCell: CellConfigurable {
         }
         if let subTitleModel = viewModel as? SubtitleViewModeling {
             sizeRequestedLabel.text = subTitleModel.subtitle
-        }
-        if let descriptionModel = viewModel as? DescriptionViewModeling {
-            descriptionLabel.text = descriptionModel.description
-        }
-        if let measurementModel = viewModel as? MeasurementViewModeling {
-            if let bra = measurementModel.bra, let cup = measurementModel.cup {
-                braLabel.text = "Bra Size: " + String(bra) + cup
-            }
-            if let height = measurementModel.height {
-                let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
-                let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
-                heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
-            }
-            if let hip = measurementModel.hip {
-                hipLabel.text = "Hip: " + String(hip) + "'  | "
-            }
-            if let waist = measurementModel.waist {
-                waistLabel.text = "Waist: " + String(waist) + "'  | "
-            }
         }
         if let availabilityModel = viewModel as? AvailabilityProviding {
             logoImageView.isHidden = !availabilityModel.isAvailable
@@ -93,35 +75,10 @@ extension SozieRequestTableViewCell: CellConfigurable {
                         self.titleLabel.text = "Requested by " + brand.label
                     }
                 }
-                self.populateCurrentUserMeasurements()
-                self.descriptionLabel.text = "Measurements:"
             }
         } else {
             logoImageView.isHidden = true
             backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
         }
-    }
-    func populateCurrentUserMeasurements() {
-        if let currentUser = UserDefaultManager.getCurrentUserObject() {
-            if let bra = currentUser.measurement?.bra, let cup = currentUser.measurement?.cup {
-                braLabel.text = "Bra Size: " + String(bra) + cup
-            }
-            if let height = currentUser.measurement?.height {
-                let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
-                let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
-                heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
-            }
-            if let hip = currentUser.measurement?.hip {
-                hipLabel.text = "Hip: " + String(hip) + "'  | "
-            }
-            if let waist = currentUser.measurement?.waist {
-                waistLabel.text = "Waist: " + String(waist) + "'  | "
-            }
-        }
-    }
-}
-extension SozieRequestTableViewCell: ButtonProviding {
-    func assignTagWith(_ index: Int) {
-        acceptButton.tag = index
     }
 }

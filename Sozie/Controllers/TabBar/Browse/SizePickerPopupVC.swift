@@ -19,10 +19,9 @@ class SizePickerPopupVC: UIViewController {
     var closeHandler: (() -> Void)?
     var currentProductId: String?
     var currentBrandId: Int?
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if self.delegate == nil {
             titleLabel.text = "What size would you like to request a picture of?"
         } else {

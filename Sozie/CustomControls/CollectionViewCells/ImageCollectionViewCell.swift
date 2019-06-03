@@ -18,6 +18,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
 extension ImageCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imageModel = viewModel as? ImageViewModeling {
+            imageView.sd_setShowActivityIndicatorView(true)
+            imageView.sd_setIndicatorStyle(.gray)
             imageView.sd_setImage(with: imageModel.imageURL, completed: nil)
         }
 

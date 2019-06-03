@@ -43,4 +43,25 @@ extension String {
             return ""
         }
     }
+    
+    public mutating func appendParameters(params: [String: Any]) -> String {
+        var currentString = self
+        currentString = currentString + "?"
+        for key in params.keys {
+            if let strValue = params[key] as? String {
+                currentString = currentString + key + "=" + strValue
+                currentString = currentString + "&"
+            }
+            if let intValue = params[key] as? Int {
+                currentString = currentString + key + "=" + String(intValue)
+                currentString = currentString + "&"
+            }
+            if let boolValue = params[key] as? Bool {
+                currentString = currentString + key + "=" + String(boolValue)
+                currentString = currentString + "&"
+            }
+        }
+        currentString.removeLast()
+        return currentString
+    }
 }

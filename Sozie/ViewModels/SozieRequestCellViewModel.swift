@@ -8,7 +8,9 @@
 
 import UIKit
 
-struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding {
+struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding {
+    var brandId: Int
+    
     var description: String?
     var subtitle: String?
     var isSelected: Bool
@@ -54,5 +56,6 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
         } else {
             self.isAvailable = false
         }
+        self.brandId = request.brandId
     }
 }

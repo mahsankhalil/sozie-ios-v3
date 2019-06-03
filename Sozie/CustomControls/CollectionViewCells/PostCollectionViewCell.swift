@@ -108,6 +108,8 @@ class PostCollectionViewCell: UICollectionViewCell {
 extension PostCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let imgModel = viewModel as? ImageViewModeling {
+            postImageView.sd_setShowActivityIndicatorView(true)
+            postImageView.sd_setIndicatorStyle(.gray)
             postImageView.sd_setImage(with: imgModel.imageURL, completed: nil)
         }
         if let titleModel = viewModel as? TitleViewModeling {

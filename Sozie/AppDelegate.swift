@@ -12,12 +12,15 @@ import GoogleSignIn
 import Appsee
 import Intercom
 import UserNotifications
+import CoreLocation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var imageTaken: UIImage?
     var updatedProduct: Product?
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation!
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
@@ -51,6 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return handled
         }
         return true
+    }
+
+    func setupLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        self.locationManager?.requestWhenInUseAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager?.startUpdatingLocation()
     }
 
     // Respond to Universal Links
@@ -104,5 +115,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+}
+extension AppDelegate: CLLocationManagerDelegate {
+    // Below method will provide you current location.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if currentLocation == nil {
+            currentLocation = locations.last
+            locationManager?.stopMonitoringSignificantLocationChanges()
+            let locationValue: CLLocationCoordinate2D = manager.location!.coordinate
+            print("locations = \(locationValue)")
+            locationManager?.stopUpdatingLocation()
+        }
+    }
+    // Below Mehtod will print error if not able to update location.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error")
     }
 }

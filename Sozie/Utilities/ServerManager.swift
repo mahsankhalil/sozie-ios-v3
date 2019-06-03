@@ -212,7 +212,6 @@ class ServerManager: NSObject {
             url = url + "?is_first_page=" + String(isFirstPage ? 1:0)
         }
         Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
-            
             let decoder = JSONDecoder()
             let obj: Result<BrowseResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

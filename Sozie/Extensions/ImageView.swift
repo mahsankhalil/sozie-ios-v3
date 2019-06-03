@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 extension UIImageView {
 
     func alphaAtPoint(_ point: CGPoint) -> CGFloat {

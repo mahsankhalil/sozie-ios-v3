@@ -300,24 +300,12 @@ class ProductDetailVC: BaseViewController {
         }
     }
     @IBAction func butButtonTapped(_ sender: Any) {
-//        if let productURL = self.currentProduct?.deepLink {
-//            guard let url = URL(string: productURL) else { return }
-//            let svc = SFSafariViewController(url: url)
-//            svc.modalPresentationStyle = .pageSheet
-//            self.tabBarController?.navigationController?.present(svc, animated: true, completion: nil)
-////            self.present(svc, animated: true, completion: nil)
-////            guard let url = URL(string: productURL) else { return }
-////            UIApplication.shared.open(url)
-//        }
-//        self.performSegue(withIdentifier: "toWebVC", sender: self)
         if let productURL = self.currentProduct?.deepLink {
-
             let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
             webVC.url = URL(string: productURL)
             webVC.modalPresentationStyle = .overFullScreen
             self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
         }
-
     }
     @IBAction func shareButtonTapped(_ sender: Any) {
         if var imageURL = currentProduct?.merchantImageURL {
