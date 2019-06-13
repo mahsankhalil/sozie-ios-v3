@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qhF-if-nqj">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -29,17 +29,17 @@
             <objects>
                 <viewController storyboardIdentifier="FirstShopperWelcomeVC" id="o7Z-Zq-OpK" customClass="FirstShopperWelcomeVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MJg-aN-9rq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dfz-4R-Jmj">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ygw-i6-S78">
-                                        <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CdS-jv-fEp">
-                                                <rect key="frame" x="116" y="206" width="88" height="35"/>
+                                                <rect key="frame" x="143.5" y="206" width="88" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="MnN-wO-pcC"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="vYT-xT-y8u"/>
@@ -53,7 +53,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8om-TM-wT3">
-                                                <rect key="frame" x="16" y="40" width="288" height="64"/>
+                                                <rect key="frame" x="16" y="40" width="343" height="48"/>
                                                 <string key="text">Sozies are matched to shoppers who have similar bodies.
 
 Sozie means doppelgänger in French.</string>
@@ -62,7 +62,7 @@ Sozie means doppelgänger in French.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aya-fL-Sim" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="109" y="156" width="102" height="42"/>
+                                                <rect key="frame" x="136.5" y="156" width="102" height="42"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="acf-38-BZt"/>
@@ -77,7 +77,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euG-xD-ZyJ">
-                                                <rect key="frame" x="59.5" y="0.0" width="201.5" height="38"/>
+                                                <rect key="frame" x="87" y="0.0" width="201.5" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="tZy-BX-YMf"/>
                                                 </constraints>
@@ -120,10 +120,10 @@ Sozie means doppelgänger in French.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsd-YP-nKF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0c-CR-tf0" customClass="AVPlayerView" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="64" width="320" height="213"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="312"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -170,17 +170,17 @@ Sozie means doppelgänger in French.</string>
             <objects>
                 <viewController id="7M4-Uv-FDO" customClass="WelcomeRootVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BNM-Nf-BqN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJT-zB-RKE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="2Mj-m6-aUR" kind="embed" id="ptA-uy-6bO"/>
                                 </connections>
                             </containerView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="9DK-0S-NSI">
-                                <rect key="frame" x="140.5" y="531" width="39" height="37"/>
+                                <rect key="frame" x="168" y="630" width="39" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="Nzc-Ae-mMG"/>
                                     <constraint firstAttribute="width" constant="39" id="UkB-Me-2h5"/>
@@ -239,17 +239,17 @@ Sozie means doppelgänger in French.</string>
             <objects>
                 <viewController storyboardIdentifier="FirstSozieWelcomeVC" id="wEW-MG-3er" customClass="FirstSozieWelcomeVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UWO-Zj-xo6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooy-Mb-ouy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rZ3-VN-aKO">
-                                        <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLQ-A9-Ya0">
-                                                <rect key="frame" x="116" y="206" width="88" height="35"/>
+                                                <rect key="frame" x="143.5" y="206" width="88" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="CRG-ys-psF"/>
                                                     <constraint firstAttribute="height" constant="35" id="rrE-0E-nhe"/>
@@ -263,7 +263,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="66p-Lh-8UL">
-                                                <rect key="frame" x="19" y="6" width="282" height="37.5"/>
+                                                <rect key="frame" x="19" y="6" width="337" height="37.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="How do you make ">
                                                         <attributes>
@@ -298,7 +298,7 @@ Sozie means doppelgänger in French.</string>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1SA-ra-zYR" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="109" y="156" width="102" height="42"/>
+                                                <rect key="frame" x="136.5" y="156" width="102" height="42"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102" id="4ar-bB-ZgE"/>
@@ -313,7 +313,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nr0-E2-AdA">
-                                                <rect key="frame" x="46" y="50.5" width="228" height="96"/>
+                                                <rect key="frame" x="73.5" y="50.5" width="228" height="96"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="228" id="wUb-NC-tCL"/>
                                                 </constraints>
@@ -384,13 +384,13 @@ Check your </string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-rV-PXa">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-z3-dQJ">
-                                                <rect key="frame" x="0.0" y="64" width="320" height="221"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="320"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BALANCE" translatesAutoresizingMaskIntoConstraints="NO" id="AEk-Kf-722">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="221"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -445,17 +445,17 @@ Check your </string>
             <objects>
                 <viewController storyboardIdentifier="SecondSozieWelcomeVC" id="Lix-Jp-dBo" customClass="SecondSozieWelcomeVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rph-1e-Fdp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsu-3Q-eW3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndg-ZP-j6g">
-                                        <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-Ab-ebh">
-                                                <rect key="frame" x="116" y="206" width="88" height="35"/>
+                                                <rect key="frame" x="143.5" y="206" width="88" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="fGY-yC-mKg"/>
                                                     <constraint firstAttribute="height" constant="35" id="fK7-hB-9pJ"/>
@@ -469,7 +469,7 @@ Check your </string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIZ-5W-XvI">
-                                                <rect key="frame" x="19" y="6" width="282" height="37.5"/>
+                                                <rect key="frame" x="19" y="6" width="337" height="37.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="What is a ">
                                                         <attributes>
@@ -496,7 +496,7 @@ Check your </string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a28-wu-CZP" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="109" y="156" width="102" height="42"/>
+                                                <rect key="frame" x="136.5" y="156" width="102" height="42"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="lEY-p8-myP"/>
@@ -511,7 +511,7 @@ Check your </string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1r-BL-LIN">
-                                                <rect key="frame" x="19" y="50.5" width="282" height="64"/>
+                                                <rect key="frame" x="19" y="50.5" width="337" height="48"/>
                                                 <string key="text">Sozies are matched to shoppers who have similar bodies.
 
 Sozie means doppelgänger in French.</string>
@@ -536,10 +536,10 @@ Sozie means doppelgänger in French.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jc7-p3-4yC">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g88-gx-6Fa" customClass="AVPlayerView" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="64" width="320" height="221"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="320"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -586,17 +586,17 @@ Sozie means doppelgänger in French.</string>
             <objects>
                 <viewController storyboardIdentifier="ThirdSozieWelcomeVC" id="UzY-eE-cvC" customClass="ThirdSozieWelcomeVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lDc-LS-1mF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Xe-Ya-I6q">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQU-D9-T6r">
-                                        <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't worry! you'll be able to mask your face so people can't spot who you are. To be extra sure, create an anonymous username." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEi-Dg-uJy">
-                                                <rect key="frame" x="24.5" y="52" width="271" height="48"/>
+                                                <rect key="frame" x="52" y="52" width="271" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="271" id="q0a-xp-nyJ"/>
                                                 </constraints>
@@ -605,7 +605,7 @@ Sozie means doppelgänger in French.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CzN-xR-WW3">
-                                                <rect key="frame" x="19" y="6" width="282" height="35"/>
+                                                <rect key="frame" x="19" y="6" width="337" height="35"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Worried about your ">
                                                         <attributes>
@@ -633,7 +633,7 @@ Sozie means doppelgänger in French.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2W-6T-gmt" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="84.5" y="156" width="151" height="42"/>
+                                                <rect key="frame" x="112" y="156" width="151" height="42"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="151" id="gyc-Co-kGZ"/>
@@ -661,13 +661,13 @@ Sozie means doppelgänger in French.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qD-sl-3vU">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1a-wU-N9p">
-                                                <rect key="frame" x="0.0" y="64" width="320" height="221"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="320"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PRIVACY" translatesAutoresizingMaskIntoConstraints="NO" id="fn3-XF-9Aj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="221"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -719,17 +719,17 @@ Sozie means doppelgänger in French.</string>
             <objects>
                 <viewController storyboardIdentifier="ThirdShopperWelcomeVC" id="aEn-Ix-MFW" customClass="ThirdShopperWelcomeVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7aa-aX-Xbb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Pf-r6-chp">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="us6-cs-0la">
-                                        <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hk-hg-BmD" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="84.5" y="156" width="151" height="42"/>
+                                                <rect key="frame" x="112" y="156" width="151" height="42"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="151" id="58i-Ax-Gjm"/>
@@ -744,7 +744,7 @@ Sozie means doppelgänger in French.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always Returning?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryG-YJ-S3H">
-                                                <rect key="frame" x="47" y="0.0" width="226" height="38"/>
+                                                <rect key="frame" x="74.5" y="0.0" width="226" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="o18-BL-H8J"/>
                                                 </constraints>
@@ -753,7 +753,7 @@ Sozie means doppelgänger in French.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zI-zX-RrZ">
-                                                <rect key="frame" x="6.5" y="40" width="307" height="64"/>
+                                                <rect key="frame" x="34" y="40" width="307" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="307" id="0g4-SE-V2E"/>
                                                 </constraints>
@@ -777,10 +777,10 @@ Sozies will show you how clothes will really look on you. So you buy confidently
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgO-gr-I7M">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxa-DC-GiH" customClass="AVPlayerView" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="64" width="320" height="213"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="312"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -827,17 +827,17 @@ Sozies will show you how clothes will really look on you. So you buy confidently
             <objects>
                 <viewController storyboardIdentifier="SecondShopperWelcomeVC" id="L99-jn-W9E" customClass="SecondShopperWelcomeVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lKz-RD-ij8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQI-st-yje">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zw7-GA-ATY">
-                                        <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="283"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHZ-VP-mEs">
-                                                <rect key="frame" x="116" y="206" width="88" height="35"/>
+                                                <rect key="frame" x="143.5" y="206" width="88" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="OTJ-Tz-b8Y"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="UKm-ls-mXW"/>
@@ -851,7 +851,7 @@ Sozies will show you how clothes will really look on you. So you buy confidently
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYC-ua-4Ab" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="109" y="156" width="102" height="42"/>
+                                                <rect key="frame" x="136.5" y="156" width="102" height="42"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="dpQ-Me-yvZ"/>
@@ -866,13 +866,13 @@ Sozies will show you how clothes will really look on you. So you buy confidently
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unsure of what size to buy?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vjh-LQ-dVN">
-                                                <rect key="frame" x="18" y="0.0" width="284" height="37.5"/>
+                                                <rect key="frame" x="18" y="0.0" width="339" height="37.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGq-Av-Kkg">
-                                                <rect key="frame" x="16" y="39.5" width="288" height="64"/>
+                                                <rect key="frame" x="43.5" y="39.5" width="288" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="288" id="nP0-3t-NeB"/>
                                                 </constraints>
@@ -899,13 +899,13 @@ They will try on items of your choice so you can be sure of what size you want t
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4f7-YH-Kcr">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YB5-w6-Z2j">
-                                                <rect key="frame" x="0.0" y="64" width="320" height="213"/>
+                                                <rect key="frame" x="0.0" y="64" width="375" height="312"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UNSURE" translatesAutoresizingMaskIntoConstraints="NO" id="4Ef-Fz-W87">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="312"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -957,14 +957,14 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44G-OJ-YcA" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3u-GX-5Sl">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khG-RI-cv9" userLabel="Back Button">
                                                 <rect key="frame" x="18" y="22" width="45" height="45"/>
@@ -978,10 +978,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="3jW-hQ-oQE">
-                                                <rect key="frame" x="89" y="62" width="142" height="86"/>
+                                                <rect key="frame" x="116.5" y="62" width="142" height="86"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2bI-dV-Fca" customClass="MFTextField">
-                                                <rect key="frame" x="21" y="164" width="278" height="19"/>
+                                                <rect key="frame" x="24.5" y="164" width="326" height="34.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -993,7 +993,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPr-lP-iHn" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="25.5" y="430" width="269" height="50"/>
+                                                <rect key="frame" x="30" y="529" width="315" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="peQ-eL-kjA"/>
                                                 </constraints>
@@ -1003,7 +1003,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SbZ-YA-y8k">
-                                                <rect key="frame" x="35" y="500" width="250" height="35"/>
+                                                <rect key="frame" x="62.5" y="599" width="250" height="35"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="7OE-7M-p3s"/>
@@ -1039,7 +1039,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXO-80-eao" customClass="MFTextField">
-                                                <rect key="frame" x="21" y="208" width="278" height="19"/>
+                                                <rect key="frame" x="24.5" y="223.5" width="326" height="34.5"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -1050,7 +1050,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CyK-iU-Bfw">
-                                                <rect key="frame" x="202" y="220.5" width="92" height="28"/>
+                                                <rect key="frame" x="253.5" y="251.5" width="92" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="aRv-PM-XbN"/>
                                                 </constraints>
@@ -1063,20 +1063,20 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In with Facebook or Gmail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crl-7Y-OR1">
-                                                <rect key="frame" x="64.5" y="260" width="191.5" height="19"/>
+                                                <rect key="frame" x="92" y="291" width="191.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3H-KA-Slj">
-                                                <rect key="frame" x="108" y="294" width="42" height="42"/>
+                                                <rect key="frame" x="135.5" y="325" width="42" height="42"/>
                                                 <state key="normal" image="facebook-login-icon"/>
                                                 <connections>
                                                     <action selector="facebookButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOj-W7-4uf"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbP-TY-kLU">
-                                                <rect key="frame" x="170" y="294" width="42" height="42"/>
+                                                <rect key="frame" x="197.5" y="325" width="42" height="42"/>
                                                 <state key="normal" image="google-login-icon"/>
                                                 <connections>
                                                     <action selector="googleButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VWc-R6-EzA"/>
@@ -1151,21 +1151,21 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="LandingViewController" id="qhF-if-nqj" customClass="LandingViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jyu-xw-oc8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient Shadow" translatesAutoresizingMaskIntoConstraints="NO" id="3xP-qc-lKu">
-                                <rect key="frame" x="0.0" y="278" width="320" height="290"/>
+                                <rect key="frame" x="0.0" y="377" width="375" height="290"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="290" id="x4K-Xm-Bin"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoSignup" translatesAutoresizingMaskIntoConstraints="NO" id="f90-z6-p2F">
-                                <rect key="frame" x="93.5" y="187.5" width="133" height="83"/>
+                                <rect key="frame" x="121" y="237" width="133" height="83"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr4-cf-Obz">
-                                <rect key="frame" x="30" y="326" width="260" height="45"/>
+                                <rect key="frame" x="30" y="442.5" width="315" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="YC8-1M-zHP"/>
@@ -1179,7 +1179,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhn-R8-v2N" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="30" y="437" width="260" height="45"/>
+                                <rect key="frame" x="30" y="553.5" width="315" height="45"/>
                                 <color key="backgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="AFL-5c-s39"/>
@@ -1191,7 +1191,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GPx-l4-byK">
-                                <rect key="frame" x="35" y="518" width="250" height="35"/>
+                                <rect key="frame" x="62.5" y="617" width="250" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="QDX-WL-H6S"/>
@@ -1252,14 +1252,14 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find fashion you love and ask your Sozies to try it on for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-jk-SKW">
-                                <rect key="frame" x="53" y="375" width="214" height="35"/>
+                                <rect key="frame" x="53" y="491.5" width="269" height="35"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try clothes on for shoppers and earn money" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-kk-0qU">
-                                <rect key="frame" x="53" y="489" width="214" height="35"/>
+                                <rect key="frame" x="53" y="605.5" width="269" height="17.5"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1410,7 +1410,7 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="SelectCountryVC" id="AQI-I8-YSA" customClass="SelectCountryVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pl7-p7-juY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfz-ai-YAg" userLabel="Back Button">
@@ -1425,7 +1425,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Your Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Naw-Tm-3Wv">
-                                <rect key="frame" x="25" y="99" width="270" height="46"/>
+                                <rect key="frame" x="25" y="99" width="325" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="uvh-53-pdY"/>
                                 </constraints>
@@ -1434,7 +1434,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsy-Cc-D3H" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="30" y="425" width="260" height="48"/>
+                                <rect key="frame" x="30" y="524" width="315" height="48"/>
                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="k6B-fI-ogK"/>
@@ -1448,7 +1448,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="42" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1WA-1z-KOo">
-                                <rect key="frame" x="45" y="198" width="230" height="84"/>
+                                <rect key="frame" x="45" y="297" width="285" height="84"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="84" id="rUf-be-TnC"/>
@@ -1492,14 +1492,14 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController id="CgK-3q-Hir" customClass="SignUpEmailVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hle-Y0-cPB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mwg-TE-HXV" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cem-kf-ded">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HN-kf-RCf" userLabel="Back Button">
                                                 <rect key="frame" x="18" y="0.0" width="45" height="45"/>
@@ -1513,7 +1513,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmT-Y0-fou">
-                                                <rect key="frame" x="25" y="45" width="270" height="46"/>
+                                                <rect key="frame" x="25" y="45" width="325" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="K27-43-SaB"/>
                                                 </constraints>
@@ -1522,7 +1522,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ytY-zG-3Qq" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="113" width="271" height="19"/>
+                                                <rect key="frame" x="24.5" y="113" width="326" height="34.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -1534,7 +1534,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubF-pe-nlU" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="430" width="260" height="50"/>
+                                                <rect key="frame" x="30" y="529" width="315" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="E6P-G8-aZA"/>
                                                 </constraints>
@@ -1545,7 +1545,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y1b-7x-PVc">
-                                                <rect key="frame" x="35" y="500" width="250" height="35"/>
+                                                <rect key="frame" x="62.5" y="599" width="250" height="35"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="auz-DC-LWK"/>
@@ -1581,7 +1581,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxQ-8O-JIX" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="142" width="271" height="19"/>
+                                                <rect key="frame" x="24.5" y="157.5" width="326" height="34.5"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -1592,7 +1592,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l1y-dB-2qe" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="171" width="271" height="19"/>
+                                                <rect key="frame" x="24.5" y="202" width="326" height="35"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -1603,7 +1603,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up with Facebook or Gmail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHz-JK-vTW">
-                                                <rect key="frame" x="61" y="212" width="198" height="19"/>
+                                                <rect key="frame" x="88.5" y="259" width="198" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="y2q-wT-wN6"/>
                                                 </constraints>
@@ -1612,7 +1612,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ4-N9-vhG">
-                                                <rect key="frame" x="108" y="246" width="104" height="42"/>
+                                                <rect key="frame" x="135.5" y="293" width="104" height="42"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7q-Nm-HqQ">
                                                         <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
@@ -1648,7 +1648,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqw-9I-kR6">
-                                                <rect key="frame" x="272" y="151" width="18" height="22"/>
+                                                <rect key="frame" x="327" y="174.5" width="18" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="18" id="fFJ-nq-7YN"/>
                                                     <constraint firstAttribute="height" constant="22" id="llB-Wc-IVW"/>
@@ -1659,7 +1659,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InS-d4-4vn">
-                                                <rect key="frame" x="272" y="180" width="18" height="22"/>
+                                                <rect key="frame" x="327" y="219" width="18" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="Gdu-OT-rwY"/>
                                                     <constraint firstAttribute="width" constant="18" id="e1q-WY-QzA"/>
@@ -1753,14 +1753,14 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="SignUpViewController" id="2ke-Ea-KbH" customClass="SignUpViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nJE-t9-I8u">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjN-DD-gBX" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2w-Wc-j8a">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTR-Jv-1p8" userLabel="Back Button">
                                                 <rect key="frame" x="18" y="0.0" width="45" height="45"/>
@@ -1774,7 +1774,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8t-Wr-iHs">
-                                                <rect key="frame" x="25" y="45" width="270" height="46"/>
+                                                <rect key="frame" x="25" y="45" width="325" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="wts-ml-BDV"/>
                                                 </constraints>
@@ -1783,13 +1783,13 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMI-yt-sye">
-                                                <rect key="frame" x="25" y="101" width="270" height="33"/>
+                                                <rect key="frame" x="25" y="101" width="325" height="48.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-X1-fLq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="135" height="33"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="48.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="WhJ-6J-xTB" customClass="MFTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="135" height="19"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="34.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -1819,10 +1819,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIP-xh-seK">
-                                                        <rect key="frame" x="135" y="0.0" width="135" height="33"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="48.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="jmG-D3-PZB" customClass="MFTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="135" height="19"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="34.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -1852,13 +1852,13 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This information is for our eyes only and will not be displayed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFp-1I-pcZ">
-                                                        <rect key="frame" x="0.0" y="19.5" width="270" height="13.5"/>
+                                                        <rect key="frame" x="0.0" y="35" width="325" height="13.5"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-Ek-lM7">
-                                                        <rect key="frame" x="133.5" y="6" width="1" height="11"/>
+                                                        <rect key="frame" x="161" y="21.5" width="1" height="11"/>
                                                         <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="11" id="IB9-N4-ViT"/>
@@ -1883,10 +1883,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIP-U0-pQd">
-                                                <rect key="frame" x="25" y="149" width="270" height="33"/>
+                                                <rect key="frame" x="25" y="164.5" width="325" height="48.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-21-rMj" customClass="MFTextField">
-                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="19"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="34.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -1898,7 +1898,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make this anonymous" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6d-hg-miY">
-                                                        <rect key="frame" x="0.0" y="19.5" width="270" height="13.5"/>
+                                                        <rect key="frame" x="0.0" y="35" width="325" height="13.5"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1916,23 +1916,23 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79U-qu-8ew">
-                                                <rect key="frame" x="25" y="197" width="270" height="33"/>
+                                                <rect key="frame" x="25" y="228" width="325" height="33"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of Birth" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJO-9C-cYF" customClass="DatePickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="19"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="19"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This information is for our eyes only and will not be displayed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddM-XV-duY">
-                                                        <rect key="frame" x="0.0" y="19.5" width="270" height="13.5"/>
+                                                        <rect key="frame" x="0.0" y="19.5" width="325" height="13.5"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="birthday-icon" translatesAutoresizingMaskIntoConstraints="NO" id="EmT-fK-jT0">
-                                                        <rect key="frame" x="242" y="6" width="18" height="18"/>
+                                                        <rect key="frame" x="297" y="6" width="18" height="18"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1949,10 +1949,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7O-hf-Dvt">
-                                                <rect key="frame" x="25" y="230" width="270" height="60"/>
+                                                <rect key="frame" x="25" y="261" width="325" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duf-EW-SyB">
-                                                        <rect key="frame" x="0.0" y="30" width="122.5" height="30"/>
+                                                        <rect key="frame" x="0.0" y="30" width="150" height="30"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                         <state key="normal" title="Female">
@@ -1963,7 +1963,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ep0-w7-gfX">
-                                                        <rect key="frame" x="147.5" y="30" width="122.5" height="30"/>
+                                                        <rect key="frame" x="175" y="30" width="150" height="30"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                         <state key="normal" title="Male">
@@ -1988,7 +1988,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubp-I4-qtT" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="485" width="260" height="48"/>
+                                                <rect key="frame" x="30" y="584" width="315" height="48"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="TAT-SS-Osg"/>
@@ -2091,7 +2091,7 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="UploadProfilePictureVC" id="nsU-Bf-Cm8" customClass="UploadProfilePictureVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0DX-98-27p">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTp-Sh-bN7" userLabel="Back Button">
@@ -2106,7 +2106,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvL-2W-2CZ">
-                                <rect key="frame" x="25" y="99" width="270" height="46"/>
+                                <rect key="frame" x="25" y="99" width="325" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="jXg-Qf-ABz"/>
                                 </constraints>
@@ -2115,7 +2115,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please upload a profile picture. It does not have to be a real picture of you. Make it fun!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FL-mo-9Bx">
-                                <rect key="frame" x="25" y="145" width="270" height="38"/>
+                                <rect key="frame" x="25" y="145" width="325" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="avr-gc-xcY"/>
                                 </constraints>
@@ -2124,7 +2124,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-6Y-f9h" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="30" y="445" width="260" height="48"/>
+                                <rect key="frame" x="30" y="544" width="315" height="48"/>
                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="DAL-7f-hDg"/>
@@ -2138,7 +2138,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxo-S1-OEu">
-                                <rect key="frame" x="30" y="525" width="260" height="31"/>
+                                <rect key="frame" x="30" y="624" width="315" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="j1g-fz-J2V"/>
                                 </constraints>
@@ -2152,7 +2152,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Emoji" translatesAutoresizingMaskIntoConstraints="NO" id="v7Y-pO-2yD">
-                                <rect key="frame" x="60" y="184" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="233.5" width="200" height="200"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.96078431372549022" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="1aS-Cn-5ef"/>
@@ -2160,7 +2160,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAB-dS-Avi">
-                                <rect key="frame" x="229.5" y="352.5" width="34" height="40"/>
+                                <rect key="frame" x="257" y="402" width="34" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" id="KYm-H0-I7K"/>
@@ -2212,7 +2212,7 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="InviteFriendsVC" id="Jow-Nv-fR8" customClass="InviteFriendsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ab9-if-jiQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ket-Qs-MaW" userLabel="Back Button">
@@ -2227,7 +2227,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HY1-qz-Xmb">
-                                <rect key="frame" x="25" y="99" width="270" height="46"/>
+                                <rect key="frame" x="25" y="99" width="325" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="rsw-ac-4oF"/>
                                 </constraints>
@@ -2239,7 +2239,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The more the merrier. Click invite below to share the fun with your friends!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1c-s6-TlV">
-                                <rect key="frame" x="25" y="145" width="270" height="38"/>
+                                <rect key="frame" x="25" y="145" width="325" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="0lC-E2-Jd7"/>
                                 </constraints>
@@ -2248,7 +2248,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfy-kS-chd" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="30" y="445" width="260" height="48"/>
+                                <rect key="frame" x="30" y="544" width="315" height="48"/>
                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="xoO-Ti-EO8"/>
@@ -2262,7 +2262,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WU-uJ-atu">
-                                <rect key="frame" x="30" y="525" width="260" height="31"/>
+                                <rect key="frame" x="30" y="624" width="315" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="8al-CL-vCZ"/>
                                 </constraints>
@@ -2275,7 +2275,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vS1-gy-5De">
-                                <rect key="frame" x="35" y="261" width="250" height="46"/>
+                                <rect key="frame" x="62.5" y="310.5" width="250" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="SG2-Xy-JH2"/>
                                     <constraint firstAttribute="width" constant="250" id="zJt-ze-aLr"/>
@@ -2352,14 +2352,14 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="SelectWorkVC" id="5ua-jO-hcB" customClass="SelectWorkVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zMN-po-WQ5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5h-Ya-9bW" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUK-wJ-ySF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPA-iu-Uwb" userLabel="Back Button">
                                                 <rect key="frame" x="18" y="42" width="45" height="45"/>
@@ -2373,7 +2373,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which store would you like to visit?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ax-hb-fdg">
-                                                <rect key="frame" x="25" y="99" width="270" height="93"/>
+                                                <rect key="frame" x="25" y="99" width="325" height="93"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="93" id="gwy-Pi-Udx"/>
                                                 </constraints>
@@ -2382,7 +2382,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhC-Ir-t3x" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="445" width="260" height="48"/>
+                                                <rect key="frame" x="30" y="544" width="315" height="48"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="IHv-Ww-FDV"/>
@@ -2396,14 +2396,14 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LqJ-iI-gYO">
-                                                <rect key="frame" x="0.0" y="201" width="320" height="1"/>
+                                                <rect key="frame" x="0.0" y="300" width="375" height="1"/>
                                                 <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="0S8-u9-1O6"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KG6-vN-jm7">
-                                                <rect key="frame" x="25" y="200" width="270" height="43"/>
+                                                <rect key="frame" x="25" y="200" width="325" height="43"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search icon" translatesAutoresizingMaskIntoConstraints="NO" id="uOz-RT-6Om">
                                                         <rect key="frame" x="0.0" y="14" width="15" height="15"/>
@@ -2413,7 +2413,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b9k-sk-x7k">
-                                                        <rect key="frame" x="23" y="6.5" width="247" height="30"/>
+                                                        <rect key="frame" x="23" y="6.5" width="302" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="ukh-QL-J31"/>
                                                         </constraints>
@@ -2422,7 +2422,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ao0-yc-Ulw">
-                                                        <rect key="frame" x="0.0" y="42" width="270" height="1"/>
+                                                        <rect key="frame" x="0.0" y="42" width="325" height="1"/>
                                                         <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="NIa-NK-bJG"/>
@@ -2443,7 +2443,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hw1-HP-NM5">
-                                                <rect key="frame" x="46" y="242" width="228" height="203"/>
+                                                <rect key="frame" x="46" y="341" width="283" height="203"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="203" id="yu9-nj-xYW"/>
@@ -2518,13 +2518,13 @@ They will try on items of your choice so you can be sure of what size you want t
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIZE CHART" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25Y-ee-3E7">
-                                <rect key="frame" x="132.5" y="43" width="78.5" height="19"/>
+                                <rect key="frame" x="131.5" y="43" width="80.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="14"/>
                                 <color key="textColor" red="0.98823529409999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zf9-5B-bN3">
-                                <rect key="frame" x="14" y="81.5" width="315" height="80"/>
+                                <rect key="frame" x="14" y="79" width="315" height="80"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O7y-LR-Sa2">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="80"/>
@@ -2597,7 +2597,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-jM-Bx3">
-                                <rect key="frame" x="14" y="195.5" width="315" height="220"/>
+                                <rect key="frame" x="14" y="193" width="315" height="220"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-P4-zsZ">
                                         <rect key="frame" x="0.0" y="33" width="315" height="1"/>
@@ -3089,17 +3089,17 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="ResetPasswordVC" id="fwQ-u0-Ocn" customClass="ResetPasswordVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b3R-gJ-e6F">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8V7-ZT-jbf" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkW-9l-zwx">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gu-rE-hDT">
-                                                <rect key="frame" x="25" y="99" width="270" height="46"/>
+                                                <rect key="frame" x="25" y="99" width="325" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="fhk-Ii-ymz"/>
                                                 </constraints>
@@ -3119,7 +3119,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYa-zt-Ps2" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="235.5" width="272" height="19"/>
+                                                <rect key="frame" x="24" y="251" width="327" height="34.5"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -3130,7 +3130,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NGd-1D-h07" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="191" width="272" height="19"/>
+                                                <rect key="frame" x="24" y="191" width="327" height="34.5"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -3141,7 +3141,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lbv-qe-RAS" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="445" width="260" height="48"/>
+                                                <rect key="frame" x="30" y="544" width="315" height="48"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="LnZ-VC-lfW"/>
@@ -3212,17 +3212,17 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController storyboardIdentifier="MeasurementsVC" id="Rft-Ix-kIG" customClass="MeasurementsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vRv-o0-wdD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyS-U5-Ecw" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGa-Do-dEv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measurements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4FQ-14-O9L">
-                                                <rect key="frame" x="25" y="45" width="221" height="46"/>
+                                                <rect key="frame" x="25" y="45" width="225" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="gir-oI-ahx"/>
                                                 </constraints>
@@ -3251,7 +3251,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jbN-b4-NnX">
-                                                <rect key="frame" x="25" y="148" width="270" height="326"/>
+                                                <rect key="frame" x="25" y="148" width="325" height="326"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="326" id="ok3-YK-W2N"/>
@@ -3262,7 +3262,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zja-wb-SkP" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="454" width="260" height="48"/>
+                                                <rect key="frame" x="30" y="553" width="315" height="48"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="e0M-lD-Bep"/>
@@ -3276,7 +3276,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUx-dl-z50">
-                                                <rect key="frame" x="30" y="507" width="260" height="31"/>
+                                                <rect key="frame" x="30" y="606" width="315" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="GAW-Ya-axv"/>
                                                 </constraints>
@@ -3444,11 +3444,11 @@ They will try on items of your choice so you can be sure of what size you want t
             <objects>
                 <viewController id="UGJ-0I-bLy" customClass="MeasurementTutorialVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WG5-9Y-Z4Z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tge-s8-GFo">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Measure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhB-0K-Zc8">
                                         <rect key="frame" x="25" y="79" width="247" height="46"/>
@@ -3460,7 +3460,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWd-g3-4wD">
-                                        <rect key="frame" x="0.0" y="258" width="320" height="310"/>
+                                        <rect key="frame" x="0.0" y="357" width="375" height="310"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A" translatesAutoresizingMaskIntoConstraints="NO" id="zi9-uN-puF">
                                                 <rect key="frame" x="8" y="0.0" width="48" height="48"/>
@@ -3486,7 +3486,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRI-Gw-k3c">
-                                                <rect key="frame" x="56" y="34" width="203.5" height="48"/>
+                                                <rect key="frame" x="56" y="34" width="270.5" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="G3v-gH-yOp"/>
                                                 </constraints>
@@ -3498,7 +3498,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hips:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6L-lk-cCB">
-                                                <rect key="frame" x="56" y="246" width="31" height="18"/>
+                                                <rect key="frame" x="56" y="214" width="31" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="0Bj-95-Uql"/>
                                                 </constraints>
@@ -3507,7 +3507,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-p1-YMc">
-                                                <rect key="frame" x="56" y="127" width="245.5" height="96"/>
+                                                <rect key="frame" x="56" y="127" width="300.5" height="64"/>
                                                 <string key="text">-Bend to one side to find the natural crease of your waist
 -This is the slimmest part of the waist
 -Measure across at this point
@@ -3526,7 +3526,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HqO-r0-G7q">
-                                                <rect key="frame" x="56" y="268" width="234.5" height="48"/>
+                                                <rect key="frame" x="56" y="236" width="278.5" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="s1e-vZ-hp6"/>
                                                 </constraints>
@@ -3575,10 +3575,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Body Measurement" translatesAutoresizingMaskIntoConstraints="NO" id="33i-sC-df4">
-                                        <rect key="frame" x="0.0" y="152" width="320" height="106"/>
+                                        <rect key="frame" x="0.0" y="152" width="375" height="205"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srC-fp-BQT">
-                                        <rect key="frame" x="275" y="20" width="45" height="48"/>
+                                        <rect key="frame" x="330" y="20" width="45" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="cvw-w7-ggp"/>
                                             <constraint firstAttribute="height" constant="48" id="sOx-45-smt"/>

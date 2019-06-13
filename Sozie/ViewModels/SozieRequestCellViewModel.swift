@@ -8,9 +8,8 @@
 
 import UIKit
 
-struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding {
+struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding, FilledViewModeling, ExpiryViewModeling {
     var brandId: Int
-    
     var description: String?
     var subtitle: String?
     var isSelected: Bool
@@ -23,6 +22,8 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var waist: Int?
     var imageURL: URL?
     var isAvailable: Bool
+    var isFilled: Bool
+    var expiry: String
 
     init (request: SozieRequest) {
         var imageURL = ""
@@ -57,5 +58,11 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
             self.isAvailable = false
         }
         self.brandId = request.brandId
+        self.isFilled = request.isFilled
+        if let acceptedRequest = request.acceptedRequest {
+            self.expiry = acceptedRequest.expiry ?? ""
+        } else {
+            self.expiry = ""
+        }
     }
 }

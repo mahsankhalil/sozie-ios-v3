@@ -121,9 +121,31 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
+    func cancelRequestButtonTapped(button: UIButton) {
+        let currentRequest = requests[button.tag]
+        if let acceptedRequestId = currentRequest.acceptedRequest?.acceptedId {
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.cancelRequest(requestId: acceptedRequestId) { (isSuccess, _) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: button.tag, section: 0)) as? SozieRequestTableViewCell {
+                        cell.timer?.invalidate()
+                        cell.timer = nil
+                    } else if let cell = self.tableView.cellForRow(at: IndexPath(row: button.tag, section: 0)) as? TargetRequestTableViewCell {
+                        cell.timer?.invalidate()
+                        cell.timer = nil
+                    }
+                    self.serverParams.removeAll()
+                    self.requests.removeAll()
+                    self.fetchAllSozieRequests()
+                }
+            }
+        }
+        
+    }
+
     func nearbyStoresButtonTapped(button: UIButton) {
         let currentRequest = requests[button.tag]
-        
         let product = currentRequest.requestedProduct
         var imageURL = ""
         if var prodImageURL = product.merchantImageURL {
@@ -156,7 +178,21 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     }
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
-        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        if currentRequest?.isAccepted == true {
+            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        } else {
+            SVProgressHUD.show()
+            var dataDict = [String: Any]()
+            dataDict["product_request"] = currentRequest?.requestId
+            ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, _) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.serverParams.removeAll()
+                    self.requests.removeAll()
+                    self.fetchAllSozieRequests()
+                }
+            }
+        }
     }
 }
 extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

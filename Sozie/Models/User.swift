@@ -99,6 +99,7 @@ struct Measurements: Codable {
     var hip: Int?
     var cup: String?
     var waist: Int?
+    var size: String?
 
     enum CodingKeys: String, CodingKey {
         case bra
@@ -107,6 +108,7 @@ struct Measurements: Codable {
         case hip
         case cup
         case waist
+        case size
     }
 
     init(from decoder: Decoder) throws {
@@ -117,5 +119,6 @@ struct Measurements: Codable {
         hip = try? values.decode(Int.self, forKey: .hip)
         cup = try? values.decode(String.self, forKey: .cup)
         waist = try? values.decode(Int.self, forKey: .waist)
+        size = try? values.decode(String.self, forKey: .size)
     }
 }

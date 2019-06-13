@@ -92,18 +92,42 @@
                                     <action selector="checkStoresButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zFO-CA-Nw3"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAj-fp-ddn">
+                                <rect key="frame" x="59" y="127" width="40.5" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="Xor-8D-xB1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bd-Ae-oty">
+                                <rect key="frame" x="311" y="76" width="32" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="QUP-H5-Hsr"/>
+                                    <constraint firstAttribute="width" constant="32" id="SUS-g3-UxP"/>
+                                </constraints>
+                                <state key="normal" image="Cancel icon"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="unQ-28-sWT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4dp-ZY-5pe" firstAttribute="leading" secondItem="vEi-4F-nlD" secondAttribute="trailing" constant="10" id="0ag-4a-20f"/>
                             <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="AGl-Sm-i7c" secondAttribute="trailing" id="28t-sD-bte"/>
                             <constraint firstItem="WuJ-8Q-nGb" firstAttribute="leading" secondItem="vEi-4F-nlD" secondAttribute="trailing" constant="10" id="7BR-y2-VVF"/>
+                            <constraint firstAttribute="trailing" secondItem="6bd-Ae-oty" secondAttribute="trailing" id="8du-WL-RKj"/>
                             <constraint firstItem="fsa-6p-Xiv" firstAttribute="leading" secondItem="vEi-4F-nlD" secondAttribute="trailing" constant="10" id="E3d-Dv-dBH"/>
+                            <constraint firstItem="pAj-fp-ddn" firstAttribute="top" secondItem="vEi-4F-nlD" secondAttribute="bottom" id="Lcd-xl-St5"/>
                             <constraint firstAttribute="trailing" secondItem="WuJ-8Q-nGb" secondAttribute="trailing" id="Nah-AO-9Ew"/>
                             <constraint firstItem="4dp-ZY-5pe" firstAttribute="top" secondItem="fsa-6p-Xiv" secondAttribute="bottom" constant="9" id="Num-zQ-yjm"/>
                             <constraint firstItem="AGl-Sm-i7c" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" constant="16" id="Sn7-3Z-rDk"/>
                             <constraint firstItem="WuJ-8Q-nGb" firstAttribute="top" secondItem="4dp-ZY-5pe" secondAttribute="bottom" constant="8" id="UXq-ua-MXN"/>
                             <constraint firstItem="fsa-6p-Xiv" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" constant="43" id="Yc6-U2-oeT"/>
+                            <constraint firstItem="pAj-fp-ddn" firstAttribute="centerX" secondItem="vEi-4F-nlD" secondAttribute="centerX" id="cZk-JX-Voq"/>
+                            <constraint firstItem="6bd-Ae-oty" firstAttribute="top" secondItem="AGl-Sm-i7c" secondAttribute="bottom" constant="41" id="eI5-hZ-4zV"/>
                             <constraint firstItem="vEi-4F-nlD" firstAttribute="leading" secondItem="3rl-IZ-nQQ" secondAttribute="leading" constant="11" id="eyb-WB-rE7"/>
                             <constraint firstItem="0nT-0w-pmW" firstAttribute="leading" secondItem="3rl-IZ-nQQ" secondAttribute="leading" id="kp0-15-uIY"/>
                             <constraint firstItem="0nT-0w-pmW" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" id="lYF-Yy-IXa"/>
@@ -123,16 +147,19 @@
             <connections>
                 <outlet property="acceptButton" destination="4dp-ZY-5pe" id="8bT-jw-hjh"/>
                 <outlet property="backgroudView" destination="3rl-IZ-nQQ" id="5zR-Ma-WAu"/>
+                <outlet property="cancelButton" destination="6bd-Ae-oty" id="RgW-Ic-5e3"/>
                 <outlet property="checkStoresButton" destination="WuJ-8Q-nGb" id="DxO-HE-36i"/>
                 <outlet property="logoImageView" destination="0nT-0w-pmW" id="5Fl-dl-FWQ"/>
                 <outlet property="productImageView" destination="vEi-4F-nlD" id="NY1-3f-vRa"/>
                 <outlet property="sizeRequestedLabel" destination="fsa-6p-Xiv" id="Nhu-BB-fuq"/>
+                <outlet property="timerLabel" destination="pAj-fp-ddn" id="wrA-uR-pjC"/>
                 <outlet property="titleLabel" destination="AGl-Sm-i7c" id="VYf-Xv-sl9"/>
             </connections>
             <point key="canvasLocation" x="-69.599999999999994" y="152.47376311844079"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Cancel icon" width="13" height="15"/>
         <image name="ProductImg1.png" width="904" height="1322"/>
         <image name="SOZIE JOB" width="45" height="45"/>
         <image name="placeholder" width="7.5" height="10"/>

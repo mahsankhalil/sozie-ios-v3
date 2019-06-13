@@ -16,6 +16,8 @@ public enum MeasurementType: Int {
     case waist
     case hips
     case braSize
+    case size
+    case waistHips
 }
 
 class LocalMeasurement: NSObject {
@@ -25,6 +27,7 @@ class LocalMeasurement: NSObject {
     var hip: String?
     var cup: String?
     var waist: String?
+    var size: String?
 }
 
 class MeasurementsVC: UIViewController {
@@ -69,6 +72,9 @@ class MeasurementsVC: UIViewController {
             if let waist = user.measurement?.waist {
                 currentMeasurement.waist = String(waist)
             }
+            if let size = user.measurement?.size {
+                currentMeasurement.size = size
+            }
         } else {
             currentMeasurement = LocalMeasurement()
         }
@@ -109,14 +115,19 @@ class MeasurementsVC: UIViewController {
                 hip = self.currentMeasurement.hip
                 bra = self.currentMeasurement.bra
                 cup = self.currentMeasurement.cup
+                var currentSize = self.currentMeasurement.size
+                let wornSizes = self.converArrayOfGeneralToStringArray(generalSizes: size.general)
                 let heightViewModel = DoubleTextFieldCellViewModel(text1: heightFeet, text2: heightInches, title: "HEIGHT", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
-                let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: waist, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
-
-                let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: hip, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
+                let waistHipsModel = DoubleTextFieldCellViewModel(text1: waist, text2: hip, title: "WAIST & HIPS", columnUnit: ["in", "in"], columnPlaceholder: ["Waist", "Hips"], columnValueSuffix: ["\"", "\""], columnValues: [size.waist.convertArrayToString(), size.hip.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist and Hips", measurementType: .waistHips)
+                
+//                let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: waist, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
+//
+//                let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: hip, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
 
                 let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title: "BRA SIZE", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
+                let sizeWornViewModel = TitleTextFieldCellViewModel(title: "Dress Size", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self)
 
-                self.rowViewModels = [heightViewModel, waistViewModel, hipsViewModel, braViewModel]
+                self.rowViewModels = [heightViewModel, waistHipsModel, braViewModel, sizeWornViewModel]
                 self.sizes = size
                 self.tblVu.reloadData()
             } else {
@@ -137,6 +148,13 @@ class MeasurementsVC: UIViewController {
             destVC?.isFromSignUp = true
         }
     }
+    func converArrayOfGeneralToStringArray(generalSizes: [General]) -> [String] {
+        var sizes = [String]()
+        for size in generalSizes {
+            sizes.append(size.label)
+        }
+        return sizes
+    }
 
     private func isValidMeasurements() -> Bool {
         return currentMeasurement.height != nil && currentMeasurement.waist != nil &&
@@ -151,6 +169,7 @@ class MeasurementsVC: UIViewController {
             dataDict["hip"] = Int(currentMeasurement.hip!)
             dataDict["bra"] = Int(currentMeasurement.bra!)
             dataDict["cup"] = currentMeasurement.cup!
+            dataDict["size"] = currentMeasurement.size
             SVProgressHUD.show()
             ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
@@ -177,9 +196,9 @@ class MeasurementsVC: UIViewController {
             }
 
             setError(for: 0, isError: currentMeasurement.height == nil)
-            setError(for: 1, isError: currentMeasurement.waist == nil)
-            setError(for: 2, isError: currentMeasurement.hip == nil)
-            setError(for: 3, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil)
+            setError(for: 1, isError: currentMeasurement.waist == nil || currentMeasurement.hip == nil)
+            setError(for: 2, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil)
+            setError(for: 3, isError: currentMeasurement.size == nil)
 
             tblVu.reloadData()
         }
@@ -251,6 +270,9 @@ extension MeasurementsVC: TextFieldDelegate {
         if let measurementTypeProvider = rowViewModels[index] as? MeasurementTypeProviding {
             let type = measurementTypeProvider.measurementType
             switch type {
+            case .waistHips:
+                currentMeasurement.waist = text
+                currentMeasurement.hip = text2
             case .hips:
                 currentMeasurement.hip = text
             case .waist:
@@ -263,6 +285,8 @@ extension MeasurementsVC: TextFieldDelegate {
 //                let heightInches = (Double(text2 ?? "1.0") ?? 1.0)/12.0
                 let inchesStr = String(heightInches)
                 currentMeasurement.height = inchesStr
+            case .size:
+                currentMeasurement.size = text
             }
         }
     }
