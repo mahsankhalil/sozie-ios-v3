@@ -9,8 +9,8 @@
 import UIKit
 import FBSDKCoreKit
 import GoogleSignIn
-import Appsee
-import Intercom
+//import Appsee
+//import Intercom
 import UserNotifications
 import CoreLocation
 @UIApplicationMain
@@ -33,9 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
             self.window?.rootViewController = rootViewController
         }
-        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
-        UtilityManager.registerUserOnIntercom()
-        Appsee.start()
+//        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
+//        UtilityManager.registerUserOnIntercom()
+//        Appsee.start()
         return true
     }
 
@@ -93,12 +93,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Intercom.setDeviceToken(deviceToken)
+//        Intercom.setDeviceToken(deviceToken)
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if Intercom.isIntercomPushNotification(userInfo) {
-            Intercom.handlePushNotification(userInfo)
-        }
+//        if Intercom.isIntercomPushNotification(userInfo) {
+//            Intercom.handlePushNotification(userInfo)
+//        }
         completionHandler(.noData)
     }
 

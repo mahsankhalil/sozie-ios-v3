@@ -10,7 +10,7 @@ import UIKit
 //import SnapKit
 import SVProgressHUD
 import EasyTipView
-import Intercom
+//import Intercom
 import Photos
 class UtilityManager: NSObject {
 
@@ -274,13 +274,13 @@ class UtilityManager: NSObject {
             return "Just now"
         }
     }
-    static func registerUserOnIntercom() {
-        if let user = UserDefaultManager.getCurrentUserObject() {
-            Intercom.registerUser(withUserId: String(user.userId), email: user.email)
-        } else {
-            Intercom.registerUnidentifiedUser()
-        }
-    }
+//    static func registerUserOnIntercom() {
+//        if let user = UserDefaultManager.getCurrentUserObject() {
+//            Intercom.registerUser(withUserId: String(user.userId), email: user.email)
+//        } else {
+//            Intercom.registerUnidentifiedUser()
+//        }
+//    }
 }
 
 extension Double {

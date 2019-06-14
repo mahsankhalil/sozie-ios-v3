@@ -11,7 +11,7 @@ import SVProgressHUD
 import StoreKit
 import SideMenu
 import MessageUI
-import Intercom
+//import Intercom
 struct TitleCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewModeling, LineProviding {
     var isHidden: Bool
     var title: String?
@@ -111,7 +111,7 @@ class ProfileSideMenuVC: BaseViewController {
         ServerManager.sharedInstance.logoutUser(params: dataDict) { (_, _) in
             SVProgressHUD.dismiss()
             UserDefaultManager.deleteLoginResponse()
-            Intercom.logout()
+//            Intercom.logout()
             self.changeRootVCToLoginNC()
         }
     }

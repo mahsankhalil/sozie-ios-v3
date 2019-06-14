@@ -147,7 +147,7 @@ extension WelcomePageVC: WelcomeButtonActionsDelegate {
 //        } else {
 //            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
 //        }
-        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+        self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
 
     func shopTogetherButtonTapped() {
@@ -156,7 +156,7 @@ extension WelcomePageVC: WelcomeButtonActionsDelegate {
 //        } else {
 //            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
 //        }
-        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+        self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
 }
 extension WelcomePageVC: SignUpInfoProvider {

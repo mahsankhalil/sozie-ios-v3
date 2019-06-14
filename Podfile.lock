@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.8.0)
-  - Appsee (2.5.1)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -28,7 +27,6 @@ PODS:
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - GTMSessionFetcher/Core (1.2.1)
   - Hex (6.0.0)
-  - Intercom (5.2.1)
   - MaterialTextField (1.0.1)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -42,7 +40,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - Appsee (~> 2.5.1)
   - CCBottomRefreshControl
   - DLRadioButton (~> 1.4)
   - EasyTipView (~> 2.0.0)
@@ -50,7 +47,6 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - GoogleSignIn
   - Hex
-  - Intercom
   - MaterialTextField (~> 1.0)
   - SDWebImage (~> 4.0)
   - SideMenu
@@ -63,7 +59,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - Appsee
     - Bolts
     - CCBottomRefreshControl
     - DLRadioButton
@@ -74,7 +69,6 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - Hex
-    - Intercom
     - MaterialTextField
     - SDWebImage
     - SideMenu
@@ -95,7 +89,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
-  Appsee: 939b7bac5d89c9e4215e45c92aa85dacbdb95917
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CCBottomRefreshControl: 389780b4488321c91d18f66a6da5ef9606df6de5
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
@@ -106,7 +99,6 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   Hex: 3888e06c29fe725b12e33d434e31b06beb4112db
-  Intercom: 53f07c24f0ca18c1e910750e79b75f9c9867338f
   MaterialTextField: f1a0786588e4d3610cb9bb62d2adbe9777cebbf9
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
@@ -116,6 +108,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: 44afa8c015694137b50686320693a52fc94574d7
+PODFILE CHECKSUM: 00da289905a86a0d1afb55b12db91b310119cee6
 
 COCOAPODS: 1.5.3
