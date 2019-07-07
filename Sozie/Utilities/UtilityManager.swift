@@ -151,7 +151,7 @@ class UtilityManager: NSObject {
         controller.present(alert, animated: true, completion: nil)
     }
 
-    static func showMessageWith(title: String, body: String, in controller: UIViewController, okBtnTitle: String = "OK", cancelBtnTitle: String? = nil, block: (() -> Void)? = nil) {
+    static func showMessageWith(title: String, body: String, in controller: UIViewController, okBtnTitle: String = "OK", cancelBtnTitle: String? = nil, dismissAfter: Int? = nil, block: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
         let okBtnAction = UIAlertAction(title: okBtnTitle, style: .default) { (_) in
             block?()
@@ -162,6 +162,15 @@ class UtilityManager: NSObject {
             alert.addAction(cancelAction)
         }
         controller.present(alert, animated: true, completion: nil)
+        if let seconds = dismissAfter {
+            let dispatchAfter = DispatchTimeInterval.seconds(seconds)
+            let when = DispatchTime.now() + dispatchAfter
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                // your code with delay
+                alert.dismiss(animated: true, completion: nil)
+            }
+
+        }
     }
 
 //    static func showMessageWith(title : String , body : String, in controller : UIViewController) {

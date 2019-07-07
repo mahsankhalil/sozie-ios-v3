@@ -133,6 +133,8 @@
 		61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A20A5621E5DDAC00B27C8E /* SingleTextFieldCell.xib */; };
 		61A20A5B21E5DDBF00B27C8E /* DoubleTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */; };
 		61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */; };
+		61B565CD22CE00110073DBA3 /* FitTipsAnswerTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B565CC22CE00110073DBA3 /* FitTipsAnswerTextVC.swift */; };
+		61B565D122CE03F00073DBA3 /* OptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B565D022CE03F00073DBA3 /* OptionsViewModel.swift */; };
 		61B5A0C9229D3E60009D372C /* TargetProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B5A0C8229D3E60009D372C /* TargetProduct.swift */; };
 		61B5A0CC229E8B12009D372C /* StoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B5A0CA229E8B12009D372C /* StoreCell.swift */; };
 		61B5A0CD229E8B12009D372C /* StoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61B5A0CB229E8B12009D372C /* StoreCell.xib */; };
@@ -169,6 +171,16 @@
 		61C40D14221EB35D00FBD7FF /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */; };
 		61C40D16221EC65600FBD7FF /* Apricot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D15221EC65600FBD7FF /* Apricot@3x.png */; };
 		61E8E73322044FA9008C33BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E8E73222044FA9008C33BC /* ViewController.swift */; };
+		61F0284422CA497200B3BB4B /* UploadPostAndFitTipsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0284322CA497200B3BB4B /* UploadPostAndFitTipsVC.swift */; };
+		61F0284622CB395800B3BB4B /* UploadPictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0284522CB395700B3BB4B /* UploadPictureCell.swift */; };
+		61F0284822CB424900B3BB4B /* UploadPictureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0284722CB424900B3BB4B /* UploadPictureViewModel.swift */; };
+		61F0284A22CB7EB200B3BB4B /* ImageProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0284922CB7EB200B3BB4B /* ImageProviding.swift */; };
+		61F0284C22CC8BE600B3BB4B /* FitTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0284B22CC8BE600B3BB4B /* FitTips.swift */; };
+		61F0284E22CCBDE400B3BB4B /* FitTipsListingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0284D22CCBDE400B3BB4B /* FitTipsListingVC.swift */; };
+		61F0285022CCBE1700B3BB4B /* FitTipsAnswerTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0284F22CCBE1700B3BB4B /* FitTipsAnswerTableVC.swift */; };
+		61F0285222CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0285122CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift */; };
+		61F0285422CCBE4F00B3BB4B /* FitTipsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0285322CCBE4F00B3BB4B /* FitTipsNavigationController.swift */; };
+		61F0285622CCC85800B3BB4B /* FitTipsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0285522CCC85800B3BB4B /* FitTipsViewModel.swift */; };
 		61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F35F402217FBF7007B7A44 /* CountViewModeling.swift */; };
 		61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
@@ -344,6 +356,8 @@
 		61A20A5621E5DDAC00B27C8E /* SingleTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleTextFieldCell.xib; sourceTree = "<group>"; };
 		61A20A5921E5DDBF00B27C8E /* DoubleTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextFieldCell.swift; sourceTree = "<group>"; };
 		61A20A5A21E5DDBF00B27C8E /* DoubleTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleTextFieldCell.xib; sourceTree = "<group>"; };
+		61B565CC22CE00110073DBA3 /* FitTipsAnswerTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsAnswerTextVC.swift; sourceTree = "<group>"; };
+		61B565D022CE03F00073DBA3 /* OptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewModel.swift; sourceTree = "<group>"; };
 		61B5A0C8229D3E60009D372C /* TargetProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetProduct.swift; sourceTree = "<group>"; };
 		61B5A0CA229E8B12009D372C /* StoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreCell.swift; sourceTree = "<group>"; };
 		61B5A0CB229E8B12009D372C /* StoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreCell.xib; sourceTree = "<group>"; };
@@ -380,6 +394,16 @@
 		61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
 		61C40D15221EC65600FBD7FF /* Apricot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Apricot@3x.png"; sourceTree = "<group>"; };
 		61E8E73222044FA9008C33BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		61F0284322CA497200B3BB4B /* UploadPostAndFitTipsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostAndFitTipsVC.swift; sourceTree = "<group>"; };
+		61F0284522CB395700B3BB4B /* UploadPictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPictureCell.swift; sourceTree = "<group>"; };
+		61F0284722CB424900B3BB4B /* UploadPictureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPictureViewModel.swift; sourceTree = "<group>"; };
+		61F0284922CB7EB200B3BB4B /* ImageProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProviding.swift; sourceTree = "<group>"; };
+		61F0284B22CC8BE600B3BB4B /* FitTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTips.swift; sourceTree = "<group>"; };
+		61F0284D22CCBDE400B3BB4B /* FitTipsListingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsListingVC.swift; sourceTree = "<group>"; };
+		61F0284F22CCBE1700B3BB4B /* FitTipsAnswerTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsAnswerTableVC.swift; sourceTree = "<group>"; };
+		61F0285122CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsAnswerPickerVC.swift; sourceTree = "<group>"; };
+		61F0285322CCBE4F00B3BB4B /* FitTipsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsNavigationController.swift; sourceTree = "<group>"; };
+		61F0285522CCC85800B3BB4B /* FitTipsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsViewModel.swift; sourceTree = "<group>"; };
 		61F35F402217FBF7007B7A44 /* CountViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewModeling.swift; sourceTree = "<group>"; };
 		61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SEGOEUII_1.TTF; sourceTree = "<group>"; };
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -527,6 +551,12 @@
 				61064591222D392100AE41C3 /* UploadPostVC.swift */,
 				61064593222E718E00AE41C3 /* PhotoEditorViewController.swift */,
 				61064595222E777200AE41C3 /* PhotoEditor+Gestures.swift */,
+				61F0284322CA497200B3BB4B /* UploadPostAndFitTipsVC.swift */,
+				61F0285322CCBE4F00B3BB4B /* FitTipsNavigationController.swift */,
+				61F0284D22CCBDE400B3BB4B /* FitTipsListingVC.swift */,
+				61F0284F22CCBE1700B3BB4B /* FitTipsAnswerTableVC.swift */,
+				61F0285122CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift */,
+				61B565CC22CE00110073DBA3 /* FitTipsAnswerTextVC.swift */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -676,6 +706,7 @@
 				611E411E22145C0D007B1C62 /* PostCollectionViewCell.xib */,
 				617FF0B422291C5F0096597E /* PostSizeCollectionViewCell.swift */,
 				617FF0B522291C5F0096597E /* PostSizeCollectionViewCell.xib */,
+				61F0284522CB395700B3BB4B /* UploadPictureCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -776,6 +807,7 @@
 				6194333F22293F6E0096B219 /* UserPost.swift */,
 				6179EC2F2278756C00AE75F9 /* Review.swift */,
 				61B5A0C8229D3E60009D372C /* TargetProduct.swift */,
+				61F0284B22CC8BE600B3BB4B /* FitTips.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -911,6 +943,10 @@
 				6120D43A22B110600000678C /* TextFieldCellViewModeling.swift */,
 				61816C3722B24D3900D67B06 /* FilledViewModeling.swift */,
 				61816C3922B24DEC00D67B06 /* ExpiryViewModeling.swift */,
+				61F0284722CB424900B3BB4B /* UploadPictureViewModel.swift */,
+				61F0284922CB7EB200B3BB4B /* ImageProviding.swift */,
+				61F0285522CCC85800B3BB4B /* FitTipsViewModel.swift */,
+				61B565D022CE03F00073DBA3 /* OptionsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1153,6 +1189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61F0285622CCC85800B3BB4B /* FitTipsViewModel.swift in Sources */,
 				61064596222E777300AE41C3 /* PhotoEditor+Gestures.swift in Sources */,
 				D738BF6A21F3F82400302FE5 /* TitleViewModeling.swift in Sources */,
 				6944813421C7A018001A11A2 /* DatePickerTextField.swift in Sources */,
@@ -1166,7 +1203,9 @@
 				6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */,
 				61B5A0CF229E9A1D009D372C /* StoresPopupVC.swift in Sources */,
 				61B5A0CC229E8B12009D372C /* StoreCell.swift in Sources */,
+				61F0284A22CB7EB200B3BB4B /* ImageProviding.swift in Sources */,
 				61C40D0F221EAE1000FBD7FF /* SozieTableViewCell.swift in Sources */,
+				61F0285222CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift in Sources */,
 				612F00CF22084B390025DBEA /* SelectionPopupVC.swift in Sources */,
 				61592035220D882600816034 /* Category.swift in Sources */,
 				611E411F22145C0D007B1C62 /* PostCollectionViewCell.swift in Sources */,
@@ -1187,6 +1226,7 @@
 				613C4618226212E900AF77DF /* SecondShopperWelcomeVC.swift in Sources */,
 				612089F02243A2A2005516D1 /* LineProviding.swift in Sources */,
 				6108FB992201D1F30007A49F /* ImageCollectionViewCell.swift in Sources */,
+				61B565D122CE03F00073DBA3 /* OptionsViewModel.swift in Sources */,
 				694480ED21C7A018001A11A2 /* Styles.swift in Sources */,
 				611E412422147224007B1C62 /* PostCellViewModel.swift in Sources */,
 				6103E1A221FB192200C7E7CF /* WishListVC.swift in Sources */,
@@ -1205,6 +1245,7 @@
 				DA48CB1A21FADD8D006804B6 /* ErrorViewModeling.swift in Sources */,
 				61BC873721E76C62000AEA06 /* Brand.swift in Sources */,
 				61064592222D392100AE41C3 /* UploadPostVC.swift in Sources */,
+				61F0285022CCBE1700B3BB4B /* FitTipsAnswerTableVC.swift in Sources */,
 				6179EC2C22770B4600AE75F9 /* CommentsVC.swift in Sources */,
 				614374E222390EAE00DBD295 /* MyBalanceVC.swift in Sources */,
 				61B9D1C8222548BA007C6326 /* SozieRequest.swift in Sources */,
@@ -1216,7 +1257,9 @@
 				614CEA4621F1E48600FE5F9D /* SocialAuthManager.swift in Sources */,
 				694480EA21C7A018001A11A2 /* Constants.swift in Sources */,
 				61C40D0A221E843900FBD7FF /* RequestsVC.swift in Sources */,
+				61F0284622CB395800B3BB4B /* UploadPictureCell.swift in Sources */,
 				61943342222949B80096B219 /* UserPostCellViewModel.swift in Sources */,
+				61B565CD22CE00110073DBA3 /* FitTipsAnswerTextVC.swift in Sources */,
 				61816C3A22B24DEC00D67B06 /* ExpiryViewModeling.swift in Sources */,
 				61B9D1CC22254F82007C6326 /* SubtitleViewModeling.swift in Sources */,
 				61716224225B6BF30098C3E1 /* InfiniteScrollCollectionView.swift in Sources */,
@@ -1262,6 +1305,7 @@
 				618091C821EF43D0004B3347 /* UserDefaultManager.swift in Sources */,
 				6122289D21F5D3D500D4D747 /* ServerResponsePopUp.swift in Sources */,
 				61A20A5B21E5DDBF00B27C8E /* DoubleTextFieldCell.swift in Sources */,
+				61F0285422CCBE4F00B3BB4B /* FitTipsNavigationController.swift in Sources */,
 				6103E1A721FEDBEB00C7E7CF /* PopupController.swift in Sources */,
 				6179EC2E227833BD00AE75F9 /* CommentsViewModel.swift in Sources */,
 				6944810B21C7A018001A11A2 /* Router.swift in Sources */,
@@ -1274,6 +1318,7 @@
 				6173E020221C068100AC9781 /* DescriptionViewModeling.swift in Sources */,
 				61145CC121DB926700062332 /* ServerManager.swift in Sources */,
 				61716226225F5F2A0098C3E1 /* Label.swift in Sources */,
+				61F0284E22CCBDE400B3BB4B /* FitTipsListingVC.swift in Sources */,
 				DA48CB1E21FC17E8006804B6 /* UIButtonProviding.swift in Sources */,
 				617FF0B322291B770096597E /* View.swift in Sources */,
 				6197726A2216C3D9003A7091 /* Double.swift in Sources */,
@@ -1298,12 +1343,15 @@
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
 				6106459C222FD7DE00AE41C3 /* SozieProfileVC.swift in Sources */,
 				613C4616226212D700AF77DF /* FirstShopperWelcomeVC.swift in Sources */,
+				61F0284422CA497200B3BB4B /* UploadPostAndFitTipsVC.swift in Sources */,
 				619772682216BF1E003A7091 /* MeasurementViewModeling.swift in Sources */,
+				61F0284822CB424900B3BB4B /* UploadPictureViewModel.swift in Sources */,
 				6103E19121FAF24200C7E7CF /* TabBarVC.swift in Sources */,
 				613C4622226219CF00AF77DF /* WelcomePageVC.swift in Sources */,
 				613C461C2262131B00AF77DF /* FirstSozieWelcomeVC.swift in Sources */,
 				6106459A222E77CB00AE41C3 /* ImageView.swift in Sources */,
 				6102CE002268A9620057D77A /* AvailabilityProviding.swift in Sources */,
+				61F0284C22CC8BE600B3BB4B /* FitTips.swift in Sources */,
 				6103E1A421FB43B600C7E7CF /* ProfileSideMenuVC.swift in Sources */,
 				61C40D03221E7DE900FBD7FF /* TabView.swift in Sources */,
 				6188C70821ECA30200B51EA1 /* SizeCell.swift in Sources */,

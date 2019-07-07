@@ -44,3 +44,30 @@ extension Array where Element == Float {
         return json
     }
 }
+extension Array where Element == String {
+    func convertArrayToString() -> [String] {
+        var arrayOfString = [String]()
+        for elem in self {
+            arrayOfString.append(elem)
+        }
+        return arrayOfString
+    }
+    func makeArrayJSON() -> String {
+        var json = ""
+        for elem in self {
+            json = json + elem + ","
+        }
+        json.remove(at: json.index(before: json.endIndex))
+        return json
+    }
+}
+extension Collection where Iterator.Element == [String: Any] {
+    func toJSONString(options: JSONSerialization.WritingOptions = .prettyPrinted) -> String {
+        if let arr = self as? [[String: Any]],
+            let dat = try? JSONSerialization.data(withJSONObject: arr, options: options),
+            let str = String(data: dat, encoding: String.Encoding.utf8) {
+            return str
+        }
+        return "[]"
+    }
+}

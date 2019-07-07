@@ -14,6 +14,8 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var searchCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
+    @IBOutlet weak var questionMarkButton: UIButton!
+    @IBOutlet weak var instructionsScrollView: UIScrollView!
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
@@ -70,6 +72,9 @@ class SozieRequestsVC: UIViewController {
         }
     }
 
+    @IBAction func questionMarkButtonTapped(_ sender: Any) {
+        instructionsScrollView.isHidden = false
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -141,7 +146,6 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 }
             }
         }
-        
     }
 
     func nearbyStoresButtonTapped(button: UIButton) {
@@ -179,7 +183,15 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
         if currentRequest?.isAccepted == true {
-            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+//                let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+                if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
+                    uploadPostVC.currentRequest = currentRequest
+                profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
+                }
+                
+            }
+//            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
         } else {
             SVProgressHUD.show()
             var dataDict = [String: Any]()

@@ -50,6 +50,7 @@ class ServerManager: NSObject {
     static let cashoutURL = ServerManager.serverURL + "user/sozie/cashout"
     static let reviewURL = ServerManager.serverURL + "post/review/"
     static let acceptRequestURL = ServerManager.serverURL + "productrequest/sozie/request/"
+    static let fitTipsURL = ServerManager.serverURL + "common/fittips"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -735,6 +736,58 @@ class ServerManager: NSObject {
             }
             obj.ifFailure {
                 block!(false, obj.error!)
+            }
+        }
+    }
+    func getAllFitTips(params: [String: Any], block: CompletionHandler) {
+        Alamofire.request(ServerManager.fitTipsURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<[FitTips]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
+            "Content-type": "multipart/form-data"
+        ]
+        let formData: (MultipartFormData) -> Void = { (multipartFormData) in
+            for (key, value) in (params ?? [:]) {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            if let allImagesData = imagesData {
+                for data in allImagesData {
+                    multipartFormData.append(data, withName: "images_to_upload", fileName: "image.png", mimeType: "image/png")
+                }
+            }
+            
+//            if let data = imageData {
+//                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
+//            }
+//            if let thumbdata = thumbImageData {
+//                multipartFormData.append(thumbdata, withName: "thumb_image", fileName: "image.png", mimeType: "image/png")
+//            }
+        }
+        Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseData { response in
+                    let decoder = JSONDecoder()
+                    let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+                    obj.ifSuccess {
+                        block!(true, obj.value!)
+                    }
+                    obj.ifFailure {
+                        block!(false, obj.error!)
+                    }
+                }
+            case .failure(let error):
+                block!(false, error)
             }
         }
     }

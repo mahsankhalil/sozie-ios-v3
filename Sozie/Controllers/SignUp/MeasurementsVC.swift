@@ -115,11 +115,10 @@ class MeasurementsVC: UIViewController {
                 hip = self.currentMeasurement.hip
                 bra = self.currentMeasurement.bra
                 cup = self.currentMeasurement.cup
-                var currentSize = self.currentMeasurement.size
+                let currentSize = self.currentMeasurement.size
                 let wornSizes = self.converArrayOfGeneralToStringArray(generalSizes: size.general)
                 let heightViewModel = DoubleTextFieldCellViewModel(text1: heightFeet, text2: heightInches, title: "HEIGHT", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
                 let waistHipsModel = DoubleTextFieldCellViewModel(text1: waist, text2: hip, title: "WAIST & HIPS", columnUnit: ["in", "in"], columnPlaceholder: ["Waist", "Hips"], columnValueSuffix: ["\"", "\""], columnValues: [size.waist.convertArrayToString(), size.hip.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist and Hips", measurementType: .waistHips)
-                
 //                let waistViewModel = SingleTextFieldCellViewModel(title: "WAIST", text: waist, placeholder: "Waist", values: size.waist.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist", measurementType: .waist)
 //
 //                let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: hip, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)

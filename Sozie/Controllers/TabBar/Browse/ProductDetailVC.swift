@@ -257,7 +257,7 @@ class ProductDetailVC: BaseViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "toUploadPost" {
-            let uploadPostVC = segue.destination as! UploadPostVC
+            let uploadPostVC = segue.destination as! UploadPostAndFitTipsVC
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             uploadPostVC.selectedImage = appDelegate.imageTaken
             uploadPostVC.currentProduct = currentProduct
@@ -602,7 +602,7 @@ extension ProductDetailVC: ProductDetailCollectionViewCellDelegate {
 }
 extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostVC") as? UploadPostVC {
+        if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
             if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
                 uploadPostVC.selectedImage = scaledImg
