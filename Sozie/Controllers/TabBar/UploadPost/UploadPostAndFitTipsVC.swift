@@ -50,6 +50,7 @@ class UploadPostAndFitTipsVC: UIViewController {
         self.fitTipsCheckMark.isHidden = true
         fetchFitTipsFromServer()
     }
+    
 
     func updateViews() {
         if self.checkIfAllQuestionsAnswered() == true {
@@ -203,6 +204,7 @@ class UploadPostAndFitTipsVC: UIViewController {
     @IBAction func deleteButtonTapped(_ sender: Any) {
         if let index = selectedIndex {
             viewModels[index].image = nil
+            viewModels[index].imageURL = nil
             postImageView.image = nil
             selectedIndex = nil
             self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
@@ -263,7 +265,15 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
                 viewModels[index].imageURL = pickedImageURL
                 viewModels[index].image = scaledImg
                 self.postImageView.image = scaledImg
-                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                if index > 2 {
+                    if index < 7 {
+                        let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                        viewModels.append(viewModel)
+                    }
+                    viewModels[index].title = ""
+                }
+                self.imagesCollectionView.reloadData()
+//                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
             }
         }
         picker.dismiss(animated: true, completion: nil)

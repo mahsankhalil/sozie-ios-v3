@@ -119,6 +119,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                     _ = UserDefaultManager.saveLoginResponse(loginResp: loginResponse)
 //                    UtilityManager.registerUserOnIntercom()
                 }
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.updatePushTokenToServer()
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {
                 if let error = response as? Error {

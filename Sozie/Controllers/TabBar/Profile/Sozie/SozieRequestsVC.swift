@@ -9,6 +9,8 @@
 import UIKit
 import SVProgressHUD
 class SozieRequestsVC: UIViewController {
+    @IBOutlet weak var gotItButton: UIButton!
+    @IBOutlet weak var instructionsHeightConstraint: NSLayoutConstraint!
     var reuseableIdentifier = "SozieRequestTableViewCell"
     var reuseableIdentifierTarget = "TargetRequestTableViewCell"
     @IBOutlet weak var searchCountLabel: UILabel!
@@ -21,6 +23,7 @@ class SozieRequestsVC: UIViewController {
     var selectedProduct: Product?
     var serverParams: [String: Any] = [String: Any]()
     var currentRequest: SozieRequest?
+    var tutorialVC: SozieRequestTutorialVC?
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -40,13 +43,18 @@ class SozieRequestsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
+        instructionsHeightConstraint.constant = (1517.5/375) * UIScreen.main.bounds.size.width
+        tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
+        tutorialVC?.delegate = self
+        UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+//        self.view.window?.addSubview(tutorialVC.view)
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         serverParams.removeAll()
         requests.removeAll()
         fetchAllSozieRequests()
-
     }
     @objc func loadNextPage() {
         if let nextUrl = self.nextURL {
@@ -70,6 +78,9 @@ class SozieRequestsVC: UIViewController {
                 self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS")
             }
         }
+    }
+    @IBAction func gotItButtonTapped(_ sender: Any) {
+        instructionsScrollView.isHidden = true
     }
 
     @IBAction func questionMarkButtonTapped(_ sender: Any) {
@@ -189,7 +200,6 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     uploadPostVC.currentRequest = currentRequest
                 profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
                 }
-                
             }
 //            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
         } else {
@@ -220,5 +230,11 @@ extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControll
             }
             picker.dismiss(animated: true, completion: nil)
         }
+    }
+}
+extension SozieRequestsVC: SozieRequestTutorialDelegate {
+    func infoButtonTapped() {
+        tutorialVC?.view.removeFromSuperview()
+        instructionsScrollView.isHidden = false
     }
 }

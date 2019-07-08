@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var updatedProduct: Product?
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
+    var pushToken: String?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
@@ -94,6 +95,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 //        Intercom.setDeviceToken(deviceToken)
+        pushToken = deviceToken.hexString
+        updatePushTokenToServer()
+    }
+    func updatePushTokenToServer() {
+        var dataDict = [String: Any]()
+        dataDict["device_notify_id"] = pushToken
+        ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
+            
+        }
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 //        if Intercom.isIntercomPushNotification(userInfo) {
