@@ -65,19 +65,20 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let fitTip = fitTips[indexPath.row]
-        if fitTip.question[0].type == "R" {
+        if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
             //Single selection
-            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerPickerVC") as! FitTipsAnswerPickerVC
-            destVC.fitTipsIndex = indexPath.row
-            destVC.questionIndex = 0
-            destVC.fitTips = fitTips
-            self.navigationController?.pushViewController(destVC, animated: true)
-        } else if fitTip.question[0].type == "C" {
+//            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerPickerVC") as! FitTipsAnswerPickerVC
+//            destVC.fitTipsIndex = indexPath.row
+//            destVC.questionIndex = 0
+//            destVC.fitTips = fitTips
+//            self.navigationController?.pushViewController(destVC, animated: true)
+//        } else if fitTip.question[0].type == "C" {
             //Multiple selection
             let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
             destVC.fitTipsIndex = indexPath.row
             destVC.questionIndex = 0
             destVC.fitTips = fitTips
+            destVC.type = fitTip.question[0].type
             self.navigationController?.pushViewController(destVC, animated: true)
         } else if fitTip.question[0].type == "T" {
             //Text Input

@@ -18,6 +18,7 @@ class FitTipsAnswerTableVC: UIViewController {
     var fitTips: [FitTips]?
     var viewModels: [OptionsViewModel] = []
     var arrayOfSelectedIndexes: [Int] = []
+    var type: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,23 +27,41 @@ class FitTipsAnswerTableVC: UIViewController {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
             if let options = fitTips?[tipsIndex].question[quesIndex].options {
                 viewModels.removeAll()
+                var index = 0
                 for option in options {
-                    let viewModel = OptionsViewModel(title: option.optionText, attributedTitle: nil, isCheckmarkHidden: true)
+                    var viewModel = OptionsViewModel(title: option.optionText, attributedTitle: nil, isCheckmarkHidden: true)
+                    if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
+                        if checkIfAnswered(text: option.optionText, answer: answer) {
+                            viewModel.isCheckmarkHidden = false
+                            arrayOfSelectedIndexes.append(index)
+                        }
+                    }
                     viewModels.append(viewModel)
+                    index = index + 1
                 }
             }
         }
     }
+    func checkIfAnswered(text: String, answer: String) -> Bool {
+        let answers = answer.components(separatedBy: ",")
+        for currentAnswer in answers {
+            if currentAnswer == text {
+                return true
+            }
+        }
+        return false
+    }
 
     @IBAction func backButtonTaped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func nextButtonTapped(_ sender: Any) {
         if arrayOfSelectedIndexes.isEmpty {
             UtilityManager.showErrorMessage(body: "Please select options.", in: self)
+        } else if type == "C" && arrayOfSelectedIndexes.count < 2 {
+            UtilityManager.showErrorMessage(body: "Please select two options.", in: self)
         } else {
-            
-            if let fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
+            if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
                 var arrayOfAnswers = [String]()
                 for index in arrayOfSelectedIndexes {
                     arrayOfAnswers.append(fitTips[fitTipIndex].question[questIndex].options[index].optionText)
@@ -54,28 +73,27 @@ class FitTipsAnswerTableVC: UIViewController {
                         (self.navigationController as! FitTipsNavigationController).closeHandler!()
                         return
                     } else {
-                        //                    fitTipIndex = fitTipIndex + 1
-                        //                    questIndex = 0
-                        self.navigationController?.popToRootViewController(animated: true)
-                        return
+                        fitTipIndex = fitTipIndex + 1
+                        questIndex = 0
+//                        self.navigationController?.popToRootViewController(animated: true)
+//                        return
                     }
                 } else {
                     questIndex = questIndex + 1
                 }
                 let fitTip = fitTips[fitTipIndex]
-                if fitTip.question[0].type == "R" {
+                if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
                     //Single selection
-                    navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-                } else if fitTip.question[0].type == "C" {
+//                    navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+//                } else if fitTip.question[0].type == "C" {
                     //Multiple selection
-                    navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                    navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
-                    navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: fitTipIndex)
+                    navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 }
             }
         }
-        
 //        if let tipsIndex = fitTipsIndex {
 //            if let fitTip = fitTips?[tipsIndex] {
 //                if fitTip.question[0].type == "R" {
@@ -106,11 +124,12 @@ class FitTipsAnswerTableVC: UIViewController {
         destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
-    func navigateToTableAnswer(fitTipIndex: Int, questIndex: Int) {
+    func navigateToTableAnswer(fitTipIndex: Int, questIndex: Int, type: String) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
+        destVC.type = type
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     /*
@@ -144,14 +163,45 @@ extension FitTipsAnswerTableVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if arrayOfSelectedIndexes.contains(indexPath.row) {
-            arrayOfSelectedIndexes.removeAll { $0 == indexPath.row }
-            viewModels[indexPath.row].isCheckmarkHidden = true
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        } else {
-            arrayOfSelectedIndexes.append(indexPath.row)
-            viewModels[indexPath.row].isCheckmarkHidden = false
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+        if let currentType = type {
+            if currentType == "C" {
+                if arrayOfSelectedIndexes.contains(indexPath.row) {
+                    arrayOfSelectedIndexes.removeAll { $0 == indexPath.row }
+                    viewModels[indexPath.row].isCheckmarkHidden = true
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                } else {
+                    if arrayOfSelectedIndexes.count < 2 {
+                        arrayOfSelectedIndexes.append(indexPath.row)
+                        viewModels[indexPath.row].isCheckmarkHidden = false
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    } else {
+                        viewModels[arrayOfSelectedIndexes[0]].isCheckmarkHidden = true
+                        arrayOfSelectedIndexes.remove(at: 0)
+                        arrayOfSelectedIndexes.append(indexPath.row)
+                        viewModels[indexPath.row].isCheckmarkHidden = false
+                        tableView.reloadData()
+                    }
+                }
+            } else if currentType == "R" {
+                if arrayOfSelectedIndexes.contains(indexPath.row) {
+                    arrayOfSelectedIndexes.removeAll { $0 == indexPath.row }
+                    viewModels[indexPath.row].isCheckmarkHidden = true
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                } else {
+                    if arrayOfSelectedIndexes.count < 1 {
+                        arrayOfSelectedIndexes.append(indexPath.row)
+                        viewModels[indexPath.row].isCheckmarkHidden = false
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    } else {
+                        viewModels[arrayOfSelectedIndexes[0]].isCheckmarkHidden = true
+                        arrayOfSelectedIndexes.remove(at: 0)
+                        arrayOfSelectedIndexes.append(indexPath.row)
+                        viewModels[indexPath.row].isCheckmarkHidden = false
+                        tableView.reloadData()
+                    }
+                }
+            }
         }
+        
     }
 }

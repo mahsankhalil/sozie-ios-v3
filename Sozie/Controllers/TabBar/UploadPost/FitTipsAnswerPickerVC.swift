@@ -25,10 +25,10 @@ class FitTipsAnswerPickerVC: UIViewController {
     }
 
     @IBAction func backButtonTaped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if let fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
+        if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
             fitTips[fitTipIndex].question[questIndex].answer = fitTips[fitTipIndex].question[questIndex].options[pickerView.selectedRow(inComponent: 0)].optionText
             fitTips[fitTipIndex].question[questIndex].isAnswered = true
             if questIndex == fitTips[fitTipIndex].question.count - 1 {
@@ -36,21 +36,21 @@ class FitTipsAnswerPickerVC: UIViewController {
                     (self.navigationController as! FitTipsNavigationController).closeHandler!()
                     return
                 } else {
-//                    fitTipIndex = fitTipIndex + 1
-//                    questIndex = 0
-                    self.navigationController?.popToRootViewController(animated: true)
-                    return
+                    fitTipIndex = fitTipIndex + 1
+                    questIndex = 0
+//                    self.navigationController?.popToRootViewController(animated: true)
+//                    return
                 }
             } else {
                 questIndex = questIndex + 1
             }
             let fitTip = fitTips[fitTipIndex]
-            if fitTip.question[0].type == "R" {
+            if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
                 //Single selection
-                navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-            } else if fitTip.question[0].type == "C" {
+                //                    navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                //                } else if fitTip.question[0].type == "C" {
                 //Multiple selection
-                navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
             } else if fitTip.question[0].type == "T" {
                 //Text Input
                 navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: fitTipIndex)
@@ -81,13 +81,15 @@ class FitTipsAnswerPickerVC: UIViewController {
         destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
-    func navigateToTableAnswer(fitTipIndex: Int, questIndex: Int) {
+    func navigateToTableAnswer(fitTipIndex: Int, questIndex: Int, type: String) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
+        destVC.type = type
         self.navigationController?.pushViewController(destVC, animated: true)
     }
+
 }
 extension FitTipsAnswerPickerVC: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

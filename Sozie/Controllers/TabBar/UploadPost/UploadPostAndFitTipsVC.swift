@@ -50,7 +50,6 @@ class UploadPostAndFitTipsVC: UIViewController {
         self.fitTipsCheckMark.isHidden = true
         fetchFitTipsFromServer()
     }
-    
 
     func updateViews() {
         if self.checkIfAllQuestionsAnswered() == true {
