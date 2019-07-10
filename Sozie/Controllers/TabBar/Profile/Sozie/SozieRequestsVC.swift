@@ -44,9 +44,11 @@ class SozieRequestsVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
         instructionsHeightConstraint.constant = (1517.5/375) * UIScreen.main.bounds.size.width
-        tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
-        tutorialVC?.delegate = self
-        UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+        if UserDefaultManager.getIfRequestTutorialShown() == false {
+            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
+            tutorialVC?.delegate = self
+            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+        }
 //        self.view.window?.addSubview(tutorialVC.view)
 
     }

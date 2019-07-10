@@ -55,6 +55,7 @@ extension TargetRequestTableViewCell: ButtonProviding {
     func assignTagWith(_ index: Int) {
         acceptButton.tag = index
         cancelButton.tag = index
+        checkStoresButton.tag = index
     }
 }
 extension TargetRequestTableViewCell: CellConfigurable {

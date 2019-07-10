@@ -42,6 +42,7 @@ class ServerManager: NSObject {
     static let sozieRequestsURL = ServerManager.serverURL + "productrequest/sozie/request/"
     static let addPostURL = ServerManager.serverURL + "post/add/"
     static let postURL = ServerManager.serverURL + "post/list/"
+    static let uploadsURL = ServerManager.serverURL + "post/uploads/list"
     static let changePasswordURL = ServerManager.serverURL + "user/change_password/"
     static let blockListURL = ServerManager.serverURL + "user/blocked/list"
     static let unBlockURL = ServerManager.serverURL + "user/unblock/"
@@ -513,7 +514,7 @@ class ServerManager: NSObject {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
-        var url = ServerManager.postURL
+        var url = ServerManager.uploadsURL
         if let nextURL = params["next"] as? String {
             url = nextURL
             if let userId = params["user_id"] {

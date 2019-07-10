@@ -25,6 +25,7 @@ class SozieRequestTutorialVC: UIViewController {
     }
 
     @IBAction func infoButtonTapped(_ sender: Any) {
+        UserDefaultManager.setRequestTutorialShown()
         delegate?.infoButtonTapped()
     }
 

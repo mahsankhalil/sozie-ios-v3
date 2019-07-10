@@ -11,12 +11,14 @@ import UIKit
 struct UserPost: Codable {
     var postId: Int
     var imageURL: String
-    var thumbURL: String
+    var thumbURL: String?
     var userId: Int
     var productId: String
     var sizeValue: String
     var productRequest: Int?
     var product: Product
+    var reviewAction: String
+    var isApproved: Bool
 
     enum CodingKeys: String, CodingKey {
         case postId = "id"
@@ -27,17 +29,21 @@ struct UserPost: Codable {
         case sizeValue = "size_worn"
         case productRequest = "product_request"
         case product
+        case reviewAction = "review_action"
+        case isApproved = "is_approved"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         postId = try values.decode(Int.self, forKey: .postId)
         imageURL = try values.decode(String.self, forKey: .imageURL)
         userId = try values.decode(Int.self, forKey: .userId)
-        thumbURL = try values.decode(String.self, forKey: .thumbURL)
+        thumbURL = try? values.decode(String.self, forKey: .thumbURL)
         productId = try values.decode(String.self, forKey: .productId)
         sizeValue = try values.decode(String.self, forKey: .sizeValue)
         productRequest = try? values.decode(Int.self, forKey: .productRequest)
         product = try values.decode(Product.self, forKey: .product)
+        reviewAction = try values.decode(String.self, forKey: .reviewAction)
+        isApproved = try values.decode(Bool.self, forKey: .isApproved)
     }
 }
 struct PostPaginatedResponse: Codable {

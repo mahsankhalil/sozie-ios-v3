@@ -139,6 +139,20 @@ class UserDefaultManager: NSObject {
         UserDefaults.standard.synchronize()
         UserDefaultManager.checkIfALLUserGuidesShownThenDisableUserGuide()
     }
+    static func setBrowserTutorialShown() {
+        UserDefaults.standard.set(true, forKey: "BrowseTutorialShown")
+        UserDefaults.standard.synchronize()
+    }
+    static func getIfBrowseTutorialShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: "BrowseTutorialShown")
+    }
+    static func setRequestTutorialShown() {
+        UserDefaults.standard.set(true, forKey: "RequestTutorialShown")
+        UserDefaults.standard.synchronize()
+    }
+    static func getIfRequestTutorialShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: "RequestTutorialShown")
+    }
     static func checkIfALLUserGuidesShownThenDisableUserGuide() {
         if UserDefaults.standard.bool(forKey: UserDefaultKey.measurementUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.browseUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.requestSozieButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.followButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.mySoziesUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.myRequestsUserGuide) == true {
             makeUserGuideDisabled()

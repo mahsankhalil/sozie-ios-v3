@@ -12,7 +12,8 @@ class PostSizeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelBackgroundView: UIView!
     @IBOutlet weak var sizeLabel: UILabel!
-
+    @IBOutlet weak var statusImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,6 +31,13 @@ extension PostSizeCollectionViewCell: CellConfigurable {
         }
         if let subtitleModel = viewModel as? SubtitleViewModeling {
             sizeLabel.text = subtitleModel.subtitle
+        }
+        if let selectionModel = viewModel as? SelectionProviding {
+            if selectionModel.isSelected == true {
+                self.statusImageView.image = UIImage(named: "checked")
+            } else {
+                self.statusImageView.image = UIImage(named: "cancel")
+            }
         }
     }
 }

@@ -80,6 +80,7 @@ class BrowseVC: BaseViewController {
     var cancelTipView: EasyTipView?
     var collectionTipView: EasyTipView?
     var gstrRcgnzr: UIGestureRecognizer?
+    var tutorialVC: BrowseWelcomeVC?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,6 +88,12 @@ class BrowseVC: BaseViewController {
         self.brandsCollectionVu.infiniteScrollDelegate = self
         _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         setupSozieLogoNavBar()
+        if UserDefaultManager.getIfBrowseTutorialShown() == false {
+            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
+            tutorialVC?.delegate = self
+            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+        }
+        
 //        if let userType = UserDefaultManager.getCurrentUserType() {
 //            if userType == UserType.shopper.rawValue {
 //                setupSozieLogoNavBar()
@@ -620,5 +627,11 @@ extension BrowseVC: PopupNavControllerDelegate {
             self.filterBySozies = true
         }
         fetchFilteredData()
+    }
+}
+extension BrowseVC: BrowseWelcomeDelegate {
+    func profileButtonTapped() {
+        self.tabBarController?.selectedIndex = 3
+        tutorialVC?.view.removeFromSuperview()
     }
 }

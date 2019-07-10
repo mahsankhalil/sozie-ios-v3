@@ -193,5 +193,6 @@ extension SozieRequestTableViewCell: ButtonProviding {
     func assignTagWith(_ index: Int) {
         acceptButton.tag = index
         cancelButton.tag = index
+        
     }
 }
