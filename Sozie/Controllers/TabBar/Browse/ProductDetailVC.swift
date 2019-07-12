@@ -501,7 +501,7 @@ extension ProductDetailVC: UIScrollViewDelegate {
         if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
             if UserDefaultManager.getIfShopper() == false {
                 if (scrollView.contentSize.width - scrollView.bounds.width) != 0 {
-                    UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+//                    UtilityManager.openImagePickerActionSheetFrom(viewController: self)
                 }
             }
         }
@@ -519,7 +519,8 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
     }
 
     func cameraButtonTapped(button: UIButton) {
-        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        UtilityManager.showMessageWith(title: "Coming Soon", body: "Tap \"Profile\" to see Requests available to you", in: self)
+//        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 
     func moreButtonTapped(button: UIButton) {
@@ -597,7 +598,9 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
 }
 extension ProductDetailVC: ProductDetailCollectionViewCellDelegate {
     func productCameraButtonTapped(button: UIButton) {
-        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        UtilityManager.showMessageWith(title: "Coming Soon", body: "Tap \"Profile\" to see Requests available to you", in: self)
+
+//        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 }
 extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

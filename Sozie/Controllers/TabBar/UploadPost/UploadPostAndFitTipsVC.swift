@@ -8,7 +8,10 @@
 
 import UIKit
 import SVProgressHUD
-class UploadPostAndFitTipsVC: UIViewController {
+protocol UploadPostAndFitTipsDelegate: class {
+    func uploadPostInfoButtonTapped()
+}
+class UploadPostAndFitTipsVC: BaseViewController {
     @IBOutlet weak var postMaskButton: UIButton!
     @IBOutlet weak var postDeleteButton: UIButton!
     @IBOutlet weak var postImageView: UIImageView!
@@ -31,6 +34,7 @@ class UploadPostAndFitTipsVC: UIViewController {
     var selectedImage: UIImage?
     var isSizeSelected = false
     var fitTips: [FitTips]?
+    weak var delegate: UploadPostAndFitTipsDelegate?
     var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,15 +53,19 @@ class UploadPostAndFitTipsVC: UIViewController {
         self.sizeCheckMark.isHidden = true
         self.fitTipsCheckMark.isHidden = true
         fetchFitTipsFromServer()
+        self.showInfoButton()
     }
-
+    override func infoButtonTapped() {
+        delegate?.uploadPostInfoButtonTapped()
+        self.navigationController?.popViewController(animated: true)
+    }
     func updateViews() {
         if self.checkIfAllQuestionsAnswered() == true {
             self.fitTipsCheckMark.isHidden = false
         }
-        if isSizeSelected {
-            self.sizeCheckMark.isHidden = false
-        }
+//        if isSizeSelected {
+//            self.sizeCheckMark.isHidden = false
+//        }
     }
     func checkIfAllQuestionsAnswered() -> Bool {
         if let fitTips = fitTips {
@@ -172,14 +180,12 @@ class UploadPostAndFitTipsVC: UIViewController {
             UtilityManager.showErrorMessage(body: "Please Select all the images.", in: self)
         } else if self.checkIfAllQuestionsAnswered() == false {
             UtilityManager.showErrorMessage(body: "Please answer all Fit Tips.", in: self)
-        } else if isSizeSelected == false {
-            UtilityManager.showErrorMessage(body: "Please select size worn.", in: self)
         } else {
             var dataDict = [String: Any]()
             dataDict["product_id"] = currentProduct?.productStringId
-            dataDict["size_worn"] = selectedSizeValue
             if let request = currentRequest {
                 dataDict["product_request"] = request.requestId
+                dataDict["size_worn"] = request.sizeValue
             }
             var imagesData: [Data] = []
             for viewModel in viewModels {
@@ -258,10 +264,10 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
 }
 extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let pickedImageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL, let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if let index = selectedIndex {
                 let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
-                viewModels[index].imageURL = pickedImageURL
+//                viewModels[index].imageURL = pickedImageURL
                 viewModels[index].image = scaledImg
                 self.postImageView.image = scaledImg
                 if index > 2 {
@@ -324,6 +330,11 @@ extension UploadPostAndFitTipsVC: UITextFieldDelegate {
                 }
                 popUpInstnc.closeHandler = { []  in
                     popUpVC.dismiss()
+                }
+                popUpInstnc.navigationHandler = { []  in
+                    UIView.animate(withDuration: 0.6, animations: {
+                        popUpVC.updatePopUpSize()
+                    })
                 }
             }
         }

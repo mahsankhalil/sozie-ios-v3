@@ -14,7 +14,7 @@ import GoogleSignIn
 import UserNotifications
 import CoreLocation
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var imageTaken: UIImage?
@@ -30,14 +30,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
-            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-            let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
-            self.window?.rootViewController = rootViewController
+            if UserDefaultManager.checkIfMeasurementEmpty() {
+                self.showMeasuremnetVC()
+            } else {
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
+                self.window?.rootViewController = rootViewController
+            }
         }
 //        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
 //        UtilityManager.registerUserOnIntercom()
 //        Appsee.start()
+        UNUserNotificationCenter.current().delegate = self
         return true
+    }
+    func showMeasuremnetVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let rootViewController = storyboard.instantiateViewController(withIdentifier: "MeasurementsVC") as! MeasurementsVC
+        rootViewController.isFromSignUp = true
+        self.window?.rootViewController = rootViewController
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -97,6 +108,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Intercom.setDeviceToken(deviceToken)
         pushToken = deviceToken.hexString
         updatePushTokenToServer()
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
     }
     func updatePushTokenToServer() {
         var dataDict = [String: Any]()

@@ -11,6 +11,7 @@ import UIKit
 class FitTipsNavigationController: UINavigationController {
     var fitTips: [FitTips]?
     var closeHandler: (() -> Void)?
+    var navigationHandler: (() -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,11 +38,20 @@ class FitTipsNavigationController: UINavigationController {
 }
 extension FitTipsNavigationController: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
+        if let destVC = self.topViewController as? FitTipsAnswerTableVC {
+            if let tipsIndex = destVC.fitTipsIndex, let questionIndex = destVC.questionIndex {
+                if let count = fitTips?[tipsIndex].question[questionIndex].options.count {
+                    let height = (CGFloat(count) * 40.0) + 150.0
+                    return CGSize(width: UIScreen.main.bounds.size.width, height: height)
+                }
+            }
+        }
         return CGSize(width: UIScreen.main.bounds.size.width, height: 330)
     }
 }
 extension FitTipsNavigationController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        navigationHandler!()
         if let destVC = self.viewControllers[0] as? FitTipsListingVC {
             destVC.fitTips = self.fitTips!
         }

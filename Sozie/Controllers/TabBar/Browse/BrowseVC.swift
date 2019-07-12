@@ -88,11 +88,7 @@ class BrowseVC: BaseViewController {
         self.brandsCollectionVu.infiniteScrollDelegate = self
         _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         setupSozieLogoNavBar()
-        if UserDefaultManager.getIfBrowseTutorialShown() == false {
-            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
-            tutorialVC?.delegate = self
-            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
-        }
+        
         
 //        if let userType = UserDefaultManager.getCurrentUserType() {
 //            if userType == UserType.shopper.rawValue {
@@ -115,6 +111,18 @@ class BrowseVC: BaseViewController {
         setupViews()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name(rawValue: "RefreshBrowseData"), object: nil)
         self.refreshData()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        perform(#selector(showWelcomeView), with: nil, afterDelay: 0.5)
+    }
+    @objc func showWelcomeView() {
+        if UserDefaultManager.getIfBrowseTutorialShown() == false {
+            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
+            tutorialVC?.delegate = self
+            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+            UserDefaultManager.setBrowserTutorialShown()
+        }
     }
     func showTipeViewAfterDelay() {
         perform(#selector(showTipView), with: nil, afterDelay: 0.5)

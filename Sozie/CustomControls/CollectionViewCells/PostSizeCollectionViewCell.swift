@@ -39,5 +39,12 @@ extension PostSizeCollectionViewCell: CellConfigurable {
                 self.statusImageView.image = UIImage(named: "cancel")
             }
         }
+        if let postViewModel = viewModel as? UserPostCellViewModel {
+            if postViewModel.status == "P" {
+                self.statusImageView.isHidden = true
+            } else {
+                self.statusImageView.isHidden = false
+            }
+        }
     }
 }

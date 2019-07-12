@@ -24,6 +24,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var isAvailable: Bool
     var isFilled: Bool
     var expiry: String
+    var acceptedBySomeoneElse: Bool
 
     init (request: SozieRequest) {
         var imageURL = ""
@@ -59,8 +60,14 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
         }
         self.brandId = request.brandId
         self.isFilled = request.isFilled
+        self.acceptedBySomeoneElse = false
         if let acceptedRequest = request.acceptedRequest {
             self.expiry = acceptedRequest.expiry ?? ""
+            if acceptedRequest.acceptedById == UserDefaultManager.getCurrentUserId() {
+                self.acceptedBySomeoneElse = false
+            } else {
+                self.acceptedBySomeoneElse = true
+            }
         } else {
             self.expiry = ""
         }

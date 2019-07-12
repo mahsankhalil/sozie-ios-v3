@@ -29,23 +29,24 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
     override func awakeFromNib() {
         super.awakeFromNib()
         pickerView = UIPickerView()
-        let myInputView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: pickerView.frame.height + 20))
+        let myInputView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: pickerView.frame.height + 55))
         pickerView.backgroundColor = UIColor.white
         myInputView.backgroundColor = UIColor.white
         pickerView.frame = CGRect(x: pickerView.frame.origin.x, y: pickerView.frame.origin.y, width: myInputView.frame.size.width, height: pickerView.frame.size.height)
         pickerView.center = CGPoint(x: myInputView.center.x, y: myInputView.center.y + 10)
         myInputView.addSubview(pickerView)
-        let donePickerBtn = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 80, y: 5, width: 50, height: 30))
+        let donePickerBtn = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 50, y: 5, width: 50, height: 30))
         donePickerBtn.setTitle("Done", for: UIControl.State.normal)
         donePickerBtn.titleLabel?.font = UIFont(name: "SegoeUI", size: 12.0)
         donePickerBtn.setTitleColor( UIColor(hex: "888888"), for: UIControl.State.normal)
         donePickerBtn.setTitleColor(Styles.sharedStyles.primaryGreyColor, for: UIControl.State.normal)
         donePickerBtn.addTarget(self, action: #selector(CustomPickerTextField.donePickerBtnClick(sender:)), for: UIControl.Event.touchUpInside)
         myInputView.addSubview(donePickerBtn)
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 5, width: UIScreen.main.bounds.width, height: 30))
-        titleLabel?.font = UIFont(name: "SegoeUI-Bold", size: 16.0)
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 35, width: UIScreen.main.bounds.width, height: 30))
+        titleLabel?.font = UIFont(name: "SegoeUI-Bold", size: 14.0)
         titleLabel?.textColor = UIColor(hex: "FFA4A4")
         titleLabel?.textAlignment = .center
+        titleLabel?.numberOfLines = 0
         myInputView.addSubview(titleLabel!)
         self.inputView = myInputView
         self.delegate = self

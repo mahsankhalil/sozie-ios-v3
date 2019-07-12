@@ -23,7 +23,7 @@ class FitTipsAnswerTextVC: UIViewController {
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
             if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
-                textView.text = answer
+                textView.text = "I wish " + answer
             }
         }
         textView.delegate = self
@@ -39,7 +39,8 @@ class FitTipsAnswerTextVC: UIViewController {
             UtilityManager.showErrorMessage(body: "Please enter comment", in: self)
         } else {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
-                fitTips[fitTipIndex].question[questIndex].answer = self.textView.text
+                let answer = self.textView.text.deletingPrefix("I wish ")
+                fitTips[fitTipIndex].question[questIndex].answer = answer
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
                     if fitTipIndex == fitTips.count - 1 {
@@ -106,7 +107,7 @@ class FitTipsAnswerTextVC: UIViewController {
 extension FitTipsAnswerTextVC: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Type your comment..." {
-            textView.text = ""
+            textView.text = "I wish "
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {

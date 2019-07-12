@@ -12,4 +12,5 @@ struct UserPostCellViewModel: RowViewModel, ImageViewModeling, SubtitleViewModel
     var subtitle: String?
     var imageURL: URL?
     var isSelected: Bool
+    var status: String
 }

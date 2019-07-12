@@ -46,6 +46,10 @@ class TermsOfServiceVC: UIViewController {
     }
     */
     @IBAction func backButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if let navContrlr = self.navigationController {
+            navContrlr.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

@@ -24,7 +24,25 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user
     }
-
+    static func checkIfMeasurementEmpty() -> Bool {
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if let measurements = user.measurement {
+                if let size = measurements.size {
+                    if size == "" {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else {
+                    return true
+                }
+            } else {
+                return true
+            }
+        } else {
+            return true
+        }
+    }
     static func updateUserObject(user: User) {
         guard var loginResponse = loginResponse() else { return  }
         loginResponse.user = user

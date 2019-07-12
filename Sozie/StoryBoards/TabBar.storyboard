@@ -2108,7 +2108,7 @@ To see your Sozie Requests click on profile below.</string>
             <objects>
                 <viewController storyboardIdentifier="SozieRequestsVC" id="F5W-yp-aSP" customClass="SozieRequestsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k1V-mc-ItS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1597"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1760"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNv-L9-ztQ">
@@ -2145,10 +2145,10 @@ To see your Sozie Requests click on profile below.</string>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4z-UW-tEO">
-                                <rect key="frame" x="0.0" y="94" width="375" height="1503"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="1666"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="163" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-US-Zou">
-                                        <rect key="frame" x="0.0" y="-16" width="375" height="1519"/>
+                                        <rect key="frame" x="0.0" y="-16" width="375" height="1682"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataSource" destination="F5W-yp-aSP" id="lgk-C5-w3d"/>
@@ -2156,7 +2156,7 @@ To see your Sozie Requests click on profile below.</string>
                                         </connections>
                                     </tableView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Requests available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-kl-HO1">
-                                        <rect key="frame" x="64" y="691" width="247" height="19.5"/>
+                                        <rect key="frame" x="64" y="772.5" width="247" height="19.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="247" id="xyN-ht-z8q"/>
                                         </constraints>
@@ -2176,22 +2176,63 @@ To see your Sozie Requests click on profile below.</string>
                                 </constraints>
                             </view>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-0f-PRI">
-                                <rect key="frame" x="0.0" y="47" width="375" height="1550"/>
+                                <rect key="frame" x="0.0" y="47" width="375" height="1713"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-Ge-ikh">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1517"/>
+                                        <rect key="frame" x="0.0" y="100" width="375" height="1519"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1517" id="jgx-4a-01h"/>
+                                            <constraint firstAttribute="height" constant="1519" id="jgx-4a-01h"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyN-lW-kZE">
-                                        <rect key="frame" x="105.5" y="1520" width="164" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxA-md-0rs">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdq-cA-Vz4">
+                                                <rect key="frame" x="18" y="0.0" width="339" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="339" id="F64-tp-I4r"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="SCROLL TO THE BOTTOM OF THE SCREEN AND CLICK ON">
+                                                        <attributes>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="   I GET IT   ">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="TO SEE YOUR REQUESTS">
+                                                        <attributes>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Yrc-5C-ZOx"/>
-                                            <constraint firstAttribute="width" constant="164" id="kUx-XA-O0N"/>
+                                            <constraint firstAttribute="height" constant="100" id="CJD-eh-NJh"/>
+                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="top" secondItem="oxA-md-0rs" secondAttribute="top" id="IH5-mx-oiI"/>
+                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="centerX" secondItem="oxA-md-0rs" secondAttribute="centerX" id="dOc-np-hlj"/>
+                                            <constraint firstAttribute="bottom" secondItem="kdq-cA-Vz4" secondAttribute="bottom" id="qao-FD-aIV"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyN-lW-kZE" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                        <rect key="frame" x="36.5" y="1634" width="302" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="Yrc-5C-ZOx"/>
+                                            <constraint firstAttribute="width" constant="302" id="kUx-XA-O0N"/>
                                         </constraints>
                                         <state key="normal" title="I get It">
-                                            <color key="titleColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="gotItButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="07e-zh-x16"/>
@@ -2200,13 +2241,16 @@ To see your Sozie Requests click on profile below.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="gyN-lW-kZE" firstAttribute="top" secondItem="OVH-Ge-ikh" secondAttribute="bottom" constant="3" id="LSv-1T-HKx"/>
-                                    <constraint firstAttribute="bottom" secondItem="gyN-lW-kZE" secondAttribute="bottom" id="S21-tp-TsV"/>
+                                    <constraint firstAttribute="trailing" secondItem="oxA-md-0rs" secondAttribute="trailing" id="8VR-Gp-eXo"/>
+                                    <constraint firstItem="gyN-lW-kZE" firstAttribute="top" secondItem="OVH-Ge-ikh" secondAttribute="bottom" constant="15" id="LSv-1T-HKx"/>
+                                    <constraint firstItem="oxA-md-0rs" firstAttribute="leading" secondItem="jn3-0f-PRI" secondAttribute="leading" id="RzI-cd-s32"/>
+                                    <constraint firstAttribute="bottom" secondItem="gyN-lW-kZE" secondAttribute="bottom" constant="23" id="S21-tp-TsV"/>
                                     <constraint firstItem="OVH-Ge-ikh" firstAttribute="leading" secondItem="jn3-0f-PRI" secondAttribute="leading" id="Tri-Za-sdn"/>
                                     <constraint firstItem="OVH-Ge-ikh" firstAttribute="centerX" secondItem="jn3-0f-PRI" secondAttribute="centerX" id="YDW-WF-FeK"/>
                                     <constraint firstItem="gyN-lW-kZE" firstAttribute="centerX" secondItem="jn3-0f-PRI" secondAttribute="centerX" id="gRe-NF-NN4"/>
                                     <constraint firstAttribute="trailing" secondItem="OVH-Ge-ikh" secondAttribute="trailing" id="qH2-MY-yPc"/>
-                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="top" secondItem="jn3-0f-PRI" secondAttribute="top" id="yrE-V0-4o4"/>
+                                    <constraint firstItem="oxA-md-0rs" firstAttribute="top" secondItem="jn3-0f-PRI" secondAttribute="top" id="r28-aq-o7W"/>
+                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="top" secondItem="jn3-0f-PRI" secondAttribute="top" constant="100" id="yrE-V0-4o4"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -2226,7 +2270,7 @@ To see your Sozie Requests click on profile below.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pOd-GA-Mn6"/>
                     </view>
-                    <size key="freeformSize" width="375" height="1597"/>
+                    <size key="freeformSize" width="375" height="1760"/>
                     <connections>
                         <outlet property="gotItButton" destination="gyN-lW-kZE" id="kzp-j0-wKP"/>
                         <outlet property="instructionsHeightConstraint" destination="jgx-4a-01h" id="Fs1-98-r1r"/>
@@ -2240,7 +2284,7 @@ To see your Sozie Requests click on profile below.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSQ-9S-ed2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45.600000000000001" y="1278.7106446776613"/>
+            <point key="canvasLocation" x="45.600000000000001" y="1278.2608695652175"/>
         </scene>
         <!--Fit Tips Navigation Controller-->
         <scene sceneID="mnk-Hu-W9W">
@@ -2346,7 +2390,7 @@ To see your Sozie Requests click on profile below.</string>
                                                 <rect key="frame" x="16" y="112" width="343" height="403"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 UPLOAD PICTURES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vap-XA-C63">
-                                                        <rect key="frame" x="0.0" y="8" width="127" height="20"/>
+                                                        <rect key="frame" x="0.0" y="8" width="130.5" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="AbV-GD-DN8"/>
                                                         </constraints>
@@ -2464,6 +2508,15 @@ To see your Sozie Requests click on profile below.</string>
                                                             <constraint firstItem="GRV-tq-r6s" firstAttribute="top" secondItem="DrT-La-phd" secondAttribute="top" id="yMm-sX-zoP"/>
                                                         </constraints>
                                                     </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(min 3 images)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-Jh-VFi">
+                                                        <rect key="frame" x="134" y="11" width="78" height="14"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="14" id="jQ0-0Y-4fj"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                        <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2475,11 +2528,13 @@ To see your Sozie Requests click on profile below.</string>
                                                     <constraint firstAttribute="height" constant="403" id="Dgh-7w-kHp"/>
                                                     <constraint firstItem="DrT-La-phd" firstAttribute="top" secondItem="bec-kE-9eo" secondAttribute="bottom" constant="22" id="GVn-Z5-aJL"/>
                                                     <constraint firstItem="bec-kE-9eo" firstAttribute="top" secondItem="vap-XA-C63" secondAttribute="bottom" constant="8" id="Lzv-u7-Hv5"/>
+                                                    <constraint firstItem="Y50-Jh-VFi" firstAttribute="leading" secondItem="vap-XA-C63" secondAttribute="trailing" constant="3.5" id="MfO-Ad-dnN"/>
+                                                    <constraint firstItem="Y50-Jh-VFi" firstAttribute="top" secondItem="D6o-15-nOA" secondAttribute="top" constant="11" id="ZEL-jT-Vh2"/>
                                                     <constraint firstItem="vap-XA-C63" firstAttribute="top" secondItem="D6o-15-nOA" secondAttribute="top" constant="8" id="bHA-Up-UbL"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 WHAT SIZE FIT YOU BEST?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkr-lA-IdQ">
-                                                <rect key="frame" x="20" y="535" width="172" height="20"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 WHAT SIZE FIT YOU BEST?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkr-lA-IdQ">
+                                                <rect key="frame" x="20" y="535" width="175.5" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="PZM-eX-PFA"/>
                                                 </constraints>
@@ -2487,8 +2542,8 @@ To see your Sozie Requests click on profile below.</string>
                                                 <color key="textColor" red="0.26663362979999999" green="0.26668566469999999" blue="0.26663035149999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 ADD FIT TIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6IZ-RU-Ncx">
-                                                <rect key="frame" x="20" y="573" width="92.5" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 ADD FIT TIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6IZ-RU-Ncx">
+                                                <rect key="frame" x="20" y="563" width="91" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="HSl-4L-Gdj"/>
                                                 </constraints>
@@ -2496,8 +2551,8 @@ To see your Sozie Requests click on profile below.</string>
                                                 <color key="textColor" red="0.26663362979999999" green="0.26668566469999999" blue="0.26663035149999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVk-XI-T8l">
-                                                <rect key="frame" x="202" y="535" width="127" height="20"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVk-XI-T8l">
+                                                <rect key="frame" x="205.5" y="535" width="123.5" height="20"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apS-lu-G2l">
                                                         <rect key="frame" x="0.0" y="19" width="127" height="1"/>
@@ -2521,7 +2576,7 @@ To see your Sozie Requests click on profile below.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RK6-Nl-9q3">
-                                                <rect key="frame" x="137" y="573" width="166" height="20"/>
+                                                <rect key="frame" x="135.5" y="563" width="167.5" height="20"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y56-8k-L9e">
                                                         <rect key="frame" x="0.0" y="19" width="166" height="1"/>
@@ -2544,7 +2599,7 @@ To see your Sozie Requests click on profile below.</string>
                                                     <constraint firstAttribute="height" constant="20" id="XWO-2b-A2j"/>
                                                 </constraints>
                                             </view>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="checkedSmall" translatesAutoresizingMaskIntoConstraints="NO" id="ZJk-cN-IGS">
+                                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="checkedSmall" translatesAutoresizingMaskIntoConstraints="NO" id="ZJk-cN-IGS">
                                                 <rect key="frame" x="344" y="538" width="15" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="ffV-Ad-e3f"/>
@@ -2552,7 +2607,7 @@ To see your Sozie Requests click on profile below.</string>
                                                 </constraints>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="checkedSmall" translatesAutoresizingMaskIntoConstraints="NO" id="NMa-0x-K9f">
-                                                <rect key="frame" x="344" y="576" width="15" height="15"/>
+                                                <rect key="frame" x="344" y="566" width="15" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="NRA-ZE-fSB"/>
                                                     <constraint firstAttribute="width" constant="15" id="cV1-Ul-bku"/>
@@ -2581,12 +2636,12 @@ To see your Sozie Requests click on profile below.</string>
                                             <constraint firstItem="kVk-XI-T8l" firstAttribute="leading" secondItem="lkr-lA-IdQ" secondAttribute="trailing" constant="10" id="OlB-HU-z1K"/>
                                             <constraint firstItem="kVk-XI-T8l" firstAttribute="top" secondItem="D6o-15-nOA" secondAttribute="bottom" constant="20" id="SLY-FM-pjW"/>
                                             <constraint firstAttribute="trailing" secondItem="D6o-15-nOA" secondAttribute="trailing" constant="16" id="SkJ-Jn-2hf"/>
-                                            <constraint firstItem="6IZ-RU-Ncx" firstAttribute="top" secondItem="lkr-lA-IdQ" secondAttribute="bottom" constant="18" id="TKp-E2-efF"/>
+                                            <constraint firstItem="6IZ-RU-Ncx" firstAttribute="top" secondItem="lkr-lA-IdQ" secondAttribute="bottom" constant="8" id="TKp-E2-efF"/>
                                             <constraint firstAttribute="trailing" secondItem="HTG-dz-e42" secondAttribute="trailing" constant="30" id="UUK-Dx-nAx"/>
                                             <constraint firstItem="RK6-Nl-9q3" firstAttribute="leading" secondItem="6IZ-RU-Ncx" secondAttribute="trailing" constant="24.5" id="XtQ-6W-Mgd"/>
-                                            <constraint firstItem="HTG-dz-e42" firstAttribute="top" secondItem="6IZ-RU-Ncx" secondAttribute="bottom" constant="56" id="bBC-w6-99S"/>
+                                            <constraint firstItem="HTG-dz-e42" firstAttribute="top" secondItem="6IZ-RU-Ncx" secondAttribute="bottom" constant="66" id="bBC-w6-99S"/>
                                             <constraint firstItem="lkr-lA-IdQ" firstAttribute="leading" secondItem="cqz-QL-COC" secondAttribute="leading" constant="20" id="dKv-RH-JVi"/>
-                                            <constraint firstItem="RK6-Nl-9q3" firstAttribute="top" secondItem="lkr-lA-IdQ" secondAttribute="bottom" constant="18" id="dbW-mk-Dvj"/>
+                                            <constraint firstItem="RK6-Nl-9q3" firstAttribute="top" secondItem="lkr-lA-IdQ" secondAttribute="bottom" constant="8" id="dbW-mk-Dvj"/>
                                             <constraint firstItem="lkr-lA-IdQ" firstAttribute="top" secondItem="D6o-15-nOA" secondAttribute="bottom" constant="20" id="ehq-93-PqH"/>
                                             <constraint firstItem="ZJk-cN-IGS" firstAttribute="leading" secondItem="kVk-XI-T8l" secondAttribute="trailing" constant="15" id="hNZ-JO-WT7"/>
                                             <constraint firstItem="BL2-MM-ley" firstAttribute="leading" secondItem="cqz-QL-COC" secondAttribute="leading" constant="12" id="hzE-mi-8aR"/>
@@ -2595,7 +2650,7 @@ To see your Sozie Requests click on profile below.</string>
                                             <constraint firstItem="ZJk-cN-IGS" firstAttribute="top" secondItem="D6o-15-nOA" secondAttribute="bottom" constant="23" id="qCY-zU-fPr"/>
                                             <constraint firstItem="BL2-MM-ley" firstAttribute="top" secondItem="cqz-QL-COC" secondAttribute="top" constant="9" id="uKZ-um-sdU"/>
                                             <constraint firstItem="HTG-dz-e42" firstAttribute="leading" secondItem="cqz-QL-COC" secondAttribute="leading" constant="30" id="vmF-NH-lwc"/>
-                                            <constraint firstItem="NMa-0x-K9f" firstAttribute="top" secondItem="ZJk-cN-IGS" secondAttribute="bottom" constant="23" id="wPu-2v-hmD"/>
+                                            <constraint firstItem="NMa-0x-K9f" firstAttribute="top" secondItem="ZJk-cN-IGS" secondAttribute="bottom" constant="13" id="wPu-2v-hmD"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -3862,14 +3917,14 @@ To see your Sozie Requests click on profile below.</string>
                                                     <action selector="backButtonTapped:" destination="9VM-Mo-ZVu" eventType="touchUpInside" id="cdb-ox-6x8"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You earn cash money for creating posts that help others shop online!." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Q-tL-wVc">
-                                                <rect key="frame" x="25" y="146" width="290" height="35"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You earn cash money for creating posts that help others shop online!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Q-tL-wVc">
+                                                <rect key="frame" x="25" y="146" width="290" height="30.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XtM-Fk-ksd" customClass="DZGradientView" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="80" y="229" width="215" height="118"/>
+                                                <rect key="frame" x="80" y="224.5" width="215" height="118"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zH-Xc-d4c">
                                                         <rect key="frame" x="0.0" y="17" width="215" height="33"/>
@@ -3893,7 +3948,7 @@ To see your Sozie Requests click on profile below.</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;You must have at least £10 to be paid out&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-Ix-I0e">
-                                                <rect key="frame" x="25" y="377" width="325" height="16.5"/>
+                                                <rect key="frame" x="25" y="372.5" width="325" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3938,7 +3993,7 @@ To see your Sozie Requests click on profile below.</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your posts will be reviewed for accuracy before you are paid out." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8G-au-E7m">
-                                                <rect key="frame" x="55" y="413.5" width="265" height="35"/>
+                                                <rect key="frame" x="55" y="409" width="265" height="30.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                 <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>

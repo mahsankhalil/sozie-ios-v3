@@ -80,8 +80,9 @@ class MeasurementsVC: UIViewController {
         }
         fetchDataFromServer()
         if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.measurementUserGuide) == false {
-            showTipView()
+//            showTipView()
         }
+        skipButton.isHidden = true
     }
     func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
@@ -124,7 +125,7 @@ class MeasurementsVC: UIViewController {
 //                let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: hip, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
 
                 let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title: "BRA SIZE", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
-                let sizeWornViewModel = TitleTextFieldCellViewModel(title: "Dress Size", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self)
+                let sizeWornViewModel = TitleTextFieldCellViewModel(title: "What dress size do you normally wear?", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self)
 
                 self.rowViewModels = [heightViewModel, waistHipsModel, braViewModel, sizeWornViewModel]
                 self.sizes = size

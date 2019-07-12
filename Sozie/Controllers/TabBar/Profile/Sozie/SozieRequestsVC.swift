@@ -43,7 +43,11 @@ class SozieRequestsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
-        instructionsHeightConstraint.constant = (1517.5/375) * UIScreen.main.bounds.size.width
+        let topRefreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        topRefreshControl.triggerVerticalOffset = 50.0
+        topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
+        tableView.refreshControl = topRefreshControl
+        instructionsHeightConstraint.constant = (1713.0/375.0) * UIScreen.main.bounds.size.width
         if UserDefaultManager.getIfRequestTutorialShown() == false {
             tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
             tutorialVC?.delegate = self
@@ -52,10 +56,34 @@ class SozieRequestsVC: UIViewController {
 //        self.view.window?.addSubview(tutorialVC.view)
 
     }
+    func disableRootButtons() {
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+
+            profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
+            profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = false
+        }
+    }
+    func enableRootButtons() {
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            
+            profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = true
+            profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = true
+
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.refreshControl?.didMoveToSuperview()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         serverParams.removeAll()
         requests.removeAll()
+        fetchAllSozieRequests()
+    }
+    @objc func reloadRequestData() {
+        self.requests.removeAll()
+        serverParams.removeAll()
         fetchAllSozieRequests()
     }
     @objc func loadNextPage() {
@@ -73,6 +101,7 @@ class SozieRequestsVC: UIViewController {
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             self.tableView.bottomRefreshControl?.endRefreshing()
+            self.tableView.refreshControl?.endRefreshing()
             if isSuccess {
                 let paginatedData = response as! RequestsPaginatedResponse
                 self.requests.append(contentsOf: paginatedData.results)
@@ -83,10 +112,12 @@ class SozieRequestsVC: UIViewController {
     }
     @IBAction func gotItButtonTapped(_ sender: Any) {
         instructionsScrollView.isHidden = true
+        enableRootButtons()
     }
 
     @IBAction func questionMarkButtonTapped(_ sender: Any) {
         instructionsScrollView.isHidden = false
+        disableRootButtons()
     }
     // MARK: - Navigation
 
@@ -135,7 +166,11 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedProduct = requests[indexPath.row].requestedProduct
-        performSegue(withIdentifier: "toProductDetail", sender: self)
+        if viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true {
+            performSegue(withIdentifier: "toProductDetail", sender: self)
+        } else if viewModels[indexPath.row].isSelected == false {
+            performSegue(withIdentifier: "toProductDetail", sender: self)
+        }
     }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
@@ -200,6 +235,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
 //                let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
                 if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
                     uploadPostVC.currentRequest = currentRequest
+                    uploadPostVC.delegate = self
                 profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
                 }
             }
@@ -238,5 +274,15 @@ extension SozieRequestsVC: SozieRequestTutorialDelegate {
     func infoButtonTapped() {
         tutorialVC?.view.removeFromSuperview()
         instructionsScrollView.isHidden = false
+        disableRootButtons()
+    }
+}
+extension SozieRequestsVC: UploadPostAndFitTipsDelegate {
+    func uploadPostInfoButtonTapped() {
+        if let tutVC = tutorialVC {
+            tutVC.view.removeFromSuperview()
+        }
+        instructionsScrollView.isHidden = false
+        disableRootButtons()
     }
 }

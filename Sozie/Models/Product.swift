@@ -51,7 +51,7 @@ struct Product: Codable {
         case categoryId = "generic_category"
         case postCount = "posts_count"
         case currency
-        case posts
+        case posts = "uploads"
         case isFavourite = "is_favourite"
         case feedId = "feed_id"
         case merchantImageURL = "merchant_image_url"

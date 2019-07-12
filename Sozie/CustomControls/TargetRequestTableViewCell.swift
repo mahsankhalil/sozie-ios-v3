@@ -19,6 +19,7 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var checkStoresButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var overlayView: UIView!
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +31,7 @@ class TargetRequestTableViewCell: UITableViewCell {
         productImageView.layer.borderColor = UIColor(hex: "DDDDDD").cgColor
         acceptButton.layer.cornerRadius = 3.0
         timerLabel.isHidden = true
+        overlayView.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -87,30 +89,45 @@ extension TargetRequestTableViewCell: CellConfigurable {
         self.handleAcceptRejectFunctionality(viewModel: viewModel)
     }
     func handleAcceptRejectFunctionality(viewModel: RowViewModel) {
-        if let acceptedViewModel = viewModel as? SelectionProviding {
-            if acceptedViewModel.isSelected == true {
-                self.acceptButton.setTitle("UPLOAD PICTURE", for: .normal)
-                self.acceptButton.backgroundColor = UIColor(hex: "13AEF2")
-                self.timerLabel.isHidden = false
-                self.cancelButton.isHidden = false
-            } else {
+        if let sozieRequestViewModel = viewModel as? SozieRequestCellViewModel {
+            if sozieRequestViewModel.acceptedBySomeoneElse == true && sozieRequestViewModel.isSelected == true {
+                self.overlayView.isHidden = false
                 self.acceptButton.setTitle("ACCEPT REQUEST", for: .normal)
                 self.acceptButton.backgroundColor = UIColor(hex: "FC8787")
                 self.timerLabel.isHidden = true
                 self.cancelButton.isHidden = true
-            }
-        }
-        if let expiryViewModel = viewModel as? ExpiryViewModeling {
-            if !expiryViewModel.expiry.isEmpty {
-                let dateFormat = DateFormatter()
-                dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                dateFormat.timeZone = TimeZone(abbreviation: "UTC")
-                if let date = dateFormat.date(from: expiryViewModel.expiry) {
-                    if timer == nil {
-                        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(countDownDate(timer:)), userInfo: ["date": date], repeats: true)
+            } else {
+                self.overlayView.isHidden = true
+                if let acceptedViewModel = viewModel as? SelectionProviding {
+                    if acceptedViewModel.isSelected == true {
+                        self.acceptButton.setTitle("UPLOAD PICTURE", for: .normal)
+                        self.acceptButton.backgroundColor = UIColor(hex: "13AEF2")
                         self.timerLabel.isHidden = false
+                        self.cancelButton.isHidden = false
+                    } else {
+                        self.acceptButton.setTitle("ACCEPT REQUEST", for: .normal)
+                        self.acceptButton.backgroundColor = UIColor(hex: "FC8787")
+                        self.timerLabel.isHidden = true
+                        self.cancelButton.isHidden = true
                     }
                 }
+            }
+            if sozieRequestViewModel.acceptedBySomeoneElse == false {
+                if let expiryViewModel = viewModel as? ExpiryViewModeling {
+                    if !expiryViewModel.expiry.isEmpty {
+                        let dateFormat = DateFormatter()
+                        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+                        if let date = dateFormat.date(from: expiryViewModel.expiry) {
+                            if timer == nil {
+                                timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(countDownDate(timer:)), userInfo: ["date": date], repeats: true)
+                                self.timerLabel.isHidden = false
+                            }
+                        }
+                    }
+                }
+            } else {
+                self.timerLabel.isHidden = true
             }
         }
     }

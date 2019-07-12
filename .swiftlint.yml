@@ -3,5 +3,6 @@ disabled_rules: # rule identifiers to exclude from running
 - force_cast
 - shorthand_operator
 - type_body_length
+- legacy_constructor
 excluded:
 - Pods

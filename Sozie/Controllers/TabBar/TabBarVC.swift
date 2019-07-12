@@ -62,7 +62,8 @@ extension TabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if UserDefaultManager.getIfShopper() == false {
             if self.customizableViewControllers?.index(of: viewController) == 2 {
-                UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+                UtilityManager.showMessageWith(title: "Coming Soon", body: "Tap \"Profile\" to see Requests available to you", in: self)
+//                UtilityManager.openImagePickerActionSheetFrom(viewController: self)
                 return false
             } else if self.customizableViewControllers?.index(of: viewController) == 0 {
                 if currentBrandId != UserDefaultManager.getCurrentUserObject()?.brand {
