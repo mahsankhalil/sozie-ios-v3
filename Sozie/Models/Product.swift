@@ -36,6 +36,7 @@ struct Product: Codable {
     var isFavourite: Bool?
     var feedId: Int?
     var merchantImageURL: String?
+    var merchantProductId: String?
     var productStringId: String?
     var sizeChart: [ProductSize]?
     var reviews: ReviewList?
@@ -50,10 +51,11 @@ struct Product: Codable {
         case categoryId = "generic_category"
         case postCount = "posts_count"
         case currency
-        case posts
+        case posts = "uploads"
         case isFavourite = "is_favourite"
         case feedId = "feed_id"
         case merchantImageURL = "merchant_image_url"
+        case merchantProductId = "merchant_product_id"
         case productStringId = "product_id"
         case sizeChart = "size_chart"
         case reviews
@@ -74,6 +76,7 @@ struct Product: Codable {
         isFavourite = try? values.decode(Bool.self, forKey: .isFavourite)
         feedId = try? values.decode(Int.self, forKey: .feedId)
         merchantImageURL = try? values.decode(String.self, forKey: .merchantImageURL)
+        merchantProductId = try? values.decode(String.self, forKey: .merchantProductId)
         productStringId = try? values.decode(String.self, forKey: .productStringId)
         sizeChart = try? values.decode([ProductSize].self, forKey: .sizeChart)
         reviews = try? values.decode(ReviewList.self, forKey: .reviews)

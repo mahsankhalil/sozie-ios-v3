@@ -9,15 +9,21 @@
 import UIKit
 import SVProgressHUD
 class SozieRequestsVC: UIViewController {
+    @IBOutlet weak var gotItButton: UIButton!
+    @IBOutlet weak var instructionsHeightConstraint: NSLayoutConstraint!
     var reuseableIdentifier = "SozieRequestTableViewCell"
+    var reuseableIdentifierTarget = "TargetRequestTableViewCell"
     @IBOutlet weak var searchCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
+    @IBOutlet weak var questionMarkButton: UIButton!
+    @IBOutlet weak var instructionsScrollView: UIScrollView!
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
     var serverParams: [String: Any] = [String: Any]()
     var currentRequest: SozieRequest?
+    var tutorialVC: SozieRequestTutorialVC?
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -37,13 +43,48 @@ class SozieRequestsVC: UIViewController {
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
+        let topRefreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        topRefreshControl.triggerVerticalOffset = 50.0
+        topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
+        tableView.refreshControl = topRefreshControl
+        instructionsHeightConstraint.constant = (1713.0/375.0) * UIScreen.main.bounds.size.width
+        if UserDefaultManager.getIfRequestTutorialShown() == false {
+            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
+            tutorialVC?.delegate = self
+            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+        }
+//        self.view.window?.addSubview(tutorialVC.view)
+
+    }
+    func disableRootButtons() {
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+
+            profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
+            profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = false
+        }
+    }
+    func enableRootButtons() {
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            
+            profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = true
+            profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = true
+
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.refreshControl?.didMoveToSuperview()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         serverParams.removeAll()
         requests.removeAll()
         fetchAllSozieRequests()
-
+    }
+    @objc func reloadRequestData() {
+        self.requests.removeAll()
+        serverParams.removeAll()
+        fetchAllSozieRequests()
     }
     @objc func loadNextPage() {
         if let nextUrl = self.nextURL {
@@ -60,6 +101,7 @@ class SozieRequestsVC: UIViewController {
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             self.tableView.bottomRefreshControl?.endRefreshing()
+            self.tableView.refreshControl?.endRefreshing()
             if isSuccess {
                 let paginatedData = response as! RequestsPaginatedResponse
                 self.requests.append(contentsOf: paginatedData.results)
@@ -68,7 +110,15 @@ class SozieRequestsVC: UIViewController {
             }
         }
     }
+    @IBAction func gotItButtonTapped(_ sender: Any) {
+        instructionsScrollView.isHidden = true
+        enableRootButtons()
+    }
 
+    @IBAction func questionMarkButtonTapped(_ sender: Any) {
+        instructionsScrollView.isHidden = false
+        disableRootButtons()
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -89,10 +139,14 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
-        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
+        var identifier = reuseableIdentifier
+        if viewModel.brandId == 10 {
+            identifier = reuseableIdentifierTarget
+        }
+        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier)
         if tableViewCell == nil {
-            tableView.register(UINib(nibName: reuseableIdentifier, bundle: nil), forCellReuseIdentifier: reuseableIdentifier)
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseableIdentifier)
+            tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier)
         }
         guard let cell = tableViewCell else { return UITableViewCell() }
         if let cellConfigurable = cell as? CellConfigurable {
@@ -104,18 +158,101 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         if let currentCell = cell as? SozieRequestTableViewCell {
             currentCell.delegate = self
         }
+        if let currentCell = cell as? TargetRequestTableViewCell {
+            currentCell.delegate = self
+        }
         cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedProduct = requests[indexPath.row].requestedProduct
-        performSegue(withIdentifier: "toProductDetail", sender: self)
+        if viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true {
+            performSegue(withIdentifier: "toProductDetail", sender: self)
+        } else if viewModels[indexPath.row].isSelected == false {
+            performSegue(withIdentifier: "toProductDetail", sender: self)
+        }
     }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
+    func cancelRequestButtonTapped(button: UIButton) {
+        let currentRequest = requests[button.tag]
+        if let acceptedRequestId = currentRequest.acceptedRequest?.acceptedId {
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.cancelRequest(requestId: acceptedRequestId) { (isSuccess, _) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: button.tag, section: 0)) as? SozieRequestTableViewCell {
+                        cell.timer?.invalidate()
+                        cell.timer = nil
+                    } else if let cell = self.tableView.cellForRow(at: IndexPath(row: button.tag, section: 0)) as? TargetRequestTableViewCell {
+                        cell.timer?.invalidate()
+                        cell.timer = nil
+                    }
+                    self.serverParams.removeAll()
+                    self.requests.removeAll()
+                    self.fetchAllSozieRequests()
+                }
+            }
+        }
+    }
+
+    func nearbyStoresButtonTapped(button: UIButton) {
+        let currentRequest = requests[button.tag]
+        let product = currentRequest.requestedProduct
+        var imageURL = ""
+        if var prodImageURL = product.merchantImageURL {
+            if prodImageURL == "" {
+                if let imageURLTarget = product.imageURL {
+                    imageURL = imageURLTarget
+                }
+            } else {
+                if prodImageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = prodImageURL.components(separatedBy: delimeter)
+                    prodImageURL = url[0]
+                }
+                imageURL = prodImageURL
+            }
+        }
+        if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
+            let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL)
+            popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+            let popUpVC = PopupController
+                .create(self.tabBarController!.navigationController!)
+            //        let options = PopupCustomOption.layout(.bottom)
+            //        popUpVC.cornerRadius = 0.0
+            //        _ = popUpVC.customize([options])
+            _ = popUpVC.show(popUpInstnc)
+            popUpInstnc.closeHandler = { [] in
+                popUpVC.dismiss()
+            }
+        }
+    }
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
-        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        if currentRequest?.isAccepted == true {
+            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+//                let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+                if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
+                    uploadPostVC.currentRequest = currentRequest
+                    uploadPostVC.delegate = self
+                profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
+                }
+            }
+//            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        } else {
+            SVProgressHUD.show()
+            var dataDict = [String: Any]()
+            dataDict["product_request"] = currentRequest?.requestId
+            ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, _) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.serverParams.removeAll()
+                    self.requests.removeAll()
+                    self.fetchAllSozieRequests()
+                }
+            }
+        }
     }
 }
 extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -131,5 +268,21 @@ extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControll
             }
             picker.dismiss(animated: true, completion: nil)
         }
+    }
+}
+extension SozieRequestsVC: SozieRequestTutorialDelegate {
+    func infoButtonTapped() {
+        tutorialVC?.view.removeFromSuperview()
+        instructionsScrollView.isHidden = false
+        disableRootButtons()
+    }
+}
+extension SozieRequestsVC: UploadPostAndFitTipsDelegate {
+    func uploadPostInfoButtonTapped() {
+        if let tutVC = tutorialVC {
+            tutVC.view.removeFromSuperview()
+        }
+        instructionsScrollView.isHidden = false
+        disableRootButtons()
     }
 }

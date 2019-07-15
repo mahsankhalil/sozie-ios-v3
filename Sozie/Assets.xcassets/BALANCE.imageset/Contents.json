@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "BALANCE.png",
+      "filename" : "Iphone Mockup.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "BALANCE@2x.png",
+      "filename" : "Iphone Mockup@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "BALANCE@3x.png",
+      "filename" : "Iphone Mockup@3x.png",
       "scale" : "3x"
     }
   ],

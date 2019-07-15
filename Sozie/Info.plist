@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0.2</string>
+	<string>3.0.3</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -42,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>7</string>
 	<key>Configuration</key>
 	<string>$(CONFIGURATION)</string>
 	<key>FacebookAppID</key>
@@ -67,6 +69,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Sozie would like to access Camera to take photos</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Sozie would like to access you location to find the nearest stores for you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Sozie would like to access photo library to select photos</string>
 	<key>SERVER_URL</key>

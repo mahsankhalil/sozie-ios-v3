@@ -24,7 +24,25 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user
     }
-
+    static func checkIfMeasurementEmpty() -> Bool {
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if let measurements = user.measurement {
+                if let size = measurements.size {
+                    if size == "" {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else {
+                    return true
+                }
+            } else {
+                return true
+            }
+        } else {
+            return true
+        }
+    }
     static func updateUserObject(user: User) {
         guard var loginResponse = loginResponse() else { return  }
         loginResponse.user = user
@@ -138,6 +156,20 @@ class UserDefaultManager: NSObject {
         UserDefaults.standard.set(true, forKey: userGuide)
         UserDefaults.standard.synchronize()
         UserDefaultManager.checkIfALLUserGuidesShownThenDisableUserGuide()
+    }
+    static func setBrowserTutorialShown() {
+        UserDefaults.standard.set(true, forKey: "BrowseTutorialShown")
+        UserDefaults.standard.synchronize()
+    }
+    static func getIfBrowseTutorialShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: "BrowseTutorialShown")
+    }
+    static func setRequestTutorialShown() {
+        UserDefaults.standard.set(true, forKey: "RequestTutorialShown")
+        UserDefaults.standard.synchronize()
+    }
+    static func getIfRequestTutorialShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: "RequestTutorialShown")
     }
     static func checkIfALLUserGuidesShownThenDisableUserGuide() {
         if UserDefaults.standard.bool(forKey: UserDefaultKey.measurementUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.browseUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.requestSozieButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.followButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.mySoziesUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.myRequestsUserGuide) == true {

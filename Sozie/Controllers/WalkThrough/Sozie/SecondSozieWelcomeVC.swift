@@ -12,7 +12,7 @@ import AVFoundation
 class SecondSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
 
     weak var delegate: WelcomeButtonActionsDelegate?
-    var index: Int = 1
+    var index: Int = 0
 
     @IBOutlet weak var videoView: AVPlayerView!
     var avPlayer: AVPlayer!

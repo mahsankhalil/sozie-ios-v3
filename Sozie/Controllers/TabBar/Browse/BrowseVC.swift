@@ -80,6 +80,7 @@ class BrowseVC: BaseViewController {
     var cancelTipView: EasyTipView?
     var collectionTipView: EasyTipView?
     var gstrRcgnzr: UIGestureRecognizer?
+    var tutorialVC: BrowseWelcomeVC?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,6 +88,8 @@ class BrowseVC: BaseViewController {
         self.brandsCollectionVu.infiniteScrollDelegate = self
         _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         setupSozieLogoNavBar()
+        
+        
 //        if let userType = UserDefaultManager.getCurrentUserType() {
 //            if userType == UserType.shopper.rawValue {
 //                setupSozieLogoNavBar()
@@ -108,6 +111,18 @@ class BrowseVC: BaseViewController {
         setupViews()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name(rawValue: "RefreshBrowseData"), object: nil)
         self.refreshData()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        perform(#selector(showWelcomeView), with: nil, afterDelay: 0.5)
+    }
+    @objc func showWelcomeView() {
+        if UserDefaultManager.getIfBrowseTutorialShown() == false {
+            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
+            tutorialVC?.delegate = self
+            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+            UserDefaultManager.setBrowserTutorialShown()
+        }
     }
     func showTipeViewAfterDelay() {
         perform(#selector(showTipView), with: nil, afterDelay: 0.5)
@@ -550,7 +565,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 12.0
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10)  {
+        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
             loadNextPage()
         }
     }
@@ -620,5 +635,11 @@ extension BrowseVC: PopupNavControllerDelegate {
             self.filterBySozies = true
         }
         fetchFilteredData()
+    }
+}
+extension BrowseVC: BrowseWelcomeDelegate {
+    func profileButtonTapped() {
+        self.tabBarController?.selectedIndex = 3
+        tutorialVC?.view.removeFromSuperview()
     }
 }

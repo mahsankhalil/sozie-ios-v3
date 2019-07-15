@@ -13,8 +13,9 @@ import SVProgressHUD
 import EasyTipView
 import TPKeyboardAvoiding
 
-class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDelegate, UITextViewDelegate {
 
+    @IBOutlet weak var termsConditionTextView: UITextView!
     @IBOutlet weak var femaleBtn: UIButton!
     @IBOutlet weak var maleBtn: UIButton!
     @IBOutlet weak var lastNameTxtFld: MFTextField!
@@ -43,6 +44,64 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         applyValidators()
         populateCurrentUserData()
         populateSocialData()
+        makeAttributedTextView()
+    }
+    func makeAttributedTextView() {
+        let text = NSMutableAttributedString(string: "By tapping \"Sign Up\" you agree to our ")
+        let text2 = NSMutableAttributedString(string: " and ")
+        text.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 10), range: NSMakeRange(0, text.length))
+        text2.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 10), range: NSMakeRange(0, text2.length))
+        text2.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: "A9A9A9"), range: NSMakeRange(0, text2.length))
+        text.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: "A9A9A9"), range: NSMakeRange(0, text.length))
+
+        let selectablePart = NSMutableAttributedString(string: "Terms & Conditions")
+        let selectablePart2 = NSMutableAttributedString(string: "Privacy Policy")
+
+        selectablePart2.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 10), range: NSMakeRange(0, selectablePart2.length))
+        selectablePart.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: "92BFFE"), range: NSMakeRange(0, selectablePart.length))
+        selectablePart2.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hex: "92BFFE"), range: NSMakeRange(0, selectablePart2.length))
+
+        // Add an underline to indicate this portion of text is selectable (optional)
+        selectablePart2.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range: NSMakeRange(0, selectablePart2.length))
+        // Add an NSLinkAttributeName with a value of an url or anything else
+        selectablePart2.addAttribute(NSAttributedString.Key.link, value: "privacy", range: NSMakeRange(0, selectablePart2.length))
+        selectablePart.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 10), range: NSMakeRange(0, selectablePart.length))
+        // Add an underline to indicate this portion of text is selectable (optional)
+        selectablePart.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range: NSMakeRange(0, selectablePart.length))
+        // Add an NSLinkAttributeName with a value of an url or anything else
+        selectablePart.addAttribute(NSAttributedString.Key.link, value: "terms", range: NSMakeRange(0, selectablePart.length))
+        // Combine the non-selectable string with the selectable string
+        
+        text.append(selectablePart)
+        text.append(text2)
+        text.append(selectablePart2)
+        // Center the text (optional)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.center
+        text.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, text.length))
+        // To set the link text color (optional)
+        // Set the text view to contain the attributed text
+        termsConditionTextView.attributedText = text
+        // Disable editing, but enable selectable so that the link can be selected
+        termsConditionTextView.isEditable = false
+        termsConditionTextView.isSelectable = true
+        // Set the delegate in order to use textView(_:shouldInteractWithURL:inRange)
+        termsConditionTextView.delegate = self
+    }
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        // **Perform sign in action here**
+        if URL.absoluteString == "terms" {
+            let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+            let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
+            tosVC.type = TOSType.termsCondition
+            self.present(tosVC, animated: true, completion: nil)
+        } else if URL.absoluteString == "privacy" {
+            let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+            let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
+            tosVC.type = TOSType.privacyPolicy
+            self.present(tosVC, animated: true, completion: nil)
+        }
+        return false
     }
 
     func populateSocialData() {
@@ -69,8 +128,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                 applyFemaleSelection()
             }
             signUpButton.setTitle("Save", for: .normal)
+            termsConditionTextView.isHidden = true
         } else {
             backButton.isHidden = true
+            termsConditionTextView.isHidden = false
         }
     }
     // MARK: - Custom Methods
@@ -117,8 +178,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             if isSuccess {
                 if let loginResponse = response as? LoginResponse {
                     _ = UserDefaultManager.saveLoginResponse(loginResp: loginResponse)
-                    UtilityManager.registerUserOnIntercom()
+//                    UtilityManager.registerUserOnIntercom()
                 }
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.updatePushTokenToServer()
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {
                 if let error = response as? Error {

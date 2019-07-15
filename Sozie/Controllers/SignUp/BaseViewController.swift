@@ -137,6 +137,13 @@ class BaseViewController: UIViewController {
         tagItemButton.tintColor = UIColor(hex: "888888")
         navigationItem.rightBarButtonItem = tagItemButton
     }
+    func showInfoButton() {
+        let infoButton = UIBarButtonItem(image: UIImage(named: "info"), style: .plain, target: self, action: #selector(infoButtonTapped))
+        navigationItem.rightBarButtonItem = infoButton
+    }
+    @objc func infoButtonTapped() {
+        
+    }
     @objc func tagItemButtonTapped() {
     }
     @objc func cancelButtonTapped() {

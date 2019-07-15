@@ -34,7 +34,7 @@ class SozieProfileVC: BaseViewController {
 //                    sizeString = "Size Worn: " + post.sizeType + " " + post.sizeValue
 //                }
                 sizeString = "Size Worn: " + post.sizeValue
-                let viewModel = UserPostCellViewModel(subtitle: sizeString, imageURL: URL(string: post.thumbURL))
+                let viewModel = UserPostCellViewModel(subtitle: sizeString, imageURL: URL(string: post.imageURL), isSelected: post.isApproved,status: post.reviewAction)
                 viewModels.append(viewModel)
             }
             self.collectionView.reloadData()

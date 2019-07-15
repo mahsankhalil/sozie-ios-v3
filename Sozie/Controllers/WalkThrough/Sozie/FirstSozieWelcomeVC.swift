@@ -11,15 +11,15 @@ import UIKit
 class FirstSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
 
     weak var delegate: WelcomeButtonActionsDelegate?
-    var index: Int = 0
+    var index: Int = 1
 
     @IBOutlet weak var detailLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+//         Do any additional setup after loading the view.
         let formattedString = NSMutableAttributedString()
-        formattedString.normal("Sozies help shoppers by trying-on, taking pictures and reviewing fashion.\nThe more you help, the more you make.\n\nCheck your ").bold("Balance ").normal("to see how much you've made and ").bold("Cash out").normal("!")
+        formattedString.normal("Fill ").bold("Requests ").normal("within 24 hours.\nYou get paid for each approved request.\nCheck your updated ").bold("Balance ").normal("on your ").bold("Profile ").normal("page to see the money you’ve made!")
         detailLabel.attributedText = formattedString
 
     }

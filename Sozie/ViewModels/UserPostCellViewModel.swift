@@ -8,7 +8,9 @@
 
 import UIKit
 
-struct UserPostCellViewModel: RowViewModel, ImageViewModeling, SubtitleViewModeling {
+struct UserPostCellViewModel: RowViewModel, ImageViewModeling, SubtitleViewModeling, SelectionProviding {
     var subtitle: String?
     var imageURL: URL?
+    var isSelected: Bool
+    var status: String
 }

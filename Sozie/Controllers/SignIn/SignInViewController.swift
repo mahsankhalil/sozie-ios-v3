@@ -79,8 +79,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 // Do something after login
                 let res = response as! LoginResponse
                 _ = UserDefaultManager.saveLoginResponse(loginResp: res)
-                UtilityManager.registerUserOnIntercom()
+//                UtilityManager.registerUserOnIntercom()
                 self.changeRootVCToTabBarNC()
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.updatePushTokenToServer()
             } else {
                 let error = response as! Error
                 UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)

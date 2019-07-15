@@ -70,7 +70,8 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
                         let user = response as! User
                         UserDefaultManager.updateUserObject(user: user)
                         if self.isFromSignUp {
-                            self.performSegue(withIdentifier: "toInviteFriends", sender: self)
+                            self.changeRootVCToTabBarNC()
+//                            self.performSegue(withIdentifier: "toInviteFriends", sender: self)
                         } else {
                             self.navigationController?.popViewController(animated: true)
                         }
@@ -86,6 +87,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
     }
 
     @IBAction func skipBtnTapped(_ sender: Any) {
+        self.changeRootVCToTabBarNC()
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {

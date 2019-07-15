@@ -53,10 +53,19 @@
                                     <constraint firstAttribute="height" constant="14" id="gny-Oc-VR8"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oae-AF-2q2">
+                                <rect key="frame" x="37.5" y="37.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="e8n-aA-pzL"/>
+                                    <constraint firstAttribute="width" constant="50" id="wBK-qS-hpl"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TDQ-m4-nEq" firstAttribute="top" secondItem="WgC-aZ-UeW" secondAttribute="top" id="MvG-2w-hzJ"/>
+                            <constraint firstItem="Oae-AF-2q2" firstAttribute="centerX" secondItem="WgC-aZ-UeW" secondAttribute="centerX" id="kOb-rF-FFs"/>
+                            <constraint firstItem="Oae-AF-2q2" firstAttribute="centerY" secondItem="WgC-aZ-UeW" secondAttribute="centerY" id="m8S-vI-yTK"/>
                             <constraint firstItem="TDQ-m4-nEq" firstAttribute="leading" secondItem="WgC-aZ-UeW" secondAttribute="leading" id="mGC-M2-Rca"/>
                             <constraint firstAttribute="trailing" secondItem="TDQ-m4-nEq" secondAttribute="trailing" id="odp-vG-aHc"/>
                             <constraint firstAttribute="bottom" secondItem="TDQ-m4-nEq" secondAttribute="bottom" id="sZg-08-mnq"/>
@@ -77,6 +86,7 @@
                 <outlet property="imageView" destination="TDQ-m4-nEq" id="hYf-qX-ISt"/>
                 <outlet property="labelBackgroundView" destination="GFC-SD-IAZ" id="4t9-aX-NuR"/>
                 <outlet property="sizeLabel" destination="oHS-uq-WBB" id="dPs-hZ-8zI"/>
+                <outlet property="statusImageView" destination="Oae-AF-2q2" id="dDH-xV-Obu"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="106.59670164917542"/>
         </collectionViewCell>

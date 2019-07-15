@@ -9,15 +9,19 @@
 import UIKit
 import FBSDKCoreKit
 import GoogleSignIn
-import Appsee
-import Intercom
+//import Appsee
+//import Intercom
 import UserNotifications
+import CoreLocation
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var imageTaken: UIImage?
     var updatedProduct: Product?
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation!
+    var pushToken: String?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
@@ -26,14 +30,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
-            let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
-            let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
-            self.window?.rootViewController = rootViewController
+            if UserDefaultManager.checkIfMeasurementEmpty() {
+                self.showMeasuremnetVC()
+            } else {
+                let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+                let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
+                self.window?.rootViewController = rootViewController
+            }
         }
-        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
-        UtilityManager.registerUserOnIntercom()
-        Appsee.start()
+//        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
+//        UtilityManager.registerUserOnIntercom()
+//        Appsee.start()
+        UNUserNotificationCenter.current().delegate = self
         return true
+    }
+    func showMeasuremnetVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let rootViewController = storyboard.instantiateViewController(withIdentifier: "MeasurementsVC") as! MeasurementsVC
+        rootViewController.isFromSignUp = true
+        self.window?.rootViewController = rootViewController
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -51,6 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return handled
         }
         return true
+    }
+
+    func setupLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        self.locationManager?.requestWhenInUseAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager?.startUpdatingLocation()
     }
 
     // Respond to Universal Links
@@ -82,12 +105,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Intercom.setDeviceToken(deviceToken)
+//        Intercom.setDeviceToken(deviceToken)
+        pushToken = deviceToken.hexString
+        updatePushTokenToServer()
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+    func updatePushTokenToServer() {
+        var dataDict = [String: Any]()
+        dataDict["device_notify_id"] = pushToken
+        ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
+            
+        }
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if Intercom.isIntercomPushNotification(userInfo) {
-            Intercom.handlePushNotification(userInfo)
-        }
+//        if Intercom.isIntercomPushNotification(userInfo) {
+//            Intercom.handlePushNotification(userInfo)
+//        }
         completionHandler(.noData)
     }
 
@@ -104,5 +139,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+}
+extension AppDelegate: CLLocationManagerDelegate {
+    // Below method will provide you current location.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if currentLocation == nil {
+            currentLocation = locations.last
+            locationManager?.stopMonitoringSignificantLocationChanges()
+            let locationValue: CLLocationCoordinate2D = manager.location!.coordinate
+            print("locations = \(locationValue)")
+            locationManager?.stopUpdatingLocation()
+        }
+    }
+    // Below Mehtod will print error if not able to update location.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error")
     }
 }

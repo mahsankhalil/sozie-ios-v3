@@ -18,6 +18,7 @@ struct SozieRequest: Codable {
     var brandId: Int
     var isFilled: Bool
     var isAccepted: Bool
+    var acceptedRequest: AcceptedRequest?
     enum CodingKeys: String, CodingKey {
         case requestId = "id"
         case user = "user"
@@ -28,6 +29,7 @@ struct SozieRequest: Codable {
         case brandId = "brand"
         case isFilled = "is_filled"
         case isAccepted = "is_accepted"
+        case acceptedRequest = "accepted_request"
     }
 
     init(from decoder: Decoder) throws {
@@ -41,8 +43,26 @@ struct SozieRequest: Codable {
         brandId = try values.decode(Int.self, forKey: .brandId)
         isFilled = try values.decode(Bool.self, forKey: .isFilled)
         isAccepted = try values.decode(Bool.self, forKey: .isAccepted)
-    }
+        acceptedRequest = try? values.decode(AcceptedRequest.self, forKey: .acceptedRequest)
 
+    }
+}
+
+struct AcceptedRequest: Codable {
+    var acceptedId: Int?
+    var acceptedById: Int?
+    var expiry: String?
+    enum CodingKeys: String, CodingKey {
+        case acceptedId = "id"
+        case acceptedById = "accepted_by"
+        case expiry
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        acceptedId = try? values.decode(Int.self, forKey: .acceptedId)
+        acceptedById = try? values.decode(Int.self, forKey: .acceptedById)
+        expiry = try? values.decode(String.self, forKey: .expiry)
+    }
 }
 
 struct RequestsPaginatedResponse: Codable {

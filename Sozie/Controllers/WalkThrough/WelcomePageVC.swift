@@ -37,7 +37,7 @@ class WelcomePageVC: UIPageViewController {
         dataSource = self
         delegate = self
         if userType == UserType.sozie {
-            orderedViewControllers = [self.viewCntrollerWith(identifier: "FirstSozieWelcomeVC"), self.viewCntrollerWith(identifier: "SecondSozieWelcomeVC"), self.viewCntrollerWith(identifier: "ThirdSozieWelcomeVC")] as! [UIViewController]
+            orderedViewControllers = [self.viewCntrollerWith(identifier: "SecondSozieWelcomeVC"), self.viewCntrollerWith(identifier: "FirstSozieWelcomeVC"), self.viewCntrollerWith(identifier: "ThirdSozieWelcomeVC")] as! [UIViewController]
         } else {
             orderedViewControllers = [self.viewCntrollerWith(identifier: "FirstShopperWelcomeVC"), self.viewCntrollerWith(identifier: "SecondShopperWelcomeVC"), self.viewCntrollerWith(identifier: "ThirdShopperWelcomeVC")] as! [UIViewController]
         }
@@ -147,7 +147,7 @@ extension WelcomePageVC: WelcomeButtonActionsDelegate {
 //        } else {
 //            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
 //        }
-        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+        self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
 
     func shopTogetherButtonTapped() {
@@ -156,7 +156,7 @@ extension WelcomePageVC: WelcomeButtonActionsDelegate {
 //        } else {
 //            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
 //        }
-        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
+        self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
 }
 extension WelcomePageVC: SignUpInfoProvider {

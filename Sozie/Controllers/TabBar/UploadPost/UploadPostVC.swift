@@ -162,12 +162,12 @@ class UploadPostVC: BaseViewController {
     }
     @IBAction func sizeWornButtonTapped(_ sender: Any) {
         let popUpInstnc = SizePickerPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
+        popUpInstnc.delegate = self
         let popUpVC = PopupController
             .create(self.tabBarController?.navigationController ?? self)
             .show(popUpInstnc)
         let options = PopupCustomOption.layout(.bottom)
         _ = popUpVC.customize([options])
-        popUpInstnc.delegate = self
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()
         }

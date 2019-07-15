@@ -12,10 +12,13 @@ class PostSizeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelBackgroundView: UIView!
     @IBOutlet weak var sizeLabel: UILabel!
-
+    @IBOutlet weak var statusImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        imageView.sd_setShowActivityIndicatorView(true)
+        imageView.sd_setIndicatorStyle(.gray)
         labelBackgroundView.roundCorners(corners: [.topLeft], radius: 20.0)
     }
 
@@ -28,6 +31,20 @@ extension PostSizeCollectionViewCell: CellConfigurable {
         }
         if let subtitleModel = viewModel as? SubtitleViewModeling {
             sizeLabel.text = subtitleModel.subtitle
+        }
+        if let selectionModel = viewModel as? SelectionProviding {
+            if selectionModel.isSelected == true {
+                self.statusImageView.image = UIImage(named: "checked")
+            } else {
+                self.statusImageView.image = UIImage(named: "cancel")
+            }
+        }
+        if let postViewModel = viewModel as? UserPostCellViewModel {
+            if postViewModel.status == "P" {
+                self.statusImageView.isHidden = true
+            } else {
+                self.statusImageView.isHidden = false
+            }
         }
     }
 }

@@ -257,7 +257,7 @@ class ProductDetailVC: BaseViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "toUploadPost" {
-            let uploadPostVC = segue.destination as! UploadPostVC
+            let uploadPostVC = segue.destination as! UploadPostAndFitTipsVC
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             uploadPostVC.selectedImage = appDelegate.imageTaken
             uploadPostVC.currentProduct = currentProduct
@@ -300,24 +300,12 @@ class ProductDetailVC: BaseViewController {
         }
     }
     @IBAction func butButtonTapped(_ sender: Any) {
-//        if let productURL = self.currentProduct?.deepLink {
-//            guard let url = URL(string: productURL) else { return }
-//            let svc = SFSafariViewController(url: url)
-//            svc.modalPresentationStyle = .pageSheet
-//            self.tabBarController?.navigationController?.present(svc, animated: true, completion: nil)
-////            self.present(svc, animated: true, completion: nil)
-////            guard let url = URL(string: productURL) else { return }
-////            UIApplication.shared.open(url)
-//        }
-//        self.performSegue(withIdentifier: "toWebVC", sender: self)
         if let productURL = self.currentProduct?.deepLink {
-
             let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
             webVC.url = URL(string: productURL)
             webVC.modalPresentationStyle = .overFullScreen
             self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
         }
-
     }
     @IBAction func shareButtonTapped(_ sender: Any) {
         if var imageURL = currentProduct?.merchantImageURL {
@@ -513,7 +501,7 @@ extension ProductDetailVC: UIScrollViewDelegate {
         if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
             if UserDefaultManager.getIfShopper() == false {
                 if (scrollView.contentSize.width - scrollView.bounds.width) != 0 {
-                    UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+//                    UtilityManager.openImagePickerActionSheetFrom(viewController: self)
                 }
             }
         }
@@ -531,7 +519,8 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
     }
 
     func cameraButtonTapped(button: UIButton) {
-        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        UtilityManager.showMessageWith(title: "Coming Soon", body: "Tap \"Profile\" to see Requests available to you", in: self)
+//        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 
     func moreButtonTapped(button: UIButton) {
@@ -609,12 +598,14 @@ extension ProductDetailVC: PostCollectionViewCellDelegate {
 }
 extension ProductDetailVC: ProductDetailCollectionViewCellDelegate {
     func productCameraButtonTapped(button: UIButton) {
-        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+        UtilityManager.showMessageWith(title: "Coming Soon", body: "Tap \"Profile\" to see Requests available to you", in: self)
+
+//        UtilityManager.openImagePickerActionSheetFrom(viewController: self)
     }
 }
 extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostVC") as? UploadPostVC {
+        if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
             if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
                 uploadPostVC.selectedImage = scaledImg

@@ -32,7 +32,7 @@ class MyBalanceVC: UIViewController {
             if isSuccess {
                 let balance = (response as! BalanceResponse).balance
                 self.currentbalance = balance
-                self.balanceLabel.text = "£" + String(format: "%0.2f", balance)
+                self.balanceLabel.text = "$" + String(format: "%0.2f", balance)
             } else {
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }

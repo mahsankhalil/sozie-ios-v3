@@ -26,6 +26,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
         productImageView.layer.borderWidth = 1.0
         productImageView.layer.borderColor = UIColor(hex: "DDDDDD").cgColor
         productImageView.clipsToBounds = true
+        productImageView.sd_setShowActivityIndicatorView(true)
+        productImageView.sd_setIndicatorStyle(.gray)
         titleImageViewHeightConstraint.constant = 13.0
 
 //        if let userType = UserDefaultManager.getCurrentUserType() {
