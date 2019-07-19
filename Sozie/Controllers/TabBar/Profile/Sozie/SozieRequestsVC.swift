@@ -24,6 +24,14 @@ class SozieRequestsVC: UIViewController {
     var serverParams: [String: Any] = [String: Any]()
     var currentRequest: SozieRequest?
     var tutorialVC: SozieRequestTutorialVC?
+    var inStockTutorialVC: RequestInStockTutorialVC?
+    var acceptRequestTutorialVC: AcceptRequestTutorialVC?
+    var ifInStockTutorialShown: Bool = false
+    var ifAcceptRequestTutorialShown: Bool = false
+    var ifUploadPostTutorialShown: Bool = false
+    var isFromTutorial: Bool = false
+    var progressTutorialVC: TutorialProgressVC?
+    var ifGotItButtonTapped: Bool = false
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -53,8 +61,14 @@ class SozieRequestsVC: UIViewController {
             tutorialVC?.delegate = self
             UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
 //        self.view.window?.addSubview(tutorialVC.view)
 
+    }
+    @objc func resetFirstTime() {
+        serverParams.removeAll()
+        requests.removeAll()
+        self.fetchAllSozieRequests()
     }
     func disableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
@@ -65,7 +79,6 @@ class SozieRequestsVC: UIViewController {
     }
     func enableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
-            
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = true
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = true
 
@@ -80,6 +93,123 @@ class SozieRequestsVC: UIViewController {
         serverParams.removeAll()
         requests.removeAll()
         fetchAllSozieRequests()
+    }
+    func showProgressTutorial() {
+        if progressTutorialVC == nil {
+            let window = UIApplication.shared.keyWindow
+            let topPadding = window?.safeAreaInsets.top
+            progressTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "TutorialProgressVC") as? TutorialProgressVC
+            progressTutorialVC?.delegate = self
+            if let tutVC = progressTutorialVC {
+                tutVC.view.frame.origin.y = 0
+                tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: (topPadding ?? 0.0) + 64.0)
+                window?.addSubview(tutVC.view)
+            }
+        }
+    }
+    func showInStockTutorial() {
+        if ifInStockTutorialShown == false {
+            self.showProgressTutorial()
+            progressTutorialVC?.updateProgress(progress: 1.0/8.0)
+            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+                inStockTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "RequestInStockTutorialVC") as! RequestInStockTutorialVC)
+                if let tutVC = inStockTutorialVC {
+                    disableRootButtons()
+                    self.tableView.isScrollEnabled = false
+                    self.tableView.allowsSelection = false
+                    if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
+                        cell.acceptButton.isEnabled = false
+                    }
+                    let window = UIApplication.shared.keyWindow
+                    let topPadding = window?.safeAreaInsets.top
+                    tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 365 - (topPadding ?? 0))
+                    tutVC.view.frame.origin.x = 0
+                    tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
+                    profileParentVC.view.addSubview(tutVC.view)
+                    ifInStockTutorialShown = true
+                }
+            }
+        }
+    }
+    func hideInStockTutorial() {
+        inStockTutorialVC?.view.removeFromSuperview()
+        enableRootButtons()
+        if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
+            cell.checkStoresButton.isEnabled = true
+            cell.acceptButton.isEnabled = true
+        }
+        self.tableView.isScrollEnabled = true
+        self.tableView.allowsSelection = true
+    }
+    func showAcceptRequestTutorial() {
+        if ifAcceptRequestTutorialShown == false {
+            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+                acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
+                progressTutorialVC?.updateProgress(progress: 4.0/8.0)
+                if let tutVC = acceptRequestTutorialVC {
+                    disableRootButtons()
+                    self.tableView.isScrollEnabled = false
+                    self.tableView.allowsSelection = false
+                    if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
+                        cell.checkStoresButton.isEnabled = false
+                        cell.acceptButton.isEnabled = true
+                    }
+                    let window = UIApplication.shared.keyWindow
+                    let topPadding = window?.safeAreaInsets.top
+                    tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 365 - (topPadding ?? 0))
+                    tutVC.view.frame.origin.x = 0
+                    tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
+                    profileParentVC.view.addSubview(tutVC.view)
+                    ifAcceptRequestTutorialShown = true
+                    isFromTutorial = true
+                }
+            }
+        }
+    }
+    func hideAcceptRequestTutorial() {
+        acceptRequestTutorialVC?.view.removeFromSuperview()
+        enableRootButtons()
+        if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
+            cell.checkStoresButton.isEnabled = true
+            cell.acceptButton.isEnabled = true
+        }
+        self.tableView.isScrollEnabled = true
+        self.tableView.allowsSelection = true
+    }
+    func showUploadPostTutorial() {
+        if ifUploadPostTutorialShown == false {
+            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+                acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
+                progressTutorialVC?.updateProgress(progress: 5.0/8.0)
+                acceptRequestTutorialVC?.descriptionString = "Now let's fulfill the request.\nYou have 12 hours. Click here"
+                if let tutVC = acceptRequestTutorialVC {
+                    disableRootButtons()
+                    self.tableView.isScrollEnabled = false
+                    self.tableView.allowsSelection = false
+                    if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
+                        cell.checkStoresButton.isEnabled = false
+                        cell.acceptButton.isEnabled = true
+                    }
+                    let window = UIApplication.shared.keyWindow
+                    let topPadding = window?.safeAreaInsets.top
+                    tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 365 - (topPadding ?? 0))
+                    tutVC.view.frame.origin.x = 0
+                    tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
+                    profileParentVC.view.addSubview(tutVC.view)
+                    ifUploadPostTutorialShown = true
+                }
+            }
+        }
+    }
+    func hideUploadPostTutorial() {
+        acceptRequestTutorialVC?.view.removeFromSuperview()
+        enableRootButtons()
+        if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
+            cell.checkStoresButton.isEnabled = true
+            cell.acceptButton.isEnabled = true
+        }
+        self.tableView.isScrollEnabled = true
+        self.tableView.allowsSelection = true
     }
     @objc func reloadRequestData() {
         self.requests.removeAll()
@@ -107,12 +237,32 @@ class SozieRequestsVC: UIViewController {
                 self.requests.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
                 self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS")
+                self.showPostTutorials()
             }
         }
+    }
+    func showPostTutorials() {
+        if UserDefaultManager.getIfPostTutorialShown() == false {
+            if UserDefaultManager.getIfRequestTutorialShown() {
+                self.showInStockTutorial()
+                if let tutorialView = self.acceptRequestTutorialVC?.view {
+                    if let parentView = self.parent?.parent?.view {
+                        if tutorialView.isDescendant(of: parentView) && self.ifUploadPostTutorialShown == true {
+                            self.acceptDumnyRequest(tag: 0)
+                        }
+                    }
+                }
+            }
+        }
+
     }
     @IBAction func gotItButtonTapped(_ sender: Any) {
         instructionsScrollView.isHidden = true
         enableRootButtons()
+        if ifGotItButtonTapped == false {
+            showPostTutorials()
+            ifGotItButtonTapped = true
+        }
     }
 
     @IBAction func questionMarkButtonTapped(_ sender: Any) {
@@ -197,6 +347,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     }
 
     func nearbyStoresButtonTapped(button: UIButton) {
+        hideInStockTutorial()
         let currentRequest = requests[button.tag]
         let product = currentRequest.requestedProduct
         var imageURL = ""
@@ -215,7 +366,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             }
         }
         if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
-            let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL)
+            let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL, progreesVC: progressTutorialVC)
             popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
             let popUpVC = PopupController
                 .create(self.tabBarController!.navigationController!)
@@ -225,31 +376,62 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             _ = popUpVC.show(popUpInstnc)
             popUpInstnc.closeHandler = { [] in
                 popUpVC.dismiss()
+                if UserDefaultManager.getIfPostTutorialShown() == false {
+                    self.showAcceptRequestTutorial()
+                }
             }
         }
+    }
+    func acceptDumnyRequest(tag: Int) {
+        requests[tag].isAccepted = true
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .hour, value: 24, to: Date())
+        let acceptedRequest = AcceptedRequest(acceptedById: UserDefaultManager.getCurrentUserId()!, acceptedId: 0, expiry: dateFormat.string(from: date!))
+        requests[tag].acceptedRequest = acceptedRequest
+        let viewModel = SozieRequestCellViewModel(request: requests[tag])
+        viewModels.remove(at: tag)
+        viewModels.insert(viewModel, at: tag)
+        self.tableView.reloadRows(at: [IndexPath(row: tag, section: 0)], with: .automatic)
     }
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
         if currentRequest?.isAccepted == true {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
-//                let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
                 if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
                     uploadPostVC.currentRequest = currentRequest
+                    if isFromTutorial {
+                        if UserDefaultManager.getIfPostTutorialShown() == false {
+                            uploadPostVC.isTutorialShowing = true
+                        }
+                    }
+                    uploadPostVC.progressTutorialVC = progressTutorialVC
                     uploadPostVC.delegate = self
+                    hideUploadPostTutorial()
+                    isFromTutorial = false
                 profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
                 }
             }
-//            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
         } else {
+            if isFromTutorial {
+                acceptDumnyRequest(tag: button.tag)
+                hideAcceptRequestTutorial()
+                showUploadPostTutorial()
+                return
+            }
             SVProgressHUD.show()
             var dataDict = [String: Any]()
             dataDict["product_request"] = currentRequest?.requestId
-            ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, _) in
+            ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     self.serverParams.removeAll()
                     self.requests.removeAll()
                     self.fetchAllSozieRequests()
+                } else {
+                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
                 }
             }
         }
@@ -284,5 +466,12 @@ extension SozieRequestsVC: UploadPostAndFitTipsDelegate {
         }
         instructionsScrollView.isHidden = false
         disableRootButtons()
+    }
+}
+extension SozieRequestsVC: TutorialProgressDelegate {
+    func tutorialSkipButtonTapped() {
+        self.hideInStockTutorial()
+        self.hideUploadPostTutorial()
+        self.hideAcceptRequestTutorial()
     }
 }

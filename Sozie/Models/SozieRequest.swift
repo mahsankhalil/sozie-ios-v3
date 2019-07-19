@@ -57,6 +57,11 @@ struct AcceptedRequest: Codable {
         case acceptedById = "accepted_by"
         case expiry
     }
+    init(acceptedById: Int, acceptedId: Int,expiry: String) {
+        self.acceptedId = acceptedId
+        self.acceptedById = acceptedById
+        self.expiry = expiry
+    }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         acceptedId = try? values.decode(Int.self, forKey: .acceptedId)

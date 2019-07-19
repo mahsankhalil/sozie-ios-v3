@@ -171,7 +171,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if isFemaleSelected {
             signUpDict![User.CodingKeys.gender.stringValue] = "F"
         }
-
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        signUpDict!["version"]  = appVersion
         SVProgressHUD.show()
         ServerManager.sharedInstance.signUpUserWith(params: signUpDict!) { (isSuccess, response) in
             SVProgressHUD.dismiss()
