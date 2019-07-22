@@ -103,13 +103,14 @@ class StoresPopupVC: UIViewController {
         TargetAPIManager.sharedInstance.getNearbyStores(productId: productId!, params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
+                self.targetProduct = (response as! ProductResponse).products[0]
                 if UserDefaultManager.getIfPostTutorialShown() == false {
                     if (response as! ProductResponse).products[0].locations.count != 0 {
                         self.removeTutorialVC()
                         self.showNearByCancelTutorial()
+                        self.targetProduct?.locations[0].locationAvailableQuantity = 1
                     }
                 }
-                self.targetProduct = (response as! ProductResponse).products[0]
             }
         }
     }

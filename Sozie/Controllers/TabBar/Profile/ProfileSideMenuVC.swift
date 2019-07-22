@@ -111,6 +111,10 @@ class ProfileSideMenuVC: BaseViewController {
         ServerManager.sharedInstance.logoutUser(params: dataDict) { (_, _) in
             SVProgressHUD.dismiss()
             UserDefaultManager.deleteLoginResponse()
+            UserDefaultManager.makeUserGuideEnable()
+            UserDefaultManager.removeAllUserGuidesShown()
+            UserDefaultManager.deleteBrowserTutorialShown()
+            UserDefaultManager.deleteRequestTutorialShown()
 //            Intercom.logout()
             self.changeRootVCToLoginNC()
         }

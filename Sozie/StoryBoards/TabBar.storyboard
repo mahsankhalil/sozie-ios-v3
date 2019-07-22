@@ -2517,49 +2517,46 @@ Let's go back and accept your first request</string>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m2L-dq-yAI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.94300176059999996" alpha="0.85827464790140851" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dO7-NL-zsO">
-                                <rect key="frame" x="28" y="179" width="319" height="309"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi Amanda," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dim-Qj-U5m">
-                                        <rect key="frame" x="12" y="8" width="89" height="21"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dO7-NL-zsO">
+                                        <rect key="frame" x="28" y="244" width="319" height="179"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi Amanda," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dim-Qj-U5m">
+                                                <rect key="frame" x="12" y="8" width="89" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="y3o-ur-hsM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.16860446333885193" green="0.16864064335823059" blue="0.16860216856002808" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-7o-Jme">
+                                                <rect key="frame" x="12" y="42" width="282" height="104"/>
+                                                <string key="text">We are excited to have you on-board! 
+Please complete the tutorial to start receiving Sozie requests
+
+Click on Profile below and follow the instructions Good Luck!</string>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                                <color key="textColor" red="0.60385400056838989" green="0.60396051406860352" blue="0.60384726524353027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="y3o-ur-hsM"/>
+                                            <constraint firstItem="Dim-Qj-U5m" firstAttribute="leading" secondItem="dO7-NL-zsO" secondAttribute="leading" constant="12" id="55O-Zk-DU6"/>
+                                            <constraint firstAttribute="trailing" secondItem="Icn-7o-Jme" secondAttribute="trailing" constant="25" id="C2d-xM-Yjo"/>
+                                            <constraint firstItem="Dim-Qj-U5m" firstAttribute="top" secondItem="dO7-NL-zsO" secondAttribute="top" constant="8" id="CNL-zE-wHa"/>
+                                            <constraint firstAttribute="height" constant="179" id="VI8-bI-fBb"/>
+                                            <constraint firstItem="Icn-7o-Jme" firstAttribute="leading" secondItem="dO7-NL-zsO" secondAttribute="leading" constant="12" id="YDc-Uu-JDs"/>
+                                            <constraint firstAttribute="width" constant="319" id="hzT-vb-Pu7"/>
+                                            <constraint firstItem="Icn-7o-Jme" firstAttribute="top" secondItem="Dim-Qj-U5m" secondAttribute="bottom" constant="13" id="rNP-HH-5xf"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.16860446333885193" green="0.16864064335823059" blue="0.16860216856002808" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-7o-Jme">
-                                        <rect key="frame" x="12" y="42" width="282" height="212.5"/>
-                                        <string key="text">Taking the right type of picture is what makes a
-good Sozie. We want to see you look your best
-in every picture that you upload to ensure that
-you get paid!
-
-Once you get the hang of it - its super easy!
-
-We recommend that you take a friend with you
-to help you take pictures.  If you choose to work
-solo, you can ask a sales associate to take
-pictures of you!
-
-To see your Sozie Requests click on profile below.</string>
-                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
-                                        <color key="textColor" red="0.60385400056838989" green="0.60396051406860352" blue="0.60384726524353027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.94300176059999996" alpha="0.85827464790140851" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Dim-Qj-U5m" firstAttribute="leading" secondItem="dO7-NL-zsO" secondAttribute="leading" constant="12" id="55O-Zk-DU6"/>
-                                    <constraint firstAttribute="trailing" secondItem="Icn-7o-Jme" secondAttribute="trailing" constant="25" id="C2d-xM-Yjo"/>
-                                    <constraint firstItem="Dim-Qj-U5m" firstAttribute="top" secondItem="dO7-NL-zsO" secondAttribute="top" constant="8" id="CNL-zE-wHa"/>
-                                    <constraint firstAttribute="height" constant="309" id="VI8-bI-fBb"/>
-                                    <constraint firstItem="Icn-7o-Jme" firstAttribute="leading" secondItem="dO7-NL-zsO" secondAttribute="leading" constant="12" id="YDc-Uu-JDs"/>
-                                    <constraint firstAttribute="width" constant="319" id="hzT-vb-Pu7"/>
-                                    <constraint firstItem="Icn-7o-Jme" firstAttribute="top" secondItem="Dim-Qj-U5m" secondAttribute="bottom" constant="13" id="rNP-HH-5xf"/>
+                                    <constraint firstItem="dO7-NL-zsO" firstAttribute="centerX" secondItem="m2L-dq-yAI" secondAttribute="centerX" id="Flw-vQ-eUb"/>
+                                    <constraint firstItem="dO7-NL-zsO" firstAttribute="centerY" secondItem="m2L-dq-yAI" secondAttribute="centerY" id="WGs-1J-29M"/>
                                 </constraints>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="down-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="puC-qk-dcC">
@@ -2609,11 +2606,9 @@ To see your Sozie Requests click on profile below.</string>
                         <constraints>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="2vV-g5-hBI"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="leading" secondItem="zta-YF-Rdr" secondAttribute="leading" id="4o8-5r-Q92"/>
-                            <constraint firstItem="dO7-NL-zsO" firstAttribute="centerY" secondItem="hIP-b5-G4r" secondAttribute="centerY" id="8Ff-0E-SRq"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="top" secondItem="hIP-b5-G4r" secondAttribute="top" id="E37-zJ-gNj"/>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="top" secondItem="puC-qk-dcC" secondAttribute="bottom" constant="40" id="O6R-Gg-qN9"/>
                             <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="puC-qk-dcC" secondAttribute="trailing" constant="22" id="ba4-Ac-e33"/>
-                            <constraint firstItem="dO7-NL-zsO" firstAttribute="centerX" secondItem="hIP-b5-G4r" secondAttribute="centerX" id="ei6-i9-J9o"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="kRm-WB-tuL"/>
                             <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="P5D-h3-5P0" secondAttribute="trailing" constant="2" id="shD-ZZ-IwB"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="trailing" secondItem="zta-YF-Rdr" secondAttribute="trailing" id="sqK-nb-qs6"/>

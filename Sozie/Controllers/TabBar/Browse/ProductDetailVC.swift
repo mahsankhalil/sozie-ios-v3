@@ -448,6 +448,9 @@ extension ProductDetailVC: UIScrollViewDelegate {
         commentsTableView.isHidden = false
         if currentIndex != 0 {
             if let allPosts = currentProduct?.posts {
+                if currentIndex > allPosts.count {
+                    return
+                }
                 let currentPost = allPosts[currentIndex - 1]
                 if currentPost.canPostReview == true {
                     addCommentHeightConstraint.constant = 24.0

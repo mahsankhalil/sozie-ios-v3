@@ -80,6 +80,17 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 let res = response as! LoginResponse
                 _ = UserDefaultManager.saveLoginResponse(loginResp: res)
 //                UtilityManager.registerUserOnIntercom()
+                if let user = UserDefaultManager.getCurrentUserObject() {
+                    if let tutorialCompleted = user.tutorialCompleted {
+                        if tutorialCompleted == false {
+                            UserDefaultManager.removeAllUserGuidesShown()
+                        } else {
+                            UserDefaultManager.setPostTutorialShown()
+                            UserDefaultManager.setBrowserTutorialShown()
+                            UserDefaultManager.setRequestTutorialShown()
+                        }
+                    }
+                }
                 self.changeRootVCToTabBarNC()
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.updatePushTokenToServer()

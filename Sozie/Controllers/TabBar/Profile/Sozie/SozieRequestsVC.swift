@@ -56,11 +56,12 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
         instructionsHeightConstraint.constant = (1713.0/375.0) * UIScreen.main.bounds.size.width
-        if UserDefaultManager.getIfRequestTutorialShown() == false {
-            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
-            tutorialVC?.delegate = self
-            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
-        }
+//        if UserDefaultManager.getIfRequestTutorialShown() == false {
+//            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
+//            tutorialVC?.delegate = self
+//            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+//        }
+        showPostTutorials()
         NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
 //        self.view.window?.addSubview(tutorialVC.view)
 
@@ -243,7 +244,7 @@ class SozieRequestsVC: UIViewController {
     }
     func showPostTutorials() {
         if UserDefaultManager.getIfPostTutorialShown() == false {
-            if UserDefaultManager.getIfRequestTutorialShown() {
+//            if UserDefaultManager.getIfRequestTutorialShown() {
                 self.showInStockTutorial()
                 if let tutorialView = self.acceptRequestTutorialVC?.view {
                     if let parentView = self.parent?.parent?.view {
@@ -252,7 +253,7 @@ class SozieRequestsVC: UIViewController {
                         }
                     }
                 }
-            }
+//            }
         }
 
     }

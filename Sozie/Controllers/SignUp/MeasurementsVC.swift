@@ -125,7 +125,7 @@ class MeasurementsVC: UIViewController {
 //                let hipsViewModel = SingleTextFieldCellViewModel(title: "HIPS", text: hip, placeholder: "Hips", values: size.hip.convertArrayToString(), valueSuffix: "\"", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Hips", measurementType: .hips)
 
                 let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title: "BRA SIZE", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [size.bra.band.convertArrayToString(), size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
-                let sizeWornViewModel = TitleTextFieldCellViewModel(title: "What dress size do you normally wear?", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self)
+                let sizeWornViewModel = TitleTextFieldCellViewModel(title: "What dress size do you normally wear?", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current dress size", displayError: false)
 
                 self.rowViewModels = [heightViewModel, waistHipsModel, braViewModel, sizeWornViewModel]
                 self.sizes = size
@@ -198,8 +198,7 @@ class MeasurementsVC: UIViewController {
             setError(for: 0, isError: currentMeasurement.height == nil)
             setError(for: 1, isError: currentMeasurement.waist == nil || currentMeasurement.hip == nil)
             setError(for: 2, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil)
-            setError(for: 3, isError: currentMeasurement.size == nil)
-
+            setError(for: 3, isError: currentMeasurement.size == nil || currentMeasurement.size == "")
             tblVu.reloadData()
         }
     }
