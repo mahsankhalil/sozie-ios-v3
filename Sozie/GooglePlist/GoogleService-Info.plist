@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-    <dict>
-      <key>CLIENT_ID</key>
-      <string>943339111983-3cca64ei8g4gukhudc5lurr6cpi0k91f.apps.googleusercontent.com</string>
-      <key>REVERSED_CLIENT_ID</key>
-      <string>com.googleusercontent.apps.943339111983-3cca64ei8g4gukhudc5lurr6cpi0k91f</string>
-      <key>PLIST_VERSION</key>
-      <string>1</string>
-      <key>BUNDLE_ID</key>
-      <string>com.sozie.sozieapp</string>
-    </dict>
-    </plist>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>417360914886-5e24itjr4bn9l232koedq6jb0jdjonif.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.417360914886-5e24itjr4bn9l232koedq6jb0jdjonif</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDIHktwgQhsq4SEq1yCxnUsnVVYpL_dnuE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>417360914886</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sozie.sozieapp</string>
+	<key>PROJECT_ID</key>
+	<string>sosie-83808</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sosie-83808.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:417360914886:ios:0c51dab7a17844e4</string>
+	<key>DATABASE_URL</key>
+	<string>https://sosie-83808.firebaseio.com</string>
+</dict>
+</plist>

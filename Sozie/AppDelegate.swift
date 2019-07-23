@@ -13,6 +13,7 @@ import GoogleSignIn
 //import Intercom
 import UserNotifications
 import CoreLocation
+import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
@@ -26,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         // Override point for customization after application launch.
         print(Bundle.main.infoDictionary?["Configuration"] as! String)
-        GIDSignIn.sharedInstance().clientID = "943339111983-3cca64ei8g4gukhudc5lurr6cpi0k91f.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().clientID = "417360914886-kt7feo03r47adeesn8i4udr0i0ofufs0.apps.googleusercontent.com"
+        FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
@@ -41,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
 //        UtilityManager.registerUserOnIntercom()
 //        Appsee.start()
+//        if let user = UserDefaultManager.getCurrentUserObject() {
+//            HubSpotManager.createContact(user: user)
+//        }
         UNUserNotificationCenter.current().delegate = self
         return true
     }

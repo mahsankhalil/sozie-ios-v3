@@ -183,6 +183,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                 }
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.updatePushTokenToServer()
+                if let user = UserDefaultManager.getCurrentUserObject() {
+                    HubSpotManager.createContact(user: user)
+                }
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {
                 if let error = response as? Error {
