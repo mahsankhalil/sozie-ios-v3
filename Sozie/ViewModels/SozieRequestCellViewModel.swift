@@ -25,7 +25,6 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var isFilled: Bool
     var expiry: String
     var acceptedBySomeoneElse: Bool
-
     init (request: SozieRequest) {
         var imageURL = ""
         if let productImageURL = request.requestedProduct.imageURL {

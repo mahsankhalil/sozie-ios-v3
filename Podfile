@@ -24,6 +24,8 @@ pod 'Firebase/Analytics'
 #pod 'Appsee', '~> 2.5.1'
 #pod 'Intercom'
 pod 'DLRadioButton', '~> 1.4'
+pod 'Fabric', '~> 1.10.2'
+pod 'Crashlytics', '~> 3.13.4'
 end
 target 'Sozie' do
     all_pods

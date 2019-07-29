@@ -69,9 +69,20 @@ class ServerManager: NSObject {
         }
     }
 
-    func getUserProfile(params: [String: Any], block: CompletionHandler) {
-        Alamofire.request(ServerManager.profileURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).response { response in
-            debugPrint(response)
+    func getUserProfile(userId: Int, block: CompletionHandler) {
+        let url = ServerManager.profileURL + String(userId) + "/"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<User> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
         }
     }
 

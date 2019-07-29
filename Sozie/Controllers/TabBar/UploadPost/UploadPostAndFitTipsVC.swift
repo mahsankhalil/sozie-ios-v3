@@ -233,30 +233,65 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     */
 
+    func uploadPOstData(isTutorial: Bool) {
+        var dataDict = [String: Any]()
+        dataDict["product_id"] = currentProduct?.productStringId
+        if let request = currentRequest {
+            dataDict["product_request"] = request.requestId
+            dataDict["size_worn"] = request.sizeValue
+        }
+        if isTutorial {
+            dataDict["posted_to_learn"] = true
+        }
+        var imagesData: [Data] = []
+        for viewModel in viewModels {
+            if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
+                imagesData.append(imageData)
+            }
+        }
+        dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                if isTutorial {
+                    self.uploadTutorialData()
+                } else {
+                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
+                    self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
+                }
+            } else {
+                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+            }
+        }
+    }
+    func uploadTutorialData() {
+        var dataDict = [String: Any]()
+        dataDict["CheckStores"] = false
+        dataDict["FindYourProductA"] = true
+        dataDict["FindYourProductB"] = true
+        dataDict["TryOnScreenA"] = true
+        dataDict["TryOnScreenB"] = true
+        dataDict["Camera"] = true
+        dataDict["FitTip"] = true
+        dataDict["Submit"] = true
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.updateTutorial(params: dataDict) { (isSuccess, _) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                if var user = UserDefaultManager.getCurrentUserObject() {
+                    user.isTutorialApproved = true
+                    UserDefaultManager.updateUserObject(user: user)
+                }
+                UserDefaultManager.setPostTutorialShown()
+                self.progressTutorialVC?.view.removeFromSuperview()
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
     @IBAction func submitButtonTapped(_ sender: Any) {
         if isTutorialShowing {
-            var dataDict = [String: Any]()
-            dataDict["CheckStores"] = false
-            dataDict["FindYourProductA"] = true
-            dataDict["FindYourProductB"] = true
-            dataDict["TryOnScreenA"] = true
-            dataDict["TryOnScreenB"] = true
-            dataDict["Camera"] = true
-            dataDict["FitTip"] = true
-            dataDict["Submit"] = true
-            SVProgressHUD.show()
-            ServerManager.sharedInstance.updateTutorial(params: dataDict) { (isSuccess, _) in
-                SVProgressHUD.dismiss()
-                if isSuccess {
-                    if var user = UserDefaultManager.getCurrentUserObject() {
-                        user.isTutorialApproved = true
-                        UserDefaultManager.updateUserObject(user: user)
-                    }
-                    UserDefaultManager.setPostTutorialShown()
-                    self.progressTutorialVC?.view.removeFromSuperview()
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
+            uploadPOstData(isTutorial: true)
             return
         }
         if self.checkIfAllImagesUplaoded() == false {
@@ -264,29 +299,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         } else if self.checkIfAllQuestionsAnswered() == false {
             UtilityManager.showErrorMessage(body: "Please answer all Fit Tips.", in: self)
         } else {
-            var dataDict = [String: Any]()
-            dataDict["product_id"] = currentProduct?.productStringId
-            if let request = currentRequest {
-                dataDict["product_request"] = request.requestId
-                dataDict["size_worn"] = request.sizeValue
-            }
-            var imagesData: [Data] = []
-            for viewModel in viewModels {
-                if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
-                    imagesData.append(imageData)
-                }
-            }
-            dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
-            SVProgressHUD.show()
-            ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData) { (isSuccess, response) in
-                SVProgressHUD.dismiss()
-                if isSuccess {
-                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
-                    self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
-                } else {
-                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
-                }
-            }
+            uploadPOstData(isTutorial: false)
         }
     }
     @IBAction func deleteButtonTapped(_ sender: Any) {

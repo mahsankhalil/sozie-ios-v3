@@ -157,9 +157,9 @@ class SozieRequestsVC: UIViewController {
                     }
                     let window = UIApplication.shared.keyWindow
                     let topPadding = window?.safeAreaInsets.top
-                    tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 365 - (topPadding ?? 0))
+                    tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 345 - (topPadding ?? 0))
                     tutVC.view.frame.origin.x = 0
-                    tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
+                    tutVC.view.frame.origin.y = 345 + (topPadding ?? 0)
                     profileParentVC.view.addSubview(tutVC.view)
                     ifAcceptRequestTutorialShown = true
                     isFromTutorial = true
@@ -242,17 +242,31 @@ class SozieRequestsVC: UIViewController {
             }
         }
     }
+    func populateDummyRequests() {
+        if self.requests.count == 0 {
+            if var user = UserDefaultManager.getCurrentUserObject() {
+                user.isSuperUser = true
+                let dummyProduct = Product(productId: 49263387, productName: "Women's Plus Size Sleeveless Square Neck Denim Dress - Universal Thread Indigo X, Blue", brandId: 10, imageURL: "https://target.scene7.com/is/image/Target/GUEST_bd675863-a930-4bf2-b855-c342457004e4?wid=1000&hei=1000", description: "Look effortlessly chic while keeping your cool for any occasion wearing this Sleeveless Square-Neck Denim Dress from Universal Thread. This indigo midi dress comes with a front tie that lets you find your ideal fit, and it's cut in a relaxed silhouette for comfortable wear. In a sleeveless design made from a 100 percent cotton fabric with side slits, this sleeveless denim midi dress keeps you feeling airy, light and comfy throughout your day. Pair it with espadrilles and a straw bucket bag for a casual day out or with strappy heels and drop earrings for a nighttime twist. Size: X. Color: Blue. Gender: Female. Age Group: Adult.", merchantProductId: "54441283", productStringId: "bd675863a9304bf2b855c342457004e4", searchPrice: 32.99, currency: "USD", merchantImageURL: "")
+                let dummyRequest = SozieRequest(requestId: 361, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil)
+                self.requests.append(dummyRequest)
+                self.requests.append(dummyRequest)
+                self.requests.append(dummyRequest)
+
+            }
+        }
+    }
     func showPostTutorials() {
         if UserDefaultManager.getIfPostTutorialShown() == false {
 //            if UserDefaultManager.getIfRequestTutorialShown() {
-                self.showInStockTutorial()
-                if let tutorialView = self.acceptRequestTutorialVC?.view {
-                    if let parentView = self.parent?.parent?.view {
-                        if tutorialView.isDescendant(of: parentView) && self.ifUploadPostTutorialShown == true {
-                            self.acceptDumnyRequest(tag: 0)
-                        }
+            populateDummyRequests()
+            self.showInStockTutorial()
+            if let tutorialView = self.acceptRequestTutorialVC?.view {
+                if let parentView = self.parent?.parent?.view {
+                    if tutorialView.isDescendant(of: parentView) && self.ifUploadPostTutorialShown == true {
+                        self.acceptDumnyRequest(tag: 0)
                     }
                 }
+            }
 //            }
         }
 
@@ -346,8 +360,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             }
         }
     }
-
-    func nearbyStoresButtonTapped(button: UIButton) {
+    func nearByStorButtonAction(button: UIButton) {
         hideInStockTutorial()
         let currentRequest = requests[button.tag]
         let product = currentRequest.requestedProduct
@@ -379,6 +392,23 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 popUpVC.dismiss()
                 if UserDefaultManager.getIfPostTutorialShown() == false {
                     self.showAcceptRequestTutorial()
+                }
+            }
+        }
+    }
+    func nearbyStoresButtonTapped(button: UIButton) {
+        if let userId = UserDefaultManager.getCurrentUserId() {
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.getUserProfile(userId: userId) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    let user = response as! User
+                    UserDefaultManager.updateUserObject(user: user)
+                    if user.isTutorialApproved == false {
+                        return
+                    } else {
+                        self.nearByStorButtonAction(button: button)
+                    }
                 }
             }
         }
@@ -432,7 +462,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     self.requests.removeAll()
                     self.fetchAllSozieRequests()
                 } else {
-                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+                    UtilityManager.showMessageWith(title: "Hold on tight!", body: (response as! Error).localizedDescription, in: self)
                 }
             }
         }
@@ -474,5 +504,8 @@ extension SozieRequestsVC: TutorialProgressDelegate {
         self.hideInStockTutorial()
         self.hideUploadPostTutorial()
         self.hideAcceptRequestTutorial()
+        serverParams.removeAll()
+        requests.removeAll()
+        fetchAllSozieRequests()
     }
 }

@@ -60,6 +60,18 @@ struct Product: Codable {
         case sizeChart = "size_chart"
         case reviews
     }
+    init (productId: Int, productName: String, brandId: Int, imageURL: String, description: String, merchantProductId: String, productStringId: String, searchPrice: Float, currency: String, merchantImageURL: String) {
+        self.productId = productId
+        self.productName = productName
+        self.brandId = brandId
+        self.imageURL = imageURL
+        self.description = description
+        self.merchantProductId = merchantProductId
+        self.productStringId = productStringId
+        self.searchPrice = searchPrice
+        self.currency = currency
+        self.merchantImageURL = merchantImageURL
+    }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         productId = try values.decode(Int.self, forKey: .productId)

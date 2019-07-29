@@ -158,7 +158,7 @@ class MeasurementsVC: UIViewController {
 
     private func isValidMeasurements() -> Bool {
         return currentMeasurement.height != nil && currentMeasurement.waist != nil &&
-            currentMeasurement.hip != nil && currentMeasurement.bra != nil && currentMeasurement.cup != nil
+            currentMeasurement.hip != nil && currentMeasurement.bra != nil && currentMeasurement.cup != nil && currentMeasurement.size != nil && currentMeasurement.size != ""
     }
 
     @IBAction func uploadBtnTapped(_ sender: Any) {
