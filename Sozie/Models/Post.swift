@@ -17,6 +17,7 @@ struct Post: Codable {
     var sizeValue: String
     var reviews: ReviewList?
     var canPostReview: Bool?
+    var compiledFitTips: String?
     enum CodingKeys: String, CodingKey {
 
         case postId = "id"
@@ -27,6 +28,7 @@ struct Post: Codable {
         case sizeValue = "size_worn"
         case reviews
         case canPostReview = "can_post_review"
+        case compiledFitTips = "compiled_fit_tip"
 
     }
 
@@ -40,5 +42,7 @@ struct Post: Codable {
         sizeValue = try values.decode(String.self, forKey: .sizeValue)
         reviews = try? values.decode(ReviewList.self, forKey: .reviews)
         canPostReview = try? values.decode(Bool.self, forKey: .canPostReview)
+        compiledFitTips = try? values.decode(String.self, forKey: .compiledFitTips)
+
     }
 }

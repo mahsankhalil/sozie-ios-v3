@@ -8,11 +8,13 @@
 
 import UIKit
 
-struct TitleTextFieldCellViewModel: RowViewModel, TextFieldCellViewModeling, ReuseIdentifierProviding, MeasurementTypeProviding {
+struct TitleTextFieldCellViewModel: RowViewModel, TextFieldCellViewModeling, ReuseIdentifierProviding, MeasurementTypeProviding, ErrorViewModeling, ErrorMessageViewModeling {
     var title: String
     var text: String?
     var values: [String]
     var measurementType: MeasurementType
     var textFieldDelegate: TextFieldDelegate
+    var errorMessage: String
+    var displayError: Bool
     let reuseIdentifier: String = "TitleTextFieldCell"
 }

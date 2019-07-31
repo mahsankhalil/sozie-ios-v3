@@ -31,7 +31,17 @@ struct SozieRequest: Codable {
         case isAccepted = "is_accepted"
         case acceptedRequest = "accepted_request"
     }
-
+    init(requestId: Int, user: User, sizeValue: String, productId: String, requestedProduct: Product, brandId: Int, isFilled: Bool, isAccepted: Bool, acceptedRequest: AcceptedRequest?) {
+        self.requestId = requestId
+        self.user = user
+        self.sizeValue = sizeValue
+        self.productId = productId
+        self.requestedProduct = requestedProduct
+        self.brandId = brandId
+        self.isFilled = isFilled
+        self.isAccepted = isAccepted
+        self.acceptedRequest = acceptedRequest
+    }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         requestId = try values.decode(Int.self, forKey: .requestId)
@@ -56,6 +66,11 @@ struct AcceptedRequest: Codable {
         case acceptedId = "id"
         case acceptedById = "accepted_by"
         case expiry
+    }
+    init(acceptedById: Int, acceptedId: Int,expiry: String) {
+        self.acceptedId = acceptedId
+        self.acceptedById = acceptedById
+        self.expiry = expiry
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

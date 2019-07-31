@@ -24,6 +24,9 @@ class StoresPopupVC: UIViewController {
     var viewModels: [StoreViewModel] = []
     var timer: Timer?
     var nearbyString: String?
+    var tutorialVC: NearbyStoresTutorialVC?
+    var cancelTutorialVC: NearbyCloseTutorialVC?
+    var progressTutorialVC: TutorialProgressVC?
     var targetProduct: TargetProduct? {
         didSet {
             viewModels.removeAll()
@@ -49,6 +52,34 @@ class StoresPopupVC: UIViewController {
         if let imageURL = productImage {
             productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
         }
+        if UserDefaultManager.getIfPostTutorialShown() == false {
+            showNearByStoresTutorial()
+        }
+        progressTutorialVC?.delegate = self
+    }
+    func showNearByStoresTutorial() {
+        tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyStoresTutorialVC") as? NearbyStoresTutorialVC
+        progressTutorialVC?.updateProgress(progress: 2.0/8.0)
+        if let nearByTutorialVC = tutorialVC {
+            nearByTutorialVC.view.frame.origin.y = 176
+            nearByTutorialVC.view.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.size.height - 176.0)
+            self.view.addSubview(nearByTutorialVC.view)
+        }
+    }
+    func removeTutorialVC() {
+        tutorialVC?.view.removeFromSuperview()
+    }
+    func showNearByCancelTutorial() {
+        cancelTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyCloseTutorialVC") as? NearbyCloseTutorialVC
+        progressTutorialVC?.updateProgress(progress: 3.0/8.0)
+        if let nearByTutorialVC = cancelTutorialVC {
+            nearByTutorialVC.view.frame.origin.y = 37.0
+            nearByTutorialVC.view.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.size.height - 37.0)
+            self.view.addSubview(nearByTutorialVC.view)
+        }
+    }
+    func removeCancelTutorialVC() {
+        cancelTutorialVC?.view.removeFromSuperview()
     }
     @objc func getStoresList() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -73,14 +104,22 @@ class StoresPopupVC: UIViewController {
             SVProgressHUD.dismiss()
             if isSuccess {
                 self.targetProduct = (response as! ProductResponse).products[0]
+                if UserDefaultManager.getIfPostTutorialShown() == false {
+                    if (response as! ProductResponse).products[0].locations.count != 0 {
+                        self.removeTutorialVC()
+                        self.showNearByCancelTutorial()
+                        self.targetProduct?.locations[0].locationAvailableQuantity = 1
+                    }
+                }
             }
         }
     }
-    class func instance(productId: String, productImage: String) -> StoresPopupVC {
+    class func instance(productId: String, productImage: String, progreesVC: TutorialProgressVC?) -> StoresPopupVC {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "StoresPopupVC") as! StoresPopupVC
         instnce.productId = productId
         instnce.productImage = productImage
+        instnce.progressTutorialVC = progreesVC
         return instnce
     }
     /*
@@ -107,6 +146,7 @@ class StoresPopupVC: UIViewController {
             UtilityManager.showMessageWith(title: "Warning!", body: "Please enter city/zip code to search.", in: self)
         } else {
             nearbyString = textField.text
+            removeTutorialVC()
             fetchDataFromServer()
         }
     }
@@ -137,5 +177,13 @@ extension StoresPopupVC: UITableViewDelegate, UITableViewDataSource {
             cellConfigurable.setup(viewModel)
         }
         return cell
+    }
+}
+extension StoresPopupVC: TutorialProgressDelegate {
+    func tutorialSkipButtonTapped() {
+        self.removeTutorialVC()
+        self.removeCancelTutorialVC()
+        timer?.invalidate()
+        self.closeHandler!()
     }
 }

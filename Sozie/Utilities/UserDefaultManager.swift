@@ -164,12 +164,27 @@ class UserDefaultManager: NSObject {
     static func getIfBrowseTutorialShown() -> Bool {
         return UserDefaults.standard.bool(forKey: "BrowseTutorialShown")
     }
+    static func deleteBrowserTutorialShown() {
+        UserDefaults.standard.set(false, forKey: "BrowseTutorialShown")
+        UserDefaults.standard.synchronize()
+    }
     static func setRequestTutorialShown() {
         UserDefaults.standard.set(true, forKey: "RequestTutorialShown")
         UserDefaults.standard.synchronize()
     }
+    static func deleteRequestTutorialShown() {
+        UserDefaults.standard.set(false, forKey: "RequestTutorialShown")
+        UserDefaults.standard.synchronize()
+    }
     static func getIfRequestTutorialShown() -> Bool {
         return UserDefaults.standard.bool(forKey: "RequestTutorialShown")
+    }
+    static func getIfPostTutorialShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: "PostTutorialShown")
+    }
+    static func setPostTutorialShown() {
+        UserDefaults.standard.set(true, forKey: "PostTutorialShown")
+        UserDefaults.standard.synchronize()
     }
     static func checkIfALLUserGuidesShownThenDisableUserGuide() {
         if UserDefaults.standard.bool(forKey: UserDefaultKey.measurementUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.browseUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.requestSozieButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.followButtonUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.mySoziesUserGuide) == true && UserDefaults.standard.bool(forKey: UserDefaultKey.myRequestsUserGuide) == true {
@@ -184,6 +199,7 @@ class UserDefaultManager: NSObject {
         UserDefaults.standard.set(false, forKey: UserDefaultKey.followButtonUserGuide)
         UserDefaults.standard.set(false, forKey: UserDefaultKey.mySoziesUserGuide)
         UserDefaults.standard.set(false, forKey: UserDefaultKey.myRequestsUserGuide)
+        UserDefaults.standard.set(false, forKey: "PostTutorialShown")
         UserDefaults.standard.synchronize()
     }
     static func markAllUserGuidesNotShown() {

@@ -433,6 +433,11 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 swipeToSeeView.isHidden = currentPage > 0
             }
         }
+        if currentPage == 0 {
+            if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {
+                descriptionTextLabel.text = productName + "\n" +  productDescription
+            }
+        }
         currentIndex = currentPage
         updateCommentsView()
     }
@@ -443,11 +448,17 @@ extension ProductDetailVC: UIScrollViewDelegate {
         commentsTableView.isHidden = false
         if currentIndex != 0 {
             if let allPosts = currentProduct?.posts {
+                if currentIndex > allPosts.count {
+                    return
+                }
                 let currentPost = allPosts[currentIndex - 1]
                 if currentPost.canPostReview == true {
                     addCommentHeightConstraint.constant = 24.0
                 } else {
                     addCommentHeightConstraint.constant = 0.0
+                }
+                if let fitTips = currentPost.compiledFitTips {
+                    self.descriptionTextLabel.text = fitTips
                 }
                 if let totalCount = currentPost.reviews?.totalCount {
                     if totalCount <= 2 {

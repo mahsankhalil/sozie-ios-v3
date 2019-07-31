@@ -171,7 +171,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if isFemaleSelected {
             signUpDict![User.CodingKeys.gender.stringValue] = "F"
         }
-
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        signUpDict!["version"]  = appVersion
         SVProgressHUD.show()
         ServerManager.sharedInstance.signUpUserWith(params: signUpDict!) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -182,6 +183,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                 }
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.updatePushTokenToServer()
+                if let user = UserDefaultManager.getCurrentUserObject() {
+//                    HubSpotManager.createContact(user: user)
+                }
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {
                 if let error = response as? Error {
