@@ -10,10 +10,11 @@ import UIKit
 import FBSDKCoreKit
 import GoogleSignIn
 //import Appsee
-//import Intercom
+import Intercom
 import UserNotifications
 import CoreLocation
-import Firebase
+//import Firebase
+import Analytics
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
@@ -23,12 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
     var pushToken: String?
+    var segmentAnalytics: SEGAnalytics?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
         print(Bundle.main.infoDictionary?["Configuration"] as! String)
         GIDSignIn.sharedInstance().clientID = "417360914886-kt7feo03r47adeesn8i4udr0i0ofufs0.apps.googleusercontent.com"
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
@@ -40,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.window?.rootViewController = rootViewController
             }
         }
+//        Intercom.setApiKey("ios_sdk-a1bcb8310b7c4ccc2937ed6429e6ecfc17b224b0", forAppId:"jevqi9qx")
+//        UtilityManager.registerUserOnIntercom()
 //        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")
 //        UtilityManager.registerUserOnIntercom()
 //        Appsee.start()
@@ -47,7 +51,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            HubSpotManager.createContact(user: user)
 //        }
         UNUserNotificationCenter.current().delegate = self
+        setupSegment()
+        perform(#selector(createIdentityOnSegment), with: nil, afterDelay: 5.0)
+
+        if UserDefaultManager.getIfFirstTime() {
+            SegmentManager.createEventDownloaded()
+            UserDefaultManager.setNotFirstTime()
+        }
         return true
+    }
+    @objc func createIdentityOnSegment() {
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            SegmentManager.createEntity(user: user)
+        }
+    }
+    func setupSegment() {
+        let configuration = SEGAnalyticsConfiguration.init(writeKey: "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI")
+        configuration.trackApplicationLifecycleEvents = true
+        configuration.recordScreenViews = true
+        configuration.use(SEGIntercomIntegrationFactory.instance())
+        segmentAnalytics = SEGAnalytics(configuration: configuration)
+        segmentAnalytics?.reset()
     }
     func showMeasuremnetVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -110,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        Intercom.setDeviceToken(deviceToken)
+        Intercom.setDeviceToken(deviceToken)
         pushToken = deviceToken.hexString
         updatePushTokenToServer()
     }
@@ -125,9 +149,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        if Intercom.isIntercomPushNotification(userInfo) {
-//            Intercom.handlePushNotification(userInfo)
-//        }
+        if Intercom.isIntercomPushNotification(userInfo) {
+            Intercom.handlePushNotification(userInfo)
+        }
         completionHandler(.noData)
     }
 

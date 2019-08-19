@@ -42,6 +42,14 @@ class ProfileRootVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         populateCurrentUserData()
+        if let userId = UserDefaultManager.getCurrentUserId() {
+            ServerManager.sharedInstance.getUserProfile(userId: userId) { (isSuccess, response) in
+                if isSuccess {
+                    let user = response as! User
+                    UserDefaultManager.updateUserObject(user: user)
+                }
+            }
+        }
     }
     func populateCurrentUserData() {
         if let currentUser = UserDefaultManager.getCurrentUserObject() {

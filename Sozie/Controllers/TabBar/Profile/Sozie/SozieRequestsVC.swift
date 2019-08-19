@@ -69,6 +69,10 @@ class SozieRequestsVC: UIViewController {
     @objc func resetFirstTime() {
         serverParams.removeAll()
         requests.removeAll()
+        progressTutorialVC = nil
+        self.ifInStockTutorialShown = false
+        ifAcceptRequestTutorialShown = false
+        ifUploadPostTutorialShown = false
         self.fetchAllSozieRequests()
     }
     func disableRootButtons() {
@@ -118,6 +122,7 @@ class SozieRequestsVC: UIViewController {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
+                    self.questionMarkButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.acceptButton.isEnabled = false
                     }
@@ -128,6 +133,7 @@ class SozieRequestsVC: UIViewController {
                     tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
                     profileParentVC.view.addSubview(tutVC.view)
                     ifInStockTutorialShown = true
+                    isFromTutorial = true
                 }
             }
         }
@@ -151,6 +157,7 @@ class SozieRequestsVC: UIViewController {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
+                    self.questionMarkButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
@@ -182,11 +189,12 @@ class SozieRequestsVC: UIViewController {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
                 progressTutorialVC?.updateProgress(progress: 5.0/8.0)
-                acceptRequestTutorialVC?.descriptionString = "Now let's fulfill the request.\nYou have 12 hours. Click here"
+                acceptRequestTutorialVC?.descriptionString = "Now let's fulfill the request.\nClick here"
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
+                    self.questionMarkButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
@@ -211,6 +219,7 @@ class SozieRequestsVC: UIViewController {
         }
         self.tableView.isScrollEnabled = true
         self.tableView.allowsSelection = true
+        self.questionMarkButton.isUserInteractionEnabled = true
     }
     @objc func reloadRequestData() {
         self.requests.removeAll()
@@ -405,6 +414,9 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     let user = response as! User
                     UserDefaultManager.updateUserObject(user: user)
                     if user.isTutorialApproved == false {
+                        if self.isFromTutorial {
+                            self.nearByStorButtonAction(button: button)
+                        }
                         return
                     } else {
                         self.nearByStorButtonAction(button: button)
@@ -504,6 +516,7 @@ extension SozieRequestsVC: TutorialProgressDelegate {
         self.hideInStockTutorial()
         self.hideUploadPostTutorial()
         self.hideAcceptRequestTutorial()
+        self.questionMarkButton.isUserInteractionEnabled = true
         serverParams.removeAll()
         requests.removeAll()
         fetchAllSozieRequests()

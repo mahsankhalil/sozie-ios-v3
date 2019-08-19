@@ -23,6 +23,8 @@ class TabBarVC: UITabBarController {
         }
         self.delegate = self
         self.view.backgroundColor = UIColor.white
+        Intercom.setLauncherVisible(true)
+        Intercom.setBottomPadding(30.0)
     }
 
     // MARK: - Custom Methods

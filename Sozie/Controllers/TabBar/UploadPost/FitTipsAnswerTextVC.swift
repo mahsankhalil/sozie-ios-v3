@@ -35,7 +35,7 @@ class FitTipsAnswerTextVC: UIViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if textView.text.isEmpty || textView.text == "Type your comment..." {
+        if textView.text.isEmpty || textView.text == "I wish " {
             UtilityManager.showErrorMessage(body: "Please enter comment", in: self)
         } else {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
@@ -111,8 +111,8 @@ extension FitTipsAnswerTextVC: UITextViewDelegate {
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "" {
-            textView.text = "Type your comment..."
+        if textView.text == "I wish " {
+            textView.text = "I wish "
         } else {
 
         }

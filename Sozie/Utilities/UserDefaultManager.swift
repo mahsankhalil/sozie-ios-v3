@@ -62,6 +62,17 @@ class UserDefaultManager: NSObject {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginResponse)
         UserDefaults.standard.synchronize()
     }
+    static func getIfFirstTime() -> Bool {
+        if UserDefaults.standard.bool(forKey: "firstTime") == true {
+            return false
+        } else {
+            return true
+        }
+    }
+    static func setNotFirstTime() {
+        UserDefaults.standard.set(true, forKey: "firstTime")
+        UserDefaults.standard.synchronize()
+    }
 
     static func getAccessToken() -> String? {
         guard let loginResponse = loginResponse() else { return nil }

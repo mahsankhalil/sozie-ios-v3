@@ -11,3 +11,4 @@
 #include "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.debug.xcconfig"
 SLASH = /
 SERVER_URL = http:$(SLASH)/52.56.155.110/api/v1/
+BETA_TESTER = YES

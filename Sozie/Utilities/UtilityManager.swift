@@ -39,6 +39,7 @@ class UtilityManager: NSObject {
     static func dateFromStringWithFormat(date: String, format: String) -> NSDate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.date(from: date)! as NSDate
     }
 

@@ -47,7 +47,7 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var menuBtn: UIButton!
 
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
-    let settingTitles = ["Push Notifications", "Reset first time use guide", "Blocked Accounts"]
+    let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
@@ -83,7 +83,7 @@ class ProfileSideMenuVC: BaseViewController {
             if index == titles.count - 1 {
                 bottomLineHidden = true
             }
-            if title == "Push Notifications" || title == "Reset first time use guide" {
+            if title == "Push Notifications" || title == "Reset Tutorial" {
                 var flag = false
                 if title == "Push Notifications" {
                     if let user = UserDefaultManager.getCurrentUserObject() {
@@ -91,7 +91,7 @@ class ProfileSideMenuVC: BaseViewController {
                             flag = notfStatus
                         }
                     }
-                } else if title == "Reset first time use guide" {
+                } else if title == "Reset Tutorial" {
                     flag = false
 //                    flag = !UserDefaultManager.isUserGuideDisabled()
                 }
@@ -115,7 +115,8 @@ class ProfileSideMenuVC: BaseViewController {
             UserDefaultManager.removeAllUserGuidesShown()
             UserDefaultManager.deleteBrowserTutorialShown()
             UserDefaultManager.deleteRequestTutorialShown()
-//            Intercom.logout()
+            Intercom.logout()
+            Intercom.setLauncherVisible(false)
             self.changeRootVCToLoginNC()
         }
     }

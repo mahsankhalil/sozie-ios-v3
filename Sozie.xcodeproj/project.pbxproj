@@ -30,6 +30,7 @@
 		6106459A222E77CB00AE41C3 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61064599222E77CB00AE41C3 /* ImageView.swift */; };
 		6106459C222FD7DE00AE41C3 /* SozieProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106459B222FD7DE00AE41C3 /* SozieProfileVC.swift */; };
 		6108FB992201D1F30007A49F /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6108FB982201D1F20007A49F /* ImageCollectionViewCell.swift */; };
+		610A622422F997EF00D12E55 /* SegmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A622322F997EF00D12E55 /* SegmentManager.swift */; };
 		610A74372202DF6E00964886 /* ImageViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A74362202DF6E00964886 /* ImageViewModeling.swift */; };
 		610A7439220307D000964886 /* TitleImageViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A7438220307D000964886 /* TitleImageViewModeling.swift */; };
 		610A743B2203126600964886 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A743A2203126600964886 /* ProductCollectionViewCell.swift */; };
@@ -67,6 +68,8 @@
 		613C46202262134400AF77DF /* ThirdSozieWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C461F2262134400AF77DF /* ThirdSozieWelcomeVC.swift */; };
 		613C4622226219CF00AF77DF /* WelcomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4621226219CF00AF77DF /* WelcomePageVC.swift */; };
 		613C462422621A0700AF77DF /* WelcomeRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C462322621A0700AF77DF /* WelcomeRootVC.swift */; };
+		613C48C3230A81C800200AE0 /* Arrow-Gif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 613C48C1230A81C600200AE0 /* Arrow-Gif.gif */; };
+		613C48C4230A81C800200AE0 /* Down-Arrow.gif in Resources */ = {isa = PBXBuildFile; fileRef = 613C48C2230A81C800200AE0 /* Down-Arrow.gif */; };
 		613CFD312264B53D00841348 /* now_01.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 613CFD302264B53C00841348 /* now_01.mp4 */; };
 		613CFD332264B6FA00841348 /* now.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 613CFD322264B6F900841348 /* now.mp4 */; };
 		613CFD352266005D00841348 /* MeasurementTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613CFD342266005D00841348 /* MeasurementTutorialVC.swift */; };
@@ -94,6 +97,8 @@
 		615A039522365FD300E64C23 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A039422365FD300E64C23 /* ChangePasswordVC.swift */; };
 		6163C53022E729D500149304 /* HubSpotApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6163C52F22E729D500149304 /* HubSpotApiManager.swift */; };
 		6163C53222E72AF600149304 /* HubSpotResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6163C53122E72AF600149304 /* HubSpotResponse.swift */; };
+		6164D28822FAFFF1008B5B22 /* SEGIntercomIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6164D28122FAFFF0008B5B22 /* SEGIntercomIntegration.m */; };
+		6164D28A22FAFFF1008B5B22 /* SEGIntercomIntegrationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6164D28322FAFFF0008B5B22 /* SEGIntercomIntegrationFactory.m */; };
 		6166814022315797009DD1D0 /* TermsOfServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166813F22315796009DD1D0 /* TermsOfServiceVC.swift */; };
 		616DDD68220ADF1C00A7CCFA /* DisclosureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */; };
 		616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */; };
@@ -262,6 +267,7 @@
 		61064599222E77CB00AE41C3 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		6106459B222FD7DE00AE41C3 /* SozieProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieProfileVC.swift; sourceTree = "<group>"; };
 		6108FB982201D1F20007A49F /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		610A622322F997EF00D12E55 /* SegmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentManager.swift; sourceTree = "<group>"; };
 		610A74362202DF6E00964886 /* ImageViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModeling.swift; sourceTree = "<group>"; };
 		610A7438220307D000964886 /* TitleImageViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageViewModeling.swift; sourceTree = "<group>"; };
 		610A743A2203126600964886 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -299,6 +305,8 @@
 		613C461F2262134400AF77DF /* ThirdSozieWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdSozieWelcomeVC.swift; sourceTree = "<group>"; };
 		613C4621226219CF00AF77DF /* WelcomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
 		613C462322621A0700AF77DF /* WelcomeRootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRootVC.swift; sourceTree = "<group>"; };
+		613C48C1230A81C600200AE0 /* Arrow-Gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Arrow-Gif.gif"; sourceTree = "<group>"; };
+		613C48C2230A81C800200AE0 /* Down-Arrow.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Down-Arrow.gif"; sourceTree = "<group>"; };
 		613CFD302264B53C00841348 /* now_01.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = now_01.mp4; sourceTree = "<group>"; };
 		613CFD322264B6F900841348 /* now.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = now.mp4; sourceTree = "<group>"; };
 		613CFD342266005D00841348 /* MeasurementTutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementTutorialVC.swift; sourceTree = "<group>"; };
@@ -326,6 +334,13 @@
 		615A039422365FD300E64C23 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		6163C52F22E729D500149304 /* HubSpotApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubSpotApiManager.swift; sourceTree = "<group>"; };
 		6163C53122E72AF600149304 /* HubSpotResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubSpotResponse.swift; sourceTree = "<group>"; };
+		6164D28122FAFFF0008B5B22 /* SEGIntercomIntegration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGIntercomIntegration.m; sourceTree = "<group>"; };
+		6164D28222FAFFF0008B5B22 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		6164D28322FAFFF0008B5B22 /* SEGIntercomIntegrationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGIntercomIntegrationFactory.m; sourceTree = "<group>"; };
+		6164D28422FAFFF0008B5B22 /* SEGIntercomIntegration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGIntercomIntegration.h; sourceTree = "<group>"; };
+		6164D28522FAFFF0008B5B22 /* SEGIntercomIntegrationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGIntercomIntegrationFactory.h; sourceTree = "<group>"; };
+		6164D28722FAFFF0008B5B22 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		6164D28C22FB0065008B5B22 /* Sozie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sozie-Bridging-Header.h"; sourceTree = "<group>"; };
 		6166813F22315796009DD1D0 /* TermsOfServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceVC.swift; sourceTree = "<group>"; };
 		616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureCell.swift; sourceTree = "<group>"; };
 		616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisclosureCell.xib; sourceTree = "<group>"; };
@@ -565,6 +580,7 @@
 		6103E1A521FEDBEB00C7E7CF /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				6164D27F22FAFFF0008B5B22 /* Segment-Intercom */,
 				61716223225B6BF20098C3E1 /* InfiniteScrollCollectionView.swift */,
 				61C40CF9221E7DE800FBD7FF /* TabPage */,
 				6103E1A621FEDBEB00C7E7CF /* PopupController.swift */,
@@ -645,6 +661,35 @@
 				614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */,
 			);
 			path = SocialManager;
+			sourceTree = "<group>";
+		};
+		6164D27F22FAFFF0008B5B22 /* Segment-Intercom */ = {
+			isa = PBXGroup;
+			children = (
+				6164D28022FAFFF0008B5B22 /* Classes */,
+				6164D28622FAFFF0008B5B22 /* Assets */,
+			);
+			path = "Segment-Intercom";
+			sourceTree = "<group>";
+		};
+		6164D28022FAFFF0008B5B22 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6164D28122FAFFF0008B5B22 /* SEGIntercomIntegration.m */,
+				6164D28222FAFFF0008B5B22 /* .gitkeep */,
+				6164D28322FAFFF0008B5B22 /* SEGIntercomIntegrationFactory.m */,
+				6164D28422FAFFF0008B5B22 /* SEGIntercomIntegration.h */,
+				6164D28522FAFFF0008B5B22 /* SEGIntercomIntegrationFactory.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6164D28622FAFFF0008B5B22 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				6164D28722FAFFF0008B5B22 /* .gitkeep */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		6166813E223156F9009DD1D0 /* Settings */ = {
@@ -831,6 +876,7 @@
 				618091C721EF43D0004B3347 /* UserDefaultManager.swift */,
 				61B5A0D0229EA337009D372C /* TargetAPIManager.swift */,
 				6163C52F22E729D500149304 /* HubSpotApiManager.swift */,
+				610A622322F997EF00D12E55 /* SegmentManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -887,6 +933,8 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				613C48C1230A81C600200AE0 /* Arrow-Gif.gif */,
+				613C48C2230A81C800200AE0 /* Down-Arrow.gif */,
 				617FA17A227078810055FD18 /* Config */,
 				613CFD322264B6F900841348 /* now.mp4 */,
 				613CFD302264B53C00841348 /* now_01.mp4 */,
@@ -912,6 +960,7 @@
 				61C40D15221EC65600FBD7FF /* Apricot@3x.png */,
 				610A743E22032E5100964886 /* M_S.png */,
 				6998E7E821C77779009DFBEF /* Info.plist */,
+				6164D28C22FB0065008B5B22 /* Sozie-Bridging-Header.h */,
 			);
 			path = Sozie;
 			sourceTree = "<group>";
@@ -1075,6 +1124,7 @@
 				61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */,
 				614374DC2236919200DBD295 /* BlockedUserCell.xib in Resources */,
 				610A744722033B9000964886 /* MK.png in Resources */,
+				613C48C3230A81C800200AE0 /* Arrow-Gif.gif in Resources */,
 				6120D43722B1064F0000678C /* TitleTextFieldCell.xib in Resources */,
 				614CEA4321F1E08F00FE5F9D /* GoogleService-Info.plist in Resources */,
 				DA43F897221BAE3300EE12DD /* .swiftlint.yml in Resources */,
@@ -1085,6 +1135,7 @@
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
 				61C40D01221E7DE900FBD7FF /* TabView.xib in Resources */,
 				61C40D04221E7DE900FBD7FF /* TabCollectionCell.xib in Resources */,
+				613C48C4230A81C800200AE0 /* Down-Arrow.gif in Resources */,
 				61C40D10221EAE1000FBD7FF /* SozieTableViewCell.xib in Resources */,
 				6103E18C21F9E98800C7E7CF /* Main.storyboard in Resources */,
 				61C40D16221EC65600FBD7FF /* Apricot@3x.png in Resources */,
@@ -1174,7 +1225,7 @@
 		};
 		DA43F895221BA7AE00EE12DD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -1185,7 +1236,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
@@ -1300,6 +1351,7 @@
 				6163C53222E72AF600149304 /* HubSpotResponse.swift in Sources */,
 				DA48CB1421FACFCD006804B6 /* TextFieldDelegate.swift in Sources */,
 				615A039522365FD300E64C23 /* ChangePasswordVC.swift in Sources */,
+				6164D28822FAFFF1008B5B22 /* SEGIntercomIntegration.m in Sources */,
 				613F40EB221FF852009AABA6 /* ProductSizeChart.swift in Sources */,
 				61C40D02221E7DE900FBD7FF /* TabCollectionCell.swift in Sources */,
 				614374DE22369A5400DBD295 /* BlockListVC.swift in Sources */,
@@ -1325,6 +1377,7 @@
 				6103E19E21FB190100C7E7CF /* BrowseVC.swift in Sources */,
 				616DDD6D220B080000A7CCFA /* PopUpViewModel.swift in Sources */,
 				DA48CB1021FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift in Sources */,
+				610A622422F997EF00D12E55 /* SegmentManager.swift in Sources */,
 				617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */,
 				DA48CB2021FC25E8006804B6 /* MeasurementTypeProviding.swift in Sources */,
 				61B9D1D52227EC9B007C6326 /* MyUploadsVC.swift in Sources */,
@@ -1349,6 +1402,7 @@
 				69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */,
 				6173E020221C068100AC9781 /* DescriptionViewModeling.swift in Sources */,
 				61145CC121DB926700062332 /* ServerManager.swift in Sources */,
+				6164D28A22FAFFF1008B5B22 /* SEGIntercomIntegrationFactory.m in Sources */,
 				61716226225F5F2A0098C3E1 /* Label.swift in Sources */,
 				61F0284E22CCBDE400B3BB4B /* FitTipsListingVC.swift in Sources */,
 				DA48CB1E21FC17E8006804B6 /* UIButtonProviding.swift in Sources */,
@@ -1498,6 +1552,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1511,7 +1566,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)-Stage";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sozie/Sozie-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1642,6 +1697,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1655,7 +1711,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sozie/Sozie-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1669,6 +1725,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1682,7 +1739,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sozie/Sozie-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

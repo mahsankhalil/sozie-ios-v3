@@ -81,6 +81,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 _ = UserDefaultManager.saveLoginResponse(loginResp: res)
 //                UtilityManager.registerUserOnIntercom()
                 if let user = UserDefaultManager.getCurrentUserObject() {
+                    SegmentManager.createEntity(user: user)
                     if let tutorialCompleted = user.tutorialCompleted {
                         if tutorialCompleted == false {
                             UserDefaultManager.removeAllUserGuidesShown()

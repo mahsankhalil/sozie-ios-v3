@@ -13,6 +13,7 @@ class StoresPopupVC: UIViewController {
 
     private let reuseIdentifier = "StoreCell"
 
+    @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var findButton: DZGradientButton!
@@ -35,6 +36,11 @@ class StoresPopupVC: UIViewController {
                     let viewModel = StoreViewModel(count: location.locationAvailableQuantity, title: location.storeName, attributedTitle: nil, description: location.storeAddress)
                     viewModels.append(viewModel)
                 }
+                if locations.count == 0 {
+                    self.noDataFoundLabel.isHidden = false
+                } else {
+                    self.noDataFoundLabel.isHidden = true
+                }
                 self.tableView.reloadData()
             }
         }
@@ -48,7 +54,7 @@ class StoresPopupVC: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.setupLocationManager()
 //        SVProgressHUD.show()
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getStoresList), userInfo: nil, repeats: true)
+//        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(getStoresList), userInfo: nil, repeats: true)
         if let imageURL = productImage {
             productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
         }
@@ -84,7 +90,7 @@ class StoresPopupVC: UIViewController {
     @objc func getStoresList() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.currentLocation != nil {
-            timer?.invalidate()
+//            timer?.invalidate()
             SVProgressHUD.dismiss()
             if nearbyString == nil {
                 nearbyString = String(appDelegate.currentLocation.coordinate.latitude) + "," + String(appDelegate.currentLocation.coordinate.longitude)
@@ -100,6 +106,7 @@ class StoresPopupVC: UIViewController {
         dataDict["requested_quantity"] = 1
         dataDict["radius"] = 100
         dataDict["include_only_available_stores"] = true
+        SVProgressHUD.show()
         TargetAPIManager.sharedInstance.getNearbyStores(productId: productId!, params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
@@ -132,7 +139,7 @@ class StoresPopupVC: UIViewController {
     }
     */
     @IBAction func currentLocationButtonTapped(_ sender: Any) {
-        timer?.invalidate()
+//        timer?.invalidate()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.locationManager?.startUpdatingLocation()
         if let currentLocation = appDelegate.currentLocation {
@@ -141,7 +148,7 @@ class StoresPopupVC: UIViewController {
         }
     }
     @IBAction func findButtonTapped(_ sender: Any) {
-        timer?.invalidate()
+//        timer?.invalidate()
         if textField.text?.isEmpty == true {
             UtilityManager.showMessageWith(title: "Warning!", body: "Please enter city/zip code to search.", in: self)
         } else {
@@ -151,7 +158,7 @@ class StoresPopupVC: UIViewController {
         }
     }
     @IBAction func closeButtontapped(_ sender: Any) {
-        timer?.invalidate()
+//        timer?.invalidate()
         self.closeHandler!()
     }
 }
@@ -183,7 +190,7 @@ extension StoresPopupVC: TutorialProgressDelegate {
     func tutorialSkipButtonTapped() {
         self.removeTutorialVC()
         self.removeCancelTutorialVC()
-        timer?.invalidate()
+//        timer?.invalidate()
         self.closeHandler!()
     }
 }

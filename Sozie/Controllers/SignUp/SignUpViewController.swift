@@ -12,6 +12,7 @@ import MaterialTextField
 import SVProgressHUD
 import EasyTipView
 import TPKeyboardAvoiding
+//import FirebaseAnalytics
 
 class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDelegate, UITextViewDelegate {
 
@@ -185,6 +186,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                 appDelegate.updatePushTokenToServer()
                 if let user = UserDefaultManager.getCurrentUserObject() {
 //                    HubSpotManager.createContact(user: user)
+//                    Analytics.logEvent("SignUp-Completed", parameters: ["email": user.email])
+                    SegmentManager.createEntity(user: user)
+                    SegmentManager.createEventSecondScreenSignupCompleted()
                 }
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {
