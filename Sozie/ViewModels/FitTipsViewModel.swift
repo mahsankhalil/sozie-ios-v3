@@ -12,4 +12,5 @@ struct FitTipsViewModel: RowViewModel, TitleViewModeling, SelectionProviding {
     var title: String?
     var attributedTitle: NSAttributedString?
     var isSelected: Bool
+    let isFromFitTips = true
 }
