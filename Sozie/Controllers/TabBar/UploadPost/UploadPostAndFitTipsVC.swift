@@ -75,6 +75,15 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     func addPicturesTutorial() {
         picturesTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "SelectPicturesTutorialVC") as? SelectPicturesTutorialVC
+//        if let tabBarContrlr = self.parent?.parent as? TabBarVC {
+//            tabBarContrlr.tabBar.isUserInteractionEnabled = false
+//            if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem {
+//                firstItem.isEnabled = false
+//                secondItem.isEnabled = false
+//                thirdItem.isEnabled = false
+//                fourthItem.isEnabled = false
+//            }
+//        }
         progressTutorialVC?.updateProgress(progress: 6.0/8.0)
         if let tutVC = picturesTutorialVC {
             tutVC.view.frame.origin.y = 215.0
@@ -288,6 +297,15 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     UserDefaultManager.updateUserObject(user: user)
 //                    Analytics.logEvent("Tutorial-Completed", parameters: ["email": user.email])
                     SegmentManager.createEventTutorialCompleted()
+                }
+                if let tabBarContrlr = self.parent?.parent as? TabBarVC {
+                    tabBarContrlr.tabBar.isUserInteractionEnabled = true
+                    if let firstItem = tabBarContrlr.tabBar.items?[0], let secondItem = tabBarContrlr.tabBar.items?[1], let thirdItem = tabBarContrlr.tabBar.items?[2], let fourthItem = tabBarContrlr.tabBar.items?[3] {
+                        firstItem.isEnabled = true
+                        secondItem.isEnabled = true
+                        thirdItem.isEnabled = true
+                        fourthItem.isEnabled = true
+                    }
                 }
                 UserDefaultManager.setPostTutorialShown()
                 self.progressTutorialVC?.view.removeFromSuperview()

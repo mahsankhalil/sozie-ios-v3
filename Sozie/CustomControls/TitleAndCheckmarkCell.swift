@@ -28,6 +28,16 @@ extension TitleAndCheckmarkCell: CellConfigurable {
         checkmarkImageView.isHidden = true
         if let checkmarkModel = viewModel as? CheckmarkViewModeling {
             checkmarkImageView.isHidden = checkmarkModel.isCheckmarkHidden
+            if let optionViewModel = viewModel as? OptionsViewModel {
+                if optionViewModel.isFromFitTips == true {
+                    if checkmarkModel.isCheckmarkHidden == true {
+                        self.titleLabel.textColor = UIColor(hex: "888888")
+                    } else {
+                        self.titleLabel.textColor = UIColor(hex: "FC8787")
+                    }
+                }
+            }
         }
+        
     }
 }

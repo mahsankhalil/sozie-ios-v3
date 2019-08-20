@@ -12,7 +12,8 @@ struct DoubleTextFieldCellViewModel: DoubleTextFieldCellViewModeling, ErrorMessa
 ErrorViewModeling, MeasurementTypeProviding, RowViewModel {
     var text1: String?
     var text2: String?
-    var title: String
+    var title1: String
+    var title2: String
     var columnUnit: [String]
     var columnPlaceholder: [String]
     var columnValueSuffix: [String]

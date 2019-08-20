@@ -26,7 +26,7 @@ class TitleTextFieldCell: UITableViewCell {
     }
 }
 extension TitleTextFieldCell: CustomPickerTextFieldDelegate {
-    func customPickerValueChanges(value1: String?, value2: String?) {
+    func customPickerValueChanges(instance: CustomPickerTextField, value1: String?, value2: String?) {
         if let text = value1 {
             textField.text = text
             textFieldDelegate?.textFieldDidUpdate(self, text: text)

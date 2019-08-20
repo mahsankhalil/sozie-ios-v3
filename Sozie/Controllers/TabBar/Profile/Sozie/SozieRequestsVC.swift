@@ -269,6 +269,15 @@ class SozieRequestsVC: UIViewController {
 //            if UserDefaultManager.getIfRequestTutorialShown() {
             populateDummyRequests()
             self.showInStockTutorial()
+            if let tabBarContrlr = self.parent?.parent?.parent?.parent as? TabBarVC {
+                tabBarContrlr.tabBar.isUserInteractionEnabled = false
+                if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![3] as? UITabBarItem {
+                    firstItem.isEnabled = false
+                    secondItem.isEnabled = false
+                    thirdItem.isEnabled = false
+                    fourthItem.isEnabled = false
+                }
+            }
             if let tutorialView = self.acceptRequestTutorialVC?.view {
                 if let parentView = self.parent?.parent?.view {
                     if tutorialView.isDescendant(of: parentView) && self.ifUploadPostTutorialShown == true {
