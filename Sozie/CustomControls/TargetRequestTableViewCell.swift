@@ -120,9 +120,13 @@ extension TargetRequestTableViewCell: CellConfigurable {
                         dateFormat.timeZone = TimeZone(abbreviation: "UTC")
                         if let date = dateFormat.date(from: expiryViewModel.expiry) {
                             if timer == nil {
-                                timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(countDownDate(timer:)), userInfo: ["date": date], repeats: true)
+//                                timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(countDownDate(timer:)), userInfo: ["date": date], repeats: true)
                                 self.timerLabel.isHidden = false
+                            } else {
+                                timer?.invalidate()
+                                timer = nil
                             }
+                            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(countDownDate(timer:)), userInfo: ["date": date], repeats: true)
                         }
                     }
                 }

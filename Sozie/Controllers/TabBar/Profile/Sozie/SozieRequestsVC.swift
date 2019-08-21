@@ -73,6 +73,7 @@ class SozieRequestsVC: UIViewController {
         self.ifInStockTutorialShown = false
         ifAcceptRequestTutorialShown = false
         ifUploadPostTutorialShown = false
+        SVProgressHUD.show()
         self.fetchAllSozieRequests()
     }
     func disableRootButtons() {
@@ -224,6 +225,7 @@ class SozieRequestsVC: UIViewController {
     @objc func reloadRequestData() {
         self.requests.removeAll()
         serverParams.removeAll()
+        SVProgressHUD.show()
         fetchAllSozieRequests()
     }
     @objc func loadNextPage() {
@@ -237,7 +239,6 @@ class SozieRequestsVC: UIViewController {
     }
 
     func fetchAllSozieRequests() {
-        SVProgressHUD.show()
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             self.tableView.bottomRefreshControl?.endRefreshing()
@@ -358,7 +359,12 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func cancelRequestButtonTapped(button: UIButton) {
-        let currentRequest = requests[button.tag]
+        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
+            self.cancelRequest(button: button)
+        }
+    }
+    func cancelRequest(button: UIButton) {
+        let currentRequest = self.requests[button.tag]
         if let acceptedRequestId = currentRequest.acceptedRequest?.acceptedId {
             SVProgressHUD.show()
             ServerManager.sharedInstance.cancelRequest(requestId: acceptedRequestId) { (isSuccess, _) in
@@ -373,6 +379,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     }
                     self.serverParams.removeAll()
                     self.requests.removeAll()
+                    SVProgressHUD.show()
                     self.fetchAllSozieRequests()
                 }
             }
@@ -481,9 +488,19 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 if isSuccess {
                     self.serverParams.removeAll()
                     self.requests.removeAll()
+                    SVProgressHUD.show()
                     self.fetchAllSozieRequests()
                 } else {
-                    UtilityManager.showMessageWith(title: "Hold on tight!", body: (response as! Error).localizedDescription, in: self)
+                    let error = (response as! Error).localizedDescription
+                    if let errorDict = error.getColonSeparatedErrorDetails() {
+                        if let title = errorDict["title"] as? String , let description = errorDict["description"] as? String {
+                            UtilityManager.showMessageWith(title: title, body: description, in: self)
+                        } else {
+                            UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                        }
+                    } else {
+                        UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                    }
                 }
             }
         }
@@ -528,6 +545,7 @@ extension SozieRequestsVC: TutorialProgressDelegate {
         self.questionMarkButton.isUserInteractionEnabled = true
         serverParams.removeAll()
         requests.removeAll()
+        SVProgressHUD.show()
         fetchAllSozieRequests()
     }
 }

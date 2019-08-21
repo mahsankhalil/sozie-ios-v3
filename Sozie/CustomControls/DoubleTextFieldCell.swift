@@ -26,8 +26,8 @@ class DoubleTextFieldCell: UITableViewCell, CustomPickerTextFieldDelegate {
     func customPickerValueChanges(instance: CustomPickerTextField, value1: String?, value2: String?) {
         if let text = value1 {
             instance.text = text
-            var firstText = ""
-            var secondText = ""
+            var firstText: String?
+            var secondText: String?
             if let text1 = firstTxtFld.text {
                 firstText = text1
             }
@@ -63,22 +63,34 @@ extension DoubleTextFieldCell: CellConfigurable {
 //            firstTxtFld.configure(title: doubleTextFieldCellViewModel.title, rightTitle: doubleTextFieldCellViewModel.columnUnit[0], placeholder: doubleTextFieldCellViewModel.columnPlaceholder[0], values1: doubleTextFieldCellViewModel.columnValues[0], values1Suffix: doubleTextFieldCellViewModel.columnValueSuffix[0], values2: doubleTextFieldCellViewModel.columnValues[1], values2Suffix: doubleTextFieldCellViewModel.columnValueSuffix[1])
 //            secondTxtFld.configure(title: doubleTextFieldCellViewModel.title, rightTitle: doubleTextFieldCellViewModel.columnUnit[1], placeholder: doubleTextFieldCellViewModel.columnPlaceholder[1], values1: doubleTextFieldCellViewModel.columnValues[0], values1Suffix: doubleTextFieldCellViewModel.columnValueSuffix[0], values2: doubleTextFieldCellViewModel.columnValues[1], values2Suffix: doubleTextFieldCellViewModel.columnValueSuffix[1])
             if let text = doubleTextFieldCellViewModel.text1 {
-                firstTxtFld.text = text
-                firstTxtFld.currentValue1 = text
+                if text != "" {
+                    firstTxtFld.text = text
+                    firstTxtFld.currentValue1 = text
+                }
                 if let text2 = doubleTextFieldCellViewModel.text2 {
-                    firstTxtFld.currentValue2 = text2
+                    if text2 != "" {
+                        secondTxtFld.currentValue1 = text2
+                    }
                 }
             }
             if let text = doubleTextFieldCellViewModel.text2 {
-                secondTxtFld.text = text
-                secondTxtFld.currentValue2 = text
+                if text != "" {
+                    secondTxtFld.text = text
+                    secondTxtFld.currentValue1 = text
+                }
+                
                 if let text2 = doubleTextFieldCellViewModel.text1 {
-                    secondTxtFld.currentValue1 = text2
+                    if text2 != "" {
+                        firstTxtFld.currentValue1 = text2
+                    }
                 }
 
             }
+            firstTxtFld.applyRightVuLblWith(title: doubleTextFieldCellViewModel.columnUnit[0] )
+            secondTxtFld.applyRightVuLblWith(title: doubleTextFieldCellViewModel.columnUnit[1] )
             self.textFieldDelegate = doubleTextFieldCellViewModel.textFieldDelegate
         }
+        
         if let errorModel = viewModel as? ErrorViewModeling {
             if errorModel.displayError, let errorMessageModel = viewModel as? ErrorMessageViewModeling {
                 firstTxtFld.setError(CustomError(str: errorMessageModel.errorMessage), animated: true)

@@ -68,5 +68,13 @@ extension String {
         guard self.hasPrefix(prefix) else { return self }
         return String(self.dropFirst(prefix.count))
     }
+    func getColonSeparatedErrorDetails() -> [String: Any]? {
+        var strArray = self.components(separatedBy: ":")
+        if strArray.count == 2 {
+            return ["title": strArray[0] , "description": strArray[1]]
+        } else {
+            return nil
+        }
+    }
 }
 

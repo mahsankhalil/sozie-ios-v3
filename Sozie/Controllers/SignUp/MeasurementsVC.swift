@@ -157,8 +157,8 @@ class MeasurementsVC: UIViewController {
     }
 
     private func isValidMeasurements() -> Bool {
-        return currentMeasurement.height != nil && currentMeasurement.waist != nil &&
-            currentMeasurement.hip != nil && currentMeasurement.bra != nil && currentMeasurement.cup != nil && currentMeasurement.size != nil && currentMeasurement.size != ""
+        return currentMeasurement.height != nil && currentMeasurement.height != "" && currentMeasurement.waist != nil && currentMeasurement.waist != "" &&
+            currentMeasurement.hip != nil && currentMeasurement.hip != "" && currentMeasurement.bra != nil && currentMeasurement.bra != "" && currentMeasurement.cup != nil && currentMeasurement.cup != "" && currentMeasurement.size != nil && currentMeasurement.size != ""
     }
 
     @IBAction func uploadBtnTapped(_ sender: Any) {
@@ -196,8 +196,8 @@ class MeasurementsVC: UIViewController {
             }
 
             setError(for: 0, isError: currentMeasurement.height == nil)
-            setError(for: 1, isError: currentMeasurement.waist == nil || currentMeasurement.hip == nil)
-            setError(for: 2, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil)
+            setError(for: 1, isError: currentMeasurement.waist == nil || currentMeasurement.hip == nil || currentMeasurement.waist == "" || currentMeasurement.hip == "")
+            setError(for: 2, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil || currentMeasurement.bra == "" || currentMeasurement.cup == "")
             setError(for: 3, isError: currentMeasurement.size == nil || currentMeasurement.size == "")
             tblVu.reloadData()
         }
@@ -282,22 +282,24 @@ extension MeasurementsVC: TextFieldDelegate {
             case .height:
                 let heightInches = (Int(text2 ?? "") ?? 0) + ((Int(text) ?? 0) * 12)
 //                let heightInches = (Double(text2 ?? "1.0") ?? 1.0)/12.0
-                let inchesStr = String(heightInches)
-                currentMeasurement.height = inchesStr
+                if text2 != nil && text2 != "" {
+                    let inchesStr = String(heightInches)
+                    currentMeasurement.height = inchesStr
+                }
             case .size:
                 currentMeasurement.size = text
             }
         }
     }
 
-    func textFieldDidUpdate(_ sender: Any?, text: String) {
+    func textFieldDidUpdate(_ sender: Any?, text: String?) {
         guard let cell = sender as? UITableViewCell else { return }
-        updateCurrentMeasurement(cell.tag, text: text)
+        updateCurrentMeasurement(cell.tag, text: text ?? "")
     }
 
-    func textFieldDidUpdate(_ sender: Any?, textField1: String, textField2: String) {
+    func textFieldDidUpdate(_ sender: Any?, textField1: String?, textField2: String?) {
         guard let cell = sender as? UITableViewCell else { return }
-        updateCurrentMeasurement(cell.tag, text: textField1, text2: textField2)
+        updateCurrentMeasurement(cell.tag, text: textField1 ?? "", text2: textField2)
     }
 }
 
