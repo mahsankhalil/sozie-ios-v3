@@ -74,6 +74,11 @@ extension TabBarVC: UITabBarControllerDelegate {
                     }
                     currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
                 }
+            } else if self.customizableViewControllers?.index(of: viewController) == 3 {
+                if UserDefaultManager.getIfBrowseTutorialShown() == false {
+                    UserDefaultManager.setBrowserTutorialShown()
+                }
+
             }
         }
         return true

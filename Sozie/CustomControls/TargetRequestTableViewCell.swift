@@ -127,6 +127,9 @@ extension TargetRequestTableViewCell: CellConfigurable {
                                 timer = nil
                             }
                             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(countDownDate(timer:)), userInfo: ["date": date], repeats: true)
+                            if let currentTimer = timer {
+                                countDownDate(timer: currentTimer)
+                            }
                         }
                     }
                 }

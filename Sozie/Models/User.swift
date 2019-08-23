@@ -32,6 +32,7 @@ struct User: Codable {
     var isSuperUser: Bool?
     var isTutorialApproved: Bool?
     var tutorialCompleted: Bool?
+    var createdAt: String?
     enum CodingKeys: String, CodingKey {
         case username
         case email
@@ -55,6 +56,7 @@ struct User: Codable {
         case isSuperUser = "is_superuser"
         case isTutorialApproved = "tutorial_approved"
         case tutorialCompleted = "tutorial_completed"
+        case createdAt = "created_at"
     }
 
     init(from decoder: Decoder) throws {
@@ -81,8 +83,7 @@ struct User: Codable {
         isSuperUser = try? values.decode(Bool.self, forKey: .isSuperUser)
         isTutorialApproved = try? values.decode(Bool.self, forKey: .isTutorialApproved)
         tutorialCompleted = try? values.decode(Bool.self, forKey: .tutorialCompleted)
-
-
+        createdAt = try? values.decode(String.self, forKey: .createdAt)
     }
 }
 struct UserPreferences: Codable {

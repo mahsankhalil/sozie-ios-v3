@@ -121,7 +121,6 @@ class BrowseVC: BaseViewController {
             tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
             tutorialVC?.delegate = self
             UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
-            UserDefaultManager.setBrowserTutorialShown()
         }
     }
     func showTipeViewAfterDelay() {

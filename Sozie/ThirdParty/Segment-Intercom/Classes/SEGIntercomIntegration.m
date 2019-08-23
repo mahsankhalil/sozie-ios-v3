@@ -162,7 +162,11 @@
     }
 
     if (traits[@"created_at"]) {
-        userAttributes.signedUpAt = traits[@"created_at"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+        [formatter setTimeZone:[[NSTimeZone alloc] initWithName:@"UTC"]];
+        NSDate * date = [formatter dateFromString:traits[@"created_at"]];
+        userAttributes.signedUpAt = date;
         [customAttributes removeObjectForKey:@"created_at"];
     };
 

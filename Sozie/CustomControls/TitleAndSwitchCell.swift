@@ -40,8 +40,12 @@ extension TitleAndSwitchCell: CellConfigurable {
                 titleLabel.text = title
                 if title == "Reset Tutorial" {
                     if let user = UserDefaultManager.getCurrentUserObject() {
-                        if user.isTutorialApproved == true {
+                        if user.tutorialCompleted == true && user.isTutorialApproved == nil {
                             switchControl.isUserInteractionEnabled = false
+                        } else if user.isTutorialApproved == true {
+                            switchControl.isUserInteractionEnabled = false
+                        } else if user.isTutorialApproved == false {
+                            switchControl.isUserInteractionEnabled = true
                         } else {
                             switchControl.isUserInteractionEnabled = true
                         }

@@ -494,7 +494,13 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     let error = (response as! Error).localizedDescription
                     if let errorDict = error.getColonSeparatedErrorDetails() {
                         if let title = errorDict["title"] as? String , let description = errorDict["description"] as? String {
-                            UtilityManager.showMessageWith(title: title, body: description, in: self)
+                            if title == "Tutorial Rejected" {
+                                UserDefaultManager.makeUserGuideEnable()
+                                UserDefaultManager.removeAllUserGuidesShown()
+                                self.showResetTutorialPopup(text: description)
+                            } else {
+                                UtilityManager.showMessageWith(title: title, body: description, in: self)
+                            }
                         } else {
                             UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
                         }
@@ -503,6 +509,19 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     }
                 }
             }
+        }
+    }
+    func showResetTutorialPopup(text: String) {
+        let popUpInstnc = SozieRequestErrorPopUp.instance(description: text)
+        let popUpVC = PopupController
+            .create(self.tabBarController?.navigationController ?? self)
+            .show(popUpInstnc)
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+        popUpInstnc.resetTutorialHandler = { [] in
+            popUpVC.dismiss()
+            self.resetFirstTime()
         }
     }
 }

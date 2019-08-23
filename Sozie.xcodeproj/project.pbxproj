@@ -60,6 +60,7 @@
 		612F00CD2208476A0025DBEA /* ListingPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00CC2208476A0025DBEA /* ListingPopupVC.swift */; };
 		612F00CF22084B390025DBEA /* SelectionPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00CE22084B390025DBEA /* SelectionPopupVC.swift */; };
 		612F00D122084B6D0025DBEA /* PopupNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00D022084B6D0025DBEA /* PopupNavController.swift */; };
+		613B0808230E994200AB5E8B /* SozieRequestErrorPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613B0807230E994200AB5E8B /* SozieRequestErrorPopUp.swift */; };
 		613C4616226212D700AF77DF /* FirstShopperWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4615226212D700AF77DF /* FirstShopperWelcomeVC.swift */; };
 		613C4618226212E900AF77DF /* SecondShopperWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4617226212E900AF77DF /* SecondShopperWelcomeVC.swift */; };
 		613C461A226212FD00AF77DF /* ThirdShopperWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C4619226212FD00AF77DF /* ThirdShopperWelcomeVC.swift */; };
@@ -297,6 +298,7 @@
 		612F00CC2208476A0025DBEA /* ListingPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingPopupVC.swift; sourceTree = "<group>"; };
 		612F00CE22084B390025DBEA /* SelectionPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPopupVC.swift; sourceTree = "<group>"; };
 		612F00D022084B6D0025DBEA /* PopupNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupNavController.swift; sourceTree = "<group>"; };
+		613B0807230E994200AB5E8B /* SozieRequestErrorPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieRequestErrorPopUp.swift; sourceTree = "<group>"; };
 		613C4615226212D700AF77DF /* FirstShopperWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstShopperWelcomeVC.swift; sourceTree = "<group>"; };
 		613C4617226212E900AF77DF /* SecondShopperWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondShopperWelcomeVC.swift; sourceTree = "<group>"; };
 		613C4619226212FD00AF77DF /* ThirdShopperWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdShopperWelcomeVC.swift; sourceTree = "<group>"; };
@@ -806,6 +808,7 @@
 				61B9D1D22227EC89007C6326 /* SozieRequestsVC.swift */,
 				61B9D1D42227EC9B007C6326 /* MyUploadsVC.swift */,
 				61B5A0CE229E9A1D009D372C /* StoresPopupVC.swift */,
+				613B0807230E994200AB5E8B /* SozieRequestErrorPopUp.swift */,
 			);
 			path = Sozie;
 			sourceTree = "<group>";
@@ -1408,6 +1411,7 @@
 				DA48CB1E21FC17E8006804B6 /* UIButtonProviding.swift in Sources */,
 				617FF0B322291B770096597E /* View.swift in Sources */,
 				6197726A2216C3D9003A7091 /* Double.swift in Sources */,
+				613B0808230E994200AB5E8B /* SozieRequestErrorPopUp.swift in Sources */,
 				613F40ED222014B8009AABA6 /* SizeCellViewModel.swift in Sources */,
 				DA48CB2421FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift in Sources */,
 				61EE668F22D5E5B2004265F1 /* BrowseWelcomeVC.swift in Sources */,

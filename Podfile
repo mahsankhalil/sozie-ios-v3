@@ -27,6 +27,7 @@ pod 'DLRadioButton', '~> 1.4'
 pod 'Fabric', '~> 1.10.2'
 pod 'Crashlytics', '~> 3.13.4'
 pod 'Analytics', '~> 3.6.10'
+pod 'Branch'
 #pod 'Segment-Intercom', '1.0.0-beta'
 end
 target 'Sozie' do

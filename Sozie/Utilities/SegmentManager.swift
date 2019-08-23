@@ -38,6 +38,7 @@ class SegmentManager: NSObject {
         if betaTester == "YES" {
             betaTesterBool = true
         }
+        dataDict["created_at"] = user.createdAt
         dataDict["beta_testing"] = betaTesterBool
         var signUpComplete = false
         if UserDefaultManager.checkIfMeasurementEmpty() {
