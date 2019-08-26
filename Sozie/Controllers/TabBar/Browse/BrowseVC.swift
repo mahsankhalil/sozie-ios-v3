@@ -118,9 +118,11 @@ class BrowseVC: BaseViewController {
     }
     @objc func showWelcomeView() {
         if UserDefaultManager.getIfBrowseTutorialShown() == false {
-            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
-            tutorialVC?.delegate = self
-            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+            if tutorialVC == nil {
+                tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
+                tutorialVC?.delegate = self
+                UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+            }
         }
     }
     func showTipeViewAfterDelay() {

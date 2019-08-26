@@ -18,8 +18,8 @@ class SelectPicturesTutorialVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        labelView.layer.borderWidth = 1.0
-        labelView.layer.cornerRadius = 3.0
+        labelView.layer.borderWidth = 0.5
+        labelView.layer.cornerRadius = 10.0
         labelView.layer.borderColor = UIColor(hex: "9C9C9C").cgColor
         if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "Arrow-Gif", withExtension: "gif")!)
         {

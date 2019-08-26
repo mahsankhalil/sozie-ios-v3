@@ -152,10 +152,22 @@ class UtilityManager: NSObject {
         controller.present(alert, animated: true, completion: nil)
     }
 
-    static func showMessageWith(title: String, body: String, in controller: UIViewController, okBtnTitle: String = "OK", cancelBtnTitle: String? = nil, dismissAfter: Int? = nil, block: (() -> Void)? = nil) {
+    static func showMessageWith(title: String, body: String, in controller: UIViewController, okBtnTitle: String = "OK", cancelBtnTitle: String? = nil, dismissAfter: Int? = nil, leftAligned: Bool? = false,  block: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
         let okBtnAction = UIAlertAction(title: okBtnTitle, style: .default) { (_) in
             block?()
+        }
+        if leftAligned == true {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = NSTextAlignment.left
+            let attributedMessageText = NSMutableAttributedString(
+                string: body,
+                attributes: [
+                    NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13.0)
+                ]
+            )
+            alert.setValue(attributedMessageText, forKey: "attributedMessage")
         }
         alert.addAction(okBtnAction)
         if let cancelTite = cancelBtnTitle {
