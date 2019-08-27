@@ -195,7 +195,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         }
         return true
     }
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     func showAlertView(title: String, message: String) {
         SVProgressHUD.dismiss()
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)

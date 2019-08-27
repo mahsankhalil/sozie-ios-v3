@@ -16,6 +16,7 @@ import TPKeyboardAvoiding
 
 class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDelegate, UITextViewDelegate {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var termsConditionTextView: UITextView!
     @IBOutlet weak var femaleBtn: UIButton!
     @IBOutlet weak var maleBtn: UIButton!
@@ -125,14 +126,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             dateOfBirtTxtFld.pickerView.date = dateOfBirtTxtFld.date!
             userNameTxtFld.text = currentUser.username
             userNameTxtFld.isUserInteractionEnabled = false
+            userNameTxtFld.textColor = UIColor(hex: "DADADA")
             if currentUser.gender == "F" {
                 applyFemaleSelection()
             }
+            userNameTxtFld.isEnabled = false
             signUpButton.setTitle("Save", for: .normal)
             termsConditionTextView.isHidden = true
+            titleLabel.text = "Profile"
         } else {
             backButton.isHidden = true
             termsConditionTextView.isHidden = false
+            titleLabel.text = "Sign Up"
         }
     }
     // MARK: - Custom Methods
@@ -254,6 +259,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             txtFld.setError(nil, animated: true)
         }
         tipView?.dismiss()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
     override func didReceiveMemoryWarning() {

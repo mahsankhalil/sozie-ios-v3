@@ -342,10 +342,12 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     @IBAction func postMakButtonTapped(_ sender: Any) {
         if let index = selectedIndex {
-            let photoEditor = self.storyboard?.instantiateViewController(withIdentifier: "PhotoEditorViewController") as! PhotoEditorViewController
-            photoEditor.photoEditorDelegate = self
-            photoEditor.image = viewModels[index].image
-            present(photoEditor, animated: true, completion: nil)
+            if let image = viewModels[index].image {
+                let photoEditor = self.storyboard?.instantiateViewController(withIdentifier: "PhotoEditorViewController") as! PhotoEditorViewController
+                photoEditor.photoEditorDelegate = self
+                photoEditor.image = image
+                present(photoEditor, animated: true, completion: nil)
+            }
         }
     }
 }
@@ -409,9 +411,9 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
                 removePictureTutorial()
                 if isFitTipsTutorialShown == false {
                     addFitTipsTutorial()
+                    self.imagesCollectionView.isUserInteractionEnabled = false
                 }
             }
-            
         }
         picker.dismiss(animated: true, completion: nil)
     }

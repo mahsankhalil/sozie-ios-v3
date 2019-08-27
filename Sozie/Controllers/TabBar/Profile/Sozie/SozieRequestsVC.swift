@@ -81,13 +81,24 @@ class SozieRequestsVC: UIViewController {
 
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = false
+            
         }
+//        ((self.parent as! ProfileTabsPageVC).view.subviews.compactMap { $0 as? UIScrollView }.first as! UIScrollView).isScrollEnabled = false
+        if let parent = self.parent as? ProfileTabsPageVC {
+            let scrollView = parent.view.subviews.compactMap { $0 as? UIScrollView }.first
+            scrollView!.isScrollEnabled = false
+        }
+        
     }
     func enableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = true
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = true
 
+        }
+        if let parent = self.parent as? ProfileTabsPageVC {
+            let scrollView = parent.view.subviews.compactMap { $0 as? UIScrollView }.first
+            scrollView!.isScrollEnabled = true
         }
     }
     override func viewDidAppear(_ animated: Bool) {

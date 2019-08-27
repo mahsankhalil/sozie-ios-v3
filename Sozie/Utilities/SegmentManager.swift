@@ -25,7 +25,7 @@ class SegmentManager: NSObject {
             dataDict["height"] = heightText
         }
         dataDict["waist_measurement"] = user.measurement?.waist
-        dataDict["hips_measurement"] = user.measurement?.hip
+        dataDict["hip_measurement"] = user.measurement?.hip
         if let bra = user.measurement?.bra, let cup = user.measurement?.cup {
             dataDict["bra_size"] = String(bra) + cup
         }

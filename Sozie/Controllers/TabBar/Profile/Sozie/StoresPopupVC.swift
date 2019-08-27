@@ -115,11 +115,29 @@ class StoresPopupVC: UIViewController {
                     if (response as! ProductResponse).products[0].locations.count != 0 {
                         self.removeTutorialVC()
                         self.showNearByCancelTutorial()
-                        self.targetProduct?.locations[0].locationAvailableQuantity = 1
+                        if self.targetProduct?.locations.count == 0 {
+                            self.makeDummyViewModels()
+                        } else {
+                            self.targetProduct?.locations[0].locationAvailableQuantity = 1
+                        }
                     }
+                }
+            } else {
+                if UserDefaultManager.getIfPostTutorialShown() == false {
+                    self.removeTutorialVC()
+                    self.showNearByCancelTutorial()
+                    self.makeDummyViewModels()
                 }
             }
         }
+    }
+    func makeDummyViewModels() {
+        viewModels.removeAll()
+        for _ in 0...4 {
+            let viewModel = StoreViewModel(count: 1, title: "Your Location", attributedTitle: nil, description: "101010 street close to you\n Your city 12345")
+            viewModels.append(viewModel)
+        }
+        self.tableView.reloadData()
     }
     class func instance(productId: String, productImage: String, progreesVC: TutorialProgressVC?) -> StoresPopupVC {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)

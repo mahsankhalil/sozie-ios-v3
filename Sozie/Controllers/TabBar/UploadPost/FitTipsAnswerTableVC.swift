@@ -56,10 +56,10 @@ class FitTipsAnswerTableVC: UIViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if arrayOfSelectedIndexes.isEmpty {
-            UtilityManager.showErrorMessage(body: "Please select options.", in: self)
+        if type == "R" && arrayOfSelectedIndexes.isEmpty {
+            UtilityManager.showMessageWith(title: "Oops!", body: "You forgot to select an option!", in: self)
         } else if type == "C" && arrayOfSelectedIndexes.count < 2 {
-            UtilityManager.showErrorMessage(body: "Please select two options.", in: self)
+            UtilityManager.showMessageWith(title: "Oops!", body: "You must select 2 options!", in: self)
         } else {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
                 var arrayOfAnswers = [String]()

@@ -1397,14 +1397,14 @@
                                 <color key="backgroundColor" white="0.94300176059999996" alpha="0.73613556329999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="up-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="E2q-kO-ewD">
-                                <rect key="frame" x="185" y="-25" width="50" height="139"/>
+                                <rect key="frame" x="185" y="-38" width="50" height="139"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="139" id="QtB-8Y-YFy"/>
                                     <constraint firstAttribute="width" constant="50" id="g1N-MG-ilL"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojr-rZ-Oyc">
-                                <rect key="frame" x="16" y="117" width="343" height="71"/>
+                                <rect key="frame" x="16" y="104" width="343" height="71"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click here to accept your first request!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TE-nN-kTg">
                                         <rect key="frame" x="37" y="8" width="268" height="55"/>
@@ -1432,7 +1432,7 @@
                             <constraint firstItem="FPP-bA-Uzw" firstAttribute="bottom" secondItem="0qB-ek-kH2" secondAttribute="bottom" id="g12-Ng-mSs"/>
                             <constraint firstItem="FPP-bA-Uzw" firstAttribute="trailing" secondItem="0qB-ek-kH2" secondAttribute="trailing" id="om2-Mm-tbI"/>
                             <constraint firstItem="FPP-bA-Uzw" firstAttribute="leading" secondItem="0qB-ek-kH2" secondAttribute="leading" id="qPK-Xb-gwz"/>
-                            <constraint firstItem="E2q-kO-ewD" firstAttribute="top" secondItem="sWx-OO-2QV" secondAttribute="top" constant="-25" id="szV-g6-4Ed"/>
+                            <constraint firstItem="E2q-kO-ewD" firstAttribute="top" secondItem="sWx-OO-2QV" secondAttribute="top" constant="-38" id="szV-g6-4Ed"/>
                             <constraint firstItem="ojr-rZ-Oyc" firstAttribute="centerX" secondItem="sWx-OO-2QV" secondAttribute="centerX" id="zjx-68-pf5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0qB-ek-kH2"/>
@@ -2553,7 +2553,7 @@ Let's go back and accept your first request</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-7o-Jme">
-                                                <rect key="frame" x="12" y="42" width="282" height="91"/>
+                                                <rect key="frame" x="12" y="42" width="282" height="104"/>
                                                 <string key="text">We are excited to have you on-board! 
 Please complete the tutorial to start receiving Sozie requests
 
@@ -2582,10 +2582,10 @@ Click on Profile below and follow the instructions Good Luck!</string>
                                 </constraints>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="down-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="puC-qk-dcC">
-                                <rect key="frame" x="303" y="514" width="50" height="65"/>
+                                <rect key="frame" x="303" y="475" width="50" height="139"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="aBo-cj-7v7"/>
-                                    <constraint firstAttribute="height" constant="65" id="yUa-S7-j1z"/>
+                                    <constraint firstAttribute="height" constant="139" id="yUa-S7-j1z"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5D-h3-5P0">
@@ -2629,7 +2629,7 @@ Click on Profile below and follow the instructions Good Luck!</string>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="2vV-g5-hBI"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="leading" secondItem="zta-YF-Rdr" secondAttribute="leading" id="4o8-5r-Q92"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="top" secondItem="hIP-b5-G4r" secondAttribute="top" id="E37-zJ-gNj"/>
-                            <constraint firstItem="P5D-h3-5P0" firstAttribute="top" secondItem="puC-qk-dcC" secondAttribute="bottom" constant="40" id="O6R-Gg-qN9"/>
+                            <constraint firstItem="P5D-h3-5P0" firstAttribute="top" secondItem="puC-qk-dcC" secondAttribute="bottom" constant="5" id="O6R-Gg-qN9"/>
                             <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="puC-qk-dcC" secondAttribute="trailing" constant="22" id="ba4-Ac-e33"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="kRm-WB-tuL"/>
                             <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="P5D-h3-5P0" secondAttribute="trailing" constant="2" id="shD-ZZ-IwB"/>
@@ -2639,6 +2639,7 @@ Click on Profile below and follow the instructions Good Luck!</string>
                     </view>
                     <connections>
                         <outlet property="bottomViewWidthConstraint" destination="A2B-lf-Jxw" id="3Mb-YG-5xp"/>
+                        <outlet property="imageView" destination="puC-qk-dcC" id="tYP-V8-vBd"/>
                         <outlet property="nameLabel" destination="Dim-Qj-U5m" id="GKp-7S-AKW"/>
                         <outlet property="profileButton" destination="0lq-S2-jPI" id="i8n-Ss-Ln4"/>
                         <outlet property="welcomeNoteView" destination="dO7-NL-zsO" id="VdJ-JH-1L6"/>

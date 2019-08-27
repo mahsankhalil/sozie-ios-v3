@@ -12,6 +12,7 @@ protocol BrowseWelcomeDelegate: class {
 }
 class BrowseWelcomeVC: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var bottomViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var welcomeNoteView: UIView!
@@ -27,6 +28,11 @@ class BrowseWelcomeVC: UIViewController {
         bottomViewWidthConstraint.constant = (UIScreen.main.bounds.size.width - 15)/4
         if let firstName = UserDefaultManager.getCurrentUserObject()?.firstName {
             nameLabel.text = "Hi " + firstName + ","
+        }
+        if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "Down-Arrow", withExtension: "gif")!)
+        {
+            let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
+            imageView.image = arrowGifImage
         }
     }
 
