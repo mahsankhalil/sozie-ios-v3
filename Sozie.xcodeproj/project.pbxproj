@@ -200,6 +200,7 @@
 		61F0285222CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0285122CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift */; };
 		61F0285422CCBE4F00B3BB4B /* FitTipsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0285322CCBE4F00B3BB4B /* FitTipsNavigationController.swift */; };
 		61F0285622CCC85800B3BB4B /* FitTipsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0285522CCC85800B3BB4B /* FitTipsViewModel.swift */; };
+		61F1846B2317D34A001E7A14 /* ConfirmEmailCashoutPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F1846A2317D34A001E7A14 /* ConfirmEmailCashoutPopUp.swift */; };
 		61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F35F402217FBF7007B7A44 /* CountViewModeling.swift */; };
 		61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
@@ -447,6 +448,7 @@
 		61F0285122CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsAnswerPickerVC.swift; sourceTree = "<group>"; };
 		61F0285322CCBE4F00B3BB4B /* FitTipsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsNavigationController.swift; sourceTree = "<group>"; };
 		61F0285522CCC85800B3BB4B /* FitTipsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsViewModel.swift; sourceTree = "<group>"; };
+		61F1846A2317D34A001E7A14 /* ConfirmEmailCashoutPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEmailCashoutPopUp.swift; sourceTree = "<group>"; };
 		61F35F402217FBF7007B7A44 /* CountViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewModeling.swift; sourceTree = "<group>"; };
 		61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SEGOEUII_1.TTF; sourceTree = "<group>"; };
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -701,6 +703,7 @@
 				615A039422365FD300E64C23 /* ChangePasswordVC.swift */,
 				614374DD22369A5400DBD295 /* BlockListVC.swift */,
 				614374E122390EAE00DBD295 /* MyBalanceVC.swift */,
+				61F1846A2317D34A001E7A14 /* ConfirmEmailCashoutPopUp.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1400,6 +1403,7 @@
 				61C40D13221EB35D00FBD7FF /* RequestTableViewCell.swift in Sources */,
 				611E411B22145BF2007B1C62 /* ProductDetailCollectionViewCell.swift in Sources */,
 				69854D7121C8D9C70092672D /* DZGradientButton.swift in Sources */,
+				61F1846B2317D34A001E7A14 /* ConfirmEmailCashoutPopUp.swift in Sources */,
 				61064598222E77BE00AE41C3 /* Image.swift in Sources */,
 				613C46202262134400AF77DF /* ThirdSozieWelcomeVC.swift in Sources */,
 				69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */,
@@ -1521,6 +1525,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1556,7 +1561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1611,6 +1616,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1672,6 +1678,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1701,7 +1708,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1729,7 +1736,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
