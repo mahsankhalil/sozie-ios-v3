@@ -47,10 +47,10 @@ class SozieRequestErrorPopUp: UIViewController {
     }
     */
     @IBAction func closeButtonTapped(_ sender: Any) {
-        self.closeHandler!()
+        self.closeHandler?()
     }
     @IBAction func restartTutorialButtonTapped(_ sender: Any) {
-        self.resetTutorialHandler!()
+        self.resetTutorialHandler?()
     }
     
 }

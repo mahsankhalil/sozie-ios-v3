@@ -37,7 +37,6 @@ class BrowseWelcomeVC: UIViewController {
     }
 
     @IBAction func profileButtonTapped(_ sender: Any) {
-        UserDefaultManager.setBrowserTutorialShown()
         delegate?.profileButtonTapped()
     }
 

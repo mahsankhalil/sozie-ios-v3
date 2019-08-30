@@ -267,6 +267,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
             SVProgressHUD.dismiss()
             if isSuccess {
                 if isTutorial {
+                    UserDefaultManager.setBrowserTutorialShown()
                     self.uploadTutorialData()
                 } else {
                     SegmentManager.createEventRequestSubmitted()

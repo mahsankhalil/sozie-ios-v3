@@ -2581,7 +2581,7 @@ Click on Profile below and follow the instructions Good Luck!</string>
                                     <constraint firstItem="dO7-NL-zsO" firstAttribute="centerY" secondItem="m2L-dq-yAI" secondAttribute="centerY" id="WGs-1J-29M"/>
                                 </constraints>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="down-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="puC-qk-dcC">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="down-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="puC-qk-dcC">
                                 <rect key="frame" x="303" y="475" width="50" height="139"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="aBo-cj-7v7"/>

@@ -36,11 +36,7 @@ class StoresPopupVC: UIViewController {
                     let viewModel = StoreViewModel(count: location.locationAvailableQuantity, title: location.storeName, attributedTitle: nil, description: location.storeAddress)
                     viewModels.append(viewModel)
                 }
-                if locations.count == 0 {
-                    self.noDataFoundLabel.isHidden = false
-                } else {
-                    self.noDataFoundLabel.isHidden = true
-                }
+                self.noDataFoundLabel.isHidden = (locations.count != 0)
                 self.tableView.reloadData()
             }
         }

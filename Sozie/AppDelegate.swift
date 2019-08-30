@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if UserDefaultManager.checkIfMeasurementEmpty() {
                 self.showMeasuremnetVC()
             } else {
+                fetchUserDetail()
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
                 self.window?.rootViewController = rootViewController
@@ -64,6 +65,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let user = UserDefaultManager.getCurrentUserObject() {
             SegmentManager.createEntity(user: user)
         }
+    }
+    func fetchUserDetail() {
+        if let userId = UserDefaultManager.getCurrentUserId() {
+            ServerManager.sharedInstance.getUserProfile(userId: userId) { (isSuccess, response) in
+                if isSuccess {
+                    let user = response as! User
+                    UserDefaultManager.updateUserObject(user: user)
+                }
+            }
+        }
+        
     }
     func setupSegment() {
         let configuration = SEGAnalyticsConfiguration.init(writeKey: "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI")

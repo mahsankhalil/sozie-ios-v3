@@ -355,7 +355,13 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         }
         if let currentCell = cell as? TargetRequestTableViewCell {
             currentCell.delegate = self
+            if isFromTutorial {
+                currentCell.cancelButton.isUserInteractionEnabled = false
+            } else {
+                currentCell.cancelButton.isUserInteractionEnabled = true
+            }
         }
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -391,6 +397,8 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     self.serverParams.removeAll()
                     self.requests.removeAll()
                     SVProgressHUD.show()
+                    let appDel = UIApplication.shared.delegate as! AppDelegate
+                    appDel.fetchUserDetail()
                     self.fetchAllSozieRequests()
                 }
             }
@@ -469,6 +477,12 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
         if currentRequest?.isAccepted == true {
+            if let user = UserDefaultManager.getCurrentUserObject() {
+                if user.isBanned == true {
+                    UtilityManager.showMessageWith(title: "Oops!", body: "We are sorry to inform you that you have been banned from using Sozie for any 2 of the following reasons:\n- Cancelling an accepted request\n- Not completing an accepted request\n- Having a completed request rejected\n The ban will be lifted after 2 weeks at which point we will send you an email so that you may start accepting requests again.\n If you feel that there was an error, please email us at theteam@sozie.com\n Thank you", in: self, leftAligned: true)
+                    return
+                }
+            }
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
                     uploadPostVC.currentRequest = currentRequest
