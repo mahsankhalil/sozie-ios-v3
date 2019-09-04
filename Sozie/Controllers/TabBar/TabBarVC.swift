@@ -23,6 +23,8 @@ class TabBarVC: UITabBarController {
         }
         self.delegate = self
         self.view.backgroundColor = UIColor.white
+        Intercom.setLauncherVisible(true)
+        Intercom.setBottomPadding(30.0)
     }
 
     // MARK: - Custom Methods
@@ -72,6 +74,11 @@ extension TabBarVC: UITabBarControllerDelegate {
                     }
                     currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
                 }
+            } else if self.customizableViewControllers?.index(of: viewController) == 3 {
+                if UserDefaultManager.getIfBrowseTutorialShown() == false {
+                    UserDefaultManager.setBrowserTutorialShown()
+                }
+
             }
         }
         return true

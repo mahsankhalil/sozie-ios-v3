@@ -69,6 +69,11 @@ class SozieRequestsVC: UIViewController {
     @objc func resetFirstTime() {
         serverParams.removeAll()
         requests.removeAll()
+        progressTutorialVC = nil
+        self.ifInStockTutorialShown = false
+        ifAcceptRequestTutorialShown = false
+        ifUploadPostTutorialShown = false
+        SVProgressHUD.show()
         self.fetchAllSozieRequests()
     }
     func disableRootButtons() {
@@ -76,13 +81,24 @@ class SozieRequestsVC: UIViewController {
 
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = false
+            
         }
+//        ((self.parent as! ProfileTabsPageVC).view.subviews.compactMap { $0 as? UIScrollView }.first as! UIScrollView).isScrollEnabled = false
+        if let parent = self.parent as? ProfileTabsPageVC {
+            let scrollView = parent.view.subviews.compactMap { $0 as? UIScrollView }.first
+            scrollView!.isScrollEnabled = false
+        }
+        
     }
     func enableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = true
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = true
 
+        }
+        if let parent = self.parent as? ProfileTabsPageVC {
+            let scrollView = parent.view.subviews.compactMap { $0 as? UIScrollView }.first
+            scrollView!.isScrollEnabled = true
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +134,7 @@ class SozieRequestsVC: UIViewController {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
+                    self.questionMarkButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.acceptButton.isEnabled = false
                     }
@@ -128,6 +145,7 @@ class SozieRequestsVC: UIViewController {
                     tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
                     profileParentVC.view.addSubview(tutVC.view)
                     ifInStockTutorialShown = true
+                    isFromTutorial = true
                 }
             }
         }
@@ -151,6 +169,7 @@ class SozieRequestsVC: UIViewController {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
+                    self.questionMarkButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
@@ -182,11 +201,12 @@ class SozieRequestsVC: UIViewController {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
                 progressTutorialVC?.updateProgress(progress: 5.0/8.0)
-                acceptRequestTutorialVC?.descriptionString = "Now let's fulfill the request.\nYou have 12 hours. Click here"
+                acceptRequestTutorialVC?.descriptionString = "Now let's fulfill the request.\nClick here"
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
+                    self.questionMarkButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
@@ -211,10 +231,12 @@ class SozieRequestsVC: UIViewController {
         }
         self.tableView.isScrollEnabled = true
         self.tableView.allowsSelection = true
+        self.questionMarkButton.isUserInteractionEnabled = true
     }
     @objc func reloadRequestData() {
         self.requests.removeAll()
         serverParams.removeAll()
+        SVProgressHUD.show()
         fetchAllSozieRequests()
     }
     @objc func loadNextPage() {
@@ -228,7 +250,6 @@ class SozieRequestsVC: UIViewController {
     }
 
     func fetchAllSozieRequests() {
-        SVProgressHUD.show()
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             self.tableView.bottomRefreshControl?.endRefreshing()
@@ -247,7 +268,7 @@ class SozieRequestsVC: UIViewController {
             if var user = UserDefaultManager.getCurrentUserObject() {
                 user.isSuperUser = true
                 let dummyProduct = Product(productId: 49263387, productName: "Women's Plus Size Sleeveless Square Neck Denim Dress - Universal Thread Indigo X, Blue", brandId: 10, imageURL: "https://target.scene7.com/is/image/Target/GUEST_bd675863-a930-4bf2-b855-c342457004e4?wid=1000&hei=1000", description: "Look effortlessly chic while keeping your cool for any occasion wearing this Sleeveless Square-Neck Denim Dress from Universal Thread. This indigo midi dress comes with a front tie that lets you find your ideal fit, and it's cut in a relaxed silhouette for comfortable wear. In a sleeveless design made from a 100 percent cotton fabric with side slits, this sleeveless denim midi dress keeps you feeling airy, light and comfy throughout your day. Pair it with espadrilles and a straw bucket bag for a casual day out or with strappy heels and drop earrings for a nighttime twist. Size: X. Color: Blue. Gender: Female. Age Group: Adult.", merchantProductId: "54441283", productStringId: "bd675863a9304bf2b855c342457004e4", searchPrice: 32.99, currency: "USD", merchantImageURL: "")
-                let dummyRequest = SozieRequest(requestId: 361, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil)
+                let dummyRequest = SozieRequest(requestId: 700, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil)
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
@@ -260,6 +281,15 @@ class SozieRequestsVC: UIViewController {
 //            if UserDefaultManager.getIfRequestTutorialShown() {
             populateDummyRequests()
             self.showInStockTutorial()
+            if let tabBarContrlr = self.parent?.parent?.parent?.parent as? TabBarVC {
+                tabBarContrlr.tabBar.isUserInteractionEnabled = false
+                if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![3] as? UITabBarItem {
+                    firstItem.isEnabled = false
+                    secondItem.isEnabled = false
+                    thirdItem.isEnabled = false
+                    fourthItem.isEnabled = false
+                }
+            }
             if let tutorialView = self.acceptRequestTutorialVC?.view {
                 if let parentView = self.parent?.parent?.view {
                     if tutorialView.isDescendant(of: parentView) && self.ifUploadPostTutorialShown == true {
@@ -325,7 +355,13 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         }
         if let currentCell = cell as? TargetRequestTableViewCell {
             currentCell.delegate = self
+            if isFromTutorial {
+                currentCell.cancelButton.isUserInteractionEnabled = false
+            } else {
+                currentCell.cancelButton.isUserInteractionEnabled = true
+            }
         }
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -340,7 +376,12 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func cancelRequestButtonTapped(button: UIButton) {
-        let currentRequest = requests[button.tag]
+        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
+            self.cancelRequest(button: button)
+        }
+    }
+    func cancelRequest(button: UIButton) {
+        let currentRequest = self.requests[button.tag]
         if let acceptedRequestId = currentRequest.acceptedRequest?.acceptedId {
             SVProgressHUD.show()
             ServerManager.sharedInstance.cancelRequest(requestId: acceptedRequestId) { (isSuccess, _) in
@@ -355,6 +396,9 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     }
                     self.serverParams.removeAll()
                     self.requests.removeAll()
+                    SVProgressHUD.show()
+                    let appDel = UIApplication.shared.delegate as! AppDelegate
+                    appDel.fetchUserDetail()
                     self.fetchAllSozieRequests()
                 }
             }
@@ -405,6 +449,9 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     let user = response as! User
                     UserDefaultManager.updateUserObject(user: user)
                     if user.isTutorialApproved == false {
+                        if self.isFromTutorial {
+                            self.nearByStorButtonAction(button: button)
+                        }
                         return
                     } else {
                         self.nearByStorButtonAction(button: button)
@@ -430,6 +477,12 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func acceptRequestButtonTapped(button: UIButton) {
         currentRequest = requests[button.tag]
         if currentRequest?.isAccepted == true {
+            if let user = UserDefaultManager.getCurrentUserObject() {
+                if user.isBanned == true {
+                    UtilityManager.showMessageWith(title: "Oops!", body: "We are sorry to inform you that you have been banned from using Sozie for any 2 of the following reasons:\n- Cancelling an accepted request\n- Not completing an accepted request\n- Having a completed request rejected\n The ban will be lifted after 2 weeks at which point we will send you an email so that you may start accepting requests again.\n If you feel that there was an error, please email us at theteam@sozie.com\n Thank you", in: self, leftAligned: true)
+                    return
+                }
+            }
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
                     uploadPostVC.currentRequest = currentRequest
@@ -460,11 +513,42 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 if isSuccess {
                     self.serverParams.removeAll()
                     self.requests.removeAll()
+                    SVProgressHUD.show()
                     self.fetchAllSozieRequests()
                 } else {
-                    UtilityManager.showMessageWith(title: "Hold on tight!", body: (response as! Error).localizedDescription, in: self)
+                    let error = (response as! Error).localizedDescription
+                    if let errorDict = error.getColonSeparatedErrorDetails() {
+                        if let title = errorDict["title"] as? String , let description = errorDict["description"] as? String {
+                            if title == "Tutorial Rejected" {
+                                UserDefaultManager.makeUserGuideEnable()
+                                UserDefaultManager.removeAllUserGuidesShown()
+                                self.showResetTutorialPopup(text: description)
+                            } else if title == "Oops!" {
+                                UtilityManager.showMessageWith(title: title, body: description, in: self, leftAligned: true)
+                            } else {
+                                UtilityManager.showMessageWith(title: title, body: description, in: self)
+                            }
+                        } else {
+                            UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                        }
+                    } else {
+                        UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                    }
                 }
             }
+        }
+    }
+    func showResetTutorialPopup(text: String) {
+        let popUpInstnc = SozieRequestErrorPopUp.instance(description: text)
+        let popUpVC = PopupController
+            .create(self.tabBarController?.navigationController ?? self)
+            .show(popUpInstnc)
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+        popUpInstnc.resetTutorialHandler = { [] in
+            popUpVC.dismiss()
+            self.resetFirstTime()
         }
     }
 }
@@ -504,8 +588,10 @@ extension SozieRequestsVC: TutorialProgressDelegate {
         self.hideInStockTutorial()
         self.hideUploadPostTutorial()
         self.hideAcceptRequestTutorial()
+        self.questionMarkButton.isUserInteractionEnabled = true
         serverParams.removeAll()
         requests.removeAll()
+        SVProgressHUD.show()
         fetchAllSozieRequests()
     }
 }

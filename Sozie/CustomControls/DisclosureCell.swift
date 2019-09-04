@@ -33,6 +33,18 @@ extension DisclosureCell: CellConfigurable {
                 titleLabel.attributedText = attributedTitle
             }
         }
+        if let model = viewModel as? FitTipsViewModel {
+            if model.isFromFitTips {
+                if let selectionModel = viewModel as? SelectionProviding {
+                    if selectionModel.isSelected {
+                        self.titleLabel.textColor = UIColor(hex: "FC8787")
+                    } else {
+                        self.titleLabel.textColor = UIColor(hex: "888888")
+                    }
+                }
+            }
+        }
+        
         // Check for CheckmarkViewModeling
     }
 }

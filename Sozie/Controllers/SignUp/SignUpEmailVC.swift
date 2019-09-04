@@ -93,6 +93,10 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         let txtFld  = textField as! MFTextField
         txtFld.setError(nil, animated: true)
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
     // MARK: - Navigation
 

@@ -10,7 +10,7 @@ import UIKit
 import MaterialTextField
 
 protocol CustomPickerTextFieldDelegate: class {
-    func customPickerValueChanges(value1: String?, value2: String?)
+    func customPickerValueChanges(instance: CustomPickerTextField, value1: String?, value2: String?)
 }
 
 class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -82,7 +82,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         if let values2 = values2, values2.count > 0 {
             value2 = values2[pickerView.selectedRow(inComponent: 1)]
         }
-        delegate.customPickerValueChanges(value1: value1, value2: value2)
+        delegate.customPickerValueChanges(instance: self ,value1: value1, value2: value2)
     }
 
     // MARK: - PickerVIew Delegates

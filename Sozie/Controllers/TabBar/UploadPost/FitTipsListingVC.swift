@@ -18,7 +18,10 @@ class FitTipsListingVC: UIViewController {
         didSet {
             viewModels.removeAll()
             for fitTip in fitTips {
-                let viewModel = FitTipsViewModel(title: fitTip.label, attributedTitle: nil, isSelected: false)
+                var viewModel = FitTipsViewModel(title: fitTip.label, attributedTitle: nil, isSelected: false)
+                if checkIfFitTipAnswered(fitTip: fitTip) {
+                    viewModel.isSelected = true
+                }
                 viewModels.append(viewModel)
             }
         }
@@ -29,7 +32,39 @@ class FitTipsListingVC: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    func checkIfFitTipAnswered(fitTip: FitTips) -> Bool {
+        
+        for question in fitTip.question {
+            if question.type == "R" || question.type == "C" {
+                for option in question.options {
+                    if let answer = question.answer {
+                        if checkIfAnswered(text: option.optionText, answer: answer) {
+                            return true
+                        }
+                    }
+                }
 
+            } else if question.type == "T" {
+                if let answer = question.answer {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    func checkIfAnswered(text: String, answer: String) -> Bool {
+        let answers = answer.components(separatedBy: ",")
+        for currentAnswer in answers {
+            if currentAnswer == text {
+                return true
+            }
+        }
+        return false
+    }
     @IBAction func doneButtonTapped(_ sender: Any) {
     }
 

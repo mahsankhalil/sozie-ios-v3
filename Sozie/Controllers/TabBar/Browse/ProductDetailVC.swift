@@ -520,13 +520,13 @@ extension ProductDetailVC: UIScrollViewDelegate {
 }
 extension ProductDetailVC: PostCollectionViewCellDelegate {
     func profileButtonTapped(button: UIButton) {
-        if let posts = self.currentProduct?.posts {
-            let sozieProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SozieProfileVC") as! SozieProfileVC
-            let currentUser = posts[button.tag - 1].user
-            currentPostId = posts[button.tag - 1].postId
-            sozieProfileVC.user = currentUser
-            self.navigationController?.pushViewController(sozieProfileVC, animated: true)
-        }
+//        if let posts = self.currentProduct?.posts {
+//            let sozieProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SozieProfileVC") as! SozieProfileVC
+//            let currentUser = posts[button.tag - 1].user
+//            currentPostId = posts[button.tag - 1].postId
+//            sozieProfileVC.user = currentUser
+//            self.navigationController?.pushViewController(sozieProfileVC, animated: true)
+//        }
     }
 
     func cameraButtonTapped(button: UIButton) {

@@ -81,6 +81,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 _ = UserDefaultManager.saveLoginResponse(loginResp: res)
 //                UtilityManager.registerUserOnIntercom()
                 if let user = UserDefaultManager.getCurrentUserObject() {
+                    SegmentManager.createEntity(user: user)
                     if let tutorialCompleted = user.tutorialCompleted {
                         if tutorialCompleted == false {
                             UserDefaultManager.removeAllUserGuidesShown()
@@ -194,7 +195,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         }
         return true
     }
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     func showAlertView(title: String, message: String) {
         SVProgressHUD.dismiss()
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)

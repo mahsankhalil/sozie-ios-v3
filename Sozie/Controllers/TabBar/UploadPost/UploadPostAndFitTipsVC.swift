@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import TPKeyboardAvoiding
+//import FirebaseAnalytics
 protocol UploadPostAndFitTipsDelegate: class {
     func uploadPostInfoButtonTapped()
 }
@@ -29,7 +30,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     @IBOutlet weak var fitTipsCheckMark: UIImageView!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     var progressTutorialVC: TutorialProgressVC?
-    
+    var popUpVC: PopupController?
     var selectedSizeValue: String?
     var currentRequest: SozieRequest?
     var currentProduct: Product?
@@ -42,6 +43,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var fitTipsTutorialVC: AddFitTipsTutorialVC?
     var submitTutorialVC: SubmitPostTutorialVC?
     var isTutorialShowing: Bool = false
+    var isFitTipsTutorialShown: Bool = false
     var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +75,15 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     func addPicturesTutorial() {
         picturesTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "SelectPicturesTutorialVC") as? SelectPicturesTutorialVC
+//        if let tabBarContrlr = self.parent?.parent as? TabBarVC {
+//            tabBarContrlr.tabBar.isUserInteractionEnabled = false
+//            if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem {
+//                firstItem.isEnabled = false
+//                secondItem.isEnabled = false
+//                thirdItem.isEnabled = false
+//                fourthItem.isEnabled = false
+//            }
+//        }
         progressTutorialVC?.updateProgress(progress: 6.0/8.0)
         if let tutVC = picturesTutorialVC {
             tutVC.view.frame.origin.y = 215.0
@@ -88,10 +99,11 @@ class UploadPostAndFitTipsVC: BaseViewController {
         fitTipsTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "AddFitTipsTutorialVC") as? AddFitTipsTutorialVC
         progressTutorialVC?.updateProgress(progress: 7.0/8.0)
         if let tutVC = fitTipsTutorialVC {
-            tutVC.view.frame.origin.y = 398
-            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 165)
+            tutVC.view.frame.origin.y = 398 - 74
+            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 165 + 74)
             self.scrollView.addSubview(tutVC.view)
             self.bottomButtom.isEnabled = false
+            isFitTipsTutorialShown = true
         }
     }
     func removeFitTipsTutorial() {
@@ -101,8 +113,8 @@ class UploadPostAndFitTipsVC: BaseViewController {
         submitTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "SubmitPostTutorialVC") as? SubmitPostTutorialVC
         progressTutorialVC?.updateProgress(progress: 8.0/8.0)
         if let tutVC = submitTutorialVC {
-            tutVC.view.frame.origin.y = 430
-            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 215)
+            tutVC.view.frame.origin.y = 430 - 74
+            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 215 + 74)
             self.scrollView.addSubview(tutVC.view)
             self.bottomButtom.isEnabled = true
         }
@@ -255,8 +267,10 @@ class UploadPostAndFitTipsVC: BaseViewController {
             SVProgressHUD.dismiss()
             if isSuccess {
                 if isTutorial {
+                    UserDefaultManager.setBrowserTutorialShown()
                     self.uploadTutorialData()
                 } else {
+                    SegmentManager.createEventRequestSubmitted()
                     UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
                     self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
                 }
@@ -282,6 +296,17 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 if var user = UserDefaultManager.getCurrentUserObject() {
                     user.isTutorialApproved = true
                     UserDefaultManager.updateUserObject(user: user)
+//                    Analytics.logEvent("Tutorial-Completed", parameters: ["email": user.email])
+                    SegmentManager.createEventTutorialCompleted()
+                }
+                if let tabBarContrlr = self.parent?.parent as? TabBarVC {
+                    tabBarContrlr.tabBar.isUserInteractionEnabled = true
+                    if let firstItem = tabBarContrlr.tabBar.items?[0], let secondItem = tabBarContrlr.tabBar.items?[1], let thirdItem = tabBarContrlr.tabBar.items?[2], let fourthItem = tabBarContrlr.tabBar.items?[3] {
+                        firstItem.isEnabled = true
+                        secondItem.isEnabled = true
+                        thirdItem.isEnabled = true
+                        fourthItem.isEnabled = true
+                    }
                 }
                 UserDefaultManager.setPostTutorialShown()
                 self.progressTutorialVC?.view.removeFromSuperview()
@@ -318,10 +343,12 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     @IBAction func postMakButtonTapped(_ sender: Any) {
         if let index = selectedIndex {
-            let photoEditor = self.storyboard?.instantiateViewController(withIdentifier: "PhotoEditorViewController") as! PhotoEditorViewController
-            photoEditor.photoEditorDelegate = self
-            photoEditor.image = viewModels[index].image
-            present(photoEditor, animated: true, completion: nil)
+            if let image = viewModels[index].image {
+                let photoEditor = self.storyboard?.instantiateViewController(withIdentifier: "PhotoEditorViewController") as! PhotoEditorViewController
+                photoEditor.photoEditorDelegate = self
+                photoEditor.image = image
+                present(photoEditor, animated: true, completion: nil)
+            }
         }
     }
 }
@@ -383,9 +410,11 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         if checkIfAllImagesUplaoded() {
             if UserDefaultManager.getIfPostTutorialShown() == false {
                 removePictureTutorial()
-                addFitTipsTutorial()
+                if isFitTipsTutorialShown == false {
+                    addFitTipsTutorial()
+                    self.imagesCollectionView.isUserInteractionEnabled = false
+                }
             }
-            
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -411,35 +440,35 @@ extension UploadPostAndFitTipsVC: UITextFieldDelegate {
         if textField == sizeTextField {
             let popUpInstnc = SizePickerPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
             popUpInstnc.delegate = self
-            let popUpVC = PopupController
+            popUpVC = PopupController
                 .create(self.tabBarController?.navigationController ?? self)
                 .show(popUpInstnc)
             let options = PopupCustomOption.layout(.bottom)
-            _ = popUpVC.customize([options])
-            _ = popUpVC.didCloseHandler { (_) in
+            _ = popUpVC?.customize([options])
+            _ = popUpVC?.didCloseHandler { (_) in
                 self.updateViews()
             }
             popUpInstnc.closeHandler = { []  in
-                popUpVC.dismiss()
+                self.popUpVC?.dismiss()
             }
         } else if textField == fitTipsTextField {
             if let listOfFitTips = fitTips {
                 let popUpInstnc = FitTipsNavigationController.instance(fitTips: listOfFitTips)
                 popUpInstnc.delegate = self
-                let popUpVC = PopupController
+                popUpVC = PopupController
                     .create(self.tabBarController?.navigationController ?? self)
                     .show(popUpInstnc)
                 let options = PopupCustomOption.layout(.bottom)
-                _ = popUpVC.customize([options, .movesAlongWithKeyboard(true)])
-                _ = popUpVC.didCloseHandler { (_) in
+                _ = popUpVC?.customize([options, .movesAlongWithKeyboard(true)])
+                _ = popUpVC?.didCloseHandler { (_) in
                     self.updateViews()
                 }
                 popUpInstnc.closeHandler = { []  in
-                    popUpVC.dismiss()
+                    self.popUpVC?.dismiss()
                 }
                 popUpInstnc.navigationHandler = { []  in
                     UIView.animate(withDuration: 0.6, animations: {
-                        popUpVC.updatePopUpSize()
+                        self.popUpVC?.updatePopUpSize()
                     })
                 }
             }
@@ -459,5 +488,6 @@ extension UploadPostAndFitTipsVC: TutorialProgressDelegate {
         self.removePictureTutorial()
         self.addSubmitTutorial()
         self.navigationController?.popViewController(animated: true)
+        self.popUpVC?.dismiss()
     }
 }

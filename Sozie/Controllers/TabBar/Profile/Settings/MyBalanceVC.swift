@@ -56,14 +56,29 @@ class MyBalanceVC: UIViewController {
             UtilityManager.showMessageWith(title: "Insufficient Amount", body: "To cash out you need a minimum of $10", in: self)
             return
         }
-        SVProgressHUD.show()
-        ServerManager.sharedInstance.cashOut(params: [:]) { (isSuccess, response) in
-            SVProgressHUD.dismiss()
-            if isSuccess {
-                UtilityManager.showMessageWith(title: "Success!", body: (response as! ValidateRespose).detail, in: self)
-            } else {
-                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
-            }
+        
+        let popUpInstnc = ConfirmEmailCashoutPopUp.instance()
+        let popUpVC = PopupController
+            .create(self)
+            .show(popUpInstnc)
+        _ = popUpVC.customize([.movesAlongWithKeyboard(true)])
+        _ = popUpVC.didCloseHandler { (_) in
         }
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+            self.fetchDataFromServer()
+        }
+       
+        
+        
+//        SVProgressHUD.show()
+//        ServerManager.sharedInstance.cashOut(params: [:]) { (isSuccess, response) in
+//            SVProgressHUD.dismiss()
+//            if isSuccess {
+//                UtilityManager.showMessageWith(title: "Success!", body: (response as! ValidateRespose).detail, in: self)
+//            } else {
+//                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+//            }
+//        }
     }
 }

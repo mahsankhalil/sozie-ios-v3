@@ -26,9 +26,11 @@ class TitleTextFieldCell: UITableViewCell {
     }
 }
 extension TitleTextFieldCell: CustomPickerTextFieldDelegate {
-    func customPickerValueChanges(value1: String?, value2: String?) {
+    func customPickerValueChanges(instance: CustomPickerTextField, value1: String?, value2: String?) {
         if let text = value1 {
-            textField.text = text
+            if text != "" {
+                textField.text = text
+            }
             textFieldDelegate?.textFieldDidUpdate(self, text: text)
         }
     }
@@ -40,8 +42,10 @@ extension TitleTextFieldCell: CellConfigurable {
 //            self.buttonTappedDelegate = model.buttonTappedDelegate
             self.textFieldDelegate = model.textFieldDelegate
             if let text = model.text {
-                textField.currentValue1 = text
-                textField.text = text
+                if text != "" {
+                    textField.currentValue1 = text
+                    textField.text = text
+                }
             }
         }
         if let errorModel = viewModel as? ErrorViewModeling {

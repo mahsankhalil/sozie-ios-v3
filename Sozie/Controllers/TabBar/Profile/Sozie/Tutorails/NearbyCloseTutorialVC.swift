@@ -10,6 +10,7 @@ import UIKit
 
 class NearbyCloseTutorialVC: UIViewController {
     @IBOutlet weak var labelView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,6 +18,11 @@ class NearbyCloseTutorialVC: UIViewController {
         labelView.layer.borderWidth = 1.0
         labelView.layer.cornerRadius = 3.0
         labelView.layer.borderColor = UIColor(hex: "9C9C9C").cgColor
+        if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "Arrow-Gif", withExtension: "gif")!)
+        {
+            let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
+            imageView.image = arrowGifImage
+        }
     }
     /*
     // MARK: - Navigation

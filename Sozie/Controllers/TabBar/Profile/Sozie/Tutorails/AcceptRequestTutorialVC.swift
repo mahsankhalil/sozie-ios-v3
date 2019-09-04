@@ -9,6 +9,7 @@
 import UIKit
 
 class AcceptRequestTutorialVC: UIViewController {
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var labelView: UIView!
     var descriptionString: String?
@@ -21,6 +22,11 @@ class AcceptRequestTutorialVC: UIViewController {
         labelView.layer.borderColor = UIColor(hex: "9C9C9C").cgColor
         if let string = descriptionString {
             textLabel.text = string
+        }
+        if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "Arrow-Gif", withExtension: "gif")!)
+        {
+            let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
+            imageView.image = arrowGifImage
         }
     }
     /*

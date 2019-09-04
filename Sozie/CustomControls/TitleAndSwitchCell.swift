@@ -38,6 +38,19 @@ extension TitleAndSwitchCell: CellConfigurable {
         if let titleModel = viewModel as? TitleViewModeling {
             if let title = titleModel.title {
                 titleLabel.text = title
+                if title == "Reset Tutorial" {
+                    if let user = UserDefaultManager.getCurrentUserObject() {
+                        if user.tutorialCompleted == true && user.isTutorialApproved == nil {
+                            switchControl.isUserInteractionEnabled = false
+                        } else if user.isTutorialApproved == true {
+                            switchControl.isUserInteractionEnabled = false
+                        } else if user.isTutorialApproved == false {
+                            switchControl.isUserInteractionEnabled = true
+                        } else {
+                            switchControl.isUserInteractionEnabled = true
+                        }
+                    }
+                }
             }
             if let attributedTitle = titleModel.attributedTitle {
                 titleLabel.attributedText = attributedTitle
