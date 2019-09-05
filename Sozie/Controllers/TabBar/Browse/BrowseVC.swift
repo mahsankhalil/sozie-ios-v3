@@ -88,8 +88,6 @@ class BrowseVC: BaseViewController {
         self.brandsCollectionVu.infiniteScrollDelegate = self
         _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         setupSozieLogoNavBar()
-        
-        
 //        if let userType = UserDefaultManager.getCurrentUserType() {
 //            if userType == UserType.shopper.rawValue {
 //                setupSozieLogoNavBar()

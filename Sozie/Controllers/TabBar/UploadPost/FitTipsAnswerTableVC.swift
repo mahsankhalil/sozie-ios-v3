@@ -44,10 +44,8 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     func checkIfAnswered(text: String, answer: String) -> Bool {
         let answers = answer.components(separatedBy: ",")
-        for currentAnswer in answers {
-            if currentAnswer == text {
+        for currentAnswer in answers where currentAnswer == text {
                 return true
-            }
         }
         return false
     }
@@ -202,6 +200,5 @@ extension FitTipsAnswerTableVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
     }
 }

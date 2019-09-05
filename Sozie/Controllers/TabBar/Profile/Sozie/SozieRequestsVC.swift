@@ -78,10 +78,8 @@ class SozieRequestsVC: UIViewController {
     }
     func disableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
-
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = false
-            
         }
 //        ((self.parent as! ProfileTabsPageVC).view.subviews.compactMap { $0 as? UIScrollView }.first as! UIScrollView).isScrollEnabled = false
         if let parent = self.parent as? ProfileTabsPageVC {
@@ -201,7 +199,7 @@ class SozieRequestsVC: UIViewController {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
                 progressTutorialVC?.updateProgress(progress: 5.0/8.0)
-                acceptRequestTutorialVC?.descriptionString = "Now let's fulfill the request.\nClick here"
+                acceptRequestTutorialVC?.descriptionString = "Now let's fulful the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    "
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
@@ -361,7 +359,6 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
                 currentCell.cancelButton.isUserInteractionEnabled = true
             }
         }
-        
         cell.selectionStyle = .none
         return cell
     }
@@ -371,6 +368,11 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else if viewModels[indexPath.row].isSelected == false {
             performSegue(withIdentifier: "toProductDetail", sender: self)
+        }
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (requests.count < 10 && indexPath.row == requests.count - 2) || (indexPath.row == requests.count - 10) {
+            loadNextPage()
         }
     }
 }
@@ -518,7 +520,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 } else {
                     let error = (response as! Error).localizedDescription
                     if let errorDict = error.getColonSeparatedErrorDetails() {
-                        if let title = errorDict["title"] as? String , let description = errorDict["description"] as? String {
+                        if let title = errorDict["title"] as? String, let description = errorDict["description"] as? String {
                             if title == "Tutorial Rejected" {
                                 UserDefaultManager.makeUserGuideEnable()
                                 UserDefaultManager.removeAllUserGuidesShown()

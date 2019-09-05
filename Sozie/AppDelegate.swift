@@ -31,19 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         print(Bundle.main.infoDictionary?["Configuration"] as! String)
         GIDSignIn.sharedInstance().clientID = "417360914886-kt7feo03r47adeesn8i4udr0i0ofufs0.apps.googleusercontent.com"
-        var plistName = ""
-        if let betaTester = Bundle.main.infoDictionary?["BETA_TESTER"] as? String {
-            if betaTester == "YES" {
-                plistName = "GoogleService-Info-DEV"
-            } else {
-                plistName = "GoogleService-Info-PROD"
-            }
-        } else {
-            plistName = "GoogleService-Info-PROD"
-        }
-        let filePath = Bundle.main.path(forResource: plistName, ofType: "plist")!
-        let options = FirebaseOptions(contentsOfFile: filePath)
-        FirebaseApp.configure(options: options!)
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
@@ -88,13 +75,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         }
-        
     }
     func setupSegment() {
-        let configuration = SEGAnalyticsConfiguration.init(writeKey: "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI")
+        var writeKey = "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI"
+        if let betaTester = Bundle.main.infoDictionary?["BETA_TESTER"] as? String {
+            if betaTester == "YES" {
+                writeKey = "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI"
+            } else {
+                writeKey = "EctXRhKVtgLSwyWIHuVZPtQSXKjfYhNw"
+            }
+        } else {
+            writeKey = "EctXRhKVtgLSwyWIHuVZPtQSXKjfYhNw"
+        }
+        let configuration = SEGAnalyticsConfiguration.init(writeKey: writeKey)
         configuration.trackApplicationLifecycleEvents = true
         configuration.recordScreenViews = true
         configuration.use(SEGIntercomIntegrationFactory.instance())
+//        let firebaseInstance = SEGFirebaseIntegrationFactory()
         configuration.use(SEGFirebaseIntegrationFactory.instance())
         segmentAnalytics = SEGAnalytics(configuration: configuration)
         segmentAnalytics?.reset()
@@ -171,7 +168,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var dataDict = [String: Any]()
         dataDict["device_notify_id"] = pushToken
         ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
-            
         }
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
