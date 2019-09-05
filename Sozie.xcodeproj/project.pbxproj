@@ -185,8 +185,8 @@
 		61C40D14221EB35D00FBD7FF /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */; };
 		61C40D16221EC65600FBD7FF /* Apricot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D15221EC65600FBD7FF /* Apricot@3x.png */; };
 		61CC5CF822E1E261003C3455 /* TutorialProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CC5CF722E1E261003C3455 /* TutorialProgressVC.swift */; };
-		61D7699F232102C800EDBC4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61D7699E232102C800EDBC4A /* GoogleService-Info.plist */; };
 		61D769A1232102D000EDBC4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61D769A0232102D000EDBC4A /* GoogleService-Info.plist */; };
+		61D769A323210C9000EDBC4A /* GoogleService-Info-DEV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61D769A223210C9000EDBC4A /* GoogleService-Info-DEV.plist */; };
 		61E8E73322044FA9008C33BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E8E73222044FA9008C33BC /* ViewController.swift */; };
 		61EE668B22D344D6004265F1 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE668A22D344D6004265F1 /* Data.swift */; };
 		61EE668D22D36F8F004265F1 /* SozieRequestTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE668C22D36F8F004265F1 /* SozieRequestTutorialVC.swift */; };
@@ -434,8 +434,8 @@
 		61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
 		61C40D15221EC65600FBD7FF /* Apricot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Apricot@3x.png"; sourceTree = "<group>"; };
 		61CC5CF722E1E261003C3455 /* TutorialProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProgressVC.swift; sourceTree = "<group>"; };
-		61D7699E232102C800EDBC4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61D769A0232102D000EDBC4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		61D769A223210C9000EDBC4A /* GoogleService-Info-DEV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-DEV.plist"; sourceTree = "<group>"; };
 		61E8E73222044FA9008C33BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		61EE668A22D344D6004265F1 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		61EE668C22D36F8F004265F1 /* SozieRequestTutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieRequestTutorialVC.swift; sourceTree = "<group>"; };
@@ -768,7 +768,7 @@
 		617E0FE1231D373600B659B2 /* DEV */ = {
 			isa = PBXGroup;
 			children = (
-				61D7699E232102C800EDBC4A /* GoogleService-Info.plist */,
+				61D769A223210C9000EDBC4A /* GoogleService-Info-DEV.plist */,
 			);
 			path = DEV;
 			sourceTree = "<group>";
@@ -1155,6 +1155,7 @@
 				D738BF6521F3E33A00302FE5 /* TitleAndCheckmarkCell.xib in Resources */,
 				61C40D14221EB35D00FBD7FF /* RequestTableViewCell.xib in Resources */,
 				611E412022145C0D007B1C62 /* PostCollectionViewCell.xib in Resources */,
+				61D769A323210C9000EDBC4A /* GoogleService-Info-DEV.plist in Resources */,
 				610A743F22032E5200964886 /* M_S.png in Resources */,
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
 				61C40D01221E7DE900FBD7FF /* TabView.xib in Resources */,
@@ -1173,7 +1174,6 @@
 				6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */,
 				61B5A0D722A12C12009D372C /* TargetRequestTableViewCell.xib in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
-				61D7699F232102C800EDBC4A /* GoogleService-Info.plist in Resources */,
 				6103E1B521FF33CC00C7E7CF /* TitleAndSwitchCell.xib in Resources */,
 				615790E52254CBEB007B8532 /* signup.mp4 in Resources */,
 				61B647F82227FEC7007A6370 /* SozieRequestTableViewCell.xib in Resources */,

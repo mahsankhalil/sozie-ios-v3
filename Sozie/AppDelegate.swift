@@ -91,7 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         configuration.trackApplicationLifecycleEvents = true
         configuration.recordScreenViews = true
         configuration.use(SEGIntercomIntegrationFactory.instance())
-//        let firebaseInstance = SEGFirebaseIntegrationFactory()
+        //Firebase DEV and Prod Environment is setup in (Sozie-Stage -> Edit Scheme -> Build -> Post-Action)
+        // A run script is added over there which will replace the google plist file in Built Directory
         configuration.use(SEGFirebaseIntegrationFactory.instance())
         segmentAnalytics = SEGAnalytics(configuration: configuration)
         segmentAnalytics?.reset()
