@@ -21,11 +21,11 @@ class AcceptRequestTutorialVC: UIViewController {
         labelView.layer.cornerRadius = 3.0
         labelView.layer.borderColor = UIColor(hex: "9C9C9C").cgColor
         if let string = descriptionString {
-            if string == "Now let's fulful the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    " {
+            if string == "Now let's fulfil the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    " {
                 let stringToColor = "    UPLOAD PICTURE    "
                 let range = (string as NSString).range(of: stringToColor)
                 let attribute = NSMutableAttributedString.init(string: string)
-                attribute.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor(hex: "FC8787") , range: range)
+                attribute.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor(hex: "13AEF2") , range: range)
                 attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white , range: range)
                 textLabel.attributedText = attribute
             }

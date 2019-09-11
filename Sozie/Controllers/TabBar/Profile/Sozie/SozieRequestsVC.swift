@@ -199,7 +199,7 @@ class SozieRequestsVC: UIViewController {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
                 progressTutorialVC?.updateProgress(progress: 5.0/8.0)
-                acceptRequestTutorialVC?.descriptionString = "Now let's fulful the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    "
+                acceptRequestTutorialVC?.descriptionString = "Now let's fulfil the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    "
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
@@ -481,7 +481,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         if currentRequest?.isAccepted == true {
             if let user = UserDefaultManager.getCurrentUserObject() {
                 if user.isBanned == true {
-                    UtilityManager.showMessageWith(title: "Oops!", body: "We are sorry to inform you that you have been banned from using Sozie for any 2 of the following reasons:\n- Cancelling an accepted request\n- Not completing an accepted request\n- Having a completed request rejected\n The ban will be lifted after 2 weeks at which point we will send you an email so that you may start accepting requests again.\n If you feel that there was an error, please email us at theteam@sozie.com\n Thank you", in: self, leftAligned: true)
+                    UtilityManager.showMessageWith(title: "Oops!", body: "You have been banned from Sozie for having 2 strikes against you.\nAny of the following reason results in a strike:\n- Cancelling an accepted request\n- Not completing an accepted request within 24 hours\n- Having a completed request rejected\n We have sent you an email with more details", in: self, leftAligned: true)
                     return
                 }
             }

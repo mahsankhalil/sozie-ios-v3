@@ -52,9 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            HubSpotManager.createContact(user: user)
 //        }
         UNUserNotificationCenter.current().delegate = self
-        setupSegment()
-        perform(#selector(createIdentityOnSegment), with: nil, afterDelay: 5.0)
-
+        self.setupSegment()
+        self.perform(#selector(self.createIdentityOnSegment), with: nil, afterDelay: 5.0)
+        
         if UserDefaultManager.getIfFirstTime() {
             SegmentManager.createEventDownloaded()
             UserDefaultManager.setNotFirstTime()
@@ -81,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let betaTester = Bundle.main.infoDictionary?["BETA_TESTER"] as? String {
             if betaTester == "YES" {
                 writeKey = "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI"
+//                writeKey = "EctXRhKVtgLSwyWIHuVZPtQSXKjfYhNw"
             } else {
                 writeKey = "EctXRhKVtgLSwyWIHuVZPtQSXKjfYhNw"
             }
@@ -94,8 +95,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //Firebase DEV and Prod Environment is setup in (Sozie-Stage -> Edit Scheme -> Build -> Post-Action)
         // A run script is added over there which will replace the google plist file in Built Directory
         configuration.use(SEGFirebaseIntegrationFactory.instance())
-        segmentAnalytics = SEGAnalytics(configuration: configuration)
-        segmentAnalytics?.reset()
+//        segmentAnalytics = SEGAnalytics(configuration: configuration)
+        SEGAnalytics.setup(with: configuration)
+        self.segmentAnalytics = SEGAnalytics.shared()
+
+//        segmentAnalytics?.reset()
     }
     func showMeasuremnetVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
