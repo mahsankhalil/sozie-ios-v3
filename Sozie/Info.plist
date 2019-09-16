@@ -48,7 +48,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>29</string>
+	<string>30</string>
 	<key>Configuration</key>
 	<string>$(CONFIGURATION)</string>
 	<key>FacebookAppID</key>
@@ -72,11 +72,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Sozie would like to access Camera to take photos</string>
+	<string>Sozie would like to access Camera to take photos, photo taken will be used as your profile picture as well as for completion of requests.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Sozie would like to access you location to find the nearest stores for you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Sozie would like to access photo library to select photos</string>
+	<string>Sozie would like to access Photo Library to select photos, photos selected will be used as your profile picture as well as for completion of requests.</string>
 	<key>SERVER_URL</key>
 	<string>$(SERVER_URL)</string>
 	<key>UIAppFonts</key>
