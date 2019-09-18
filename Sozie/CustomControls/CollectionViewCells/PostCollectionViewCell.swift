@@ -54,6 +54,7 @@ class PostCollectionViewCell: UICollectionViewCell {
             followButtonWidthConstraint.constant = 0.0
             followButton.isHidden = true
         }
+        cameraButton.isHidden = true
     }
     @objc func dismissTipView() {
         tipView?.dismiss(withCompletion: nil)

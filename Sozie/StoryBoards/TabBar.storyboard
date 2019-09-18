@@ -2128,7 +2128,7 @@ Let's go back and accept your first request</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wish List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D22-6e-RYC">
-                                                <rect key="frame" x="12" y="0.0" width="195" height="46"/>
+                                                <rect key="frame" x="12" y="0.0" width="189.5" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Jsi-q4-TB9"/>
                                                 </constraints>
@@ -2137,7 +2137,7 @@ Let's go back and accept your first request</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -2637,14 +2637,14 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 </constraints>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="down-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="puC-qk-dcC">
-                                <rect key="frame" x="303" y="475" width="50" height="139"/>
+                                <rect key="frame" x="210" y="475" width="50" height="139"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="aBo-cj-7v7"/>
                                     <constraint firstAttribute="height" constant="139" id="yUa-S7-j1z"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5D-h3-5P0">
-                                <rect key="frame" x="283" y="619" width="90" height="48"/>
+                                <rect key="frame" x="190" y="619" width="90" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lq-S2-jPI">
                                         <rect key="frame" x="30.5" y="3.5" width="29" height="29"/>
@@ -2685,9 +2685,9 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="leading" secondItem="zta-YF-Rdr" secondAttribute="leading" id="4o8-5r-Q92"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="top" secondItem="hIP-b5-G4r" secondAttribute="top" id="E37-zJ-gNj"/>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="top" secondItem="puC-qk-dcC" secondAttribute="bottom" constant="5" id="O6R-Gg-qN9"/>
-                            <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="puC-qk-dcC" secondAttribute="trailing" constant="22" id="ba4-Ac-e33"/>
+                            <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="puC-qk-dcC" secondAttribute="trailing" constant="115" id="ba4-Ac-e33"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="kRm-WB-tuL"/>
-                            <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="P5D-h3-5P0" secondAttribute="trailing" constant="2" id="shD-ZZ-IwB"/>
+                            <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="P5D-h3-5P0" secondAttribute="trailing" constant="95" id="shD-ZZ-IwB"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="trailing" secondItem="zta-YF-Rdr" secondAttribute="trailing" id="sqK-nb-qs6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zta-YF-Rdr"/>
@@ -2709,7 +2709,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
             <objects>
                 <viewController storyboardIdentifier="SozieRequestsVC" id="F5W-yp-aSP" customClass="SozieRequestsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k1V-mc-ItS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1760"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNv-L9-ztQ">
@@ -2746,10 +2746,10 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4z-UW-tEO">
-                                <rect key="frame" x="0.0" y="94" width="375" height="1666"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="1500"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="163" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-US-Zou">
-                                        <rect key="frame" x="0.0" y="-16" width="375" height="1682"/>
+                                        <rect key="frame" x="0.0" y="-16" width="375" height="1516"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataSource" destination="F5W-yp-aSP" id="lgk-C5-w3d"/>
@@ -2757,7 +2757,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         </connections>
                                     </tableView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Requests available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-kl-HO1">
-                                        <rect key="frame" x="64" y="772.5" width="247" height="19.5"/>
+                                        <rect key="frame" x="64" y="689.5" width="247" height="19.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="247" id="xyN-ht-z8q"/>
                                         </constraints>
@@ -2777,12 +2777,12 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 </constraints>
                             </view>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-0f-PRI">
-                                <rect key="frame" x="0.0" y="47" width="375" height="1713"/>
+                                <rect key="frame" x="0.0" y="47" width="375" height="1547"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-Ge-ikh">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="1519"/>
+                                        <rect key="frame" x="0.0" y="100" width="375" height="1353"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1519" id="jgx-4a-01h"/>
+                                            <constraint firstAttribute="height" constant="1353" id="jgx-4a-01h"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxA-md-0rs">
@@ -2827,7 +2827,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyN-lW-kZE" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                        <rect key="frame" x="36.5" y="1634" width="302" height="56"/>
+                                        <rect key="frame" x="36.5" y="1468" width="302" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="Yrc-5C-ZOx"/>
                                             <constraint firstAttribute="width" constant="302" id="kUx-XA-O0N"/>
@@ -2871,7 +2871,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pOd-GA-Mn6"/>
                     </view>
-                    <size key="freeformSize" width="375" height="1760"/>
+                    <size key="freeformSize" width="375" height="1594"/>
                     <connections>
                         <outlet property="gotItButton" destination="gyN-lW-kZE" id="kzp-j0-wKP"/>
                         <outlet property="instructionsHeightConstraint" destination="jgx-4a-01h" id="Fs1-98-r1r"/>
@@ -5254,7 +5254,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="crossIcon" width="11" height="12"/>
         <image name="down-arrow-sketch" width="50" height="65.5"/>
         <image name="info" width="30" height="32"/>
-        <image name="instructions" width="375" height="1515"/>
+        <image name="instructions" width="375" height="1349"/>
         <image name="login-logo" width="142" height="86.5"/>
         <image name="placeholder" width="7.5" height="10"/>
         <image name="right2" width="30" height="29"/>
@@ -5263,6 +5263,6 @@ Please click on the (restart tutorial) button below to start again!</string>
     <inferredMetricsTieBreakers>
         <segue reference="LXu-v3-0l3"/>
         <segue reference="nT3-Pv-VcT"/>
-        <segue reference="tDQ-ci-Y7S"/>
+        <segue reference="0CE-es-xl4"/>
     </inferredMetricsTieBreakers>
 </document>

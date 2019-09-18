@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,7 +70,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size Requested: (L)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsa-6p-Xiv">
-                                <rect key="frame" x="157" y="43" width="104" height="22"/>
+                                <rect key="frame" x="157" y="43" width="99" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="xru-Rz-q54"/>
                                 </constraints>
@@ -93,7 +93,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAj-fp-ddn">
-                                <rect key="frame" x="57.5" y="127" width="43" height="15"/>
+                                <rect key="frame" x="59" y="127" width="40.5" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="Xor-8D-xB1"/>
                                 </constraints>
@@ -169,7 +169,7 @@
     </objects>
     <resources>
         <image name="Cancel icon" width="13" height="15"/>
-        <image name="ProductImg1.png" width="904" height="1322"/>
+        <image name="ProductImg1.png" width="452" height="661"/>
         <image name="SOZIE JOB" width="45" height="45"/>
         <image name="placeholder" width="7.5" height="10"/>
     </resources>

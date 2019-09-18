@@ -638,7 +638,7 @@ extension BrowseVC: PopupNavControllerDelegate {
 }
 extension BrowseVC: BrowseWelcomeDelegate {
     func profileButtonTapped() {
-        self.tabBarController?.selectedIndex = 3
+        self.tabBarController?.selectedIndex = 2
         tutorialVC?.view.removeFromSuperview()
     }
 }

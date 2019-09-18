@@ -55,7 +55,7 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (1713.0/375.0) * UIScreen.main.bounds.size.width
+        instructionsHeightConstraint.constant = (1547.0/375.0) * UIScreen.main.bounds.size.width
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
 //            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
 //            tutorialVC?.delegate = self
@@ -116,8 +116,8 @@ class SozieRequestsVC: UIViewController {
             progressTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "TutorialProgressVC") as? TutorialProgressVC
             progressTutorialVC?.delegate = self
             if let tutVC = progressTutorialVC {
-                tutVC.view.frame.origin.y = 0
-                tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: (topPadding ?? 0.0) + 64.0)
+                tutVC.view.frame.origin.y = (topPadding ?? 0.0)
+                tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 44.0)
                 window?.addSubview(tutVC.view)
             }
         }
@@ -280,12 +280,12 @@ class SozieRequestsVC: UIViewController {
             populateDummyRequests()
             self.showInStockTutorial()
             if let tabBarContrlr = self.parent?.parent?.parent?.parent as? TabBarVC {
-                tabBarContrlr.tabBar.isUserInteractionEnabled = false
+//                tabBarContrlr.tabBar.isUserInteractionEnabled = false
                 if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![3] as? UITabBarItem {
                     firstItem.isEnabled = false
                     secondItem.isEnabled = false
                     thirdItem.isEnabled = false
-                    fourthItem.isEnabled = false
+//                    fourthItem.isEnabled = false
                 }
             }
             if let tutorialView = self.acceptRequestTutorialVC?.view {
