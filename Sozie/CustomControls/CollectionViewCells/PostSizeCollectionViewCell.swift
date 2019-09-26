@@ -19,6 +19,8 @@ class PostSizeCollectionViewCell: UICollectionViewCell {
         // Initialization code
         imageView.sd_setShowActivityIndicatorView(true)
         imageView.sd_setIndicatorStyle(.gray)
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
         labelBackgroundView.roundCorners(corners: [.topLeft], radius: 20.0)
     }
 
@@ -44,6 +46,21 @@ extension PostSizeCollectionViewCell: CellConfigurable {
                 self.statusImageView.isHidden = true
             } else {
                 self.statusImageView.isHidden = false
+            }
+        }
+        
+        if let uploadViewModel = viewModel as? UploadViewModel {
+            imageView.sd_setImage(with: uploadViewModel.imageURL) { (_, _, _, _) in
+            }
+            if uploadViewModel.status == "P" {
+                self.statusImageView.isHidden = true
+            } else {
+                self.statusImageView.isHidden = false
+            }
+            if uploadViewModel.isApproved == true {
+                self.statusImageView.image = UIImage(named: "checked")
+            } else {
+                self.statusImageView.image = UIImage(named: "cancel")
             }
         }
     }

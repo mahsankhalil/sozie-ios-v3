@@ -25,6 +25,19 @@ class TabBarVC: UITabBarController {
         self.view.backgroundColor = UIColor.white
 //        Intercom.setLauncherVisible(true)
 //        Intercom.setBottomPadding(30.0)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBadge), name: Notification.Name(rawValue: "updateBadge"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showProfileTab), name: Notification.Name(rawValue: "showProfileTab"), object: nil)
+    }
+
+    @objc func showProfileTab() {
+        
+    }
+    @objc func updateBadge() {
+        if Intercom.unreadConversationCount() == 0 {
+            self.tabBar.items?[3].badgeValue = nil
+        } else {
+            self.tabBar.items?[3].badgeValue =  String(Intercom.unreadConversationCount())
+        }
     }
 
     // MARK: - Custom Methods

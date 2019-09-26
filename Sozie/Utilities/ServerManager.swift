@@ -510,6 +510,8 @@ class ServerManager: NSObject {
         var url = ServerManager.sozieRequestsURL
         if let nextURL = params["next"] as? String {
             url = nextURL
+        }else if let param = params["is_tutorial_request"] {
+            url = url + "?is_tutorial_request=" + String(param as! Bool)
         }
         Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
@@ -526,7 +528,7 @@ class ServerManager: NSObject {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
-        var url = ServerManager.uploadsURL
+        var url = ServerManager.postURL
         if let nextURL = params["next"] as? String {
             url = nextURL
             if let userId = params["user_id"] {

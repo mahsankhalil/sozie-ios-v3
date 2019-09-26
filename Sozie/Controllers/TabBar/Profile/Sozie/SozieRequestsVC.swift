@@ -248,6 +248,9 @@ class SozieRequestsVC: UIViewController {
     }
 
     func fetchAllSozieRequests() {
+        if UserDefaultManager.getIfPostTutorialShown() == false {
+            serverParams["is_tutorial_request"] = true
+        }
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             self.tableView.bottomRefreshControl?.endRefreshing()

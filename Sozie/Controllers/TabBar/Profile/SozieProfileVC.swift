@@ -34,8 +34,8 @@ class SozieProfileVC: BaseViewController {
 //                    sizeString = "Size Worn: " + post.sizeType + " " + post.sizeValue
 //                }
                 sizeString = "Size Worn: " + post.sizeValue
-                let viewModel = UserPostCellViewModel(subtitle: sizeString, imageURL: URL(string: post.imageURL), isSelected: post.isApproved,status: post.reviewAction)
-                viewModels.append(viewModel)
+//                let viewModel = UserPostCellViewModel(subtitle: sizeString, imageURL: URL(string: post.imageURL), isSelected: post.isApproved,status: post.reviewAction)
+//                viewModels.append(viewModel)
             }
             self.collectionView.reloadData()
         }
@@ -118,7 +118,7 @@ class SozieProfileVC: BaseViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "toProductDetail" {
             let destVC = segue.destination as? ProductDetailVC
-            destVC?.currentProduct = currentPost?.product
+//            destVC?.currentProduct = currentPost?.product
             destVC?.currentPostId = currentPost?.postId
         }
     }

@@ -64,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     @objc func createIdentityOnSegment() {
         if let user = UserDefaultManager.getCurrentUserObject() {
             SegmentManager.createEntity(user: user)
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updateBadge")))
         }
     }
     func fetchUserDetail() {
@@ -177,9 +178,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if Intercom.isIntercomPushNotification(userInfo) {
+            if (application.applicationState == UIApplication.State.inactive || application.applicationState == UIApplication.State.background) {
+//                self.perform(#selector(self.showProfileTab), with: nil, afterDelay: 5.0)
+            }
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updateBadge")))
             Intercom.handlePushNotification(userInfo)
         }
         completionHandler(.noData)
+    }
+    @objc func showProfileTab() {
+//        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "showProfileTab")))
     }
 
     func showResetPasswordVC(with params: [String: Any]) {
