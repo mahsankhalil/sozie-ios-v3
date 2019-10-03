@@ -62,6 +62,19 @@ extension DoubleTextFieldCell: CellConfigurable {
             secondTxtFld.configure(title: doubleTextFieldCellViewModel.title2, placeholder: doubleTextFieldCellViewModel.columnPlaceholder[1], values: doubleTextFieldCellViewModel.columnValues[1], valuesSuffix:  doubleTextFieldCellViewModel.columnValueSuffix[1])
 //            firstTxtFld.configure(title: doubleTextFieldCellViewModel.title, rightTitle: doubleTextFieldCellViewModel.columnUnit[0], placeholder: doubleTextFieldCellViewModel.columnPlaceholder[0], values1: doubleTextFieldCellViewModel.columnValues[0], values1Suffix: doubleTextFieldCellViewModel.columnValueSuffix[0], values2: doubleTextFieldCellViewModel.columnValues[1], values2Suffix: doubleTextFieldCellViewModel.columnValueSuffix[1])
 //            secondTxtFld.configure(title: doubleTextFieldCellViewModel.title, rightTitle: doubleTextFieldCellViewModel.columnUnit[1], placeholder: doubleTextFieldCellViewModel.columnPlaceholder[1], values1: doubleTextFieldCellViewModel.columnValues[0], values1Suffix: doubleTextFieldCellViewModel.columnValueSuffix[0], values2: doubleTextFieldCellViewModel.columnValues[1], values2Suffix: doubleTextFieldCellViewModel.columnValueSuffix[1])
+            if let text = doubleTextFieldCellViewModel.text1, let text2 = doubleTextFieldCellViewModel.text2 {
+                if text == "" && text2 == "" {
+                    firstTxtFld.text = ""
+                    firstTxtFld.currentValue1 = ""
+                    secondTxtFld.text = ""
+                    secondTxtFld.currentValue1 = ""
+                }
+            } else {
+                firstTxtFld.text = ""
+                firstTxtFld.currentValue1 = ""
+                secondTxtFld.text = ""
+                secondTxtFld.currentValue1 = ""
+            }
             if let text = doubleTextFieldCellViewModel.text1 {
                 if text != "" {
                     firstTxtFld.text = text
