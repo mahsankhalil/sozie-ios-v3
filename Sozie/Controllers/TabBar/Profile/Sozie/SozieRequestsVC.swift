@@ -55,7 +55,7 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (1713.0/375.0) * UIScreen.main.bounds.size.width
+        instructionsHeightConstraint.constant = (1547.0/375.0) * UIScreen.main.bounds.size.width
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
 //            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
 //            tutorialVC?.delegate = self
@@ -78,10 +78,8 @@ class SozieRequestsVC: UIViewController {
     }
     func disableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
-
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = false
-            
         }
 //        ((self.parent as! ProfileTabsPageVC).view.subviews.compactMap { $0 as? UIScrollView }.first as! UIScrollView).isScrollEnabled = false
         if let parent = self.parent as? ProfileTabsPageVC {
@@ -118,8 +116,8 @@ class SozieRequestsVC: UIViewController {
             progressTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "TutorialProgressVC") as? TutorialProgressVC
             progressTutorialVC?.delegate = self
             if let tutVC = progressTutorialVC {
-                tutVC.view.frame.origin.y = 0
-                tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: (topPadding ?? 0.0) + 64.0)
+                tutVC.view.frame.origin.y = (topPadding ?? 0.0)
+                tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 44.0)
                 window?.addSubview(tutVC.view)
             }
         }
@@ -201,7 +199,7 @@ class SozieRequestsVC: UIViewController {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
                 progressTutorialVC?.updateProgress(progress: 5.0/8.0)
-                acceptRequestTutorialVC?.descriptionString = "Now let's fulfill the request.\nClick here"
+                acceptRequestTutorialVC?.descriptionString = "Now let's fulfil the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    "
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
@@ -250,6 +248,9 @@ class SozieRequestsVC: UIViewController {
     }
 
     func fetchAllSozieRequests() {
+        if UserDefaultManager.getIfPostTutorialShown() == false {
+            serverParams["is_tutorial_request"] = true
+        }
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             self.tableView.bottomRefreshControl?.endRefreshing()
@@ -282,12 +283,12 @@ class SozieRequestsVC: UIViewController {
             populateDummyRequests()
             self.showInStockTutorial()
             if let tabBarContrlr = self.parent?.parent?.parent?.parent as? TabBarVC {
-                tabBarContrlr.tabBar.isUserInteractionEnabled = false
+//                tabBarContrlr.tabBar.isUserInteractionEnabled = false
                 if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![3] as? UITabBarItem {
                     firstItem.isEnabled = false
                     secondItem.isEnabled = false
                     thirdItem.isEnabled = false
-                    fourthItem.isEnabled = false
+//                    fourthItem.isEnabled = false
                 }
             }
             if let tutorialView = self.acceptRequestTutorialVC?.view {
@@ -361,7 +362,6 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
                 currentCell.cancelButton.isUserInteractionEnabled = true
             }
         }
-        
         cell.selectionStyle = .none
         return cell
     }
@@ -371,6 +371,11 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else if viewModels[indexPath.row].isSelected == false {
             performSegue(withIdentifier: "toProductDetail", sender: self)
+        }
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (requests.count < 10 && indexPath.row == requests.count - 2) || (indexPath.row == requests.count - 10) {
+            loadNextPage()
         }
     }
 }
@@ -479,7 +484,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         if currentRequest?.isAccepted == true {
             if let user = UserDefaultManager.getCurrentUserObject() {
                 if user.isBanned == true {
-                    UtilityManager.showMessageWith(title: "Oops!", body: "We are sorry to inform you that you have been banned from using Sozie for any 2 of the following reasons:\n- Cancelling an accepted request\n- Not completing an accepted request\n- Having a completed request rejected\n The ban will be lifted after 2 weeks at which point we will send you an email so that you may start accepting requests again.\n If you feel that there was an error, please email us at theteam@sozie.com\n Thank you", in: self, leftAligned: true)
+                    UtilityManager.showMessageWith(title: "Oops!", body: "You have been banned from Sozie for having 2 strikes against you.\nAny of the following reason results in a strike:\n- Cancelling an accepted request\n- Not completing an accepted request within 24 hours\n- Having a completed request rejected\n We have sent you an email with more details", in: self, leftAligned: true)
                     return
                 }
             }
@@ -518,7 +523,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 } else {
                     let error = (response as! Error).localizedDescription
                     if let errorDict = error.getColonSeparatedErrorDetails() {
-                        if let title = errorDict["title"] as? String , let description = errorDict["description"] as? String {
+                        if let title = errorDict["title"] as? String, let description = errorDict["description"] as? String {
                             if title == "Tutorial Rejected" {
                                 UserDefaultManager.makeUserGuideEnable()
                                 UserDefaultManager.removeAllUserGuidesShown()

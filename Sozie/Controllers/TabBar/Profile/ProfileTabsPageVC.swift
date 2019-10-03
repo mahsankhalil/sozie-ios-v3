@@ -13,7 +13,7 @@ class ProfileTabsPageVC: TabPageViewController {
     var soziesVC: SoziesVC?
     var requestsVC: RequestsVC?
     var sozieRequestsVC: SozieRequestsVC?
-    var myUploadsVC: MyUploadsVC?
+    var myUploadsVC: MyUploadsNewVC?
 
     override init() {
         super.init()
@@ -23,7 +23,7 @@ class ProfileTabsPageVC: TabPageViewController {
             tabItems = [(soziesVC, "SOZIES"), (requestsVC, "REQUESTS")] as! [(viewController: UIViewController, title: String)]
         } else {
             sozieRequestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SozieRequestsVC") as? SozieRequestsVC
-            myUploadsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "MyUploadsVC") as? MyUploadsVC
+            myUploadsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "MyUploadsNewVC") as? MyUploadsNewVC
             tabItems = [(sozieRequestsVC, "Sozie Requests"), (myUploadsVC, "My Uploads")] as! [(viewController: UIViewController, title: String)]
         }
         option.tabWidth = UIScreen.main.bounds.size.width / CGFloat(tabItems.count)

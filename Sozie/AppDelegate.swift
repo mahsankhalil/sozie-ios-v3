@@ -13,8 +13,9 @@ import GoogleSignIn
 import Intercom
 import UserNotifications
 import CoreLocation
-//import Firebase
+import Firebase
 import Analytics
+import Segment_Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
@@ -30,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         print(Bundle.main.infoDictionary?["Configuration"] as! String)
         GIDSignIn.sharedInstance().clientID = "417360914886-kt7feo03r47adeesn8i4udr0i0ofufs0.apps.googleusercontent.com"
-//        FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
@@ -52,9 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            HubSpotManager.createContact(user: user)
 //        }
         UNUserNotificationCenter.current().delegate = self
-        setupSegment()
-        perform(#selector(createIdentityOnSegment), with: nil, afterDelay: 5.0)
-
+        self.setupSegment()
+        self.perform(#selector(self.createIdentityOnSegment), with: nil, afterDelay: 5.0)
+        
         if UserDefaultManager.getIfFirstTime() {
             SegmentManager.createEventDownloaded()
             UserDefaultManager.setNotFirstTime()
@@ -64,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     @objc func createIdentityOnSegment() {
         if let user = UserDefaultManager.getCurrentUserObject() {
             SegmentManager.createEntity(user: user)
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updateBadge")))
         }
     }
     func fetchUserDetail() {
@@ -75,15 +76,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         }
-        
     }
     func setupSegment() {
-        let configuration = SEGAnalyticsConfiguration.init(writeKey: "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI")
+        var writeKey = "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI"
+        if let betaTester = Bundle.main.infoDictionary?["BETA_TESTER"] as? String {
+            if betaTester == "YES" {
+                writeKey = "zQT3BYCL9zdEZP7rDseJkFXN63zMzMCI"
+//                writeKey = "EctXRhKVtgLSwyWIHuVZPtQSXKjfYhNw"
+            } else {
+                writeKey = "EctXRhKVtgLSwyWIHuVZPtQSXKjfYhNw"
+            }
+        } else {
+            writeKey = "EctXRhKVtgLSwyWIHuVZPtQSXKjfYhNw"
+        }
+        let configuration = SEGAnalyticsConfiguration.init(writeKey: writeKey)
         configuration.trackApplicationLifecycleEvents = true
         configuration.recordScreenViews = true
         configuration.use(SEGIntercomIntegrationFactory.instance())
-        segmentAnalytics = SEGAnalytics(configuration: configuration)
-        segmentAnalytics?.reset()
+        //Firebase DEV and Prod Environment is setup in (Sozie-Stage -> Edit Scheme -> Build -> Post-Action)
+        // A run script is added over there which will replace the google plist file in Built Directory
+        configuration.use(SEGFirebaseIntegrationFactory.instance())
+//        segmentAnalytics = SEGAnalytics(configuration: configuration)
+        SEGAnalytics.setup(with: configuration)
+        self.segmentAnalytics = SEGAnalytics.shared()
+
+//        segmentAnalytics?.reset()
     }
     func showMeasuremnetVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -157,14 +174,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var dataDict = [String: Any]()
         dataDict["device_notify_id"] = pushToken
         ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
-            
         }
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if Intercom.isIntercomPushNotification(userInfo) {
+            if (application.applicationState == UIApplication.State.inactive || application.applicationState == UIApplication.State.background) {
+//                self.perform(#selector(self.showProfileTab), with: nil, afterDelay: 5.0)
+            }
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updateBadge")))
             Intercom.handlePushNotification(userInfo)
         }
         completionHandler(.noData)
+    }
+    @objc func showProfileTab() {
+//        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "showProfileTab")))
     }
 
     func showResetPasswordVC(with params: [String: Any]) {

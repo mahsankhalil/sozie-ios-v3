@@ -37,7 +37,6 @@ class FitTipsListingVC: UIViewController {
         self.tableView.reloadData()
     }
     func checkIfFitTipAnswered(fitTip: FitTips) -> Bool {
-        
         for question in fitTip.question {
             if question.type == "R" || question.type == "C" {
                 for option in question.options {
@@ -86,7 +85,6 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "DisclosureCell")
-        
         if tableViewCell == nil {
             tableView.register(UINib(nibName: "DisclosureCell", bundle: nil), forCellReuseIdentifier: "DisclosureCell")
             tableViewCell = tableView.dequeueReusableCell(withIdentifier: "DisclosureCell")

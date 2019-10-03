@@ -49,7 +49,11 @@ class MyBalanceVC: UIViewController {
     }
     */
     @IBAction func backButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if self.navigationController == nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     @IBAction func checkoutButtonTapped(_ sender: Any) {
         if currentbalance < 10 {

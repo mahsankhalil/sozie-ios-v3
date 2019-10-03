@@ -18,6 +18,7 @@ class SocialAuthManager: NSObject {
 
     func loginWithFacebook(from viewController: UIViewController, block: CompletionHandler) {
         let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
         loginManager.loginBehavior = FBSDKLoginBehavior.native
         loginManager.logIn(withReadPermissions: ["public_profile", "email"], from: viewController) { (result, error) in
 

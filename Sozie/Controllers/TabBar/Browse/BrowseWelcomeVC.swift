@@ -29,8 +29,7 @@ class BrowseWelcomeVC: UIViewController {
         if let firstName = UserDefaultManager.getCurrentUserObject()?.firstName {
             nameLabel.text = "Hi " + firstName + ","
         }
-        if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "Down-Arrow", withExtension: "gif")!)
-        {
+        if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "Down-Arrow", withExtension: "gif")!) {
             let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
             imageView.image = arrowGifImage
         }

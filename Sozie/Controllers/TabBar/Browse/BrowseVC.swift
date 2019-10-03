@@ -88,8 +88,6 @@ class BrowseVC: BaseViewController {
         self.brandsCollectionVu.infiniteScrollDelegate = self
         _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         setupSozieLogoNavBar()
-        
-        
 //        if let userType = UserDefaultManager.getCurrentUserType() {
 //            if userType == UserType.shopper.rawValue {
 //                setupSozieLogoNavBar()
@@ -640,7 +638,7 @@ extension BrowseVC: PopupNavControllerDelegate {
 }
 extension BrowseVC: BrowseWelcomeDelegate {
     func profileButtonTapped() {
-        self.tabBarController?.selectedIndex = 3
+        self.tabBarController?.selectedIndex = 2
         tutorialVC?.view.removeFromSuperview()
     }
 }

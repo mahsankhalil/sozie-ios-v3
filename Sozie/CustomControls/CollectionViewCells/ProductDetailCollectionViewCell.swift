@@ -28,6 +28,7 @@ class ProductDetailCollectionViewCell: UICollectionViewCell {
                 cameraButton.isHidden = false
             }
         }
+        cameraButton.isHidden = true
     }
     @IBAction func cameraButtonTapped(_ sender: Any) {
         delegate?.productCameraButtonTapped(button: sender as! UIButton)

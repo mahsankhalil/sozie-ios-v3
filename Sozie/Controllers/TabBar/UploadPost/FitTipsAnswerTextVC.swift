@@ -68,7 +68,6 @@ class FitTipsAnswerTextVC: UIViewController {
                 }
             }
         }
-        
     }
     /*
     // MARK: - Navigation
@@ -120,7 +119,7 @@ extension FitTipsAnswerTextVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let  char = text.cString(using: String.Encoding.utf8)!
         let isBackSpace = strcmp(char, "\\b")
-        if (isBackSpace == -92) {
+        if isBackSpace == -92 {
             // If backspace is pressed this will call
             if textView.text == "I wish " {
                 return false

@@ -176,6 +176,7 @@ class MeasurementsVC: UIViewController {
                 if isSuccess {
                     let user = response as! User
                     UserDefaultManager.updateUserObject(user: user)
+                    SegmentManager.createEntity(user: user)
                     if self.isFromSignUp == false {
                         self.navigationController?.popViewController(animated: true)
                     } else {

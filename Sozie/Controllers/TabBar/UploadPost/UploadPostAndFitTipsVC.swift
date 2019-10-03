@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import TPKeyboardAvoiding
+import UserNotifications
 //import FirebaseAnalytics
 protocol UploadPostAndFitTipsDelegate: class {
     func uploadPostInfoButtonTapped()
@@ -245,6 +246,37 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     */
 
+    func checkPushNotifications() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                // Already authorized
+            }
+            else {
+                // Either denied or notDetermined
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+                    (granted, error) in
+                    // add your own
+                    let alertController = UIAlertController(title: "Notification Alert", message: "please enable notifications", preferredStyle: .alert)
+                    let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                            })
+                        }
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                    alertController.addAction(cancelAction)
+                    alertController.addAction(settingsAction)
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }
+                }
+            }
+        }
+    }
     func uploadPOstData(isTutorial: Bool) {
         var dataDict = [String: Any]()
         dataDict["product_id"] = currentProduct?.productStringId
@@ -271,13 +303,18 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     self.uploadTutorialData()
                 } else {
                     SegmentManager.createEventRequestSubmitted()
-                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
+//                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
+                    self.showThankYouController()
                     self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
                 }
             } else {
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
         }
+    }
+    func showThankYouController() {
+        let thankYouVC = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouController") as! ThankYouController
+        self.view.addSubview(thankYouVC.view)
     }
     func uploadTutorialData() {
         var dataDict = [String: Any]()
@@ -309,6 +346,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     }
                 }
                 UserDefaultManager.setPostTutorialShown()
+                self.checkPushNotifications()
                 self.progressTutorialVC?.view.removeFromSuperview()
                 self.navigationController?.popViewController(animated: true)
             }
