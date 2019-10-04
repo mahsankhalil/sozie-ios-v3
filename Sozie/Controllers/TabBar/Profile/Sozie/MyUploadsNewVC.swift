@@ -22,7 +22,7 @@ class MyUploadsNewVC: UIViewController {
         didSet {
             viewModels.removeAll()
             for post in posts {
-                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved)
+                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved, isModerated: post.isModerated)
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0
@@ -100,6 +100,13 @@ extension MyUploadsNewVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let viewModel = viewModels[indexPath.row]
+        if viewModel.isTutorial {
+            return 220
+        }
+        return 250.0
     }
 }
 extension MyUploadsNewVC: MyUploadsCellDelegate {

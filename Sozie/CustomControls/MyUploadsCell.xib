@@ -26,8 +26,8 @@
                             <constraint firstAttribute="height" constant="1" id="I0e-Nb-kqH"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Zxa-96-MFY">
-                        <rect key="frame" x="0.0" y="1" width="30" height="34"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Zxa-96-MFY">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="KnR-HH-2rV"/>
                             <constraint firstAttribute="height" constant="34" id="Ofb-DK-gT2"/>
@@ -134,9 +134,8 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="QR1-XP-mqQ" firstAttribute="top" secondItem="990-no-Vd0" secondAttribute="bottom" constant="9" id="6Ja-ep-fwc"/>
                     <constraint firstItem="UkX-g2-o4C" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="6K6-G7-DH0"/>
-                    <constraint firstItem="Zxa-96-MFY" firstAttribute="top" secondItem="UkX-g2-o4C" secondAttribute="bottom" id="7Ks-gH-BcN"/>
+                    <constraint firstItem="Zxa-96-MFY" firstAttribute="top" secondItem="UkX-g2-o4C" secondAttribute="bottom" constant="-1" id="7Ks-gH-BcN"/>
                     <constraint firstAttribute="trailing" secondItem="der-Yv-KUx" secondAttribute="trailing" id="7zF-BK-PqM"/>
                     <constraint firstItem="ITF-98-8pm" firstAttribute="leading" secondItem="UTa-l4-7yZ" secondAttribute="trailing" constant="4" id="AZH-rL-mzK"/>
                     <constraint firstAttribute="trailing" secondItem="QR1-XP-mqQ" secondAttribute="trailing" id="FMi-Bx-7py"/>
@@ -161,6 +160,8 @@
                 <outlet property="cornerIcon" destination="Zxa-96-MFY" id="3uw-Rr-rQu"/>
                 <outlet property="deleteButton" destination="990-no-Vd0" id="cH3-gb-pWh"/>
                 <outlet property="descriptionLabel" destination="Vsq-Bu-T9o" id="9AL-wJ-uW4"/>
+                <outlet property="requestedForImageView" destination="ITF-98-8pm" id="9gQ-RA-XeJ"/>
+                <outlet property="requestedForLabel" destination="UTa-l4-7yZ" id="iwa-Ag-lC9"/>
                 <outlet property="resetTutrialButton" destination="yMe-Le-UP3" id="R41-tm-c3l"/>
                 <outlet property="viewBalanceButton" destination="sha-bU-UKT" id="ieT-Bh-dMq"/>
             </connections>
@@ -169,8 +170,8 @@
     </objects>
     <resources>
         <image name="Arrow" width="5" height="10"/>
+        <image name="Star Icon" width="30.5" height="34"/>
         <image name="Target-title" width="100" height="12"/>
         <image name="Trash can" width="28.5" height="28.5"/>
-        <image name="Tutorial Icon" width="30.5" height="34"/>
     </resources>
 </document>

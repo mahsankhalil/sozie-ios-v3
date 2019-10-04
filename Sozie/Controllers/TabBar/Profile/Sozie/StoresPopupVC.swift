@@ -58,6 +58,12 @@ class StoresPopupVC: UIViewController {
             showNearByStoresTutorial()
         }
         progressTutorialVC?.delegate = self
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedOnScreen))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    @objc func tappedOnScreen() {
+        self.view.endEditing(true)
     }
     func showNearByStoresTutorial() {
         tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyStoresTutorialVC") as? NearbyStoresTutorialVC

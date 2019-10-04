@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 protocol BrowseWelcomeDelegate: class {
     func profileButtonTapped()
 }
@@ -32,6 +33,18 @@ class BrowseWelcomeVC: UIViewController {
         if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "Down-Arrow", withExtension: "gif")!) {
             let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
             imageView.image = arrowGifImage
+        }
+        var imageIcon = UIImage(named: "Profile icon")
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if let image = user.picture {
+                SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, imageData, error, success) in
+                    if picture != nil {
+                        imageIcon = picture?.scaleImageToSize(newSize: CGSize(width: 30.0, height: 30.0))
+                        imageIcon = imageIcon?.circularImage(15.0)!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+                        self.profileButton.setImage(imageIcon, for: .normal)
+                    }
+                }
+            }
         }
     }
 

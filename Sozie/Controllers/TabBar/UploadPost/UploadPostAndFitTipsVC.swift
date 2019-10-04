@@ -250,28 +250,26 @@ class UploadPostAndFitTipsVC: BaseViewController {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 // Already authorized
-            }
-            else {
+            } else {
                 // Either denied or notDetermined
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
                     (granted, error) in
                     // add your own
-                    let alertController = UIAlertController(title: "Notification Alert", message: "please enable notifications", preferredStyle: .alert)
-                    let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                    let alertController = UIAlertController(title: "Notification Alert", message: "Enable notifications to get instant alerts\nBy enabling notifications, you can keep up to date with new requests from Sozie. ", preferredStyle: .alert)
+                    let settingsAction = UIAlertAction(title: "Enable Notifications", style: .default) { (_) -> Void in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
                         }
                         if UIApplication.shared.canOpenURL(settingsUrl) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (_) in
                             })
                         }
                     }
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                    let cancelAction = UIAlertAction(title: "Not Now", style: .default, handler: nil)
                     alertController.addAction(cancelAction)
                     alertController.addAction(settingsAction)
                     DispatchQueue.main.async {
                         self.present(alertController, animated: true, completion: nil)
-                        
                     }
                 }
             }

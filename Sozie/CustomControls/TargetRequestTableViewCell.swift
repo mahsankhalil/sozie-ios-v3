@@ -86,6 +86,8 @@ extension TargetRequestTableViewCell: CellConfigurable {
             logoImageView.isHidden = true
             backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
         }
+        logoImageView.isHidden = true
+        backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
         self.handleAcceptRejectFunctionality(viewModel: viewModel)
     }
     func handleAcceptRejectFunctionality(viewModel: RowViewModel) {

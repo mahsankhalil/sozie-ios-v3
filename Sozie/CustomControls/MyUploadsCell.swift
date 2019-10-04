@@ -21,6 +21,9 @@ class MyUploadsCell: UITableViewCell {
     @IBOutlet weak var viewBalanceButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var requestedForLabel: UILabel!
+    @IBOutlet weak var requestedForImageView: UIImageView!
+    
     weak var delegate: MyUploadsCellDelegate?
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     var viewModels: [UploadViewModel] = []
@@ -65,16 +68,29 @@ extension MyUploadsCell: CellConfigurable {
             }
             self.collectionView.reloadData()
             self.resetTutrialButton.isHidden = true
+            if postViewModel.isModerated == true {
+                self.descriptionLabel.isHidden = false
+            } else {
+                self.descriptionLabel.isHidden = true
+            }
             if postViewModel.isApproved {
                 self.bottomView.backgroundColor = UIColor(hex: "FC8787")
                 if postViewModel.isTutorial {
                     self.cornerIcon.isHidden = false
                     self.descriptionLabel.text = "Tutorial approved"
                     self.viewBalanceButton.isHidden = true
+                    self.resetTutrialButton.isHidden = true
+                    requestedForLabel.isHidden = true
+                    requestedForImageView.isHidden = true
+                    self.deleteButton.isHidden = true
                 } else {
                     self.cornerIcon.isHidden = true
                     self.descriptionLabel.text = "Post approved"
                     self.viewBalanceButton.isHidden = false
+                    self.resetTutrialButton.isHidden = true
+                    requestedForLabel.isHidden = false
+                    requestedForImageView.isHidden = false
+                    self.deleteButton.isHidden = false
                 }
                 self.viewBalanceButton.isEnabled = true
             } else {
@@ -83,11 +99,22 @@ extension MyUploadsCell: CellConfigurable {
                     self.cornerIcon.isHidden = false
                     self.descriptionLabel.text = "Tutorial not approved"
                     self.viewBalanceButton.isHidden = true
-                    self.resetTutrialButton.isHidden = false
+                    if postViewModel.isModerated == true {
+                        self.resetTutrialButton.isHidden = false
+                    } else {
+                        self.resetTutrialButton.isHidden = true
+                    }
+                    requestedForLabel.isHidden = true
+                    requestedForImageView.isHidden = true
+                    self.deleteButton.isHidden = true
                 } else {
                     self.cornerIcon.isHidden = true
                     self.descriptionLabel.text = "Post not approved"
                     self.viewBalanceButton.isHidden = false
+                    self.resetTutrialButton.isHidden = true
+                    requestedForLabel.isHidden = false
+                    requestedForImageView.isHidden = false
+                    self.deleteButton.isHidden = false
                 }
                 self.viewBalanceButton.isEnabled = false
             }
