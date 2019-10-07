@@ -20,5 +20,6 @@ ErrorViewModeling, MeasurementTypeProviding, RowViewModel {
     var displayError: Bool
     var errorMessage: String
     var measurementType: MeasurementType
+    var columnUnit: String
     let reuseIdentifier = "SingleTextFieldCell"
 }

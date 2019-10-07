@@ -30,7 +30,7 @@ class TabBarVC: UITabBarController {
     }
 
     @objc func showProfileTab() {
-        
+        self.selectedIndex = 2
     }
     @objc func updateBadge() {
         if Intercom.unreadConversationCount() == 0 {

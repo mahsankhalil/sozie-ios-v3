@@ -3476,6 +3476,17 @@ They will try on items of your choice so you can be sure of what size you want t
                                                     <action selector="clickHereButtonTapped:" destination="Rft-Ix-kIG" eventType="touchUpInside" id="v2d-DJ-lMW"/>
                                                 </connections>
                                             </button>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zuF-N8-OyU">
+                                                <rect key="frame" x="283" y="54" width="67" height="29"/>
+                                                <segments>
+                                                    <segment title="in"/>
+                                                    <segment title="cm"/>
+                                                </segments>
+                                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="segmentControlValueChanged:" destination="Rft-Ix-kIG" eventType="valueChanged" id="Bwh-de-Qsc"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -3506,6 +3517,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                             <constraint firstItem="J6J-N3-J31" firstAttribute="leading" secondItem="ZCW-fF-mUM" secondAttribute="trailing" constant="2.5" id="YRf-b6-o8D"/>
                                             <constraint firstItem="jbN-b4-NnX" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="25" id="aqK-eU-kUk"/>
                                             <constraint firstItem="oIT-6i-FxZ" firstAttribute="leading" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="25" id="bNd-mF-xVl"/>
+                                            <constraint firstItem="zuF-N8-OyU" firstAttribute="centerY" secondItem="4FQ-14-O9L" secondAttribute="centerY" id="cBc-Ss-AlJ"/>
                                             <constraint firstItem="J6J-N3-J31" firstAttribute="top" secondItem="oIT-6i-FxZ" secondAttribute="bottom" constant="2" id="drl-SL-0BP">
                                                 <variation key="heightClass=regular" constant="5"/>
                                             </constraint>
@@ -3517,6 +3529,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <variation key="heightClass=regular" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="Zja-wb-SkP" firstAttribute="leading" relation="lessThanOrEqual" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="30" id="rwG-ac-8UE"/>
+                                            <constraint firstAttribute="trailing" secondItem="zuF-N8-OyU" secondAttribute="trailing" constant="25" id="sf8-PQ-8M1"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J6J-N3-J31" secondAttribute="trailing" constant="20" symbolic="YES" id="xoa-Fz-mv4"/>
                                             <constraint firstItem="oIT-6i-FxZ" firstAttribute="top" secondItem="4FQ-14-O9L" secondAttribute="bottom" constant="1" id="zIx-Ds-hFQ">
                                                 <variation key="heightClass=regular" constant="0.0"/>
@@ -3603,6 +3616,7 @@ They will try on items of your choice so you can be sure of what size you want t
                     <connections>
                         <outlet property="backBtn" destination="bvC-1f-lfT" id="ccs-3R-N5K"/>
                         <outlet property="scrollView" destination="fyS-U5-Ecw" id="RHO-uh-Ibh"/>
+                        <outlet property="segmentControl" destination="zuF-N8-OyU" id="HCR-2s-Utz"/>
                         <outlet property="skipButton" destination="UUx-dl-z50" id="JNy-SM-da2"/>
                         <outlet property="tblVu" destination="jbN-b4-NnX" id="88G-FT-2cn"/>
                         <outlet property="titleLabel" destination="4FQ-14-O9L" id="1W1-87-HNy"/>
@@ -3612,7 +3626,7 @@ They will try on items of your choice so you can be sure of what size you want t
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4g-IE-cY3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2259.375" y="427.81690140845069"/>
+            <point key="canvasLocation" x="2258.4000000000001" y="427.73613193403304"/>
         </scene>
         <!--Measurement TutorialVC-->
         <scene sceneID="2y1-Zj-ZYv">

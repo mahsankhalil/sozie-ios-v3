@@ -12,8 +12,8 @@ struct Size: Codable {
 
     var general: [General]
     var height: Height
-    var waist: [Int]
-    var hip: [Int]
+    var waist: IntegerScales
+    var hip: IntegerScales
     var bra: Bra
     var sizeChart: [SizeChart]
 
@@ -30,8 +30,8 @@ struct Size: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         general = try values.decode([General].self, forKey: .general)
         height = try values.decode(Height.self, forKey: .height)
-        waist = try values.decode([Int].self, forKey: .waist)
-        hip = try values.decode([Int].self, forKey: .hip)
+        waist = try values.decode(IntegerScales.self, forKey: .waist)
+        hip = try values.decode(IntegerScales.self, forKey: .hip)
         bra = try values.decode(Bra.self, forKey: .bra)
         sizeChart = try values.decode([SizeChart].self, forKey: .sizeChart)
     }
@@ -65,6 +65,22 @@ struct SizeChart: Codable {
     }
 }
 
+struct IntegerScales: Codable {
+    
+    var inches: [Int]
+    var centimeters: [Int]
+    
+    enum CodingKeys: String, CodingKey {
+        case inches
+        case centimeters
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        inches = try values.decode([Int].self, forKey: .inches)
+        centimeters = try values.decode([Int].self, forKey: .centimeters)
+    }
+}
 struct Scales: Codable {
 
     var inch: Double
@@ -110,23 +126,25 @@ struct Height: Codable {
 
     var inches: [Int]
     var feet: [Int]
-
+    var centimeters: [Int]
     enum CodingKeys: String, CodingKey {
         case inches
         case feet
+        case centimeters
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         inches = try values.decode([Int].self, forKey: .inches)
         feet = try values.decode([Int].self, forKey: .feet)
+        centimeters = try values.decode([Int].self, forKey: .centimeters)
     }
 }
 
 struct Bra: Codable {
 
     var cup: [String]
-    var band: [Int]
+    var band: IntegerScales
 
     enum CodingKeys: String, CodingKey {
         case cup
@@ -136,6 +154,6 @@ struct Bra: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         cup = try values.decode([String].self, forKey: .cup)
-        band = try values.decode([Int].self, forKey: .band)
+        band = try values.decode(IntegerScales.self, forKey: .band)
     }
 }

@@ -54,6 +54,8 @@ extension SingleTextFieldCell: CellConfigurable {
                 textField.currentValue1 = text
                 textField.text = text
             }
+            textField.applyRightVuLblWith(title: model.columnUnit)
+
         }
         if let errorModel = viewModel as? ErrorViewModeling {
             if errorModel.displayError, let errorMessageModel = viewModel as? ErrorMessageViewModeling {
