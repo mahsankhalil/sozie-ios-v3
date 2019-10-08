@@ -284,7 +284,7 @@ class SozieRequestsVC: UIViewController {
             self.showInStockTutorial()
             if let tabBarContrlr = self.parent?.parent?.parent?.parent as? TabBarVC {
 //                tabBarContrlr.tabBar.isUserInteractionEnabled = false
-                if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![3] as? UITabBarItem {
+                if let firstItem = tabBarContrlr.tabBar.items?[0], let secondItem = tabBarContrlr.tabBar.items?[1], let thirdItem = tabBarContrlr.tabBar.items?[2] {
                     firstItem.isEnabled = false
                     secondItem.isEnabled = false
                     thirdItem.isEnabled = false

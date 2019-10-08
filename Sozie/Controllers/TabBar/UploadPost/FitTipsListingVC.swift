@@ -48,7 +48,7 @@ class FitTipsListingVC: UIViewController {
                 }
 
             } else if question.type == "T" {
-                if let answer = question.answer {
+                if let _ = question.answer {
                     return true
                 }
             }

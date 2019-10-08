@@ -793,7 +793,7 @@
                         <outlet property="swipeToSeeView" destination="Yf5-ou-rod" id="JjM-eO-5QN"/>
                         <outlet property="tableViewHeightConstraint" destination="LM5-LO-nzb" id="Zfo-gs-Pau"/>
                         <outlet property="topViewHeightConstraint" destination="0TM-GL-lj3" id="Q12-Iy-7iW"/>
-                        <segue destination="EfA-he-4gM" kind="show" identifier="" id="567-1Z-O12"/>
+                        <segue destination="EfA-he-4gM" kind="show" identifier="toUploadPostVC" id="567-1Z-O12"/>
                         <segue destination="UDD-yH-x4w" kind="presentation" identifier="toWebVC" modalPresentationStyle="overFullScreen" id="5CF-lV-hkA"/>
                         <segue destination="9Mm-4c-zhn" kind="show" identifier="toCommentsDetail" id="2H7-Rs-2mw"/>
                         <segue destination="hk2-EG-beL" kind="show" identifier="toUploadPost" id="o6Q-L5-dL4"/>
@@ -2396,7 +2396,7 @@ Let's go back and accept your first request</string>
                         <outlet property="waistLabel" destination="4Wg-QZ-baL" id="Bzz-Va-O6S"/>
                         <segue destination="EfA-he-4gM" kind="show" identifier="toProfileVC" id="LXu-v3-0l3"/>
                         <segue destination="Rw2-Kf-DVh" kind="show" identifier="toSozieProfile" id="bX4-Sh-7sC"/>
-                        <segue destination="hk2-EG-beL" kind="show" id="nT3-Pv-VcT"/>
+                        <segue destination="hk2-EG-beL" kind="show" identifier="toUploadPostAndFitTips" id="nT3-Pv-VcT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Vi-gl-k7Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5410,7 +5410,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="up-arrow-sketch" width="50" height="65.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LXu-v3-0l3"/>
+        <segue reference="567-1Z-O12"/>
         <segue reference="nT3-Pv-VcT"/>
         <segue reference="ANr-fN-ARm"/>
     </inferredMetricsTieBreakers>
