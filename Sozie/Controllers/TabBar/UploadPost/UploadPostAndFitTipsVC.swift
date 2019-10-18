@@ -420,9 +420,45 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         if viewModels[indexPath.row].image == nil {
-            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+                let imagePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
+                imagePickerVC.delegate = self
+                self.present(imagePickerVC, animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+                UtilityManager.openGalleryFrom(viewController: self)
+            }))
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         } else {
             self.postImageView.image = viewModels[indexPath.row].image
+        }
+    }
+}
+extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
+    func processCapturedImage(image: UIImage) {
+        if let index = selectedIndex {
+            let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 750, height: (image.size.height/image.size.width)*750))
+            viewModels[index].image = scaledImg
+            self.postImageView.image = scaledImg
+            if index > 2 {
+                if index < 5 {
+                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    viewModels.append(viewModel)
+                }
+                viewModels[index].title = ""
+            }
+            self.imagesCollectionView.reloadData()
+        }
+        if checkIfAllImagesUplaoded() {
+            if UserDefaultManager.getIfPostTutorialShown() == false {
+                removePictureTutorial()
+                if isFitTipsTutorialShown == false {
+                    addFitTipsTutorial()
+                    self.imagesCollectionView.isUserInteractionEnabled = false
+                }
+            }
         }
     }
 }

@@ -189,6 +189,7 @@
 		61C40D14221EB35D00FBD7FF /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */; };
 		61C40D16221EC65600FBD7FF /* Apricot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D15221EC65600FBD7FF /* Apricot@3x.png */; };
 		61CC5CF822E1E261003C3455 /* TutorialProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CC5CF722E1E261003C3455 /* TutorialProgressVC.swift */; };
+		61D75379235872D1002BD92A /* RequestImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D75378235872D1002BD92A /* RequestImagePickerController.swift */; };
 		61D769A1232102D000EDBC4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61D769A0232102D000EDBC4A /* GoogleService-Info.plist */; };
 		61D769A323210C9000EDBC4A /* GoogleService-Info-DEV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61D769A223210C9000EDBC4A /* GoogleService-Info-DEV.plist */; };
 		61E8E73322044FA9008C33BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E8E73222044FA9008C33BC /* ViewController.swift */; };
@@ -445,6 +446,7 @@
 		61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
 		61C40D15221EC65600FBD7FF /* Apricot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Apricot@3x.png"; sourceTree = "<group>"; };
 		61CC5CF722E1E261003C3455 /* TutorialProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProgressVC.swift; sourceTree = "<group>"; };
+		61D75378235872D1002BD92A /* RequestImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestImagePickerController.swift; sourceTree = "<group>"; };
 		61D769A0232102D000EDBC4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61D769A223210C9000EDBC4A /* GoogleService-Info-DEV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-DEV.plist"; sourceTree = "<group>"; };
 		61E8E73222044FA9008C33BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				61B565CC22CE00110073DBA3 /* FitTipsAnswerTextVC.swift */,
 				61EE668C22D36F8F004265F1 /* SozieRequestTutorialVC.swift */,
 				615816632333A4A500990F41 /* ThankYouController.swift */,
+				61D75378235872D1002BD92A /* RequestImagePickerController.swift */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -1339,6 +1342,7 @@
 				6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */,
 				61816C3822B24D3900D67B06 /* FilledViewModeling.swift in Sources */,
 				612F00D122084B6D0025DBEA /* PopupNavController.swift in Sources */,
+				61D75379235872D1002BD92A /* RequestImagePickerController.swift in Sources */,
 				613F40EF22201567009AABA6 /* SelectionProviding.swift in Sources */,
 				6140C07522117CD200D9CE4F /* ProductDetailVC.swift in Sources */,
 				61B5A0D922A13300009D372C /* BrandIdProviding.swift in Sources */,
@@ -1618,7 +1622,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
-				PRODUCT_NAME = "$(TARGET_NAME)-Stage";
+				PRODUCT_NAME = "$(TARGET_NAME)-Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Sozie/Sozie-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
