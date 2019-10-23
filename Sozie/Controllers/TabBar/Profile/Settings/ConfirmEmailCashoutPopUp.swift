@@ -24,8 +24,6 @@ class ConfirmEmailCashoutPopUp: UIViewController {
         let instnce = storyboard.instantiateViewController(withIdentifier: "ConfirmEmailCashoutPopUp") as! ConfirmEmailCashoutPopUp
         return instnce
     }
-    
-
     /*
     // MARK: - Navigation
 
@@ -41,7 +39,7 @@ class ConfirmEmailCashoutPopUp: UIViewController {
         ServerManager.sharedInstance.cashOut(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                UtilityManager.showMessageWith(title: "Success!", body: (response as! ValidateRespose).detail, in: self,okBtnTitle: "Ok", cancelBtnTitle: nil, dismissAfter: nil, leftAligned: nil ) {
+                UtilityManager.showMessageWith(title: "Success!", body: (response as! ValidateRespose).detail, in: self, okBtnTitle: "Ok", cancelBtnTitle: nil, dismissAfter: nil, leftAligned: nil ) {
                     self.closeHandler?()
                 }
             } else {
@@ -50,7 +48,7 @@ class ConfirmEmailCashoutPopUp: UIViewController {
         }
     }
     @IBAction func submitButtonTapped(_ sender: Any) {
-        if let email = emailTextField.text  {
+        if let email = emailTextField.text {
             if email.isValidEmail() {
                 UtilityManager.showMessageWith(title: "Confirmation!", body: "Are you sure to get cashout on this email\n" + email, in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                     self.submitEmailForCashOut(email: email)
@@ -58,12 +56,10 @@ class ConfirmEmailCashoutPopUp: UIViewController {
             } else {
                 UtilityManager.showMessageWith(title: "Warning!", body: "Please enter valid email", in: self)
             }
-            
         } else {
             UtilityManager.showMessageWith(title: "Warning!", body: "Please enter valid email", in: self)
         }
     }
-    
 }
 extension ConfirmEmailCashoutPopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {

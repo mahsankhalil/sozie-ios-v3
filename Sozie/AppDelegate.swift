@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
         self.setupSegment()
         self.perform(#selector(self.createIdentityOnSegment), with: nil, afterDelay: 5.0)
-        
         if UserDefaultManager.getIfFirstTime() {
             SegmentManager.createEventDownloaded()
             UserDefaultManager.setNotFirstTime()
@@ -178,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if Intercom.isIntercomPushNotification(userInfo) {
-            if (application.applicationState == UIApplication.State.inactive || application.applicationState == UIApplication.State.background) {
+            if application.applicationState == UIApplication.State.inactive || application.applicationState == UIApplication.State.background {
                 if UserDefaultManager.isUserLoggedIn() {
                     if UserDefaultManager.checkIfMeasurementEmpty() == false {
                         self.perform(#selector(self.showProfileTab), with: nil, afterDelay: 1.0)

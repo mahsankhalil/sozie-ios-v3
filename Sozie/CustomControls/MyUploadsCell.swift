@@ -23,7 +23,6 @@ class MyUploadsCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var requestedForLabel: UILabel!
     @IBOutlet weak var requestedForImageView: UIImageView!
-    
     weak var delegate: MyUploadsCellDelegate?
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     var viewModels: [UploadViewModel] = []
@@ -50,7 +49,6 @@ class MyUploadsCell: UITableViewCell {
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ResetFirstTime")))
         delegate?.resetTutorialButtonTapped(button: sender as! UIButton)
     }
-    
 }
 extension MyUploadsCell: ButtonProviding {
     func assignTagWith(_ index: Int) {
@@ -76,56 +74,67 @@ extension MyUploadsCell: CellConfigurable {
             if postViewModel.isApproved {
                 self.bottomView.backgroundColor = UIColor(hex: "FC8787")
                 if postViewModel.isTutorial {
-                    self.cornerIcon.isHidden = false
-                    self.descriptionLabel.text = "Tutorial approved"
-                    self.viewBalanceButton.isHidden = true
-                    self.resetTutrialButton.isHidden = true
-                    requestedForLabel.isHidden = true
-                    requestedForImageView.isHidden = true
-                    self.deleteButton.isHidden = true
+                    showTutorialApproved(postViewModel: postViewModel)
                 } else {
-                    self.cornerIcon.isHidden = true
-                    self.descriptionLabel.text = "Post approved"
-                    self.viewBalanceButton.isHidden = false
-                    self.resetTutrialButton.isHidden = true
-                    requestedForLabel.isHidden = false
-                    requestedForImageView.isHidden = false
-                    self.deleteButton.isHidden = false
+                    showPostApproved(postViewModel: postViewModel)
                 }
                 self.viewBalanceButton.isEnabled = true
             } else {
                 self.bottomView.backgroundColor = UIColor(hex: "DCDCDC")
                 if postViewModel.isTutorial {
-                    self.cornerIcon.isHidden = false
-                    self.descriptionLabel.text = "Tutorial not approved"
-                    self.viewBalanceButton.isHidden = true
-                    if postViewModel.isModerated == true {
-                        self.resetTutrialButton.isHidden = false
-                    } else {
-                        self.resetTutrialButton.isHidden = true
-                    }
-                    requestedForLabel.isHidden = true
-                    requestedForImageView.isHidden = true
-                    self.deleteButton.isHidden = true
+                    showTutorialNotApproved(postViewModel: postViewModel)
                 } else {
-                    self.cornerIcon.isHidden = true
-                    self.descriptionLabel.text = "Post not approved"
-                    self.viewBalanceButton.isHidden = false
-                    self.resetTutrialButton.isHidden = true
-                    requestedForLabel.isHidden = false
-                    requestedForImageView.isHidden = false
-                    self.deleteButton.isHidden = false
+                    showPostNotApproved(postViewModel: postViewModel)
                 }
                 self.viewBalanceButton.isEnabled = false
             }
         }
+    }
+    func showPostApproved(postViewModel: UserPostWithUploadsViewModel) {
+        self.cornerIcon.isHidden = true
+        self.descriptionLabel.text = "Post approved"
+        self.viewBalanceButton.isHidden = false
+        self.resetTutrialButton.isHidden = true
+        requestedForLabel.isHidden = false
+        requestedForImageView.isHidden = false
+        self.deleteButton.isHidden = false
+    }
+    func showPostNotApproved(postViewModel: UserPostWithUploadsViewModel) {
+        self.cornerIcon.isHidden = true
+        self.descriptionLabel.text = "Post not approved"
+        self.viewBalanceButton.isHidden = false
+        self.resetTutrialButton.isHidden = true
+        requestedForLabel.isHidden = false
+        requestedForImageView.isHidden = false
+        self.deleteButton.isHidden = false
+    }
+    func showTutorialApproved(postViewModel: UserPostWithUploadsViewModel) {
+        self.cornerIcon.isHidden = false
+        self.descriptionLabel.text = "Tutorial approved"
+        self.viewBalanceButton.isHidden = true
+        self.resetTutrialButton.isHidden = true
+        requestedForLabel.isHidden = true
+        requestedForImageView.isHidden = true
+        self.deleteButton.isHidden = true
+    }
+    func showTutorialNotApproved(postViewModel: UserPostWithUploadsViewModel) {
+        self.cornerIcon.isHidden = false
+        self.descriptionLabel.text = "Tutorial not approved"
+        self.viewBalanceButton.isHidden = true
+        if postViewModel.isModerated == true {
+            self.resetTutrialButton.isHidden = false
+        } else {
+            self.resetTutrialButton.isHidden = true
+        }
+        requestedForLabel.isHidden = true
+        requestedForImageView.isHidden = true
+        self.deleteButton.isHidden = true
     }
 }
 extension MyUploadsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModels.count
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let rowViewModel = viewModels[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostSizeCollectionViewCell", for: indexPath)
@@ -134,7 +143,6 @@ extension MyUploadsCell: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let availableWidth: Int = Int(UIScreen.main.bounds.size.width - 6 )
 //        let widthPerItem = Double(availableWidth/3)
@@ -146,7 +154,6 @@ extension MyUploadsCell: UICollectionViewDelegate, UICollectionViewDataSource {
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }
@@ -154,7 +161,6 @@ extension MyUploadsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        currentPost = posts[indexPath.row]
 //        self.performSegue(withIdentifier: "toProductDetail", sender: self)

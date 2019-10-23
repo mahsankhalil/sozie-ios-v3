@@ -73,7 +73,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         // Add an NSLinkAttributeName with a value of an url or anything else
         selectablePart.addAttribute(NSAttributedString.Key.link, value: "terms", range: NSMakeRange(0, selectablePart.length))
         // Combine the non-selectable string with the selectable string
-        
         text.append(selectablePart)
         text.append(text2)
         text.append(selectablePart2)

@@ -477,21 +477,24 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 }
             }
         } else {
-            addCommentHeightConstraint.constant = 0.0
-            if let reviews = currentProduct?.reviews {
-                commentViewModels.removeAll()
-                let totalCount = reviews.totalCount
-                if totalCount <= 2 {
-                    allReviewButton.setTitle(String(reviews.totalCount) + " Reviews", for: .normal)
-                } else {
-                    allReviewButton.setTitle("View all " + String(reviews.totalCount) + " reviews", for: .normal)
-                }
-                for review in reviews.reviews {
-                    let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
-                    commentViewModels.append(viewModel)
-                }
-                commentsTableView.reloadData()
+            hideAddCommentView()
+        }
+    }
+    func hideAddCommentView() {
+        addCommentHeightConstraint.constant = 0.0
+        if let reviews = currentProduct?.reviews {
+            commentViewModels.removeAll()
+            let totalCount = reviews.totalCount
+            if totalCount <= 2 {
+                allReviewButton.setTitle(String(reviews.totalCount) + " Reviews", for: .normal)
+            } else {
+                allReviewButton.setTitle("View all " + String(reviews.totalCount) + " reviews", for: .normal)
             }
+            for review in reviews.reviews {
+                let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
+                commentViewModels.append(viewModel)
+            }
+            commentsTableView.reloadData()
         }
     }
     func getAttributedStringWith(name: String, text: String) -> NSAttributedString {

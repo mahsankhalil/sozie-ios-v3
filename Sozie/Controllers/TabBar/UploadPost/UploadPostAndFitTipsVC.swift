@@ -210,12 +210,8 @@ class UploadPostAndFitTipsVC: BaseViewController {
         }
     }
     func checkIfAllImagesUplaoded() -> Bool {
-        for index in 0...viewModels.count {
-            if index < 3 {
-                if viewModels[index].image == nil {
-                    return false
-                }
-            }
+        for index in 0...viewModels.count where index < 3 && viewModels[index].image == nil {
+            return false
         }
         return true
     }
@@ -252,8 +248,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 // Already authorized
             } else {
                 // Either denied or notDetermined
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
-                    (granted, error) in
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in
                     // add your own
                     let alertController = UIAlertController(title: "Notification Alert", message: "Enable notifications to get instant alerts\nBy enabling notifications, you can keep up to date with new requests from Sozie. ", preferredStyle: .alert)
                     let settingsAction = UIAlertAction(title: "Enable Notifications", style: .default) { (_) -> Void in

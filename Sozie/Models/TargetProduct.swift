@@ -17,7 +17,6 @@ struct ProductResponse: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         products = try values.decode([TargetProduct].self, forKey: .products)
     }
-    
 }
 struct TargetProduct: Codable {
     var productId: String

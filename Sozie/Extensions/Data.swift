@@ -14,4 +14,3 @@ extension Data {
         return hexString
     }
 }
-

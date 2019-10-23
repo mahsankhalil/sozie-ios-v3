@@ -44,7 +44,6 @@ extension DisclosureCell: CellConfigurable {
                 }
             }
         }
-        
         // Check for CheckmarkViewModeling
     }
 }

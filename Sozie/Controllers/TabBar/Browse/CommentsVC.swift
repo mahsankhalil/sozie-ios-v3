@@ -9,8 +9,8 @@
 import UIKit
 import SVProgressHUD
 public enum CommentType: String {
-    case post = "post"
-    case product = "product"
+    case post
+    case product
 }
 class CommentsVC: UIViewController {
 

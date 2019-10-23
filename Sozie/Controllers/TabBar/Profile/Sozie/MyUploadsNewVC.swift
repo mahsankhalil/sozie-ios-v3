@@ -97,7 +97,6 @@ extension MyUploadsNewVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
@@ -111,9 +110,7 @@ extension MyUploadsNewVC: UITableViewDelegate, UITableViewDataSource {
 }
 extension MyUploadsNewVC: MyUploadsCellDelegate {
     func deleteButtonTapped(button: UIButton) {
-        
     }
-    
     func viewBalanceButtonTapped(button: UIButton) {
         let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
         let balanceVC = storyBoard.instantiateViewController(withIdentifier: "MyBalanceVC") as! MyBalanceVC

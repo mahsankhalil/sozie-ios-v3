@@ -48,7 +48,7 @@ class FitTipsListingVC: UIViewController {
                 }
 
             } else if question.type == "T" {
-                if let _ = question.answer {
+                if question.answer != nil {
                     return true
                 }
             }
@@ -57,10 +57,8 @@ class FitTipsListingVC: UIViewController {
     }
     func checkIfAnswered(text: String, answer: String) -> Bool {
         let answers = answer.components(separatedBy: ",")
-        for currentAnswer in answers {
-            if currentAnswer == text {
-                return true
-            }
+        for currentAnswer in answers where currentAnswer == text {
+            return true
         }
         return false
     }

@@ -82,7 +82,7 @@ struct Uploads: Codable {
     var imageURL: String
     var reviewAction: String
     var isApproved: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case uploadId = "id"
         case postId = "post"
@@ -90,7 +90,6 @@ struct Uploads: Codable {
         case reviewAction = "review_action"
         case isApproved = "is_approved"
     }
-    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         uploadId = try values.decode(Int.self, forKey: .uploadId)

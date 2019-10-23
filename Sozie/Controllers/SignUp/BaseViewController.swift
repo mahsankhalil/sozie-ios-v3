@@ -142,7 +142,6 @@ class BaseViewController: UIViewController {
         navigationItem.rightBarButtonItem = infoButton
     }
     @objc func infoButtonTapped() {
-        
     }
     @objc func tagItemButtonTapped() {
     }

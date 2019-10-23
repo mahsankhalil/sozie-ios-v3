@@ -88,17 +88,14 @@ extension SozieRequestTableViewCell: CellConfigurable {
                 waistLabel.text = "Waist: " + String(waist) + "'  | "
             }
         }
+        setupRequestedByWith(viewModel: viewModel)
+        self.handleAcceptRejectFunctionality(viewModel: viewModel)
+    }
+    func setupRequestedByWith(viewModel: RowViewModel) {
         if let availabilityModel = viewModel as? AvailabilityProviding {
             logoImageView.isHidden = !availabilityModel.isAvailable
             backgroudView.layer.borderColor = availabilityModel.isAvailable ? UIColor(hex: "FC8787").cgColor : UIColor(hex: "A6A6A6").cgColor
             if availabilityModel.isAvailable == true {
-//                if let currentUser = UserDefaultManager.getCurrentUserObject() {
-//                    if let brandId = currentUser.brand {
-//                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-//                            self.titleLabel.text = "Requested by " + brand.label
-//                        }
-//                    }
-//                }
                 if let brandProvider = viewModel as? BrandIdProviding {
                     if let brand = UserDefaultManager.getBrandWithId(brandId: brandProvider.brandId) {
                         self.titleLabel.text = "Requested by " + brand.label
@@ -111,16 +108,6 @@ extension SozieRequestTableViewCell: CellConfigurable {
             logoImageView.isHidden = true
             backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
         }
-        self.handleAcceptRejectFunctionality(viewModel: viewModel)
-//        if let acceptedViewModel = viewModel as? SelectionProviding {
-//            if acceptedViewModel.isSelected == true {
-//                self.acceptButton.setTitle("UPLOAD PICTURE", for: .normal)
-//                self.acceptButton.backgroundColor = UIColor(hex: "13AEF2")
-//            } else {
-//                self.acceptButton.setTitle("ACCEPT REQUEST", for: .normal)
-//                self.acceptButton.backgroundColor = UIColor(hex: "FC8787")
-//            }
-//        }
     }
     func handleAcceptRejectFunctionality(viewModel: RowViewModel) {
         if let acceptedViewModel = viewModel as? SelectionProviding {
@@ -193,6 +180,5 @@ extension SozieRequestTableViewCell: ButtonProviding {
     func assignTagWith(_ index: Int) {
         acceptButton.tag = index
         cancelButton.tag = index
-        
     }
 }

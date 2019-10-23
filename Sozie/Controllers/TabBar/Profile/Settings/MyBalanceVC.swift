@@ -60,7 +60,6 @@ class MyBalanceVC: UIViewController {
             UtilityManager.showMessageWith(title: "Insufficient Amount", body: "To cash out you need a minimum of $10", in: self)
             return
         }
-        
         let popUpInstnc = ConfirmEmailCashoutPopUp.instance()
         let popUpVC = PopupController
             .create(self)
@@ -72,9 +71,6 @@ class MyBalanceVC: UIViewController {
             popUpVC.dismiss()
             self.fetchDataFromServer()
         }
-       
-        
-        
 //        SVProgressHUD.show()
 //        ServerManager.sharedInstance.cashOut(params: [:]) { (isSuccess, response) in
 //            SVProgressHUD.dismiss()

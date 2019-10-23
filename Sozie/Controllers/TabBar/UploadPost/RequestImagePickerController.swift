@@ -12,7 +12,6 @@ protocol CaptureManagerDelegate: class {
     func processCapturedImage(image: UIImage)
 }
 class RequestImagePickerController: UIViewController {
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usePhotoButton: UIButton!
     @IBOutlet weak var retakeButton: UIButton!
@@ -30,7 +29,6 @@ class RequestImagePickerController: UIViewController {
         // Do any additional setup after loading the view.
         var topPadding: CGFloat! = 0.0
         var bottomPadding: CGFloat! = 0.0
-        
         if #available(iOS 11.0, *) {
             let window = UIApplication.shared.keyWindow
             topPadding = window?.safeAreaInsets.top ?? 0.0
@@ -54,9 +52,8 @@ class RequestImagePickerController: UIViewController {
         camerView.addSubview(faceImageView)
         feetImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - feetImageView.frame.size.width)/2.0), y: 409)
         camerView.addSubview(feetImageView)
-        
         let output = AVCaptureVideoDataOutput()
-        output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: kCVPixelFormatType_32BGRA] as! [String : Any]
+        output.videoSettings = ([kCVPixelBufferPixelFormatTypeKey as AnyHashable: kCVPixelFormatType_32BGRA] as! [String: Any])
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         captureSession?.addOutput(output)
     }
@@ -71,9 +68,7 @@ class RequestImagePickerController: UIViewController {
         let path = CGMutablePath()
         path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
         path.addEllipse(in: CGRect(origin: CGPoint(x: ((UIScreen.main.bounds.size.width - 70.0)/2.0), y: yOffset), size: CGSize(width: 70, height: 91)))
-        //        path.addEllipse(in: CGRect(origin: CGPoint(x: xOffset, y: yOffset), size: CGSize(width: 70, height: 91)))
-        path.addRect(CGRect(origin:  CGPoint(x: ((UIScreen.main.bounds.size.width - 239.0)/2.0), y: 420), size: CGSize(width: 239, height: 69)))
-        
+        path.addRect(CGRect(origin: CGPoint(x: ((UIScreen.main.bounds.size.width - 239.0)/2.0), y: 420), size: CGSize(width: 239, height: 69)))
         // Step 3
         let maskLayer = CAShapeLayer()
         maskLayer.backgroundColor = UIColor.black.cgColor
@@ -85,7 +80,6 @@ class RequestImagePickerController: UIViewController {
         // Step 4
         overlayView.layer.mask = maskLayer
         overlayView.clipsToBounds = true
-        
         return overlayView
     }
     @IBAction func userPhotoButtonTapped(_ sender: Any) {
@@ -94,7 +88,6 @@ class RequestImagePickerController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
     @IBAction func retakeButtonTapped(_ sender: Any) {
         captureSession?.startRunning()
         self.imageView.isHidden = true
@@ -116,7 +109,6 @@ class RequestImagePickerController: UIViewController {
         self.cancelButton.isHidden = true
         self.retakeButton.isHidden = false
         self.usePhotoButton.isHidden = false
-        
     }
     @IBAction func cameraButtonTaapped(_ sender: Any) {
         if let session = captureSession {
@@ -130,7 +122,7 @@ class RequestImagePickerController: UIViewController {
             //Get new input
             var newCamera: AVCaptureDevice! = nil
             if let input = currentCameraInput as? AVCaptureDeviceInput {
-                if (input.device.position == .back) {
+                if input.device.position == .back {
                     newCamera = cameraWithPosition(position: .front)
                 } else {
                     newCamera = cameraWithPosition(position: .back)
@@ -146,7 +138,7 @@ class RequestImagePickerController: UIViewController {
                 newVideoInput = nil
             }
             if newVideoInput == nil || err != nil {
-                print("Error creating capture device input: \(err?.localizedDescription)")
+                print("Error creating capture device input: \(err?.localizedDescription ?? "Error")")
             } else {
                 session.addInput(newVideoInput)
             }
@@ -156,14 +148,12 @@ class RequestImagePickerController: UIViewController {
     }
     func cameraWithPosition(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .unspecified)
-        for device in discoverySession.devices {
-            if device.position == position {
-                return device
-            }
+        for device in discoverySession.devices where device.position == position {
+            return device
         }
         return nil
     }
-    func getImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) ->UIImage? {
+    func getImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return nil
         }
@@ -171,7 +161,6 @@ class RequestImagePickerController: UIViewController {
 //        let image = UIImage(ciImage: cameraImage)
 //        CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
 //        return image
-        
         CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
         let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
         let width = CVPixelBufferGetWidth(pixelBuffer)
@@ -185,7 +174,7 @@ class RequestImagePickerController: UIViewController {
         guard let cgImage = context.makeImage() else {
             return nil
         }
-        let image = UIImage(cgImage: cgImage, scale: 1, orientation:.right)
+        let image = UIImage(cgImage: cgImage, scale: 1, orientation: .right)
         CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
         return self.cropToPreviewLayer(originalImage: image)
     }
@@ -195,10 +184,8 @@ class RequestImagePickerController: UIViewController {
         let width = CGFloat(cgImage.width)
         let height = CGFloat(cgImage.height)
         let cropRect = CGRect(x: outputRect.origin.x * width, y: outputRect.origin.y * height, width: outputRect.size.width * width, height: outputRect.size.height * height)
-        
         cgImage = cgImage.cropping(to: cropRect)!
         let croppedUIImage = UIImage(cgImage: cgImage, scale: 1.0, orientation: originalImage.imageOrientation)
-        
         return croppedUIImage
     }
     /*

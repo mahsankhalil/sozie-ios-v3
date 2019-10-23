@@ -38,6 +38,5 @@ extension TitleAndCheckmarkCell: CellConfigurable {
                 }
             }
         }
-        
     }
 }

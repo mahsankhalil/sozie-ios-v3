@@ -37,7 +37,7 @@ class BrowseWelcomeVC: UIViewController {
         var imageIcon = UIImage(named: "Profile icon")
         if let user = UserDefaultManager.getCurrentUserObject() {
             if let image = user.picture {
-                SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, imageData, error, success) in
+                SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, _, _, _) in
                     if picture != nil {
                         imageIcon = picture?.scaleImageToSize(newSize: CGSize(width: 30.0, height: 30.0))
                         imageIcon = imageIcon?.circularImage(15.0)!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)

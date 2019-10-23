@@ -67,7 +67,7 @@ struct AcceptedRequest: Codable {
         case acceptedById = "accepted_by"
         case expiry
     }
-    init(acceptedById: Int, acceptedId: Int,expiry: String) {
+    init(acceptedById: Int, acceptedId: Int, expiry: String) {
         self.acceptedId = acceptedId
         self.acceptedById = acceptedById
         self.expiry = expiry

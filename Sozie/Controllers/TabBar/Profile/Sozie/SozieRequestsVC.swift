@@ -86,7 +86,6 @@ class SozieRequestsVC: UIViewController {
             let scrollView = parent.view.subviews.compactMap { $0 as? UIScrollView }.first
             scrollView!.isScrollEnabled = false
         }
-        
     }
     func enableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
@@ -510,35 +509,38 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 showUploadPostTutorial()
                 return
             }
-            SVProgressHUD.show()
-            var dataDict = [String: Any]()
-            dataDict["product_request"] = currentRequest?.requestId
-            ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
-                SVProgressHUD.dismiss()
-                if isSuccess {
-                    self.serverParams.removeAll()
-                    self.requests.removeAll()
-                    SVProgressHUD.show()
-                    self.fetchAllSozieRequests()
-                } else {
-                    let error = (response as! Error).localizedDescription
-                    if let errorDict = error.getColonSeparatedErrorDetails() {
-                        if let title = errorDict["title"] as? String, let description = errorDict["description"] as? String {
-                            if title == "Tutorial Rejected" {
-                                UserDefaultManager.makeUserGuideEnable()
-                                UserDefaultManager.removeAllUserGuidesShown()
-                                self.showResetTutorialPopup(text: description)
-                            } else if title == "Oops!" {
-                                UtilityManager.showMessageWith(title: title, body: description, in: self, leftAligned: true)
-                            } else {
-                                UtilityManager.showMessageWith(title: title, body: description, in: self)
-                            }
+            acceptRequestAPICall()
+        }
+    }
+    func acceptRequestAPICall() {
+        SVProgressHUD.show()
+        var dataDict = [String: Any]()
+        dataDict["product_request"] = currentRequest?.requestId
+        ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                self.serverParams.removeAll()
+                self.requests.removeAll()
+                SVProgressHUD.show()
+                self.fetchAllSozieRequests()
+            } else {
+                let error = (response as! Error).localizedDescription
+                if let errorDict = error.getColonSeparatedErrorDetails() {
+                    if let title = errorDict["title"] as? String, let description = errorDict["description"] as? String {
+                        if title == "Tutorial Rejected" {
+                            UserDefaultManager.makeUserGuideEnable()
+                            UserDefaultManager.removeAllUserGuidesShown()
+                            self.showResetTutorialPopup(text: description)
+                        } else if title == "Oops!" {
+                            UtilityManager.showMessageWith(title: title, body: description, in: self, leftAligned: true)
                         } else {
-                            UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                            UtilityManager.showMessageWith(title: title, body: description, in: self)
                         }
                     } else {
                         UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
                     }
+                } else {
+                    UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
                 }
             }
         }

@@ -60,13 +60,13 @@ class TabBarVC: UITabBarController {
         var imageIcon = UIImage(named: "Profile icon")
         if let user = UserDefaultManager.getCurrentUserObject() {
             if let image = user.picture {
-                SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, imageData, error, success) in
+                SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, _, _, _) in
                     if picture != nil {
                         imageIcon = picture?.scaleImageToSize(newSize: CGSize(width: 30.0, height: 30.0))
                         imageIcon = imageIcon?.circularImage(15.0)!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
 
-                        if let vc = self.viewControllers?[2] {
-                            vc.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: imageIcon)
+                        if let desiredVC = self.viewControllers?[2] {
+                            desiredVC.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: imageIcon)
                         }
                     }
                 }

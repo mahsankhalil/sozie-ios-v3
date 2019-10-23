@@ -54,42 +54,43 @@ class ProfileRootVC: BaseViewController {
     func populateCurrentUserData() {
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
             self.nameLabel.text = currentUser.username
-            if let measurement = currentUser.measurement {
-                if let bra = measurement.bra, let cup = measurement.cup {
-                    braLabel.text = "Bra Size: " + String(bra) + cup
+            populateMeasurementData(currentUser: currentUser)
+            if let imageURL = currentUser.picture {
+                if imageURL != "" {
+                    profileImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
                 }
-                if let unit = measurement.unit {
-                    if unit == "IN" {
-                        if let height = measurement.height {
-                            let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
-                            let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
-                            heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
-                        }
-                    } else {
-                        if let height = measurement.height {
-                            heightLabel.text = "Height: " + String(height) + "  |"
-                        }
-                    }
-                } else {
+            }
+        }
+    }
+    func populateMeasurementData(currentUser: User) {
+        if let measurement = currentUser.measurement {
+            if let bra = measurement.bra, let cup = measurement.cup {
+                braLabel.text = "Bra Size: " + String(bra) + cup
+            }
+            if let unit = measurement.unit {
+                if unit == "IN" {
                     if let height = measurement.height {
                         let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
                         let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
                         heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
                     }
-
+                } else {
+                    if let height = measurement.height {
+                        heightLabel.text = "Height: " + String(height) + "  |"
+                    }
                 }
-                
-                if let hip = measurement.hip {
-                    hipLabel.text = "Hip: " + String(hip) + "  |"
-                }
-                if let waist = measurement.waist {
-                    waistLabel.text = "Waist: " + String(waist) + "  |"
+            } else {
+                if let height = measurement.height {
+                    let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+                    let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
+                    heightLabel.text = "Height: " + feetMeasurement.value.feetToFeetInches() + "  |"
                 }
             }
-            if let imageURL = currentUser.picture {
-                if imageURL != "" {
-                    profileImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
-                }
+            if let hip = measurement.hip {
+                hipLabel.text = "Hip: " + String(hip) + "  |"
+            }
+            if let waist = measurement.waist {
+                waistLabel.text = "Waist: " + String(waist) + "  |"
             }
         }
     }

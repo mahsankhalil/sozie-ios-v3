@@ -72,20 +72,8 @@ class HubSpotManager: NSObject {
         HubSpotApiManager.sharedInstance.createContact(params: dataDict) { (_, _) in
         }
     }
-    class func updateContactWith(user: User) {
-        var properties = [[String: Any]]()
-        
-        
-        var firstNameProperty = [String: Any]()
-        firstNameProperty["property"] = "firstname"
-        firstNameProperty["value"] = user.firstName
-        properties.append(firstNameProperty)
-        
-        var lastNameProperty = [String: Any]()
-        lastNameProperty["property"] = "lastname"
-        lastNameProperty["value"] = user.lastName
-        properties.append(lastNameProperty)
-        
+    class func updateMeasurementsIn(user: User, properties: [[String: Any]]) -> [[String: Any]] {
+        var measurementProperties = properties
         if let height = user.measurement?.height {
             var heightProperty = [String: Any]()
             let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
@@ -93,30 +81,39 @@ class HubSpotManager: NSObject {
             let heightText = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
             heightProperty["property"] = "height"
             heightProperty["value"] = heightText
-            properties.append(heightProperty)
+            measurementProperties.append(heightProperty)
         }
-        
         var waistProperty = [String: Any]()
         waistProperty["property"] = "waist_measurement"
         waistProperty["value"] = user.measurement?.waist
-        properties.append(waistProperty)
-
+        measurementProperties.append(waistProperty)
         var hipsProperty = [String: Any]()
         hipsProperty["property"] = "hips_measurement"
         hipsProperty["value"] = user.measurement?.hip
-        properties.append(hipsProperty)
-        
+        measurementProperties.append(hipsProperty)
         if let bra = user.measurement?.bra, let cup = user.measurement?.cup {
             var braProperty = [String: Any]()
             braProperty["property"] = "bra_size"
             braProperty["value"] = String(bra) + cup
-            properties.append(braProperty)
+            measurementProperties.append(braProperty)
         }
         var sizeProperty = [String: Any]()
         sizeProperty["property"] = "dress_size"
         sizeProperty["value"] = user.measurement?.size
-        properties.append(sizeProperty)
-
+        measurementProperties.append(sizeProperty)
+        return measurementProperties
+    }
+    class func updateContactWith(user: User) {
+        var properties = [[String: Any]]()
+        var firstNameProperty = [String: Any]()
+        firstNameProperty["property"] = "firstname"
+        firstNameProperty["value"] = user.firstName
+        properties.append(firstNameProperty)
+        var lastNameProperty = [String: Any]()
+        lastNameProperty["property"] = "lastname"
+        lastNameProperty["value"] = user.lastName
+        properties.append(lastNameProperty)
+        properties = HubSpotManager.updateMeasurementsIn(user: user, properties: properties)
         let birthday = UtilityManager.dateFromStringWithFormat(date: user.birthday, format: "yyyy-MM-dd")
         let timeInterval = birthday.timeIntervalSince1970
 
@@ -124,7 +121,6 @@ class HubSpotManager: NSObject {
         dobProperty["property"] = "date_of_birth"
         dobProperty["value"] = Int64(timeInterval * 1000)
         properties.append(dobProperty)
-        
         let betaTester = Bundle.main.infoDictionary?["BETA_TESTER"] as! String
         var betaTesterBool = false
         if betaTester == "YES" {
@@ -134,7 +130,6 @@ class HubSpotManager: NSObject {
         betaTesterProperty["property"] = "beta_tester"
         betaTesterProperty["value"] = betaTesterBool
         properties.append(betaTesterProperty)
-        
         var signUpComplete = false
         if UserDefaultManager.checkIfMeasurementEmpty() {
             signUpComplete = true
@@ -143,7 +138,6 @@ class HubSpotManager: NSObject {
         signUpCompleteProperty["property"] = "sign-up_complete"
         signUpCompleteProperty["value"] = signUpComplete
         properties.append(signUpCompleteProperty)
-        
         var typeProperty = [String: Any]()
         typeProperty["property"] = "sozie"
         typeProperty["value"] = true

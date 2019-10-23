@@ -66,15 +66,14 @@ struct SizeChart: Codable {
 }
 
 struct IntegerScales: Codable {
-    
+
     var inches: [Int]
     var centimeters: [Int]
-    
+
     enum CodingKeys: String, CodingKey {
         case inches
         case centimeters
     }
-    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         inches = try values.decode([Int].self, forKey: .inches)

@@ -35,8 +35,6 @@ class SozieRequestErrorPopUp: UIViewController {
         instnce.descriptionText = description
         return instnce
     }
-
-
     /*
     // MARK: - Navigation
 
@@ -52,7 +50,6 @@ class SozieRequestErrorPopUp: UIViewController {
     @IBAction func restartTutorialButtonTapped(_ sender: Any) {
         self.resetTutorialHandler?()
     }
-    
 }
 extension SozieRequestErrorPopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
