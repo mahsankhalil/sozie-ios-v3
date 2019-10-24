@@ -18,7 +18,7 @@ ErrorViewModeling, MeasurementTypeProviding, RowViewModel {
     var columnPlaceholder: [String]
     var columnValueSuffix: [String]
     var columnValues: [[String]]
-    var textFieldDelegate: TextFieldDelegate
+    weak var textFieldDelegate: TextFieldDelegate?
     var displayError: Bool
     var errorMessage: String
     var measurementType: MeasurementType

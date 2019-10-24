@@ -260,8 +260,7 @@ class UtilityManager: NSObject {
             } else {
                 return short ? "1 m" : "Last month"
             }
-        }
-        else if weekOfYear >= 1 {
+        } else if weekOfYear >= 1 {
             return short ? "\(day + (weekOfYear * 7)) d" : "\(day + (weekOfYear * 7)) days ago"
         } else if day >= 2 {
             return short ? "\(day) d" : "\(day) days ago"

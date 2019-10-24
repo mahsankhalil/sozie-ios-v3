@@ -17,5 +17,5 @@ protocol DoubleTextFieldCellViewModeling {
     var columnPlaceholder: [String] { get }
     var columnValueSuffix: [String] { get }
     var columnValues: [[String]] { get }
-    var textFieldDelegate: TextFieldDelegate { get }
+    var textFieldDelegate: TextFieldDelegate? { get }
 }

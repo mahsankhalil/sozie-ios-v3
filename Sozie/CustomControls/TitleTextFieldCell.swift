@@ -10,7 +10,7 @@ import UIKit
 
 class TitleTextFieldCell: UITableViewCell {
     @IBOutlet weak var textField: CustomPickerTextField!
-    private var textFieldDelegate: TextFieldDelegate?
+    weak private var textFieldDelegate: TextFieldDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()

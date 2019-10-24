@@ -15,8 +15,8 @@ ErrorViewModeling, MeasurementTypeProviding, RowViewModel {
     var placeholder: String
     var values: [String]
     var valueSuffix: String
-    var buttonTappedDelegate: ButtonTappedDelegate
-    var textFieldDelegate: TextFieldDelegate
+    weak var buttonTappedDelegate: ButtonTappedDelegate?
+    weak var textFieldDelegate: TextFieldDelegate?
     var displayError: Bool
     var errorMessage: String
     var measurementType: MeasurementType

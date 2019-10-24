@@ -17,7 +17,7 @@ class PopupNavController: UINavigationController {
     var navigationHandler: (() -> Void)?
     var popupType: PopupType?
     var brandList: [Brand]?
-    var popupDelegate: PopupNavControllerDelegate?
+    weak var popupDelegate: PopupNavControllerDelegate?
     var closeHandler: (() -> Void)?
     var filterType: FilterType?
     var selectedBrandId: Int?

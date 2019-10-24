@@ -15,7 +15,7 @@ class SingleTextFieldCell: UITableViewCell {
     @IBOutlet weak var notSureButton: UIButton!
 
     weak private var buttonTappedDelegate: ButtonTappedDelegate?
-    private var textFieldDelegate: TextFieldDelegate?
+    weak private var textFieldDelegate: TextFieldDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
