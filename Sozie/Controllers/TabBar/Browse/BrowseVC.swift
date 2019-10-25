@@ -121,6 +121,18 @@ class BrowseVC: BaseViewController {
                 tutorialVC?.delegate = self
                 UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
             }
+        } else {
+            if UserDefaultManager.getIfGoShoppingShown() == false {
+                let goShoppingPopUp = self.storyboard?.instantiateViewController(withIdentifier: "GoShoppingVC")
+                goShoppingPopUp?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+                let popUpVC = PopupController
+                    .create(self.tabBarController!.navigationController!)
+                let options = PopupCustomOption.layout(.center)
+                popUpVC.cornerRadius = 15.0
+                _ = popUpVC.customize([options])
+                _ = popUpVC.show(goShoppingPopUp!)
+                UserDefaultManager.setGoShoppingShown()
+            }
         }
     }
     func showTipeViewAfterDelay() {

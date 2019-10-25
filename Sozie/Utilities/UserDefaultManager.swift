@@ -175,6 +175,13 @@ class UserDefaultManager: NSObject {
     static func getIfBrowseTutorialShown() -> Bool {
         return UserDefaults.standard.bool(forKey: "BrowseTutorialShown")
     }
+    static func setGoShoppingShown() {
+        UserDefaults.standard.set(true, forKey: "BrowseGoShoppingShown")
+        UserDefaults.standard.synchronize()
+    }
+    static func getIfGoShoppingShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: "BrowseGoShoppingShown")
+    }
     static func deleteBrowserTutorialShown() {
         UserDefaults.standard.set(false, forKey: "BrowseTutorialShown")
         UserDefaults.standard.synchronize()
