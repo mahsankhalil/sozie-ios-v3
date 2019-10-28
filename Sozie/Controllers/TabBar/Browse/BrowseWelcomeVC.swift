@@ -18,6 +18,7 @@ class BrowseWelcomeVC: UIViewController {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var welcomeNoteView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
     weak var delegate: BrowseWelcomeDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class BrowseWelcomeVC: UIViewController {
         welcomeNoteView.layer.borderWidth = 1.0
         welcomeNoteView.layer.borderColor = UIColor(hex: "CCCCCC").cgColor
         bottomViewWidthConstraint.constant = (UIScreen.main.bounds.size.width - 15)/4
+        bottomViewTrailingConstraint.constant = (UIScreen.main.bounds.size.width - 15)/4 + 5
         if let firstName = UserDefaultManager.getCurrentUserObject()?.firstName {
             nameLabel.text = "Hi " + firstName + ","
         }

@@ -47,6 +47,7 @@ class BrowseVC: BaseViewController {
     var filterBySozies = false
     var selectedIndex: Int?
     var searchString: String?
+    var totalCount: Int = 0
     private var brandList: [Brand] = [] {
         didSet {
             brandViewModels.removeAll()
@@ -383,6 +384,7 @@ class BrowseVC: BaseViewController {
             self.productsCollectionVu.refreshControl?.endRefreshing()
             self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
             if isSuccess {
+                self.totalCount = (response as! BrowseResponse).count
                 self.itemsCountLbl.text = String((response as! BrowseResponse).count) + ((response as! BrowseResponse).count <= 1 ? " ITEM" : " ITEMS")
                 self.productList.append(contentsOf: (response as! BrowseResponse).products)
                 self.productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 50
@@ -577,7 +579,9 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
-            loadNextPage()
+            if self.totalCount != productList.count {
+                loadNextPage()
+            }
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

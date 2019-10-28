@@ -2791,8 +2791,8 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="2vV-g5-hBI"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="leading" secondItem="zta-YF-Rdr" secondAttribute="leading" id="4o8-5r-Q92"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="top" secondItem="hIP-b5-G4r" secondAttribute="top" id="E37-zJ-gNj"/>
+                            <constraint firstItem="P5D-h3-5P0" firstAttribute="centerX" secondItem="puC-qk-dcC" secondAttribute="centerX" id="HNb-Ft-TS8"/>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="top" secondItem="puC-qk-dcC" secondAttribute="bottom" constant="5" id="O6R-Gg-qN9"/>
-                            <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="puC-qk-dcC" secondAttribute="trailing" constant="115" id="ba4-Ac-e33"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="kRm-WB-tuL"/>
                             <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="P5D-h3-5P0" secondAttribute="trailing" constant="95" id="shD-ZZ-IwB"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="trailing" secondItem="zta-YF-Rdr" secondAttribute="trailing" id="sqK-nb-qs6"/>
@@ -2800,6 +2800,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                         <viewLayoutGuide key="safeArea" id="zta-YF-Rdr"/>
                     </view>
                     <connections>
+                        <outlet property="bottomViewTrailingConstraint" destination="shD-ZZ-IwB" id="8aE-L8-yab"/>
                         <outlet property="bottomViewWidthConstraint" destination="A2B-lf-Jxw" id="3Mb-YG-5xp"/>
                         <outlet property="imageView" destination="puC-qk-dcC" id="tYP-V8-vBd"/>
                         <outlet property="nameLabel" destination="Dim-Qj-U5m" id="GKp-7S-AKW"/>
@@ -4484,7 +4485,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-37-bLi" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="251" width="327" height="34.5"/>
+                                                <rect key="frame" x="24" y="235.5" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -4495,7 +4496,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F8M-8y-sRN" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="311" width="327" height="35"/>
+                                                <rect key="frame" x="24" y="280" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -4506,7 +4507,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KbI-Yk-nlC" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="191" width="327" height="34.5"/>
+                                                <rect key="frame" x="24" y="191" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
