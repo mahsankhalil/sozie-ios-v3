@@ -208,6 +208,8 @@ class ProductDetailVC: BaseViewController {
                 }
                 productViewModel.imageURL = URL(string: imageURL)
             }
+        } else if let imageURL = currentProduct?.imageURL {
+            productViewModel.imageURL = URL(string: imageURL)
         }
     }
     func makePostCellViewModel() {

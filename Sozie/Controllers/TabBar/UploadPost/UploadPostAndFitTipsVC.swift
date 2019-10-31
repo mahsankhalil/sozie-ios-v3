@@ -207,6 +207,8 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 }
                 productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
             }
+        } else if let imageURL = currentProduct?.imageURL {
+            productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
         }
     }
     func checkIfAllImagesUplaoded() -> Bool {

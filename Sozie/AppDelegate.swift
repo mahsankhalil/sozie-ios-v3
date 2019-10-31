@@ -170,10 +170,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler([.alert, .badge, .sound])
     }
     func updatePushTokenToServer() {
+        #if !targetEnvironment(simulator)
         var dataDict = [String: Any]()
         dataDict["device_notify_id"] = pushToken
         ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
         }
+        #endif
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if Intercom.isIntercomPushNotification(userInfo) {
