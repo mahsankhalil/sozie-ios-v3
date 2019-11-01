@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding, FilledViewModeling, ExpiryViewModeling {
+struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding, FilledViewModeling, ExpiryViewModeling, ColorViewModeling {
     var brandId: Int
     var description: String?
     var subtitle: String?
@@ -25,6 +25,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var isFilled: Bool
     var expiry: String
     var acceptedBySomeoneElse: Bool
+    var colorTitle: String?
     init (request: SozieRequest) {
         var imageURL = ""
         if let productImageURL = request.requestedProduct.imageURL {
@@ -39,7 +40,16 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
                 }
             }
         }
-        let subtitle = "Size Requested: (" + request.sizeValue + ")"
+        let subtitle = "Size: " + request.sizeValue.capitalizingFirstLetter()
+        if let color = request.color {
+            if color == "n/a" {
+                self.colorTitle = "Color: N/A"
+            } else {
+                self.colorTitle = "Color: " + color.capitalizingFirstLetter()
+            }
+        } else {
+            self.colorTitle = "Color: N/A"
+        }
         let title = "Requested by " + request.user.username
         let description = request.user.username +  " Measurements:"
         self.description = description

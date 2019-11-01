@@ -20,6 +20,7 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var colorLabel: UILabel!
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -70,7 +71,16 @@ extension TargetRequestTableViewCell: CellConfigurable {
             titleLabel.text = titleModel.title!
         }
         if let subTitleModel = viewModel as? SubtitleViewModeling {
-            sizeRequestedLabel.text = subTitleModel.subtitle
+            let attributedStr = NSMutableAttributedString(string: subTitleModel.subtitle!)
+            attributedStr.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 4))
+            sizeRequestedLabel.attributedText = attributedStr
+//            sizeRequestedLabel.text = subTitleModel.subtitle
+        }
+        if let colorTitleModel = viewModel as? ColorViewModeling {
+            let attributedStr = NSMutableAttributedString(string: colorTitleModel.colorTitle!)
+            attributedStr.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 5))
+            colorLabel.attributedText = attributedStr
+//            colorLabel.text = colorTitleModel.colorTitle
         }
         if let availabilityModel = viewModel as? AvailabilityProviding {
             logoImageView.isHidden = !availabilityModel.isAvailable
