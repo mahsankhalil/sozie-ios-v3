@@ -5528,6 +5528,12 @@ Please click on the (restart tutorial) button below to start again!</string>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ic6-hJ-nfG">
                                 <rect key="frame" x="0.0" y="84" width="375" height="493"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vk2-hd-bq6">
+                                <rect key="frame" x="175.5" y="323" width="24" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -5538,9 +5544,11 @@ Please click on the (restart tutorial) button below to start again!</string>
                             <constraint firstItem="lqY-8i-lmf" firstAttribute="trailing" secondItem="xLA-d1-aaq" secondAttribute="trailing" id="G9O-pn-qfm"/>
                             <constraint firstItem="Ic6-hJ-nfG" firstAttribute="trailing" secondItem="xLA-d1-aaq" secondAttribute="trailing" id="Je3-b1-4DV"/>
                             <constraint firstItem="ovG-QX-gZR" firstAttribute="top" secondItem="lqY-8i-lmf" secondAttribute="bottom" id="LDq-fA-NXL"/>
+                            <constraint firstItem="Vk2-hd-bq6" firstAttribute="centerY" secondItem="HKv-c8-C2o" secondAttribute="centerY" id="MZ5-el-RrQ"/>
                             <constraint firstItem="hCe-Tt-IRT" firstAttribute="trailing" secondItem="xLA-d1-aaq" secondAttribute="trailing" id="dwO-fi-oQS"/>
                             <constraint firstItem="ovG-QX-gZR" firstAttribute="leading" secondItem="xLA-d1-aaq" secondAttribute="leading" id="fDK-Ph-8v4"/>
                             <constraint firstItem="hCe-Tt-IRT" firstAttribute="leading" secondItem="xLA-d1-aaq" secondAttribute="leading" id="gjw-OF-5bg"/>
+                            <constraint firstItem="Vk2-hd-bq6" firstAttribute="centerX" secondItem="HKv-c8-C2o" secondAttribute="centerX" id="hFH-sl-864"/>
                             <constraint firstItem="lqY-8i-lmf" firstAttribute="top" secondItem="hCe-Tt-IRT" secondAttribute="bottom" id="jRa-w9-7BS"/>
                             <constraint firstItem="ovG-QX-gZR" firstAttribute="bottom" secondItem="xLA-d1-aaq" secondAttribute="bottom" id="lm4-dL-rSI"/>
                             <constraint firstItem="Ic6-hJ-nfG" firstAttribute="top" secondItem="hCe-Tt-IRT" secondAttribute="bottom" id="oBq-Gj-mHi"/>
@@ -5554,6 +5562,7 @@ Please click on the (restart tutorial) button below to start again!</string>
                         <outlet property="cancelButton" destination="quj-kp-M33" id="K18-bO-vZj"/>
                         <outlet property="captureButton" destination="lAo-FL-qeu" id="FmY-Au-zkG"/>
                         <outlet property="imageView" destination="Ic6-hJ-nfG" id="VHI-Si-Xbt"/>
+                        <outlet property="intensityLabel" destination="Vk2-hd-bq6" id="Q4D-ue-HNl"/>
                         <outlet property="retakeButton" destination="brq-7I-gha" id="Bel-gi-E0Q"/>
                         <outlet property="usePhotoButton" destination="NQp-ks-ka4" id="hwH-UG-YCh"/>
                     </connections>

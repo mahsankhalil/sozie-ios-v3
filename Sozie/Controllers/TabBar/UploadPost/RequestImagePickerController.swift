@@ -12,6 +12,7 @@ protocol CaptureManagerDelegate: class {
     func processCapturedImage(image: UIImage)
 }
 class RequestImagePickerController: UIViewController {
+    @IBOutlet weak var intensityLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usePhotoButton: UIButton!
     @IBOutlet weak var retakeButton: UIButton!
@@ -211,5 +212,17 @@ extension RequestImagePickerController: AVCaptureVideoDataOutputSampleBufferDele
             return
         }
         currentImage = outputImage
+        let rawMetadata = CMCopyDictionaryOfAttachments(allocator: nil, target: sampleBuffer, attachmentMode: CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))
+        let metadata = CFDictionaryCreateMutableCopy(nil, 0, rawMetadata) as NSMutableDictionary
+        let exifData = metadata.value(forKey: "{Exif}") as? NSMutableDictionary
+        let fNumber: Double = exifData?["FNumber"] as! Double
+        let exposureTime: Double = exifData?["ExposureTime"] as! Double
+        let isoSpeedRatingsArray = exifData!["ISOSpeedRatings"] as? NSArray
+        let isoSpeedRatings: Double = isoSpeedRatingsArray![0] as! Double
+        let calibrationConstant: Double = 50
+        //Calculating the luminosity
+        let luminosity: Double = (calibrationConstant * fNumber * fNumber ) / ( exposureTime * isoSpeedRatings )
+        intensityLabel.text = String(luminosity)
+//        print(luminosity)
     }
 }
