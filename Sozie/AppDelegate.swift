@@ -15,6 +15,7 @@ import UserNotifications
 import CoreLocation
 import Firebase
 import Analytics
+import Branch
 import Segment_Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -29,6 +30,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
+        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+            // do stuff with deep link data (nav to page, display content, etc)
+            if let stage = params?["~stage"] as? String {
+                if stage == "forgot_password" {
+                    if let token = params?["token"], let userId = params?["user_id"] {
+                        var dataDict = [String: Any]()
+                        dataDict["user_token"] = token
+                        dataDict["user_id"] = userId
+                        self.showResetPasswordVC(with: dataDict)
+                    }
+                }
+            }
+            print(params as? [String: AnyObject] ?? {})
+        }
         print(Bundle.main.infoDictionary?["Configuration"] as! String)
         GIDSignIn.sharedInstance().clientID = "417360914886-kt7feo03r47adeesn8i4udr0i0ofufs0.apps.googleusercontent.com"
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -114,11 +129,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        if url.absoluteString.hasPrefix("sozie://resetpwd") {
-            if let params = url.queryParameters {
-                showResetPasswordVC(with: params)
-            }
-        }
+        Branch.getInstance().application(app, open: url, options: options)
+//        if url.absoluteString.hasPrefix("sozie://resetpwd") {
+//            if let params = url.queryParameters {
+//                showResetPasswordVC(with: params)
+//            }
+//        }
         if let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options) {
             return handled
         }
