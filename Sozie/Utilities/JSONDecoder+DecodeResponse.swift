@@ -29,6 +29,11 @@ extension JSONDecoder {
             }
             return .failure(CustomError(str: "Token has been expired"))
         }
+        if response.response?.statusCode == 500 {
+            let appDel = UIApplication.shared.delegate as? AppDelegate
+            UtilityManager.showMessageWith(title: "Please bear with us.", body: "We will have Sozie up and running shortly!", in: (appDel?.window!.rootViewController!)!)
+            return .failure(CustomError(str: ""))
+        }
         if !((response.response?.statusCode == 200) || (response.response?.statusCode == 201)) {
             do {
                 if let data = response.data,

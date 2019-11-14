@@ -40,7 +40,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
                 }
             }
         }
-        let subtitle = "Size: " + request.sizeValue.capitalizingFirstLetter()
+        let subtitle = "Size: " + request.sizeValue.uppercased()
         if let color = request.color {
             if color == "n/a" {
                 self.colorTitle = "Color: N/A"

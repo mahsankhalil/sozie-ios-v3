@@ -40,7 +40,7 @@ class RequestImagePickerController: UIViewController {
             let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
         captureSession?.addInput(input)
         captureSession?.startRunning()
-        let offset = topPadding + bottomPadding + 64.0 + 110
+        let offset = topPadding + bottomPadding + 64.0 + 90
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
         previewLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: (UIScreen.main.bounds.size.height - offset))
         previewLayer.videoGravity = .resizeAspectFill
@@ -57,6 +57,25 @@ class RequestImagePickerController: UIViewController {
         output.videoSettings = ([kCVPixelBufferPixelFormatTypeKey as AnyHashable: kCVPixelFormatType_32BGRA] as! [String: Any])
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         captureSession?.addOutput(output)
+        addGridOnView()
+    }
+    func addGridOnView() {
+        let xPosition = UIScreen.main.bounds.width/3
+        let firstVertLine = UIView(frame: CGRect(x: xPosition, y: 0.0, width: 0.5, height: previewLayer.frame.height))
+        let secondVertLine = UIView(frame: CGRect(x: 2*xPosition, y: 0.0, width: 0.5, height: previewLayer.frame.height))
+        let yPosition = previewLayer.frame.height/3
+        let firstHorLine = UIView(frame: CGRect(x: 0, y: yPosition, width: UIScreen.main.bounds.width, height: 0.5))
+        let secondHorLine = UIView(frame: CGRect(x: 0, y: 2*yPosition, width: UIScreen.main.bounds.width, height: 0.5))
+
+        firstVertLine.backgroundColor = UIColor.white
+        secondVertLine.backgroundColor = UIColor.white
+        firstHorLine.backgroundColor = UIColor.white
+        secondHorLine.backgroundColor = UIColor.white
+
+        camerView.addSubview(firstVertLine)
+        camerView.addSubview(secondVertLine)
+        camerView.addSubview(firstHorLine)
+        camerView.addSubview(secondHorLine)
     }
     func createOverlay(frame: CGRect,
                        xOffset: CGFloat,
@@ -222,7 +241,7 @@ extension RequestImagePickerController: AVCaptureVideoDataOutputSampleBufferDele
         let calibrationConstant: Double = 50
         //Calculating the luminosity
         let luminosity: Double = (calibrationConstant * fNumber * fNumber ) / ( exposureTime * isoSpeedRatings )
-        intensityLabel.text = String(luminosity)
+//        intensityLabel.text = String(luminosity)
 //        print(luminosity)
     }
 }

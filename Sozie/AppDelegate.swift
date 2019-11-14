@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Override point for customization after application launch.
-        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, _) in
             // do stuff with deep link data (nav to page, display content, etc)
             if let stage = params?["~stage"] as? String {
                 if stage == "forgot_password" {
