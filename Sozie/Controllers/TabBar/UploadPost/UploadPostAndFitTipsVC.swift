@@ -421,6 +421,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
                 let imagePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
                 imagePickerVC.delegate = self
+                imagePickerVC.photoIndex = self.selectedIndex
                 self.present(imagePickerVC, animated: true, completion: nil)
             }))
             alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in

@@ -12,6 +12,9 @@ protocol CaptureManagerDelegate: class {
     func processCapturedImage(image: UIImage)
 }
 class RequestImagePickerController: UIViewController {
+    @IBOutlet weak var sampleImageView: UIImageView!
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cameraViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var intensityLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usePhotoButton: UIButton!
@@ -24,10 +27,12 @@ class RequestImagePickerController: UIViewController {
     var captureSession: AVCaptureSession?
     weak var delegate: CaptureManagerDelegate?
     var currentImage: UIImage?
+    var photoIndex: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        hideShowSampleImageView()
         var topPadding: CGFloat! = 0.0
         var bottomPadding: CGFloat! = 0.0
         if #available(iOS 11.0, *) {
@@ -35,29 +40,48 @@ class RequestImagePickerController: UIViewController {
             topPadding = window?.safeAreaInsets.top ?? 0.0
             bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         }
+        imageViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
+        cameraViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
         captureSession = AVCaptureSession()
         guard let captureDevice = AVCaptureDevice.default(for: .video),
             let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
         captureSession?.addInput(input)
         captureSession?.startRunning()
-        let offset = topPadding + bottomPadding + 64.0 + 90
+//        let offset = topPadding + bottomPadding + 64.0 + 90
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
-        previewLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: (UIScreen.main.bounds.size.height - offset))
+        previewLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: cameraViewHeightConstraint.constant)
         previewLayer.videoGravity = .resizeAspectFill
         camerView.layer.addSublayer(previewLayer)
-        let subView = self.createOverlay(frame: previewLayer.frame, xOffset: 10, yOffset: 10, radius: 10)
+        let subView = self.createOverlay(frame: previewLayer.frame, xOffset: 10, yOffset: topPadding, radius: 10)
         camerView.addSubview(subView)
         let faceImageView = UIImageView(image: UIImage(named: "Face"))
         let feetImageView = UIImageView(image: UIImage(named: "Feet"))
-        faceImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - faceImageView.frame.size.width)/2.0), y: 10)
+        faceImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - faceImageView.frame.size.width)/2.0), y: topPadding)
         camerView.addSubview(faceImageView)
-        feetImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - feetImageView.frame.size.width)/2.0), y: 409)
+        feetImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - feetImageView.frame.size.width)/2.0), y: cameraViewHeightConstraint.constant - 90 - 92)
         camerView.addSubview(feetImageView)
         let output = AVCaptureVideoDataOutput()
         output.videoSettings = ([kCVPixelBufferPixelFormatTypeKey as AnyHashable: kCVPixelFormatType_32BGRA] as! [String: Any])
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         captureSession?.addOutput(output)
         addGridOnView()
+    }
+    func hideShowSampleImageView() {
+        self.sampleImageView.isHidden = false
+        if let index = photoIndex {
+            switch index {
+            case 0:
+                self.sampleImageView.image = UIImage(named: "Front")
+            case 1:
+                self.sampleImageView.image = UIImage(named: "Back")
+            case 2:
+                self.sampleImageView.image = UIImage(named: "Side")
+            default:
+                self.sampleImageView.isHidden = true
+            }
+        } else {
+            self.sampleImageView.isHidden = true
+        }
     }
     func addGridOnView() {
         let xPosition = UIScreen.main.bounds.width/3
@@ -88,7 +112,7 @@ class RequestImagePickerController: UIViewController {
         let path = CGMutablePath()
         path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
         path.addEllipse(in: CGRect(origin: CGPoint(x: ((UIScreen.main.bounds.size.width - 70.0)/2.0), y: yOffset), size: CGSize(width: 70, height: 91)))
-        path.addRect(CGRect(origin: CGPoint(x: ((UIScreen.main.bounds.size.width - 239.0)/2.0), y: 420), size: CGSize(width: 239, height: 69)))
+        path.addRect(CGRect(origin: CGPoint(x: ((UIScreen.main.bounds.size.width - 239.0)/2.0), y: cameraViewHeightConstraint.constant - 90 - 92 + 11), size: CGSize(width: 239, height: 69)))
         // Step 3
         let maskLayer = CAShapeLayer()
         maskLayer.backgroundColor = UIColor.black.cgColor
@@ -111,6 +135,9 @@ class RequestImagePickerController: UIViewController {
     @IBAction func retakeButtonTapped(_ sender: Any) {
         captureSession?.startRunning()
         self.imageView.isHidden = true
+        if let index = photoIndex, index < 3 {
+            self.sampleImageView.isHidden = false
+        }
         self.captureButton.isHidden = false
         self.cameraButton.isHidden = false
         self.cancelButton.isHidden = false
@@ -123,6 +150,7 @@ class RequestImagePickerController: UIViewController {
     @IBAction func captureButtontapped(_ sender: Any) {
         captureSession?.stopRunning()
         self.imageView.image = currentImage
+        self.sampleImageView.isHidden = true
         self.imageView.isHidden = false
         self.captureButton.isHidden = true
         self.cameraButton.isHidden = true
