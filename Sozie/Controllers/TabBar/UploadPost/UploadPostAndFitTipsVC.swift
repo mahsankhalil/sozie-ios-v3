@@ -353,7 +353,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
             return
         }
         if self.checkIfAllImagesUplaoded() == false {
-            UtilityManager.showErrorMessage(body: "Please Select all the images.", in: self)
+            UtilityManager.showErrorMessage(body: "Please upload pictures of all angles.", in: self)
         } else if self.checkIfAllQuestionsAnswered() == false {
             UtilityManager.showErrorMessage(body: "Please answer all Fit Tips.", in: self)
         } else {
