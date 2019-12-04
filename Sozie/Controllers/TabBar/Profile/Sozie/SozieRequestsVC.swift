@@ -161,6 +161,7 @@ class SozieRequestsVC: UIViewController {
         if ifAcceptRequestTutorialShown == false {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
+                acceptRequestTutorialVC?.descriptionString = "Click on     ACCEPT REQUEST    "
                 progressTutorialVC?.updateProgress(progress: 4.0/8.0)
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()

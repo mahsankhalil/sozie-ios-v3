@@ -51,10 +51,16 @@ class TabBarVC: UITabBarController {
         self.viewControllers = ([shopNC, wishListNC, profileNC] as! [UIViewController])
     }
     func populateUIOfSozieType() {
+        var genderImageString = ""
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                genderImageString = "-Blue"
+            }
+        }
         let browseNC = self.storyboard?.instantiateViewController(withIdentifier: "BrowseNC")
-        browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected"))
+        browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected" + genderImageString))
         let wishListNC = self.storyboard?.instantiateViewController(withIdentifier: "WishListNC")
-        wishListNC?.tabBarItem = UITabBarItem(title: "Wish List", image: UIImage(named: "Whish List"), selectedImage: UIImage(named: "Wish List Selected"))
+        wishListNC?.tabBarItem = UITabBarItem(title: "Wish List", image: UIImage(named: "Whish List"), selectedImage: UIImage(named: "Wish List Selected" + genderImageString))
 //        let cameraVc = UIViewController()
 //        cameraVc.tabBarItem = UITabBarItem(title: "Camera", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
         var imageIcon = UIImage(named: "Profile icon")
@@ -73,7 +79,7 @@ class TabBarVC: UITabBarController {
             }
         }
         let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
-        profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: UIImage(named: "Profile icon-Selected"))
+        profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: UIImage(named: "Profile icon-Selected" + genderImageString))
         let helpVc = UIViewController()
         helpVc.tabBarItem = UITabBarItem(title: "Help", image: UIImage(named: "Help"), selectedImage: UIImage(named: "Help Selected"))
         self.viewControllers = ([browseNC, wishListNC, profileNC, helpVc] as! [UIViewController])

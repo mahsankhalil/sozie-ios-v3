@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 class WishListVC: BaseViewController {
 
+    @IBOutlet weak var wishListUnderLineView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noProductLabel: UILabel!
     private var viewModels: [ProductImageCellViewModel] = []
@@ -30,6 +31,7 @@ class WishListVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        wishListUnderLineView.backgroundColor = UtilityManager.getGenderColor()
         setupSozieLogoNavBar()
         assignNoProductLabel()
         self.tableView.tableFooterView = UIView()

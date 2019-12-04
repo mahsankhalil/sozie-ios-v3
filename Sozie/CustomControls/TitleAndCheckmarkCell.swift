@@ -33,7 +33,7 @@ extension TitleAndCheckmarkCell: CellConfigurable {
                     if checkmarkModel.isCheckmarkHidden == true {
                         self.titleLabel.textColor = UIColor(hex: "888888")
                     } else {
-                        self.titleLabel.textColor = UIColor(hex: "FC8787")
+                        self.titleLabel.textColor = UtilityManager.getGenderColor()
                     }
                 }
             }

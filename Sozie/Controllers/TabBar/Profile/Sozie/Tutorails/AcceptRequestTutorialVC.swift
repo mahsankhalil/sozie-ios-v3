@@ -25,7 +25,14 @@ class AcceptRequestTutorialVC: UIViewController {
                 let stringToColor = "    UPLOAD PICTURE    "
                 let range = (string as NSString).range(of: stringToColor)
                 let attribute = NSMutableAttributedString.init(string: string)
-                attribute.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor(hex: "13AEF2"), range: range)
+                attribute.addAttribute(NSAttributedString.Key.backgroundColor, value: UtilityManager.getGenderUploadPictureColor(), range: range)
+                attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: range)
+                textLabel.attributedText = attribute
+            } else if string == "Click on     ACCEPT REQUEST    " {
+                let stringToColor = "    ACCEPT REQUEST    "
+                let range = (string as NSString).range(of: stringToColor)
+                let attribute = NSMutableAttributedString.init(string: string)
+                attribute.addAttribute(NSAttributedString.Key.backgroundColor, value: UtilityManager.getGenderColor(), range: range)
                 attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: range)
                 textLabel.attributedText = attribute
             }

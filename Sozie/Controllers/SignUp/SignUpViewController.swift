@@ -29,6 +29,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     let validator = Validator()
     var isFemaleSelected = false
+    var isMaleSelected = false
     var signUpDict: [String: Any]?
     var tipView: EasyTipView?
 
@@ -176,6 +177,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if isFemaleSelected {
             signUpDict![User.CodingKeys.gender.stringValue] = "F"
         }
+        if isMaleSelected {
+            signUpDict![User.CodingKeys.gender.stringValue] = "M"
+        }
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         signUpDict!["version"]  = appVersion
         SVProgressHUD.show()
@@ -212,6 +216,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if isFemaleSelected {
             dataDict[User.CodingKeys.gender.stringValue] = "F"
         }
+        if isMaleSelected {
+            dataDict[User.CodingKeys.gender.stringValue] = "M"
+        }
         SVProgressHUD.show()
         ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -229,7 +236,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
 
     func validationSuccessful() {
 
-        if !isFemaleSelected {
+        if !(isFemaleSelected || isMaleSelected) {
             UtilityManager.showErrorMessage(body: "Please Select gender", in: self)
         } else {
             if UserDefaultManager.isUserLoggedIn() {
@@ -283,11 +290,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
 
     func applyFemaleSelection() {
         isFemaleSelected = true
+        isMaleSelected = false
         femaleBtn.applyButtonSelected()
         maleBtn.applyButtonUnSelected()
         femaleBtn.applyButtonShadow()
         maleBtn.layer.shadowOpacity = 0.0
-        tipView?.dismiss()
+//        tipView?.dismiss()
+    }
+    func applyMaleSelection() {
+        isMaleSelected = true
+        isFemaleSelected = false
+        maleBtn.applyButtonSelected()
+        femaleBtn.applyButtonUnSelected()
+        maleBtn.applyButtonShadow()
+        femaleBtn.layer.shadowOpacity = 0.0
     }
 
     @IBAction func signupButtonPressed(_ sender: Any) {
@@ -300,27 +316,28 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     @IBAction func maleBtnTapped(_ sender: Any) {
-        tipView?.dismiss()
-        let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
-        let shopperText = "“Hi guys, We are working hard on a Sozie solution for you! Please look out for the updated version of our app in the near future.”"
-        var text = sozietext
-        if UserDefaultManager.getCurrentUserObject() != nil, let userType = UserDefaultManager.getCurrentUserType() {
-            if userType == UserType.sozie.rawValue {
-                text = sozietext
-            } else {
-                text = shopperText
-            }
-        } else {
-            if let userType = signUpDict?[User.CodingKeys.type.stringValue] as? String {
-                if userType == UserType.sozie.rawValue {
-                    text = sozietext
-                } else {
-                    text = shopperText
-                }
-            }
-        }
-        tipView = EasyTipView(text: text, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
-        tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
+        applyMaleSelection()
+//        tipView?.dismiss()
+//        let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
+//        let shopperText = "“Hi guys, We are working hard on a Sozie solution for you! Please look out for the updated version of our app in the near future.”"
+//        var text = sozietext
+//        if UserDefaultManager.getCurrentUserObject() != nil, let userType = UserDefaultManager.getCurrentUserType() {
+//            if userType == UserType.sozie.rawValue {
+//                text = sozietext
+//            } else {
+//                text = shopperText
+//            }
+//        } else {
+//            if let userType = signUpDict?[User.CodingKeys.type.stringValue] as? String {
+//                if userType == UserType.sozie.rawValue {
+//                    text = sozietext
+//                } else {
+//                    text = shopperText
+//                }
+//            }
+//        }
+//        tipView = EasyTipView(text: text, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
+//        tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {

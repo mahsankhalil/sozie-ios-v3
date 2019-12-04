@@ -20,6 +20,7 @@ class FitTipsAnswerTextVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        titleLabel.textColor = UtilityManager.getGenderColor()
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
             if let answer = fitTips?[tipsIndex].question[quesIndex].answer {

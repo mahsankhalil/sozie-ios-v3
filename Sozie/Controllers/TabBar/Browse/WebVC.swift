@@ -27,6 +27,7 @@ class WebVC: UIViewController {
         if let currentURL = url {
             setupWebview(url: currentURL)
         }
+        progressView.progressTintColor = UtilityManager.getGenderColor()
         setupEstimatedProgressObserver()
     }
 

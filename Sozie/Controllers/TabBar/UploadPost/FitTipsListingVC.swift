@@ -31,6 +31,7 @@ class FitTipsListingVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        titleLabel.textColor = UtilityManager.getGenderColor()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

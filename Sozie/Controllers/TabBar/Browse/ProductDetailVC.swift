@@ -28,7 +28,7 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var reviewButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentsTableView: UITableView!
-    @IBOutlet weak var sozieBuyButton: UIButton!
+    @IBOutlet weak var sozieBuyButton: DZGradientButton!
     @IBOutlet weak var addCommentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addCommentTextField: UITextField!
     var currentProduct: Product?
@@ -85,6 +85,7 @@ class ProductDetailVC: BaseViewController {
 //            self.showTagItemButton()
             self.showCancelButton()
         }
+        sozieBuyButton.shadowAdded = false
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

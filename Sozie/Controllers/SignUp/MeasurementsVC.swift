@@ -18,6 +18,7 @@ public enum MeasurementType: Int {
     case braSize
     case size
     case waistHips
+    case chest
 }
 
 class LocalMeasurement: NSObject {
@@ -28,6 +29,7 @@ class LocalMeasurement: NSObject {
     var cup: String?
     var waist: String?
     var size: String?
+    var chest: String?
 }
 
 class MeasurementsVC: UIViewController {
@@ -85,6 +87,9 @@ class MeasurementsVC: UIViewController {
             if let size = user.measurement?.size {
                 currentMeasurement.size = size
             }
+            if let chest = user.measurement?.chest {
+                currentMeasurement.chest = String(chest)
+            }
             if let unit = user.measurement?.unit {
                 if unit == "IN" {
                     self.segmentControl.selectedSegmentIndex = 0
@@ -114,22 +119,25 @@ class MeasurementsVC: UIViewController {
         var hip: String?
         var bra: String?
         var cup: String?
+        var chest: String?
         if let height = self.currentMeasurement.height {
             heightInches = Double(height)?.inchesToRemainingInches()
             heightFeet = Double(height)?.inchesToFeet()
         }
+        chest = self.currentMeasurement.chest
         waist = self.currentMeasurement.waist
         hip = self.currentMeasurement.hip
         bra = self.currentMeasurement.bra
         cup = self.currentMeasurement.cup
         let currentSize = self.currentMeasurement.size
-        let wornSizes = self.converArrayOfGeneralToStringArray(generalSizes: size.general)
+        let wornSizes = size.sizes
         var isInches = true
         var unit = "in"
         var unitAbr = "\""
         var waistValues = size.waist.inches.convertArrayToString()
         var hipValues = size.hip.inches.convertArrayToString()
-        var braBandValues = size.bra.band.inches.convertArrayToString()
+        var braBandValues = size.bra?.band.inches.convertArrayToString()
+        var chestValues = size.chest?.inches.convertArrayToString()
         var heightCM = ""
         if self.segmentControl.selectedSegmentIndex != 0 {
             isInches = false
@@ -137,28 +145,54 @@ class MeasurementsVC: UIViewController {
             unitAbr = ""
             waistValues = size.waist.centimeters.convertArrayToString()
             hipValues = size.hip.centimeters.convertArrayToString()
-            braBandValues = size.bra.band.centimeters.convertArrayToString()
+            braBandValues = size.bra?.band.centimeters.convertArrayToString()
+            chestValues = size.chest?.centimeters.convertArrayToString()
             heightCM = self.currentMeasurement.height ?? ""
         }
         let heightViewModelCM = SingleTextFieldCellViewModel(title: "HEIGHT", text: heightCM, placeholder: "Height", values: size.height.centimeters.convertArrayToString(), valueSuffix: "", buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height, columnUnit: unit)
         let heightViewModel = DoubleTextFieldCellViewModel(text1: heightFeet, text2: heightInches, title1: "HEIGHT(feet)", title2: "HEIGHT(Inches)", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
         let waistHipsModel = DoubleTextFieldCellViewModel(text1: waist, text2: hip, title1: "WAIST", title2: "HIPS", columnUnit: [unit, unit], columnPlaceholder: ["Waist", "Hips"], columnValueSuffix: [unitAbr, unitAbr], columnValues: [waistValues, hipValues], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist and Hips", measurementType: .waistHips)
-        let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title1: "BRA SIZE(Band)", title2: "BRA SIZE(Cup)", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [braBandValues, size.bra.cup], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
+        let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title1: "BRA SIZE(Band)", title2: "BRA SIZE(Cup)", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [braBandValues ?? [], size.bra?.cup ?? []], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
         let sizeWornViewModel = TitleTextFieldCellViewModel(title: "What dress size do you normally wear?", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current dress size", displayError: false)
+        let chestViewModel = SingleTextFieldCellViewModel(title: "CHEST", text: heightCM, placeholder: "Chest", values: chestValues ?? [], valueSuffix: unitAbr, buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Chest size", measurementType: .chest, columnUnit: unit)
+//        let chestViewModel = TitleTextFieldCellViewModel(title: "Chest Size", text: chest, values: chestValues ?? [], measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current chest size", displayError: false)
+        var heightFinalViewModel: RowViewModel
         if isInches == true {
-            self.rowViewModels = [heightViewModel, waistHipsModel, braViewModel, sizeWornViewModel]
+            heightFinalViewModel = heightViewModel
         } else {
-            self.rowViewModels = [heightViewModelCM, waistHipsModel, braViewModel, sizeWornViewModel]
+            heightFinalViewModel = heightViewModelCM
         }
+        var chestFinalViewModel: RowViewModel
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "F" {
+                chestFinalViewModel = braViewModel
+            } else {
+                chestFinalViewModel = chestViewModel
+            }
+        } else {
+            chestFinalViewModel = braViewModel
+        }
+        self.rowViewModels = [heightFinalViewModel, waistHipsModel, chestFinalViewModel, sizeWornViewModel]
+
     }
     func fetchDataFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getSizeCharts(params: [:]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                guard let size = response as? Size else { return }
-                self.setSizeAccordingly(size: size)
-                self.sizes = size
+                guard let size = response as? AllSizes else { return }
+                if let gender = UserDefaultManager.getCurrentUserGender() {
+                    if gender == "F" {
+                        self.setSizeAccordingly(size: size.female!)
+                        self.sizes = size.female
+                    } else {
+                        self.setSizeAccordingly(size: size.male!)
+                        self.sizes = size.male
+                    }
+                } else {
+                    self.setSizeAccordingly(size: size.female!)
+                    self.sizes = size.female
+                }
                 self.tblVu.reloadData()
             } else {
                 let err = response as? Error
@@ -186,17 +220,22 @@ class MeasurementsVC: UIViewController {
 
     private func isValidMeasurements() -> Bool {
         return currentMeasurement.height != nil && currentMeasurement.height != "" && currentMeasurement.waist != nil && currentMeasurement.waist != "" &&
-            currentMeasurement.hip != nil && currentMeasurement.hip != "" && currentMeasurement.bra != nil && currentMeasurement.bra != "" && currentMeasurement.cup != nil && currentMeasurement.cup != "" && currentMeasurement.size != nil && currentMeasurement.size != ""
+            currentMeasurement.hip != nil && currentMeasurement.hip != "" && ((currentMeasurement.bra != nil && currentMeasurement.bra != "" && currentMeasurement.cup != nil && currentMeasurement.cup != "") || (currentMeasurement.chest != nil && currentMeasurement.chest != "")) && currentMeasurement.size != nil && currentMeasurement.size != ""
     }
 
     @IBAction func uploadBtnTapped(_ sender: Any) {
         if isValidMeasurements() {
+            let gender = UserDefaultManager.getCurrentUserGender()
             var dataDict = [String: Any]()
             dataDict["height"] = Int(Double(currentMeasurement.height!)!)
             dataDict["waist"] = Int(currentMeasurement.waist!)
             dataDict["hip"] = Int(currentMeasurement.hip!)
-            dataDict["bra"] = Int(currentMeasurement.bra!)
-            dataDict["cup"] = currentMeasurement.cup!
+            if gender == "F" {
+                dataDict["bra"] = Int(currentMeasurement.bra!)
+                dataDict["cup"] = currentMeasurement.cup!
+            } else if gender == "M" {
+                dataDict["chest"] = Int(currentMeasurement.chest!)
+            }
             dataDict["size"] = currentMeasurement.size
             dataDict["unit"] = "IN"
             if isFromSignUp {
@@ -225,10 +264,14 @@ class MeasurementsVC: UIViewController {
                     rowViewModels[index] = errorViewModel as! RowViewModel
                 }
             }
-
+            let gender = UserDefaultManager.getCurrentUserGender()
             setError(for: 0, isError: currentMeasurement.height == nil)
             setError(for: 1, isError: currentMeasurement.waist == nil || currentMeasurement.hip == nil || currentMeasurement.waist == "" || currentMeasurement.hip == "")
-            setError(for: 2, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil || currentMeasurement.bra == "" || currentMeasurement.cup == "")
+            if gender == "F" {
+                setError(for: 2, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil || currentMeasurement.bra == "" || currentMeasurement.cup == "")
+            } else if gender == "M" {
+                setError(for: 2, isError: currentMeasurement.chest == nil || currentMeasurement.chest == "")
+            }
             setError(for: 3, isError: currentMeasurement.size == nil || currentMeasurement.size == "")
             tblVu.reloadData()
         }
@@ -258,7 +301,12 @@ class MeasurementsVC: UIViewController {
         fetchDataFromServer()
     }
     @IBAction func clickHereButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toMeasurementTutorial", sender: self)
+        let gender = UserDefaultManager.getCurrentUserGender()
+        if gender == "F" {
+            performSegue(withIdentifier: "toMeasurementTutorial", sender: self)
+        } else {
+            performSegue(withIdentifier: "toMaleMeasurementTutorial", sender: self)
+        }
     }
     @IBAction func backBtnTapped(_ sender: Any) {
         if UserDefaultManager.isUserLoggedIn() {
@@ -341,6 +389,8 @@ extension MeasurementsVC: TextFieldDelegate {
                 }
             case .size:
                 currentMeasurement.size = text
+            case .chest:
+                currentMeasurement.chest = text
             }
         }
     }
@@ -357,20 +407,20 @@ extension MeasurementsVC: TextFieldDelegate {
 }
 extension MeasurementsVC: ButtonTappedDelegate {
     func onButtonTappedDelegate(_ sender: Any?) {
-        guard let button = sender as? UIButton, let sizes = sizes else { return }
-        let index = button.tag
-        let rowViewModel = rowViewModels[index]
-        if let measurementModel = rowViewModel as? MeasurementTypeProviding {
-            let type = measurementModel.measurementType
-            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes.sizeChart, arrayOfGeneral: sizes.general, type: type, productSizeChart: nil)
-            let popUpVC = PopupController
-                .create(self)
-                .show(popUpInstnc)
-            popUpInstnc.delegate = self
-            popUpInstnc.closeHandler = { []  in
-                popUpVC.dismiss()
-            }
-        }
+//        guard let button = sender as? UIButton, let sizes = sizes else { return }
+//        let index = button.tag
+//        let rowViewModel = rowViewModels[index]
+//        if let measurementModel = rowViewModel as? MeasurementTypeProviding {
+//            let type = measurementModel.measurementType
+//            let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: sizes.sizeChart, arrayOfGeneral: sizes.general, type: type, productSizeChart: nil)
+//            let popUpVC = PopupController
+//                .create(self)
+//                .show(popUpInstnc)
+//            popUpInstnc.delegate = self
+//            popUpInstnc.closeHandler = { []  in
+//                popUpVC.dismiss()
+//            }
+//        }
     }
 }
 extension MeasurementsVC: SizeChartPopupVCDelegate {

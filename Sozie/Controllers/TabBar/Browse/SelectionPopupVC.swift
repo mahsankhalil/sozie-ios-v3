@@ -57,6 +57,7 @@ class SelectionPopupVC: UIViewController {
 
         // Do any additional setup after loading the view.
         topView.layer.cornerRadius = 10.0
+        titleLabel.textColor = UtilityManager.getGenderColor()
 //        titleLbl.text = popupType?.rawValue
     }
     override func viewWillAppear(_ animated: Bool) {

@@ -8,32 +8,51 @@
 
 import UIKit
 
+struct AllSizes: Codable {
+    var male: Size?
+    var female: Size?
+    enum CodingKeys: String, CodingKey {
+    case male = "M"
+    case female = "F"
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        male = try? values.decode(Size.self, forKey: .male)
+        female = try? values.decode(Size.self, forKey: .female)
+    }
+}
 struct Size: Codable {
 
-    var general: [General]
+//    var general: [General]
     var height: Height
     var waist: IntegerScales
     var hip: IntegerScales
-    var bra: Bra
-    var sizeChart: [SizeChart]
-
+    var bra: Bra?
+    var chest: IntegerScales?
+    var sizes: [String]
+//    var sizeChart: [SizeChart]
+    
     enum CodingKeys: String, CodingKey {
-        case general
+//        case general
         case height
         case waist
         case hip
         case bra
-        case sizeChart = "size_chart"
+//        case sizeChart = "size_chart"
+        case chest
+        case sizes
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        general = try values.decode([General].self, forKey: .general)
+//        general = try values.decode([General].self, forKey: .general)
         height = try values.decode(Height.self, forKey: .height)
         waist = try values.decode(IntegerScales.self, forKey: .waist)
         hip = try values.decode(IntegerScales.self, forKey: .hip)
-        bra = try values.decode(Bra.self, forKey: .bra)
-        sizeChart = try values.decode([SizeChart].self, forKey: .sizeChart)
+        bra = try? values.decode(Bra.self, forKey: .bra)
+//        sizeChart = try values.decode([SizeChart].self, forKey: .sizeChart)
+        chest = try? values.decode(IntegerScales.self, forKey: .chest)
+        sizes = try values.decode([String].self, forKey: .sizes)
     }
 }
 struct SizeChart: Codable {

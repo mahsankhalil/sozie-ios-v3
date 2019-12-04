@@ -13,6 +13,7 @@ protocol BrowseWelcomeDelegate: class {
 }
 class BrowseWelcomeVC: UIViewController {
 
+    @IBOutlet weak var profileButtonLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var bottomViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileButton: UIButton!
@@ -24,6 +25,7 @@ class BrowseWelcomeVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        profileButtonLabel.textColor = UtilityManager.getGenderColor()
         welcomeNoteView.layer.cornerRadius = 20.0
         welcomeNoteView.layer.borderWidth = 1.0
         welcomeNoteView.layer.borderColor = UIColor(hex: "CCCCCC").cgColor
@@ -36,7 +38,14 @@ class BrowseWelcomeVC: UIViewController {
             let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
             imageView.image = arrowGifImage
         }
-        var imageIcon = UIImage(named: "Profile icon")
+        var genderImageString = ""
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                genderImageString = "-Blue"
+            }
+        }
+        profileButton.setImage(UIImage(named: "Profile icon-Selected" + genderImageString), for: .normal)
+        var imageIcon = UIImage(named: "Profile icon-Selected")
         if let user = UserDefaultManager.getCurrentUserObject() {
             if let image = user.picture {
                 SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, _, _, _) in

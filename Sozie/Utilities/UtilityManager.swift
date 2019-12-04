@@ -67,6 +67,22 @@ class UtilityManager: NSObject {
             window.rootViewController = viewCOntroller
         }, completion: nil)
     }
+    static func getGenderColor() -> UIColor {
+        let gender = UserDefaultManager.getCurrentUserGender()
+        if gender == "M" {
+            return UIColor(hex: "17B5F9")
+        } else {
+            return UIColor(hex: "FC8787")
+        }
+    }
+    static func getGenderUploadPictureColor() -> UIColor {
+        let gender = UserDefaultManager.getCurrentUserGender()
+        if gender == "M" {
+            return UIColor(hex: "F5AB4A")
+        } else {
+            return UIColor(hex: "17B5F9")
+        }
+    }
     // MARK: - Other Methods
     static func openImagePickerActionSheetFrom(viewController: UIViewController) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

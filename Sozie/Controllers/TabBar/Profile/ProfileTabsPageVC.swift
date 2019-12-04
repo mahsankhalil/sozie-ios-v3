@@ -28,7 +28,7 @@ class ProfileTabsPageVC: TabPageViewController {
         }
         option.tabWidth = UIScreen.main.bounds.size.width / CGFloat(tabItems.count)
         option.tabHeight = 44.0
-        option.currentColor = UIColor(hex: "FC8C8C")
+        option.currentColor = UtilityManager.getGenderColor() //UIColor(hex: "FC8C8C")
         option.defaultColor = UIColor(hex: "888888")
         option.pageBackgoundColor = UIColor.clear
         option.font = UIFont(name: Font.standard.rawValue, size: 13.0)!

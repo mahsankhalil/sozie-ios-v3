@@ -105,7 +105,7 @@ extension TargetRequestTableViewCell: CellConfigurable {
             if sozieRequestViewModel.acceptedBySomeoneElse == true && sozieRequestViewModel.isSelected == true {
                 self.overlayView.isHidden = false
                 self.acceptButton.setTitle("ACCEPT REQUEST", for: .normal)
-                self.acceptButton.backgroundColor = UIColor(hex: "FC8787")
+                self.acceptButton.backgroundColor = UtilityManager.getGenderColor()
                 self.timerLabel.isHidden = true
                 self.cancelButton.isHidden = true
             } else {
@@ -113,12 +113,12 @@ extension TargetRequestTableViewCell: CellConfigurable {
                 if let acceptedViewModel = viewModel as? SelectionProviding {
                     if acceptedViewModel.isSelected == true {
                         self.acceptButton.setTitle("UPLOAD PICTURE", for: .normal)
-                        self.acceptButton.backgroundColor = UIColor(hex: "13AEF2")
+                        self.acceptButton.backgroundColor = UtilityManager.getGenderUploadPictureColor()
                         self.timerLabel.isHidden = false
                         self.cancelButton.isHidden = false
                     } else {
                         self.acceptButton.setTitle("ACCEPT REQUEST", for: .normal)
-                        self.acceptButton.backgroundColor = UIColor(hex: "FC8787")
+                        self.acceptButton.backgroundColor = UtilityManager.getGenderColor()
                         self.timerLabel.isHidden = true
                         self.cancelButton.isHidden = true
                     }

@@ -64,8 +64,15 @@ class ProfileRootVC: BaseViewController {
     }
     func populateMeasurementData(currentUser: User) {
         if let measurement = currentUser.measurement {
-            if let bra = measurement.bra, let cup = measurement.cup {
-                braLabel.text = "Bra Size: " + String(bra) + cup
+            let gender = UserDefaultManager.getCurrentUserGender()
+            if gender == "F" {
+                if let bra = measurement.bra, let cup = measurement.cup {
+                    braLabel.text = "Bra Size: " + String(bra) + cup
+                }
+            } else {
+                if let chest = measurement.chest {
+                    braLabel.text = "Chest: " + String(chest)
+                }
             }
             if let unit = measurement.unit {
                 if unit == "IN" {
