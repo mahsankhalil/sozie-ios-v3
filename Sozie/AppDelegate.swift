@@ -187,9 +187,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     func updatePushTokenToServer() {
         #if !targetEnvironment(simulator)
-        var dataDict = [String: Any]()
-        dataDict["device_notify_id"] = pushToken
-        ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
+        if let token = pushToken, token != "" {
+            var dataDict = [String: Any]()
+            dataDict["device_notify_id"] = token
+            ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
+            }
         }
         #endif
     }

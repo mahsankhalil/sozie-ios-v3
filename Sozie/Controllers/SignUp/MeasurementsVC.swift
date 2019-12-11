@@ -225,7 +225,7 @@ class MeasurementsVC: UIViewController {
                     rowViewModels[index] = errorViewModel as! RowViewModel
                 }
             }
-
+            self.setSizeAccordingly(size: self.sizes!)
             setError(for: 0, isError: currentMeasurement.height == nil)
             setError(for: 1, isError: currentMeasurement.waist == nil || currentMeasurement.hip == nil || currentMeasurement.waist == "" || currentMeasurement.hip == "")
             setError(for: 2, isError: currentMeasurement.bra == nil || currentMeasurement.cup == nil || currentMeasurement.bra == "" || currentMeasurement.cup == "")

@@ -46,6 +46,9 @@ extension TitleTextFieldCell: CellConfigurable {
                     textField.currentValue1 = text
                     textField.text = text
                 }
+            } else {
+                textField.currentValue1 = ""
+                textField.text = ""
             }
         }
         if let errorModel = viewModel as? ErrorViewModeling {

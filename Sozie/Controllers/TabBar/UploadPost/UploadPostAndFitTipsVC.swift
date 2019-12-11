@@ -300,9 +300,11 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     SegmentManager.createEventRequestSubmitted()
 //                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
                     self.showThankYouController()
+                    self.bottomButtom.isEnabled = true
                     self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
                 }
             } else {
+                self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
         }
@@ -324,6 +326,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         SVProgressHUD.show()
         ServerManager.sharedInstance.updateTutorial(params: dataDict) { (isSuccess, _) in
             SVProgressHUD.dismiss()
+            self.bottomButtom.isEnabled = true
             if isSuccess {
                 if var user = UserDefaultManager.getCurrentUserObject() {
                     user.isTutorialApproved = true
@@ -349,6 +352,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     @IBAction func submitButtonTapped(_ sender: Any) {
         if isTutorialShowing {
+            self.bottomButtom.isEnabled = false
             uploadPOstData(isTutorial: true)
             return
         }
@@ -357,6 +361,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         } else if self.checkIfAllQuestionsAnswered() == false {
             UtilityManager.showErrorMessage(body: "Please answer all Fit Tips.", in: self)
         } else {
+            self.bottomButtom.isEnabled = false
             uploadPOstData(isTutorial: false)
         }
     }
@@ -422,6 +427,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
                 let imagePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
                 imagePickerVC.delegate = self
                 imagePickerVC.photoIndex = self.selectedIndex
+                self.progressTutorialVC?.view.isHidden = true
                 self.present(imagePickerVC, animated: true, completion: nil)
             }))
             alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
@@ -458,6 +464,9 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
                 }
             }
         }
+        if isTutorialShowing {
+            self.progressTutorialVC?.view.isHidden = false
+        }
     }
 }
 extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -485,6 +494,9 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
                     self.imagesCollectionView.isUserInteractionEnabled = false
                 }
             }
+        }
+        if isTutorialShowing {
+            self.progressTutorialVC?.view.isHidden = false
         }
         picker.dismiss(animated: true, completion: nil)
     }
