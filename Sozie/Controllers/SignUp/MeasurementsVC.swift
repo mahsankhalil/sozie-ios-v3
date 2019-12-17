@@ -265,6 +265,7 @@ class MeasurementsVC: UIViewController {
                 }
             }
             let gender = UserDefaultManager.getCurrentUserGender()
+            self.setSizeAccordingly(size: self.sizes!)
             setError(for: 0, isError: currentMeasurement.height == nil)
             setError(for: 1, isError: currentMeasurement.waist == nil || currentMeasurement.hip == nil || currentMeasurement.waist == "" || currentMeasurement.hip == "")
             if gender == "F" {
