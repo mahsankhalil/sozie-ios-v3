@@ -31,7 +31,6 @@ struct Size: Codable {
     var chest: IntegerScales?
     var sizes: [String]
 //    var sizeChart: [SizeChart]
-    
     enum CodingKeys: String, CodingKey {
 //        case general
         case height

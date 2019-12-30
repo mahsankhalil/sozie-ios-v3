@@ -154,7 +154,7 @@ class MeasurementsVC: UIViewController {
         let waistHipsModel = DoubleTextFieldCellViewModel(text1: waist, text2: hip, title1: "WAIST", title2: "HIPS", columnUnit: [unit, unit], columnPlaceholder: ["Waist", "Hips"], columnValueSuffix: [unitAbr, unitAbr], columnValues: [waistValues, hipValues], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist and Hips", measurementType: .waistHips)
         let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title1: "BRA SIZE(Band)", title2: "BRA SIZE(Cup)", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [braBandValues ?? [], size.bra?.cup ?? []], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
         let sizeWornViewModel = TitleTextFieldCellViewModel(title: "What dress size do you normally wear?", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current dress size", displayError: false)
-        let chestViewModel = SingleTextFieldCellViewModel(title: "CHEST", text: heightCM, placeholder: "Chest", values: chestValues ?? [], valueSuffix: unitAbr, buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Chest size", measurementType: .chest, columnUnit: unit)
+        let chestViewModel = SingleTextFieldCellViewModel(title: "CHEST", text: chest, placeholder: "Chest", values: chestValues ?? [], valueSuffix: unitAbr, buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Chest size", measurementType: .chest, columnUnit: unit)
 //        let chestViewModel = TitleTextFieldCellViewModel(title: "Chest Size", text: chest, values: chestValues ?? [], measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current chest size", displayError: false)
         var heightFinalViewModel: RowViewModel
         if isInches == true {
@@ -257,13 +257,6 @@ class MeasurementsVC: UIViewController {
             }
             updateProfileOnServer(dataDict: dataDict)
         } else {
-            func setError(for index: Int, isError: Bool) {
-                let rowViewModel = rowViewModels[index]
-                if var errorViewModel = rowViewModel as? ErrorViewModeling {
-                    errorViewModel.displayError = isError
-                    rowViewModels[index] = errorViewModel as! RowViewModel
-                }
-            }
             let gender = UserDefaultManager.getCurrentUserGender()
             self.setSizeAccordingly(size: self.sizes!)
             setError(for: 0, isError: currentMeasurement.height == nil)
@@ -275,6 +268,13 @@ class MeasurementsVC: UIViewController {
             }
             setError(for: 3, isError: currentMeasurement.size == nil || currentMeasurement.size == "")
             tblVu.reloadData()
+        }
+    }
+    func setError(for index: Int, isError: Bool) {
+        let rowViewModel = rowViewModels[index]
+        if var errorViewModel = rowViewModel as? ErrorViewModeling {
+            errorViewModel.displayError = isError
+            rowViewModels[index] = errorViewModel as! RowViewModel
         }
     }
     func updateProfileOnServer(dataDict: [String: Any]) {

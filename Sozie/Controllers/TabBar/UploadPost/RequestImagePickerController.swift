@@ -34,11 +34,11 @@ class RequestImagePickerController: UIViewController {
         // Do any additional setup after loading the view.
         hideShowSampleImageView()
         var topPadding: CGFloat! = 0.0
-        var bottomPadding: CGFloat! = 0.0
+//        var bottomPadding: CGFloat! = 0.0
         if #available(iOS 11.0, *) {
             let window = UIApplication.shared.keyWindow
             topPadding = window?.safeAreaInsets.top ?? 0.0
-            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+//            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         }
         imageViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
         cameraViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
@@ -259,16 +259,16 @@ extension RequestImagePickerController: AVCaptureVideoDataOutputSampleBufferDele
             return
         }
         currentImage = outputImage
-        let rawMetadata = CMCopyDictionaryOfAttachments(allocator: nil, target: sampleBuffer, attachmentMode: CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))
-        let metadata = CFDictionaryCreateMutableCopy(nil, 0, rawMetadata) as NSMutableDictionary
-        let exifData = metadata.value(forKey: "{Exif}") as? NSMutableDictionary
-        let fNumber: Double = exifData?["FNumber"] as! Double
-        let exposureTime: Double = exifData?["ExposureTime"] as! Double
-        let isoSpeedRatingsArray = exifData!["ISOSpeedRatings"] as? NSArray
-        let isoSpeedRatings: Double = isoSpeedRatingsArray![0] as! Double
-        let calibrationConstant: Double = 50
+//        let rawMetadata = CMCopyDictionaryOfAttachments(allocator: nil, target: sampleBuffer, attachmentMode: CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))
+//        let metadata = CFDictionaryCreateMutableCopy(nil, 0, rawMetadata) as NSMutableDictionary
+//        let exifData = metadata.value(forKey: "{Exif}") as? NSMutableDictionary
+//        let fNumber: Double = exifData?["FNumber"] as! Double
+//        let exposureTime: Double = exifData?["ExposureTime"] as! Double
+//        let isoSpeedRatingsArray = exifData!["ISOSpeedRatings"] as? NSArray
+//        let isoSpeedRatings: Double = isoSpeedRatingsArray![0] as! Double
+//        let calibrationConstant: Double = 50
         //Calculating the luminosity
-        let luminosity: Double = (calibrationConstant * fNumber * fNumber ) / ( exposureTime * isoSpeedRatings )
+//        let luminosity: Double = (calibrationConstant * fNumber * fNumber ) / ( exposureTime * isoSpeedRatings )
 //        intensityLabel.text = String(luminosity)
 //        print(luminosity)
     }

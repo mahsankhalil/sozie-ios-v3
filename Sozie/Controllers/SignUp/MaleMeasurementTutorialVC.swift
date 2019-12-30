@@ -27,5 +27,4 @@ class MaleMeasurementTutorialVC: UIViewController {
     @IBAction func crossButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }
