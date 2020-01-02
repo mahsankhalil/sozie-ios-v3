@@ -243,6 +243,13 @@ class UtilityManager: NSObject {
             closure()
         }
     }
+    static func getColorNameCapitalized(color: String) -> String {
+        if color == "n/a" {
+            return "Color: N/A"
+        } else {
+            return "Color: " + color.capitalizingFirstLetter()
+        }
+    }
 //
     static func timeAgoSinceDate(date: NSDate, numericDates: Bool, short: Bool = false) -> String {
         let calendar = NSCalendar.current

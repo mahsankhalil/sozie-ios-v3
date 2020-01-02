@@ -42,11 +42,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
         }
         let subtitle = "Size: " + request.sizeValue.uppercased()
         if let color = request.color {
-            if color == "n/a" {
-                self.colorTitle = "Color: N/A"
-            } else {
-                self.colorTitle = "Color: " + color.capitalizingFirstLetter()
-            }
+            self.colorTitle = UtilityManager.getColorNameCapitalized(color: color)
         } else {
             self.colorTitle = "Color: N/A"
         }
@@ -62,11 +58,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
         self.cup = request.user.measurement?.cup
         self.waist = request.user.measurement?.waist
         self.imageURL = URL(string: imageURL)
-        if request.user.isSuperUser == true {
-            self.isAvailable = true
-        } else {
-            self.isAvailable = false
-        }
+        self.isAvailable = request.user.isSuperUser ?? false
         self.brandId = request.brandId
         self.isFilled = request.isFilled
         self.acceptedBySomeoneElse = false
