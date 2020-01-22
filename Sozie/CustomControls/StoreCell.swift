@@ -39,5 +39,12 @@ extension StoreCell: CellConfigurable {
         if let countViewModel = viewModel as? CountViewModeling {
             quantityLeftTitle.text = "only " + String(countViewModel.count) + " left"
         }
+        if let availabilityModel = viewModel as? AvailabilityProviding {
+            if availabilityModel.isAvailable {
+                quantityLeftTitle.text = "Available"
+            } else {
+                quantityLeftTitle.text = "Not Available"
+            }
+        }
     }
 }

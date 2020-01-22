@@ -142,7 +142,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func setupLocationManager() {
-        locationManager = CLLocationManager()
+        if locationManager == nil {
+            locationManager = CLLocationManager()
+        }
         locationManager?.delegate = self
         self.locationManager?.requestWhenInUseAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -231,13 +233,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate: CLLocationManagerDelegate {
     // Below method will provide you current location.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if currentLocation == nil {
-            currentLocation = locations.last
-            locationManager?.stopMonitoringSignificantLocationChanges()
-            let locationValue: CLLocationCoordinate2D = manager.location!.coordinate
-            print("locations = \(locationValue)")
-            locationManager?.stopUpdatingLocation()
-        }
+        locationManager?.stopUpdatingLocation()
+        currentLocation = locations.last
+        locationManager?.stopMonitoringSignificantLocationChanges()
+        print("locations = \(String(describing: currentLocation))")
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "LocationAvailable")))
+
     }
     // Below Mehtod will print error if not able to update location.
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

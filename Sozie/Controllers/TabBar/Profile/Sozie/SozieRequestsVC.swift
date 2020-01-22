@@ -427,22 +427,43 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 }
                 imageURL = prodImageURL
             }
+        } else {
+            if let img = product.imageURL {
+                imageURL = img.getActualSizeImageURL() ?? ""
+            }
         }
         if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
-            let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL, progreesVC: progressTutorialVC)
-            popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
-            let popUpVC = PopupController
-                .create(self.tabBarController!.navigationController!)
-            //        let options = PopupCustomOption.layout(.bottom)
-            //        popUpVC.cornerRadius = 0.0
-            //        _ = popUpVC.customize([options])
-            _ = popUpVC.show(popUpInstnc)
-            popUpInstnc.closeHandler = { [] in
-                popUpVC.dismiss()
-                if UserDefaultManager.getIfPostTutorialShown() == false {
-                    self.showAcceptRequestTutorial()
-                }
+            if currentRequest.brandId == 10 || self.isFromTutorial {
+                self.showTargetStore(merchantId: merchantId, imageURL: imageURL)
+            } else if currentRequest.brandId == 18 {
+                self.showAdidasStoresPopup(productId: merchantId, imageURL: imageURL, sku: currentRequest.sku ?? "")
             }
+        }
+    }
+    func showTargetStore(merchantId: String, imageURL: String) {
+        let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL, progreesVC: progressTutorialVC)
+        popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        _ = popUpVC.show(popUpInstnc)
+        popUpInstnc.closeHandler = { [] in
+            popUpVC.dismiss()
+            if UserDefaultManager.getIfPostTutorialShown() == false {
+                self.showAcceptRequestTutorial()
+            }
+        }
+    }
+    func showAdidasStoresPopup(productId: String, imageURL: String, sku: String) {
+        let popUpInstnc = StoresPopupListingVC.instance(productId: productId, productImage: imageURL, sku: sku)
+        popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        _ = popUpVC.show(popUpInstnc)
+        popUpInstnc.closeHandler = { [] in
+            popUpVC.dismiss()
+//            if UserDefaultManager.getIfPostTutorialShown() == false {
+//                self.showAcceptRequestTutorial()
+//            }
         }
     }
     func nearbyStoresButtonTapped(button: UIButton) {

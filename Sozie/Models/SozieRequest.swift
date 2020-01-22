@@ -20,6 +20,7 @@ struct SozieRequest: Codable {
     var isAccepted: Bool
     var acceptedRequest: AcceptedRequest?
     var color: String?
+    var sku: String?
     enum CodingKeys: String, CodingKey {
         case requestId = "id"
         case user = "user"
@@ -32,8 +33,9 @@ struct SozieRequest: Codable {
         case isAccepted = "is_accepted"
         case acceptedRequest = "accepted_request"
         case color
+        case sku
     }
-    init(requestId: Int, user: User, sizeValue: String, productId: String, requestedProduct: Product, brandId: Int, isFilled: Bool, isAccepted: Bool, acceptedRequest: AcceptedRequest?, color: String?) {
+    init(requestId: Int, user: User, sizeValue: String, productId: String, requestedProduct: Product, brandId: Int, isFilled: Bool, isAccepted: Bool, acceptedRequest: AcceptedRequest?, color: String?,sku: String? = nil) {
         self.requestId = requestId
         self.user = user
         self.sizeValue = sizeValue
@@ -44,6 +46,7 @@ struct SozieRequest: Codable {
         self.isAccepted = isAccepted
         self.acceptedRequest = acceptedRequest
         self.color = color
+        self.sku = sku
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -58,7 +61,7 @@ struct SozieRequest: Codable {
         isAccepted = try values.decode(Bool.self, forKey: .isAccepted)
         acceptedRequest = try? values.decode(AcceptedRequest.self, forKey: .acceptedRequest)
         color = try? values.decode(String.self, forKey: .color)
-
+        sku = try? values.decode(String.self, forKey: .sku)
     }
 }
 
