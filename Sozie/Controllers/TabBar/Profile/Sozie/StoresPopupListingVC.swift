@@ -28,7 +28,7 @@ class StoresPopupListingVC: UIViewController {
                     if location.avaialable == "Y" {
                         isAvailable = true
                     }
-                    let viewModel = AdidasStoreViewModel(count: 0, title: location.name, attributedTitle: nil, description: location.street + "\n" + location.city, isAvailable: isAvailable)
+                    let viewModel = AdidasStoreViewModel(count: 0, title: location.name.capitalizingFirstLetter(), attributedTitle: nil, description: location.street + "\n" + location.city, isAvailable: isAvailable)
                     viewModels.append(viewModel)
                 }
                 self.noDataFoundLabel.isHidden = (locations.count != 0)
