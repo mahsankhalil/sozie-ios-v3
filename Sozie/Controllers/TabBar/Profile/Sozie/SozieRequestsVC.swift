@@ -32,6 +32,7 @@ class SozieRequestsVC: UIViewController {
     var isFromTutorial: Bool = false
     var progressTutorialVC: TutorialProgressVC?
     var ifGotItButtonTapped: Bool = false
+    var totalTutorialCount: Float = 8.0
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -64,6 +65,13 @@ class SozieRequestsVC: UIViewController {
         showPostTutorials()
         NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
 //        self.view.window?.addSubview(tutorialVC.view)
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if user.country == 1 {
+                self.totalTutorialCount = 7
+            } else {
+                self.totalTutorialCount = 8
+            }
+        }
 
     }
     @objc func resetFirstTime() {
@@ -124,7 +132,7 @@ class SozieRequestsVC: UIViewController {
     func showInStockTutorial() {
         if ifInStockTutorialShown == false {
             self.showProgressTutorial()
-            progressTutorialVC?.updateProgress(progress: 1.0/8.0)
+            progressTutorialVC?.updateProgress(progress: 1.0/totalTutorialCount)
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 inStockTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "RequestInStockTutorialVC") as! RequestInStockTutorialVC)
                 if let tutVC = inStockTutorialVC {
@@ -162,7 +170,7 @@ class SozieRequestsVC: UIViewController {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
                 acceptRequestTutorialVC?.descriptionString = "Click on     ACCEPT REQUEST    "
-                progressTutorialVC?.updateProgress(progress: 4.0/8.0)
+                progressTutorialVC?.updateProgress(progress: 4.0/totalTutorialCount)
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
@@ -198,7 +206,7 @@ class SozieRequestsVC: UIViewController {
         if ifUploadPostTutorialShown == false {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
-                progressTutorialVC?.updateProgress(progress: 5.0/8.0)
+                progressTutorialVC?.updateProgress(progress: 5.0/totalTutorialCount)
                 acceptRequestTutorialVC?.descriptionString = "Now let's fulfil the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    "
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
@@ -433,7 +441,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             }
         }
         if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
-            if currentRequest.brandId == 10 || self.isFromTutorial {
+            if currentRequest.brandId == 10 {
                 self.showTargetStore(merchantId: merchantId, imageURL: imageURL)
             } else if currentRequest.brandId == 18 {
                 self.showAdidasStoresPopup(productId: merchantId, imageURL: imageURL, sku: currentRequest.sku ?? "")
@@ -454,16 +462,16 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         }
     }
     func showAdidasStoresPopup(productId: String, imageURL: String, sku: String) {
-        let popUpInstnc = StoresPopupListingVC.instance(productId: productId, productImage: imageURL, sku: sku)
+        let popUpInstnc = StoresPopupListingVC.instance(productId: productId, productImage: imageURL, sku: sku, progreesVC: progressTutorialVC)
         popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
         let popUpVC = PopupController
             .create(self.tabBarController!.navigationController!)
         _ = popUpVC.show(popUpInstnc)
         popUpInstnc.closeHandler = { [] in
             popUpVC.dismiss()
-//            if UserDefaultManager.getIfPostTutorialShown() == false {
-//                self.showAcceptRequestTutorial()
-//            }
+            if UserDefaultManager.getIfPostTutorialShown() == false {
+                self.showAcceptRequestTutorial()
+            }
         }
     }
     func nearbyStoresButtonTapped(button: UIButton) {

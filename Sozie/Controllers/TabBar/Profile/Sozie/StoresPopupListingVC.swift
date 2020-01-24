@@ -14,11 +14,14 @@ class StoresPopupListingVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var locationButton: UIButton!
     var productId: String?
     var productImage: String?
     var sku: String?
     var viewModels: [AdidasStoreViewModel] = []
     var timer: Timer?
+    var progressTutorialVC: TutorialProgressVC?
+    var cancelTutorialVC: NearbyCloseTutorialVC?
     var adidasStores: [AdidasStore]? {
         didSet {
             viewModels.removeAll()
@@ -31,7 +34,7 @@ class StoresPopupListingVC: UIViewController {
                     let viewModel = AdidasStoreViewModel(count: 0, title: location.name.capitalizingFirstLetter(), attributedTitle: nil, description: location.street + "\n" + location.city, isAvailable: isAvailable)
                     viewModels.append(viewModel)
                 }
-                self.noDataFoundLabel.isHidden = (locations.count != 0)
+                self.showNoDataLabelAccordingly()
                 self.tableView.reloadData()
             }
         }
@@ -47,6 +50,45 @@ class StoresPopupListingVC: UIViewController {
             productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(fetchDataFromServer), name: Notification.Name(rawValue: "LocationAvailable"), object: nil)
+        progressTutorialVC?.delegate = self
+        if appDelegate.currentLocation == nil {
+            self.showNoDataLabelAccordingly()
+        } else {
+            fetchDataFromServer()
+        }
+    }
+    func showNoDataLabelAccordingly() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        guard let locations = self.adidasStores else {
+            self.noDataFoundLabel.isHidden = false
+            if appDelegate.currentLocation == nil {
+                self.noDataFoundLabel.text = "Click on the button below to ALLOW LOCATION ACCESS so that you can see what store to visit for this item!"
+                self.locationButton.isHidden = false
+            } else {
+                self.noDataFoundLabel.text = "Your location did not match anything we have on file. Please try again. "
+                self.locationButton.isHidden = true
+            }
+            return
+        }
+        self.noDataFoundLabel.isHidden = (locations.count != 0)
+        self.locationButton.isHidden = (locations.count != 0)
+        if locations.count == 0 {
+            if appDelegate.currentLocation == nil {
+                self.noDataFoundLabel.text = "Click on the button below to ALLOW LOCATION ACCESS so that you can see what store to visit for this item!"
+                self.locationButton.isHidden = false
+            } else {
+                self.noDataFoundLabel.text = "Your location did not match anything we have on file. Please try again. "
+                self.locationButton.isHidden = true
+            }
+        }
+    }
+    func makeDummyViewModels() {
+        viewModels.removeAll()
+        for _ in 0...4 {
+            let viewModel = AdidasStoreViewModel(count: 0, title: "Originals Flagship Store London,", attributedTitle: nil, description: "15 Fouberts Place,London", isAvailable: true)
+            viewModels.append(viewModel)
+        }
+        self.tableView.reloadData()
     }
     func excludeStoresNotRequired(stores: [AdidasStore]) -> [AdidasStore] {
         var requiredStores = [AdidasStore]()
@@ -59,7 +101,19 @@ class StoresPopupListingVC: UIViewController {
         }
         return requiredStores
     }
-    class func instance(productId: String, productImage: String, sku: String) -> StoresPopupListingVC {
+    func showNearByCancelTutorial() {
+        cancelTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyCloseTutorialVC") as? NearbyCloseTutorialVC
+        progressTutorialVC?.updateProgress(progress: 3.0/8.0)
+        if let nearByTutorialVC = cancelTutorialVC {
+            nearByTutorialVC.view.frame.origin.y = 37.0
+            nearByTutorialVC.view.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.size.height - 37.0)
+            self.view.addSubview(nearByTutorialVC.view)
+        }
+    }
+    func removeCancelTutorialVC() {
+        cancelTutorialVC?.view.removeFromSuperview()
+    }
+    class func instance(productId: String, productImage: String, sku: String, progreesVC: TutorialProgressVC?) -> StoresPopupListingVC {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "StoresPopupListingVC") as! StoresPopupListingVC
         instnce.productId = productId
@@ -81,7 +135,24 @@ class StoresPopupListingVC: UIViewController {
                 if isSuccess {
                     let productResponse = response as! AdidasProductResponse
                     self.adidasStores = self.excludeStoresNotRequired(stores: productResponse.rawStores)
+                    if UserDefaultManager.getIfPostTutorialShown() == false {
+                        if let stores = self.adidasStores {
+                            if stores.count == 0 {
+                                self.makeDummyViewModels()
+                            }
+                        }
+                        self.showNearByCancelTutorial()
+
+                    }
                 }
+            }
+        }
+    }
+    @IBAction func locationButtonTapped(_ sender: Any) {
+        let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
+        if let url = settingsUrl {
+            DispatchQueue.main.async {
+                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil) //(url as URL)
             }
         }
     }
@@ -121,5 +192,11 @@ extension StoresPopupListingVC: UITableViewDelegate, UITableViewDataSource {
             cellConfigurable.setup(viewModel)
         }
         return cell
+    }
+}
+extension StoresPopupListingVC: TutorialProgressDelegate {
+    func tutorialSkipButtonTapped() {
+        self.removeCancelTutorialVC()
+        self.closeHandler!()
     }
 }

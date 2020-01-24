@@ -242,6 +242,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     }
     // Below Mehtod will print error if not able to update location.
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        currentLocation = nil
         print("Error")
     }
 }
