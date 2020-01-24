@@ -128,7 +128,7 @@ class StoresPopupListingVC: UIViewController {
             dataDict["isCnCRestricted"] = false
             dataDict["lat"] = appDelegate.currentLocation.coordinate.latitude
             dataDict["lng"] = appDelegate.currentLocation.coordinate.longitude
-            dataDict["sku"] = sku
+            dataDict["sku"] = sku?.uppercased()
             SVProgressHUD.show()
             AdidasAPIManager.sharedInstance.getNearbyStores(params: dataDict) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
