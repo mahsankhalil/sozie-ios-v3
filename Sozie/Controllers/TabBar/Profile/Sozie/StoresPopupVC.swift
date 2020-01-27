@@ -107,7 +107,7 @@ class StoresPopupVC: UIViewController {
         dataDict["limit"] = 20
         dataDict["requested_quantity"] = 1
         dataDict["radius"] = 100
-        dataDict["include_only_available_stores"] = true
+//        dataDict["include_only_available_stores"] = true
         SVProgressHUD.show()
         TargetAPIManager.sharedInstance.getNearbyStores(productId: productId!, params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
