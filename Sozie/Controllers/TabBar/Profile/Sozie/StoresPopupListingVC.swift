@@ -84,10 +84,22 @@ class StoresPopupListingVC: UIViewController {
     }
     func makeDummyViewModels() {
         viewModels.removeAll()
-        for _ in 0...4 {
-            let viewModel = AdidasStoreViewModel(count: 0, title: "Originals Flagship Store London,", attributedTitle: nil, description: "15 Fouberts Place,London", isAvailable: true)
-            viewModels.append(viewModel)
-        }
+        let viewModel1 = AdidasStoreViewModel(count: 0, title: "Originals Flagship Store London,", attributedTitle: nil, description: "15 Fouberts Place,London", isAvailable: true)
+        let viewModel2 = AdidasStoreViewModel(count: 0, title: "Adidas Flagship Store London,", attributedTitle: nil, description: "425 Oxford street, W1C 2PG London", isAvailable: true)
+        let viewModel3 = AdidasStoreViewModel(count: 0, title: "Adidas Store London, Westfield Stratford City,", attributedTitle: nil, description: "144-145 The Arcade, Westfield Stratford City, E20 1EL London", isAvailable: true)
+        let viewModel4 = AdidasStoreViewModel(count: 0, title: "Adidas Brand Center London,", attributedTitle: nil, description: "Westfield Shopping Centre,Unit 5021/5521, W12 7GE London", isAvailable: true)
+        let viewModel5 = AdidasStoreViewModel(count: 0, title: "Originals Flagship Store London,", attributedTitle: nil, description: "Hanbury Street, 15 Hanbury Street, Old Truman Brewery, E1 6QR London", isAvailable: true)
+        viewModels.append(viewModel1)
+        viewModels.append(viewModel2)
+        viewModels.append(viewModel3)
+        viewModels.append(viewModel4)
+        viewModels.append(viewModel5)
+//
+//
+//        for _ in 0...4 {
+//            let viewModel = AdidasStoreViewModel(count: 0, title: "Originals Flagship Store London,", attributedTitle: nil, description: "15 Fouberts Place,London", isAvailable: true)
+//            viewModels.append(viewModel)
+//        }
         self.tableView.reloadData()
     }
     func excludeStoresNotRequired(stores: [AdidasStore]) -> [AdidasStore] {
