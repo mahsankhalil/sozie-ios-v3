@@ -395,7 +395,7 @@
                                         <rect key="frame" x="0.0" y="121" width="375" height="47"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What are you looking for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-qA-8H8">
-                                                <rect key="frame" x="20" y="17.5" width="335" height="12"/>
+                                                <rect key="frame" x="20" y="16.5" width="335" height="14"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="10"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -960,7 +960,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slim fit design and waist belt flatter the figure V neckline and 3/4-length sleeves cut a modern" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BeM-ik-fG4">
-                                                <rect key="frame" x="8" y="56" width="308" height="37.5"/>
+                                                <rect key="frame" x="8" y="56" width="308" height="33"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -976,7 +976,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzI-O6-tTt">
-                                                <rect key="frame" x="8" y="93.5" width="153" height="18"/>
+                                                <rect key="frame" x="8" y="89" width="153" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="ZiT-0M-kaW"/>
                                                     <constraint firstAttribute="width" constant="153" id="pga-bu-e95"/>
@@ -987,7 +987,7 @@
                                                 </state>
                                             </button>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WWM-89-G8R">
-                                                <rect key="frame" x="0.0" y="153" width="375" height="494"/>
+                                                <rect key="frame" x="0.0" y="148.5" width="375" height="498.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="9Mm-4c-zhn" id="4PY-sW-hph"/>
@@ -995,7 +995,7 @@
                                                 </connections>
                                             </tableView>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tn-Pd-vPu">
-                                                <rect key="frame" x="8" y="119" width="359" height="24"/>
+                                                <rect key="frame" x="8" y="114.5" width="359" height="24"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a Comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgF-1W-XX7">
                                                         <rect key="frame" x="0.0" y="0.0" width="359" height="23"/>
@@ -2276,7 +2276,7 @@ Let's go back and accept your first request</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xoy-XT-b75">
-                                                <rect key="frame" x="94" y="36" width="134" height="23"/>
+                                                <rect key="frame" x="94" y="36" width="135.5" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="23" id="8Zr-qF-93z"/>
                                                 </constraints>
@@ -2361,7 +2361,7 @@ Let's go back and accept your first request</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wish List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D22-6e-RYC">
-                                                <rect key="frame" x="12" y="0.0" width="189.5" height="46"/>
+                                                <rect key="frame" x="12" y="0.0" width="195" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Jsi-q4-TB9"/>
                                                 </constraints>
@@ -2370,7 +2370,7 @@ Let's go back and accept your first request</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -3228,7 +3228,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 <rect key="frame" x="16" y="112" width="343" height="403"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 UPLOAD PICTURES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vap-XA-C63">
-                                                        <rect key="frame" x="0.0" y="8" width="127" height="20"/>
+                                                        <rect key="frame" x="0.0" y="8" width="130.5" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="AbV-GD-DN8"/>
                                                         </constraints>
@@ -3347,7 +3347,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(min 3 images)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-Jh-VFi">
-                                                        <rect key="frame" x="130.5" y="11" width="78" height="14"/>
+                                                        <rect key="frame" x="134" y="11" width="78" height="14"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="14" id="jQ0-0Y-4fj"/>
                                                         </constraints>
@@ -3372,7 +3372,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </constraints>
                                             </view>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 WHAT SIZE FIT YOU BEST?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkr-lA-IdQ">
-                                                <rect key="frame" x="20" y="535" width="172" height="20"/>
+                                                <rect key="frame" x="20" y="535" width="175.5" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="PZM-eX-PFA"/>
                                                 </constraints>
@@ -3381,7 +3381,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 ADD FIT TIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6IZ-RU-Ncx">
-                                                <rect key="frame" x="20" y="563" width="92.5" height="20"/>
+                                                <rect key="frame" x="20" y="563" width="91" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="HSl-4L-Gdj"/>
                                                 </constraints>
@@ -3390,7 +3390,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVk-XI-T8l">
-                                                <rect key="frame" x="202" y="535" width="127" height="20"/>
+                                                <rect key="frame" x="205.5" y="535" width="123.5" height="20"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apS-lu-G2l">
                                                         <rect key="frame" x="0.0" y="19" width="127" height="1"/>
@@ -3414,7 +3414,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RK6-Nl-9q3">
-                                                <rect key="frame" x="137" y="563" width="166" height="20"/>
+                                                <rect key="frame" x="135.5" y="563" width="167.5" height="20"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y56-8k-L9e">
                                                         <rect key="frame" x="0.0" y="19" width="166" height="1"/>
@@ -4869,7 +4869,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;You must have at least $10 to be paid out&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-Ix-I0e">
-                                                <rect key="frame" x="25" y="372.5" width="325" height="16.5"/>
+                                                <rect key="frame" x="25" y="372.5" width="325" height="19"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4914,7 +4914,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your posts will be reviewed for accuracy before you are paid out." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8G-au-E7m">
-                                                <rect key="frame" x="55" y="409" width="265" height="30.5"/>
+                                                <rect key="frame" x="55" y="411.5" width="265" height="30.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                 <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
