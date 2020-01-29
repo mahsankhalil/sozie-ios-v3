@@ -88,6 +88,15 @@ extension MyUploadsCell: CellConfigurable {
                 }
                 self.viewBalanceButton.isEnabled = false
             }
+            if let user = UserDefaultManager.getCurrentUserObject() {
+                if let country = user.country {
+                    if country == 1 {
+                        self.requestedForImageView.image = UIImage(named: "Adidas-Title")
+                    } else {
+                        self.requestedForImageView.image = UIImage(named: "Target-title")
+                    }
+                }
+            }
         }
     }
     func showPostApproved(postViewModel: UserPostWithUploadsViewModel) {

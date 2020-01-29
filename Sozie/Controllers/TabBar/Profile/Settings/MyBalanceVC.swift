@@ -17,12 +17,23 @@ class MyBalanceVC: UIViewController {
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var balanceLabel: UILabel!
     var currentbalance: Float = 0.0
+    var currencySymbol = "$"
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         fetchDataFromServer()
         checkoutBackgroundView.layer.cornerRadius = Styles.sharedStyles.buttonCornerRadius
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if let country = user.country {
+                if country == 1 {
+                    currencySymbol = "£"
+                } else {
+                    currencySymbol = "$"
+                }
+            }
+        }
+        minimumBalanceLabel.text = "\"You must have at least " + currencySymbol + "10 to be paid out\""
     }
 
     func fetchDataFromServer() {
@@ -32,7 +43,7 @@ class MyBalanceVC: UIViewController {
             if isSuccess {
                 let balance = (response as! BalanceResponse).balance
                 self.currentbalance = balance
-                self.balanceLabel.text = "$" + String(format: "%0.2f", balance)
+                self.balanceLabel.text = self.currencySymbol + String(format: "%0.2f", balance)
             } else {
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
@@ -57,7 +68,7 @@ class MyBalanceVC: UIViewController {
     }
     @IBAction func checkoutButtonTapped(_ sender: Any) {
         if currentbalance < 10 {
-            UtilityManager.showMessageWith(title: "Insufficient Amount", body: "To cash out you need a minimum of $10", in: self)
+            UtilityManager.showMessageWith(title: "Insufficient Amount", body: "To cash out you need a minimum of " + currencySymbol + "10", in: self)
             return
         }
         let popUpInstnc = ConfirmEmailCashoutPopUp.instance()

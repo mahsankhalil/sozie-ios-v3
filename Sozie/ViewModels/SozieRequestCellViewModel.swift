@@ -40,7 +40,10 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
                 }
             }
         }
-        let subtitle = "Size: " + request.sizeValue.uppercased()
+        var subtitle = "Size: " + request.sizeValue.uppercased()
+        if let displaySize = request.displaySize {
+            subtitle = "Size: " + displaySize.uppercased()
+        }
         if let color = request.color {
             self.colorTitle = UtilityManager.getColorNameCapitalized(color: color)
         } else {

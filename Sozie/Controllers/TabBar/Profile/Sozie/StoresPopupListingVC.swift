@@ -84,7 +84,7 @@ class StoresPopupListingVC: UIViewController {
     }
     func makeDummyViewModels() {
         viewModels.removeAll()
-        let viewModel1 = AdidasStoreViewModel(count: 0, title: "Originals Flagship Store London,", attributedTitle: nil, description: "15 Fouberts Place,London", isAvailable: true)
+        let viewModel1 = AdidasStoreViewModel(count: 0, title: "Originals Flagship Store London,", attributedTitle: nil, description: "Fouberts Place, 15 Fouberts Place, Carnaby Street, W1F 7QB London", isAvailable: true)
         let viewModel2 = AdidasStoreViewModel(count: 0, title: "Adidas Flagship Store London,", attributedTitle: nil, description: "425 Oxford street, W1C 2PG London", isAvailable: true)
         let viewModel3 = AdidasStoreViewModel(count: 0, title: "Adidas Store London, Westfield Stratford City,", attributedTitle: nil, description: "144-145 The Arcade, Westfield Stratford City, E20 1EL London", isAvailable: true)
         let viewModel4 = AdidasStoreViewModel(count: 0, title: "Adidas Brand Center London,", attributedTitle: nil, description: "Westfield Shopping Centre,Unit 5021/5521, W12 7GE London", isAvailable: true)
@@ -114,12 +114,14 @@ class StoresPopupListingVC: UIViewController {
         return requiredStores
     }
     func showNearByCancelTutorial() {
-        cancelTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyCloseTutorialVC") as? NearbyCloseTutorialVC
-        progressTutorialVC?.updateProgress(progress: 3.0/8.0)
-        if let nearByTutorialVC = cancelTutorialVC {
-            nearByTutorialVC.view.frame.origin.y = 37.0
-            nearByTutorialVC.view.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.size.height - 37.0)
-            self.view.addSubview(nearByTutorialVC.view)
+        if cancelTutorialVC == nil {
+            cancelTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyCloseTutorialVC") as? NearbyCloseTutorialVC
+            progressTutorialVC?.updateProgress(progress: 3.0/8.0)
+            if let nearByTutorialVC = cancelTutorialVC {
+                nearByTutorialVC.view.frame.origin.y = 37.0
+                nearByTutorialVC.view.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.size.height - 37.0)
+                self.view.addSubview(nearByTutorialVC.view)
+            }
         }
     }
     func removeCancelTutorialVC() {
@@ -154,7 +156,6 @@ class StoresPopupListingVC: UIViewController {
                             }
                         }
                         self.showNearByCancelTutorial()
-
                     }
                 }
             }
