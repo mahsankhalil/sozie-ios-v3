@@ -28,7 +28,7 @@ class StoresPopupListingVC: UIViewController {
             if let locations = adidasStores {
                 for location in locations {
                     var isAvailable = false
-                    if location.avaialable == "Y" {
+                    if location.avaialable.lowercased() == "now" {
                         isAvailable = true
                     }
                     let viewModel = AdidasStoreViewModel(count: 0, title: location.name.capitalizingFirstLetter(), attributedTitle: nil, description: location.street + "\n" + location.city, isAvailable: isAvailable)
@@ -148,7 +148,7 @@ class StoresPopupListingVC: UIViewController {
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     let productResponse = response as! AdidasProductResponse
-                    self.adidasStores = self.excludeStoresNotRequired(stores: productResponse.rawStores)
+                    self.adidasStores = self.excludeStoresNotRequired(stores: productResponse.filteredStores)
                     if UserDefaultManager.getIfPostTutorialShown() == false {
                         if let stores = self.adidasStores {
                             if stores.count == 0 {

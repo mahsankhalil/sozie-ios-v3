@@ -8,13 +8,13 @@
 
 import UIKit
 struct AdidasProductResponse: Codable {
-    var rawStores: [AdidasStore]
+    var filteredStores: [AdidasStore]
     enum CodingKeys: String, CodingKey {
-        case rawStores
+        case filteredStores
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        rawStores = try values.decode([AdidasStore].self, forKey: .rawStores)
+        filteredStores = try values.decode([AdidasStore].self, forKey: .filteredStores)
     }
 }
 
@@ -23,17 +23,13 @@ struct AdidasStore: Codable {
     var name: String
     var street: String
     var city: String
-    var country: String
     var avaialable: String
-    var distance: String
     enum CodingKeys: String, CodingKey {
         case storeId = "id"
         case name
-        case street = "street1"
+        case street
         case city
-        case country
-        case avaialable = "Available"
-        case distance
+        case avaialable = "availability"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -41,9 +37,6 @@ struct AdidasStore: Codable {
         name = try values.decode(String.self, forKey: .name)
         street = try values.decode(String.self, forKey: .street)
         city = try values.decode(String.self, forKey: .city)
-        country = try values.decode(String.self, forKey: .country)
         avaialable = try values.decode(String.self, forKey: .avaialable)
-        distance = try values.decode(String.self, forKey: .distance)
-
     }
 }
