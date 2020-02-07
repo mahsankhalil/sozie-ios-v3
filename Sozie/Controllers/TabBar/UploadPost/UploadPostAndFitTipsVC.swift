@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import TPKeyboardAvoiding
 import UserNotifications
+import CropViewController
 //import FirebaseAnalytics
 protocol UploadPostAndFitTipsDelegate: class {
     func uploadPostInfoButtonTapped()
@@ -471,21 +472,51 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
 }
 extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true, completion: nil)
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            if let index = selectedIndex {
-                let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
-                viewModels[index].image = scaledImg
-                self.postImageView.image = scaledImg
-                if index > 2 {
-                    if index < 5 {
-                        let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
-                        viewModels.append(viewModel)
-                    }
-                    viewModels[index].title = ""
-                }
-                self.imagesCollectionView.reloadData()
-            }
+//            self.setupImage(pickedImage: pickedImage)
+            self.showCropVC(image: pickedImage)
         }
+    }
+    func showCropVC(image: UIImage) {
+        let cropVC = CropViewController(image: image)
+        cropVC.delegate = self
+        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+        cropVC.aspectRatioPickerButtonHidden = true
+        cropVC.aspectRatioLockEnabled = true
+        cropVC.resetButtonHidden = true
+        cropVC.rotateButtonsHidden = true
+        cropVC.toolbar.doneTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.toolbar.cancelTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.cropView.gridOverlayHidden = true
+        cropVC.cropView.setGridOverlayHidden(true, animated: true)
+        let imgVu = UIImageView(image: UIImage(named: "Canvas"))
+        imgVu.center = cropVC.cropView.center
+        imgVu.frame = cropVC.cropView.cropBoxFrame
+        cropVC.cropView.addSubview(imgVu)
+        self.present(cropVC, animated: true) {
+            imgVu.frame = cropVC.cropView.cropBoxFrame
+        }
+    }
+    func setupImage(pickedImage: UIImage) {
+        if let index = selectedIndex {
+            let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+            viewModels[index].image = scaledImg
+            self.postImageView.image = scaledImg
+            if index > 2 {
+                if index < 5 {
+                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    viewModels.append(viewModel)
+                }
+                viewModels[index].title = ""
+            }
+            self.imagesCollectionView.reloadData()
+        }
+    }
+}
+extension UploadPostAndFitTipsVC: CropViewControllerDelegate {
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        self.setupImage(pickedImage: image)
         if checkIfAllImagesUplaoded() {
             if UserDefaultManager.getIfPostTutorialShown() == false {
                 removePictureTutorial()
@@ -498,7 +529,7 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         if isTutorialShowing {
             self.progressTutorialVC?.view.isHidden = false
         }
-        picker.dismiss(animated: true, completion: nil)
+        cropViewController.dismiss(animated: true, completion: nil)
     }
 }
 extension UploadPostAndFitTipsVC: PhotoEditorDelegate {
