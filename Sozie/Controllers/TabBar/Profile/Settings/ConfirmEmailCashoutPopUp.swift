@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import StoreKit
 class ConfirmEmailCashoutPopUp: UIViewController {
 
     @IBOutlet weak var submitButton: UIButton!
@@ -41,6 +42,7 @@ class ConfirmEmailCashoutPopUp: UIViewController {
             if isSuccess {
                 UtilityManager.showMessageWith(title: "Success!", body: (response as! ValidateRespose).detail, in: self, okBtnTitle: "Ok", cancelBtnTitle: nil, dismissAfter: nil, leftAligned: nil ) {
                     self.closeHandler?()
+                    SKStoreReviewController.requestReview()
                 }
             } else {
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
