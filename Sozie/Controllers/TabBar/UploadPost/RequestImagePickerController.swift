@@ -28,6 +28,7 @@ class RequestImagePickerController: UIViewController {
     weak var delegate: CaptureManagerDelegate?
     var currentImage: UIImage?
     var photoIndex: Int?
+    var overlayImageView: UIImageView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,19 +53,29 @@ class RequestImagePickerController: UIViewController {
         previewLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: cameraViewHeightConstraint.constant)
         previewLayer.videoGravity = .resizeAspectFill
         camerView.layer.addSublayer(previewLayer)
+        overlayImageView = UIImageView(image: UIImage(named: "Canvas"))
+        overlayImageView?.frame.size.height = UIScreen.main.bounds.size.height - 140.0
+        overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)! * (9.0/16.0)
+        overlayImageView?.center.x = UIScreen.main.bounds.size.width/2.0
+        overlayImageView?.center.y = (UIScreen.main.bounds.size.height - 90.0)/2.0
+        overlayImageView?.layer.borderWidth = 1.0
+        overlayImageView?.layer.borderColor = UIColor.white.cgColor
+        if let imageView = overlayImageView {
+            camerView.addSubview(imageView)
+        }
         let subView = self.createOverlay(frame: previewLayer.frame, xOffset: 10, yOffset: topPadding, radius: 10)
         camerView.addSubview(subView)
-        let faceImageView = UIImageView(image: UIImage(named: "Face"))
-        let feetImageView = UIImageView(image: UIImage(named: "Feet"))
-        faceImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - faceImageView.frame.size.width)/2.0), y: topPadding)
-        camerView.addSubview(faceImageView)
-        feetImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - feetImageView.frame.size.width)/2.0), y: cameraViewHeightConstraint.constant - 90 - 92)
-        camerView.addSubview(feetImageView)
+//        let faceImageView = UIImageView(image: UIImage(named: "Face"))
+//        let feetImageView = UIImageView(image: UIImage(named: "Feet"))
+//        faceImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - faceImageView.frame.size.width)/2.0), y: topPadding)
+//        camerView.addSubview(faceImageView)
+//        feetImageView.frame.origin = CGPoint(x: ((UIScreen.main.bounds.size.width - feetImageView.frame.size.width)/2.0), y: cameraViewHeightConstraint.constant - 90 - 92)
+//        camerView.addSubview(feetImageView)
         let output = AVCaptureVideoDataOutput()
         output.videoSettings = ([kCVPixelBufferPixelFormatTypeKey as AnyHashable: kCVPixelFormatType_32BGRA] as! [String: Any])
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         captureSession?.addOutput(output)
-        addGridOnView()
+//        addGridOnView()
     }
     func hideShowSampleImageView() {
         self.sampleImageView.isHidden = false
@@ -83,24 +94,24 @@ class RequestImagePickerController: UIViewController {
             self.sampleImageView.isHidden = true
         }
     }
-    func addGridOnView() {
-        let xPosition = UIScreen.main.bounds.width/3
-        let firstVertLine = UIView(frame: CGRect(x: xPosition, y: 0.0, width: 0.5, height: previewLayer.frame.height))
-        let secondVertLine = UIView(frame: CGRect(x: 2*xPosition, y: 0.0, width: 0.5, height: previewLayer.frame.height))
-        let yPosition = previewLayer.frame.height/3
-        let firstHorLine = UIView(frame: CGRect(x: 0, y: yPosition, width: UIScreen.main.bounds.width, height: 0.5))
-        let secondHorLine = UIView(frame: CGRect(x: 0, y: 2*yPosition, width: UIScreen.main.bounds.width, height: 0.5))
-
-        firstVertLine.backgroundColor = UIColor.white
-        secondVertLine.backgroundColor = UIColor.white
-        firstHorLine.backgroundColor = UIColor.white
-        secondHorLine.backgroundColor = UIColor.white
-
-        camerView.addSubview(firstVertLine)
-        camerView.addSubview(secondVertLine)
-        camerView.addSubview(firstHorLine)
-        camerView.addSubview(secondHorLine)
-    }
+//    func addGridOnView() {
+//        let xPosition = UIScreen.main.bounds.width/3
+//        let firstVertLine = UIView(frame: CGRect(x: xPosition, y: 0.0, width: 0.5, height: previewLayer.frame.height))
+//        let secondVertLine = UIView(frame: CGRect(x: 2*xPosition, y: 0.0, width: 0.5, height: previewLayer.frame.height))
+//        let yPosition = previewLayer.frame.height/3
+//        let firstHorLine = UIView(frame: CGRect(x: 0, y: yPosition, width: UIScreen.main.bounds.width, height: 0.5))
+//        let secondHorLine = UIView(frame: CGRect(x: 0, y: 2*yPosition, width: UIScreen.main.bounds.width, height: 0.5))
+//
+//        firstVertLine.backgroundColor = UIColor.white
+//        secondVertLine.backgroundColor = UIColor.white
+//        firstHorLine.backgroundColor = UIColor.white
+//        secondHorLine.backgroundColor = UIColor.white
+//
+//        camerView.addSubview(firstVertLine)
+//        camerView.addSubview(secondVertLine)
+//        camerView.addSubview(firstHorLine)
+//        camerView.addSubview(secondHorLine)
+//    }
     func createOverlay(frame: CGRect,
                        xOffset: CGFloat,
                        yOffset: CGFloat,
@@ -111,8 +122,8 @@ class RequestImagePickerController: UIViewController {
         // Step 2
         let path = CGMutablePath()
         path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
-        path.addEllipse(in: CGRect(origin: CGPoint(x: ((UIScreen.main.bounds.size.width - 70.0)/2.0), y: yOffset), size: CGSize(width: 70, height: 91)))
-        path.addRect(CGRect(origin: CGPoint(x: ((UIScreen.main.bounds.size.width - 239.0)/2.0), y: cameraViewHeightConstraint.constant - 90 - 92 + 11), size: CGSize(width: 239, height: 69)))
+        
+        path.addRect(overlayImageView!.frame)
         // Step 3
         let maskLayer = CAShapeLayer()
         maskLayer.backgroundColor = UIColor.black.cgColor
@@ -227,7 +238,7 @@ class RequestImagePickerController: UIViewController {
         return self.cropToPreviewLayer(originalImage: image)
     }
     func cropToPreviewLayer(originalImage: UIImage) -> UIImage {
-        let outputRect = previewLayer.metadataOutputRectConverted(fromLayerRect: previewLayer.bounds)
+        let outputRect = previewLayer.metadataOutputRectConverted(fromLayerRect: overlayImageView!.frame)
         var cgImage = originalImage.cgImage!
         let width = CGFloat(cgImage.width)
         let height = CGFloat(cgImage.height)
