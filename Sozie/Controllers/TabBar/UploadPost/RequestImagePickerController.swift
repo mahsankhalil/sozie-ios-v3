@@ -53,7 +53,7 @@ class RequestImagePickerController: UIViewController {
         previewLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: cameraViewHeightConstraint.constant)
         previewLayer.videoGravity = .resizeAspectFill
         camerView.layer.addSublayer(previewLayer)
-        overlayImageView = UIImageView(image: UIImage(named: "Canvas"))
+        overlayImageView = UIImageView(image: UIImage(named: "Canvas-Camera"))
         overlayImageView?.frame.size.height = UIScreen.main.bounds.size.height - 140.0
         overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)! * (9.0/16.0)
         overlayImageView?.center.x = UIScreen.main.bounds.size.width/2.0

@@ -89,8 +89,9 @@ class UploadPostAndFitTipsVC: BaseViewController {
         progressTutorialVC?.updateProgress(progress: 6.0/8.0)
         if let tutVC = picturesTutorialVC {
             tutVC.view.frame.origin.y = 215.0
-            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 522)
+            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 638)
             self.scrollView.addSubview(tutVC.view)
+            self.scrollView.contentSizeToFit()
         }
     }
     func removePictureTutorial() {
@@ -490,7 +491,7 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         cropVC.toolbar.cancelTextButton.setTitleColor(UIColor.white, for: .normal)
         cropVC.cropView.gridOverlayHidden = true
         cropVC.cropView.setGridOverlayHidden(true, animated: true)
-        let imgVu = UIImageView(image: UIImage(named: "Canvas"))
+        let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
         imgVu.center = cropVC.cropView.center
         imgVu.frame = cropVC.cropView.cropBoxFrame
         cropVC.cropView.addSubview(imgVu)

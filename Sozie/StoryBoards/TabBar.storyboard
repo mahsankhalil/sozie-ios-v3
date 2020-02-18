@@ -1817,34 +1817,185 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmZ-0d-kmg">
-                                <rect key="frame" x="16" y="170" width="343" height="310"/>
+                                <rect key="frame" x="16" y="143" width="343" height="426"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm2-N8-b1e">
-                                        <rect key="frame" x="37" y="0.0" width="268" height="135"/>
-                                        <string key="text">Time to upload pictures! Go ahead upload a front, side and back view of yourself.
-Don't worry about what you're wearing! We just want to make sure that you have the correct angles!
-Here is an example:</string>
-                                        <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="13"/>
-                                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Depinder" translatesAutoresizingMaskIntoConstraints="NO" id="eFP-j0-7aX">
-                                        <rect key="frame" x="15" y="135" width="313" height="152"/>
+                                        <rect key="frame" x="15" y="262" width="313" height="152"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="152" id="Rnm-a6-00L"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm2-N8-b1e">
+                                        <rect key="frame" x="15" y="16" width="313" height="228"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">Time to upload your pics! Follow the instructions below and you will be good to go!
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+1. Upload a </string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="full">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" front, back, and side view at the same angle as the pic below.">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content" base64-UTF8="YES">
+Cgo
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="2. Make sure your pictures are ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="bright ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="💡">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content" base64-UTF8="YES">
+Cgo
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="3.">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content"> No selfies!
+
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="4. We ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="DO">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" want pics to be stylized with ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="shoes">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="👠">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" well-groomed hair, ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="and">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI"/>
+                                                    <font key="NSOriginalFont" size="13" name="SegoeUI"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" makeup">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="💄">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="310" id="1hr-zW-Clt"/>
-                                    <constraint firstAttribute="bottom" secondItem="eFP-j0-7aX" secondAttribute="bottom" constant="23" id="7zU-PB-NRb"/>
+                                    <constraint firstAttribute="height" constant="426" id="1hr-zW-Clt"/>
+                                    <constraint firstAttribute="bottom" secondItem="eFP-j0-7aX" secondAttribute="bottom" constant="12" id="7zU-PB-NRb"/>
                                     <constraint firstAttribute="trailing" secondItem="eFP-j0-7aX" secondAttribute="trailing" constant="15" id="Nt1-rr-7St"/>
                                     <constraint firstItem="eFP-j0-7aX" firstAttribute="leading" secondItem="fmZ-0d-kmg" secondAttribute="leading" constant="15" id="RBj-jk-73u"/>
-                                    <constraint firstItem="eFP-j0-7aX" firstAttribute="top" secondItem="Zm2-N8-b1e" secondAttribute="bottom" id="emw-z9-C8N"/>
-                                    <constraint firstItem="Zm2-N8-b1e" firstAttribute="top" secondItem="fmZ-0d-kmg" secondAttribute="top" id="nbK-Uz-7tq"/>
-                                    <constraint firstItem="Zm2-N8-b1e" firstAttribute="leading" secondItem="fmZ-0d-kmg" secondAttribute="leading" constant="37" id="pax-xS-dFD"/>
-                                    <constraint firstAttribute="trailing" secondItem="Zm2-N8-b1e" secondAttribute="trailing" constant="38" id="sRJ-j4-Ppp"/>
+                                    <constraint firstItem="eFP-j0-7aX" firstAttribute="top" secondItem="Zm2-N8-b1e" secondAttribute="bottom" constant="18" id="emw-z9-C8N"/>
+                                    <constraint firstItem="Zm2-N8-b1e" firstAttribute="top" secondItem="fmZ-0d-kmg" secondAttribute="top" constant="16" id="nbK-Uz-7tq"/>
+                                    <constraint firstItem="Zm2-N8-b1e" firstAttribute="leading" secondItem="fmZ-0d-kmg" secondAttribute="leading" constant="15" id="pax-xS-dFD"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zm2-N8-b1e" secondAttribute="trailing" constant="15" id="sRJ-j4-Ppp"/>
                                     <constraint firstAttribute="width" constant="343" id="zLe-dG-kUD"/>
                                 </constraints>
                             </view>
@@ -1855,7 +2006,7 @@ Here is an example:</string>
                             <constraint firstItem="ZN2-S8-QFE" firstAttribute="leading" secondItem="eln-46-oEw" secondAttribute="trailing" constant="32" id="Gij-xI-JYE"/>
                             <constraint firstItem="fmZ-0d-kmg" firstAttribute="centerX" secondItem="XtM-dM-6NT" secondAttribute="centerX" id="Jhr-IP-20m"/>
                             <constraint firstItem="eln-46-oEw" firstAttribute="leading" secondItem="nlt-OD-rh9" secondAttribute="leading" constant="34" id="Pzu-ry-4S6"/>
-                            <constraint firstItem="fmZ-0d-kmg" firstAttribute="top" secondItem="eln-46-oEw" secondAttribute="bottom" constant="31" id="Scy-RJ-W7U"/>
+                            <constraint firstItem="fmZ-0d-kmg" firstAttribute="top" secondItem="eln-46-oEw" secondAttribute="bottom" constant="4" id="Scy-RJ-W7U"/>
                             <constraint firstItem="3rM-GJ-XWE" firstAttribute="leading" secondItem="nlt-OD-rh9" secondAttribute="leading" id="Uf6-AS-Cv9"/>
                             <constraint firstItem="ZN2-S8-QFE" firstAttribute="top" secondItem="XtM-dM-6NT" secondAttribute="top" id="eBf-vD-a9z"/>
                             <constraint firstItem="3rM-GJ-XWE" firstAttribute="bottom" secondItem="nlt-OD-rh9" secondAttribute="bottom" id="fm9-ih-9mn"/>
