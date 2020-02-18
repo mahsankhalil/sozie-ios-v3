@@ -68,7 +68,7 @@ class MyBalanceVC: UIViewController {
     }
     @IBAction func checkoutButtonTapped(_ sender: Any) {
         if currentbalance < 10 {
-            UtilityManager.showMessageWith(title: "Insufficient Amount", body: "To cash out you need a minimum of " + currencySymbol + "10", in: self)
+            UtilityManager.showMessageWith(title: "Insufficient Amount", body: "You do not have enough money to cash out yet", in: self)
             return
         }
         let popUpInstnc = ConfirmEmailCashoutPopUp.instance()
