@@ -3478,7 +3478,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zuF-N8-OyU">
-                                                <rect key="frame" x="283" y="54" width="67" height="29"/>
+                                                <rect key="frame" x="258" y="54" width="67" height="29"/>
                                                 <segments>
                                                     <segment title="in"/>
                                                     <segment title="cm"/>
@@ -3508,6 +3508,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                             </constraint>
                                             <constraint firstAttribute="bottom" secondItem="UUx-dl-z50" secondAttribute="bottom" constant="10" id="IFw-PI-xVc"/>
                                             <constraint firstAttribute="height" constant="647" id="JNd-ln-lgD"/>
+                                            <constraint firstItem="zuF-N8-OyU" firstAttribute="leading" secondItem="4FQ-14-O9L" secondAttribute="trailing" constant="8" id="KKG-oU-w6k"/>
                                             <constraint firstItem="UUx-dl-z50" firstAttribute="centerX" secondItem="DGa-Do-dEv" secondAttribute="centerX" id="N1G-5j-qK0">
                                                 <variation key="heightClass=regular" constant="0.0"/>
                                             </constraint>
@@ -3530,7 +3531,6 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <variation key="heightClass=regular" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="Zja-wb-SkP" firstAttribute="leading" relation="lessThanOrEqual" secondItem="DGa-Do-dEv" secondAttribute="leading" constant="30" id="rwG-ac-8UE"/>
-                                            <constraint firstAttribute="trailing" secondItem="zuF-N8-OyU" secondAttribute="trailing" constant="25" id="sf8-PQ-8M1"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J6J-N3-J31" secondAttribute="trailing" constant="20" symbolic="YES" id="xoa-Fz-mv4"/>
                                             <constraint firstItem="oIT-6i-FxZ" firstAttribute="top" secondItem="4FQ-14-O9L" secondAttribute="bottom" constant="1" id="zIx-Ds-hFQ">
                                                 <variation key="heightClass=regular" constant="0.0"/>

@@ -71,6 +71,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         super.viewDidAppear(animated)
         if picturesTutorialVC == nil {
             if UserDefaultManager.getIfPostTutorialShown() == false {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                 self.addPicturesTutorial()
             }
         }
@@ -291,10 +292,12 @@ class UploadPostAndFitTipsVC: BaseViewController {
             }
         }
         dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         SVProgressHUD.show()
         ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                 if isTutorial {
                     UserDefaultManager.setBrowserTutorialShown()
                     self.uploadTutorialData()

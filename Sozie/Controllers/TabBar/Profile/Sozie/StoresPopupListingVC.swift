@@ -22,15 +22,12 @@ class StoresPopupListingVC: UIViewController {
     var timer: Timer?
     var progressTutorialVC: TutorialProgressVC?
     var cancelTutorialVC: NearbyCloseTutorialVC?
-    var adidasStores: [AdidasStore]? {
+    var adidasStores: [AdidasRawStore]? {
         didSet {
             viewModels.removeAll()
             if let locations = adidasStores {
                 for location in locations {
-                    var isAvailable = false
-                    if location.avaialable.lowercased() == "now" {
-                        isAvailable = true
-                    }
+                    let isAvailable = self.checkIfProductAvailableIn(storeId: location.storeId)
                     let viewModel = AdidasStoreViewModel(count: 0, title: location.name.capitalizingFirstLetter(), attributedTitle: nil, description: location.street + "\n" + location.city, isAvailable: isAvailable)
                     viewModels.append(viewModel)
                 }
@@ -39,6 +36,7 @@ class StoresPopupListingVC: UIViewController {
             }
         }
     }
+    var availableStores = [AdidasStore]()
     var closeHandler: (() -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +54,14 @@ class StoresPopupListingVC: UIViewController {
         } else {
             fetchDataFromServer()
         }
+    }
+    func checkIfProductAvailableIn(storeId: String) -> Bool {
+        for store in self.availableStores where store.storeId == storeId {
+            if store.avaialable.lowercased() == "now" {
+                return true
+            }
+        }
+        return false
     }
     func showNoDataLabelAccordingly() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -102,8 +108,8 @@ class StoresPopupListingVC: UIViewController {
 //        }
         self.tableView.reloadData()
     }
-    func excludeStoresNotRequired(stores: [AdidasStore]) -> [AdidasStore] {
-        var requiredStores = [AdidasStore]()
+    func excludeStoresNotRequired(stores: [AdidasRawStore]) -> [AdidasRawStore] {
+        var requiredStores = [AdidasRawStore]()
         for store in stores {
             if store.storeId == "GB200893" || store.storeId == "GB501962" {
                 continue
@@ -138,6 +144,7 @@ class StoresPopupListingVC: UIViewController {
     @objc func fetchDataFromServer() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.currentLocation != nil {
+            NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "LocationAvailable"), object: nil)
             var dataDict = [String: Any]()
             dataDict["isCnCRestricted"] = false
             dataDict["lat"] = appDelegate.currentLocation.coordinate.latitude
@@ -148,7 +155,8 @@ class StoresPopupListingVC: UIViewController {
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     let productResponse = response as! AdidasProductResponse
-                    self.adidasStores = self.excludeStoresNotRequired(stores: productResponse.filteredStores)
+                    self.availableStores = productResponse.filteredStores
+                    self.adidasStores = self.excludeStoresNotRequired(stores: productResponse.rawStores)
                     if UserDefaultManager.getIfPostTutorialShown() == false {
                         if let stores = self.adidasStores {
                             if stores.count == 0 {
