@@ -729,7 +729,7 @@ class ServerManager: NSObject {
         ]
         Alamofire.request(ServerManager.acceptRequestURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
-            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            let obj: Result<AcceptedRequestResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }

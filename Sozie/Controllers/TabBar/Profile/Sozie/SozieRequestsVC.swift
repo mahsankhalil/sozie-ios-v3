@@ -56,7 +56,7 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (1547.0/375.0) * UIScreen.main.bounds.size.width
+        instructionsHeightConstraint.constant = (1070.0/375.0) * UIScreen.main.bounds.size.width
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
 //            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
 //            tutorialVC?.delegate = self
@@ -386,6 +386,9 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
             loadNextPage()
         }
     }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     func cancelRequestButtonTapped(button: UIButton) {
@@ -539,20 +542,36 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 showUploadPostTutorial()
                 return
             }
-            acceptRequestAPICall()
+            acceptRequestAPICall(tag: button.tag)
         }
     }
-    func acceptRequestAPICall() {
+    func makeRequestAccepted(tag: Int, acceptedRequestId: Int) {
+        requests[tag].isAccepted = true
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .hour, value: 24, to: Date())
+        let acceptedRequest = AcceptedRequest(acceptedById: UserDefaultManager.getCurrentUserId()!, acceptedId: acceptedRequestId, expiry: dateFormat.string(from: date!))
+        requests[tag].acceptedRequest = acceptedRequest
+        let viewModel = SozieRequestCellViewModel(request: requests[tag])
+        viewModels.remove(at: tag)
+        viewModels.insert(viewModel, at: tag)
+        self.tableView.reloadRows(at: [IndexPath(row: tag, section: 0)], with: .none)
+    }
+    func acceptRequestAPICall(tag: Int) {
         SVProgressHUD.show()
         var dataDict = [String: Any]()
         dataDict["product_request"] = currentRequest?.requestId
         ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.serverParams.removeAll()
-                self.requests.removeAll()
-                SVProgressHUD.show()
-                self.fetchAllSozieRequests()
+//                self.serverParams.removeAll()
+//                self.requests.removeAll()
+//                SVProgressHUD.show()
+//                self.fetchAllSozieRequests()
+                let acceptedRequestResponse = response as! AcceptedRequestResponse
+                self.makeRequestAccepted(tag: tag, acceptedRequestId: acceptedRequestResponse.acceptedRequestId)
             } else {
                 let error = (response as! Error).localizedDescription
                 if let errorDict = error.getColonSeparatedErrorDetails() {

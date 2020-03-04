@@ -495,12 +495,31 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         cropVC.cropView.gridOverlayHidden = true
         cropVC.cropView.setGridOverlayHidden(true, animated: true)
         let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
+        var image: UIImage?
+        if let index = selectedIndex {
+            switch index {
+            case 0:
+                image = UIImage(named: "Front")
+            case 1:
+                image = UIImage(named: "Back")
+            case 2:
+                image = UIImage(named: "Side")
+            default:
+                image = nil
+            }
+        } else {
+            image = nil
+        }
+        let tutorialImageView = UIImageView(image: image)
+        tutorialImageView.frame.origin.x = UIScreen.main.bounds.size.width - 68
+        tutorialImageView.frame.origin.y = 20
         imgVu.center = cropVC.cropView.center
         imgVu.frame = cropVC.cropView.cropBoxFrame
         cropVC.cropView.addSubview(imgVu)
         self.present(cropVC, animated: true) {
             imgVu.frame = cropVC.cropView.cropBoxFrame
         }
+        cropVC.cropView.addSubview(tutorialImageView)
     }
     func setupImage(pickedImage: UIImage) {
         if let index = selectedIndex {
