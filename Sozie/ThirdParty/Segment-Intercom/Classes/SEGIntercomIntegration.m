@@ -86,20 +86,16 @@
             int amountInCents = dataValue * 100;
             NSNumber *finalAmount = [[NSNumber alloc] initWithInt:amountInCents];
             [price setObject:finalAmount forKey:@"amount"];
-
             [output removeObjectForKey:key];
-            isAmountSet = @YES;
+            isAmountSet = true;
         }
-
         if ([key isEqual:@"currency"]) {
             [price setObject:data forKey:@"currency"];
             [output removeObjectForKey:key];
         }
-
         if (price.count > 0) {
             [output setObject:price forKey:@"price"];
         }
-
         if ([data isKindOfClass:[NSDictionary class]] || [data isKindOfClass:[NSArray class]]) {
             [output removeObjectForKey:key];
         }

@@ -30,7 +30,7 @@ class TabBarVC: UITabBarController {
     }
 
     @objc func showProfileTab() {
-        
+        self.selectedIndex = 2
     }
     @objc func updateBadge() {
         if Intercom.unreadConversationCount() == 0 {
@@ -51,29 +51,35 @@ class TabBarVC: UITabBarController {
         self.viewControllers = ([shopNC, wishListNC, profileNC] as! [UIViewController])
     }
     func populateUIOfSozieType() {
+        var genderImageString = ""
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                genderImageString = "-Blue"
+            }
+        }
         let browseNC = self.storyboard?.instantiateViewController(withIdentifier: "BrowseNC")
-        browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected"))
+        browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected" + genderImageString))
         let wishListNC = self.storyboard?.instantiateViewController(withIdentifier: "WishListNC")
-        wishListNC?.tabBarItem = UITabBarItem(title: "Wish List", image: UIImage(named: "Whish List"), selectedImage: UIImage(named: "Wish List Selected"))
+        wishListNC?.tabBarItem = UITabBarItem(title: "Wish List", image: UIImage(named: "Whish List"), selectedImage: UIImage(named: "Wish List Selected" + genderImageString))
 //        let cameraVc = UIViewController()
 //        cameraVc.tabBarItem = UITabBarItem(title: "Camera", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
         var imageIcon = UIImage(named: "Profile icon")
         if let user = UserDefaultManager.getCurrentUserObject() {
             if let image = user.picture {
-                SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, imageData, error, success) in
+                SDWebImageDownloader().downloadImage(with: URL(string: image)) { (picture, _, _, _) in
                     if picture != nil {
                         imageIcon = picture?.scaleImageToSize(newSize: CGSize(width: 30.0, height: 30.0))
                         imageIcon = imageIcon?.circularImage(15.0)!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
 
-                        if let vc = self.viewControllers?[2] {
-                            vc.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: imageIcon)
+                        if let desiredVC = self.viewControllers?[2] {
+                            desiredVC.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: imageIcon)
                         }
                     }
                 }
             }
         }
         let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
-        profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: UIImage(named: "Profile icon-Selected"))
+        profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: UIImage(named: "Profile icon-Selected" + genderImageString))
         let helpVc = UIViewController()
         helpVc.tabBarItem = UITabBarItem(title: "Help", image: UIImage(named: "Help"), selectedImage: UIImage(named: "Help Selected"))
         self.viewControllers = ([browseNC, wishListNC, profileNC, helpVc] as! [UIViewController])

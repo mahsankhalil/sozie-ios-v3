@@ -16,8 +16,7 @@ class ThankYouController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "ThankYouAnimation", withExtension: "gif")!)
-        {
+        if let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "ThankYouAnimation", withExtension: "gif")!) {
             let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
             imageView.image = arrowGifImage
         }
@@ -25,11 +24,7 @@ class ThankYouController: UIViewController {
         thankyouView.layer.borderWidth = 0.5
         thankyouView.layer.borderColor = UIColor.lightGray.cgColor
         thankyouView.applyShadowWith(radius: 10.0, shadowOffSet: CGSize(width: 0.0, height: 15.0), opacity: 0.25)
-        
-
     }
-    
-
     /*
     // MARK: - Navigation
 

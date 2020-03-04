@@ -39,7 +39,6 @@ public extension UIImage {
             imageView.contentMode = .scaleAspectFit
         } else { imageView = UIImageView(image: self) }
         var layer: CALayer = CALayer()
-        
         layer = imageView.layer
         layer.masksToBounds = true
         layer.cornerRadius = radius
@@ -47,7 +46,6 @@ public extension UIImage {
         layer.render(in: UIGraphicsGetCurrentContext()!)
         let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         return roundedImage
     }
 }

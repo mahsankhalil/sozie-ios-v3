@@ -31,6 +31,7 @@ class FitTipsListingVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        titleLabel.textColor = UtilityManager.getGenderColor()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,7 +49,7 @@ class FitTipsListingVC: UIViewController {
                 }
 
             } else if question.type == "T" {
-                if let answer = question.answer {
+                if question.answer != nil {
                     return true
                 }
             }
@@ -57,10 +58,8 @@ class FitTipsListingVC: UIViewController {
     }
     func checkIfAnswered(text: String, answer: String) -> Bool {
         let answers = answer.components(separatedBy: ",")
-        for currentAnswer in answers {
-            if currentAnswer == text {
-                return true
-            }
+        for currentAnswer in answers where currentAnswer == text {
+            return true
         }
         return false
     }

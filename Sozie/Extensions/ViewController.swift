@@ -23,7 +23,7 @@ extension UIViewController {
         viewController.view.layoutIfNeeded()
         UIView.transition(with: window, duration: 1.0, options: .transitionFlipFromRight, animations: {
             let rootWindow = (UIApplication.shared.delegate as! AppDelegate).window
-            let presentedViewController = rootWindow?.rootViewController?.presentedViewController
+            _ = rootWindow?.rootViewController?.presentedViewController
             self.present(viewController, animated: false) {
                 rootWindow?.rootViewController?.dismiss(animated: false) {
                     rootWindow?.rootViewController = viewController

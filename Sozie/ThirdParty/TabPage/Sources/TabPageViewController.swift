@@ -79,7 +79,7 @@ open class TabPageViewController: UIPageViewController {
 
 public extension TabPageViewController {
 
-    public func displayControllerWithIndex(_ index: Int, direction: UIPageViewController.NavigationDirection, animated: Bool) {
+    func displayControllerWithIndex(_ index: Int, direction: UIPageViewController.NavigationDirection, animated: Bool) {
 
         beforeIndex = index
         shouldScrollCurrentBar = false
@@ -154,7 +154,7 @@ extension TabPageViewController {
         let top = NSLayoutConstraint(item: tabView,
                                      attribute: .top,
                                      relatedBy: .equal,
-                                     toItem: topLayoutGuide,
+                                     toItem: view.safeAreaLayoutGuide.owningView,
                                      attribute: .bottom,
                                      multiplier: 1.0,
                                      constant: 0.0)
@@ -175,7 +175,7 @@ extension TabPageViewController {
                                        multiplier: 1.0,
                                        constant: 0.0)
 
-        view.addConstraints([top, left, right])
+        view.addConstraints([left, right])
 
         tabView.pageTabItems = tabItems.map({ $0.title})
         tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
@@ -224,7 +224,7 @@ extension TabPageViewController {
                                         toItem: nil,
                                         attribute: .height,
                                         multiplier: 1.0,
-                                        constant: topLayoutGuide.length)
+                                        constant: view.safeAreaInsets.top)
 
         view.addConstraints([top, left, right, height])
 
@@ -258,7 +258,7 @@ extension TabPageViewController {
             setupStatusView()
         }
 
-        statusViewHeightConstraint!.constant = topLayoutGuide.length
+        statusViewHeightConstraint!.constant = view.safeAreaInsets.top
     }
 
     public func showNavigationBar() {

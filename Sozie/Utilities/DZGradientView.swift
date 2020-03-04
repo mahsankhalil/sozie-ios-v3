@@ -13,6 +13,12 @@ import UIKit
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                gradientStartColor = UIColor(hex: "17B5F9")
+                gradientEndColor = UIColor(hex: "48C8FF")
+            }
+        }
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [gradientStartColor.cgColor, gradientEndColor.cgColor]

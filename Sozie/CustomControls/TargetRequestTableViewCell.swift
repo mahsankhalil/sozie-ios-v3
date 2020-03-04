@@ -20,6 +20,7 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var colorLabel: UILabel!
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -70,7 +71,16 @@ extension TargetRequestTableViewCell: CellConfigurable {
             titleLabel.text = titleModel.title!
         }
         if let subTitleModel = viewModel as? SubtitleViewModeling {
-            sizeRequestedLabel.text = subTitleModel.subtitle
+            let attributedStr = NSMutableAttributedString(string: subTitleModel.subtitle!)
+            attributedStr.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 4))
+            sizeRequestedLabel.attributedText = attributedStr
+//            sizeRequestedLabel.text = subTitleModel.subtitle
+        }
+        if let colorTitleModel = viewModel as? ColorViewModeling {
+            let attributedStr = NSMutableAttributedString(string: colorTitleModel.colorTitle!)
+            attributedStr.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 5))
+            colorLabel.attributedText = attributedStr
+//            colorLabel.text = colorTitleModel.colorTitle
         }
         if let availabilityModel = viewModel as? AvailabilityProviding {
             logoImageView.isHidden = !availabilityModel.isAvailable
@@ -86,6 +96,8 @@ extension TargetRequestTableViewCell: CellConfigurable {
             logoImageView.isHidden = true
             backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
         }
+        logoImageView.isHidden = true
+        backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
         self.handleAcceptRejectFunctionality(viewModel: viewModel)
     }
     func handleAcceptRejectFunctionality(viewModel: RowViewModel) {
@@ -93,7 +105,7 @@ extension TargetRequestTableViewCell: CellConfigurable {
             if sozieRequestViewModel.acceptedBySomeoneElse == true && sozieRequestViewModel.isSelected == true {
                 self.overlayView.isHidden = false
                 self.acceptButton.setTitle("ACCEPT REQUEST", for: .normal)
-                self.acceptButton.backgroundColor = UIColor(hex: "FC8787")
+                self.acceptButton.backgroundColor = UtilityManager.getGenderColor()
                 self.timerLabel.isHidden = true
                 self.cancelButton.isHidden = true
             } else {
@@ -101,12 +113,12 @@ extension TargetRequestTableViewCell: CellConfigurable {
                 if let acceptedViewModel = viewModel as? SelectionProviding {
                     if acceptedViewModel.isSelected == true {
                         self.acceptButton.setTitle("UPLOAD PICTURE", for: .normal)
-                        self.acceptButton.backgroundColor = UIColor(hex: "13AEF2")
+                        self.acceptButton.backgroundColor = UtilityManager.getGenderUploadPictureColor()
                         self.timerLabel.isHidden = false
                         self.cancelButton.isHidden = false
                     } else {
                         self.acceptButton.setTitle("ACCEPT REQUEST", for: .normal)
-                        self.acceptButton.backgroundColor = UIColor(hex: "FC8787")
+                        self.acceptButton.backgroundColor = UtilityManager.getGenderColor()
                         self.timerLabel.isHidden = true
                         self.cancelButton.isHidden = true
                     }

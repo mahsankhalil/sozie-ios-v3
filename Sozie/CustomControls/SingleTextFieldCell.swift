@@ -15,7 +15,7 @@ class SingleTextFieldCell: UITableViewCell {
     @IBOutlet weak var notSureButton: UIButton!
 
     weak private var buttonTappedDelegate: ButtonTappedDelegate?
-    private var textFieldDelegate: TextFieldDelegate?
+    weak private var textFieldDelegate: TextFieldDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,6 +54,8 @@ extension SingleTextFieldCell: CellConfigurable {
                 textField.currentValue1 = text
                 textField.text = text
             }
+            textField.applyRightVuLblWith(title: model.columnUnit)
+
         }
         if let errorModel = viewModel as? ErrorViewModeling {
             if errorModel.displayError, let errorMessageModel = viewModel as? ErrorMessageViewModeling {

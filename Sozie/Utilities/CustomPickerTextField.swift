@@ -82,7 +82,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         if let values2 = values2, values2.count > 0 {
             value2 = values2[pickerView.selectedRow(inComponent: 1)]
         }
-        delegate.customPickerValueChanges(instance: self ,value1: value1, value2: value2)
+        delegate.customPickerValueChanges(instance: self, value1: value1, value2: value2)
     }
 
     // MARK: - PickerVIew Delegates

@@ -21,7 +21,7 @@ class FitTipsAnswerTableVC: UIViewController {
     var type: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        titleLabel.textColor = UtilityManager.getGenderColor()
         // Do any additional setup after loading the view.
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText

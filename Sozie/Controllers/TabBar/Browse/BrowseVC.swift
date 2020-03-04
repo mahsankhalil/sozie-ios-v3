@@ -47,6 +47,7 @@ class BrowseVC: BaseViewController {
     var filterBySozies = false
     var selectedIndex: Int?
     var searchString: String?
+    var totalCount: Int = 0
     private var brandList: [Brand] = [] {
         didSet {
             brandViewModels.removeAll()
@@ -120,6 +121,18 @@ class BrowseVC: BaseViewController {
                 tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "BrowseWelcomeVC") as! BrowseWelcomeVC)
                 tutorialVC?.delegate = self
                 UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
+            }
+        } else {
+            if UserDefaultManager.getIfGoShoppingShown() == false {
+                let goShoppingPopUp = self.storyboard?.instantiateViewController(withIdentifier: "GoShoppingVC")
+                goShoppingPopUp?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+                let popUpVC = PopupController
+                    .create(self.tabBarController!.navigationController!)
+                let options = PopupCustomOption.layout(.center)
+                popUpVC.cornerRadius = 15.0
+                _ = popUpVC.customize([options])
+                _ = popUpVC.show(goShoppingPopUp!)
+                UserDefaultManager.setGoShoppingShown()
             }
         }
     }
@@ -371,6 +384,7 @@ class BrowseVC: BaseViewController {
             self.productsCollectionVu.refreshControl?.endRefreshing()
             self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
             if isSuccess {
+                self.totalCount = (response as! BrowseResponse).count
                 self.itemsCountLbl.text = String((response as! BrowseResponse).count) + ((response as! BrowseResponse).count <= 1 ? " ITEM" : " ITEMS")
                 self.productList.append(contentsOf: (response as! BrowseResponse).products)
                 self.productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 50

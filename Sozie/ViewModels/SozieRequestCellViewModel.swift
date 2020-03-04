@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding, FilledViewModeling, ExpiryViewModeling {
+struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding, FilledViewModeling, ExpiryViewModeling, ColorViewModeling {
     var brandId: Int
     var description: String?
     var subtitle: String?
@@ -25,6 +25,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var isFilled: Bool
     var expiry: String
     var acceptedBySomeoneElse: Bool
+    var colorTitle: String?
     init (request: SozieRequest) {
         var imageURL = ""
         if let productImageURL = request.requestedProduct.imageURL {
@@ -39,7 +40,15 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
                 }
             }
         }
-        let subtitle = "Size Requested: (" + request.sizeValue + ")"
+        var subtitle = "Size: " + request.sizeValue.uppercased()
+        if let displaySize = request.displaySize {
+            subtitle = "Size: " + displaySize.uppercased()
+        }
+        if let color = request.color {
+            self.colorTitle = UtilityManager.getColorNameCapitalized(color: color)
+        } else {
+            self.colorTitle = "Color: N/A"
+        }
         let title = "Requested by " + request.user.username
         let description = request.user.username +  " Measurements:"
         self.description = description
@@ -52,11 +61,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
         self.cup = request.user.measurement?.cup
         self.waist = request.user.measurement?.waist
         self.imageURL = URL(string: imageURL)
-        if request.user.isSuperUser == true {
-            self.isAvailable = true
-        } else {
-            self.isAvailable = false
-        }
+        self.isAvailable = request.user.isSuperUser ?? false
         self.brandId = request.brandId
         self.isFilled = request.isFilled
         self.acceptedBySomeoneElse = false

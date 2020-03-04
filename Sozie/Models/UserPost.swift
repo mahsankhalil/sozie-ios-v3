@@ -21,6 +21,7 @@ struct UserPost: Codable {
     var isApproved: Bool
     var uploads: [Uploads]
     var isTutorialPost: Bool
+    var isModerated: Bool
 
     enum CodingKeys: String, CodingKey {
         case postId = "id"
@@ -35,6 +36,7 @@ struct UserPost: Codable {
         case isApproved = "is_approved"
         case uploads
         case isTutorialPost = "posted_to_learn"
+        case isModerated = "is_moderated"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -50,6 +52,7 @@ struct UserPost: Codable {
         isApproved = try values.decode(Bool.self, forKey: .isApproved)
         uploads = try values.decode([Uploads].self, forKey: .uploads)
         isTutorialPost = try values.decode(Bool.self, forKey: .isTutorialPost)
+        isModerated = try values.decode(Bool.self, forKey: .isModerated)
     }
 }
 struct PostPaginatedResponse: Codable {
@@ -79,7 +82,7 @@ struct Uploads: Codable {
     var imageURL: String
     var reviewAction: String
     var isApproved: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case uploadId = "id"
         case postId = "post"
@@ -87,7 +90,6 @@ struct Uploads: Codable {
         case reviewAction = "review_action"
         case isApproved = "is_approved"
     }
-    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         uploadId = try values.decode(Int.self, forKey: .uploadId)

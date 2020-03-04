@@ -28,7 +28,7 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var reviewButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentsTableView: UITableView!
-    @IBOutlet weak var sozieBuyButton: UIButton!
+    @IBOutlet weak var sozieBuyButton: DZGradientButton!
     @IBOutlet weak var addCommentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addCommentTextField: UITextField!
     var currentProduct: Product?
@@ -85,6 +85,7 @@ class ProductDetailVC: BaseViewController {
 //            self.showTagItemButton()
             self.showCancelButton()
         }
+        sozieBuyButton.shadowAdded = false
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -208,6 +209,8 @@ class ProductDetailVC: BaseViewController {
                 }
                 productViewModel.imageURL = URL(string: imageURL)
             }
+        } else if let imageURL = currentProduct?.imageURL {
+            productViewModel.imageURL = URL(string: imageURL)
         }
     }
     func makePostCellViewModel() {
@@ -477,21 +480,24 @@ extension ProductDetailVC: UIScrollViewDelegate {
                 }
             }
         } else {
-            addCommentHeightConstraint.constant = 0.0
-            if let reviews = currentProduct?.reviews {
-                commentViewModels.removeAll()
-                let totalCount = reviews.totalCount
-                if totalCount <= 2 {
-                    allReviewButton.setTitle(String(reviews.totalCount) + " Reviews", for: .normal)
-                } else {
-                    allReviewButton.setTitle("View all " + String(reviews.totalCount) + " reviews", for: .normal)
-                }
-                for review in reviews.reviews {
-                    let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
-                    commentViewModels.append(viewModel)
-                }
-                commentsTableView.reloadData()
+            hideAddCommentView()
+        }
+    }
+    func hideAddCommentView() {
+        addCommentHeightConstraint.constant = 0.0
+        if let reviews = currentProduct?.reviews {
+            commentViewModels.removeAll()
+            let totalCount = reviews.totalCount
+            if totalCount <= 2 {
+                allReviewButton.setTitle(String(reviews.totalCount) + " Reviews", for: .normal)
+            } else {
+                allReviewButton.setTitle("View all " + String(reviews.totalCount) + " reviews", for: .normal)
             }
+            for review in reviews.reviews {
+                let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
+                commentViewModels.append(viewModel)
+            }
+            commentsTableView.reloadData()
         }
     }
     func getAttributedStringWith(name: String, text: String) -> NSAttributedString {

@@ -26,17 +26,17 @@ class SozieProfileVC: BaseViewController {
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     var posts: [UserPost] = [] {
         didSet {
-            for post in posts {
-                var sizeString = ""
+//            for post in posts {
+//                var sizeString = ""
 //                if post.sizeType == "GN" {
 //                    sizeString = "Size Worn: " + post.sizeValue
 //                } else {
 //                    sizeString = "Size Worn: " + post.sizeType + " " + post.sizeValue
 //                }
-                sizeString = "Size Worn: " + post.sizeValue
+//                sizeString = "Size Worn: " + post.sizeValue
 //                let viewModel = UserPostCellViewModel(subtitle: sizeString, imageURL: URL(string: post.imageURL), isSelected: post.isApproved,status: post.reviewAction)
 //                viewModels.append(viewModel)
-            }
+//            }
             self.collectionView.reloadData()
         }
     }

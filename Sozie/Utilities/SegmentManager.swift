@@ -19,9 +19,12 @@ class SegmentManager: NSObject {
             dataDict["name"] = firstName + " " + lastName
         }
         if let height = user.measurement?.height {
-            let heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+            var heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.inches)
+            if user.measurement?.unit?.lowercased() == "cm" {
+                heightMeasurment = NSMeasurement(doubleValue: Double(height), unit: UnitLength.centimeters)
+            }
             let feetMeasurement = heightMeasurment.converting(to: UnitLength.feet)
-            let heightText = "Height: " + feetMeasurement.value.feetToFeetInches() + "  | "
+            let heightText = feetMeasurement.value.feetToFeetInches()
             dataDict["height"] = heightText
         }
         dataDict["waist_measurement"] = user.measurement?.waist

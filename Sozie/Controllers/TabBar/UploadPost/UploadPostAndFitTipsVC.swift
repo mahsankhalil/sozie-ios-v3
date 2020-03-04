@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import TPKeyboardAvoiding
 import UserNotifications
+import CropViewController
 //import FirebaseAnalytics
 protocol UploadPostAndFitTipsDelegate: class {
     func uploadPostInfoButtonTapped()
@@ -70,6 +71,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         super.viewDidAppear(animated)
         if picturesTutorialVC == nil {
             if UserDefaultManager.getIfPostTutorialShown() == false {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
                 self.addPicturesTutorial()
             }
         }
@@ -88,8 +90,9 @@ class UploadPostAndFitTipsVC: BaseViewController {
         progressTutorialVC?.updateProgress(progress: 6.0/8.0)
         if let tutVC = picturesTutorialVC {
             tutVC.view.frame.origin.y = 215.0
-            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 522)
+            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 638)
             self.scrollView.addSubview(tutVC.view)
+            self.scrollView.contentSizeToFit()
         }
     }
     func removePictureTutorial() {
@@ -207,15 +210,13 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 }
                 productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
             }
+        } else if let imageURL = currentProduct?.imageURL {
+            productImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
         }
     }
     func checkIfAllImagesUplaoded() -> Bool {
-        for index in 0...viewModels.count {
-            if index < 3 {
-                if viewModels[index].image == nil {
-                    return false
-                }
-            }
+        for index in 0...viewModels.count where index < 3 && viewModels[index].image == nil {
+            return false
         }
         return true
     }
@@ -250,28 +251,25 @@ class UploadPostAndFitTipsVC: BaseViewController {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 // Already authorized
-            }
-            else {
+            } else {
                 // Either denied or notDetermined
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
-                    (granted, error) in
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in
                     // add your own
-                    let alertController = UIAlertController(title: "Notification Alert", message: "please enable notifications", preferredStyle: .alert)
-                    let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                    let alertController = UIAlertController(title: "Notification Alert", message: "Enable notifications to get instant alerts\nBy enabling notifications, you can keep up to date with new requests from Sozie. ", preferredStyle: .alert)
+                    let settingsAction = UIAlertAction(title: "Enable Notifications", style: .default) { (_) -> Void in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
                         }
                         if UIApplication.shared.canOpenURL(settingsUrl) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (_) in
                             })
                         }
                     }
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                    let cancelAction = UIAlertAction(title: "Not Now", style: .default, handler: nil)
                     alertController.addAction(cancelAction)
                     alertController.addAction(settingsAction)
                     DispatchQueue.main.async {
                         self.present(alertController, animated: true, completion: nil)
-                        
                     }
                 }
             }
@@ -294,10 +292,12 @@ class UploadPostAndFitTipsVC: BaseViewController {
             }
         }
         dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         SVProgressHUD.show()
         ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                 if isTutorial {
                     UserDefaultManager.setBrowserTutorialShown()
                     self.uploadTutorialData()
@@ -305,9 +305,11 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     SegmentManager.createEventRequestSubmitted()
 //                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
                     self.showThankYouController()
+                    self.bottomButtom.isEnabled = true
                     self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
                 }
             } else {
+                self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
         }
@@ -329,6 +331,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         SVProgressHUD.show()
         ServerManager.sharedInstance.updateTutorial(params: dataDict) { (isSuccess, _) in
             SVProgressHUD.dismiss()
+            self.bottomButtom.isEnabled = true
             if isSuccess {
                 if var user = UserDefaultManager.getCurrentUserObject() {
                     user.isTutorialApproved = true
@@ -354,14 +357,16 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     @IBAction func submitButtonTapped(_ sender: Any) {
         if isTutorialShowing {
+            self.bottomButtom.isEnabled = false
             uploadPOstData(isTutorial: true)
             return
         }
         if self.checkIfAllImagesUplaoded() == false {
-            UtilityManager.showErrorMessage(body: "Please Select all the images.", in: self)
+            UtilityManager.showErrorMessage(body: "Please upload pictures of all angles.", in: self)
         } else if self.checkIfAllQuestionsAnswered() == false {
             UtilityManager.showErrorMessage(body: "Please answer all Fit Tips.", in: self)
         } else {
+            self.bottomButtom.isEnabled = false
             uploadPOstData(isTutorial: false)
         }
     }
@@ -422,28 +427,38 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         if viewModels[indexPath.row].image == nil {
-            UtilityManager.openImagePickerActionSheetFrom(viewController: self)
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+                let imagePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
+                imagePickerVC.delegate = self
+                imagePickerVC.photoIndex = self.selectedIndex
+                self.progressTutorialVC?.view.isHidden = true
+                self.present(imagePickerVC, animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+                UtilityManager.openGalleryFrom(viewController: self)
+            }))
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         } else {
             self.postImageView.image = viewModels[indexPath.row].image
         }
     }
 }
-extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            if let index = selectedIndex {
-                let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
-                viewModels[index].image = scaledImg
-                self.postImageView.image = scaledImg
-                if index > 2 {
-                    if index < 5 {
-                        let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
-                        viewModels.append(viewModel)
-                    }
-                    viewModels[index].title = ""
+extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
+    func processCapturedImage(image: UIImage) {
+        if let index = selectedIndex {
+            let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 750, height: (image.size.height/image.size.width)*750))
+            viewModels[index].image = scaledImg
+            self.postImageView.image = scaledImg
+            if index > 2 {
+                if index < 5 {
+                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    viewModels.append(viewModel)
                 }
-                self.imagesCollectionView.reloadData()
+                viewModels[index].title = ""
             }
+            self.imagesCollectionView.reloadData()
         }
         if checkIfAllImagesUplaoded() {
             if UserDefaultManager.getIfPostTutorialShown() == false {
@@ -454,7 +469,90 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
                 }
             }
         }
+        if isTutorialShowing {
+            self.progressTutorialVC?.view.isHidden = false
+        }
+    }
+}
+extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+//            self.setupImage(pickedImage: pickedImage)
+            self.showCropVC(image: pickedImage)
+        }
+    }
+    func showCropVC(image: UIImage) {
+        let cropVC = CropViewController(image: image)
+        cropVC.delegate = self
+        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+        cropVC.aspectRatioPickerButtonHidden = true
+        cropVC.aspectRatioLockEnabled = true
+        cropVC.resetButtonHidden = true
+        cropVC.rotateButtonsHidden = true
+        cropVC.toolbar.doneTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.toolbar.cancelTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.cropView.gridOverlayHidden = true
+        cropVC.cropView.setGridOverlayHidden(true, animated: true)
+        let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
+        var image: UIImage?
+        if let index = selectedIndex {
+            switch index {
+            case 0:
+                image = UIImage(named: "Front")
+            case 1:
+                image = UIImage(named: "Back")
+            case 2:
+                image = UIImage(named: "Side")
+            default:
+                image = nil
+            }
+        } else {
+            image = nil
+        }
+        let tutorialImageView = UIImageView(image: image)
+        tutorialImageView.frame.origin.x = UIScreen.main.bounds.size.width - 68
+        tutorialImageView.frame.origin.y = 20
+        imgVu.center = cropVC.cropView.center
+        imgVu.frame = cropVC.cropView.cropBoxFrame
+        cropVC.cropView.addSubview(imgVu)
+        self.present(cropVC, animated: true) {
+            imgVu.frame = cropVC.cropView.cropBoxFrame
+        }
+        cropVC.cropView.addSubview(tutorialImageView)
+    }
+    func setupImage(pickedImage: UIImage) {
+        if let index = selectedIndex {
+            let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+            viewModels[index].image = scaledImg
+            self.postImageView.image = scaledImg
+            if index > 2 {
+                if index < 5 {
+                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    viewModels.append(viewModel)
+                }
+                viewModels[index].title = ""
+            }
+            self.imagesCollectionView.reloadData()
+        }
+    }
+}
+extension UploadPostAndFitTipsVC: CropViewControllerDelegate {
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        self.setupImage(pickedImage: image)
+        if checkIfAllImagesUplaoded() {
+            if UserDefaultManager.getIfPostTutorialShown() == false {
+                removePictureTutorial()
+                if isFitTipsTutorialShown == false {
+                    addFitTipsTutorial()
+                    self.imagesCollectionView.isUserInteractionEnabled = false
+                }
+            }
+        }
+        if isTutorialShowing {
+            self.progressTutorialVC?.view.isHidden = false
+        }
+        cropViewController.dismiss(animated: true, completion: nil)
     }
 }
 extension UploadPostAndFitTipsVC: PhotoEditorDelegate {

@@ -67,6 +67,22 @@ class UtilityManager: NSObject {
             window.rootViewController = viewCOntroller
         }, completion: nil)
     }
+    static func getGenderColor() -> UIColor {
+        let gender = UserDefaultManager.getCurrentUserGender()
+        if gender == "M" {
+            return UIColor(hex: "17B5F9")
+        } else {
+            return UIColor(hex: "FC8787")
+        }
+    }
+    static func getGenderUploadPictureColor() -> UIColor {
+        let gender = UserDefaultManager.getCurrentUserGender()
+        if gender == "M" {
+            return UIColor(hex: "F5AB4A")
+        } else {
+            return UIColor(hex: "17B5F9")
+        }
+    }
     // MARK: - Other Methods
     static func openImagePickerActionSheetFrom(viewController: UIViewController) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -152,7 +168,7 @@ class UtilityManager: NSObject {
         controller.present(alert, animated: true, completion: nil)
     }
 
-    static func showMessageWith(title: String, body: String, in controller: UIViewController, okBtnTitle: String = "OK", cancelBtnTitle: String? = nil, dismissAfter: Int? = nil, leftAligned: Bool? = false,  block: (() -> Void)? = nil) {
+    static func showMessageWith(title: String, body: String, in controller: UIViewController, okBtnTitle: String = "OK", cancelBtnTitle: String? = nil, dismissAfter: Int? = nil, leftAligned: Bool? = false, block: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
         let okBtnAction = UIAlertAction(title: okBtnTitle, style: .default) { (_) in
             block?()
@@ -227,6 +243,13 @@ class UtilityManager: NSObject {
             closure()
         }
     }
+    static func getColorNameCapitalized(color: String) -> String {
+        if color == "n/a" {
+            return "Color: N/A"
+        } else {
+            return "Color: " + color.capitalizingFirstLetter()
+        }
+    }
 //
     static func timeAgoSinceDate(date: NSDate, numericDates: Bool, short: Bool = false) -> String {
         let calendar = NSCalendar.current
@@ -260,11 +283,7 @@ class UtilityManager: NSObject {
             } else {
                 return short ? "1 m" : "Last month"
             }
-        }
-//        else if (weekOfYear >= 2) {
-//            return "\(weekOfYear) weeks ago"
-//        }
-        else if weekOfYear >= 1 {
+        } else if weekOfYear >= 1 {
             return short ? "\(day + (weekOfYear * 7)) d" : "\(day + (weekOfYear * 7)) days ago"
         } else if day >= 2 {
             return short ? "\(day) d" : "\(day) days ago"
@@ -296,13 +315,6 @@ class UtilityManager: NSObject {
             return "Just now"
         }
     }
-//    static func registerUserOnIntercom() {
-//        if let user = UserDefaultManager.getCurrentUserObject() {
-//            Intercom.registerUser(withUserId: String(user.userId), email: user.email)
-//        } else {
-//            Intercom.registerUnidentifiedUser()
-//        }
-//    }
 }
 
 extension Double {

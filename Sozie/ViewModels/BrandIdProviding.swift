@@ -11,4 +11,3 @@ import UIKit
 protocol BrandIdProviding {
     var brandId: Int { get set }
 }
-

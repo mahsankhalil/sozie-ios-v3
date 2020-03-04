@@ -90,7 +90,7 @@ class ServerManager: NSObject {
         Alamofire.request(ServerManager.sizeChartURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             guard let block = block else { return }
             let decoder = JSONDecoder()
-            let obj: Result<Size> = decoder.decodeResponse(from: response)
+            let obj: Result<AllSizes> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block(true, obj.value!)
             }
@@ -510,7 +510,7 @@ class ServerManager: NSObject {
         var url = ServerManager.sozieRequestsURL
         if let nextURL = params["next"] as? String {
             url = nextURL
-        }else if let param = params["is_tutorial_request"] {
+        } else if let param = params["is_tutorial_request"] {
             url = url + "?is_tutorial_request=" + String(param as! Bool)
         }
         Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
@@ -729,7 +729,7 @@ class ServerManager: NSObject {
         ]
         Alamofire.request(ServerManager.acceptRequestURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
-            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            let obj: Result<AcceptedRequestResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }
@@ -781,7 +781,6 @@ class ServerManager: NSObject {
                     multipartFormData.append(data, withName: "images_to_upload", fileName: "image.png", mimeType: "image/png")
                 }
             }
-            
 //            if let data = imageData {
 //                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
 //            }

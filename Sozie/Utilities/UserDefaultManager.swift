@@ -57,6 +57,10 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.type
     }
+    static func getCurrentUserGender() -> String? {
+        guard let loginResponse = loginResponse() else { return nil }
+        return loginResponse.user?.gender
+    }
 
     static func deleteLoginResponse() {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginResponse)
@@ -174,6 +178,13 @@ class UserDefaultManager: NSObject {
     }
     static func getIfBrowseTutorialShown() -> Bool {
         return UserDefaults.standard.bool(forKey: "BrowseTutorialShown")
+    }
+    static func setGoShoppingShown() {
+        UserDefaults.standard.set(true, forKey: "BrowseGoShoppingShown")
+        UserDefaults.standard.synchronize()
+    }
+    static func getIfGoShoppingShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: "BrowseGoShoppingShown")
     }
     static func deleteBrowserTutorialShown() {
         UserDefaults.standard.set(false, forKey: "BrowseTutorialShown")

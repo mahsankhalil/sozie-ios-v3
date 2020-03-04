@@ -14,6 +14,7 @@ protocol SingleTextFieldCellViewModeling {
     var placeholder: String { get }
     var values: [String] { get }
     var valueSuffix: String { get }
-    var buttonTappedDelegate: ButtonTappedDelegate { get }
-    var textFieldDelegate: TextFieldDelegate { get }
+    var buttonTappedDelegate: ButtonTappedDelegate? { get }
+    var columnUnit: String { get }
+    var textFieldDelegate: TextFieldDelegate? { get }
 }

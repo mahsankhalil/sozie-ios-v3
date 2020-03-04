@@ -17,7 +17,6 @@ struct ProductResponse: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         products = try values.decode([TargetProduct].self, forKey: .products)
     }
-    
 }
 struct TargetProduct: Codable {
     var productId: String
@@ -45,7 +44,7 @@ struct TargetLocation: Codable {
     var storeName: String
     var storeAddress: String
     var locationAvailableQuantity: Int
-    var storePickupAvailability: Availability
+    var storePickupAvailability: Availability?
     var curbsideAvailability: Availability
     var inStoreOnly: Availability
     enum CodingKeys: String, CodingKey {
@@ -66,7 +65,7 @@ struct TargetLocation: Codable {
         storeName = try values.decode(String.self, forKey: .storeName)
         storeAddress = try values.decode(String.self, forKey: .storeAddress)
         locationAvailableQuantity = try values.decode(Int.self, forKey: .locationAvailableQuantity)
-        storePickupAvailability = try values.decode(Availability.self, forKey: .storePickupAvailability)
+        storePickupAvailability = try? values.decode(Availability.self, forKey: .storePickupAvailability)
         curbsideAvailability = try values.decode(Availability.self, forKey: .curbsideAvailability)
         inStoreOnly = try values.decode(Availability.self, forKey: .inStoreOnly)
     }

@@ -12,5 +12,5 @@ protocol TextFieldCellViewModeling {
     var title: String { get }
     var text: String? { get }
     var values: [String] { get }
-    var textFieldDelegate: TextFieldDelegate { get }
+    var textFieldDelegate: TextFieldDelegate? { get }
 }

@@ -17,6 +17,12 @@ import Hex
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                gradientStartColor = UIColor(hex: "17B5F9")
+                gradientEndColor = UIColor(hex: "48C8FF")
+            }
+        }
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [gradientStartColor.cgColor, gradientEndColor.cgColor]
@@ -51,9 +57,14 @@ import Hex
         let shadowLayer = UIView(frame: self.frame)
         shadowLayer.backgroundColor = UIColor.clear
         shadowLayer.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                shadowLayer.layer.shadowColor = UIColor(hex: "48C8FF").cgColor
+            }
+        }
         shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
         shadowLayer.layer.shadowOffset.height = 4.0
-        shadowLayer.layer.shadowOpacity = 1.0
+        shadowLayer.layer.shadowOpacity = 0.5
         shadowLayer.layer.shadowRadius = 4
         shadowLayer.layer.masksToBounds = true
         shadowLayer.clipsToBounds = false

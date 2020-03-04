@@ -10,7 +10,7 @@ import UIKit
 
 struct LoginResponse: Codable {
 
-    var refresh: String
+    var refresh: String?
     var access: String
     var userId: Int?
     var user: User?
@@ -24,7 +24,7 @@ struct LoginResponse: Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        refresh = try values.decode(String.self, forKey: .refresh)
+        refresh = try? values.decode(String.self, forKey: .refresh)
         access = try values.decode(String.self, forKey: .access)
         userId = try? values.decode(Int.self, forKey: .userId)
         user = try? values.decode(User.self, forKey: .user)
@@ -42,6 +42,21 @@ struct ValidateRespose: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         detail = try values.decode(String.self, forKey: .detail)
+    }
+}
+struct AcceptedRequestResponse: Codable {
+    
+    var detail: String
+    var acceptedRequestId: Int
+    enum CodingKeys: String, CodingKey {
+        case detail
+        case acceptedRequestId = "accepted_request_id"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        detail = try values.decode(String.self, forKey: .detail)
+        acceptedRequestId = try values.decode(Int.self, forKey: .acceptedRequestId)
     }
 }
 

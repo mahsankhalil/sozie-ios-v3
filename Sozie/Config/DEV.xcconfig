@@ -1,0 +1,14 @@
+//
+//  QA.xcconfig
+//  Sozie
+//
+//  Created by Zaighum Ghazali Khan on 10/7/19.
+//  Copyright © 2019 Danial Zahid. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+#include "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.dev.xcconfig"
+SLASH = /
+SERVER_URL = http:$(SLASH)/dev-api.sozie.com/api/v1/
+BETA_TESTER = YES

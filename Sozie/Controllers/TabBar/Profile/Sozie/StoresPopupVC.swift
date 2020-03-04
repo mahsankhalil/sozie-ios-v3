@@ -58,6 +58,12 @@ class StoresPopupVC: UIViewController {
             showNearByStoresTutorial()
         }
         progressTutorialVC?.delegate = self
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedOnScreen))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    @objc func tappedOnScreen() {
+        self.view.endEditing(true)
     }
     func showNearByStoresTutorial() {
         tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyStoresTutorialVC") as? NearbyStoresTutorialVC
@@ -101,7 +107,7 @@ class StoresPopupVC: UIViewController {
         dataDict["limit"] = 20
         dataDict["requested_quantity"] = 1
         dataDict["radius"] = 100
-        dataDict["include_only_available_stores"] = true
+//        dataDict["include_only_available_stores"] = true
         SVProgressHUD.show()
         TargetAPIManager.sharedInstance.getNearbyStores(productId: productId!, params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()

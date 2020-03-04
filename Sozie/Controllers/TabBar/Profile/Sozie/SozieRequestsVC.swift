@@ -32,6 +32,7 @@ class SozieRequestsVC: UIViewController {
     var isFromTutorial: Bool = false
     var progressTutorialVC: TutorialProgressVC?
     var ifGotItButtonTapped: Bool = false
+    var totalTutorialCount: Float = 8.0
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -55,7 +56,7 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (1547.0/375.0) * UIScreen.main.bounds.size.width
+        instructionsHeightConstraint.constant = (1070.0/375.0) * UIScreen.main.bounds.size.width
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
 //            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
 //            tutorialVC?.delegate = self
@@ -64,6 +65,13 @@ class SozieRequestsVC: UIViewController {
         showPostTutorials()
         NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
 //        self.view.window?.addSubview(tutorialVC.view)
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if user.country == 1 {
+                self.totalTutorialCount = 7
+            } else {
+                self.totalTutorialCount = 8
+            }
+        }
 
     }
     @objc func resetFirstTime() {
@@ -86,7 +94,6 @@ class SozieRequestsVC: UIViewController {
             let scrollView = parent.view.subviews.compactMap { $0 as? UIScrollView }.first
             scrollView!.isScrollEnabled = false
         }
-        
     }
     func enableRootButtons() {
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
@@ -125,7 +132,7 @@ class SozieRequestsVC: UIViewController {
     func showInStockTutorial() {
         if ifInStockTutorialShown == false {
             self.showProgressTutorial()
-            progressTutorialVC?.updateProgress(progress: 1.0/8.0)
+            progressTutorialVC?.updateProgress(progress: 1.0/totalTutorialCount)
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 inStockTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "RequestInStockTutorialVC") as! RequestInStockTutorialVC)
                 if let tutVC = inStockTutorialVC {
@@ -162,7 +169,8 @@ class SozieRequestsVC: UIViewController {
         if ifAcceptRequestTutorialShown == false {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
-                progressTutorialVC?.updateProgress(progress: 4.0/8.0)
+                acceptRequestTutorialVC?.descriptionString = "Click on     ACCEPT REQUEST    "
+                progressTutorialVC?.updateProgress(progress: 4.0/totalTutorialCount)
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
                     self.tableView.isScrollEnabled = false
@@ -198,7 +206,7 @@ class SozieRequestsVC: UIViewController {
         if ifUploadPostTutorialShown == false {
             if let profileParentVC = self.parent?.parent as? ProfileRootVC {
                 acceptRequestTutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "AcceptRequestTutorialVC") as! AcceptRequestTutorialVC)
-                progressTutorialVC?.updateProgress(progress: 5.0/8.0)
+                progressTutorialVC?.updateProgress(progress: 5.0/totalTutorialCount)
                 acceptRequestTutorialVC?.descriptionString = "Now let's fulfil the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    "
                 if let tutVC = acceptRequestTutorialVC {
                     disableRootButtons()
@@ -269,7 +277,7 @@ class SozieRequestsVC: UIViewController {
             if var user = UserDefaultManager.getCurrentUserObject() {
                 user.isSuperUser = true
                 let dummyProduct = Product(productId: 49263387, productName: "Women's Plus Size Sleeveless Square Neck Denim Dress - Universal Thread Indigo X, Blue", brandId: 10, imageURL: "https://target.scene7.com/is/image/Target/GUEST_bd675863-a930-4bf2-b855-c342457004e4?wid=1000&hei=1000", description: "Look effortlessly chic while keeping your cool for any occasion wearing this Sleeveless Square-Neck Denim Dress from Universal Thread. This indigo midi dress comes with a front tie that lets you find your ideal fit, and it's cut in a relaxed silhouette for comfortable wear. In a sleeveless design made from a 100 percent cotton fabric with side slits, this sleeveless denim midi dress keeps you feeling airy, light and comfy throughout your day. Pair it with espadrilles and a straw bucket bag for a casual day out or with strappy heels and drop earrings for a nighttime twist. Size: X. Color: Blue. Gender: Female. Age Group: Adult.", merchantProductId: "54441283", productStringId: "bd675863a9304bf2b855c342457004e4", searchPrice: 32.99, currency: "USD", merchantImageURL: "")
-                let dummyRequest = SozieRequest(requestId: 700, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil)
+                let dummyRequest = SozieRequest(requestId: 700, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil, color: nil, displaySize: "3x")
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
@@ -284,7 +292,7 @@ class SozieRequestsVC: UIViewController {
             self.showInStockTutorial()
             if let tabBarContrlr = self.parent?.parent?.parent?.parent as? TabBarVC {
 //                tabBarContrlr.tabBar.isUserInteractionEnabled = false
-                if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![3] as? UITabBarItem {
+                if let firstItem = tabBarContrlr.tabBar.items?[0], let secondItem = tabBarContrlr.tabBar.items?[1], let thirdItem = tabBarContrlr.tabBar.items?[2] {
                     firstItem.isEnabled = false
                     secondItem.isEnabled = false
                     thirdItem.isEnabled = false
@@ -336,7 +344,7 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var identifier = reuseableIdentifier
-        if viewModel.brandId == 10 {
+        if viewModel.brandId == 10 || viewModel.brandId == 18 {
             identifier = reuseableIdentifierTarget
         }
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier)
@@ -377,6 +385,9 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         if (requests.count < 10 && indexPath.row == requests.count - 2) || (indexPath.row == requests.count - 10) {
             loadNextPage()
         }
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
@@ -427,21 +438,42 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 }
                 imageURL = prodImageURL
             }
+        } else {
+            if let img = product.imageURL {
+                imageURL = img.getActualSizeImageURL() ?? ""
+            }
         }
         if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
-            let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL, progreesVC: progressTutorialVC)
-            popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
-            let popUpVC = PopupController
-                .create(self.tabBarController!.navigationController!)
-            //        let options = PopupCustomOption.layout(.bottom)
-            //        popUpVC.cornerRadius = 0.0
-            //        _ = popUpVC.customize([options])
-            _ = popUpVC.show(popUpInstnc)
-            popUpInstnc.closeHandler = { [] in
-                popUpVC.dismiss()
-                if UserDefaultManager.getIfPostTutorialShown() == false {
-                    self.showAcceptRequestTutorial()
-                }
+            if currentRequest.brandId == 10 {
+                self.showTargetStore(merchantId: merchantId, imageURL: imageURL)
+            } else if currentRequest.brandId == 18 {
+                self.showAdidasStoresPopup(productId: merchantId, imageURL: imageURL, sku: currentRequest.sku ?? "")
+            }
+        }
+    }
+    func showTargetStore(merchantId: String, imageURL: String) {
+        let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL, progreesVC: progressTutorialVC)
+        popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        _ = popUpVC.show(popUpInstnc)
+        popUpInstnc.closeHandler = { [] in
+            popUpVC.dismiss()
+            if UserDefaultManager.getIfPostTutorialShown() == false {
+                self.showAcceptRequestTutorial()
+            }
+        }
+    }
+    func showAdidasStoresPopup(productId: String, imageURL: String, sku: String) {
+        let popUpInstnc = StoresPopupListingVC.instance(productId: productId, productImage: imageURL, sku: sku, progreesVC: progressTutorialVC)
+        popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        _ = popUpVC.show(popUpInstnc)
+        popUpInstnc.closeHandler = { [] in
+            popUpVC.dismiss()
+            if UserDefaultManager.getIfPostTutorialShown() == false {
+                self.showAcceptRequestTutorial()
             }
         }
     }
@@ -510,35 +542,54 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 showUploadPostTutorial()
                 return
             }
-            SVProgressHUD.show()
-            var dataDict = [String: Any]()
-            dataDict["product_request"] = currentRequest?.requestId
-            ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
-                SVProgressHUD.dismiss()
-                if isSuccess {
-                    self.serverParams.removeAll()
-                    self.requests.removeAll()
-                    SVProgressHUD.show()
-                    self.fetchAllSozieRequests()
-                } else {
-                    let error = (response as! Error).localizedDescription
-                    if let errorDict = error.getColonSeparatedErrorDetails() {
-                        if let title = errorDict["title"] as? String, let description = errorDict["description"] as? String {
-                            if title == "Tutorial Rejected" {
-                                UserDefaultManager.makeUserGuideEnable()
-                                UserDefaultManager.removeAllUserGuidesShown()
-                                self.showResetTutorialPopup(text: description)
-                            } else if title == "Oops!" {
-                                UtilityManager.showMessageWith(title: title, body: description, in: self, leftAligned: true)
-                            } else {
-                                UtilityManager.showMessageWith(title: title, body: description, in: self)
-                            }
+            acceptRequestAPICall(tag: button.tag)
+        }
+    }
+    func makeRequestAccepted(tag: Int, acceptedRequestId: Int) {
+        requests[tag].isAccepted = true
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .hour, value: 24, to: Date())
+        let acceptedRequest = AcceptedRequest(acceptedById: UserDefaultManager.getCurrentUserId()!, acceptedId: acceptedRequestId, expiry: dateFormat.string(from: date!))
+        requests[tag].acceptedRequest = acceptedRequest
+        let viewModel = SozieRequestCellViewModel(request: requests[tag])
+        viewModels.remove(at: tag)
+        viewModels.insert(viewModel, at: tag)
+        self.tableView.reloadRows(at: [IndexPath(row: tag, section: 0)], with: .none)
+    }
+    func acceptRequestAPICall(tag: Int) {
+        SVProgressHUD.show()
+        var dataDict = [String: Any]()
+        dataDict["product_request"] = currentRequest?.requestId
+        ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+//                self.serverParams.removeAll()
+//                self.requests.removeAll()
+//                SVProgressHUD.show()
+//                self.fetchAllSozieRequests()
+                let acceptedRequestResponse = response as! AcceptedRequestResponse
+                self.makeRequestAccepted(tag: tag, acceptedRequestId: acceptedRequestResponse.acceptedRequestId)
+            } else {
+                let error = (response as! Error).localizedDescription
+                if let errorDict = error.getColonSeparatedErrorDetails() {
+                    if let title = errorDict["title"] as? String, let description = errorDict["description"] as? String {
+                        if title == "Tutorial Rejected" {
+                            UserDefaultManager.makeUserGuideEnable()
+                            UserDefaultManager.removeAllUserGuidesShown()
+                            self.showResetTutorialPopup(text: description)
+                        } else if title == "Oops!" {
+                            UtilityManager.showMessageWith(title: title, body: description, in: self, leftAligned: true)
                         } else {
-                            UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                            UtilityManager.showMessageWith(title: title, body: description, in: self)
                         }
                     } else {
                         UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
                     }
+                } else {
+                    UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
                 }
             }
         }

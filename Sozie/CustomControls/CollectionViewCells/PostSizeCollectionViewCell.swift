@@ -13,7 +13,7 @@ class PostSizeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var labelBackgroundView: UIView!
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -48,7 +48,6 @@ extension PostSizeCollectionViewCell: CellConfigurable {
                 self.statusImageView.isHidden = false
             }
         }
-        
         if let uploadViewModel = viewModel as? UploadViewModel {
             imageView.sd_setImage(with: uploadViewModel.imageURL) { (_, _, _, _) in
             }

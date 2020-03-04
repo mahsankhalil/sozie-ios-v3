@@ -30,7 +30,7 @@ extension UploadPictureCell: CellConfigurable {
                     if title != "" {
                         let attributedString = NSMutableAttributedString(string: title)
                         let starString = NSMutableAttributedString(string: "*")
-                        starString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range:NSMakeRange(0, starString.length))
+                        starString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: NSMakeRange(0, starString.length))
                         attributedString.append(starString)
                         detailLabel.attributedText = attributedString
                     }

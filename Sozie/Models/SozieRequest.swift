@@ -19,6 +19,9 @@ struct SozieRequest: Codable {
     var isFilled: Bool
     var isAccepted: Bool
     var acceptedRequest: AcceptedRequest?
+    var color: String?
+    var sku: String?
+    var displaySize: String?
     enum CodingKeys: String, CodingKey {
         case requestId = "id"
         case user = "user"
@@ -30,8 +33,11 @@ struct SozieRequest: Codable {
         case isFilled = "is_filled"
         case isAccepted = "is_accepted"
         case acceptedRequest = "accepted_request"
+        case color
+        case sku
+        case displaySize = "display_size"
     }
-    init(requestId: Int, user: User, sizeValue: String, productId: String, requestedProduct: Product, brandId: Int, isFilled: Bool, isAccepted: Bool, acceptedRequest: AcceptedRequest?) {
+    init(requestId: Int, user: User, sizeValue: String, productId: String, requestedProduct: Product, brandId: Int, isFilled: Bool, isAccepted: Bool, acceptedRequest: AcceptedRequest?, color: String?,sku: String? = nil, displaySize: String?) {
         self.requestId = requestId
         self.user = user
         self.sizeValue = sizeValue
@@ -41,6 +47,9 @@ struct SozieRequest: Codable {
         self.isFilled = isFilled
         self.isAccepted = isAccepted
         self.acceptedRequest = acceptedRequest
+        self.color = color
+        self.sku = sku
+        self.displaySize = displaySize
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -54,7 +63,9 @@ struct SozieRequest: Codable {
         isFilled = try values.decode(Bool.self, forKey: .isFilled)
         isAccepted = try values.decode(Bool.self, forKey: .isAccepted)
         acceptedRequest = try? values.decode(AcceptedRequest.self, forKey: .acceptedRequest)
-
+        color = try? values.decode(String.self, forKey: .color)
+        sku = try? values.decode(String.self, forKey: .sku)
+        displaySize = try? values.decode(String.self, forKey: .displaySize)
     }
 }
 
@@ -67,7 +78,7 @@ struct AcceptedRequest: Codable {
         case acceptedById = "accepted_by"
         case expiry
     }
-    init(acceptedById: Int, acceptedId: Int,expiry: String) {
+    init(acceptedById: Int, acceptedId: Int, expiry: String) {
         self.acceptedId = acceptedId
         self.acceptedById = acceptedById
         self.expiry = expiry

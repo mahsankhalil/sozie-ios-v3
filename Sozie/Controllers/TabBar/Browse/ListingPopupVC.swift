@@ -56,10 +56,9 @@ class ListingPopupVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         topView.layer.cornerRadius = 10.0
-
+        titleLabel.textColor = UtilityManager.getGenderColor()
     }
     func setPopupType(type: PopupType?, brandList: [Brand]?, filterType: FilterType?) {
         if selectedViewModelIndex != nil {

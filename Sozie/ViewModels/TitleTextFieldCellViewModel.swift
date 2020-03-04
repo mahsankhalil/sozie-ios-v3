@@ -13,7 +13,7 @@ struct TitleTextFieldCellViewModel: RowViewModel, TextFieldCellViewModeling, Reu
     var text: String?
     var values: [String]
     var measurementType: MeasurementType
-    var textFieldDelegate: TextFieldDelegate
+    weak var textFieldDelegate: TextFieldDelegate?
     var errorMessage: String
     var displayError: Bool
     let reuseIdentifier: String = "TitleTextFieldCell"
