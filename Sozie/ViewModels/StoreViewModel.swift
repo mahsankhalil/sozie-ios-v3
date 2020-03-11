@@ -15,7 +15,7 @@ struct StoreViewModel: RowViewModel, TitleViewModeling, DescriptionViewModeling,
     var description: String?
 }
 
-struct AdidasStoreViewModel: RowViewModel, TitleViewModeling, DescriptionViewModeling, CountViewModeling,AvailabilityProviding {
+struct AdidasStoreViewModel: RowViewModel, TitleViewModeling, DescriptionViewModeling, CountViewModeling, AvailabilityProviding {
     var count: Int
     var title: String?
     var attributedTitle: NSAttributedString?

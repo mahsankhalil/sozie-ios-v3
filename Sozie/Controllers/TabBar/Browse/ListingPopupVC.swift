@@ -57,6 +57,7 @@ class ListingPopupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.tableView.backgroundColor = UIColor.white
         topView.layer.cornerRadius = 10.0
         titleLabel.textColor = UtilityManager.getGenderColor()
     }

@@ -48,6 +48,7 @@ class SozieRequestsVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.tableView.backgroundColor = UIColor.white
         let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         refreshControl.triggerVerticalOffset = 50.0
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)

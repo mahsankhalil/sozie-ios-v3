@@ -29,6 +29,7 @@ class WishListVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = UIColor.white
 
         // Do any additional setup after loading the view.
         wishListUnderLineView.backgroundColor = UtilityManager.getGenderColor()

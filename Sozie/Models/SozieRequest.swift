@@ -37,7 +37,7 @@ struct SozieRequest: Codable {
         case sku
         case displaySize = "display_size"
     }
-    init(requestId: Int, user: User, sizeValue: String, productId: String, requestedProduct: Product, brandId: Int, isFilled: Bool, isAccepted: Bool, acceptedRequest: AcceptedRequest?, color: String?,sku: String? = nil, displaySize: String?) {
+    init(requestId: Int, user: User, sizeValue: String, productId: String, requestedProduct: Product, brandId: Int, isFilled: Bool, isAccepted: Bool, acceptedRequest: AcceptedRequest?, color: String?, sku: String? = nil, displaySize: String?) {
         self.requestId = requestId
         self.user = user
         self.sizeValue = sizeValue

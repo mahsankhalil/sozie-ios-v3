@@ -56,6 +56,7 @@ class ProfileSideMenuVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.tblVu.backgroundColor = UIColor.white
         if UserDefaultManager.getIfShopper() {
             self.myBalanceViewHeightContraint.constant = 0.0
         } else {

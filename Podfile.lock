@@ -97,7 +97,7 @@ PODS:
   - Segment-Firebase/Core (2.4.0):
     - Analytics (~> 3.2)
     - Firebase/Core (~> 5.0)
-  - SideMenu (5.0.3)
+  - SideMenu (6.4.5)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.30.0)
   - SwiftValidator (4.0.0)
@@ -122,7 +122,7 @@ DEPENDENCIES:
   - MaterialTextField (~> 1.0)
   - SDWebImage (~> 4.4.2)
   - Segment-Firebase
-  - SideMenu (~> 5.0.3)
+  - SideMenu (~> 6.0)
   - SVProgressHUD
   - SwiftLint (= 0.30.0)
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
@@ -202,13 +202,13 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
   Segment-Firebase: cac4b742228ef74d50ed886f3fc731e4bc8b7d29
-  SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
+  SideMenu: d4e7fd593af1eda94e41a7ac35b3664702c865f3
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 4e37cb5cd33435170dfd09fba089f41fdbf64d53
   SwiftValidator: 249b6b3ae3b294266c5b9de134d94f18f2d5aa47
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: 4c0eb8a141a153f71cf8f980ecc57fd2b31902e0
+PODFILE CHECKSUM: 9a2108ad6e1045601ad193efad5a324bbfa1a653
 
 COCOAPODS: 1.7.5

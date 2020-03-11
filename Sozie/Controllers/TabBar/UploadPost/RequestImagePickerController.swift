@@ -122,7 +122,6 @@ class RequestImagePickerController: UIViewController {
         // Step 2
         let path = CGMutablePath()
         path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
-        
         path.addRect(overlayImageView!.frame)
         // Step 3
         let maskLayer = CAShapeLayer()
