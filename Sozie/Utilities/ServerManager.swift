@@ -513,6 +513,9 @@ class ServerManager: NSObject {
         } else if let param = params["is_tutorial_request"] {
             url = url + "?is_tutorial_request=" + String(param as! Bool)
         }
+        if let query = params["query"] as? String {
+            url = url + "?query=" + (query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")
+        }
         Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<RequestsPaginatedResponse> = decoder.decodeResponse(from: response)

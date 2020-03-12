@@ -9,6 +9,10 @@
 import UIKit
 import SVProgressHUD
 class SozieRequestsVC: UIViewController {
+    @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var gotItButton: UIButton!
     @IBOutlet weak var instructionsHeightConstraint: NSLayoutConstraint!
     var reuseableIdentifier = "SozieRequestTableViewCell"
@@ -33,6 +37,8 @@ class SozieRequestsVC: UIViewController {
     var progressTutorialVC: TutorialProgressVC?
     var ifGotItButtonTapped: Bool = false
     var totalTutorialCount: Float = 8.0
+    var gstrRcgnzr: UIGestureRecognizer?
+    var searchString: String?
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -73,7 +79,8 @@ class SozieRequestsVC: UIViewController {
                 self.totalTutorialCount = 8
             }
         }
-
+        searchTextField.delegate = self
+        searchViewHeightConstraint.constant = 0.0
     }
     @objc func resetFirstTime() {
         serverParams.removeAll()
@@ -141,6 +148,7 @@ class SozieRequestsVC: UIViewController {
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
                     self.questionMarkButton.isUserInteractionEnabled = false
+                    self.searchButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.acceptButton.isEnabled = false
                     }
@@ -177,6 +185,7 @@ class SozieRequestsVC: UIViewController {
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
                     self.questionMarkButton.isUserInteractionEnabled = false
+                    self.searchButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
@@ -214,6 +223,7 @@ class SozieRequestsVC: UIViewController {
                     self.tableView.isScrollEnabled = false
                     self.tableView.allowsSelection = false
                     self.questionMarkButton.isUserInteractionEnabled = false
+                    self.searchButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
@@ -239,6 +249,7 @@ class SozieRequestsVC: UIViewController {
         self.tableView.isScrollEnabled = true
         self.tableView.allowsSelection = true
         self.questionMarkButton.isUserInteractionEnabled = true
+        self.searchButton.isUserInteractionEnabled = true
     }
     @objc func reloadRequestData() {
         self.requests.removeAll()
@@ -259,6 +270,9 @@ class SozieRequestsVC: UIViewController {
     func fetchAllSozieRequests() {
         if UserDefaultManager.getIfPostTutorialShown() == false {
             serverParams["is_tutorial_request"] = true
+        }
+        if searchString != nil && searchString != "" {
+            serverParams["query"] = searchString
         }
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -311,6 +325,45 @@ class SozieRequestsVC: UIViewController {
         }
 
     }
+    func showSearchVu() {
+        searchViewHeightConstraint.constant = 0.0
+        gstrRcgnzr = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        gstrRcgnzr?.cancelsTouchesInView = true
+        self.view.addGestureRecognizer(gstrRcgnzr!)
+        UIView.animate(withDuration: 0.3) {
+            self.searchViewHeightConstraint.constant = 47.0
+            self.view.layoutIfNeeded()
+            self.searchView.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+            self.searchTextField.becomeFirstResponder()
+        }
+    }
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+        if let rcgnizer = gstrRcgnzr {
+            self.view.removeGestureRecognizer(rcgnizer)
+        }
+    }
+    func hideSearchVu() {
+        if searchTextField.text?.isEmpty == false {
+            searchString = searchTextField.text
+//            self.isFirstPage = true
+//            self.clearFilterButton.isHidden = false
+            
+        } else {
+            searchString = nil
+        }
+        self.requests.removeAll()
+        serverParams.removeAll()
+        self.tableView.refreshControl?.beginRefreshing()
+        fetchAllSozieRequests()
+        searchViewHeightConstraint.constant = 47.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchViewHeightConstraint.constant = 0.0
+            self.searchView.clipsToBounds = true
+            self.dismissKeyboard()
+            self.view.layoutIfNeeded()
+        }
+    }
     @IBAction func gotItButtonTapped(_ sender: Any) {
         instructionsScrollView.isHidden = true
         enableRootButtons()
@@ -320,6 +373,13 @@ class SozieRequestsVC: UIViewController {
         }
     }
 
+    @IBAction func searchButtonTapped(_ sender: Any) {
+        if searchViewHeightConstraint.constant == 0 {
+            showSearchVu()
+        } else {
+            hideSearchVu()
+        }
+    }
     @IBAction func questionMarkButtonTapped(_ sender: Any) {
         instructionsScrollView.isHidden = false
         disableRootButtons()
@@ -646,9 +706,19 @@ extension SozieRequestsVC: TutorialProgressDelegate {
         self.hideUploadPostTutorial()
         self.hideAcceptRequestTutorial()
         self.questionMarkButton.isUserInteractionEnabled = true
+        self.searchButton.isUserInteractionEnabled = true
         serverParams.removeAll()
         requests.removeAll()
         SVProgressHUD.show()
         fetchAllSozieRequests()
+    }
+}
+extension SozieRequestsVC: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+//        hideSearchVu()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideSearchVu()
+        return true
     }
 }
