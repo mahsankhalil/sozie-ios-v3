@@ -49,6 +49,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.postMaskButton.isHidden = true
         // Do any additional setup after loading the view.
         if currentProduct == nil {
             currentProduct = currentRequest?.requestedProduct
@@ -432,6 +433,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
                 let imagePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
                 imagePickerVC.delegate = self
                 imagePickerVC.photoIndex = self.selectedIndex
+                imagePickerVC.modalPresentationStyle = .fullScreen
                 self.progressTutorialVC?.view.isHidden = true
                 self.present(imagePickerVC, animated: true, completion: nil)
             }))
@@ -458,6 +460,7 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
                 }
                 viewModels[index].title = ""
             }
+            UIImageWriteToSavedPhotosAlbum(scaledImg, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
             self.imagesCollectionView.reloadData()
         }
         if checkIfAllImagesUplaoded() {
@@ -534,6 +537,12 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
                 viewModels[index].title = ""
             }
             self.imagesCollectionView.reloadData()
+        }
+    }
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            UtilityManager.showMessageWith(title: "Save Error", body: error.localizedDescription, in: self)
         }
     }
 }

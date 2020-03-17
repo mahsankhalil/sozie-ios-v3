@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         print(Bundle.main.infoDictionary?["Configuration"] as! String)
         GIDSignIn.sharedInstance().clientID = "417360914886-kt7feo03r47adeesn8i4udr0i0ofufs0.apps.googleusercontent.com"
-        FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
             if UserDefaultManager.checkIfMeasurementEmpty() {
@@ -135,9 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //                showResetPasswordVC(with: params)
 //            }
 //        }
-        if let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options) {
-            return handled
-        }
+        ApplicationDelegate.shared.application(app, open: url, options: options)
         return true
     }
 

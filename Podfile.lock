@@ -1,12 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
   - Analytics (3.6.10)
-  - Bolts (1.9.0):
-    - Bolts/AppLinks (= 1.9.0)
-    - Bolts/Tasks (= 1.9.0)
-  - Bolts/AppLinks (1.9.0):
-    - Bolts/Tasks
-  - Bolts/Tasks (1.9.0)
   - Branch (0.27.1):
     - Branch/Core (= 0.27.1)
   - Branch/Core (0.27.1)
@@ -17,10 +11,14 @@ PODS:
   - DLRadioButton (1.4.12)
   - EasyTipView (2.0.4)
   - Fabric (1.10.2)
-  - FBSDKCoreKit (4.39.1):
-    - Bolts (~> 1.9)
-  - FBSDKLoginKit (4.39.1):
-    - FBSDKCoreKit
+  - FBSDKCoreKit (5.5.0):
+    - FBSDKCoreKit/Basics (= 5.5.0)
+    - FBSDKCoreKit/Core (= 5.5.0)
+  - FBSDKCoreKit/Basics (5.5.0)
+  - FBSDKCoreKit/Core (5.5.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.5.0):
+    - FBSDKCoreKit (~> 5.0)
   - Firebase/Core (5.20.2):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.8.1)
@@ -114,8 +112,8 @@ DEPENDENCIES:
   - DLRadioButton (~> 1.4)
   - EasyTipView (~> 2.0.1)
   - Fabric (~> 1.10.2)
-  - FBSDKCoreKit (~> 4.39.1)
-  - FBSDKLoginKit (~> 4.39.1)
+  - FBSDKCoreKit (~> 5.5.0)
+  - FBSDKLoginKit (~> 5.5.0)
   - GoogleSignIn
   - Hex (~> 6.0.0)
   - Intercom
@@ -133,7 +131,6 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Analytics
-    - Bolts
     - Branch
     - CCBottomRefreshControl
     - Crashlytics
@@ -177,7 +174,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Analytics: 63744ad4afa65c3bcdcdb7a94b62515bde5b3900
-  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Branch: 1ace77c04b6e3efbf982bf4364f0662bfac156a0
   CCBottomRefreshControl: 389780b4488321c91d18f66a6da5ef9606df6de5
   Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
@@ -185,8 +181,8 @@ SPEC CHECKSUMS:
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
-  FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
+  FBSDKCoreKit: 7ade9cfea30eef2f6cf105a1aa904f89ea68fb7d
+  FBSDKLoginKit: bb28062f24e79590c44ba03297ca9bea4b6436d2
   Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
   FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
   FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
@@ -209,6 +205,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: 9a2108ad6e1045601ad193efad5a324bbfa1a653
+PODFILE CHECKSUM: 320846a6ed7d21596ac5d708ce1b65421d528725
 
 COCOAPODS: 1.7.5

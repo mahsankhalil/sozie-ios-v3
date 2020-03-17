@@ -75,6 +75,8 @@
 	<string>Sozie would like to access Camera to take photos, photo taken will be used as your profile picture as well as for completion of requests.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Sozie would like to access you location to find the nearest stores for you.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Sozie would like to save photos taken from the app in camera roll.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Sozie would like to access Photo Library to select photos, photos selected will be used as your profile picture as well as for completion of requests.</string>
 	<key>SERVER_URL</key>
