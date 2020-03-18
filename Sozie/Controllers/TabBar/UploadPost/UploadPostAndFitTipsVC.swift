@@ -309,6 +309,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     self.bottomButtom.isEnabled = true
                     self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
                 }
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
             } else {
                 self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)

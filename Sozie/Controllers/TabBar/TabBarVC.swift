@@ -83,7 +83,11 @@ class TabBarVC: UITabBarController {
         let helpVc = UIViewController()
         helpVc.tabBarItem = UITabBarItem(title: "Help", image: UIImage(named: "Help"), selectedImage: UIImage(named: "Help Selected"))
         self.viewControllers = ([browseNC, wishListNC, profileNC, helpVc] as! [UIViewController])
-
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if user.tutorialCompleted == true {
+                self.showProfileTab()
+            }
+        }
     }
     /*
     // MARK: - Navigation

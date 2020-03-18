@@ -71,6 +71,8 @@ class SozieRequestsVC: UIViewController {
 //        }
         showPostTutorials()
         NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAllData), name: Notification.Name(rawValue: "PostUploaded"), object: nil)
+
 //        self.view.window?.addSubview(tutorialVC.view)
         if let user = UserDefaultManager.getCurrentUserObject() {
             if user.country == 1 {
@@ -81,6 +83,7 @@ class SozieRequestsVC: UIViewController {
         }
         searchTextField.delegate = self
         searchViewHeightConstraint.constant = 0.0
+        self.reloadAllData()
     }
     @objc func resetFirstTime() {
         serverParams.removeAll()
@@ -120,6 +123,11 @@ class SozieRequestsVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        serverParams.removeAll()
+//        requests.removeAll()
+//        fetchAllSozieRequests()
+    }
+    @objc func reloadAllData() {
         serverParams.removeAll()
         requests.removeAll()
         fetchAllSozieRequests()
