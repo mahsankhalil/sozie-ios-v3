@@ -290,7 +290,13 @@ class SozieRequestsVC: UIViewController {
                 let paginatedData = response as! RequestsPaginatedResponse
                 self.requests.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
-                self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS")
+                if self.requests.count > 0 {
+                    let brandId = self.requests[0].brandId
+                    let brand = UserDefaultManager.getBrandWithId(brandId: brandId)
+                    self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS") + " BY " + (brand?.label.uppercased() ?? "")
+                } else {
+                    self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS")
+                }
                 self.showPostTutorials()
             }
         }

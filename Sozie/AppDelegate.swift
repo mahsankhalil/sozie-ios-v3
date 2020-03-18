@@ -58,6 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.window?.rootViewController = rootViewController
             }
         }
+        ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
+            if isSuccess {
+                let brandList = response as! [Brand]
+                _ = UserDefaultManager.saveAllBrands(brands: brandList)
+            }
+        }
 //        Intercom.setApiKey("ios_sdk-a1bcb8310b7c4ccc2937ed6429e6ecfc17b224b0", forAppId:"jevqi9qx")
 //        UtilityManager.registerUserOnIntercom()
 //        Intercom.setApiKey("ios_sdk-d2d055c16ce67ff20e47efcf6d49f3091ec8acde", forAppId: "txms4v5i")

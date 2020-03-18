@@ -3118,7 +3118,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-it-NRf">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-it-NRf">
                                         <rect key="frame" x="308" y="0.0" width="41" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -3131,11 +3131,15 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQ4-VP-Ww2">
-                                        <rect key="frame" x="285" y="0.0" width="15" height="50"/>
+                                        <rect key="frame" x="285" y="0.0" width="80" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="15" id="77p-eC-Uxs"/>
+                                            <constraint firstAttribute="width" constant="80" id="77p-eC-Uxs"/>
                                         </constraints>
-                                        <state key="normal" image="SearchIconBrowse"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="-7" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Search" image="Search">
+                                            <color key="titleColor" red="0.53327292203903198" green="0.53336817026138306" blue="0.53326696157455444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="searchButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="yaj-r1-89E"/>
                                         </connections>
@@ -3147,7 +3151,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                     <constraint firstAttribute="bottom" secondItem="cQ4-VP-Ww2" secondAttribute="bottom" id="H6o-id-t6K"/>
                                     <constraint firstItem="VfK-it-NRf" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="top" id="HlN-Bl-V46"/>
                                     <constraint firstItem="eRy-5e-JXH" firstAttribute="leading" secondItem="ZNv-L9-ztQ" secondAttribute="leading" constant="19" id="XFq-DB-nfk"/>
-                                    <constraint firstItem="VfK-it-NRf" firstAttribute="leading" secondItem="cQ4-VP-Ww2" secondAttribute="trailing" constant="8" id="eyD-hV-b1u"/>
+                                    <constraint firstItem="VfK-it-NRf" firstAttribute="leading" secondItem="cQ4-VP-Ww2" secondAttribute="trailing" constant="-57" id="eyD-hV-b1u"/>
                                     <constraint firstItem="cQ4-VP-Ww2" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="top" id="k5l-tG-VZF"/>
                                     <constraint firstAttribute="trailing" secondItem="VfK-it-NRf" secondAttribute="trailing" constant="26" id="kRi-zL-kA2"/>
                                     <constraint firstItem="eRy-5e-JXH" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="top" constant="16" id="qmp-VG-fTe"/>
@@ -3167,11 +3171,14 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-Pr-xqA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What are you looking for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gXU-xH-lRF">
-                                                <rect key="frame" x="20" y="16" width="335" height="15.5"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gXU-xH-lRF">
+                                                <rect key="frame" x="20" y="13.5" width="335" height="20"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="iBu-lG-Vkz"/>
+                                                </constraints>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="10"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                             </textField>
                                         </subviews>
@@ -5953,6 +5960,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="Profile icon" width="29" height="29"/>
         <image name="Profile icon-Selected" width="29" height="29"/>
         <image name="Right" width="12" height="21"/>
+        <image name="Search" width="20" height="20"/>
         <image name="SearchIconBrowse" width="15" height="15"/>
         <image name="Share" width="21.5" height="21.5"/>
         <image name="Shop" width="21" height="27.5"/>
