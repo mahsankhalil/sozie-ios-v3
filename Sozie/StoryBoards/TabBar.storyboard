@@ -1761,12 +1761,23 @@
                                     <action selector="skipButtonTapped:" destination="5LY-BY-wwJ" eventType="touchUpInside" id="K8l-Tr-Tvs"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete tutorial with real photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="du6-wZ-5j9">
+                                <rect key="frame" x="59" y="56" width="257" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="dux-Kh-oSc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="V58-AC-IL1" firstAttribute="centerY" secondItem="acT-or-ijy" secondAttribute="centerY" id="GS1-Yd-rKK"/>
+                            <constraint firstItem="du6-wZ-5j9" firstAttribute="top" secondItem="Akl-vP-k4U" secondAttribute="bottom" constant="11" id="OUZ-da-L1e"/>
                             <constraint firstItem="Akl-vP-k4U" firstAttribute="centerX" secondItem="acT-or-ijy" secondAttribute="centerX" id="OzT-5R-8Zo"/>
                             <constraint firstItem="Akl-vP-k4U" firstAttribute="centerY" secondItem="acT-or-ijy" secondAttribute="centerY" id="bM0-5Y-3rO"/>
+                            <constraint firstItem="du6-wZ-5j9" firstAttribute="centerX" secondItem="acT-or-ijy" secondAttribute="centerX" id="fuI-aU-Qjd"/>
                             <constraint firstItem="V58-AC-IL1" firstAttribute="leading" secondItem="zuJ-Q7-dfX" secondAttribute="leading" id="pSA-ei-hPB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zuJ-Q7-dfX"/>

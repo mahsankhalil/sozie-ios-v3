@@ -139,8 +139,8 @@ class SozieRequestsVC: UIViewController {
             progressTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "TutorialProgressVC") as? TutorialProgressVC
             progressTutorialVC?.delegate = self
             if let tutVC = progressTutorialVC {
-                tutVC.view.frame.origin.y = (topPadding ?? 0.0)
-                tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 44.0)
+                tutVC.view.frame.origin.y = (0.0)
+                tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50.0 + (topPadding ?? 0))
                 window?.addSubview(tutVC.view)
             }
         }
