@@ -611,13 +611,15 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 }
             }
         } else {
-            if isFromTutorial {
-                acceptDumnyRequest(tag: button.tag)
-                hideAcceptRequestTutorial()
-                showUploadPostTutorial()
-                return
+            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "If you do not complete the request, a strike will be counted against you.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                if self.isFromTutorial {
+                    self.acceptDumnyRequest(tag: button.tag)
+                    self.hideAcceptRequestTutorial()
+                    self.showUploadPostTutorial()
+                    return
+                }
+                self.acceptRequestAPICall(tag: button.tag)
             }
-            acceptRequestAPICall(tag: button.tag)
         }
     }
     func makeRequestAccepted(tag: Int, acceptedRequestId: Int) {
