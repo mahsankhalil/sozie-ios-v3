@@ -35,6 +35,16 @@
                                     <constraint firstAttribute="width" constant="136" id="pOa-Gb-3fN"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDl-j7-idt">
+                                <rect key="frame" x="11" y="16" width="136" height="111"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="136" id="7fI-Lu-3uc"/>
+                                    <constraint firstAttribute="height" constant="111" id="rJO-FZ-pJU"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="pictureButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="16o-go-gOh"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requested by Carla" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AGl-Sm-i7c">
                                 <rect key="frame" x="157" y="16" width="186" height="19"/>
                                 <constraints>
@@ -131,6 +141,7 @@
                             <constraint firstAttribute="bottom" secondItem="AJl-CH-owF" secondAttribute="bottom" id="5UB-M2-D3o"/>
                             <constraint firstItem="WuJ-8Q-nGb" firstAttribute="leading" secondItem="vEi-4F-nlD" secondAttribute="trailing" constant="10" id="7BR-y2-VVF"/>
                             <constraint firstAttribute="trailing" secondItem="6bd-Ae-oty" secondAttribute="trailing" id="8du-WL-RKj"/>
+                            <constraint firstItem="IDl-j7-idt" firstAttribute="centerY" secondItem="3rl-IZ-nQQ" secondAttribute="centerY" id="BUn-rW-wia"/>
                             <constraint firstItem="fsa-6p-Xiv" firstAttribute="leading" secondItem="vEi-4F-nlD" secondAttribute="trailing" constant="10" id="E3d-Dv-dBH"/>
                             <constraint firstItem="QOE-LV-XiY" firstAttribute="leading" secondItem="fsa-6p-Xiv" secondAttribute="trailing" constant="15" id="HNL-3w-pPl"/>
                             <constraint firstItem="AJl-CH-owF" firstAttribute="leading" secondItem="3rl-IZ-nQQ" secondAttribute="leading" id="J60-G4-qBD"/>
@@ -145,6 +156,7 @@
                             <constraint firstItem="QOE-LV-XiY" firstAttribute="top" secondItem="AGl-Sm-i7c" secondAttribute="bottom" constant="8" id="d1a-U2-DF3"/>
                             <constraint firstItem="6bd-Ae-oty" firstAttribute="top" secondItem="AGl-Sm-i7c" secondAttribute="bottom" constant="41" id="eI5-hZ-4zV"/>
                             <constraint firstItem="vEi-4F-nlD" firstAttribute="leading" secondItem="3rl-IZ-nQQ" secondAttribute="leading" constant="11" id="eyb-WB-rE7"/>
+                            <constraint firstItem="IDl-j7-idt" firstAttribute="leading" secondItem="3rl-IZ-nQQ" secondAttribute="leading" constant="11" id="fhu-RI-6rj"/>
                             <constraint firstItem="0nT-0w-pmW" firstAttribute="leading" secondItem="3rl-IZ-nQQ" secondAttribute="leading" id="kp0-15-uIY"/>
                             <constraint firstItem="0nT-0w-pmW" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" id="lYF-Yy-IXa"/>
                             <constraint firstItem="AJl-CH-owF" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" id="lhF-Ia-bXQ"/>
@@ -170,6 +182,7 @@
                 <outlet property="colorLabel" destination="QOE-LV-XiY" id="aQT-oK-8Cf"/>
                 <outlet property="logoImageView" destination="0nT-0w-pmW" id="5Fl-dl-FWQ"/>
                 <outlet property="overlayView" destination="AJl-CH-owF" id="YJH-vS-yyV"/>
+                <outlet property="pictureButton" destination="IDl-j7-idt" id="5he-vF-XAm"/>
                 <outlet property="productImageView" destination="vEi-4F-nlD" id="NY1-3f-vRa"/>
                 <outlet property="sizeRequestedLabel" destination="fsa-6p-Xiv" id="Nhu-BB-fuq"/>
                 <outlet property="timerLabel" destination="pAj-fp-ddn" id="wrA-uR-pjC"/>

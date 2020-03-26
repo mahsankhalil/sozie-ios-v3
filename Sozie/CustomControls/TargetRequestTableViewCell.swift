@@ -21,6 +21,7 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var pictureButton: UIButton!
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +40,9 @@ class TargetRequestTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func pictureButtonTapped(_ sender: Any) {
+        delegate?.pictureButtonTapped(button: sender as! UIButton)
     }
     @IBAction func acceptButtonTapped(_ sender: Any) {
         delegate?.acceptRequestButtonTapped(button: sender as! UIButton)
@@ -59,6 +63,7 @@ extension TargetRequestTableViewCell: ButtonProviding {
         acceptButton.tag = index
         cancelButton.tag = index
         checkStoresButton.tag = index
+        pictureButton.tag = index
     }
 }
 extension TargetRequestTableViewCell: CellConfigurable {

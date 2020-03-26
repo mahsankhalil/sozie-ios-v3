@@ -2521,7 +2521,7 @@ Let's go back and accept your first request</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wish List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D22-6e-RYC">
-                                                <rect key="frame" x="12" y="0.0" width="195" height="46"/>
+                                                <rect key="frame" x="12" y="0.0" width="189.5" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Jsi-q4-TB9"/>
                                                 </constraints>
@@ -2530,7 +2530,7 @@ Let's go back and accept your first request</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -3049,7 +3049,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                             <action selector="profileButtonTapped:" destination="mph-Fd-H3f" eventType="touchUpInside" id="gxE-aH-3Gi"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4C-jq-cj1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4C-jq-cj1">
                                         <rect key="frame" x="29" y="35" width="32.5" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32.5" id="51a-f5-mn5"/>
@@ -4685,8 +4685,36 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                             <constraint firstAttribute="height" constant="50" id="rsD-6K-Uin"/>
                                         </constraints>
                                     </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-Sl-ZAV">
+                                        <rect key="frame" x="0.0" y="102" width="375" height="50"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XD5-TO-1M0" customClass="DZGradientView" customModule="Sozie" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPn-X1-abP">
+                                                        <rect key="frame" x="21" y="6" width="304" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <inset key="titleEdgeInsets" minX="-57" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="266" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <state key="normal" title="HOW TO TAKE SOZIE PICTURES" image="Question">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="howToTakeSoziePicturesButtonTapped:" destination="77b-ez-nUK" eventType="touchUpInside" id="D2w-Sk-3ws"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Mq7-bO-fC4"/>
+                                        </constraints>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vuA-GP-hoS">
-                                        <rect key="frame" x="0.0" y="102" width="375" height="533"/>
+                                        <rect key="frame" x="0.0" y="152" width="375" height="483"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataSource" destination="77b-ez-nUK" id="bBg-eB-jlE"/>
@@ -4710,14 +4738,17 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="g1Z-Sl-ZAV" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="2tU-Pg-X5x"/>
                                     <constraint firstItem="nxh-LR-Fbt" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="4em-yE-yDP"/>
                                     <constraint firstItem="9WL-Ri-f6Q" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="DCh-Cm-n6S"/>
                                     <constraint firstItem="nxh-LR-Fbt" firstAttribute="bottom" secondItem="g2K-iV-vEO" secondAttribute="bottom" id="F0D-1j-YCI"/>
+                                    <constraint firstItem="g1Z-Sl-ZAV" firstAttribute="top" secondItem="0RB-il-JcJ" secondAttribute="bottom" id="FQo-b1-Hpv"/>
                                     <constraint firstItem="nxh-LR-Fbt" firstAttribute="top" secondItem="vuA-GP-hoS" secondAttribute="bottom" id="X2a-tb-KPl"/>
                                     <constraint firstItem="0RB-il-JcJ" firstAttribute="top" secondItem="9WL-Ri-f6Q" secondAttribute="bottom" id="bFU-VM-dee"/>
+                                    <constraint firstItem="vuA-GP-hoS" firstAttribute="top" secondItem="g1Z-Sl-ZAV" secondAttribute="bottom" id="i2K-g8-6GQ"/>
                                     <constraint firstItem="vuA-GP-hoS" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="jQv-9O-Hz3"/>
+                                    <constraint firstItem="g1Z-Sl-ZAV" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="lv4-25-cJP"/>
                                     <constraint firstItem="9WL-Ri-f6Q" firstAttribute="top" secondItem="g2K-iV-vEO" secondAttribute="top" constant="14" id="oVi-2J-01K"/>
-                                    <constraint firstItem="vuA-GP-hoS" firstAttribute="top" secondItem="0RB-il-JcJ" secondAttribute="bottom" id="omr-QS-iC1"/>
                                     <constraint firstItem="vuA-GP-hoS" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="r4k-SK-1d5"/>
                                     <constraint firstItem="0RB-il-JcJ" firstAttribute="leading" secondItem="g2K-iV-vEO" secondAttribute="leading" id="xle-p5-1P8"/>
                                     <constraint firstItem="0RB-il-JcJ" firstAttribute="trailing" secondItem="g2K-iV-vEO" secondAttribute="trailing" id="yBr-4S-hki"/>
@@ -4738,6 +4769,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                     <navigationItem key="navigationItem" id="CFa-m9-Aec"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="howToTakePicturesButton" destination="jPn-X1-abP" id="lww-gY-LOB"/>
                         <outlet property="logoutBtn" destination="nxh-LR-Fbt" id="CDX-GP-7Qb"/>
                         <outlet property="menuBtn" destination="9WL-Ri-f6Q" id="Tsp-w1-CgF"/>
                         <outlet property="myBalanceButton" destination="9i1-JX-HJB" id="52x-Ua-Mm8"/>
@@ -4750,6 +4782,66 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgC-Bd-dFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3192.8000000000002" y="1078.1109445277361"/>
+        </scene>
+        <!--Sozie InstructionsVC-->
+        <scene sceneID="nGn-qS-7xx">
+            <objects>
+                <viewController storyboardIdentifier="SozieInstructionsVC" id="2xZ-AU-1Dl" customClass="SozieInstructionsVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P4P-Je-iUd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="944"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGP-UO-pDr">
+                                <rect key="frame" x="16" y="20" width="47" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="47" id="qMO-Pr-F8K"/>
+                                    <constraint firstAttribute="height" constant="41" id="sQM-vU-W0c"/>
+                                </constraints>
+                                <state key="normal" image="back-button-white"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="2xZ-AU-1Dl" eventType="touchUpInside" id="bFw-DT-Su5"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaz-y8-NbA">
+                                <rect key="frame" x="0.0" y="69" width="375" height="875"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions" translatesAutoresizingMaskIntoConstraints="NO" id="QwS-ce-Fea">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="875"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="875" id="d8F-iW-l3n"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="QwS-ce-Fea" firstAttribute="trailing" secondItem="qaz-y8-NbA" secondAttribute="trailing" id="Dlm-Kh-sYp"/>
+                                    <constraint firstItem="QwS-ce-Fea" firstAttribute="top" secondItem="qaz-y8-NbA" secondAttribute="top" id="PW6-vZ-5Ur"/>
+                                    <constraint firstItem="QwS-ce-Fea" firstAttribute="bottom" secondItem="qaz-y8-NbA" secondAttribute="bottom" id="TkJ-gY-CiL"/>
+                                    <constraint firstItem="QwS-ce-Fea" firstAttribute="leading" secondItem="qaz-y8-NbA" secondAttribute="leading" id="s7D-Zg-iRG"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="ils-mg-ubg"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="ueS-Fn-5dJ"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="qaz-y8-NbA" firstAttribute="leading" secondItem="Y9D-Tv-wck" secondAttribute="leading" id="GYf-PP-qdv"/>
+                            <constraint firstItem="qaz-y8-NbA" firstAttribute="trailing" secondItem="Y9D-Tv-wck" secondAttribute="trailing" id="Iz5-Rd-0gU"/>
+                            <constraint firstItem="qaz-y8-NbA" firstAttribute="bottom" secondItem="Y9D-Tv-wck" secondAttribute="bottom" id="WJG-ik-3LR"/>
+                            <constraint firstItem="qaz-y8-NbA" firstAttribute="top" secondItem="qGP-UO-pDr" secondAttribute="bottom" constant="8" id="jac-MV-0Oq"/>
+                            <constraint firstItem="qGP-UO-pDr" firstAttribute="top" secondItem="Y9D-Tv-wck" secondAttribute="top" constant="20" id="kgw-h8-kt5"/>
+                            <constraint firstItem="qGP-UO-pDr" firstAttribute="leading" secondItem="Y9D-Tv-wck" secondAttribute="leading" constant="16" id="pgN-0C-HNM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Y9D-Tv-wck"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="944"/>
+                    <connections>
+                        <outlet property="instructionsHeightConstraint" destination="d8F-iW-l3n" id="hdp-lw-CAx"/>
+                        <outlet property="scrollView" destination="qaz-y8-NbA" id="Fy4-OW-ZOU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="17G-YO-lfA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3975.1999999999998" y="1080.3598200899551"/>
         </scene>
         <!--Wish List-->
         <scene sceneID="uHZ-nX-9RY">
@@ -5959,6 +6051,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="Paypal icon" width="64" height="32"/>
         <image name="Profile icon" width="29" height="29"/>
         <image name="Profile icon-Selected" width="29" height="29"/>
+        <image name="Question" width="9" height="16"/>
         <image name="Right" width="12" height="21"/>
         <image name="Search" width="20" height="20"/>
         <image name="SearchIconBrowse" width="15" height="15"/>

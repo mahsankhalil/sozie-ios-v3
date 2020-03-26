@@ -449,12 +449,19 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedProduct = requests[indexPath.row].requestedProduct
-        if viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true {
-            performSegue(withIdentifier: "toProductDetail", sender: self)
-        } else if viewModels[indexPath.row].isSelected == false {
-            performSegue(withIdentifier: "toProductDetail", sender: self)
-        }
+//        selectedProduct = requests[indexPath.row].requestedProduct
+//        if (viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true) || viewModels[indexPath.row].isSelected == false {
+//            if (tableView.cellForRow(at: indexPath) as? TargetRequestTableViewCell) != nil {
+//                let cell = (tableView.cellForRow(at: indexPath) as? TargetRequestTableViewCell)
+//                let button = cell?.acceptButton
+//                self.acceptRequestButtonTapped(button: button!)
+//            }
+//        }
+//        if viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true {
+//            performSegue(withIdentifier: "toProductDetail", sender: self)
+//        } else if viewModels[indexPath.row].isSelected == false {
+//            performSegue(withIdentifier: "toProductDetail", sender: self)
+//        }
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if (requests.count < 10 && indexPath.row == requests.count - 2) || (indexPath.row == requests.count - 10) {
@@ -466,6 +473,14 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
+    func pictureButtonTapped(button: UIButton) {
+        selectedProduct = requests[button.tag].requestedProduct
+        if viewModels[button.tag].acceptedBySomeoneElse == false && viewModels[button.tag].isSelected == true {
+            performSegue(withIdentifier: "toProductDetail", sender: self)
+        } else if viewModels[button.tag].isSelected == false {
+            performSegue(withIdentifier: "toProductDetail", sender: self)
+        }
+    }
     func cancelRequestButtonTapped(button: UIButton) {
         UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
             self.cancelRequest(button: button)

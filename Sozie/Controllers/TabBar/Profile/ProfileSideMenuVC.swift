@@ -45,7 +45,8 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var logoutBtn: DZGradientButton!
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
-
+    @IBOutlet weak var howToTakePicturesButton: UIButton!
+    
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
     let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
@@ -208,6 +209,11 @@ class ProfileSideMenuVC: BaseViewController {
         let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
         let balanceVC = storyBoard.instantiateViewController(withIdentifier: "MyBalanceVC") as! MyBalanceVC
         self.navigationController?.pushViewController(balanceVC, animated: true)
+    }
+    @IBAction func howToTakeSoziePicturesButtonTapped(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let instructionVC = storyBoard.instantiateViewController(withIdentifier: "SozieInstructionsVC") as! SozieInstructionsVC
+        self.navigationController?.pushViewController(instructionVC, animated: true)
     }
     @IBAction func logoutBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
