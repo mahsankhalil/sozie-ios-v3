@@ -1105,7 +1105,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CATEGORY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPP-Fy-inr">
-                                        <rect key="frame" x="16" y="20" width="343" height="21.5"/>
+                                        <rect key="frame" x="16" y="20" width="343" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1184,6 +1184,94 @@
             </objects>
             <point key="canvasLocation" x="3080.8000000000002" y="-861.76911544227892"/>
         </scene>
+        <!--Search By Size Pop UpVC-->
+        <scene sceneID="nGd-WD-sS2">
+            <objects>
+                <viewController storyboardIdentifier="SearchBySizePopUpVC" id="nwm-35-TPx" customClass="SearchBySizePopUpVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I3X-yE-KGQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="440"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veM-sN-ca3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEARCH BY SIZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W40-W3-8GP">
+                                        <rect key="frame" x="16" y="20" width="343" height="19"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
+                                        <color key="textColor" red="1" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvu-LU-CPF">
+                                        <rect key="frame" x="329" y="16" width="30" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="coZ-6u-R5e"/>
+                                            <constraint firstAttribute="height" constant="28" id="yn6-is-6pA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="12"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doneBtnTapped:" destination="6p7-a4-Skt" eventType="touchUpInside" id="UlZ-EK-My4"/>
+                                            <action selector="doneButtonTapped:" destination="nwm-35-TPx" eventType="touchUpInside" id="A0B-lV-Flo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="70y-ew-kmT"/>
+                                    <constraint firstAttribute="trailing" secondItem="vvu-LU-CPF" secondAttribute="trailing" constant="16" id="Ft6-xh-beI"/>
+                                    <constraint firstAttribute="trailing" secondItem="W40-W3-8GP" secondAttribute="trailing" constant="16" id="N97-ls-CrS"/>
+                                    <constraint firstItem="W40-W3-8GP" firstAttribute="leading" secondItem="veM-sN-ca3" secondAttribute="leading" constant="16" id="bQ8-ZC-322"/>
+                                    <constraint firstItem="W40-W3-8GP" firstAttribute="top" secondItem="veM-sN-ca3" secondAttribute="top" constant="20" id="hrV-Pk-TfQ"/>
+                                    <constraint firstItem="vvu-LU-CPF" firstAttribute="top" secondItem="veM-sN-ca3" secondAttribute="top" constant="16" id="pgC-CJ-asT"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqS-eW-wbg">
+                                <rect key="frame" x="0.0" y="49" width="375" height="391"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qIe-8m-gKE">
+                                        <rect key="frame" x="44" y="26" width="287" height="347"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="nwm-35-TPx" id="2Cp-NM-8LW"/>
+                                            <outlet property="delegate" destination="nwm-35-TPx" id="v64-gu-QUm"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="qIe-8m-gKE" secondAttribute="trailing" constant="44" id="515-2N-BDb"/>
+                                    <constraint firstAttribute="bottom" secondItem="qIe-8m-gKE" secondAttribute="bottom" constant="18" id="SnT-iw-VC5"/>
+                                    <constraint firstItem="qIe-8m-gKE" firstAttribute="leading" secondItem="ZqS-eW-wbg" secondAttribute="leading" constant="44" id="Wo8-qr-AgS"/>
+                                    <constraint firstItem="qIe-8m-gKE" firstAttribute="top" secondItem="ZqS-eW-wbg" secondAttribute="top" constant="26" id="d3K-xp-DBG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZqS-eW-wbg" firstAttribute="trailing" secondItem="9V8-bL-yQX" secondAttribute="trailing" id="1Fl-dt-bdT"/>
+                            <constraint firstItem="veM-sN-ca3" firstAttribute="leading" secondItem="9V8-bL-yQX" secondAttribute="leading" id="E5a-nZ-R2W"/>
+                            <constraint firstItem="veM-sN-ca3" firstAttribute="trailing" secondItem="9V8-bL-yQX" secondAttribute="trailing" id="klb-0H-aYL"/>
+                            <constraint firstItem="veM-sN-ca3" firstAttribute="top" secondItem="9V8-bL-yQX" secondAttribute="top" id="okF-TU-Z7L"/>
+                            <constraint firstItem="ZqS-eW-wbg" firstAttribute="leading" secondItem="9V8-bL-yQX" secondAttribute="leading" id="pgR-1N-Wix"/>
+                            <constraint firstItem="ZqS-eW-wbg" firstAttribute="top" secondItem="veM-sN-ca3" secondAttribute="bottom" constant="-26" id="vr6-9k-fQo"/>
+                            <constraint firstItem="ZqS-eW-wbg" firstAttribute="bottom" secondItem="9V8-bL-yQX" secondAttribute="bottom" id="zQR-BJ-t9v"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9V8-bL-yQX"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="OmB-qo-hrb"/>
+                    <size key="freeformSize" width="375" height="440"/>
+                    <connections>
+                        <outlet property="doneButton" destination="vvu-LU-CPF" id="Qml-7c-uPF"/>
+                        <outlet property="tableView" destination="qIe-8m-gKE" id="G8B-G9-k6D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JZ3-Mg-3cx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3097" y="-1320"/>
+        </scene>
         <!--Go Shopping Popup-->
         <scene sceneID="mQ4-IB-Yc0">
             <objects>
@@ -1236,7 +1324,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T-SHIRTS &amp; TOPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgt-KP-rRU">
-                                        <rect key="frame" x="16" y="20" width="343" height="21.5"/>
+                                        <rect key="frame" x="16" y="20" width="343" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1355,7 +1443,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7y-GA-7ph">
-                                <rect key="frame" x="170.5" y="49" width="34.5" height="23"/>
+                                <rect key="frame" x="169.5" y="49" width="36.5" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="0OO-JV-aht"/>
                                 </constraints>
@@ -2659,7 +2747,7 @@ Let's go back and accept your first request</string>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sozie Shasha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofc-Jr-uZ9">
-                                        <rect key="frame" x="71" y="12" width="103" height="21"/>
+                                        <rect key="frame" x="71" y="12" width="103.5" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Tpe-Xm-1qA"/>
                                         </constraints>
@@ -2741,7 +2829,7 @@ Let's go back and accept your first request</string>
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL SOZIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU6-Ce-lDK">
-                                        <rect key="frame" x="19" y="16" width="64" height="18"/>
+                                        <rect key="frame" x="19" y="16" width="67" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="Swr-ek-Jw0"/>
                                         </constraints>
@@ -2773,7 +2861,7 @@ Let's go back and accept your first request</string>
                                         </constraints>
                                     </view>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aM-Nn-VtR">
-                                        <rect key="frame" x="86" y="17" width="22" height="18"/>
+                                        <rect key="frame" x="89" y="17" width="22" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="LJi-vX-niB"/>
                                             <constraint firstAttribute="width" constant="22" id="boa-oY-iJz"/>
@@ -3138,7 +3226,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="-7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Search" image="Search">
-                                            <color key="titleColor" red="0.53327292203903198" green="0.53336817026138306" blue="0.53326696157455444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="searchButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="yaj-r1-89E"/>
@@ -3190,6 +3278,47 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                             <constraint firstAttribute="trailing" secondItem="gXU-xH-lRF" secondAttribute="trailing" constant="20" id="eyH-Li-tb8"/>
                                         </constraints>
                                     </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhP-DT-oxC">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bk-vw-hBF">
+                                                <rect key="frame" x="188" y="1" width="187" height="46"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="by Size" image="Search">
+                                                    <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="searchBySizeButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="tfh-5e-Kut"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYs-4B-ufe">
+                                                <rect key="frame" x="0.0" y="1" width="187" height="46"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="by ID" image="Search">
+                                                    <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="searchByIdButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="UNx-vg-cvO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="4Tr-pZ-lrG"/>
+                                            <constraint firstAttribute="trailing" secondItem="2Bk-vw-hBF" secondAttribute="trailing" id="Akz-fy-Ex0"/>
+                                            <constraint firstItem="nYs-4B-ufe" firstAttribute="top" secondItem="EhP-DT-oxC" secondAttribute="top" constant="1" id="B99-tb-BIE"/>
+                                            <constraint firstAttribute="bottom" secondItem="nYs-4B-ufe" secondAttribute="bottom" id="OBm-Yc-eOz"/>
+                                            <constraint firstAttribute="bottom" secondItem="2Bk-vw-hBF" secondAttribute="bottom" id="SVV-LC-4EI"/>
+                                            <constraint firstItem="2Bk-vw-hBF" firstAttribute="top" secondItem="EhP-DT-oxC" secondAttribute="top" constant="1" id="XS3-Rc-A37"/>
+                                            <constraint firstItem="2Bk-vw-hBF" firstAttribute="width" secondItem="nYs-4B-ufe" secondAttribute="width" id="jZx-dM-Xcs"/>
+                                            <constraint firstItem="2Bk-vw-hBF" firstAttribute="leading" secondItem="nYs-4B-ufe" secondAttribute="trailing" constant="1" id="tBO-m7-1br"/>
+                                            <constraint firstItem="nYs-4B-ufe" firstAttribute="leading" secondItem="EhP-DT-oxC" secondAttribute="leading" id="tmC-iO-hS9"/>
+                                        </constraints>
+                                    </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-kl-HO1">
                                         <rect key="frame" x="64" y="413" width="247" height="95.5"/>
                                         <constraints>
@@ -3203,10 +3332,13 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="EhP-DT-oxC" firstAttribute="leading" secondItem="O4z-UW-tEO" secondAttribute="leading" id="5TP-ym-m6V"/>
+                                    <constraint firstItem="EhP-DT-oxC" firstAttribute="top" secondItem="O4z-UW-tEO" secondAttribute="top" id="9f0-0V-u44"/>
                                     <constraint firstAttribute="trailing" secondItem="dbh-Pr-xqA" secondAttribute="trailing" id="B03-Oa-tJf"/>
                                     <constraint firstItem="gCP-kl-HO1" firstAttribute="centerY" secondItem="O4z-UW-tEO" secondAttribute="centerY" constant="-50.75" id="Mwh-uR-V7I"/>
                                     <constraint firstItem="fK0-US-Zou" firstAttribute="top" secondItem="O4z-UW-tEO" secondAttribute="top" constant="-16" id="Ur0-XQ-R4F"/>
                                     <constraint firstItem="dbh-Pr-xqA" firstAttribute="top" secondItem="O4z-UW-tEO" secondAttribute="top" id="Zgr-zB-w3z"/>
+                                    <constraint firstAttribute="trailing" secondItem="EhP-DT-oxC" secondAttribute="trailing" id="enX-kC-4sv"/>
                                     <constraint firstItem="fK0-US-Zou" firstAttribute="leading" secondItem="O4z-UW-tEO" secondAttribute="leading" id="fwA-4Z-dLz"/>
                                     <constraint firstAttribute="trailing" secondItem="fK0-US-Zou" secondAttribute="trailing" id="laE-jO-A2c"/>
                                     <constraint firstItem="gCP-kl-HO1" firstAttribute="centerX" secondItem="O4z-UW-tEO" secondAttribute="centerX" id="sgm-t1-5ZO"/>
@@ -3337,7 +3469,11 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                         <outlet property="noDataLabel" destination="gCP-kl-HO1" id="tmi-3w-zuD"/>
                         <outlet property="questionMarkButton" destination="VfK-it-NRf" id="jaA-cV-een"/>
                         <outlet property="searchButton" destination="cQ4-VP-Ww2" id="IFw-BU-pfH"/>
+                        <outlet property="searchByIdButton" destination="nYs-4B-ufe" id="drB-p7-bvg"/>
+                        <outlet property="searchBySizeButton" destination="2Bk-vw-hBF" id="U0e-QI-aPQ"/>
                         <outlet property="searchCountLabel" destination="eRy-5e-JXH" id="oRq-7b-WOG"/>
+                        <outlet property="searchOptionsView" destination="EhP-DT-oxC" id="cPD-7k-9uG"/>
+                        <outlet property="searchOptionsViewHeightConstraint" destination="4Tr-pZ-lrG" id="5OP-YS-3jy"/>
                         <outlet property="searchTextField" destination="gXU-xH-lRF" id="rrX-gw-nwK"/>
                         <outlet property="searchView" destination="dbh-Pr-xqA" id="tYz-ci-mTe"/>
                         <outlet property="searchViewHeightConstraint" destination="eUu-vb-8r9" id="8ui-o8-G3f"/>
@@ -3347,7 +3483,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSQ-9S-ed2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45.600000000000001" y="1278.2608695652175"/>
+            <point key="canvasLocation" x="45.600000000000001" y="1277.8110944527737"/>
         </scene>
         <!--Fit Tips Navigation Controller-->
         <scene sceneID="mnk-Hu-W9W">
@@ -3453,7 +3589,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 <rect key="frame" x="16" y="112" width="343" height="403"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 UPLOAD PICTURES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vap-XA-C63">
-                                                        <rect key="frame" x="0.0" y="8" width="127" height="20"/>
+                                                        <rect key="frame" x="0.0" y="8" width="130.5" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="AbV-GD-DN8"/>
                                                         </constraints>
@@ -3572,7 +3708,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(min 3 images)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-Jh-VFi">
-                                                        <rect key="frame" x="130.5" y="11" width="78" height="14"/>
+                                                        <rect key="frame" x="134" y="11" width="78" height="14"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="14" id="jQ0-0Y-4fj"/>
                                                         </constraints>
@@ -3597,7 +3733,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </constraints>
                                             </view>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 WHAT SIZE FIT YOU BEST?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkr-lA-IdQ">
-                                                <rect key="frame" x="20" y="535" width="172" height="20"/>
+                                                <rect key="frame" x="20" y="535" width="175.5" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="PZM-eX-PFA"/>
                                                 </constraints>
@@ -3606,7 +3742,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 ADD FIT TIPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6IZ-RU-Ncx">
-                                                <rect key="frame" x="20" y="563" width="92.5" height="20"/>
+                                                <rect key="frame" x="20" y="563" width="91" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="HSl-4L-Gdj"/>
                                                 </constraints>
@@ -3615,7 +3751,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVk-XI-T8l">
-                                                <rect key="frame" x="202" y="535" width="127" height="20"/>
+                                                <rect key="frame" x="205.5" y="535" width="123.5" height="20"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apS-lu-G2l">
                                                         <rect key="frame" x="0.0" y="19" width="127" height="1"/>
@@ -3639,7 +3775,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RK6-Nl-9q3">
-                                                <rect key="frame" x="137" y="563" width="166" height="20"/>
+                                                <rect key="frame" x="135.5" y="563" width="167.5" height="20"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y56-8k-L9e">
                                                         <rect key="frame" x="0.0" y="19" width="166" height="1"/>
@@ -4188,7 +4324,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Uploads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1S-mB-50T">
-                                        <rect key="frame" x="19" y="16" width="56.5" height="18"/>
+                                        <rect key="frame" x="19" y="16" width="55" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="f16-wn-y0G"/>
                                         </constraints>
@@ -4278,7 +4414,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Uploads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HB-gO-mMv">
-                                        <rect key="frame" x="19" y="16" width="56.5" height="18"/>
+                                        <rect key="frame" x="19" y="16" width="55" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="efk-tZ-Gdk"/>
                                         </constraints>
@@ -4361,7 +4497,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 <rect key="frame" x="0.0" y="44" width="375" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 REQUESTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22r-z8-xM1">
-                                        <rect key="frame" x="19" y="16" width="69.5" height="18"/>
+                                        <rect key="frame" x="19" y="16" width="73.5" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="019-Yl-hNR"/>
                                         </constraints>
@@ -4370,7 +4506,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlO-1r-b0I">
-                                        <rect key="frame" x="91.5" y="17" width="22" height="18"/>
+                                        <rect key="frame" x="95.5" y="17" width="22" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="22" id="38J-GZ-4gU"/>
                                             <constraint firstAttribute="height" constant="18" id="WvC-CA-HLg"/>
@@ -4548,7 +4684,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sozie Shasha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbc-5e-dT4">
-                                        <rect key="frame" x="71" y="12" width="103" height="21"/>
+                                        <rect key="frame" x="71" y="12" width="103.5" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="nBK-vC-D9I"/>
                                         </constraints>
@@ -5417,7 +5553,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIT TIPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFb-MV-cSb">
-                                        <rect key="frame" x="16" y="20" width="343" height="21.5"/>
+                                        <rect key="frame" x="16" y="20" width="343" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -5505,7 +5641,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This item ran" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rKA-WO-hDg">
-                                        <rect key="frame" x="50" y="20" width="271" height="21.5"/>
+                                        <rect key="frame" x="50" y="20" width="271" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -5607,7 +5743,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This item ran" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PM7-7I-atA">
-                                        <rect key="frame" x="50" y="20" width="271" height="21.5"/>
+                                        <rect key="frame" x="50" y="20" width="271" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -5708,7 +5844,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This item ran" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NSI-GU-JPX">
-                                        <rect key="frame" x="50" y="20" width="271" height="21.5"/>
+                                        <rect key="frame" x="50" y="20" width="271" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

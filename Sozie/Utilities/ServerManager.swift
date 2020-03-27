@@ -513,8 +513,11 @@ class ServerManager: NSObject {
         } else if let param = params["is_tutorial_request"] {
             url = url + "?is_tutorial_request=" + String(param as! Bool)
         }
-        if let query = params["query"] as? String {
-            url = url + "?query=" + (query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")
+        if let query = params["search_field"] as? String {
+            url = url + "?search_field=" + (query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")
+        }
+        if let query = params["search_value"] as? String {
+            url = url + "&search_value=" + (query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")
         }
         Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()

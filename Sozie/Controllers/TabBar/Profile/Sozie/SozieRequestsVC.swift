@@ -17,6 +17,10 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var instructionsHeightConstraint: NSLayoutConstraint!
     var reuseableIdentifier = "SozieRequestTableViewCell"
     var reuseableIdentifierTarget = "TargetRequestTableViewCell"
+    @IBOutlet weak var searchBySizeButton: UIButton!
+    @IBOutlet weak var searchByIdButton: UIButton!
+    @IBOutlet weak var searchOptionsViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchOptionsView: UIView!
     @IBOutlet weak var searchCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
@@ -39,6 +43,7 @@ class SozieRequestsVC: UIViewController {
     var totalTutorialCount: Float = 8.0
     var gstrRcgnzr: UIGestureRecognizer?
     var searchString: String?
+    var searchType: String?
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -83,6 +88,7 @@ class SozieRequestsVC: UIViewController {
         }
         searchTextField.delegate = self
         searchViewHeightConstraint.constant = 0.0
+        searchOptionsViewHeightConstraint.constant = 0.0
         self.reloadAllData()
     }
     @objc func resetFirstTime() {
@@ -280,7 +286,10 @@ class SozieRequestsVC: UIViewController {
             serverParams["is_tutorial_request"] = true
         }
         if searchString != nil && searchString != "" {
-            serverParams["query"] = searchString
+            serverParams["search_value"] = searchString
+        }
+        if searchType != nil && searchType != "" {
+            serverParams["search_field"] = searchType
         }
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
@@ -362,7 +371,6 @@ class SozieRequestsVC: UIViewController {
             searchString = searchTextField.text
 //            self.isFirstPage = true
 //            self.clearFilterButton.isHidden = false
-            
         } else {
             searchString = nil
         }
@@ -378,6 +386,22 @@ class SozieRequestsVC: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
+    func showSearchOptionView() {
+        self.searchOptionsViewHeightConstraint.constant = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchOptionsViewHeightConstraint.constant = 47.0
+            self.view.layoutIfNeeded()
+            self.searchOptionsView.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+        }
+    }
+    func hideSearchOptionView() {
+        searchOptionsViewHeightConstraint.constant = 47.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchOptionsViewHeightConstraint.constant = 0.0
+            self.searchOptionsView.clipsToBounds = true
+            self.view.layoutIfNeeded()
+        }
+    }
     @IBAction func gotItButtonTapped(_ sender: Any) {
         instructionsScrollView.isHidden = true
         enableRootButtons()
@@ -386,12 +410,31 @@ class SozieRequestsVC: UIViewController {
             ifGotItButtonTapped = true
         }
     }
+    @IBAction func searchBySizeButtonTapped(_ sender: Any) {
+        let popUpInstnc = SearchBySizePopUpVC.instance()
+        popUpInstnc.delegate = self
+        let popUpVC = PopupController
+            .create(self.tabBarController?.navigationController ?? self)
+            .show(popUpInstnc)
+        let options = PopupCustomOption.layout(.bottom)
+        _ = popUpVC.customize([options])
+        _ = popUpVC.didCloseHandler { (_) in
+        }
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+       }
+    }
 
+    @IBAction func searchByIdButtonTapped(_ sender: Any) {
+        searchType = "article_id"
+        hideSearchOptionView()
+        showSearchVu()
+    }
     @IBAction func searchButtonTapped(_ sender: Any) {
-        if searchViewHeightConstraint.constant == 0 {
-            showSearchVu()
-        } else {
-            hideSearchVu()
+        if searchOptionsViewHeightConstraint.constant == 0 && searchViewHeightConstraint.constant == 0 {
+            showSearchOptionView()
+        } else if searchOptionsViewHeightConstraint.constant == 47.0 && searchViewHeightConstraint.constant == 0 {
+            hideSearchOptionView()
         }
     }
     @IBAction func questionMarkButtonTapped(_ sender: Any) {
@@ -408,6 +451,22 @@ class SozieRequestsVC: UIViewController {
             let destVC = segue.destination as? ProductDetailVC
             destVC?.currentProduct = selectedProduct
         }
+    }
+}
+extension SozieRequestsVC: SizeSelectionDelegate {
+    func doneButtonTapped(selectedSizes: [String]) {
+        var string = ""
+        for size in selectedSizes {
+            string = string + size.lowercased() + " "
+        }
+        string.removeLast()
+        searchType = "size"
+        searchString = string
+        hideSearchOptionView()
+        self.requests.removeAll()
+        serverParams.removeAll()
+        self.tableView.refreshControl?.beginRefreshing()
+        fetchAllSozieRequests()
     }
 }
 extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
