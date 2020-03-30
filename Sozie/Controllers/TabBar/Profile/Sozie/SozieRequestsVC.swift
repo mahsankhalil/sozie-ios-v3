@@ -361,7 +361,9 @@ class SozieRequestsVC: UIViewController {
         }
     }
     @objc func dismissKeyboard() {
-        self.view.endEditing(true)
+//        self.view.endEditing(true)
+        self.searchTextField.text = ""
+        self.hideSearchVu()
         if let rcgnizer = gstrRcgnzr {
             self.view.removeGestureRecognizer(rcgnizer)
         }
@@ -382,7 +384,10 @@ class SozieRequestsVC: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.searchViewHeightConstraint.constant = 0.0
             self.searchView.clipsToBounds = true
-            self.dismissKeyboard()
+            self.view.endEditing(true)
+            if let rcgnizer = self.gstrRcgnzr {
+                self.view.removeGestureRecognizer(rcgnizer)
+            }
             self.view.layoutIfNeeded()
         }
     }
@@ -435,6 +440,8 @@ class SozieRequestsVC: UIViewController {
             showSearchOptionView()
         } else if searchOptionsViewHeightConstraint.constant == 47.0 && searchViewHeightConstraint.constant == 0 {
             hideSearchOptionView()
+        } else if searchViewHeightConstraint.constant == 47.0 && searchOptionsViewHeightConstraint.constant == 0.0 {
+            hideSearchVu()
         }
     }
     @IBAction func questionMarkButtonTapped(_ sender: Any) {
