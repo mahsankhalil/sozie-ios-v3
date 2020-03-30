@@ -25,6 +25,7 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var questionMarkButton: UIButton!
+    @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var instructionsScrollView: UIScrollView!
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
@@ -370,10 +371,12 @@ class SozieRequestsVC: UIViewController {
     }
     func hideSearchVu() {
         if searchTextField.text?.isEmpty == false {
+            crossButton.isHidden = false
             searchString = searchTextField.text
 //            self.isFirstPage = true
 //            self.clearFilterButton.isHidden = false
         } else {
+            crossButton.isHidden = true
             searchString = nil
         }
         self.requests.removeAll()
@@ -406,6 +409,14 @@ class SozieRequestsVC: UIViewController {
             self.searchOptionsView.clipsToBounds = true
             self.view.layoutIfNeeded()
         }
+    }
+    @IBAction func crossButtonTapped(_ sender: Any) {
+        self.requests.removeAll()
+        serverParams.removeAll()
+        searchString = nil
+        self.tableView.refreshControl?.beginRefreshing()
+        fetchAllSozieRequests()
+        self.crossButton.isHidden = true
     }
     @IBAction func gotItButtonTapped(_ sender: Any) {
         instructionsScrollView.isHidden = true
@@ -469,6 +480,7 @@ extension SozieRequestsVC: SizeSelectionDelegate {
         string.removeLast()
         searchType = "size"
         searchString = string
+        crossButton.isHidden = false
         hideSearchOptionView()
         self.requests.removeAll()
         serverParams.removeAll()

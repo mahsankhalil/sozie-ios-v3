@@ -3194,6 +3194,104 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1117"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-0f-PRI">
+                                <rect key="frame" x="0.0" y="47" width="375" height="1070"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-Ge-ikh">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="876"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="876" id="jgx-4a-01h"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxA-md-0rs">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdq-cA-Vz4">
+                                                <rect key="frame" x="18" y="0.0" width="339" height="100"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="339" id="F64-tp-I4r"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="SCROLL TO THE BOTTOM OF THE SCREEN AND CLICK ON">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="  ">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" I GET IT ">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" red="1" green="0.99997437000274658" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="  ">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="TO SEE YOUR REQUESTS">
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="CJD-eh-NJh"/>
+                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="top" secondItem="oxA-md-0rs" secondAttribute="top" id="IH5-mx-oiI"/>
+                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="centerX" secondItem="oxA-md-0rs" secondAttribute="centerX" id="dOc-np-hlj"/>
+                                            <constraint firstAttribute="bottom" secondItem="kdq-cA-Vz4" secondAttribute="bottom" id="qao-FD-aIV"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyN-lW-kZE" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                        <rect key="frame" x="36.5" y="991" width="302" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="Yrc-5C-ZOx"/>
+                                            <constraint firstAttribute="width" constant="302" id="kUx-XA-O0N"/>
+                                        </constraints>
+                                        <state key="normal" title="I GET IT">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="gotItButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="07e-zh-x16"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="oxA-md-0rs" secondAttribute="trailing" id="8VR-Gp-eXo"/>
+                                    <constraint firstItem="gyN-lW-kZE" firstAttribute="top" secondItem="OVH-Ge-ikh" secondAttribute="bottom" constant="15" id="LSv-1T-HKx"/>
+                                    <constraint firstItem="oxA-md-0rs" firstAttribute="leading" secondItem="jn3-0f-PRI" secondAttribute="leading" id="RzI-cd-s32"/>
+                                    <constraint firstAttribute="bottom" secondItem="gyN-lW-kZE" secondAttribute="bottom" constant="23" id="S21-tp-TsV"/>
+                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="leading" secondItem="jn3-0f-PRI" secondAttribute="leading" id="Tri-Za-sdn"/>
+                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="centerX" secondItem="jn3-0f-PRI" secondAttribute="centerX" id="YDW-WF-FeK"/>
+                                    <constraint firstItem="gyN-lW-kZE" firstAttribute="centerX" secondItem="jn3-0f-PRI" secondAttribute="centerX" id="gRe-NF-NN4"/>
+                                    <constraint firstAttribute="trailing" secondItem="OVH-Ge-ikh" secondAttribute="trailing" id="qH2-MY-yPc"/>
+                                    <constraint firstItem="oxA-md-0rs" firstAttribute="top" secondItem="jn3-0f-PRI" secondAttribute="top" id="r28-aq-o7W"/>
+                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="top" secondItem="jn3-0f-PRI" secondAttribute="top" constant="100" id="yrE-V0-4o4"/>
+                                </constraints>
+                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNv-L9-ztQ">
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
                                 <subviews>
@@ -3232,13 +3330,26 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                             <action selector="searchButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="yaj-r1-89E"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U05-QG-ILh">
+                                        <rect key="frame" x="80" y="0.0" width="25" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="Dd2-4Q-oxF"/>
+                                        </constraints>
+                                        <state key="normal" image="Cross-1"/>
+                                        <connections>
+                                            <action selector="crossButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="Icp-GD-QR5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0c4-na-9Au"/>
+                                    <constraint firstItem="U05-QG-ILh" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="top" id="8E9-1v-7r1"/>
                                     <constraint firstAttribute="bottom" secondItem="cQ4-VP-Ww2" secondAttribute="bottom" id="H6o-id-t6K"/>
                                     <constraint firstItem="VfK-it-NRf" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="top" id="HlN-Bl-V46"/>
+                                    <constraint firstAttribute="bottom" secondItem="U05-QG-ILh" secondAttribute="bottom" id="PLS-WI-d4m"/>
                                     <constraint firstItem="eRy-5e-JXH" firstAttribute="leading" secondItem="ZNv-L9-ztQ" secondAttribute="leading" constant="19" id="XFq-DB-nfk"/>
+                                    <constraint firstItem="U05-QG-ILh" firstAttribute="leading" secondItem="eRy-5e-JXH" secondAttribute="trailing" id="cIf-5c-C4g"/>
                                     <constraint firstItem="VfK-it-NRf" firstAttribute="leading" secondItem="cQ4-VP-Ww2" secondAttribute="trailing" constant="-57" id="eyD-hV-b1u"/>
                                     <constraint firstItem="cQ4-VP-Ww2" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="top" id="k5l-tG-VZF"/>
                                     <constraint firstAttribute="trailing" secondItem="VfK-it-NRf" secondAttribute="trailing" constant="26" id="kRi-zL-kA2"/>
@@ -3346,104 +3457,6 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                     <constraint firstItem="dbh-Pr-xqA" firstAttribute="leading" secondItem="O4z-UW-tEO" secondAttribute="leading" id="zAv-jz-0WF"/>
                                 </constraints>
                             </view>
-                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-0f-PRI">
-                                <rect key="frame" x="0.0" y="47" width="375" height="1070"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-Ge-ikh">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="876"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="876" id="jgx-4a-01h"/>
-                                        </constraints>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxA-md-0rs">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdq-cA-Vz4">
-                                                <rect key="frame" x="18" y="0.0" width="339" height="100"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="339" id="F64-tp-I4r"/>
-                                                </constraints>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="SCROLL TO THE BOTTOM OF THE SCREEN AND CLICK ON">
-                                                        <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="  ">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" I GET IT ">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <color key="NSColor" red="1" green="0.99997437000274658" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="  ">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="TO SEE YOUR REQUESTS">
-                                                        <attributes>
-                                                            <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="CJD-eh-NJh"/>
-                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="top" secondItem="oxA-md-0rs" secondAttribute="top" id="IH5-mx-oiI"/>
-                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="centerX" secondItem="oxA-md-0rs" secondAttribute="centerX" id="dOc-np-hlj"/>
-                                            <constraint firstAttribute="bottom" secondItem="kdq-cA-Vz4" secondAttribute="bottom" id="qao-FD-aIV"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyN-lW-kZE" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                        <rect key="frame" x="36.5" y="991" width="302" height="56"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="Yrc-5C-ZOx"/>
-                                            <constraint firstAttribute="width" constant="302" id="kUx-XA-O0N"/>
-                                        </constraints>
-                                        <state key="normal" title="I GET IT">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="gotItButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="07e-zh-x16"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="oxA-md-0rs" secondAttribute="trailing" id="8VR-Gp-eXo"/>
-                                    <constraint firstItem="gyN-lW-kZE" firstAttribute="top" secondItem="OVH-Ge-ikh" secondAttribute="bottom" constant="15" id="LSv-1T-HKx"/>
-                                    <constraint firstItem="oxA-md-0rs" firstAttribute="leading" secondItem="jn3-0f-PRI" secondAttribute="leading" id="RzI-cd-s32"/>
-                                    <constraint firstAttribute="bottom" secondItem="gyN-lW-kZE" secondAttribute="bottom" constant="23" id="S21-tp-TsV"/>
-                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="leading" secondItem="jn3-0f-PRI" secondAttribute="leading" id="Tri-Za-sdn"/>
-                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="centerX" secondItem="jn3-0f-PRI" secondAttribute="centerX" id="YDW-WF-FeK"/>
-                                    <constraint firstItem="gyN-lW-kZE" firstAttribute="centerX" secondItem="jn3-0f-PRI" secondAttribute="centerX" id="gRe-NF-NN4"/>
-                                    <constraint firstAttribute="trailing" secondItem="OVH-Ge-ikh" secondAttribute="trailing" id="qH2-MY-yPc"/>
-                                    <constraint firstItem="oxA-md-0rs" firstAttribute="top" secondItem="jn3-0f-PRI" secondAttribute="top" id="r28-aq-o7W"/>
-                                    <constraint firstItem="OVH-Ge-ikh" firstAttribute="top" secondItem="jn3-0f-PRI" secondAttribute="top" constant="100" id="yrE-V0-4o4"/>
-                                </constraints>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -3463,6 +3476,7 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                     </view>
                     <size key="freeformSize" width="375" height="1117"/>
                     <connections>
+                        <outlet property="crossButton" destination="U05-QG-ILh" id="rlX-yh-JTX"/>
                         <outlet property="gotItButton" destination="gyN-lW-kZE" id="kzp-j0-wKP"/>
                         <outlet property="instructionsHeightConstraint" destination="jgx-4a-01h" id="Fs1-98-r1r"/>
                         <outlet property="instructionsScrollView" destination="jn3-0f-PRI" id="Rd3-i1-dtb"/>
