@@ -3086,13 +3086,15 @@ Let's go back and accept your first request</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-7o-Jme">
-                                                <rect key="frame" x="12" y="42" width="282" height="173"/>
-                                                <string key="text">We are excited to have you on board!
-Please complete the tutorial to start receiving Sozie requests. 
+                                                <rect key="frame" x="12" y="42" width="282" height="167"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="167" id="Lyz-Hn-vQM"/>
+                                                </constraints>
+                                                <string key="text">Welcome to Sozie!
 
-The tutorial is a mock of what you will be actually doing - so you don't need to go into a store for it!
+Follow the arrows and complete the instructions to get started.
 
-Click on PROFILE below and follow the on-screen instructions.</string>
+Start by clicking on* REQUESTS* below.</string>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                 <color key="textColor" red="0.60385400056838989" green="0.60396051406860352" blue="0.60384726524353027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3138,9 +3140,9 @@ Click on PROFILE below and follow the on-screen instructions.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4C-jq-cj1">
-                                        <rect key="frame" x="29" y="35" width="32.5" height="12"/>
+                                        <rect key="frame" x="22" y="35" width="46.5" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32.5" id="51a-f5-mn5"/>
+                                            <constraint firstAttribute="width" constant="46.5" id="51a-f5-mn5"/>
                                             <constraint firstAttribute="height" constant="12" id="RAe-cp-IZN"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
