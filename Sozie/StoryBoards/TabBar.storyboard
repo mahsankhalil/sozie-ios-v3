@@ -3099,14 +3099,15 @@ Follow the arrows and complete the instructions to get started.
 
 Start by clicking on </string>
                                                         <attributes>
-                                                            <color key="NSColor" red="0.60385400056838989" green="0.60396051406860352" blue="0.60384726524353027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="13" name="SegoeUI"/>
+                                                            <font key="NSOriginalFont" size="13" name="SegoeUI"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="REQUESTS">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.60385400056838989" green="0.60396051406860352" blue="0.60384726524353027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="13" name="SegoeUI-Bold"/>
                                                             <font key="NSOriginalFont" size="13" name="SegoeUI-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -3114,8 +3115,9 @@ Start by clicking on </string>
                                                     </fragment>
                                                     <fragment content=" below.">
                                                         <attributes>
-                                                            <color key="NSColor" red="0.60385400056838989" green="0.60396051406860352" blue="0.60384726524353027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="13" name="SegoeUI"/>
+                                                            <font key="NSOriginalFont" size="13" name="SegoeUI"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
