@@ -1874,6 +1874,7 @@
                     <connections>
                         <outlet property="progressView" destination="Akl-vP-k4U" id="0lK-OP-uCH"/>
                         <outlet property="skipButton" destination="V58-AC-IL1" id="qWR-3U-PJn"/>
+                        <outlet property="titleLabel" destination="du6-wZ-5j9" id="xpf-Yp-upq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZS0-c9-q27" userLabel="First Responder" sceneMemberID="firstResponder"/>

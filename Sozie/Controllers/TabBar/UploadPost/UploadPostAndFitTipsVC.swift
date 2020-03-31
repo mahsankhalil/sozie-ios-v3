@@ -67,6 +67,9 @@ class UploadPostAndFitTipsVC: BaseViewController {
         fetchFitTipsFromServer()
         self.showInfoButton()
         progressTutorialVC?.delegate = self
+        let formattedString = NSMutableAttributedString()
+        formattedString.bold("Required", size: 17.0).normal(": Upload real photos of yourself")
+        progressTutorialVC?.updateProgressTitle(string: formattedString)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
