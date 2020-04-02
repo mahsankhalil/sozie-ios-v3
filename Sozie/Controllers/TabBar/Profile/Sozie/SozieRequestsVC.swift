@@ -133,6 +133,7 @@ class SozieRequestsVC: UIViewController {
 //        serverParams.removeAll()
 //        requests.removeAll()
 //        fetchAllSozieRequests()
+        hideAllSearchViews()
     }
     @objc func reloadAllData() {
         serverParams.removeAll()
@@ -169,6 +170,7 @@ class SozieRequestsVC: UIViewController {
                     self.searchButton.isUserInteractionEnabled = false
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.acceptButton.isEnabled = false
+                        cell.pictureButton.isEnabled = false
                     }
                     let window = UIApplication.shared.keyWindow
                     let topPadding = window?.safeAreaInsets.top
@@ -188,6 +190,7 @@ class SozieRequestsVC: UIViewController {
         if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
             cell.checkStoresButton.isEnabled = true
             cell.acceptButton.isEnabled = true
+            cell.pictureButton.isEnabled = true
         }
         self.tableView.isScrollEnabled = true
         self.tableView.allowsSelection = true
@@ -207,6 +210,7 @@ class SozieRequestsVC: UIViewController {
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
+                        cell.pictureButton.isEnabled = false
                     }
                     let window = UIApplication.shared.keyWindow
                     let topPadding = window?.safeAreaInsets.top
@@ -245,6 +249,7 @@ class SozieRequestsVC: UIViewController {
                     if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
                         cell.checkStoresButton.isEnabled = false
                         cell.acceptButton.isEnabled = true
+                        cell.pictureButton.isEnabled = false
                     }
                     let window = UIApplication.shared.keyWindow
                     let topPadding = window?.safeAreaInsets.top
@@ -554,6 +559,14 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
+    func hideAllSearchViews() {
+        searchType = nil
+        searchString = nil
+        searchViewHeightConstraint.constant = 0.0
+        searchOptionsViewHeightConstraint.constant = 0.0
+        self.view.layoutIfNeeded()
+        self.searchOptionsView.clipsToBounds = true
+    }
     func pictureButtonTapped(button: UIButton) {
         selectedProduct = requests[button.tag].requestedProduct
         if viewModels[button.tag].acceptedBySomeoneElse == false && viewModels[button.tag].isSelected == true {
@@ -561,11 +574,17 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         } else if viewModels[button.tag].isSelected == false {
             performSegue(withIdentifier: "toProductDetail", sender: self)
         }
+        searchType = nil
+        searchString = nil
+        searchViewHeightConstraint.constant = 0.0
+        searchOptionsViewHeightConstraint.constant = 0.0
+        self.view.layoutIfNeeded()
     }
     func cancelRequestButtonTapped(button: UIButton) {
         UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
             self.cancelRequest(button: button)
         }
+        hideAllSearchViews()
     }
     func cancelRequest(button: UIButton) {
         let currentRequest = self.requests[button.tag]
@@ -667,6 +686,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 }
             }
         }
+        hideAllSearchViews()
     }
     func acceptDumnyRequest(tag: Int) {
         requests[tag].isAccepted = true
@@ -717,6 +737,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 self.acceptRequestAPICall(tag: button.tag)
             }
         }
+        hideAllSearchViews()
     }
     func makeRequestAccepted(tag: Int, acceptedRequestId: Int) {
         requests[tag].isAccepted = true
