@@ -190,7 +190,6 @@ class SozieRequestsVC: UIViewController {
         if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
             cell.checkStoresButton.isEnabled = true
             cell.acceptButton.isEnabled = true
-            cell.pictureButton.isEnabled = true
         }
         self.tableView.isScrollEnabled = true
         self.tableView.allowsSelection = true
@@ -230,6 +229,7 @@ class SozieRequestsVC: UIViewController {
         if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
             cell.checkStoresButton.isEnabled = true
             cell.acceptButton.isEnabled = true
+            cell.pictureButton.isEnabled = true
         }
         self.tableView.isScrollEnabled = true
         self.tableView.allowsSelection = true
@@ -268,6 +268,7 @@ class SozieRequestsVC: UIViewController {
         if let cell = self.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TargetRequestTableViewCell {
             cell.checkStoresButton.isEnabled = true
             cell.acceptButton.isEnabled = true
+            cell.pictureButton.isEnabled = true
         }
         self.tableView.isScrollEnabled = true
         self.tableView.allowsSelection = true
