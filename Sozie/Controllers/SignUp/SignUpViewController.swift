@@ -316,7 +316,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     @IBAction func maleBtnTapped(_ sender: Any) {
-        if let countryId = signUpDict!["country"] as? Int,countryId == 1 {
+        if UserDefaultManager.getCurrentUserObject() != nil {
+            return
+        }
+        if let countryId = signUpDict!["country"] as? Int, countryId == 1 {
             applyMaleSelection()
         } else {
             tipView?.dismiss()
