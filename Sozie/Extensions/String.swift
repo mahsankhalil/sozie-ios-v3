@@ -69,7 +69,7 @@ extension String {
         return String(self.dropFirst(prefix.count))
     }
     func getColonSeparatedErrorDetails() -> [String: Any]? {
-        var strArray = self.components(separatedBy: "-:-")
+        let strArray = self.components(separatedBy: "-:-")
         if strArray.count == 2 {
             return ["title": strArray[0], "description": strArray[1]]
         } else {

@@ -28,11 +28,6 @@ class ProfileRootVC: BaseViewController {
         tabViewController?.view.frame = CGRect(x: 0.0, y: 0.0, width: tabView.frame.size.width, height: tabView.frame.size.height)
         self.addChild(tabViewController!)
         setupProfileNavBar()
-        SideMenuManager.default.menuRightNavigationController = storyboard!.instantiateViewController(withIdentifier: "RightMenuNavigationController") as? UISideMenuNavigationController
-        SideMenuManager.default.menuPresentMode = .menuSlideIn
-        SideMenuManager.default.menuFadeStatusBar = false
-        SideMenuManager.default.menuWidth = UIScreen.main.bounds.size.width - 60.0
-        SideMenuManager.default.menuAnimationFadeStrength = 0.5
         profileImageView.layer.cornerRadius = profileImageView.frame.width/2.0
         profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
@@ -102,6 +97,20 @@ class ProfileRootVC: BaseViewController {
         }
     }
 
+    @IBAction func sideMenuButtonTapped(_ sender: Any) {
+        var sideMenuSet = SideMenuSettings()
+        sideMenuSet.presentationStyle.backgroundColor = UIColor.black
+        sideMenuSet.presentationStyle = .menuSlideIn
+        sideMenuSet.menuWidth = UIScreen.main.bounds.size.width - 60.0
+        sideMenuSet.statusBarEndAlpha = 0.0
+        sideMenuSet.blurEffectStyle = .light
+        sideMenuSet.presentationStyle.menuStartAlpha = 0.0
+        sideMenuSet.presentationStyle.presentingEndAlpha = 0.3
+        let rightMenu = SideMenuNavigationController(rootViewController: (storyboard?.instantiateViewController(withIdentifier: "ProfileSideMenuVC"))!, settings: sideMenuSet)
+        rightMenu.setNavigationBarHidden(true, animated: false)
+        present(rightMenu, animated: true, completion: nil)
+
+    }
     /*
     // MARK: - Navigation
 

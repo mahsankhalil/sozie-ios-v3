@@ -51,6 +51,7 @@ class MeasurementsVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.tblVu.backgroundColor = UIColor.white
         segmentControl.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         if isFromSignUp {
             backBtn.isHidden = true

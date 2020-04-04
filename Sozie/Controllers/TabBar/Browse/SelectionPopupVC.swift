@@ -54,7 +54,7 @@ class SelectionPopupVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         topView.layer.cornerRadius = 10.0
         titleLabel.textColor = UtilityManager.getGenderColor()

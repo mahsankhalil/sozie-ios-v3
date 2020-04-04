@@ -12,6 +12,7 @@ protocol TutorialProgressDelegate: class {
 }
 class TutorialProgressVC: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var skipButton: UIButton!
     weak var delegate: TutorialProgressDelegate?
@@ -25,6 +26,9 @@ class TutorialProgressVC: UIViewController {
     }
     func updateProgress(progress: Float) {
         progressView.progress = progress
+    }
+    func updateProgressTitle(string: NSAttributedString) {
+        titleLabel.attributedText = string
     }
     @IBAction func skipButtonTapped(_ sender: Any) {
         self.view.removeFromSuperview()

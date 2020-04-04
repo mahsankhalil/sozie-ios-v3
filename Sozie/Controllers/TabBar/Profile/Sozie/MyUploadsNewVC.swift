@@ -31,7 +31,7 @@ class MyUploadsNewVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         refreshControl.triggerVerticalOffset = 50.0

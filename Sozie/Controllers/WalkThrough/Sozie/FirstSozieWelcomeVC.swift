@@ -33,7 +33,8 @@ class FirstSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
     }
     */
     @IBAction func nextButtonTapped(_ sender: Any) {
-        delegate?.nextButtonTapped()
+        delegate?.shopTogetherButtonTapped()
+//        delegate?.nextButtonTapped()
     }
     @IBAction func skipButtonTapped(_ sender: Any) {
         delegate?.skipButtonTapped()

@@ -21,8 +21,8 @@ extension UILabel {
     }
 }
 extension NSMutableAttributedString {
-    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont(name: "SegoeUI-Bold", size: 12)!]
+    @discardableResult func bold(_ text: String, size: CGFloat? = 12.0) -> NSMutableAttributedString {
+        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont(name: "SegoeUI-Bold", size: size!)!]
         let boldString = NSMutableAttributedString(string: text, attributes: attrs)
         append(boldString)
         return self

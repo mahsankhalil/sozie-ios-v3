@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.1.0</string>
+	<string>3.1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -48,7 +48,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Configuration</key>
 	<string>$(CONFIGURATION)</string>
 	<key>FacebookAppID</key>
@@ -75,6 +75,8 @@
 	<string>Sozie would like to access Camera to take photos, photo taken will be used as your profile picture as well as for completion of requests.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Sozie would like to access you location to find the nearest stores for you.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Sozie would like to save photos taken from the app in camera roll.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Sozie would like to access Photo Library to select photos, photos selected will be used as your profile picture as well as for completion of requests.</string>
 	<key>SERVER_URL</key>
@@ -109,6 +111,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>branch_key</key>
 	<dict>
 		<key>live</key>

@@ -49,6 +49,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.postMaskButton.isHidden = true
         // Do any additional setup after loading the view.
         if currentProduct == nil {
             currentProduct = currentRequest?.requestedProduct
@@ -66,6 +67,9 @@ class UploadPostAndFitTipsVC: BaseViewController {
         fetchFitTipsFromServer()
         self.showInfoButton()
         progressTutorialVC?.delegate = self
+        let formattedString = NSMutableAttributedString()
+        formattedString.bold("Required", size: 17.0).normal(": Upload real photos of yourself")
+        progressTutorialVC?.updateProgressTitle(string: formattedString)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -308,6 +312,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     self.bottomButtom.isEnabled = true
                     self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
                 }
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
             } else {
                 self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
@@ -432,6 +437,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
                 let imagePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
                 imagePickerVC.delegate = self
                 imagePickerVC.photoIndex = self.selectedIndex
+                imagePickerVC.modalPresentationStyle = .fullScreen
                 self.progressTutorialVC?.view.isHidden = true
                 self.present(imagePickerVC, animated: true, completion: nil)
             }))
@@ -458,6 +464,7 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
                 }
                 viewModels[index].title = ""
             }
+            UIImageWriteToSavedPhotosAlbum(scaledImg, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
             self.imagesCollectionView.reloadData()
         }
         if checkIfAllImagesUplaoded() {
@@ -534,6 +541,12 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
                 viewModels[index].title = ""
             }
             self.imagesCollectionView.reloadData()
+        }
+    }
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            UtilityManager.showMessageWith(title: "Save Error", body: error.localizedDescription, in: self)
         }
     }
 }

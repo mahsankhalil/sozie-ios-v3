@@ -17,10 +17,10 @@ class SocialAuthManager: NSObject {
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
 
     func loginWithFacebook(from viewController: UIViewController, block: CompletionHandler) {
-        let loginManager = FBSDKLoginManager()
+        let loginManager = LoginManager()
         loginManager.logOut()
-        loginManager.loginBehavior = FBSDKLoginBehavior.native
-        loginManager.logIn(withReadPermissions: ["public_profile", "email"], from: viewController) { (result, error) in
+//        loginManager.loginBehavior = LoginBehavior.native
+        loginManager.logIn(permissions: ["public_profile", "email"], from: viewController) { (result, error) in
 
             if error == nil {
                 guard let token = result?.token else {
@@ -35,14 +35,13 @@ class SocialAuthManager: NSObject {
                     return
                 }
 
-                guard let userId = token.userID else {
-                    block!(false, CustomError(str: "UserId not found."))
-                    return
-                }
-
-                let request = FBSDKGraphRequest(graphPath: "\(userId)",
-                    parameters: ["fields": "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: "GET")
-                request?.start(completionHandler: { (_, result, error) in
+//                if token.userID == nil {
+//                    block!(false, CustomError(str: "UserId not found."))
+//                    return
+//                }
+                let request = GraphRequest(graphPath: "\(token.userID)",
+                    parameters: ["fields": "id,name,first_name,last_name,email,birthday,gender,picture,link" ], httpMethod: HTTPMethod(rawValue: "GET"))
+                request.start(completionHandler: { (_, result, error) in
                     // Handle the result
                     if error == nil, let fbDict = result as? [String: Any] {
                         let dataDict = self.convertFacebookDictToAppDict(fbDict: fbDict, token: token.tokenString)

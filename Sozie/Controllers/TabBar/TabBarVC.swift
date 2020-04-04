@@ -72,18 +72,22 @@ class TabBarVC: UITabBarController {
                         imageIcon = imageIcon?.circularImage(15.0)!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
 
                         if let desiredVC = self.viewControllers?[2] {
-                            desiredVC.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: imageIcon)
+                            desiredVC.tabBarItem = UITabBarItem(title: "Requests", image: imageIcon, selectedImage: imageIcon)
                         }
                     }
                 }
             }
         }
         let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
-        profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: imageIcon, selectedImage: UIImage(named: "Profile icon-Selected" + genderImageString))
+        profileNC?.tabBarItem = UITabBarItem(title: "Requests", image: imageIcon, selectedImage: UIImage(named: "Profile icon-Selected" + genderImageString))
         let helpVc = UIViewController()
         helpVc.tabBarItem = UITabBarItem(title: "Help", image: UIImage(named: "Help"), selectedImage: UIImage(named: "Help Selected"))
         self.viewControllers = ([browseNC, wishListNC, profileNC, helpVc] as! [UIViewController])
-
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if user.tutorialCompleted == true {
+                self.showProfileTab()
+            }
+        }
     }
     /*
     // MARK: - Navigation

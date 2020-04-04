@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,20 +19,20 @@
             <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="70.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI8-Mk-Yfx">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="71.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-6h-ot5">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="71"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="71.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYX-pg-uYL">
-                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="71"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="71.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Height" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="6Qo-b7-2xs" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="71"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="71.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="71" id="Kse-Zh-2v9"/>
@@ -67,10 +65,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHg-G7-5sO">
-                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="71"/>
+                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="71.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="C7I-qT-1CX" customClass="CustomPickerTextField" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="71"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="71.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="71" id="U8O-WU-hXr"/>
@@ -103,7 +101,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="olb-Kx-COr">
-                                        <rect key="frame" x="161" y="46" width="1" height="11"/>
+                                        <rect key="frame" x="161" y="46.5" width="1" height="11"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="cEX-aH-aoO"/>
@@ -135,6 +133,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="ZI8-Mk-Yfx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0vF-cB-iPH"/>
                     <constraint firstItem="ZI8-Mk-Yfx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1ZR-tx-I5x"/>
@@ -142,11 +141,13 @@
                     <constraint firstAttribute="bottom" secondItem="ZI8-Mk-Yfx" secondAttribute="bottom" constant="-0.5" id="sl3-LQ-r0h"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="firstTxtFld" destination="6Qo-b7-2xs" id="3ak-qW-Cdc"/>
                 <outlet property="secondTxtFld" destination="C7I-qT-1CX" id="MPG-uI-dC4"/>
             </connections>
+            <point key="canvasLocation" x="138" y="135"/>
         </tableViewCell>
     </objects>
 </document>

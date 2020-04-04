@@ -42,7 +42,7 @@ class ProductDetailVC: BaseViewController {
     var currentIndex: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.commentsTableView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         swipeToSeeView.roundCorners(corners: [.topLeft], radius: 20.0)
         setupSozieLogoNavBar()

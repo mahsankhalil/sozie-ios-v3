@@ -42,6 +42,7 @@ class StoresPopupListingVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.tableView.backgroundColor = UIColor.white
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.setupLocationManager()
         if let imageURL = productImage {

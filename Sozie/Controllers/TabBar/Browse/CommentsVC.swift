@@ -45,7 +45,7 @@ class CommentsVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         self.title = "Comments"
         if let brandId = currentProduct?.brandId {

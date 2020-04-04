@@ -11,6 +11,7 @@ protocol SozieRequestTableViewCellDelegate: class {
     func acceptRequestButtonTapped(button: UIButton)
     func nearbyStoresButtonTapped(button: UIButton)
     func cancelRequestButtonTapped(button: UIButton)
+    func pictureButtonTapped(button: UIButton)
 }
 class SozieRequestTableViewCell: UITableViewCell {
     weak var delegate: SozieRequestTableViewCellDelegate?

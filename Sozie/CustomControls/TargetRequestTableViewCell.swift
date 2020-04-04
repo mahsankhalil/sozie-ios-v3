@@ -13,14 +13,15 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var backgroudView: UIView!
     @IBOutlet weak var sizeRequestedLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+//    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var checkStoresButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
-    @IBOutlet weak var colorLabel: UILabel!
+//    @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var pictureButton: UIButton!
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +40,9 @@ class TargetRequestTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func pictureButtonTapped(_ sender: Any) {
+        delegate?.pictureButtonTapped(button: sender as! UIButton)
     }
     @IBAction func acceptButtonTapped(_ sender: Any) {
         delegate?.acceptRequestButtonTapped(button: sender as! UIButton)
@@ -59,6 +63,7 @@ extension TargetRequestTableViewCell: ButtonProviding {
         acceptButton.tag = index
         cancelButton.tag = index
         checkStoresButton.tag = index
+        pictureButton.tag = index
     }
 }
 extension TargetRequestTableViewCell: CellConfigurable {
@@ -67,9 +72,9 @@ extension TargetRequestTableViewCell: CellConfigurable {
             productImageView.sd_setImage(with: imgModel.imageURL) { (_, _, _, _) in
             }
         }
-        if let titleModel = viewModel as? TitleViewModeling {
-            titleLabel.text = titleModel.title!
-        }
+//        if let titleModel = viewModel as? TitleViewModeling {
+//            titleLabel.text = titleModel.title!
+//        }
         if let subTitleModel = viewModel as? SubtitleViewModeling {
             let attributedStr = NSMutableAttributedString(string: subTitleModel.subtitle!)
             attributedStr.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 4))
@@ -79,7 +84,7 @@ extension TargetRequestTableViewCell: CellConfigurable {
         if let colorTitleModel = viewModel as? ColorViewModeling {
             let attributedStr = NSMutableAttributedString(string: colorTitleModel.colorTitle!)
             attributedStr.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 5))
-            colorLabel.attributedText = attributedStr
+//            colorLabel.attributedText = attributedStr
 //            colorLabel.text = colorTitleModel.colorTitle
         }
         if let availabilityModel = viewModel as? AvailabilityProviding {
@@ -88,7 +93,7 @@ extension TargetRequestTableViewCell: CellConfigurable {
             if availabilityModel.isAvailable == true {
                 if let brandProvider = viewModel as? BrandIdProviding {
                     if let brand = UserDefaultManager.getBrandWithId(brandId: brandProvider.brandId) {
-                        self.titleLabel.text = "Requested by " + brand.label
+//                        self.titleLabel.text = "Requested by " + brand.label
                     }
                 }
             }
