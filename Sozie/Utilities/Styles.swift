@@ -173,6 +173,9 @@ extension MFTextField {
         self.rightViewMode = .always
         self.rightView = lbl
     }
+    override open func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.width - 38, y: bounds.midY - 20, width: 38, height: 40)
+    }
 }
 
 extension UIButton {
