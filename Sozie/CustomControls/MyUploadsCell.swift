@@ -72,7 +72,7 @@ extension MyUploadsCell: CellConfigurable {
                 self.descriptionLabel.isHidden = true
             }
             if postViewModel.isApproved {
-                self.bottomView.backgroundColor = UIColor(hex: "FC8787")
+                self.bottomView.backgroundColor = UtilityManager.getGenderColor()
                 if postViewModel.isTutorial {
                     showTutorialApproved(postViewModel: postViewModel)
                 } else {

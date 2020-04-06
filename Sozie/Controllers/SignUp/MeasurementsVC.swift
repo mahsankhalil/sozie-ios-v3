@@ -154,7 +154,13 @@ class MeasurementsVC: UIViewController {
         let heightViewModel = DoubleTextFieldCellViewModel(text1: heightFeet, text2: heightInches, title1: "HEIGHT(feet)", title2: "HEIGHT(Inches)", columnUnit: ["ft", "in"], columnPlaceholder: ["Height", ""], columnValueSuffix: ["'", "\""], columnValues: [size.height.feet.convertArrayToString(), size.height.inches.convertArrayToString()], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Height", measurementType: .height)
         let waistHipsModel = DoubleTextFieldCellViewModel(text1: waist, text2: hip, title1: "WAIST", title2: "HIPS", columnUnit: [unit, unit], columnPlaceholder: ["Waist", "Hips"], columnValueSuffix: [unitAbr, unitAbr], columnValues: [waistValues, hipValues], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Waist and Hips", measurementType: .waistHips)
         let braViewModel = DoubleTextFieldCellViewModel(text1: bra, text2: cup, title1: "BRA SIZE(Band)", title2: "BRA SIZE(Cup)", columnUnit: ["band", "cup"], columnPlaceholder: ["Bra Size", ""], columnValueSuffix: ["", ""], columnValues: [braBandValues ?? [], size.bra?.cup ?? []], textFieldDelegate: self, displayError: false, errorMessage: "Please Select Bra Size", measurementType: .braSize)
-        let sizeWornViewModel = TitleTextFieldCellViewModel(title: "What dress size do you normally wear?", text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current dress size", displayError: false)
+        var sizeDescString = "What dress size do you normally wear?"
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                sizeDescString = "What size do you normally wear?"
+            }
+        }
+        let sizeWornViewModel = TitleTextFieldCellViewModel(title: sizeDescString, text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current dress size", displayError: false)
         let chestViewModel = SingleTextFieldCellViewModel(title: "CHEST", text: chest, placeholder: "Chest", values: chestValues ?? [], valueSuffix: unitAbr, buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Chest size", measurementType: .chest, columnUnit: unit)
         var heightFinalViewModel: RowViewModel
         if isInches == true {
