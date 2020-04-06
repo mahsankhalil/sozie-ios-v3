@@ -316,15 +316,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     @IBAction func maleBtnTapped(_ sender: Any) {
-//        if let countryId = signUpDict!["country"] as? Int , countryId == 1 {
-//            applyMaleSelection()
-//        } else {
+        if UserDefaultManager.getCurrentUserObject() != nil {
+            return
+        }
+        if let countryId = signUpDict!["country"] as? Int, countryId == 1 {
+            applyMaleSelection()
+        } else {
             tipView?.dismiss()
             let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
             tipView = EasyTipView(text: sozietext, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
             tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
 
-//        }
+        }
 //        let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
 //        let shopperText = "“Hi guys, We are working hard on a Sozie solution for you! Please look out for the updated version of our app in the near future.”"
 //        var text = sozietext

@@ -311,8 +311,8 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     self.showThankYouController()
                     self.bottomButtom.isEnabled = true
                     self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
+                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
                 }
-                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
             } else {
                 self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
@@ -357,6 +357,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 self.checkPushNotifications()
                 self.progressTutorialVC?.view.removeFromSuperview()
                 self.navigationController?.popViewController(animated: true)
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
             }
         }
     }
@@ -506,11 +507,11 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         if let index = selectedIndex {
             switch index {
             case 0:
-                image = UIImage(named: "Front")
+                image = UtilityManager.genderRespectedFrontImage()
             case 1:
-                image = UIImage(named: "Back")
+                image = UtilityManager.genderRespectedBackImage()
             case 2:
-                image = UIImage(named: "Side")
+                image = UtilityManager.genderRespectedSideImage()
             default:
                 image = nil
             }

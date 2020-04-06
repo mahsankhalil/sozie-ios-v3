@@ -226,7 +226,33 @@ class UtilityManager: NSObject {
         let layer = CALayer()
         layer.frame = view.bounds
     }
-
+    static func genderRespectedFrontImage() -> UIImage {
+        var image = UIImage(named: "Front")
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                image = UIImage(named: "MaleFront")
+            }
+        }
+        return image!
+    }
+    static func genderRespectedBackImage() -> UIImage {
+        var image = UIImage(named: "Back")
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                image = UIImage(named: "MaleBack")
+            }
+        }
+        return image!
+    }
+    static func genderRespectedSideImage() -> UIImage {
+        var image = UIImage(named: "Side")
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                image = UIImage(named: "MaleSide")
+            }
+        }
+        return image!
+    }
     static func uniqueKeyWithLength(len: Int) -> NSString {
         let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let randomString: NSMutableString = NSMutableString(capacity: len)

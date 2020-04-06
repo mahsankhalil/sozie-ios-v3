@@ -82,11 +82,11 @@ class RequestImagePickerController: UIViewController {
         if let index = photoIndex {
             switch index {
             case 0:
-                self.sampleImageView.image = UIImage(named: "Front")
+                self.sampleImageView.image = UtilityManager.genderRespectedFrontImage()
             case 1:
-                self.sampleImageView.image = UIImage(named: "Back")
+                self.sampleImageView.image = UtilityManager.genderRespectedBackImage()
             case 2:
-                self.sampleImageView.image = UIImage(named: "Side")
+                self.sampleImageView.image = UtilityManager.genderRespectedSideImage()
             default:
                 self.sampleImageView.isHidden = true
             }
