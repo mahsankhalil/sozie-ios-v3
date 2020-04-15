@@ -14,6 +14,7 @@ protocol SizeSelectionDelegate: class {
 
 class SearchBySizePopUpVC: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var closeHandler: (() -> Void)?
@@ -35,6 +36,7 @@ class SearchBySizePopUpVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        titleLabel.textColor = UtilityManager.getGenderColor()
         fetchDataFromServer()
     }
     class func instance() -> SearchBySizePopUpVC {

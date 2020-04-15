@@ -129,6 +129,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             userNameTxtFld.textColor = UIColor(hex: "DADADA")
             if currentUser.gender == "F" {
                 applyFemaleSelection()
+            } else {
+                applyMaleSelection()
             }
             userNameTxtFld.isEnabled = false
             signUpButton.setTitle("Save", for: .normal)
@@ -311,6 +313,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     }
 
     @IBAction func femaleBtnTapped(_ sender: Any) {
+        if UserDefaultManager.getCurrentUserObject() != nil {
+            return
+        }
         applyFemaleSelection()
 
     }

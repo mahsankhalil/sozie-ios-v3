@@ -325,7 +325,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     func uploadTutorialData() {
         var dataDict = [String: Any]()
-        dataDict["CheckStores"] = false
+        dataDict["CheckStores"] = true
         dataDict["FindYourProductA"] = true
         dataDict["FindYourProductB"] = true
         dataDict["TryOnScreenA"] = true

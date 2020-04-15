@@ -1266,6 +1266,7 @@
                     <connections>
                         <outlet property="doneButton" destination="vvu-LU-CPF" id="Qml-7c-uPF"/>
                         <outlet property="tableView" destination="qIe-8m-gKE" id="G8B-G9-k6D"/>
+                        <outlet property="titleLabel" destination="W40-W3-8GP" id="AvG-X4-MAJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JZ3-Mg-3cx" userLabel="First Responder" sceneMemberID="firstResponder"/>
