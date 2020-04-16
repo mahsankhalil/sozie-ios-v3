@@ -473,7 +473,7 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
                 removePictureTutorial()
                 if isFitTipsTutorialShown == false {
                     addFitTipsTutorial()
-                    self.imagesCollectionView.isUserInteractionEnabled = false
+//                    self.imagesCollectionView.isUserInteractionEnabled = false
                 }
             }
         }
@@ -559,7 +559,7 @@ extension UploadPostAndFitTipsVC: CropViewControllerDelegate {
                 removePictureTutorial()
                 if isFitTipsTutorialShown == false {
                     addFitTipsTutorial()
-                    self.imagesCollectionView.isUserInteractionEnabled = false
+//                    self.imagesCollectionView.isUserInteractionEnabled = false
                 }
             }
         }
