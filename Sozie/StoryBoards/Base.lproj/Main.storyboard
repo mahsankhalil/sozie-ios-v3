@@ -510,20 +510,9 @@ Check your updated </string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-rV-PXa">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-z3-dQJ">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-z3-dQJ" customClass="AVPlayerView" customModule="Sozie" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="64" width="375" height="320"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BALANCE" translatesAutoresizingMaskIntoConstraints="NO" id="AEk-Kf-722">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
-                                                    </imageView>
-                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="AEk-Kf-722" firstAttribute="top" secondItem="E9v-z3-dQJ" secondAttribute="top" id="fBr-eP-SAv"/>
-                                                    <constraint firstItem="AEk-Kf-722" firstAttribute="leading" secondItem="E9v-z3-dQJ" secondAttribute="leading" id="frS-oO-4ki"/>
-                                                    <constraint firstAttribute="trailing" secondItem="AEk-Kf-722" secondAttribute="trailing" id="gf0-hC-pJ1"/>
-                                                    <constraint firstAttribute="bottom" secondItem="AEk-Kf-722" secondAttribute="bottom" id="iuT-ii-D3H"/>
-                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -558,6 +547,7 @@ Check your updated </string>
                     </view>
                     <connections>
                         <outlet property="detailLabel" destination="Nr0-E2-AdA" id="weQ-27-cU7"/>
+                        <outlet property="videoView" destination="E9v-z3-dQJ" id="7Rq-ZA-qrp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ae5-oI-WgS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1109,7 +1099,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <rect key="frame" x="116.5" y="62" width="142" height="86.5"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2bI-dV-Fca" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="164.5" width="326" height="19"/>
+                                                <rect key="frame" x="24.5" y="164.5" width="326" height="34.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -1173,7 +1163,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXO-80-eao" customClass="MFTextField">
-                                                <rect key="frame" x="24.5" y="208.5" width="326" height="19"/>
+                                                <rect key="frame" x="24.5" y="224" width="326" height="34.5"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -1190,7 +1180,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CyK-iU-Bfw">
-                                                <rect key="frame" x="253.5" y="221" width="92" height="28"/>
+                                                <rect key="frame" x="253.5" y="252" width="92" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="aRv-PM-XbN"/>
                                                 </constraints>
@@ -1203,20 +1193,20 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In with Facebook or Gmail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crl-7Y-OR1">
-                                                <rect key="frame" x="92" y="260.5" width="191.5" height="19"/>
+                                                <rect key="frame" x="92" y="291.5" width="191.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3H-KA-Slj">
-                                                <rect key="frame" x="135.5" y="294.5" width="42" height="42"/>
+                                                <rect key="frame" x="135.5" y="325.5" width="42" height="42"/>
                                                 <state key="normal" image="facebook-login-icon"/>
                                                 <connections>
                                                     <action selector="facebookButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOj-W7-4uf"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbP-TY-kLU">
-                                                <rect key="frame" x="197.5" y="294.5" width="42" height="42"/>
+                                                <rect key="frame" x="197.5" y="325.5" width="42" height="42"/>
                                                 <state key="normal" image="google-login-icon"/>
                                                 <connections>
                                                     <action selector="googleButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VWc-R6-EzA"/>
@@ -1942,13 +1932,13 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMI-yt-sye">
-                                                <rect key="frame" x="25" y="101" width="325" height="33"/>
+                                                <rect key="frame" x="25" y="101" width="325" height="48.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-X1-fLq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="33"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="48.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="WhJ-6J-xTB" customClass="MFTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="19"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="34.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -1984,10 +1974,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIP-xh-seK">
-                                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="33"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="162.5" height="48.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="jmG-D3-PZB" customClass="MFTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="19"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="34.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -2023,13 +2013,13 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This information is for our eyes only and will not be displayed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFp-1I-pcZ">
-                                                        <rect key="frame" x="0.0" y="19.5" width="325" height="13.5"/>
+                                                        <rect key="frame" x="0.0" y="35" width="325" height="13.5"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wf5-Ek-lM7">
-                                                        <rect key="frame" x="161" y="6" width="1" height="11"/>
+                                                        <rect key="frame" x="161" y="21.5" width="1" height="11"/>
                                                         <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="11" id="IB9-N4-ViT"/>
@@ -2054,10 +2044,10 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIP-U0-pQd">
-                                                <rect key="frame" x="25" y="149" width="325" height="33"/>
+                                                <rect key="frame" x="25" y="164.5" width="325" height="48.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-21-rMj" customClass="MFTextField">
-                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="19"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="34.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
@@ -2075,7 +2065,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make this anonymous" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6d-hg-miY">
-                                                        <rect key="frame" x="0.0" y="19.5" width="325" height="13.5"/>
+                                                        <rect key="frame" x="0.0" y="35" width="325" height="13.5"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="10"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2093,7 +2083,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79U-qu-8ew">
-                                                <rect key="frame" x="25" y="197" width="325" height="33"/>
+                                                <rect key="frame" x="25" y="228" width="325" height="33"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of Birth" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJO-9C-cYF" customClass="DatePickerTextField" customModule="Sozie" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="325" height="19"/>
@@ -2134,7 +2124,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7O-hf-Dvt">
-                                                <rect key="frame" x="25" y="230" width="325" height="60"/>
+                                                <rect key="frame" x="25" y="261" width="325" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duf-EW-SyB">
                                                         <rect key="frame" x="0.0" y="30" width="150" height="30"/>
@@ -2300,6 +2290,7 @@ They will try on items of your choice so you can be sure of what size you want t
                     </view>
                     <connections>
                         <outlet property="backButton" destination="tTR-Jv-1p8" id="gir-Ok-FpQ"/>
+                        <outlet property="birthdayIcon" destination="EmT-fK-jT0" id="yVr-xX-mOt"/>
                         <outlet property="dateOfBirtTxtFld" destination="aJO-9C-cYF" id="5jI-0h-7RO"/>
                         <outlet property="femaleBtn" destination="Duf-EW-SyB" id="SFt-Yv-EnX"/>
                         <outlet property="firstNameTxtFld" destination="WhJ-6J-xTB" id="Kf6-eo-Onc"/>
@@ -4136,7 +4127,6 @@ They will try on items of your choice so you can be sure of what size you want t
         <image name="A-Point" width="48" height="48"/>
         <image name="B" width="48" height="48"/>
         <image name="B-Point" width="48" height="48"/>
-        <image name="BALANCE" width="230" height="467"/>
         <image name="Body Measurement" width="131" height="277.5"/>
         <image name="Body Measurement Male" width="137.5" height="336"/>
         <image name="C" width="48" height="48"/>

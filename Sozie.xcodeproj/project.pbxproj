@@ -200,6 +200,7 @@
 		61D769A323210C9000EDBC4A /* GoogleService-Info-DEV.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61D769A223210C9000EDBC4A /* GoogleService-Info-DEV.plist */; };
 		61D9F49E236C63C80075C00E /* ColorViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D9F49D236C63C80075C00E /* ColorViewModeling.swift */; };
 		61E8E73322044FA9008C33BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E8E73222044FA9008C33BC /* ViewController.swift */; };
+		61E944A7244867C800417683 /* now_02.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 61E944A6244867C700417683 /* now_02.mp4 */; };
 		61EE668B22D344D6004265F1 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE668A22D344D6004265F1 /* Data.swift */; };
 		61EE668D22D36F8F004265F1 /* SozieRequestTutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE668C22D36F8F004265F1 /* SozieRequestTutorialVC.swift */; };
 		61EE668F22D5E5B2004265F1 /* BrowseWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE668E22D5E5B2004265F1 /* BrowseWelcomeVC.swift */; };
@@ -465,6 +466,7 @@
 		61D769A223210C9000EDBC4A /* GoogleService-Info-DEV.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-DEV.plist"; sourceTree = "<group>"; };
 		61D9F49D236C63C80075C00E /* ColorViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewModeling.swift; sourceTree = "<group>"; };
 		61E8E73222044FA9008C33BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		61E944A6244867C700417683 /* now_02.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = now_02.mp4; sourceTree = "<group>"; };
 		61EE668A22D344D6004265F1 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		61EE668C22D36F8F004265F1 /* SozieRequestTutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieRequestTutorialVC.swift; sourceTree = "<group>"; };
 		61EE668E22D5E5B2004265F1 /* BrowseWelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseWelcomeVC.swift; sourceTree = "<group>"; };
@@ -1008,6 +1010,7 @@
 				613C48C2230A81C800200AE0 /* Down-Arrow.gif */,
 				617FA17A227078810055FD18 /* Config */,
 				613CFD322264B6F900841348 /* now.mp4 */,
+				61E944A6244867C700417683 /* now_02.mp4 */,
 				613CFD302264B53C00841348 /* now_01.mp4 */,
 				615790E42254CBEB007B8532 /* signup.mp4 */,
 				6103E1A521FEDBEB00C7E7CF /* ThirdParty */,
@@ -1196,6 +1199,7 @@
 				61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */,
 				614374DC2236919200DBD295 /* BlockedUserCell.xib in Resources */,
 				610A744722033B9000964886 /* MK.png in Resources */,
+				61E944A7244867C800417683 /* now_02.mp4 in Resources */,
 				613C48C3230A81C800200AE0 /* Arrow-Gif.gif in Resources */,
 				6120D43722B1064F0000678C /* TitleTextFieldCell.xib in Resources */,
 				DA43F897221BAE3300EE12DD /* .swiftlint.yml in Resources */,

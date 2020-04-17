@@ -27,6 +27,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var signUpButton: DZGradientButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
+    
+    @IBOutlet weak var birthdayIcon: UIImageView!
     let validator = Validator()
     var isFemaleSelected = false
     var isMaleSelected = false
@@ -48,6 +50,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         populateCurrentUserData()
         populateSocialData()
         makeAttributedTextView()
+        setupBirthdayIcon()
+    }
+    func setupBirthdayIcon() {
+        let gender = UserDefaultManager.getCurrentUserGender()
+        if gender == "M" {
+            birthdayIcon.image = UIImage(named: "birthday-icon-blue")
+        } else if gender == "F" {
+            birthdayIcon.image = UIImage(named: "birthday-icon")
+        } else {
+            birthdayIcon.image = UIImage(named: "birthday-icon-green")
+        }
     }
     func makeAttributedTextView() {
         let text = NSMutableAttributedString(string: "By tapping \"Sign Up\" you agree to our ")

@@ -156,7 +156,7 @@ extension MFTextField {
     func setupAppDesign() {
         self.underlineColor = UIColor(hex: "DADADA")
         self.placeholderColor = UIColor(hex: "888888")
-        self.tintColor = UIColor(hex: "FC8888")
+        self.tintColor = UtilityManager.getGenderColor()
         self.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
         self.errorFont = UIFont(name: "SegoeUI", size: 10.0)
     }
