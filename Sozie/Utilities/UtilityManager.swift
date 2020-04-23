@@ -71,16 +71,18 @@ class UtilityManager: NSObject {
         let gender = UserDefaultManager.getCurrentUserGender()
         if gender == "M" {
             return UIColor(hex: "17B5F9")
-        } else {
+        } else if gender == "F" {
             return UIColor(hex: "FC8787")
+        } else {
+            return UIColor(hex: "0ABAB5")
         }
     }
     static func getGenderUploadPictureColor() -> UIColor {
         let gender = UserDefaultManager.getCurrentUserGender()
         if gender == "M" {
-            return UIColor(hex: "F5AB4A")
+            return UIColor(hex: "0ABAB5")
         } else {
-            return UIColor(hex: "17B5F9")
+            return UIColor(hex: "2EDCD7")
         }
     }
     // MARK: - Other Methods

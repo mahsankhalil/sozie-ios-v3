@@ -22,6 +22,9 @@ import Hex
                 gradientStartColor = UIColor(hex: "17B5F9")
                 gradientEndColor = UIColor(hex: "48C8FF")
             }
+        } else {
+            gradientStartColor = UIColor(hex: "0ABAB5")
+            gradientEndColor = UIColor(hex: "2EDCD7")
         }
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds

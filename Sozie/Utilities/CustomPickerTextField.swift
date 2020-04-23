@@ -44,7 +44,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         myInputView.addSubview(donePickerBtn)
         titleLabel = UILabel(frame: CGRect(x: 0, y: 35, width: UIScreen.main.bounds.width, height: 30))
         titleLabel?.font = UIFont(name: "SegoeUI-Bold", size: 14.0)
-        titleLabel?.textColor = UIColor(hex: "FFA4A4")
+        titleLabel?.textColor = UtilityManager.getGenderColor() //UIColor(hex: "FFA4A4")
         titleLabel?.textAlignment = .center
         titleLabel?.numberOfLines = 0
         myInputView.addSubview(titleLabel!)

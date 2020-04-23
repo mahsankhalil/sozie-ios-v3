@@ -21,7 +21,7 @@ class SozieInstructionsVC: UIViewController {
         if let gender = UserDefaultManager.getCurrentUserGender() {
             if gender == "M" {
                 instructionsImageView.image = UIImage(named: "MaleInstructions")
-                instructionsHeightConstraint.constant = (842.0/375.0) * UIScreen.main.bounds.size.width
+                instructionsHeightConstraint.constant = (837.0/375.0) * UIScreen.main.bounds.size.width
             } else {
                 instructionsImageView.image = UIImage(named: "instructions")
                 instructionsHeightConstraint.constant = (875.0/375.0) * UIScreen.main.bounds.size.width

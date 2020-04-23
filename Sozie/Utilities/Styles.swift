@@ -156,7 +156,7 @@ extension MFTextField {
     func setupAppDesign() {
         self.underlineColor = UIColor(hex: "DADADA")
         self.placeholderColor = UIColor(hex: "888888")
-        self.tintColor = UIColor(hex: "FC8888")
+        self.tintColor = UtilityManager.getGenderColor()
         self.placeholderFont = UIFont(name: "SegoeUI", size: 14.0)
         self.errorFont = UIFont(name: "SegoeUI", size: 10.0)
     }
@@ -173,6 +173,9 @@ extension MFTextField {
         self.rightViewMode = .always
         self.rightView = lbl
     }
+    override open func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.width - 38, y: bounds.midY - 20, width: 38, height: 40)
+    }
 }
 
 extension UIButton {
@@ -185,7 +188,7 @@ extension UIButton {
     }
 
     func applyButtonSelected() {
-        self.layer.borderColor = UIColor(displayP3Red: 252.0/255.0, green: 135.0/255.0, blue: 135.0/255.0, alpha: 0.8).cgColor
+        self.layer.borderColor = UtilityManager.getGenderColor().cgColor
         self.layer.cornerRadius = 2.0
         self.layer.borderWidth = 1.0
         self.clipsToBounds = false
@@ -209,7 +212,7 @@ extension UIButton {
     }
 
     func applyButtonShadow() {
-        self.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
+        self.layer.shadowColor = UtilityManager.getGenderColor().cgColor
         self.layer.shadowRadius = 4.0
         self.layer.shadowOpacity = 0.6
         self.layer.shadowOffset.height = 4.0
