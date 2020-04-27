@@ -15,6 +15,7 @@ class SegmentManager: NSObject {
         dataDict["email"] = user.email
         dataDict["firstname"] = user.firstName
         dataDict["lastname"] = user.lastName
+        dataDict["gender"] = user.gender
         if let firstName = user.firstName, let lastName = user.lastName {
             dataDict["name"] = firstName + " " + lastName
         }
