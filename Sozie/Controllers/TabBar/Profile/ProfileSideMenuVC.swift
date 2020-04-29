@@ -132,6 +132,9 @@ class ProfileSideMenuVC: BaseViewController {
     }
     */
     func rateThisApp() {
+//        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
+//            else { fatalError("Expected a valid URL") }
+//        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         if #available(iOS 10.3, *) {
             SKStoreReviewController.requestReview()
         } else {
