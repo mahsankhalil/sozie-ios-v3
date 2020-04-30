@@ -27,7 +27,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
     @IBOutlet weak var signUpButton: DZGradientButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
-    
     @IBOutlet weak var birthdayIcon: UIImageView!
     let validator = Validator()
     var isFemaleSelected = false

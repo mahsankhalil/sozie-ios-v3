@@ -150,7 +150,7 @@ class SozieRequestsVC: UIViewController {
                 tutVC.view.frame.origin.y = (0.0)
                 tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50.0 + (topPadding ?? 0))
                 let formattedString = NSMutableAttributedString()
-                formattedString.bold("Required", size: 17.0).normal(": Follow arrow prompts below")
+                formattedString.bold("Required Tutorial", size: 15.0).normal(": Follow arrow prompts below")
                 tutVC.updateProgressTitle(string: formattedString)
                 window?.addSubview(tutVC.view)
             }
