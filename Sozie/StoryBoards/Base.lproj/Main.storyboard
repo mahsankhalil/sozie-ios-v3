@@ -1858,6 +1858,9 @@ They will try on items of your choice so you can be sure of what size you want t
                                                 <state key="normal" title="paste">
                                                     <color key="titleColor" red="0.81559693813323975" green="0.81573778390884399" blue="0.81558805704116821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pasteButtonTapped:" destination="CgK-3q-Hir" eventType="touchUpInside" id="f3b-hK-wZQ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1935,7 +1938,6 @@ They will try on items of your choice so you can be sure of what size you want t
                         <outlet property="nextBtn" destination="ubF-pe-nlU" id="fvU-QC-EnR"/>
                         <outlet property="passwordTxtFld" destination="gxQ-8O-JIX" id="Csq-fx-HmU"/>
                         <outlet property="pasteButton" destination="weq-2d-15o" id="kCg-MB-KOI"/>
-                        <outlet property="pasteButtonTapped" destination="CHU-Fu-Eqm" id="avm-A3-IbE"/>
                         <outlet property="referralCodeTextField" destination="xgH-ry-Yfq" id="DFf-fH-UGd"/>
                         <outlet property="scrollView" destination="Mwg-TE-HXV" id="cbN-pm-e2H"/>
                         <outlet property="showConfirmPasswordBtn" destination="InS-d4-4vn" id="i7v-2k-zEq"/>
@@ -3359,6 +3361,122 @@ They will try on items of your choice so you can be sure of what size you want t
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lx4-20-ILk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3080" y="1211.6941529235382"/>
+        </scene>
+        <!--Referral PopupVC-->
+        <scene sceneID="qGh-43-IJf">
+            <objects>
+                <viewController storyboardIdentifier="ReferralPopupVC" id="5hC-iu-FCG" customClass="ReferralPopupVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CfP-Bn-RaH">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referral Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZz-ph-X1n">
+                                <rect key="frame" x="16" y="31" width="318" height="24"/>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="18"/>
+                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdL-ev-DBz" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                <rect key="frame" x="53" y="214" width="244" height="48"/>
+                                <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Puf-Ys-V2f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                <state key="normal" title="I got it">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="gotItButtonTapped:" destination="5hC-iu-FCG" eventType="touchUpInside" id="sKK-mT-6ls"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RL-G1-A2x">
+                                <rect key="frame" x="16" y="73" width="318" height="86.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="If your friend referred you, ask for a referral code &amp; you'll get an extra ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="SegoeUI"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="$5">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="13" name="SegoeUI-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> when you submit your first post!
+
+Don't worry if you don't have one. You can get </string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="SegoeUI"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="$5">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="13" name="SegoeUI-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <shadow key="NSShadow" blurRadius="10">
+                                                <size key="offset" width="9.9502552430722443e-17" height="1.625"/>
+                                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.33333333333333331" colorSpace="calibratedRGB"/>
+                                            </shadow>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" per friend YOU refer once you're part of Sozie!">
+                                        <attributes>
+                                            <color key="NSColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="SegoeUI"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsC-9E-gek">
+                                <rect key="frame" x="302" y="0.0" width="48" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="jYb-WR-qaX"/>
+                                    <constraint firstAttribute="height" constant="55" id="tee-UF-Xqk"/>
+                                </constraints>
+                                <state key="normal" image="Close"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="5hC-iu-FCG" eventType="touchUpInside" id="ymL-Jx-HCF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BsC-9E-gek" firstAttribute="trailing" secondItem="IOj-uY-nf2" secondAttribute="trailing" id="0xf-lO-0Eg"/>
+                            <constraint firstItem="0RL-G1-A2x" firstAttribute="leading" secondItem="IOj-uY-nf2" secondAttribute="leading" constant="16" id="1Cc-9C-4N2"/>
+                            <constraint firstItem="0RL-G1-A2x" firstAttribute="top" secondItem="LZz-ph-X1n" secondAttribute="bottom" constant="18" id="4Hd-8G-a0T"/>
+                            <constraint firstItem="IOj-uY-nf2" firstAttribute="trailing" secondItem="0RL-G1-A2x" secondAttribute="trailing" constant="16" id="Hfj-xr-TDP"/>
+                            <constraint firstItem="IOj-uY-nf2" firstAttribute="trailing" secondItem="LZz-ph-X1n" secondAttribute="trailing" constant="16" id="Muz-EU-pxH"/>
+                            <constraint firstItem="LZz-ph-X1n" firstAttribute="top" secondItem="IOj-uY-nf2" secondAttribute="top" constant="31" id="N5Z-jA-lou"/>
+                            <constraint firstItem="IOj-uY-nf2" firstAttribute="trailing" secondItem="cdL-ev-DBz" secondAttribute="trailing" constant="53" id="T6w-RG-oS8"/>
+                            <constraint firstItem="LZz-ph-X1n" firstAttribute="leading" secondItem="IOj-uY-nf2" secondAttribute="leading" constant="16" id="Xeo-hH-Xie"/>
+                            <constraint firstItem="IOj-uY-nf2" firstAttribute="bottom" secondItem="cdL-ev-DBz" secondAttribute="bottom" constant="38" id="gbo-ih-KZt"/>
+                            <constraint firstItem="cdL-ev-DBz" firstAttribute="leading" secondItem="IOj-uY-nf2" secondAttribute="leading" constant="53" id="ilp-jM-GXh"/>
+                            <constraint firstItem="BsC-9E-gek" firstAttribute="top" secondItem="IOj-uY-nf2" secondAttribute="top" id="nTd-r3-XmX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IOj-uY-nf2"/>
+                    </view>
+                    <size key="freeformSize" width="350" height="300"/>
+                    <connections>
+                        <outlet property="closeButton" destination="BsC-9E-gek" id="oBs-L1-n1D"/>
+                        <outlet property="gotitButton" destination="cdL-ev-DBz" id="zr1-5F-gJb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LjO-KO-HYv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2408" y="1618.2908545727137"/>
         </scene>
         <!--Reset PasswordVC-->
         <scene sceneID="Sxp-bC-yXN">
