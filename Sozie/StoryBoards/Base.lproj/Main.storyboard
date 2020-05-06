@@ -2515,7 +2515,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The more the merrier. Click invite below to share the fun with your friends!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1c-s6-TlV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share the fun with your friends &amp; you both earn money when they become a Sozie." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1c-s6-TlV">
                                 <rect key="frame" x="25" y="125" width="325" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="0lC-E2-Jd7"/>
@@ -2524,20 +2524,6 @@ They will try on items of your choice so you can be sure of what size you want t
                                 <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfy-kS-chd" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                <rect key="frame" x="30" y="544" width="315" height="48"/>
-                                <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="xoO-Ti-EO8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
-                                <state key="normal" title="Invite">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="inviteBtnTapped:" destination="Jow-Nv-fR8" eventType="touchUpInside" id="N5X-Y5-Q12"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WU-uJ-atu">
                                 <rect key="frame" x="30" y="624" width="315" height="31"/>
                                 <constraints>
@@ -2552,63 +2538,311 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vS1-gy-5De">
-                                <rect key="frame" x="62.5" y="310.5" width="250" height="46"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="SG2-Xy-JH2"/>
-                                    <constraint firstAttribute="width" constant="250" id="zJt-ze-aLr"/>
-                                </constraints>
+                                <rect key="frame" x="25" y="182" width="325" height="135.5"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Invite friends later through your ">
+                                    <fragment content="Invite friends ">
                                         <attributes>
-                                            <color key="NSColor" red="0.0039215686274509803" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name=".SFNSText"/>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".SFNSText"/>
                                             <font key="NSOriginalFont" size="17" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Setting">
+                                    <fragment content="and you'll get ">
                                         <attributes>
-                                            <color key="NSColor" red="0.0039215686274509803" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name=".AppleSystemUIFontEmphasized"/>
-                                            <font key="NSOriginalFont" size="17" name=".AppleSystemUIFontEmphasized"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=" menu under your ">
+                                    <fragment content="$5">
                                         <attributes>
-                                            <color key="NSColor" red="0.0039215686274509803" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" metaFont="system" size="17"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Profile">
+                                    <fragment content=" ">
                                         <attributes>
-                                            <color key="NSColor" red="0.0039215686274509803" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name=".AppleSystemUIFontEmphasized"/>
-                                            <font key="NSOriginalFont" size="17" name=".AppleSystemUIFontEmphasized"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="17" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="when they sign up and they'll get ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="14" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="$5">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" - it's a win win!">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="14" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cgo
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="17" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Refer ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="14" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="as many friends as you'd like">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" male or female. The more the merrier - 10 friends gets you ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="14" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="$50">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" and the rewards are endless">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="14" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="🎉">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="AppleColorEmoji"/>
+                                            <font key="NSOriginalFont" size="14" name="AppleColorEmoji"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="17" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIC-WW-UT2">
+                                <rect key="frame" x="25" y="325" width="325" height="36"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="When your friends use Sozie:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Skq-il-wFv">
+                                        <rect key="frame" x="0.0" y="8" width="177" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="13"/>
+                                        <color key="textColor" red="0.24702778458595276" green="0.24707666039466858" blue="0.24702468514442444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gyh-yT-Kfy">
+                                        <rect key="frame" x="0.0" y="35" width="325" height="1"/>
+                                        <color key="backgroundColor" red="0.42645090818405151" green="0.89577609300613403" blue="0.87733733654022217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="x0e-3H-Wn3"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Gyh-yT-Kfy" secondAttribute="bottom" id="0w5-II-Kc2"/>
+                                    <constraint firstAttribute="height" constant="36" id="GU3-b2-xXq"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gyh-yT-Kfy" secondAttribute="trailing" id="ZiN-kX-MLf"/>
+                                    <constraint firstItem="Gyh-yT-Kfy" firstAttribute="leading" secondItem="PIC-WW-UT2" secondAttribute="leading" id="czO-kG-k9R"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjW-Z7-89Z">
+                                <rect key="frame" x="25" y="369" width="325" height="37.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="1.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.39178550243377686" green="0.89975547790527344" blue="0.88143157958984375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" You'll get an extra ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="$5">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> added to your balance
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="2.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.39215686274509803" green="0.89803921568627454" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" They'll get an extra ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="$5">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI-Bold"/>
+                                            <font key="NSOriginalFont" size="14" name="SegoeUI-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" added to their balance">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMi-Jt-LDg">
+                                <rect key="frame" x="25" y="485" width="325" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share Your Referral Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ExS-ro-kuh">
+                                        <rect key="frame" x="0.0" y="0.0" width="154" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="u5t-gH-iYo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                        <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mariana60ue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMs-66-80c">
+                                        <rect key="frame" x="0.0" y="27" width="86.5" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="q3B-V8-ihX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                                        <color key="textColor" red="0.57640582323074341" green="0.57650798559188843" blue="0.57639932632446289" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzp-8O-RGX">
+                                        <rect key="frame" x="279" y="27" width="46" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Iek-Zs-jmG"/>
+                                            <constraint firstAttribute="width" constant="46" id="RQX-EQ-NN6"/>
+                                        </constraints>
+                                        <state key="normal" title="Copy">
+                                            <color key="titleColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOR-0R-ROk">
+                                        <rect key="frame" x="0.0" y="50" width="325" height="1"/>
+                                        <color key="backgroundColor" red="0.92538958787918091" green="0.92554813623428345" blue="0.92537957429885864" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="BEm-ON-ddr"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="ExS-ro-kuh" firstAttribute="leading" secondItem="zMi-Jt-LDg" secondAttribute="leading" id="0td-mw-Don"/>
+                                    <constraint firstItem="LOR-0R-ROk" firstAttribute="leading" secondItem="zMi-Jt-LDg" secondAttribute="leading" id="7HK-EY-TP4"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mzp-8O-RGX" secondAttribute="trailing" id="7dk-vf-KaR"/>
+                                    <constraint firstAttribute="height" constant="51" id="JBM-uB-Ae1"/>
+                                    <constraint firstAttribute="trailing" secondItem="LOR-0R-ROk" secondAttribute="trailing" id="Kph-PH-2Eu"/>
+                                    <constraint firstItem="BMs-66-80c" firstAttribute="leading" secondItem="zMi-Jt-LDg" secondAttribute="leading" id="NMC-yt-MQY"/>
+                                    <constraint firstAttribute="bottom" secondItem="LOR-0R-ROk" secondAttribute="bottom" id="W9B-qn-jij"/>
+                                    <constraint firstItem="BMs-66-80c" firstAttribute="top" secondItem="ExS-ro-kuh" secondAttribute="bottom" constant="8" id="Wqt-pA-zfh"/>
+                                    <constraint firstItem="LOR-0R-ROk" firstAttribute="top" secondItem="Mzp-8O-RGX" secondAttribute="bottom" constant="2" id="XKG-kA-CmD"/>
+                                    <constraint firstItem="ExS-ro-kuh" firstAttribute="top" secondItem="zMi-Jt-LDg" secondAttribute="top" id="fET-S1-eMz"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfy-kS-chd" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                <rect key="frame" x="30" y="559" width="315" height="48"/>
+                                <color key="backgroundColor" red="0.98823529409999999" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="xoO-Ti-EO8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                <state key="normal" title="Invite">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="inviteBtnTapped:" destination="Jow-Nv-fR8" eventType="touchUpInside" id="N5X-Y5-Q12"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DJ9-cd-Q6s" firstAttribute="bottom" secondItem="7WU-uJ-atu" secondAttribute="bottom" constant="12" id="0Qa-Fn-cGn"/>
                             <constraint firstItem="HY1-qz-Xmb" firstAttribute="top" secondItem="Ket-Qs-MaW" secondAttribute="bottom" constant="12" id="0dm-CV-Bo5"/>
                             <constraint firstItem="HY1-qz-Xmb" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="25" id="28X-39-5Qr"/>
-                            <constraint firstItem="vS1-gy-5De" firstAttribute="centerX" secondItem="Ab9-if-jiQ" secondAttribute="centerX" id="FbY-tG-wEV"/>
+                            <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="mjW-Z7-89Z" secondAttribute="trailing" constant="25" id="9DF-Ce-bCZ"/>
+                            <constraint firstItem="vS1-gy-5De" firstAttribute="top" secondItem="l1c-s6-TlV" secondAttribute="bottom" constant="19" id="9Ve-Hj-9Ro"/>
+                            <constraint firstItem="vS1-gy-5De" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="25" id="IZo-fe-M4h"/>
+                            <constraint firstItem="mjW-Z7-89Z" firstAttribute="top" secondItem="PIC-WW-UT2" secondAttribute="bottom" constant="8" id="Kxg-UD-eLg"/>
                             <constraint firstItem="lfy-kS-chd" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="30" id="NYG-RU-G2E"/>
                             <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="lfy-kS-chd" secondAttribute="trailing" constant="30" id="Nzx-1C-e4Z"/>
-                            <constraint firstItem="7WU-uJ-atu" firstAttribute="top" secondItem="lfy-kS-chd" secondAttribute="bottom" constant="32" id="O6K-k2-8fT"/>
+                            <constraint firstItem="7WU-uJ-atu" firstAttribute="top" secondItem="lfy-kS-chd" secondAttribute="bottom" constant="17" id="O6K-k2-8fT"/>
+                            <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="vS1-gy-5De" secondAttribute="trailing" constant="25" id="OV4-0D-8vI"/>
                             <constraint firstItem="l1c-s6-TlV" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="25" id="OkV-Va-NPq"/>
+                            <constraint firstItem="zMi-Jt-LDg" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="25" id="UnV-uj-TIO"/>
+                            <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="zMi-Jt-LDg" secondAttribute="trailing" constant="25" id="ZE1-vZ-tAS"/>
                             <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="7WU-uJ-atu" secondAttribute="trailing" constant="30" id="aHS-Ry-GnR"/>
                             <constraint firstItem="Ket-Qs-MaW" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="18" id="cGi-4Z-qEB"/>
                             <constraint firstItem="Ket-Qs-MaW" firstAttribute="top" secondItem="DJ9-cd-Q6s" secondAttribute="top" constant="22" id="cdH-4o-n9u"/>
                             <constraint firstItem="l1c-s6-TlV" firstAttribute="top" secondItem="HY1-qz-Xmb" secondAttribute="bottom" id="dOF-3Z-9Ms"/>
                             <constraint firstItem="7WU-uJ-atu" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="30" id="elc-fW-0Vz"/>
-                            <constraint firstItem="vS1-gy-5De" firstAttribute="centerY" secondItem="Ab9-if-jiQ" secondAttribute="centerY" id="exG-W8-odu"/>
+                            <constraint firstItem="PIC-WW-UT2" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="25" id="fgL-wd-sBx"/>
+                            <constraint firstItem="mjW-Z7-89Z" firstAttribute="leading" secondItem="DJ9-cd-Q6s" secondAttribute="leading" constant="25" id="hmo-VJ-Rvd"/>
+                            <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="PIC-WW-UT2" secondAttribute="trailing" constant="25" id="ikC-dG-KLL"/>
+                            <constraint firstItem="PIC-WW-UT2" firstAttribute="top" secondItem="vS1-gy-5De" secondAttribute="bottom" constant="7.5" id="sGq-Am-dpC"/>
+                            <constraint firstItem="lfy-kS-chd" firstAttribute="top" secondItem="zMi-Jt-LDg" secondAttribute="bottom" constant="23" id="tS9-eX-W8p"/>
                             <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="l1c-s6-TlV" secondAttribute="trailing" constant="25" id="vLh-YH-FOA"/>
                             <constraint firstItem="DJ9-cd-Q6s" firstAttribute="trailing" secondItem="HY1-qz-Xmb" secondAttribute="trailing" constant="25" id="wrb-Xd-W0l"/>
                         </constraints>
@@ -2623,7 +2857,7 @@ They will try on items of your choice so you can be sure of what size you want t
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2o-f0-f9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3607" y="429"/>
+            <point key="canvasLocation" x="3605.5999999999999" y="428.63568215892059"/>
         </scene>
         <!--Select WorkVC-->
         <scene sceneID="LmH-X2-B9L">

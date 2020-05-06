@@ -21,7 +21,7 @@ class InviteFriendsVC: UIViewController {
         // Do any additional setup after loading the view.
         if let fromMenu = isFromSideMenu {
             if fromMenu == true {
-                inviteLaterLabel.isHidden = true
+//                inviteLaterLabel.isHidden = true
                 skipBtn.isHidden = true
             }
         }
