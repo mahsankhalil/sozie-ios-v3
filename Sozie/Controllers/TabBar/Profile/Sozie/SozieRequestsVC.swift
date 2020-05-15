@@ -669,6 +669,10 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         }
     }
     func nearbyStoresButtonTapped(button: UIButton) {
+        if UserDefaultManager.getIfPostTutorialShown() == true {
+            UtilityManager.showMessageWith(title: "Covid-19 Update", body: "We have paused in-store operations until further notice. Please stay safe at home", in: self)
+            return
+        }
         if let userId = UserDefaultManager.getCurrentUserId() {
             SVProgressHUD.show()
             ServerManager.sharedInstance.getUserProfile(userId: userId) { (isSuccess, response) in
@@ -734,8 +738,11 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     self.hideAcceptRequestTutorial()
                     self.showUploadPostTutorial()
                     return
+                } else {
+                    UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                        self.acceptRequestAPICall(tag: button.tag)
+                    }
                 }
-                self.acceptRequestAPICall(tag: button.tag)
             }
         }
         hideAllSearchViews()
