@@ -46,7 +46,6 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var howToTakePicturesButton: UIButton!
-    
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
     let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
@@ -132,6 +131,9 @@ class ProfileSideMenuVC: BaseViewController {
     }
     */
     func rateThisApp() {
+//        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
+//            else { fatalError("Expected a valid URL") }
+//        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         if #available(iOS 10.3, *) {
             SKStoreReviewController.requestReview()
         } else {

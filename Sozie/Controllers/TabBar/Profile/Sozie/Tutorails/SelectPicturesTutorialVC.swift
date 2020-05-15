@@ -15,7 +15,6 @@ class SelectPicturesTutorialVC: UIViewController {
     @IBOutlet weak var imageViewThree: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tutorialImageView: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

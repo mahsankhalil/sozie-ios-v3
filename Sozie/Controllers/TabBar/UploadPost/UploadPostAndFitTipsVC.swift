@@ -68,7 +68,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         self.showInfoButton()
         progressTutorialVC?.delegate = self
         let formattedString = NSMutableAttributedString()
-        formattedString.bold("Required", size: 17.0).normal(": Upload real photos of yourself")
+        formattedString.bold("Required Tutorial", size: 15.0).normal(": Upload real photos of yourself")
         progressTutorialVC?.updateProgressTitle(string: formattedString)
     }
     override func viewDidAppear(_ animated: Bool) {
