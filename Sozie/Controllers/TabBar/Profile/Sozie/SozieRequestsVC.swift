@@ -150,7 +150,8 @@ class SozieRequestsVC: UIViewController {
                 tutVC.view.frame.origin.y = (0.0)
                 tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50.0 + (topPadding ?? 0))
                 let formattedString = NSMutableAttributedString()
-                formattedString.bold("Required Tutorial", size: 15.0).normal(": Follow arrow prompts below")
+                formattedString.bold("Required Tutorial\nComplete from home in your own clothes.")
+//                formattedString.bold("Required Tutorial", size: 15.0).normal(": Follow arrow prompts below")
                 tutVC.updateProgressTitle(string: formattedString)
                 window?.addSubview(tutVC.view)
             }
@@ -255,7 +256,7 @@ class SozieRequestsVC: UIViewController {
                     let topPadding = window?.safeAreaInsets.top
                     tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 365 - (topPadding ?? 0))
                     tutVC.view.frame.origin.x = 0
-                    tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
+                    tutVC.view.frame.origin.y = 345 + (topPadding ?? 0)
                     profileParentVC.view.addSubview(tutVC.view)
                     ifUploadPostTutorialShown = true
                 }

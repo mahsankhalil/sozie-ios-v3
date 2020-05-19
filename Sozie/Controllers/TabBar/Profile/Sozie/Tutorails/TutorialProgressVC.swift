@@ -21,7 +21,7 @@ class TutorialProgressVC: UIViewController {
 
         // Do any additional setup after loading the view.
         progressView.layer.cornerRadius = 2.0
-        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 7.0)
+        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 2.0)
         progressView.clipsToBounds = true
     }
     func updateProgress(progress: Float) {
