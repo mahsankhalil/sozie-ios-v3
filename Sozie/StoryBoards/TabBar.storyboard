@@ -1540,7 +1540,7 @@
                                         <string key="text">Click on CHECK STORES NEAR YOU to see if item is available near you.
 
 (You do not actually have to go into store. This is just a simulation)</string>
-                                        <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>

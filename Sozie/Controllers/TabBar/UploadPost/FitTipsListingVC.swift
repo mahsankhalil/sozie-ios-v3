@@ -84,10 +84,10 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
-        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "DisclosureCell")
+        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "DisclosureAndCheckMarkCell")
         if tableViewCell == nil {
-            tableView.register(UINib(nibName: "DisclosureCell", bundle: nil), forCellReuseIdentifier: "DisclosureCell")
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier: "DisclosureCell")
+            tableView.register(UINib(nibName: "DisclosureAndCheckMarkCell", bundle: nil), forCellReuseIdentifier: "DisclosureAndCheckMarkCell")
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier: "DisclosureAndCheckMarkCell")
         }
         guard let cell = tableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
