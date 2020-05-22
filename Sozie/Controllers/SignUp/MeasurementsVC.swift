@@ -19,6 +19,8 @@ public enum MeasurementType: Int {
     case size
     case waistHips
     case chest
+    case topSize
+    case bottomSize
 }
 
 class LocalMeasurement: NSObject {
@@ -30,6 +32,8 @@ class LocalMeasurement: NSObject {
     var waist: String?
     var size: String?
     var chest: String?
+    var topSize: String?
+    var bottomSize: String?
 }
 
 class MeasurementsVC: UIViewController {
@@ -41,6 +45,11 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var skiptoDoItLaterButton: UIButton!
     @IBOutlet weak var orLabel: UILabel!
 
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
+    
+    
     var sizes: Size?
     var currentMeasurement = LocalMeasurement()
     var rowViewModels: [RowViewModel] = []
@@ -50,6 +59,7 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -75,6 +85,13 @@ class MeasurementsVC: UIViewController {
         fetchDataFromServer()
         if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.measurementUserGuide) == false {
         }
+        tableViewHeightConstraint.constant = 490
+        if UIScreen.main.bounds.size.height < 731 {
+            scrollViewHeightConstraint.constant = 731
+        } else {
+            scrollViewHeightConstraint.constant = UIScreen.main.bounds.height
+        }
+        scrollView.contentSizeToFit()
 //        skipButton.isHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -109,6 +126,12 @@ class MeasurementsVC: UIViewController {
             if let chest = user.measurement?.chest {
                 currentMeasurement.chest = String(chest)
             }
+            if let topSize = user.measurement?.topSize {
+                currentMeasurement.topSize = topSize
+            }
+            if let bottomSize = user.measurement?.bottomSize {
+                currentMeasurement.bottomSize = bottomSize
+            }
             if let unit = user.measurement?.unit {
                 if unit == "IN" {
                     self.segmentControl.selectedSegmentIndex = 0
@@ -139,6 +162,8 @@ class MeasurementsVC: UIViewController {
         var bra: String?
         var cup: String?
         var chest: String?
+        var topSize: String?
+        var bottomSize: String?
         if let height = self.currentMeasurement.height {
             heightInches = Double(height)?.inchesToRemainingInches()
             heightFeet = Double(height)?.inchesToFeet()
@@ -149,7 +174,11 @@ class MeasurementsVC: UIViewController {
         bra = self.currentMeasurement.bra
         cup = self.currentMeasurement.cup
         let currentSize = self.currentMeasurement.size
+        topSize = self.currentMeasurement.topSize
+        bottomSize = self.currentMeasurement.bottomSize
         let wornSizes = size.sizes
+        let topSizes = size.topSizes
+        let bottomSizes = size.bottomSizes
         var isInches = true
         var unit = "in"
         var unitAbr = "\""
@@ -179,6 +208,8 @@ class MeasurementsVC: UIViewController {
             }
         }
         let sizeWornViewModel = TitleTextFieldCellViewModel(title: sizeDescString, text: currentSize, values: wornSizes, measurementType: .size, textFieldDelegate: self, errorMessage: "Please enter your current dress size", displayError: false)
+        let topSizeViewModel = TitleTextFieldCellViewModel(title: "What top size do you normally wear?", text: topSize, values: topSizes ?? [], measurementType: .topSize, textFieldDelegate: self, errorMessage: "Please enter your top dress size", displayError: false)
+        let bottomSizeViewModel = TitleTextFieldCellViewModel(title: "What bottom size do you normally wear?", text: bottomSize, values: bottomSizes ?? [], measurementType: .bottomSize, textFieldDelegate: self, errorMessage: "Please enter your bottom dress size", displayError: false)
         let chestViewModel = SingleTextFieldCellViewModel(title: "CHEST", text: chest, placeholder: "Chest", values: chestValues ?? [], valueSuffix: unitAbr, buttonTappedDelegate: self, textFieldDelegate: self, displayError: false, errorMessage: "Please Select Chest size", measurementType: .chest, columnUnit: unit)
         var heightFinalViewModel: RowViewModel
         if isInches == true {
@@ -196,7 +227,7 @@ class MeasurementsVC: UIViewController {
         } else {
             chestFinalViewModel = braViewModel
         }
-        self.rowViewModels = [heightFinalViewModel, waistHipsModel, chestFinalViewModel, sizeWornViewModel]
+        self.rowViewModels = [heightFinalViewModel, waistHipsModel, chestFinalViewModel, sizeWornViewModel, topSizeViewModel, bottomSizeViewModel]
 
     }
     func fetchDataFromServer() {
@@ -244,7 +275,7 @@ class MeasurementsVC: UIViewController {
 
     private func isValidMeasurements() -> Bool {
         return currentMeasurement.height != nil && currentMeasurement.height != "" && currentMeasurement.waist != nil && currentMeasurement.waist != "" &&
-            currentMeasurement.hip != nil && currentMeasurement.hip != "" && ((currentMeasurement.bra != nil && currentMeasurement.bra != "" && currentMeasurement.cup != nil && currentMeasurement.cup != "") || (currentMeasurement.chest != nil && currentMeasurement.chest != "")) && currentMeasurement.size != nil && currentMeasurement.size != ""
+            currentMeasurement.hip != nil && currentMeasurement.hip != "" && ((currentMeasurement.bra != nil && currentMeasurement.bra != "" && currentMeasurement.cup != nil && currentMeasurement.cup != "") || (currentMeasurement.chest != nil && currentMeasurement.chest != "")) && (currentMeasurement.size != nil && currentMeasurement.size != "") && (currentMeasurement.topSize != nil && currentMeasurement.topSize != "") && (currentMeasurement.bottomSize != nil && currentMeasurement.bottomSize != "")
     }
 
     @IBAction func uploadBtnTapped(_ sender: Any) {
@@ -261,6 +292,8 @@ class MeasurementsVC: UIViewController {
                 dataDict["chest"] = Int(currentMeasurement.chest!)
             }
             dataDict["size"] = currentMeasurement.size
+            dataDict["top_size"] = currentMeasurement.topSize
+            dataDict["bottom_size"] = currentMeasurement.bottomSize
             dataDict["unit"] = "IN"
             if isFromSignUp {
                 if self.segmentControl.selectedSegmentIndex == 0 {
@@ -291,6 +324,9 @@ class MeasurementsVC: UIViewController {
                 setError(for: 2, isError: currentMeasurement.chest == nil || currentMeasurement.chest == "")
             }
             setError(for: 3, isError: currentMeasurement.size == nil || currentMeasurement.size == "")
+            setError(for: 4, isError: currentMeasurement.topSize == nil || currentMeasurement.topSize == "")
+            setError(for: 5, isError: currentMeasurement.bottomSize == nil || currentMeasurement.bottomSize == "")
+
             tblVu.reloadData()
         }
     }
@@ -416,6 +452,10 @@ extension MeasurementsVC: TextFieldDelegate {
                 currentMeasurement.size = text
             case .chest:
                 currentMeasurement.chest = text
+            case .topSize:
+                currentMeasurement.topSize = text
+            case .bottomSize:
+                currentMeasurement.bottomSize = text
             }
         }
     }

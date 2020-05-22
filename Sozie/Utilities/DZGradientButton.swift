@@ -72,7 +72,6 @@ import Hex
         shadowLayer?.layer.shadowRadius = 4
         shadowLayer?.layer.masksToBounds = true
         shadowLayer?.clipsToBounds = false
-        shadowLayer?.tag = 1122
         self.superview?.addSubview(shadowLayer ?? UIView())
         self.superview?.bringSubviewToFront(self)
     }
