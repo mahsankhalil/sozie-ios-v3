@@ -13,6 +13,7 @@ import Hex
 
     var shadowAdded: Bool = false
     var cornerRadius: CGFloat?
+    var shadowLayer: UIView?
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -57,21 +58,21 @@ import Hex
             return
         }
         shadowAdded = true
-        let shadowLayer = UIView(frame: self.frame)
-        shadowLayer.backgroundColor = UIColor.clear
-        shadowLayer.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
+        shadowLayer = UIView(frame: self.frame)
+        shadowLayer?.backgroundColor = UIColor.clear
+        shadowLayer?.layer.shadowColor = UIColor(hex: "FFA7A7").cgColor
         if let gender = UserDefaultManager.getCurrentUserGender() {
             if gender == "M" {
-                shadowLayer.layer.shadowColor = UIColor(hex: "48C8FF").cgColor
+                shadowLayer?.layer.shadowColor = UIColor(hex: "48C8FF").cgColor
             }
         }
-        shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-        shadowLayer.layer.shadowOffset.height = 4.0
-        shadowLayer.layer.shadowOpacity = 0.5
-        shadowLayer.layer.shadowRadius = 4
-        shadowLayer.layer.masksToBounds = true
-        shadowLayer.clipsToBounds = false
-        self.superview?.addSubview(shadowLayer)
+        shadowLayer?.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+        shadowLayer?.layer.shadowOffset.height = 4.0
+        shadowLayer?.layer.shadowOpacity = 0.5
+        shadowLayer?.layer.shadowRadius = 4
+        shadowLayer?.layer.masksToBounds = true
+        shadowLayer?.clipsToBounds = false
+        self.superview?.addSubview(shadowLayer ?? UIView())
         self.superview?.bringSubviewToFront(self)
     }
 }

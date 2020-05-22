@@ -24,13 +24,13 @@ class NearbyStoresTutorialVC: UIViewController {
             let arrowGifImage = UIImage.sd_animatedGIF(with: imageData)
             imageView.image = arrowGifImage
         }
-        let string = "Enter your zip code or city and press     FIND    "
-        let stringToColor = "    FIND    "
-        let range = (string as NSString).range(of: stringToColor)
-        let attribute = NSMutableAttributedString.init(string: string)
-        attribute.addAttribute(NSAttributedString.Key.backgroundColor, value: UtilityManager.getGenderColor(), range: range)
-        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: range)
-        textLabel.attributedText = attribute
+//        let string = "Enter your zip code or city and press     FIND    "
+//        let stringToColor = "    FIND    "
+//        let range = (string as NSString).range(of: stringToColor)
+//        let attribute = NSMutableAttributedString.init(string: string)
+//        attribute.addAttribute(NSAttributedString.Key.backgroundColor, value: UtilityManager.getGenderColor(), range: range)
+//        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: range)
+//        textLabel.attributedText = attribute
     }
     /*
     // MARK: - Navigation

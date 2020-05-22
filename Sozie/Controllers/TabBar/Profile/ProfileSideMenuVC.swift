@@ -18,6 +18,12 @@ struct TitleCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewMode
     var attributedTitle: NSAttributedString?
     let reuseIdentifier = "TitleCell"
 }
+struct HighLightedCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewModeling, LineProviding {
+    var isHidden: Bool
+    var title: String?
+    var attributedTitle: NSAttributedString?
+    let reuseIdentifier = "HighLightedCell"
+}
 //struct AboutSectionCellViewModel : RowViewModel, TitleViewModeling {
 //    var title: String?
 //    var attributedTitle: NSAttributedString?
@@ -46,13 +52,12 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var tblVu: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var howToTakePicturesButton: UIButton!
-    
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
     let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
-
+    private let higlightedCellReuseIdentifier = "HighLightedCell"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -99,7 +104,11 @@ class ProfileSideMenuVC: BaseViewController {
                 }
                 viewModel = TitleCellWithSwitchViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil, isSwitchOn: flag)
                             } else {
-                viewModel = TitleCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
+                if title == "My Measurements" && UserDefaultManager.checkIfMeasurementEmpty() {
+                    viewModel = HighLightedCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
+                } else {
+                    viewModel = TitleCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
+                }
             }
             viewModels.append(viewModel)
             index = index + 1
@@ -132,6 +141,9 @@ class ProfileSideMenuVC: BaseViewController {
     }
     */
     func rateThisApp() {
+//        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
+//            else { fatalError("Expected a valid URL") }
+//        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         if #available(iOS 10.3, *) {
             SKStoreReviewController.requestReview()
         } else {

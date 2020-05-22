@@ -150,7 +150,8 @@ class SozieRequestsVC: UIViewController {
                 tutVC.view.frame.origin.y = (0.0)
                 tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50.0 + (topPadding ?? 0))
                 let formattedString = NSMutableAttributedString()
-                formattedString.bold("Required", size: 17.0).normal(": Follow arrow prompts below")
+                formattedString.bold("Required Tutorial\nComplete from home in your own clothes.")
+//                formattedString.bold("Required Tutorial", size: 15.0).normal(": Follow arrow prompts below")
                 tutVC.updateProgressTitle(string: formattedString)
                 window?.addSubview(tutVC.view)
             }
@@ -255,7 +256,7 @@ class SozieRequestsVC: UIViewController {
                     let topPadding = window?.safeAreaInsets.top
                     tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 365 - (topPadding ?? 0))
                     tutVC.view.frame.origin.x = 0
-                    tutVC.view.frame.origin.y = 365 + (topPadding ?? 0)
+                    tutVC.view.frame.origin.y = 345 + (topPadding ?? 0)
                     profileParentVC.view.addSubview(tutVC.view)
                     ifUploadPostTutorialShown = true
                 }
@@ -669,6 +670,10 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         }
     }
     func nearbyStoresButtonTapped(button: UIButton) {
+        if UserDefaultManager.getIfPostTutorialShown() == true {
+            UtilityManager.showMessageWith(title: "Covid-19 Update", body: "We have paused in-store operations until further notice. Please stay safe at home", in: self)
+            return
+        }
         if let userId = UserDefaultManager.getCurrentUserId() {
             SVProgressHUD.show()
             ServerManager.sharedInstance.getUserProfile(userId: userId) { (isSuccess, response) in
@@ -728,14 +733,17 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 }
             }
         } else {
-            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "If you do not complete the request, a strike will be counted against you.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
-                if self.isFromTutorial {
-                    self.acceptDumnyRequest(tag: button.tag)
-                    self.hideAcceptRequestTutorial()
-                    self.showUploadPostTutorial()
-                    return
+            if self.isFromTutorial == true {
+                self.acceptDumnyRequest(tag: button.tag)
+                self.hideAcceptRequestTutorial()
+                self.showUploadPostTutorial()
+                return
+            } else {
+                UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "If you do not complete the request, a strike will be counted against you.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                    UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                        self.acceptRequestAPICall(tag: button.tag)
+                    }
                 }
-                self.acceptRequestAPICall(tag: button.tag)
             }
         }
         hideAllSearchViews()

@@ -1526,19 +1526,22 @@
                                 <color key="backgroundColor" white="0.94300176059999996" alpha="0.73613556334788721" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="up-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="Phs-rq-1oC">
-                                <rect key="frame" x="151" y="-20" width="50" height="133"/>
+                                <rect key="frame" x="151" y="-30" width="50" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="133" id="1xb-2i-JA4"/>
+                                    <constraint firstAttribute="height" constant="100" id="1xb-2i-JA4"/>
                                     <constraint firstAttribute="width" constant="50" id="Ic8-Ki-bF5"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1e-SD-pJh">
-                                <rect key="frame" x="16" y="120" width="343" height="71"/>
+                                <rect key="frame" x="16" y="70" width="343" height="156"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click on CHECK STORES NEAR YOU to see if the item is available near you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBD-m3-TMq">
-                                        <rect key="frame" x="37" y="8" width="268" height="55"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBD-m3-TMq">
+                                        <rect key="frame" x="37" y="8" width="268" height="140"/>
+                                        <string key="text">Click on CHECK STORES NEAR YOU to see if item is available near you.
+
+(You do not actually have to go into store. This is just a simulation)</string>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="15"/>
-                                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1549,7 +1552,7 @@
                                     <constraint firstItem="BBD-m3-TMq" firstAttribute="top" secondItem="s1e-SD-pJh" secondAttribute="top" constant="8" id="LNu-D2-acG"/>
                                     <constraint firstItem="BBD-m3-TMq" firstAttribute="leading" secondItem="s1e-SD-pJh" secondAttribute="leading" constant="37" id="T2P-eg-3YK"/>
                                     <constraint firstAttribute="trailing" secondItem="BBD-m3-TMq" secondAttribute="trailing" constant="38" id="x5d-9W-zbb"/>
-                                    <constraint firstAttribute="height" constant="71" id="zn5-aU-wZv"/>
+                                    <constraint firstAttribute="height" constant="156" id="zn5-aU-wZv"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1561,8 +1564,8 @@
                             <constraint firstItem="s1e-SD-pJh" firstAttribute="centerX" secondItem="w0J-GF-exR" secondAttribute="centerX" id="b5T-EK-yEk"/>
                             <constraint firstItem="VsF-Cl-Ywh" firstAttribute="top" secondItem="w0J-GF-exR" secondAttribute="top" id="f8B-f0-EQV"/>
                             <constraint firstItem="Phs-rq-1oC" firstAttribute="leading" secondItem="bc7-5U-PqL" secondAttribute="leading" constant="151" id="r4m-BV-Knn"/>
-                            <constraint firstItem="Phs-rq-1oC" firstAttribute="top" secondItem="w0J-GF-exR" secondAttribute="top" constant="-20" id="vwh-nK-NsQ"/>
-                            <constraint firstItem="s1e-SD-pJh" firstAttribute="top" secondItem="Phs-rq-1oC" secondAttribute="bottom" constant="7" id="wK6-Is-Q9F"/>
+                            <constraint firstItem="Phs-rq-1oC" firstAttribute="top" secondItem="w0J-GF-exR" secondAttribute="top" constant="-30" id="vwh-nK-NsQ"/>
+                            <constraint firstItem="s1e-SD-pJh" firstAttribute="top" secondItem="Phs-rq-1oC" secondAttribute="bottom" id="wK6-Is-Q9F"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bc7-5U-PqL"/>
                     </view>
@@ -1574,7 +1577,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vK3-VH-B2g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2380" y="-1048"/>
+            <point key="canvasLocation" x="-2380" y="-1048.4257871064469"/>
         </scene>
         <!--Accept Request TutorialVC-->
         <scene sceneID="1R6-ss-swh">
@@ -1601,18 +1604,42 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TE-nN-kTg">
                                         <rect key="frame" x="37" y="8" width="268" height="107"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="Click on ">
+                                            <fragment content="Click on">
                                                 <attributes>
                                                     <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="15" name="SegoeUI-Bold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
-                                            <fragment content="    ACCEPT REQUEST    ">
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <font key="NSFont" size="15" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="    ">
                                                 <attributes>
                                                     <color key="NSBackgroundColor" red="0.98706609010696411" green="0.53030991554260254" blue="0.53036487102508545" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <font key="NSFont" size="15" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="ACCEPT REQUEST">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.98706609010696411" green="0.53030991554260254" blue="0.53036487102508545" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="15" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="    ">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.98706609010696411" green="0.53030991554260254" blue="0.53036487102508545" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <font key="NSFont" size="15" name="SegoeUI-Bold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
@@ -1648,6 +1675,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="E2q-kO-ewD" id="b3y-em-UOv"/>
+                        <outlet property="labelHeightConstraint" destination="wuH-Og-snb" id="rYY-e3-Ryd"/>
                         <outlet property="labelView" destination="ojr-rZ-Oyc" id="jSh-mg-Eaa"/>
                         <outlet property="textLabel" destination="6TE-nN-kTg" id="eum-al-fDE"/>
                     </connections>
@@ -1830,51 +1858,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleAspectFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Akl-vP-k4U">
-                                <rect key="frame" x="81.5" y="43" width="212" height="2"/>
+                                <rect key="frame" x="81.5" y="2" width="212" height="2"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="W3N-7h-m63"/>
                                     <constraint firstAttribute="width" constant="212" id="za4-q7-skj"/>
                                 </constraints>
+                                <color key="progressTintColor" red="0.12750211358070374" green="0.5871577262878418" blue="0.95652514696121216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="0.56263488531112671" green="0.79381662607192993" blue="0.97749334573745728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V58-AC-IL1">
-                                <rect key="frame" x="0.0" y="26.5" width="55" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="du6-wZ-5j9">
+                                <rect key="frame" x="0.0" y="10" width="375" height="40"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.72941176470000002" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="fJw-TX-xzU"/>
-                                    <constraint firstAttribute="height" constant="35" id="sBp-BU-4sG"/>
+                                    <constraint firstAttribute="height" constant="40" id="dux-Kh-oSc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="17"/>
-                                <state key="normal" title="Skip">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="skipButtonTapped:" destination="5LY-BY-wwJ" eventType="touchUpInside" id="K8l-Tr-Tvs"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete tutorial with real photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="du6-wZ-5j9">
-                                <rect key="frame" x="59" y="56" width="257" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="dux-Kh-oSc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="17"/>
-                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <string key="text">Required Tutorial
+Complete from home in your own clothes.</string>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="V58-AC-IL1" firstAttribute="centerY" secondItem="acT-or-ijy" secondAttribute="centerY" id="GS1-Yd-rKK"/>
-                            <constraint firstItem="du6-wZ-5j9" firstAttribute="top" secondItem="Akl-vP-k4U" secondAttribute="bottom" constant="11" id="OUZ-da-L1e"/>
+                            <constraint firstItem="du6-wZ-5j9" firstAttribute="leading" secondItem="zuJ-Q7-dfX" secondAttribute="leading" id="Bmc-Jd-b19"/>
+                            <constraint firstItem="Akl-vP-k4U" firstAttribute="top" secondItem="zuJ-Q7-dfX" secondAttribute="top" constant="2" id="GW3-wW-spb"/>
+                            <constraint firstItem="du6-wZ-5j9" firstAttribute="trailing" secondItem="zuJ-Q7-dfX" secondAttribute="trailing" id="OSt-j2-3T2"/>
+                            <constraint firstItem="du6-wZ-5j9" firstAttribute="top" secondItem="Akl-vP-k4U" secondAttribute="bottom" constant="6" id="OUZ-da-L1e"/>
                             <constraint firstItem="Akl-vP-k4U" firstAttribute="centerX" secondItem="acT-or-ijy" secondAttribute="centerX" id="OzT-5R-8Zo"/>
-                            <constraint firstItem="Akl-vP-k4U" firstAttribute="centerY" secondItem="acT-or-ijy" secondAttribute="centerY" id="bM0-5Y-3rO"/>
-                            <constraint firstItem="du6-wZ-5j9" firstAttribute="centerX" secondItem="acT-or-ijy" secondAttribute="centerX" id="fuI-aU-Qjd"/>
-                            <constraint firstItem="V58-AC-IL1" firstAttribute="leading" secondItem="zuJ-Q7-dfX" secondAttribute="leading" id="pSA-ei-hPB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zuJ-Q7-dfX"/>
                     </view>
                     <size key="freeformSize" width="375" height="88"/>
                     <connections>
                         <outlet property="progressView" destination="Akl-vP-k4U" id="0lK-OP-uCH"/>
-                        <outlet property="skipButton" destination="V58-AC-IL1" id="qWR-3U-PJn"/>
                         <outlet property="titleLabel" destination="du6-wZ-5j9" id="xpf-Yp-upq"/>
                     </connections>
                 </viewController>
@@ -1916,17 +1933,17 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmZ-0d-kmg">
-                                <rect key="frame" x="16" y="143" width="343" height="426"/>
+                                <rect key="frame" x="16" y="143" width="343" height="456"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Depinder" translatesAutoresizingMaskIntoConstraints="NO" id="eFP-j0-7aX">
-                                        <rect key="frame" x="15" y="262" width="313" height="152"/>
+                                        <rect key="frame" x="15" y="245" width="313" height="203"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="152" id="Rnm-a6-00L"/>
+                                            <constraint firstAttribute="height" constant="203" id="Rnm-a6-00L"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm2-N8-b1e">
                                         <rect key="frame" x="15" y="16" width="313" height="228"/>
-                                        <string key="text">Time to upload your pics! Follow the instructions below and you will be good to go!
+                                        <mutableString key="text">Time to upload your pics! Follow the instructions below and you will be good to go!
 
 1. Upload a full front, back, and side view at the same angle as the pic below.
 
@@ -1934,7 +1951,7 @@
 
 3. No selfies!
 
-4. We DO want pics to be stylized with shoes👠 well-groomed hair, and makeup💄</string>
+4. We DO want pics to be stylized with shoes👟 &amp; well-groomed hair</mutableString>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1942,11 +1959,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="426" id="1hr-zW-Clt"/>
-                                    <constraint firstAttribute="bottom" secondItem="eFP-j0-7aX" secondAttribute="bottom" constant="12" id="7zU-PB-NRb"/>
+                                    <constraint firstAttribute="height" constant="456" id="1hr-zW-Clt"/>
+                                    <constraint firstAttribute="bottom" secondItem="eFP-j0-7aX" secondAttribute="bottom" constant="8" id="7zU-PB-NRb"/>
                                     <constraint firstAttribute="trailing" secondItem="eFP-j0-7aX" secondAttribute="trailing" constant="15" id="Nt1-rr-7St"/>
                                     <constraint firstItem="eFP-j0-7aX" firstAttribute="leading" secondItem="fmZ-0d-kmg" secondAttribute="leading" constant="15" id="RBj-jk-73u"/>
-                                    <constraint firstItem="eFP-j0-7aX" firstAttribute="top" secondItem="Zm2-N8-b1e" secondAttribute="bottom" constant="18" id="emw-z9-C8N"/>
+                                    <constraint firstItem="eFP-j0-7aX" firstAttribute="top" secondItem="Zm2-N8-b1e" secondAttribute="bottom" constant="1" id="emw-z9-C8N"/>
                                     <constraint firstItem="Zm2-N8-b1e" firstAttribute="top" secondItem="fmZ-0d-kmg" secondAttribute="top" constant="16" id="nbK-Uz-7tq"/>
                                     <constraint firstItem="Zm2-N8-b1e" firstAttribute="leading" secondItem="fmZ-0d-kmg" secondAttribute="leading" constant="15" id="pax-xS-dFD"/>
                                     <constraint firstAttribute="trailing" secondItem="Zm2-N8-b1e" secondAttribute="trailing" constant="15" id="sRJ-j4-Ppp"/>
@@ -2005,12 +2022,19 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZ3-6z-dDN">
-                                <rect key="frame" x="16" y="175" width="343" height="71"/>
+                                <rect key="frame" x="16" y="155" width="343" height="135"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSk-rV-tyo">
-                                        <rect key="frame" x="37" y="8" width="268" height="55"/>
+                                        <rect key="frame" x="37" y="8" width="268" height="119"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="Enter your zip code or city and press ">
+                                            <fragment content="Enter your zip code or city and press">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="16" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
                                                 <attributes>
                                                     <color key="NSColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="16" name="SegoeUI-Bold"/>
@@ -2025,6 +2049,26 @@
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
+                                            <fragment>
+                                                <string key="content">
+
+(</string>
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="16" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="You do not actually have to go into store. This is just a simulation)">
+                                                <attributes>
+                                                    <color key="NSBackgroundColor" red="0.9882352941176471" green="0.52941176470588236" blue="0.52941176470588236" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="16" name="SegoeUI-Bold"/>
+                                                    <font key="NSOriginalFont" size="16" name="SegoeUI-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2033,7 +2077,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="rSk-rV-tyo" secondAttribute="trailing" constant="38" id="1f9-Pf-DIv"/>
                                     <constraint firstAttribute="width" constant="343" id="H91-gE-Jnq"/>
-                                    <constraint firstAttribute="height" constant="71" id="NHv-D8-jJR"/>
+                                    <constraint firstAttribute="height" constant="135" id="NHv-D8-jJR"/>
                                     <constraint firstItem="rSk-rV-tyo" firstAttribute="leading" secondItem="DZ3-6z-dDN" secondAttribute="leading" constant="37" id="pIQ-5Z-gnP"/>
                                     <constraint firstItem="rSk-rV-tyo" firstAttribute="top" secondItem="DZ3-6z-dDN" secondAttribute="top" constant="8" id="uiE-VT-j70"/>
                                     <constraint firstAttribute="bottom" secondItem="rSk-rV-tyo" secondAttribute="bottom" constant="8" id="yOr-xy-5Am"/>
@@ -2047,7 +2091,7 @@
                             <constraint firstItem="Fqn-ee-Zsu" firstAttribute="top" secondItem="nvO-XK-JDB" secondAttribute="top" constant="16" id="DoB-nJ-gtA"/>
                             <constraint firstItem="DZ3-6z-dDN" firstAttribute="centerX" secondItem="nvO-XK-JDB" secondAttribute="centerX" id="Fcq-k2-DOq"/>
                             <constraint firstItem="QLX-5Y-zlb" firstAttribute="top" secondItem="nvO-XK-JDB" secondAttribute="top" constant="16" id="dCX-j2-1wp"/>
-                            <constraint firstItem="DZ3-6z-dDN" firstAttribute="top" secondItem="QLX-5Y-zlb" secondAttribute="bottom" constant="20" id="gjw-ie-j7Y"/>
+                            <constraint firstItem="DZ3-6z-dDN" firstAttribute="top" secondItem="QLX-5Y-zlb" secondAttribute="bottom" id="gjw-ie-j7Y"/>
                             <constraint firstItem="BCu-hQ-LPj" firstAttribute="trailing" secondItem="QLX-5Y-zlb" secondAttribute="trailing" constant="28" id="oht-9g-R8t"/>
                             <constraint firstItem="Fqn-ee-Zsu" firstAttribute="bottom" secondItem="BCu-hQ-LPj" secondAttribute="bottom" id="vAu-X2-RcC"/>
                         </constraints>
@@ -2077,14 +2121,12 @@
                                 <color key="backgroundColor" white="0.94300176059999996" alpha="0.73613556329999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jG-GI-vqS">
-                                <rect key="frame" x="16" y="250" width="343" height="105"/>
+                                <rect key="frame" x="16" y="250" width="343" height="55"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yco-yW-WBJ">
-                                        <rect key="frame" x="37" y="8" width="268" height="89"/>
-                                        <string key="text">Oh look! There is stock near you!
-Let's go back and accept your first request</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click on X" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yco-yW-WBJ">
+                                        <rect key="frame" x="37" y="8" width="268" height="39"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
-                                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -2095,7 +2137,7 @@ Let's go back and accept your first request</string>
                                     <constraint firstAttribute="bottom" secondItem="yco-yW-WBJ" secondAttribute="bottom" constant="8" id="Dtw-5I-OqR"/>
                                     <constraint firstAttribute="trailing" secondItem="yco-yW-WBJ" secondAttribute="trailing" constant="38" id="MbI-wa-wiv"/>
                                     <constraint firstItem="yco-yW-WBJ" firstAttribute="top" secondItem="0jG-GI-vqS" secondAttribute="top" constant="8" id="fzy-jM-EtO"/>
-                                    <constraint firstAttribute="height" constant="105" id="gJM-mB-XUj"/>
+                                    <constraint firstAttribute="height" constant="55" id="gJM-mB-XUj"/>
                                 </constraints>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="up-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="7tq-Lx-0q5">
@@ -2127,7 +2169,7 @@ Let's go back and accept your first request</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1IQ-bK-Lz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1089" y="-1049"/>
+            <point key="canvasLocation" x="-1090.4000000000001" y="-1049.3253373313344"/>
         </scene>
         <!--Stores PopupVC-->
         <scene sceneID="H8N-wY-4DY">
@@ -2468,7 +2510,7 @@ Let's go back and accept your first request</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wish List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D22-6e-RYC">
-                                                <rect key="frame" x="12" y="0.0" width="195" height="46"/>
+                                                <rect key="frame" x="12" y="0.0" width="189.5" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Jsi-q4-TB9"/>
                                                 </constraints>
@@ -2477,7 +2519,7 @@ Let's go back and accept your first request</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -2620,9 +2662,24 @@ Let's go back and accept your first request</string>
                                             <constraint firstAttribute="height" constant="1" id="jBp-GK-fSd"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2f-C2-DxA">
+                                        <rect key="frame" x="71" y="35" width="157" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="157" id="69Z-9X-XxY"/>
+                                            <constraint firstAttribute="height" constant="17" id="smF-o2-gL8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                        <state key="normal" title="Add your Measurements +">
+                                            <color key="titleColor" red="0.039215686270000001" green="0.72941176470000002" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addYourMeasurementsButtonTapped:" destination="lfr-T0-TPt" eventType="touchUpInside" id="JYl-E9-PQE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="v2f-C2-DxA" firstAttribute="top" secondItem="ofc-Jr-uZ9" secondAttribute="bottom" constant="2" id="44M-ct-Rtd"/>
                                     <constraint firstItem="ofc-Jr-uZ9" firstAttribute="top" secondItem="1B2-0G-5eY" secondAttribute="top" constant="12" id="EgZ-Pr-n8h"/>
                                     <constraint firstItem="ZJD-bQ-AXE" firstAttribute="leading" secondItem="1B2-0G-5eY" secondAttribute="leading" constant="21" id="FFa-ul-p6U"/>
                                     <constraint firstItem="ofc-Jr-uZ9" firstAttribute="leading" secondItem="ZJD-bQ-AXE" secondAttribute="trailing" constant="10" id="HKX-Eo-eSr"/>
@@ -2630,6 +2687,7 @@ Let's go back and accept your first request</string>
                                     <constraint firstItem="NGs-Ko-RnZ" firstAttribute="top" secondItem="ofc-Jr-uZ9" secondAttribute="bottom" constant="2" id="S3J-wx-inp"/>
                                     <constraint firstAttribute="trailing" secondItem="wa2-Zm-Y2s" secondAttribute="trailing" id="Vcw-Ti-7Fh"/>
                                     <constraint firstAttribute="height" constant="64" id="WXu-dW-Q0V"/>
+                                    <constraint firstItem="v2f-C2-DxA" firstAttribute="leading" secondItem="ZJD-bQ-AXE" secondAttribute="trailing" constant="10" id="bh8-5W-QKX"/>
                                     <constraint firstItem="ZJD-bQ-AXE" firstAttribute="centerY" secondItem="1B2-0G-5eY" secondAttribute="centerY" id="f6m-Be-Rpa"/>
                                     <constraint firstItem="NGs-Ko-RnZ" firstAttribute="leading" secondItem="ZJD-bQ-AXE" secondAttribute="trailing" constant="10" id="ml6-h3-j3e"/>
                                     <constraint firstAttribute="bottom" secondItem="wa2-Zm-Y2s" secondAttribute="bottom" id="qjv-3X-akd"/>
@@ -2660,9 +2718,11 @@ Let's go back and accept your first request</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addYourMeasurementsButton" destination="v2f-C2-DxA" id="uaT-1f-ejp"/>
                         <outlet property="braLabel" destination="qKs-ec-hAI" id="LtH-2A-CLH"/>
                         <outlet property="heightLabel" destination="KVc-qY-ioB" id="AKv-TO-e8f"/>
                         <outlet property="hipLabel" destination="6qH-q2-GKd" id="0OG-cS-Xja"/>
+                        <outlet property="measurementView" destination="NGs-Ko-RnZ" id="sSB-iN-n7F"/>
                         <outlet property="nameLabel" destination="ofc-Jr-uZ9" id="QsG-1C-WSS"/>
                         <outlet property="profileImageView" destination="ZJD-bQ-AXE" id="BwK-2Z-k4o"/>
                         <outlet property="tabView" destination="w3v-j6-BNU" id="8GD-jP-6qE"/>
@@ -2933,10 +2993,338 @@ Let's go back and accept your first request</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dO7-NL-zsO">
-                                        <rect key="frame" x="28" y="213.5" width="319" height="240"/>
+                                        <rect key="frame" x="13" y="120" width="349" height="307"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-7o-Jme">
+                                                <rect key="frame" x="12" y="83" width="325" height="224"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="224" id="Lyz-Hn-vQM"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="• This is a tutorial">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content">
+• It will take you 3 minutes to complete</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content">⏰
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content">
+• It will be a simulation of the real experience</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="📱">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="• Do it at home in your own clothes (no need to go to the store)">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="🏠">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="• Take real photos of yourself">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="📷">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="• Once you're done, you're ready to begin">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" metaFont="system"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.37902963161468506" green="0.37908855080604553" blue="0.37901675701141357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="Consolas"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="✅">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="13" name="AppleColorEmoji"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <font key="NSOriginalFont" size="13" name="Consolas"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.14117647058823529" green="0.15294117647058825" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REQUIRED TUTORIAL (3 MINS)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icp-lf-eZI">
+                                                <rect key="frame" x="12" y="12" width="481.5" height="17.5"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
+                                                <color key="textColor" red="0.039215686270000001" green="0.72941176470000002" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi Amanda," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dim-Qj-U5m">
-                                                <rect key="frame" x="12" y="8" width="89" height="21"/>
+                                                <rect key="frame" x="12" y="53.5" width="89" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="y3o-ur-hsM"/>
                                                 </constraints>
@@ -2944,63 +3332,38 @@ Let's go back and accept your first request</string>
                                                 <color key="textColor" red="0.16860446333885193" green="0.16864064335823059" blue="0.16860216856002808" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-7o-Jme">
-                                                <rect key="frame" x="12" y="42" width="282" height="167"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="167" id="Lyz-Hn-vQM"/>
-                                                </constraints>
-                                                <attributedString key="attributedText">
-                                                    <fragment>
-                                                        <string key="content">Welcome to Sozie!
-
-Follow the arrows and complete the instructions to get started.
-
-Start by clicking on </string>
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="13" name="SegoeUI"/>
-                                                            <font key="NSOriginalFont" size="13" name="SegoeUI"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="REQUESTS">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="13" name="SegoeUI-Bold"/>
-                                                            <font key="NSOriginalFont" size="13" name="SegoeUI-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" below.">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="13" name="SegoeUI"/>
-                                                            <font key="NSOriginalFont" size="13" name="SegoeUI"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Dim-Qj-U5m" firstAttribute="leading" secondItem="dO7-NL-zsO" secondAttribute="leading" constant="12" id="55O-Zk-DU6"/>
-                                            <constraint firstAttribute="trailing" secondItem="Icn-7o-Jme" secondAttribute="trailing" constant="25" id="C2d-xM-Yjo"/>
-                                            <constraint firstItem="Dim-Qj-U5m" firstAttribute="top" secondItem="dO7-NL-zsO" secondAttribute="top" constant="8" id="CNL-zE-wHa"/>
-                                            <constraint firstAttribute="height" constant="240" id="VI8-bI-fBb"/>
+                                            <constraint firstItem="icp-lf-eZI" firstAttribute="leading" secondItem="dO7-NL-zsO" secondAttribute="leading" constant="12" id="7jp-Bw-gQo"/>
+                                            <constraint firstAttribute="trailing" secondItem="icp-lf-eZI" secondAttribute="trailing" constant="-144.5" id="8yE-R5-jlk"/>
+                                            <constraint firstItem="icp-lf-eZI" firstAttribute="top" secondItem="dO7-NL-zsO" secondAttribute="top" constant="12" id="Rvr-Mr-qGk"/>
+                                            <constraint firstAttribute="height" constant="307" id="VI8-bI-fBb"/>
                                             <constraint firstItem="Icn-7o-Jme" firstAttribute="leading" secondItem="dO7-NL-zsO" secondAttribute="leading" constant="12" id="YDc-Uu-JDs"/>
-                                            <constraint firstAttribute="width" constant="319" id="hzT-vb-Pu7"/>
-                                            <constraint firstItem="Icn-7o-Jme" firstAttribute="top" secondItem="Dim-Qj-U5m" secondAttribute="bottom" constant="13" id="rNP-HH-5xf"/>
+                                            <constraint firstAttribute="trailing" secondItem="Icn-7o-Jme" secondAttribute="trailing" constant="12" id="dnF-TS-hwX"/>
+                                            <constraint firstItem="Dim-Qj-U5m" firstAttribute="top" secondItem="icp-lf-eZI" secondAttribute="bottom" constant="24" id="qTL-1I-Cdv"/>
+                                            <constraint firstItem="Icn-7o-Jme" firstAttribute="top" secondItem="Dim-Qj-U5m" secondAttribute="bottom" constant="8.5" id="rNP-HH-5xf"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.94300176059999996" alpha="0.85827464790140851" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="dO7-NL-zsO" firstAttribute="centerX" secondItem="m2L-dq-yAI" secondAttribute="centerX" id="Flw-vQ-eUb"/>
-                                    <constraint firstItem="dO7-NL-zsO" firstAttribute="centerY" secondItem="m2L-dq-yAI" secondAttribute="centerY" id="WGs-1J-29M"/>
+                                    <constraint firstAttribute="trailing" secondItem="dO7-NL-zsO" secondAttribute="trailing" constant="13" id="BAV-yV-mc4"/>
+                                    <constraint firstAttribute="bottom" secondItem="dO7-NL-zsO" secondAttribute="bottom" constant="240" id="Gtx-3h-qvw"/>
+                                    <constraint firstItem="dO7-NL-zsO" firstAttribute="leading" secondItem="m2L-dq-yAI" secondAttribute="leading" constant="13" id="W4N-3H-6dn"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow Arrow Prompts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7n-Mh-wLD">
+                                <rect key="frame" x="142.5" y="438" width="185" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="RFN-uc-ILU"/>
+                                    <constraint firstAttribute="height" constant="23" id="kmv-Fi-XeC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="17"/>
+                                <color key="textColor" red="0.039215686270000001" green="0.72941176470000002" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="down-arrow-sketch" translatesAutoresizingMaskIntoConstraints="NO" id="puC-qk-dcC">
                                 <rect key="frame" x="210" y="475" width="50" height="139"/>
                                 <constraints>
@@ -3047,11 +3410,13 @@ Start by clicking on </string>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="2vV-g5-hBI"/>
+                            <constraint firstItem="puC-qk-dcC" firstAttribute="centerX" secondItem="V7n-Mh-wLD" secondAttribute="centerX" id="3nP-VR-O06"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="leading" secondItem="zta-YF-Rdr" secondAttribute="leading" id="4o8-5r-Q92"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="top" secondItem="hIP-b5-G4r" secondAttribute="top" id="E37-zJ-gNj"/>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="centerX" secondItem="puC-qk-dcC" secondAttribute="centerX" id="HNb-Ft-TS8"/>
                             <constraint firstItem="P5D-h3-5P0" firstAttribute="top" secondItem="puC-qk-dcC" secondAttribute="bottom" constant="5" id="O6R-Gg-qN9"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="bottom" secondItem="zta-YF-Rdr" secondAttribute="bottom" id="kRm-WB-tuL"/>
+                            <constraint firstItem="puC-qk-dcC" firstAttribute="top" secondItem="V7n-Mh-wLD" secondAttribute="bottom" constant="14" id="qQ8-Bh-TXq"/>
                             <constraint firstItem="zta-YF-Rdr" firstAttribute="trailing" secondItem="P5D-h3-5P0" secondAttribute="trailing" constant="95" id="shD-ZZ-IwB"/>
                             <constraint firstItem="m2L-dq-yAI" firstAttribute="trailing" secondItem="zta-YF-Rdr" secondAttribute="trailing" id="sqK-nb-qs6"/>
                         </constraints>
@@ -3226,7 +3591,7 @@ Start by clicking on </string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can wear any color in the items below" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hup-YO-k5e">
-                                        <rect key="frame" x="19" y="34" width="186" height="14"/>
+                                        <rect key="frame" x="19" y="34" width="185.5" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="L9a-yZ-P66"/>
                                         </constraints>
@@ -4852,7 +5217,7 @@ Start by clicking on </string>
                                 <rect key="frame" x="0.0" y="69" width="375" height="875"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions" translatesAutoresizingMaskIntoConstraints="NO" id="QwS-ce-Fea">
-                                        <rect key="frame" x="0.0" y="0.0" width="750" height="875"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="875"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="875" id="d8F-iW-l3n"/>
                                         </constraints>
@@ -6088,7 +6453,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="Close" width="24" height="24"/>
         <image name="Cross" width="17.5" height="17.5"/>
         <image name="Cross-1" width="16" height="18"/>
-        <image name="Depinder" width="313.5" height="152"/>
+        <image name="Depinder" width="300" height="200"/>
         <image name="Image Tag" width="16" height="16"/>
         <image name="Left" width="12" height="21"/>
         <image name="Mask" width="33" height="27.5"/>
