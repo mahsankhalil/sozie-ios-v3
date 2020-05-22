@@ -18,6 +18,12 @@ struct TitleCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewMode
     var attributedTitle: NSAttributedString?
     let reuseIdentifier = "TitleCell"
 }
+struct HighLightedCellViewModel: RowViewModel, ReuseIdentifierProviding, TitleViewModeling, LineProviding {
+    var isHidden: Bool
+    var title: String?
+    var attributedTitle: NSAttributedString?
+    let reuseIdentifier = "HighLightedCell"
+}
 //struct AboutSectionCellViewModel : RowViewModel, TitleViewModeling {
 //    var title: String?
 //    var attributedTitle: NSAttributedString?
@@ -51,7 +57,7 @@ class ProfileSideMenuVC: BaseViewController {
     let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
-
+    private let higlightedCellReuseIdentifier = "HighLightedCell"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -98,7 +104,11 @@ class ProfileSideMenuVC: BaseViewController {
                 }
                 viewModel = TitleCellWithSwitchViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil, isSwitchOn: flag)
                             } else {
-                viewModel = TitleCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
+                if title == "My Measurements" && UserDefaultManager.checkIfMeasurementEmpty() {
+                    viewModel = HighLightedCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
+                } else {
+                    viewModel = TitleCellViewModel(isHidden: bottomLineHidden, title: title, attributedTitle: nil)
+                }
             }
             viewModels.append(viewModel)
             index = index + 1

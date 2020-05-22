@@ -36,14 +36,17 @@ class MeasurementsVC: UIViewController {
 
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var tblVu: UITableView!
-    @IBOutlet weak var uploadBtn: DZGradientButton!
-    @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var uploadBtn: UIButton!
+    @IBOutlet weak var skipButton: DZGradientButton!
+    @IBOutlet weak var skiptoDoItLaterButton: UIButton!
+    @IBOutlet weak var orLabel: UILabel!
 
     var sizes: Size?
     var currentMeasurement = LocalMeasurement()
     var rowViewModels: [RowViewModel] = []
     var isFromSignUp = false
 
+    @IBOutlet weak var saveButton: DZGradientButton!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
@@ -55,9 +58,16 @@ class MeasurementsVC: UIViewController {
         segmentControl.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         if isFromSignUp {
             backBtn.isHidden = true
+            saveButton.isHidden = true
         } else {
+            saveButton.isHidden = false
+            uploadBtn.isHidden = true
             skipButton.isHidden = true
-            uploadBtn.setTitle("Save", for: .normal)
+            skipButton.shadowAdded = false
+            skiptoDoItLaterButton.isHidden = true
+            orLabel.isHidden = true
+//            skipButton.isHidden = true
+//            uploadBtn.setTitle("Save", for: .normal)
             backBtn.isHidden = false
             segmentControl.isHidden = true
         }
@@ -65,7 +75,15 @@ class MeasurementsVC: UIViewController {
         fetchDataFromServer()
         if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.measurementUserGuide) == false {
         }
-        skipButton.isHidden = true
+//        skipButton.isHidden = true
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isFromSignUp {
+            saveButton.shadowLayer?.removeFromSuperview()
+        } else {
+            skipButton.shadowLayer?.removeFromSuperview()
+        }
     }
     func setupMeasurement() {
         if let user = UserDefaultManager.getCurrentUserObject() {

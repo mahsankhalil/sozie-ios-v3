@@ -17,6 +17,9 @@ class ProfileRootVC: BaseViewController {
     @IBOutlet weak var waistLabel: UILabel!
     @IBOutlet weak var hipLabel: UILabel!
     @IBOutlet weak var braLabel: UILabel!
+    @IBOutlet weak var measurementView: UIStackView!
+    @IBOutlet weak var addYourMeasurementsButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +48,11 @@ class ProfileRootVC: BaseViewController {
                 }
             }
         }
+        if UserDefaultManager.getIfPostTutorialShown() == false {
+           self.addYourMeasurementsButton.isEnabled = false
+        } else {
+            self.addYourMeasurementsButton.isEnabled = true
+        }
     }
     func populateCurrentUserData() {
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
@@ -58,6 +66,13 @@ class ProfileRootVC: BaseViewController {
         }
     }
     func populateMeasurementData(currentUser: User) {
+        if UserDefaultManager.checkIfMeasurementEmpty() {
+            measurementView.isHidden = true
+            addYourMeasurementsButton.isHidden = false
+        } else {
+            measurementView.isHidden = false
+            addYourMeasurementsButton.isHidden = true
+        }
         if let measurement = currentUser.measurement {
             let gender = UserDefaultManager.getCurrentUserGender()
             if gender == "F" {
@@ -97,6 +112,11 @@ class ProfileRootVC: BaseViewController {
         }
     }
 
+    @IBAction func addYourMeasurementsButtonTapped(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let measurementVC = storyBoard.instantiateViewController(withIdentifier: "MeasurementsVC") as! MeasurementsVC
+        self.tabBarController?.navigationController?.pushViewController(measurementVC, animated: true)
+    }
     @IBAction func sideMenuButtonTapped(_ sender: Any) {
         var sideMenuSet = SideMenuSettings()
         sideMenuSet.presentationStyle.backgroundColor = UIColor.black
