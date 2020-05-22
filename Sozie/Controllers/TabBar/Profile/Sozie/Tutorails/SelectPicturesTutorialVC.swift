@@ -33,12 +33,12 @@ class SelectPicturesTutorialVC: UIViewController {
             if gender == "M" {
                 let descriptionString = NSMutableAttributedString()
                 descriptionString.bold("Time to upload your pics! Follow the instructions below and you will be good to go!\n\n", size: 13.0).normal("1. Upload a ")
-                    .bold("full-length", size: 13.0).normal(" view of front, back and side\n\n2. Make sure your pictures are ").bold("bright 💡", size: 13.0).normal("\n\n3. We ").bold("DO", size: 13.0).normal(" want pics to be stylized with ").bold("shoes👟 well-groomed hair,", size: 13.0).normal(" and ").bold("appearance", size: 13.0).normal(" ")
+                    .bold("full-length", size: 13.0).normal(" view of front, back and side\n\n2. Make sure your pictures are ").bold("bright 💡", size: 13.0).normal("\n\n3. We ").bold("DO", size: 13.0).normal(" want pics to be stylized with ").bold("shoes👟 & well-groomed hair", size: 13.0)
                 descriptionLabel.attributedText = descriptionString
                 tutorialImageView.image = UIImage(named: "MaleTutorial")
             } else {
                 let descriptionString = NSMutableAttributedString()
-                descriptionString.bold("Time to upload your pics! Follow the instructions below and you will be good to go!\n\n", size: 13.0).normal("1. Upload a ").bold("full-length", size: 13.0).normal(" view of front, back and side\n\n2. Make sure your pictures are ").bold("bright 💡", size: 13.0).normal("\n\n3. We ").bold("DO", size: 13.0).normal(" want pics to be stylized with ").bold("shoes👠 well-groomed hair,", size: 13.0).normal(" and ").bold("makeup💄", size: 13.0)
+                descriptionString.bold("Time to upload your pics! Follow the instructions below and you will be good to go!\n\n", size: 13.0).normal("1. Upload a ").bold("full-length", size: 13.0).normal(" view of front, back and side\n\n2. Make sure your pictures are ").bold("bright 💡", size: 13.0).normal("\n\n3. We ").bold("DO", size: 13.0).normal(" want pics to be stylized with ").bold("shoes👟 & well-groomed hair", size: 13.0)
                 descriptionLabel.attributedText = descriptionString
                 tutorialImageView.image = UIImage(named: "Depinder")
             }

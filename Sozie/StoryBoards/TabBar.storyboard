@@ -1933,17 +1933,17 @@ Complete from home in your own clothes.</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmZ-0d-kmg">
-                                <rect key="frame" x="16" y="143" width="343" height="426"/>
+                                <rect key="frame" x="16" y="143" width="343" height="456"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Depinder" translatesAutoresizingMaskIntoConstraints="NO" id="eFP-j0-7aX">
-                                        <rect key="frame" x="15" y="262" width="313" height="152"/>
+                                        <rect key="frame" x="15" y="245" width="313" height="203"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="152" id="Rnm-a6-00L"/>
+                                            <constraint firstAttribute="height" constant="203" id="Rnm-a6-00L"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm2-N8-b1e">
                                         <rect key="frame" x="15" y="16" width="313" height="228"/>
-                                        <string key="text">Time to upload your pics! Follow the instructions below and you will be good to go!
+                                        <mutableString key="text">Time to upload your pics! Follow the instructions below and you will be good to go!
 
 1. Upload a full front, back, and side view at the same angle as the pic below.
 
@@ -1951,7 +1951,7 @@ Complete from home in your own clothes.</string>
 
 3. No selfies!
 
-4. We DO want pics to be stylized with shoes👠 well-groomed hair, and makeup💄</string>
+4. We DO want pics to be stylized with shoes👟 &amp; well-groomed hair</mutableString>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1959,11 +1959,11 @@ Complete from home in your own clothes.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="426" id="1hr-zW-Clt"/>
-                                    <constraint firstAttribute="bottom" secondItem="eFP-j0-7aX" secondAttribute="bottom" constant="12" id="7zU-PB-NRb"/>
+                                    <constraint firstAttribute="height" constant="456" id="1hr-zW-Clt"/>
+                                    <constraint firstAttribute="bottom" secondItem="eFP-j0-7aX" secondAttribute="bottom" constant="8" id="7zU-PB-NRb"/>
                                     <constraint firstAttribute="trailing" secondItem="eFP-j0-7aX" secondAttribute="trailing" constant="15" id="Nt1-rr-7St"/>
                                     <constraint firstItem="eFP-j0-7aX" firstAttribute="leading" secondItem="fmZ-0d-kmg" secondAttribute="leading" constant="15" id="RBj-jk-73u"/>
-                                    <constraint firstItem="eFP-j0-7aX" firstAttribute="top" secondItem="Zm2-N8-b1e" secondAttribute="bottom" constant="18" id="emw-z9-C8N"/>
+                                    <constraint firstItem="eFP-j0-7aX" firstAttribute="top" secondItem="Zm2-N8-b1e" secondAttribute="bottom" constant="1" id="emw-z9-C8N"/>
                                     <constraint firstItem="Zm2-N8-b1e" firstAttribute="top" secondItem="fmZ-0d-kmg" secondAttribute="top" constant="16" id="nbK-Uz-7tq"/>
                                     <constraint firstItem="Zm2-N8-b1e" firstAttribute="leading" secondItem="fmZ-0d-kmg" secondAttribute="leading" constant="15" id="pax-xS-dFD"/>
                                     <constraint firstAttribute="trailing" secondItem="Zm2-N8-b1e" secondAttribute="trailing" constant="15" id="sRJ-j4-Ppp"/>
@@ -2662,9 +2662,24 @@ Complete from home in your own clothes.</string>
                                             <constraint firstAttribute="height" constant="1" id="jBp-GK-fSd"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2f-C2-DxA">
+                                        <rect key="frame" x="71" y="35" width="157" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="157" id="69Z-9X-XxY"/>
+                                            <constraint firstAttribute="height" constant="17" id="smF-o2-gL8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                        <state key="normal" title="Add your Measurements +">
+                                            <color key="titleColor" red="0.039215686270000001" green="0.72941176470000002" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addYourMeasurementsButtonTapped:" destination="lfr-T0-TPt" eventType="touchUpInside" id="JYl-E9-PQE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="v2f-C2-DxA" firstAttribute="top" secondItem="ofc-Jr-uZ9" secondAttribute="bottom" constant="2" id="44M-ct-Rtd"/>
                                     <constraint firstItem="ofc-Jr-uZ9" firstAttribute="top" secondItem="1B2-0G-5eY" secondAttribute="top" constant="12" id="EgZ-Pr-n8h"/>
                                     <constraint firstItem="ZJD-bQ-AXE" firstAttribute="leading" secondItem="1B2-0G-5eY" secondAttribute="leading" constant="21" id="FFa-ul-p6U"/>
                                     <constraint firstItem="ofc-Jr-uZ9" firstAttribute="leading" secondItem="ZJD-bQ-AXE" secondAttribute="trailing" constant="10" id="HKX-Eo-eSr"/>
@@ -2672,6 +2687,7 @@ Complete from home in your own clothes.</string>
                                     <constraint firstItem="NGs-Ko-RnZ" firstAttribute="top" secondItem="ofc-Jr-uZ9" secondAttribute="bottom" constant="2" id="S3J-wx-inp"/>
                                     <constraint firstAttribute="trailing" secondItem="wa2-Zm-Y2s" secondAttribute="trailing" id="Vcw-Ti-7Fh"/>
                                     <constraint firstAttribute="height" constant="64" id="WXu-dW-Q0V"/>
+                                    <constraint firstItem="v2f-C2-DxA" firstAttribute="leading" secondItem="ZJD-bQ-AXE" secondAttribute="trailing" constant="10" id="bh8-5W-QKX"/>
                                     <constraint firstItem="ZJD-bQ-AXE" firstAttribute="centerY" secondItem="1B2-0G-5eY" secondAttribute="centerY" id="f6m-Be-Rpa"/>
                                     <constraint firstItem="NGs-Ko-RnZ" firstAttribute="leading" secondItem="ZJD-bQ-AXE" secondAttribute="trailing" constant="10" id="ml6-h3-j3e"/>
                                     <constraint firstAttribute="bottom" secondItem="wa2-Zm-Y2s" secondAttribute="bottom" id="qjv-3X-akd"/>
@@ -2702,9 +2718,11 @@ Complete from home in your own clothes.</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addYourMeasurementsButton" destination="v2f-C2-DxA" id="uaT-1f-ejp"/>
                         <outlet property="braLabel" destination="qKs-ec-hAI" id="LtH-2A-CLH"/>
                         <outlet property="heightLabel" destination="KVc-qY-ioB" id="AKv-TO-e8f"/>
                         <outlet property="hipLabel" destination="6qH-q2-GKd" id="0OG-cS-Xja"/>
+                        <outlet property="measurementView" destination="NGs-Ko-RnZ" id="sSB-iN-n7F"/>
                         <outlet property="nameLabel" destination="ofc-Jr-uZ9" id="QsG-1C-WSS"/>
                         <outlet property="profileImageView" destination="ZJD-bQ-AXE" id="BwK-2Z-k4o"/>
                         <outlet property="tabView" destination="w3v-j6-BNU" id="8GD-jP-6qE"/>
@@ -3337,7 +3355,7 @@ Cg
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow Arrow Prompts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7n-Mh-wLD">
-                                <rect key="frame" x="143" y="438" width="185" height="23"/>
+                                <rect key="frame" x="142.5" y="438" width="185" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="185" id="RFN-uc-ILU"/>
                                     <constraint firstAttribute="height" constant="23" id="kmv-Fi-XeC"/>
@@ -3573,7 +3591,7 @@ Cg
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can wear any color in the items below" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hup-YO-k5e">
-                                        <rect key="frame" x="19" y="34" width="186" height="14"/>
+                                        <rect key="frame" x="19" y="34" width="185.5" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="L9a-yZ-P66"/>
                                         </constraints>
@@ -6435,7 +6453,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="Close" width="24" height="24"/>
         <image name="Cross" width="17.5" height="17.5"/>
         <image name="Cross-1" width="16" height="18"/>
-        <image name="Depinder" width="313.5" height="152"/>
+        <image name="Depinder" width="300" height="200"/>
         <image name="Image Tag" width="16" height="16"/>
         <image name="Left" width="12" height="21"/>
         <image name="Mask" width="33" height="27.5"/>
