@@ -49,14 +49,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaultManager.isUserLoggedIn() {
-            if UserDefaultManager.checkIfMeasurementEmpty() {
-                self.showMeasuremnetVC()
-            } else {
+//            if UserDefaultManager.checkIfMeasurementEmpty() {
+//                self.showMeasuremnetVC()
+//            } else {
                 fetchUserDetail()
                 let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
                 let rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarNC")
                 self.window?.rootViewController = rootViewController
-            }
+//            }
         }
         ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
             if isSuccess {

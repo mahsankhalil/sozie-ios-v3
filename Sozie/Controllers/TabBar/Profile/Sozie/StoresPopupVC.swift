@@ -70,8 +70,8 @@ class StoresPopupVC: UIViewController {
         tutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "NearbyStoresTutorialVC") as? NearbyStoresTutorialVC
         progressTutorialVC?.updateProgress(progress: 2.0/8.0)
         if let nearByTutorialVC = tutorialVC {
-            nearByTutorialVC.view.frame.origin.y = 176
-            nearByTutorialVC.view.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.size.height - 176.0)
+            nearByTutorialVC.view.frame.origin.y = 146
+            nearByTutorialVC.view.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.size.height - 146.0)
             self.view.addSubview(nearByTutorialVC.view)
         }
     }

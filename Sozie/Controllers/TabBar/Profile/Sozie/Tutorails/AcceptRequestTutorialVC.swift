@@ -12,6 +12,8 @@ class AcceptRequestTutorialVC: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var labelView: UIView!
+    @IBOutlet weak var labelHeightConstraint: NSLayoutConstraint!
+
     var descriptionString: String?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,7 @@ class AcceptRequestTutorialVC: UIViewController {
         labelView.layer.cornerRadius = 3.0
         labelView.layer.borderColor = UIColor(hex: "9C9C9C").cgColor
         if let string = descriptionString {
+            labelHeightConstraint.constant = 123.0
             if string == "Now let's fulfil the request!  When live, you will have 24 hours to do this but for now click on\n    UPLOAD PICTURE    " {
                 let stringToColor = "    UPLOAD PICTURE    "
                 let range = (string as NSString).range(of: stringToColor)
@@ -29,6 +32,7 @@ class AcceptRequestTutorialVC: UIViewController {
                 attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: range)
                 textLabel.attributedText = attribute
             } else if string == "Click on     ACCEPT REQUEST    " {
+                labelHeightConstraint.constant = 50.0
                 let stringToColor = "    ACCEPT REQUEST    "
                 let range = (string as NSString).range(of: stringToColor)
                 let attribute = NSMutableAttributedString.init(string: string)

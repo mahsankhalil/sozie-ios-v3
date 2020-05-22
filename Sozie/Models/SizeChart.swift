@@ -30,6 +30,8 @@ struct Size: Codable {
     var bra: Bra?
     var chest: IntegerScales?
     var sizes: [String]
+    var topSizes: [String]?
+    var bottomSizes: [String]?
 //    var sizeChart: [SizeChart]
     enum CodingKeys: String, CodingKey {
 //        case general
@@ -40,6 +42,8 @@ struct Size: Codable {
 //        case sizeChart = "size_chart"
         case chest
         case sizes
+        case topSizes = "top_sizes"
+        case bottomSizes = "bottom_sizes"
     }
 
     init(from decoder: Decoder) throws {
@@ -52,6 +56,8 @@ struct Size: Codable {
 //        sizeChart = try values.decode([SizeChart].self, forKey: .sizeChart)
         chest = try? values.decode(IntegerScales.self, forKey: .chest)
         sizes = try values.decode([String].self, forKey: .sizes)
+        topSizes = try? values.decode([String].self, forKey: .topSizes)
+        bottomSizes = try? values.decode([String].self, forKey: .bottomSizes)
     }
 }
 struct SizeChart: Codable {

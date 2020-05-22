@@ -114,6 +114,8 @@ struct Measurements: Codable {
     var size: String?
     var unit: String?
     var chest: Int?
+    var topSize: String?
+    var bottomSize: String?
 
     enum CodingKeys: String, CodingKey {
         case bra
@@ -125,6 +127,8 @@ struct Measurements: Codable {
         case size
         case unit
         case chest
+        case topSize = "top_size"
+        case bottomSize = "bottom_size"
     }
 
     init(from decoder: Decoder) throws {
@@ -138,5 +142,7 @@ struct Measurements: Codable {
         size = try? values.decode(String.self, forKey: .size)
         unit = try? values.decode(String.self, forKey: .unit)
         chest = try? values.decode(Int.self, forKey: .chest)
+        topSize = try? values.decode(String.self, forKey: .topSize)
+        bottomSize = try? values.decode(String.self, forKey: .bottomSize)
     }
 }
