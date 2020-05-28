@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct ImageCellViewModel: RowViewModel, ImageViewModeling, ReuseIdentifierProviding {
+struct ImageCellViewModel: RowViewModel, ImageViewModeling, ReuseIdentifierProviding, SelectedImageViewModeling {
     var imageURL: URL?
+    var selectedImageURL: URL?
     let reuseIdentifier = "ImageViewCell"
 }
