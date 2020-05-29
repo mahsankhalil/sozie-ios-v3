@@ -10,6 +10,7 @@ import UIKit
 
 class PosePopupVC: UIViewController {
 
+    @IBOutlet weak var bottomLabel: UILabel!
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     @IBOutlet weak var nextButton: DZGradientButton!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -27,10 +28,13 @@ class PosePopupVC: UIViewController {
             switch index {
             case 0:
                 self.populateFrontPoseImages()
+                self.bottomLabel.text = "Front poses that work"
             case 1:
                 self.populateBackPoseImages()
+                self.bottomLabel.text = "Back poses that work"
             case 2:
                 self.populateSidePoseImages()
+                self.bottomLabel.text = "Side poses that work"
             default:
                 return
             }
