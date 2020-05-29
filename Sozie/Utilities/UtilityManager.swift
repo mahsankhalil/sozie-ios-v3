@@ -119,7 +119,28 @@ class UtilityManager: NSObject {
                     viewController.present(alert, animated: true, completion: nil)
                 }
             } else {
-                UtilityManager.showPermissionAlertWith(title: "Camera Unavailable", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+                DispatchQueue.main.async {
+                    UtilityManager.showPermissionAlertWith(title: "Camera Unavailable", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+                }
+            }
+        }
+    }
+    static func openCustomCameraFrom(viewController: UIViewController, photoIndex: Int?, progressTutorialVC: TutorialProgressVC?) {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                DispatchQueue.main.async {
+                    let storyBoard = UIStoryboard(name: "TabBar", bundle: .main)
+                    let imagePickerVC = storyBoard.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
+                    imagePickerVC.delegate = viewController as? CaptureManagerDelegate
+                    imagePickerVC.photoIndex = photoIndex
+                    imagePickerVC.modalPresentationStyle = .fullScreen
+                    progressTutorialVC?.view.isHidden = true
+                    viewController.present(imagePickerVC, animated: true, completion: nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    UtilityManager.showPermissionAlertWith(title: "Camera Unavailable", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+                }
             }
         }
     }
@@ -134,7 +155,9 @@ class UtilityManager: NSObject {
                 imagePicker.allowsEditing = false
                 viewController.present(imagePicker, animated: true, completion: nil)
             } else {
-                UtilityManager.showPermissionAlertWith(title: "Gallery Unavailable!", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+                DispatchQueue.main.async {
+                    UtilityManager.showPermissionAlertWith(title: "Gallery Unavailable!", message: "Please check to see if permissions granted in settings.", viewController: viewController)
+                }
             }
         })
     }
