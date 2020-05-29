@@ -77,6 +77,25 @@ class RequestImagePickerController: UIViewController {
         captureSession?.addOutput(output)
 //        addGridOnView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let index = photoIndex {
+            if index == 0 || index == 1 || index == 2 {
+                showPosePopup()
+            }
+        }
+    }
+    func showPosePopup() {
+        let popUpInstnc = PosePopupVC.instance(photoIndex: photoIndex)
+        let popUpVC = PopupController
+            .create(self)
+            .show(popUpInstnc)
+        let options = PopupCustomOption.layout(.top)
+        _ = popUpVC.customize([options])
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+    }
     func hideShowSampleImageView() {
         self.sampleImageView.isHidden = false
         if let index = photoIndex {
