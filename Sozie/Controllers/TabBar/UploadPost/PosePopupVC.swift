@@ -15,7 +15,7 @@ class PosePopupVC: UIViewController {
     @IBOutlet weak var nextButton: DZGradientButton!
     @IBOutlet weak var collectionView: UICollectionView!
     var viewModels: [ImageViewModel] = []
-    var photoIndex: Int?
+    var photoIndex: Int? = 0
     var closeHandler: (() -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +36,12 @@ class PosePopupVC: UIViewController {
                 self.populateSidePoseImages()
                 self.bottomLabel.text = "Side poses that work"
             default:
-                return
+                self.populateFrontPoseImages()
+                self.bottomLabel.text = "Front poses that work"
             }
+        } else {
+            self.populateFrontPoseImages()
+            self.bottomLabel.text = "Front poses that work"
         }
     }
     override func viewWillAppear(_ animated: Bool) {

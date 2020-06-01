@@ -15,6 +15,7 @@ class RequestImagePickerController: UIViewController {
     @IBOutlet weak var sampleImageView: UIImageView!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var intensityLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usePhotoButton: UIButton!
@@ -22,7 +23,7 @@ class RequestImagePickerController: UIViewController {
     @IBOutlet weak var camerView: UIView!
     var previewLayer: AVCaptureVideoPreviewLayer!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var howToButton: UIButton!
     @IBOutlet weak var captureButton: UIButton!
     var captureSession: AVCaptureSession?
     weak var delegate: CaptureManagerDelegate?
@@ -76,13 +77,12 @@ class RequestImagePickerController: UIViewController {
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         captureSession?.addOutput(output)
 //        addGridOnView()
+        textViewWidthConstraint.constant = overlayImageView?.frame.size.width ?? 0
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let index = photoIndex {
-            if index == 0 || index == 1 || index == 2 {
-                showPosePopup()
-            }
+        if let _ = photoIndex {
+            showPosePopup()
         }
     }
     func showPosePopup() {
@@ -169,7 +169,7 @@ class RequestImagePickerController: UIViewController {
             self.sampleImageView.isHidden = false
         }
         self.captureButton.isHidden = false
-        self.cameraButton.isHidden = false
+        self.howToButton.isHidden = false
         self.cancelButton.isHidden = false
         self.retakeButton.isHidden = true
         self.usePhotoButton.isHidden = true
@@ -177,52 +177,56 @@ class RequestImagePickerController: UIViewController {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    @IBAction func poseButtonTapped(_ sender: Any) {
+        showPosePopup()
+    }
     @IBAction func captureButtontapped(_ sender: Any) {
         captureSession?.stopRunning()
         self.imageView.image = currentImage
         self.sampleImageView.isHidden = true
         self.imageView.isHidden = false
         self.captureButton.isHidden = true
-        self.cameraButton.isHidden = true
+        self.howToButton.isHidden = true
         self.cancelButton.isHidden = true
         self.retakeButton.isHidden = false
         self.usePhotoButton.isHidden = false
     }
-    @IBAction func cameraButtonTaapped(_ sender: Any) {
-        if let session = captureSession {
-            //Indicate that some changes will be made to the session
-            session.beginConfiguration()
-            //Remove existing input
-            guard let currentCameraInput: AVCaptureInput = session.inputs.first else {
-                return
-            }
-            session.removeInput(currentCameraInput)
-            //Get new input
-            var newCamera: AVCaptureDevice! = nil
-            if let input = currentCameraInput as? AVCaptureDeviceInput {
-                if input.device.position == .back {
-                    newCamera = cameraWithPosition(position: .front)
-                } else {
-                    newCamera = cameraWithPosition(position: .back)
-                }
-            }
-            //Add input to session
-            var err: NSError?
-            var newVideoInput: AVCaptureDeviceInput!
-            do {
-                newVideoInput = try AVCaptureDeviceInput(device: newCamera)
-            } catch let err1 as NSError {
-                err = err1
-                newVideoInput = nil
-            }
-            if newVideoInput == nil || err != nil {
-                print("Error creating capture device input: \(err?.localizedDescription ?? "Error")")
-            } else {
-                session.addInput(newVideoInput)
-            }
-            //Commit all the configuration changes at once
-            session.commitConfiguration()
-        }
+    @IBAction func howToButtonTaapped(_ sender: Any) {
+        showPosePopup()
+//        if let session = captureSession {
+//            //Indicate that some changes will be made to the session
+//            session.beginConfiguration()
+//            //Remove existing input
+//            guard let currentCameraInput: AVCaptureInput = session.inputs.first else {
+//                return
+//            }
+//            session.removeInput(currentCameraInput)
+//            //Get new input
+//            var newCamera: AVCaptureDevice! = nil
+//            if let input = currentCameraInput as? AVCaptureDeviceInput {
+//                if input.device.position == .back {
+//                    newCamera = cameraWithPosition(position: .front)
+//                } else {
+//                    newCamera = cameraWithPosition(position: .back)
+//                }
+//            }
+//            //Add input to session
+//            var err: NSError?
+//            var newVideoInput: AVCaptureDeviceInput!
+//            do {
+//                newVideoInput = try AVCaptureDeviceInput(device: newCamera)
+//            } catch let err1 as NSError {
+//                err = err1
+//                newVideoInput = nil
+//            }
+//            if newVideoInput == nil || err != nil {
+//                print("Error creating capture device input: \(err?.localizedDescription ?? "Error")")
+//            } else {
+//                session.addInput(newVideoInput)
+//            }
+//            //Commit all the configuration changes at once
+//            session.commitConfiguration()
+//        }
     }
     func cameraWithPosition(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .unspecified)

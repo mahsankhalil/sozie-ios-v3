@@ -223,9 +223,11 @@ class ProfileSideMenuVC: BaseViewController {
         self.navigationController?.pushViewController(balanceVC, animated: true)
     }
     @IBAction func howToTakeSoziePicturesButtonTapped(_ sender: Any) {
-        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
-        let instructionVC = storyBoard.instantiateViewController(withIdentifier: "SozieInstructionsVC") as! SozieInstructionsVC
-        self.navigationController?.pushViewController(instructionVC, animated: true)
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ShowInstructions")))
+        self.dismiss(animated: true, completion: nil)
+//        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+//        let instructionVC = storyBoard.instantiateViewController(withIdentifier: "SozieInstructionsVC") as! SozieInstructionsVC
+//        self.navigationController?.pushViewController(instructionVC, animated: true)
     }
     @IBAction func logoutBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)

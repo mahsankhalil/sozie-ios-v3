@@ -78,6 +78,8 @@ class SozieRequestsVC: UIViewController {
         showPostTutorials()
         NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAllData), name: Notification.Name(rawValue: "PostUploaded"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showInstructions), name: Notification.Name(rawValue: "ShowInstructions"), object: nil)
+
 
 //        self.view.window?.addSubview(tutorialVC.view)
         if let user = UserDefaultManager.getCurrentUserObject() {
@@ -810,6 +812,11 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             self.resetFirstTime()
         }
     }
+    @objc func showInstructions() {
+        tutorialVC?.view.removeFromSuperview()
+        instructionsScrollView.isHidden = false
+        disableRootButtons()
+    }
 }
 extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -828,9 +835,7 @@ extension SozieRequestsVC: UINavigationControllerDelegate, UIImagePickerControll
 }
 extension SozieRequestsVC: SozieRequestTutorialDelegate {
     func infoButtonTapped() {
-        tutorialVC?.view.removeFromSuperview()
-        instructionsScrollView.isHidden = false
-        disableRootButtons()
+        showInstructions()
     }
 }
 extension SozieRequestsVC: UploadPostAndFitTipsDelegate {
