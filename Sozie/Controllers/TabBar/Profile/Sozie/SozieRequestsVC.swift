@@ -69,7 +69,7 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (1070.0/375.0) * UIScreen.main.bounds.size.width
+        instructionsHeightConstraint.constant = (860.0/375.0) * UIScreen.main.bounds.size.width
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
 //            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
 //            tutorialVC?.delegate = self
@@ -79,8 +79,6 @@ class SozieRequestsVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAllData), name: Notification.Name(rawValue: "PostUploaded"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showInstructions), name: Notification.Name(rawValue: "ShowInstructions"), object: nil)
-
-
 //        self.view.window?.addSubview(tutorialVC.view)
         if let user = UserDefaultManager.getCurrentUserObject() {
             if user.country == 1 {
