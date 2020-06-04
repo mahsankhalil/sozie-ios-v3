@@ -438,12 +438,25 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
                 UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: self.selectedIndex, progressTutorialVC: self.progressTutorialVC)
             }))
             alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-                UtilityManager.openGalleryFrom(viewController: self)
+                self.showPosePopup(index: self.selectedIndex)
+//                UtilityManager.openGalleryFrom(viewController: self)
             }))
             alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
             self.postImageView.image = viewModels[indexPath.row].image
+        }
+    }
+    func showPosePopup(index: Int?) {
+        let popUpInstnc = PosePopupVC.instance(photoIndex: index)
+        let popUpVC = PopupController
+            .create(self.tabBarController?.navigationController ?? self)
+            .show(popUpInstnc)
+        let options = PopupCustomOption.layout(.top)
+        _ = popUpVC.customize([options])
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+            UtilityManager.openGalleryFrom(viewController: self)
         }
     }
 }
@@ -498,31 +511,31 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         cropVC.cropView.gridOverlayHidden = true
         cropVC.cropView.setGridOverlayHidden(true, animated: true)
         let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
-        var image: UIImage?
-        if let index = selectedIndex {
-            switch index {
-            case 0:
-                image = UtilityManager.genderRespectedFrontImage()
-            case 1:
-                image = UtilityManager.genderRespectedBackImage()
-            case 2:
-                image = UtilityManager.genderRespectedSideImage()
-            default:
-                image = nil
-            }
-        } else {
-            image = nil
-        }
-        let tutorialImageView = UIImageView(image: image)
-        tutorialImageView.frame.origin.x = UIScreen.main.bounds.size.width - 68
-        tutorialImageView.frame.origin.y = 20
+//        var image: UIImage?
+//        if let index = selectedIndex {
+//            switch index {
+//            case 0:
+//                image = UtilityManager.genderRespectedFrontImage()
+//            case 1:
+//                image = UtilityManager.genderRespectedBackImage()
+//            case 2:
+//                image = UtilityManager.genderRespectedSideImage()
+//            default:
+//                image = nil
+//            }
+//        } else {
+//            image = nil
+//        }
+//        let tutorialImageView = UIImageView(image: image)
+//        tutorialImageView.frame.origin.x = UIScreen.main.bounds.size.width - 68
+//        tutorialImageView.frame.origin.y = 20
         imgVu.center = cropVC.cropView.center
         imgVu.frame = cropVC.cropView.cropBoxFrame
         cropVC.cropView.addSubview(imgVu)
         self.present(cropVC, animated: true) {
             imgVu.frame = cropVC.cropView.cropBoxFrame
         }
-        cropVC.cropView.addSubview(tutorialImageView)
+//        cropVC.cropView.addSubview(tutorialImageView)
     }
     func setupImage(pickedImage: UIImage) {
         if let index = selectedIndex {
