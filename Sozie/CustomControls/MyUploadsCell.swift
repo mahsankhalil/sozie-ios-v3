@@ -8,23 +8,17 @@
 
 import UIKit
 protocol MyUploadsCellDelegate: class {
-    func deleteButtonTapped(button: UIButton)
-    func viewBalanceButtonTapped(button: UIButton)
-    func resetTutorialButtonTapped(button: UIButton)
+    func editButtonTapped(button: UIButton)
+    func warningButtonTapped(button: UIButton)
+    func imageTapped(collectionViewTag: Int, cellTag: Int )
 }
 
 class MyUploadsCell: UITableViewCell {
-    @IBOutlet weak var resetTutrialButton: UIButton!
-    @IBOutlet weak var cornerIcon: UIImageView!
-    @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var viewBalanceButton: UIButton!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var requestedForLabel: UILabel!
-    @IBOutlet weak var requestedForImageView: UIImageView!
     weak var delegate: MyUploadsCellDelegate?
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    @IBOutlet weak var warningButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     var viewModels: [UploadViewModel] = []
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,107 +31,44 @@ class MyUploadsCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func deleteButtonTapped(_ sender: Any) {
-        delegate?.deleteButtonTapped(button: sender as! UIButton)
+
+    @IBAction func editButtonTapped(_ sender: Any) {
+        delegate?.editButtonTapped(button: sender as! UIButton)
     }
-    @IBAction func viewBalanceButtonTapped(_ sender: Any) {
-        delegate?.viewBalanceButtonTapped(button: sender as! UIButton)
-    }
-    @IBAction func resetTutorialButtonTapped(_ sender: Any) {
-        UserDefaultManager.makeUserGuideEnable()
-        UserDefaultManager.removeAllUserGuidesShown()
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ResetFirstTime")))
-        delegate?.resetTutorialButtonTapped(button: sender as! UIButton)
+    @IBAction func warningButtonTapped(_ sender: Any) {
+        delegate?.warningButtonTapped(button: sender as! UIButton)
     }
 }
 extension MyUploadsCell: ButtonProviding {
     func assignTagWith(_ index: Int) {
-        deleteButton.tag = index
-        viewBalanceButton.tag = index
+        warningButton.tag = index
+        editButton.tag = index
+        collectionView.tag = index
     }
 }
 extension MyUploadsCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
         if let postViewModel = viewModel as? UserPostWithUploadsViewModel {
             viewModels.removeAll()
+            let productImageViewModel = UploadViewModel(imageURL: URL(string: postViewModel.productURL)!, status: "P", isApproved: false)
+            viewModels.append(productImageViewModel)
             for upload in postViewModel.uploads {
                 let currentViewModel = UploadViewModel(imageURL: URL(string: upload.imageURL)!, status: upload.reviewAction, isApproved: upload.isApproved)
                 viewModels.append(currentViewModel)
             }
+            switch postViewModel.postType {
+            case .success:
+                self.editButton.isHidden = true
+                self.warningButton.isHidden = true
+            case .inReview:
+                self.editButton.isHidden = false
+                self.warningButton.isHidden = true
+            case .redo:
+                self.editButton.isHidden = true
+                self.warningButton.isHidden = false
+            }
             self.collectionView.reloadData()
-            self.resetTutrialButton.isHidden = true
-            if postViewModel.isModerated == true {
-                self.descriptionLabel.isHidden = false
-            } else {
-                self.descriptionLabel.isHidden = true
-            }
-            if postViewModel.isApproved {
-                self.bottomView.backgroundColor = UtilityManager.getGenderColor()
-                if postViewModel.isTutorial {
-                    showTutorialApproved(postViewModel: postViewModel)
-                } else {
-                    showPostApproved(postViewModel: postViewModel)
-                }
-                self.viewBalanceButton.isEnabled = true
-            } else {
-                self.bottomView.backgroundColor = UIColor(hex: "DCDCDC")
-                if postViewModel.isTutorial {
-                    showTutorialNotApproved(postViewModel: postViewModel)
-                } else {
-                    showPostNotApproved(postViewModel: postViewModel)
-                }
-                self.viewBalanceButton.isEnabled = false
-            }
-            if let user = UserDefaultManager.getCurrentUserObject() {
-                if let country = user.country {
-                    if country == 1 {
-                        self.requestedForImageView.image = UIImage(named: "Adidas-Title")
-                    } else {
-                        self.requestedForImageView.image = UIImage(named: "Target-title")
-                    }
-                }
-            }
         }
-    }
-    func showPostApproved(postViewModel: UserPostWithUploadsViewModel) {
-        self.cornerIcon.isHidden = true
-        self.descriptionLabel.text = "Post approved"
-        self.viewBalanceButton.isHidden = false
-        self.resetTutrialButton.isHidden = true
-        requestedForLabel.isHidden = false
-        requestedForImageView.isHidden = false
-        self.deleteButton.isHidden = false
-    }
-    func showPostNotApproved(postViewModel: UserPostWithUploadsViewModel) {
-        self.cornerIcon.isHidden = true
-        self.descriptionLabel.text = "Post not approved"
-        self.viewBalanceButton.isHidden = false
-        self.resetTutrialButton.isHidden = true
-        requestedForLabel.isHidden = false
-        requestedForImageView.isHidden = false
-        self.deleteButton.isHidden = false
-    }
-    func showTutorialApproved(postViewModel: UserPostWithUploadsViewModel) {
-        self.cornerIcon.isHidden = false
-        self.descriptionLabel.text = "Tutorial approved"
-        self.viewBalanceButton.isHidden = true
-        self.resetTutrialButton.isHidden = true
-        requestedForLabel.isHidden = true
-        requestedForImageView.isHidden = true
-        self.deleteButton.isHidden = true
-    }
-    func showTutorialNotApproved(postViewModel: UserPostWithUploadsViewModel) {
-        self.cornerIcon.isHidden = false
-        self.descriptionLabel.text = "Tutorial not approved"
-        self.viewBalanceButton.isHidden = true
-        if postViewModel.isModerated == true {
-            self.resetTutrialButton.isHidden = false
-        } else {
-            self.resetTutrialButton.isHidden = true
-        }
-        requestedForLabel.isHidden = true
-        requestedForImageView.isHidden = true
-        self.deleteButton.isHidden = true
     }
 }
 extension MyUploadsCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -155,7 +86,7 @@ extension MyUploadsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let availableWidth: Int = Int(UIScreen.main.bounds.size.width - 6 )
 //        let widthPerItem = Double(availableWidth/3)
-        return CGSize(width: 110, height: 110 )
+        return CGSize(width: 120, height: 120*16/9 )
     }
     //3
     func collectionView(_ collectionView: UICollectionView,
@@ -171,7 +102,6 @@ extension MyUploadsCell: UICollectionViewDelegate, UICollectionViewDataSource {
         return 3.0
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        currentPost = posts[indexPath.row]
-//        self.performSegue(withIdentifier: "toProductDetail", sender: self)
+        delegate?.imageTapped(collectionViewTag: collectionView.tag, cellTag: indexPath.row)
     }
 }

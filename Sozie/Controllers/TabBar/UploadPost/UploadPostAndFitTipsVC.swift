@@ -436,12 +436,6 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
                 UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: self.selectedIndex, progressTutorialVC: self.progressTutorialVC)
-//                let imagePickerVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestImagePickerController") as! RequestImagePickerController
-//                imagePickerVC.delegate = self
-//                imagePickerVC.photoIndex = self.selectedIndex
-//                imagePickerVC.modalPresentationStyle = .fullScreen
-//                self.progressTutorialVC?.view.isHidden = true
-//                self.present(imagePickerVC, animated: true, completion: nil)
             }))
             alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
                 UtilityManager.openGalleryFrom(viewController: self)

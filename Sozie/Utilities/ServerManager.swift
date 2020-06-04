@@ -540,9 +540,15 @@ class ServerManager: NSObject {
             if let userId = params["user_id"] {
                 url = url + "&user_id=" + String(userId as! Int)
             }
+            if let reviewAction = params["review_action"] as? String {
+                url = url + "&review_action=" + reviewAction
+            }
         } else {
             if let userId = params["user_id"] {
                 url = url + "?user_id=" + String(userId as! Int)
+            }
+            if let reviewAction = params["review_action"] as? String {
+                url = url + "&review_action=" + reviewAction
             }
         }
         Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
