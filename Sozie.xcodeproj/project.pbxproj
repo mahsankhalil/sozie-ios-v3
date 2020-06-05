@@ -119,6 +119,7 @@
 		61716224225B6BF30098C3E1 /* InfiniteScrollCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61716223225B6BF20098C3E1 /* InfiniteScrollCollectionView.swift */; };
 		61716226225F5F2A0098C3E1 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61716225225F5F2A0098C3E1 /* Label.swift */; };
 		6173E020221C068100AC9781 /* DescriptionViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6173E01F221C068100AC9781 /* DescriptionViewModeling.swift */; };
+		6178BA06248A468A001B786E /* AddPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6178BA05248A468A001B786E /* AddPostResponse.swift */; };
 		6179EC29227706AC00AE75F9 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6179EC27227706AC00AE75F9 /* CommentCell.swift */; };
 		6179EC2A227706AC00AE75F9 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6179EC28227706AC00AE75F9 /* CommentCell.xib */; };
 		6179EC2C22770B4600AE75F9 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6179EC2B22770B4600AE75F9 /* CommentsVC.swift */; };
@@ -389,6 +390,7 @@
 		61716223225B6BF20098C3E1 /* InfiniteScrollCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollCollectionView.swift; sourceTree = "<group>"; };
 		61716225225F5F2A0098C3E1 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		6173E01F221C068100AC9781 /* DescriptionViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewModeling.swift; sourceTree = "<group>"; };
+		6178BA05248A468A001B786E /* AddPostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostResponse.swift; sourceTree = "<group>"; };
 		6179EC27227706AC00AE75F9 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		6179EC28227706AC00AE75F9 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		6179EC2B22770B4600AE75F9 /* CommentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
@@ -1001,6 +1003,7 @@
 				61F0284B22CC8BE600B3BB4B /* FitTips.swift */,
 				6163C53122E72AF600149304 /* HubSpotResponse.swift */,
 				617DD44E23D5AD3A00A08AE0 /* AdidasProduct.swift */,
+				6178BA05248A468A001B786E /* AddPostResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1426,6 +1429,7 @@
 				69854D6F21C8D88A0092672D /* DZGradientView.swift in Sources */,
 				6103E1B021FF330400C7E7CF /* TitleCell.swift in Sources */,
 				6179EC302278756C00AE75F9 /* Review.swift in Sources */,
+				6178BA06248A468A001B786E /* AddPostResponse.swift in Sources */,
 				6944810A21C7A018001A11A2 /* ApplicationManager.swift in Sources */,
 				6197726622169B08003A7091 /* Post.swift in Sources */,
 				61B9D1D32227EC89007C6326 /* SozieRequestsVC.swift in Sources */,

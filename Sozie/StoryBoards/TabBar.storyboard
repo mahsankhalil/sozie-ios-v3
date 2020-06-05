@@ -1326,7 +1326,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side poses that work" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ah-ZY-4WD">
-                                        <rect key="frame" x="132.5" y="40" width="110" height="16"/>
+                                        <rect key="frame" x="131" y="40" width="113.5" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="nep-Lm-lg2"/>
                                         </constraints>
@@ -1335,7 +1335,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW TO TAKE PHOTOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUh-ZO-RnU">
-                                        <rect key="frame" x="109.5" y="18" width="156" height="20"/>
+                                        <rect key="frame" x="104.5" y="18" width="166.5" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="1eQ-ie-1tz"/>
                                         </constraints>
@@ -2627,7 +2627,7 @@ Complete from home in your own clothes.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -6712,7 +6712,7 @@ Please click on the (restart tutorial) button below to start again!</string>
                                 <rect key="frame" x="0.0" y="233.5" width="375" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Smile &amp; look at the camera :)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kn-1g-sz7">
-                                        <rect key="frame" x="24" y="112" width="207" height="20"/>
+                                        <rect key="frame" x="24" y="112" width="209" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="WjM-we-NYu"/>
                                         </constraints>
@@ -6721,7 +6721,7 @@ Please click on the (restart tutorial) button below to start again!</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Make sure head and feet are not cut off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oam-9j-q5q">
-                                        <rect key="frame" x="24" y="68" width="277" height="20"/>
+                                        <rect key="frame" x="24" y="68" width="280.5" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="PVv-Pn-Qb5"/>
                                         </constraints>
@@ -6730,7 +6730,7 @@ Please click on the (restart tutorial) button below to start again!</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RBz-IH-L6A">
-                                        <rect key="frame" x="24" y="156" width="104" height="20"/>
+                                        <rect key="frame" x="24" y="156" width="109" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="LSA-Bh-M5c"/>
                                         </constraints>
@@ -6760,7 +6760,7 @@ Please click on the (restart tutorial) button below to start again!</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Use grid to center body in frames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbn-kk-l9p">
-                                        <rect key="frame" x="24" y="24" width="237" height="20"/>
+                                        <rect key="frame" x="24" y="24" width="241" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="gSv-TM-TOd"/>
                                         </constraints>

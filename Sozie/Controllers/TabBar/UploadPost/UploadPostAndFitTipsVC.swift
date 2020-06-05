@@ -46,6 +46,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var submitTutorialVC: SubmitPostTutorialVC?
     var isTutorialShowing: Bool = false
     var isFitTipsTutorialShown: Bool = false
+    var currentTaskId: String?
     var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -301,24 +302,54 @@ class UploadPostAndFitTipsVC: BaseViewController {
         ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-                if isTutorial {
-                    UserDefaultManager.setBrowserTutorialShown()
-                    self.uploadTutorialData()
-                } else {
-                    SegmentManager.createEventRequestSubmitted()
-//                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
-                    self.showThankYouController()
-                    self.bottomButtom.isEnabled = true
-                    self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
-                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
-                }
+                self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
+                self.getPostProgress(isTutorial: isTutorial)
+//                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//                if isTutorial {
+//                    UserDefaultManager.setBrowserTutorialShown()
+//                    self.uploadTutorialData()
+//                } else {
+//                    SegmentManager.createEventRequestSubmitted()
+//                    self.showThankYouController()
+//                    self.bottomButtom.isEnabled = true
+//                    self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
+//                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
+//                }
             } else {
                 self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
         }
     }
+    func getPostProgress(isTutorial: Bool) {
+        if let taskId = self.currentTaskId {
+            ServerManager.sharedInstance.getPostProgress(taskId: taskId) { (isSuccess, response) in
+                if isSuccess {
+                    let taskInfo = (response as! ProgressResponse).taskInfo
+                    if taskInfo.taskStatus == "SUCCESS" {
+                        SVProgressHUD.dismiss()
+                        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+                        if isTutorial {
+                            UserDefaultManager.setBrowserTutorialShown()
+                            self.uploadTutorialData()
+                        } else {
+                            SegmentManager.createEventRequestSubmitted()
+                            self.showThankYouController()
+                            self.bottomButtom.isEnabled = true
+                            self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
+                            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
+                        }
+                    } else if taskInfo.taskStatus == "FAILURE" {
+                        SVProgressHUD.dismiss()
+                    } else {
+                        SVProgressHUD.showProgress(Float( taskInfo.info.progress.percent) / 100.0)
+                        self.getPostProgress(isTutorial: isTutorial)
+                    }
+                }
+            }
+        }
+    }
+
     func showThankYouController() {
         let thankYouVC = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouController") as! ThankYouController
         self.view.addSubview(thankYouVC.view)

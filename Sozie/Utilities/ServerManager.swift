@@ -54,6 +54,7 @@ class ServerManager: NSObject {
     static let fitTipsURL = ServerManager.serverURL + "common/fittips"
     static let notificationURL = ServerManager.serverURL + "user/notify_config/"
     static let tutorialURL = ServerManager.serverURL + "user/tutorial_states/"
+    static let postProgressURL = ServerManager.serverURL + "post/get_post_progress/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -596,6 +597,22 @@ class ServerManager: NSObject {
             }
         }
     }
+    func getPostProgress(taskId: String, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.postProgressURL + "?task_id=" + taskId
+        Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ProgressResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
     func changePassword(params: [String: Any], block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
@@ -805,7 +822,7 @@ class ServerManager: NSObject {
             case .success(let upload, _, _):
                 upload.responseData { response in
                     let decoder = JSONDecoder()
-                    let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+                    let obj: Result<AddPostResponse> = decoder.decodeResponse(from: response)
                     obj.ifSuccess {
                         block!(true, obj.value!)
                     }
