@@ -96,7 +96,6 @@
 		614374E022378C6500DBD295 /* BlockedUserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374DF22378C6500DBD295 /* BlockedUserCellViewModel.swift */; };
 		614374E222390EAE00DBD295 /* MyBalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374E122390EAE00DBD295 /* MyBalanceVC.swift */; };
 		614CEA4621F1E48600FE5F9D /* SocialAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */; };
-		615790E52254CBEB007B8532 /* signup.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 615790E42254CBEB007B8532 /* signup.mp4 */; };
 		615816622333A46B00990F41 /* ThankYouAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 615816612333A46A00990F41 /* ThankYouAnimation.gif */; };
 		615816642333A4A500990F41 /* ThankYouController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615816632333A4A500990F41 /* ThankYouController.swift */; };
 		6158DC282201881500CB78EC /* SwitchProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6158DC272201881500CB78EC /* SwitchProviding.swift */; };
@@ -116,6 +115,7 @@
 		61716224225B6BF30098C3E1 /* InfiniteScrollCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61716223225B6BF20098C3E1 /* InfiniteScrollCollectionView.swift */; };
 		61716226225F5F2A0098C3E1 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61716225225F5F2A0098C3E1 /* Label.swift */; };
 		6173E020221C068100AC9781 /* DescriptionViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6173E01F221C068100AC9781 /* DescriptionViewModeling.swift */; };
+		6178BA0C248A9FA3001B786E /* SignupTrimmed.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6178BA0B248A9FA3001B786E /* SignupTrimmed.mp4 */; };
 		6179EC29227706AC00AE75F9 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6179EC27227706AC00AE75F9 /* CommentCell.swift */; };
 		6179EC2A227706AC00AE75F9 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6179EC28227706AC00AE75F9 /* CommentCell.xib */; };
 		6179EC2C22770B4600AE75F9 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6179EC2B22770B4600AE75F9 /* CommentsVC.swift */; };
@@ -360,7 +360,6 @@
 		614374DF22378C6500DBD295 /* BlockedUserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserCellViewModel.swift; sourceTree = "<group>"; };
 		614374E122390EAE00DBD295 /* MyBalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceVC.swift; sourceTree = "<group>"; };
 		614CEA4521F1E48600FE5F9D /* SocialAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthManager.swift; sourceTree = "<group>"; };
-		615790E42254CBEB007B8532 /* signup.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = signup.mp4; sourceTree = "<group>"; };
 		615816612333A46A00990F41 /* ThankYouAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ThankYouAnimation.gif; sourceTree = "<group>"; };
 		615816632333A4A500990F41 /* ThankYouController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouController.swift; sourceTree = "<group>"; };
 		6158DC272201881500CB78EC /* SwitchProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchProviding.swift; sourceTree = "<group>"; };
@@ -385,6 +384,7 @@
 		61716223225B6BF20098C3E1 /* InfiniteScrollCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollCollectionView.swift; sourceTree = "<group>"; };
 		61716225225F5F2A0098C3E1 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		6173E01F221C068100AC9781 /* DescriptionViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewModeling.swift; sourceTree = "<group>"; };
+		6178BA0B248A9FA3001B786E /* SignupTrimmed.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignupTrimmed.mp4; sourceTree = "<group>"; };
 		6179EC27227706AC00AE75F9 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		6179EC28227706AC00AE75F9 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		6179EC2B22770B4600AE75F9 /* CommentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
@@ -1028,6 +1028,7 @@
 		6998E7DB21C77778009DFBEF /* Sozie */ = {
 			isa = PBXGroup;
 			children = (
+				6178BA0B248A9FA3001B786E /* SignupTrimmed.mp4 */,
 				615816612333A46A00990F41 /* ThankYouAnimation.gif */,
 				613C48C1230A81C600200AE0 /* Arrow-Gif.gif */,
 				613C48C2230A81C800200AE0 /* Down-Arrow.gif */,
@@ -1035,7 +1036,6 @@
 				613CFD322264B6F900841348 /* now.mp4 */,
 				61E944A6244867C700417683 /* now_02.mp4 */,
 				613CFD302264B53C00841348 /* now_01.mp4 */,
-				615790E42254CBEB007B8532 /* signup.mp4 */,
 				6103E1A521FEDBEB00C7E7CF /* ThirdParty */,
 				6103E18621F9E98800C7E7CF /* StoryBoards */,
 				D738BF6121F3D6E100302FE5 /* Extensions */,
@@ -1254,12 +1254,12 @@
 				61B5A0D722A12C12009D372C /* TargetRequestTableViewCell.xib in Resources */,
 				61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */,
 				6103E1B521FF33CC00C7E7CF /* TitleAndSwitchCell.xib in Resources */,
-				615790E52254CBEB007B8532 /* signup.mp4 in Resources */,
 				61B647F82227FEC7007A6370 /* SozieRequestTableViewCell.xib in Resources */,
 				6179EC2A227706AC00AE75F9 /* CommentCell.xib in Resources */,
 				611EDFD6221AF0DB00FB2DBE /* WishTableViewCell.xib in Resources */,
 				6103E1B121FF330400C7E7CF /* TitleCell.xib in Resources */,
 				613CFD332264B6FA00841348 /* now.mp4 in Resources */,
+				6178BA0C248A9FA3001B786E /* SignupTrimmed.mp4 in Resources */,
 				61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */,
 				616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */,
 				61F086E72476858000D5B591 /* DisclosureAndCheckMarkCell.xib in Resources */,
@@ -1675,7 +1675,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -1689,7 +1689,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.9;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)-Dev";
@@ -1768,7 +1768,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -1782,7 +1782,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.9;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)-Stage";
@@ -1917,7 +1917,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -1931,7 +1931,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.9;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1948,7 +1948,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1961,7 +1961,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.9;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sozie.sozieapp;
 				PRODUCT_MODULE_NAME = Sozie;
 				PRODUCT_NAME = "$(TARGET_NAME)";

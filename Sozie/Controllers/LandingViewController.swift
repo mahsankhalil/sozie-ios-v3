@@ -40,7 +40,7 @@ class LandingViewController: UIViewController {
 
     }
     func loadBackgroundVideo() {
-        let url = Bundle.main.url(forResource: "signup", withExtension: "mp4")
+        let url = Bundle.main.url(forResource: "SignupTrimmed", withExtension: "mp4")
         avPlayer = AVPlayer(url: url!)
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
