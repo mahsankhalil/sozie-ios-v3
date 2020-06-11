@@ -1,18 +1,18 @@
 //
-//  FitTipsAnswerTextVC.swift
+//  FitTipsAnswerRateVC.swift
 //  Sozie
 //
-//  Created by Zaighum Ghazali Khan on 7/4/19.
-//  Copyright © 2019 Danial Zahid. All rights reserved.
+//  Created by Zaighum Ghazali Khan on 6/11/20.
+//  Copyright © 2020 Danial Zahid. All rights reserved.
 //
 
 import UIKit
-
-class FitTipsAnswerTextVC: UIViewController {
+import RateView
+class FitTipsAnswerRateVC: UIViewController {
+    @IBOutlet weak var rateView: RateView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var textView: UITextView!
     var fitTipsIndex: Int?
     var questionIndex: Int?
     var fitTips: [FitTips]?
@@ -20,27 +20,30 @@ class FitTipsAnswerTextVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        titleLabel.textColor = UtilityManager.getGenderColor()
-        if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
-            titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
-            if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
-                textView.text = "I wish " + answer
-            }
-        }
-        textView.delegate = self
-        textView.becomeFirstResponder()
+        rateView.canRate = true
+        rateView.starFillColor = UIColor(hex: "ffbe25")
+        rateView.starNormalColor = UIColor(hex: "e0e0e0")
+        rateView.starBorderColor = UIColor.clear
         (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
 
-    @IBAction func backButtonTaped(_ sender: Any) {
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if textView.text.isEmpty || textView.text == "I wish " {
-            UtilityManager.showErrorMessage(body: "Please enter comment", in: self)
-        } else {
+        if rateView.rating != 0.0 {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
-                let answer = self.textView.text.deletingPrefix("I wish ")
+                let answer = String(Int(self.rateView.rating))
                 fitTips[fitTipIndex].question[questIndex].answer = answer
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
@@ -62,8 +65,11 @@ class FitTipsAnswerTextVC: UIViewController {
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: fitTipIndex)
                 }
             }
+        } else {
+            UtilityManager.showErrorMessage(body: "Please select rating.", in: self)
         }
     }
+    
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
         destVC.fitTipsIndex = fitTipIndex
@@ -86,31 +92,5 @@ class FitTipsAnswerTextVC: UIViewController {
         destVC.fitTips = fitTips
         destVC.type = type
         self.navigationController?.pushViewController(destVC, animated: true)
-    }
-
-}
-extension FitTipsAnswerTextVC: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Type your comment..." {
-            textView.text = "I wish "
-        }
-    }
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "I wish " {
-            textView.text = "I wish "
-        } else {
-
-        }
-    }
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let  char = text.cString(using: String.Encoding.utf8)!
-        let isBackSpace = strcmp(char, "\\b")
-        if isBackSpace == -92 {
-            // If backspace is pressed this will call
-            if textView.text == "I wish " {
-                return false
-            }
-        }
-        return true
     }
 }

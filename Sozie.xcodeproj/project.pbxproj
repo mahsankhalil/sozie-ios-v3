@@ -226,6 +226,7 @@
 		61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F35F402217FBF7007B7A44 /* CountViewModeling.swift */; };
 		61F3EDCE242E0F2200BFEFE4 /* SearchBySizePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F3EDCD242E0F2200BFEFE4 /* SearchBySizePopUpVC.swift */; };
 		61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */; };
+		61FF8DBF24924A3900AE746E /* FitTipsAnswerRateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF8DBE24924A3900AE746E /* FitTipsAnswerRateVC.swift */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
 		694480EA21C7A018001A11A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801221C7A017001A11A2 /* Constants.swift */; };
 		694480ED21C7A018001A11A2 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801521C7A017001A11A2 /* Styles.swift */; };
@@ -500,6 +501,7 @@
 		61F35F402217FBF7007B7A44 /* CountViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewModeling.swift; sourceTree = "<group>"; };
 		61F3EDCD242E0F2200BFEFE4 /* SearchBySizePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBySizePopUpVC.swift; sourceTree = "<group>"; };
 		61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SEGOEUII_1.TTF; sourceTree = "<group>"; };
+		61FF8DBE24924A3900AE746E /* FitTipsAnswerRateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsAnswerRateVC.swift; sourceTree = "<group>"; };
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6944801221C7A017001A11A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6944801521C7A017001A11A2 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				61F0284F22CCBE1700B3BB4B /* FitTipsAnswerTableVC.swift */,
 				61F0285122CCBE2E00B3BB4B /* FitTipsAnswerPickerVC.swift */,
 				61B565CC22CE00110073DBA3 /* FitTipsAnswerTextVC.swift */,
+				61FF8DBE24924A3900AE746E /* FitTipsAnswerRateVC.swift */,
 				61EE668C22D36F8F004265F1 /* SozieRequestTutorialVC.swift */,
 				615816632333A4A500990F41 /* ThankYouController.swift */,
 				61D75378235872D1002BD92A /* RequestImagePickerController.swift */,
@@ -1542,6 +1545,7 @@
 				613F897921E897AA00EB48D2 /* Country.swift in Sources */,
 				6944815921C7A018001A11A2 /* User.swift in Sources */,
 				617CD12E21DE3B2900D4C885 /* SignUpEmailVC.swift in Sources */,
+				61FF8DBF24924A3900AE746E /* FitTipsAnswerRateVC.swift in Sources */,
 				6120D43922B108CC0000678C /* TitleTextFieldCellViewModel.swift in Sources */,
 				694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */,
 				6102CDFE22688F5F0057D77A /* RequestSizeChartPopupVC.swift in Sources */,

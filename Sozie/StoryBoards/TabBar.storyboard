@@ -5455,7 +5455,7 @@ Cg
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-37-bLi" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="231" width="327" height="34.5"/>
+                                                <rect key="frame" x="24" y="215.5" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -5472,7 +5472,7 @@ Cg
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F8M-8y-sRN" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="291" width="327" height="35"/>
+                                                <rect key="frame" x="24" y="260" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -5489,7 +5489,7 @@ Cg
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KbI-Yk-nlC" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="171" width="327" height="34.5"/>
+                                                <rect key="frame" x="24" y="171" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -6215,6 +6215,106 @@ Cg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcj-Zt-Zvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-546" y="3382"/>
+        </scene>
+        <!--Fit Tips Answer RateVC-->
+        <scene sceneID="mTV-np-UrZ">
+            <objects>
+                <viewController storyboardIdentifier="FitTipsAnswerRateVC" id="B7y-Ab-w90" customClass="FitTipsAnswerRateVC" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W43-cM-ccv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="330"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9gx-sd-RwE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall Rating" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wQA-ed-P3I">
+                                        <rect key="frame" x="50" y="20" width="271" height="19"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="16"/>
+                                        <color key="textColor" red="1" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpP-f4-oIU">
+                                        <rect key="frame" x="16" y="12" width="40" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="3fi-oP-0NC"/>
+                                            <constraint firstAttribute="height" constant="37" id="PPV-Ur-90m"/>
+                                        </constraints>
+                                        <state key="normal" image="back-button-white"/>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="B7y-Ab-w90" eventType="touchUpInside" id="5Qn-b6-rLx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ncf-6f-AMq">
+                                        <rect key="frame" x="329" y="16" width="30" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="CId-v2-U2F"/>
+                                            <constraint firstAttribute="height" constant="28" id="MV5-es-pwE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="12"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="B7y-Ab-w90" eventType="touchUpInside" id="S3i-4P-K13"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wQA-ed-P3I" secondAttribute="bottom" id="8s1-9M-TH5"/>
+                                    <constraint firstAttribute="height" constant="94" id="Nvk-1D-5pf"/>
+                                    <constraint firstItem="fpP-f4-oIU" firstAttribute="top" secondItem="9gx-sd-RwE" secondAttribute="top" constant="12" id="RlU-sq-wpp"/>
+                                    <constraint firstAttribute="trailing" secondItem="wQA-ed-P3I" secondAttribute="trailing" constant="54" id="RuB-Lf-nuE"/>
+                                    <constraint firstItem="fpP-f4-oIU" firstAttribute="leading" secondItem="9gx-sd-RwE" secondAttribute="leading" constant="16" id="SzP-QW-vj6"/>
+                                    <constraint firstItem="wQA-ed-P3I" firstAttribute="top" secondItem="9gx-sd-RwE" secondAttribute="top" constant="20" id="WqV-87-LwF"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ncf-6f-AMq" secondAttribute="trailing" constant="16" id="aoz-vH-geE"/>
+                                    <constraint firstItem="Ncf-6f-AMq" firstAttribute="top" secondItem="9gx-sd-RwE" secondAttribute="top" constant="16" id="dHF-4Q-HUD"/>
+                                    <constraint firstItem="wQA-ed-P3I" firstAttribute="leading" secondItem="9gx-sd-RwE" secondAttribute="leading" constant="50" id="pfc-2k-PhT"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a62-5K-xoW">
+                                <rect key="frame" x="0.0" y="93" width="375" height="237"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lf7-xH-CJe" customClass="RateView">
+                                        <rect key="frame" x="-1" y="97.5" width="377" height="42"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="Baz-pL-bwP"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Lf7-xH-CJe" firstAttribute="leading" secondItem="a62-5K-xoW" secondAttribute="leading" constant="-1" id="7gF-F9-xAd"/>
+                                    <constraint firstItem="Lf7-xH-CJe" firstAttribute="centerY" secondItem="a62-5K-xoW" secondAttribute="centerY" id="TbK-Qx-0Y4"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lf7-xH-CJe" secondAttribute="trailing" constant="-1" id="Ycb-ZV-MML"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="a62-5K-xoW" firstAttribute="top" secondItem="9gx-sd-RwE" secondAttribute="bottom" constant="-1" id="Ct4-Yn-MGy"/>
+                            <constraint firstItem="a62-5K-xoW" firstAttribute="trailing" secondItem="9Xu-4s-hLI" secondAttribute="trailing" id="HPV-v3-fvB"/>
+                            <constraint firstItem="a62-5K-xoW" firstAttribute="bottom" secondItem="9Xu-4s-hLI" secondAttribute="bottom" id="XjK-xD-A6r"/>
+                            <constraint firstItem="a62-5K-xoW" firstAttribute="leading" secondItem="9Xu-4s-hLI" secondAttribute="leading" id="YRH-5F-zd5"/>
+                            <constraint firstItem="9gx-sd-RwE" firstAttribute="leading" secondItem="9Xu-4s-hLI" secondAttribute="leading" id="p3a-nJ-oUI"/>
+                            <constraint firstItem="9gx-sd-RwE" firstAttribute="trailing" secondItem="9Xu-4s-hLI" secondAttribute="trailing" id="p51-4e-g0z"/>
+                            <constraint firstItem="9gx-sd-RwE" firstAttribute="top" secondItem="9Xu-4s-hLI" secondAttribute="top" id="tLZ-Hx-bp8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9Xu-4s-hLI"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pFG-9n-x2D"/>
+                    <size key="freeformSize" width="375" height="330"/>
+                    <connections>
+                        <outlet property="backButton" destination="fpP-f4-oIU" id="Agz-j3-v9Z"/>
+                        <outlet property="nextButton" destination="Ncf-6f-AMq" id="rEu-gQ-OtF"/>
+                        <outlet property="rateView" destination="Lf7-xH-CJe" id="M7W-fL-lcE"/>
+                        <outlet property="titleLabel" destination="wQA-ed-P3I" id="eLD-yC-ldE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tA2-OB-uff" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-536.79999999999995" y="4149.6251874062973"/>
         </scene>
         <!--Fit Tips Answer TextVC-->
         <scene sceneID="oVG-P0-et3">

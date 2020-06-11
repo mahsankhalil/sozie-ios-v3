@@ -74,18 +74,12 @@ class FitTipsAnswerTableVC: UIViewController {
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
-//                        self.navigationController?.popToRootViewController(animated: true)
-//                        return
                     }
                 } else {
                     questIndex = questIndex + 1
                 }
                 let fitTip = fitTips[fitTipIndex]
                 if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
-                    //Single selection
-//                    navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-//                } else if fitTip.question[0].type == "C" {
-                    //Multiple selection
                     navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
@@ -93,20 +87,6 @@ class FitTipsAnswerTableVC: UIViewController {
                 }
             }
         }
-//        if let tipsIndex = fitTipsIndex {
-//            if let fitTip = fitTips?[tipsIndex] {
-//                if fitTip.question[0].type == "R" {
-//                    //Single selection
-//
-//                } else if fitTip.question[0].type == "C" {
-//                    //Multiple selection
-//
-//                } else if fitTip.question[0].type == "T" {
-//                    //Text Input
-//
-//                }
-//            }
-//        }
     }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
