@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import RateView
+import Cosmos
 class FitTipsAnswerRateVC: UIViewController {
-    @IBOutlet weak var rateView: RateView!
+    @IBOutlet weak var rateView: CosmosView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
@@ -20,13 +20,22 @@ class FitTipsAnswerRateVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        rateView.canRate = true
-        rateView.starFillColor = UIColor(hex: "ffbe25")
-        rateView.starNormalColor = UIColor(hex: "e0e0e0")
-        rateView.starBorderColor = UIColor.clear
-        rateView.step = 1.0
-        rateView.starFillMode = StarFillModeHorizontal
+        rateView.settings.updateOnTouch = true
+        rateView.settings.filledColor = UIColor(hex: "ffbe25")
+        rateView.settings.emptyColor = UIColor(hex: "e0e0e0")
+        rateView.settings.emptyBorderColor = UIColor.clear
+        rateView.settings.filledBorderColor = UIColor.clear
+        rateView.rating = 0.0
+        rateView.settings.fillMode = .full
         (self.parent?.parent as? PopupController)?.updatePopUpSize()
+        if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
+            titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
+            if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
+                if let rating = Double(answer) {
+                    rateView.rating = rating
+                }
+            }
+        }
     }
 
     /*
@@ -41,7 +50,7 @@ class FitTipsAnswerRateVC: UIViewController {
     @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
+
     @IBAction func nextButtonTapped(_ sender: Any) {
         if rateView.rating != 0.0 {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
@@ -73,7 +82,6 @@ class FitTipsAnswerRateVC: UIViewController {
             UtilityManager.showErrorMessage(body: "Please select rating.", in: self)
         }
     }
-    
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
         destVC.fitTipsIndex = fitTipIndex

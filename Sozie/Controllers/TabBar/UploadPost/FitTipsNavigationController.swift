@@ -59,7 +59,7 @@ extension FitTipsNavigationController: PopupContentViewController {
             }
         }
         if self.topViewController as? FitTipsAnswerRateVC != nil {
-            return CGSize(width: UIScreen.main.bounds.size.width, height: 250)
+            return CGSize(width: UIScreen.main.bounds.size.width, height: 175)
         }
         return CGSize(width: UIScreen.main.bounds.size.width, height: 330)
     }

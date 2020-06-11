@@ -40,7 +40,7 @@ class FitTipsListingVC: UIViewController {
     }
     func checkIfFitTipAnswered(fitTip: FitTips) -> Bool {
         for question in fitTip.question {
-            if question.type == "R" || question.type == "C" {
+            if question.type == "R" || question.type == "C" || question.type == "S" {
                 for option in question.options {
                     if let answer = question.answer {
                         if checkIfAnswered(text: option.optionText, answer: answer) {

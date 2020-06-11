@@ -6225,7 +6225,7 @@ Cg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9gx-sd-RwE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall Rating" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wQA-ed-P3I">
                                         <rect key="frame" x="50" y="20" width="271" height="21.5"/>
@@ -6262,7 +6262,7 @@ Cg
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wQA-ed-P3I" secondAttribute="bottom" id="8s1-9M-TH5"/>
-                                    <constraint firstAttribute="height" constant="94" id="Nvk-1D-5pf"/>
+                                    <constraint firstAttribute="height" constant="64" id="Nvk-1D-5pf"/>
                                     <constraint firstItem="fpP-f4-oIU" firstAttribute="top" secondItem="9gx-sd-RwE" secondAttribute="top" constant="12" id="RlU-sq-wpp"/>
                                     <constraint firstAttribute="trailing" secondItem="wQA-ed-P3I" secondAttribute="trailing" constant="54" id="RuB-Lf-nuE"/>
                                     <constraint firstItem="fpP-f4-oIU" firstAttribute="leading" secondItem="9gx-sd-RwE" secondAttribute="leading" constant="16" id="SzP-QW-vj6"/>
@@ -6273,27 +6273,63 @@ Cg
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a62-5K-xoW">
-                                <rect key="frame" x="0.0" y="93" width="375" height="237"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="266"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lf7-xH-CJe" customClass="RateView">
-                                        <rect key="frame" x="84" y="86" width="207" height="64"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SE-tn-e3S">
+                                        <rect key="frame" x="0.0" y="102" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="KWf-4p-RIi"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIt-XM-tfl">
+                                        <rect key="frame" x="0.0" y="143" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="bz9-N3-ohS"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Lf7-xH-CJe" customClass="CosmosView" customModule="Cosmos">
+                                        <rect key="frame" x="107.5" y="113" width="160" height="20"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="Baz-pL-bwP"/>
-                                            <constraint firstAttribute="width" constant="207" id="G9v-Ge-z4r"/>
+                                            <constraint firstAttribute="height" constant="20" id="Baz-pL-bwP"/>
+                                            <constraint firstAttribute="width" constant="160" id="G9v-Ge-z4r"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Yellow Star"/>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="Grey Star"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="qIt-XM-tfl" firstAttribute="leading" secondItem="a62-5K-xoW" secondAttribute="leading" id="5kY-dq-jbt"/>
                                     <constraint firstItem="Lf7-xH-CJe" firstAttribute="centerX" secondItem="a62-5K-xoW" secondAttribute="centerX" id="6Xp-u6-yft"/>
-                                    <constraint firstItem="Lf7-xH-CJe" firstAttribute="centerY" secondItem="a62-5K-xoW" secondAttribute="centerY" id="TbK-Qx-0Y4"/>
+                                    <constraint firstItem="Lf7-xH-CJe" firstAttribute="top" secondItem="3SE-tn-e3S" secondAttribute="bottom" constant="10" id="MyG-s3-14d"/>
+                                    <constraint firstItem="Lf7-xH-CJe" firstAttribute="centerY" secondItem="a62-5K-xoW" secondAttribute="centerY" constant="-10" id="TbK-Qx-0Y4"/>
+                                    <constraint firstItem="qIt-XM-tfl" firstAttribute="top" secondItem="Lf7-xH-CJe" secondAttribute="bottom" constant="10" id="Wqc-M8-s0P"/>
+                                    <constraint firstItem="3SE-tn-e3S" firstAttribute="leading" secondItem="a62-5K-xoW" secondAttribute="leading" id="XEr-Dz-8g5"/>
+                                    <constraint firstAttribute="trailing" secondItem="qIt-XM-tfl" secondAttribute="trailing" id="Z82-Mb-x8w"/>
+                                    <constraint firstAttribute="trailing" secondItem="3SE-tn-e3S" secondAttribute="trailing" id="zr6-sH-cTR"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="a62-5K-xoW" firstAttribute="top" secondItem="9gx-sd-RwE" secondAttribute="bottom" constant="-1" id="Ct4-Yn-MGy"/>
+                            <constraint firstItem="a62-5K-xoW" firstAttribute="top" secondItem="9gx-sd-RwE" secondAttribute="bottom" id="Ct4-Yn-MGy"/>
                             <constraint firstItem="a62-5K-xoW" firstAttribute="trailing" secondItem="9Xu-4s-hLI" secondAttribute="trailing" id="HPV-v3-fvB"/>
                             <constraint firstItem="a62-5K-xoW" firstAttribute="bottom" secondItem="9Xu-4s-hLI" secondAttribute="bottom" id="XjK-xD-A6r"/>
                             <constraint firstItem="a62-5K-xoW" firstAttribute="leading" secondItem="9Xu-4s-hLI" secondAttribute="leading" id="YRH-5F-zd5"/>
@@ -6742,6 +6778,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="Cross" width="17.5" height="17.5"/>
         <image name="Cross-1" width="16" height="18"/>
         <image name="Depinder" width="300" height="200"/>
+        <image name="Grey Star" width="20" height="20"/>
         <image name="Howto" width="26" height="26"/>
         <image name="Image Tag" width="16" height="16"/>
         <image name="Left" width="12" height="21"/>
@@ -6762,6 +6799,7 @@ Please click on the (restart tutorial) button below to start again!</string>
         <image name="Trash can" width="28.5" height="28.5"/>
         <image name="Whish List" width="28" height="25.5"/>
         <image name="Wish List Selected" width="27" height="24.5"/>
+        <image name="Yellow Star" width="20" height="20"/>
         <image name="back-button-white" width="22" height="10"/>
         <image name="checkedSmall" width="15" height="15"/>
         <image name="crossIcon" width="11" height="12"/>
