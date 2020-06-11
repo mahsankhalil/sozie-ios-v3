@@ -84,6 +84,8 @@ class FitTipsAnswerTableVC: UIViewController {
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                } else if fitTip.question[0].type == "S" {
+                    navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 }
             }
         }
@@ -109,6 +111,13 @@ class FitTipsAnswerTableVC: UIViewController {
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
         destVC.type = type
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRateAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     /*
