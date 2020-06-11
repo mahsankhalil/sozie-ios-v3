@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+import CropViewController
 
 public enum PostFilterType: Int {
     case success
@@ -30,11 +32,14 @@ class MyUploadsVC: UIViewController {
     var nextURL: String?
     var viewModels: [UserPostWithUploadsViewModel] = []
     var currentPost: UserPost?
+    var currentTaskId: String?
+    var currentCollectionViewIndex: Int?
+    var currentCellIndex: Int?
     var posts: [UserPost] = [] {
         didSet {
             viewModels.removeAll()
             for post in posts {
-                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved, isModerated: post.isModerated, productURL: post.productImageURL ?? "", postType: currentFilterType ?? .success)
+                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved, isModerated: post.isModerated, productURL: post.currentProduct?.imageURL ?? "", postType: currentFilterType ?? .success)
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0
@@ -94,9 +99,13 @@ class MyUploadsVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        resetDataAndFetch()
+    }
+    func resetDataAndFetch() {
         serverParams.removeAll()
         posts.removeAll()
         serverParams["review_action"] = "A"
+        currentFilterType = .success
         getPostsFromServer()
         reloadData()
     }
@@ -223,19 +232,25 @@ extension MyUploadsVC: UITableViewDelegate, UITableViewDataSource {
 }
 extension MyUploadsVC: MyUploadsCellDelegate {
     func editButtonTapped(button: UIButton) {
-        
+        let currentPost = posts[button.tag]
+        let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
+        addPostVC.currentPostId = currentPost.postId
+        addPostVC.currentProduct = currentPost.currentProduct
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
+        }
     }
     func warningButtonTapped(button: UIButton) {
         let popUpInstnc = RejectionReasonPopupWithoutTitle.instance()
-//         popUpInstnc.delegate = self
+         popUpInstnc.delegate = self
          let popUpVC = PopupController
              .create(self.tabBarController?.navigationController ?? self)
              .show(popUpInstnc)
          _ = popUpVC.didCloseHandler { (_) in
          }
-//         popUpInstnc.closeHandler = { []  in
-//             popUpVC.dismiss()
-//        }
+         popUpInstnc.closeHandler = { []  in
+             popUpVC.dismiss()
+        }
 
     }
     func imageTapped(collectionViewTag: Int, cellTag: Int) {
@@ -248,22 +263,138 @@ extension MyUploadsVC: MyUploadsCellDelegate {
                      .show(popUpInstnc)
                  _ = popUpVC.didCloseHandler { (_) in
                  }
+                popUpInstnc.closeHandler = {
+                    popUpVC.dismiss()
+                }
             }
+        }
+    }
+    func updatePostData(image: UIImage) {
+        var dataDict = [String: Any]()
+        if let postIndex = currentCollectionViewIndex, let uploadIndex = currentCellIndex {
+            let uploadId = posts[postIndex].uploads[uploadIndex].uploadId
+            let postId = posts[postIndex].postId
+            dataDict["existing_images_ids"] = uploadId
+            var imagesData: [Data] = []
+            if let imageData = image.jpegData(compressionQuality: 1.0) {
+                imagesData.append(imageData)
+            }
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: postId, imagesToEdit: imagesData, imagesToUploads: nil) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
+                    self.getPostProgress(isTutorial: false)
+                }
+            }
+        }
+    }
+    func getPostProgress(isTutorial: Bool) {
+        if let taskId = self.currentTaskId {
+            ServerManager.sharedInstance.getPostProgress(taskId: taskId) { (isSuccess, response) in
+                if isSuccess {
+                    let taskInfo = (response as! ProgressResponse).taskInfo
+                    if taskInfo.taskStatus == "SUCCESS" || taskInfo.taskStatus == "NOTREQUIRED" {
+                        SVProgressHUD.dismiss()
+                        self.resetDataAndFetch()
+                    } else if taskInfo.taskStatus == "FAILURE" {
+                        SVProgressHUD.dismiss()
+                    } else {
+                        SVProgressHUD.showProgress(Float( taskInfo.info.progress.percent) / 100.0)
+                        self.getPostProgress(isTutorial: isTutorial)
+                    }
+                }
+            }
+        }
+    }
+}
+extension MyUploadsVC: RejectionResponseWithoutTitleDelegate {
+    func rejectionResponseWithoutTitleTryAgainButtonTapped(button: UIButton) {
+        let currentPost = posts[button.tag]
+        let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
+        addPostVC.currentPostId = currentPost.postId
+        addPostVC.currentProduct = currentPost.currentProduct
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
         }
     }
 }
 extension MyUploadsVC: RejectionResponseDelegate {
     func tryAgainButtonTapped(button: UIButton, collectionViewTag: Int?, cellTag: Int?) {
-        
+        currentCollectionViewIndex = collectionViewTag
+        currentCellIndex = cellTag
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: nil, progressTutorialVC: nil)
+            UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: (cellTag ?? 1) - 1, progressTutorialVC: nil)
         }))
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            UtilityManager.openGalleryFrom(viewController: self)
+            self.showPosePopup(index: (cellTag ?? 1) - 1)
         }))
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    func showPosePopup(index: Int?) {
+        let popUpInstnc = PosePopupVC.instance(photoIndex: index)
+        let popUpVC = PopupController
+            .create(self.tabBarController?.navigationController ?? self)
+            .show(popUpInstnc)
+        let options = PopupCustomOption.layout(.top)
+        _ = popUpVC.customize([options])
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+            UtilityManager.openGalleryFrom(viewController: self)
+        }
+    }
+
+}
+extension MyUploadsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.showCropVC(image: pickedImage)
+        }
+    }
+    func showCropVC(image: UIImage) {
+        let cropVC = CropViewController(image: image)
+        cropVC.delegate = self
+        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+        cropVC.aspectRatioPickerButtonHidden = true
+        cropVC.aspectRatioLockEnabled = true
+        cropVC.resetButtonHidden = true
+        cropVC.rotateButtonsHidden = true
+        cropVC.toolbar.doneTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.toolbar.cancelTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.cropView.gridOverlayHidden = true
+        cropVC.cropView.setGridOverlayHidden(true, animated: true)
+        let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
+        imgVu.center = cropVC.cropView.center
+        imgVu.frame = cropVC.cropView.cropBoxFrame
+        cropVC.cropView.addSubview(imgVu)
+        self.present(cropVC, animated: true) {
+            imgVu.frame = cropVC.cropView.cropBoxFrame
+        }
+    }
+    func setupImage(pickedImage: UIImage) {
+        let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+        self.updatePostData(image: scaledImg)
+    }
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            UtilityManager.showMessageWith(title: "Save Error", body: error.localizedDescription, in: self)
+        }
+    }
+}
+extension MyUploadsVC: CropViewControllerDelegate {
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        self.setupImage(pickedImage: image)
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+}
+extension MyUploadsVC: CaptureManagerDelegate {
+    func processCapturedImage(image: UIImage) {
+        let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 750, height: (image.size.height/image.size.width)*750))
+        self.updatePostData(image: scaledImg)
     }
 }
 extension MyUploadsVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

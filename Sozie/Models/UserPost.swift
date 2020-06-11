@@ -22,8 +22,8 @@ struct UserPost: Codable {
     var uploads: [Uploads]
     var isTutorialPost: Bool
     var isModerated: Bool
-    var productImageURL: String?
-
+    var fitTipsAnswers: [PostFitTips]?
+    var currentProduct: Product?
     enum CodingKeys: String, CodingKey {
         case postId = "id"
 //        case imageURL = "public_image_url"
@@ -38,7 +38,8 @@ struct UserPost: Codable {
         case uploads
         case isTutorialPost = "posted_to_learn"
         case isModerated = "is_moderated"
-        case productImageURL = "product_image_url"
+        case fitTipsAnswers = "fit_tips_answers"
+        case currentProduct = "product"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -55,7 +56,8 @@ struct UserPost: Codable {
         uploads = try values.decode([Uploads].self, forKey: .uploads)
         isTutorialPost = try values.decode(Bool.self, forKey: .isTutorialPost)
         isModerated = try values.decode(Bool.self, forKey: .isModerated)
-        productImageURL = try? values.decode(String.self, forKey: .productImageURL)
+        fitTipsAnswers = try? values.decode([PostFitTips].self, forKey: .fitTipsAnswers)
+        currentProduct = try? values.decode(Product.self, forKey: .currentProduct)
 
     }
 }

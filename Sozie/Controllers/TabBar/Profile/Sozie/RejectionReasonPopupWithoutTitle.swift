@@ -7,11 +7,16 @@
 //
 
 import UIKit
+protocol RejectionResponseWithoutTitleDelegate: class {
+    func rejectionResponseWithoutTitleTryAgainButtonTapped(button: UIButton)
+}
 
 class RejectionReasonPopupWithoutTitle: UIViewController {
 
     @IBOutlet weak var tryAgainButton: DZGradientButton!
     @IBOutlet weak var userLabel: UILabel!
+    var closeHandler: (() -> Void)?
+    weak var delegate: RejectionResponseWithoutTitleDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +27,6 @@ class RejectionReasonPopupWithoutTitle: UIViewController {
             }
         }
     }
-    
     class func instance() -> RejectionReasonPopupWithoutTitle {
         let storyBoard = UIStoryboard(name: "TabBar", bundle: .main)
         return storyBoard.instantiateViewController(withIdentifier: "RejectionReasonPopupWithoutTitle") as! RejectionReasonPopupWithoutTitle
@@ -38,8 +42,10 @@ class RejectionReasonPopupWithoutTitle: UIViewController {
     }
     */
     @IBAction func tryAgainButtonTapped(_ sender: Any) {
+        self.closeHandler!()
+        delegate?.rejectionResponseWithoutTitleTryAgainButtonTapped(button: sender as! UIButton)
+        
     }
-    
 }
 extension RejectionReasonPopupWithoutTitle: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {

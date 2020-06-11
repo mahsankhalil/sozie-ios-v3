@@ -61,7 +61,6 @@
                         <state key="normal" image="Edit"/>
                         <connections>
                             <action selector="editButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="s11-tR-Ijd"/>
-                            <action selector="warningButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HZd-eF-cgM"/>
                         </connections>
                     </button>
                 </subviews>

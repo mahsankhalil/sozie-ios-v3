@@ -229,6 +229,7 @@
 		61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F35F402217FBF7007B7A44 /* CountViewModeling.swift */; };
 		61F3EDCE242E0F2200BFEFE4 /* SearchBySizePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F3EDCD242E0F2200BFEFE4 /* SearchBySizePopUpVC.swift */; };
 		61FC98E421E4A549009C85FE /* SEGOEUII_1.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */; };
+		61FF8DBD248E5A4900AE746E /* PostFitTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF8DBC248E5A4900AE746E /* PostFitTips.swift */; };
 		694480D221C7A018001A11A2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69447FF921C7A017001A11A2 /* BaseViewController.swift */; };
 		694480EA21C7A018001A11A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801221C7A017001A11A2 /* Constants.swift */; };
 		694480ED21C7A018001A11A2 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944801521C7A017001A11A2 /* Styles.swift */; };
@@ -506,6 +507,7 @@
 		61F35F402217FBF7007B7A44 /* CountViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountViewModeling.swift; sourceTree = "<group>"; };
 		61F3EDCD242E0F2200BFEFE4 /* SearchBySizePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBySizePopUpVC.swift; sourceTree = "<group>"; };
 		61FC98E321E4A548009C85FE /* SEGOEUII_1.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SEGOEUII_1.TTF; sourceTree = "<group>"; };
+		61FF8DBC248E5A4900AE746E /* PostFitTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFitTips.swift; sourceTree = "<group>"; };
 		69447FF921C7A017001A11A2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6944801221C7A017001A11A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6944801521C7A017001A11A2 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
@@ -1004,6 +1006,7 @@
 				6163C53122E72AF600149304 /* HubSpotResponse.swift */,
 				617DD44E23D5AD3A00A08AE0 /* AdidasProduct.swift */,
 				6178BA05248A468A001B786E /* AddPostResponse.swift */,
+				61FF8DBC248E5A4900AE746E /* PostFitTips.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1451,6 +1454,7 @@
 				614374E222390EAE00DBD295 /* MyBalanceVC.swift in Sources */,
 				61B9D1C8222548BA007C6326 /* SozieRequest.swift in Sources */,
 				61B5A0D622A12C12009D372C /* TargetRequestTableViewCell.swift in Sources */,
+				61FF8DBD248E5A4900AE746E /* PostFitTips.swift in Sources */,
 				61B4D40C22E06EA3003682AD /* NearbyStoresTutorialVC.swift in Sources */,
 				611E41222214719F007B1C62 /* ProductDetailCellViewModel.swift in Sources */,
 				61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */,

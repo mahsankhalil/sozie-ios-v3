@@ -18,6 +18,7 @@ class RejectionReasonPopup: UIViewController {
     var reason: String?
     var collectionViewTag: Int?
     var cellTag: Int?
+    var closeHandler: (() -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,6 +48,7 @@ class RejectionReasonPopup: UIViewController {
     }
     */
     @IBAction func tryAgainButtonTapped(_ sender: Any) {
+        self.closeHandler!()
         delegate?.tryAgainButtonTapped(button: sender as! UIButton, collectionViewTag: collectionViewTag, cellTag: cellTag)
     }
 }
