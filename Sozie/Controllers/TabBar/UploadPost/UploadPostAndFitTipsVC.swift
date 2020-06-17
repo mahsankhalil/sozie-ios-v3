@@ -11,6 +11,7 @@ import SVProgressHUD
 import TPKeyboardAvoiding
 import UserNotifications
 import CropViewController
+import AVKit
 //import FirebaseAnalytics
 protocol UploadPostAndFitTipsDelegate: class {
     func uploadPostInfoButtonTapped()
@@ -46,7 +47,8 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var submitTutorialVC: SubmitPostTutorialVC?
     var isTutorialShowing: Bool = false
     var isFitTipsTutorialShown: Bool = false
-    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
+    var currentVideoURL: URL?
+    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true), UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false)]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.postMaskButton.isHidden = true
@@ -298,7 +300,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         SVProgressHUD.show()
-        ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData) { (isSuccess, response) in
+        ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData, videoURL: self.currentVideoURL) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -415,7 +417,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 50.0, height: 65.0)
+            return CGSize(width: 50.0, height: 80.0)
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -433,6 +435,12 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         if viewModels[indexPath.row].image == nil {
+            if indexPath.row == 3 {
+                let videoPicker = self.storyboard?.instantiateViewController(withIdentifier: "VideoPickerVC") as! VideoPickerVC
+                videoPicker.modalPresentationStyle = .fullScreen
+                videoPicker.delegate = self
+                self.present(videoPicker, animated: true, completion: nil)
+            }
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
                 UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: self.selectedIndex, progressTutorialVC: self.progressTutorialVC)
@@ -468,10 +476,10 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
             self.postImageView.image = scaledImg
             if index > 2 {
                 if index < 5 {
-                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    let viewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
                     viewModels.append(viewModel)
                 }
-                viewModels[index].title = ""
+//                viewModels[index].title = ""
             }
             UIImageWriteToSavedPhotosAlbum(scaledImg, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
             self.imagesCollectionView.reloadData()
@@ -544,10 +552,12 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
             self.postImageView.image = scaledImg
             if index > 2 {
                 if index < 5 {
-                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
-                    viewModels.append(viewModel)
+                    if viewModels[index].isVideo == false {
+                        let viewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                        viewModels.append(viewModel)
+                    }
                 }
-                viewModels[index].title = ""
+//                viewModels[index].title = ""
             }
             self.imagesCollectionView.reloadData()
         }
@@ -647,5 +657,37 @@ extension UploadPostAndFitTipsVC: TutorialProgressDelegate {
         self.addSubmitTutorial()
         self.navigationController?.popViewController(animated: true)
         self.popUpVC?.dismiss()
+    }
+}
+extension UploadPostAndFitTipsVC: CustomVideoRecorderDelegate {
+    func customImagePickerController(_ picker: VideoPickerVC, didFinishPickingMediaWithInfo info: [String: Any]) {
+        if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL {
+            self.currentVideoURL = videoURL
+            self.getThumbnailImageFromVideoUrl(url: videoURL) { (image) in
+                if let pickedImage = image {
+                    self.setupImage(pickedImage: pickedImage)
+                }
+            }
+        }
+    }
+    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?) -> Void)) {
+        DispatchQueue.global().async {
+            let asset = AVAsset(url: url)
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+            avAssetImageGenerator.appliesPreferredTrackTransform = true
+            let thumnailTime = CMTimeMake(value: 2, timescale: 1)
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil)
+                let thumbImage = UIImage(cgImage: cgThumbImage)
+                DispatchQueue.main.async {
+                    completion(thumbImage)
+                }
+            } catch {
+                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    completion(nil) //11
+                }
+            }
+        }
     }
 }

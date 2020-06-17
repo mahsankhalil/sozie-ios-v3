@@ -773,7 +773,7 @@ class ServerManager: NSObject {
             }
         }
     }
-    func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, block: CompletionHandler) {
+    func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, videoURL: URL? = nil, block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
             "Content-type": "multipart/form-data"
@@ -786,6 +786,9 @@ class ServerManager: NSObject {
                 for data in allImagesData {
                     multipartFormData.append(data, withName: "images_to_upload", fileName: "image.png", mimeType: "image/png")
                 }
+            }
+            if let video = videoURL {
+                multipartFormData.append(video, withName: "video", fileName: "video.mp4", mimeType: "video/mp4")
             }
 //            if let data = imageData {
 //                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")

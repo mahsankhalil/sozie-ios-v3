@@ -13,6 +13,7 @@ class UploadPictureCell: UICollectionViewCell {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var cameraImageView: UIImageView!
     @IBOutlet weak var addMoreLabel: UILabel!
+    @IBOutlet weak var playIcon: UIImageView!
     override func awakeFromNib() {
         self.imageView.layer.borderWidth = 1.0
         self.imageView.layer.borderColor = UIColor(hex: "DBDBDB").cgColor
@@ -23,10 +24,18 @@ extension UploadPictureCell: CellConfigurable {
         if let titleModel = viewModel as? TitleViewModeling {
             if let title = titleModel.title {
                 detailLabel.text = title
-                if title == "Optional" {
+                if title == "Optional Picture" {
                     self.cameraImageView.isHidden = true
                     self.addMoreLabel.isHidden = false
+                    self.cameraImageView.image = UIImage(named: "Camera icon")
+                } else if title == "Optional Video" {
+                    self.cameraImageView.isHidden = false
+                    self.addMoreLabel.isHidden = true
+                    self.cameraImageView.image = UIImage(named: "Video")
                 } else {
+                    self.cameraImageView.isHidden = false
+                    self.addMoreLabel.isHidden = true
+                    self.cameraImageView.image = UIImage(named: "Camera icon")
                     if title != "" {
                         let attributedString = NSMutableAttributedString(string: title)
                         let starString = NSMutableAttributedString(string: "*")
@@ -46,6 +55,24 @@ extension UploadPictureCell: CellConfigurable {
             if let image = imageModel.image {
                 imageView.image = image
             }
+        }
+        if let isVideoModel = viewModel as? VideoAvailabilityProviding {
+            if let isVideo = isVideoModel.isVideo {
+                if isVideo == true {
+                    playIcon.isHidden = false
+                    if let imageModel = viewModel as? ImageProviding {
+                        if imageModel.image == nil {
+                            playIcon.isHidden = true
+                        }
+                    }
+                } else {
+                    playIcon.isHidden = true
+                }
+            } else {
+                playIcon.isHidden = true
+            }
+        } else {
+            playIcon.isHidden = true
         }
     }
 }
