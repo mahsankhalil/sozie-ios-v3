@@ -4965,22 +4965,75 @@ Cg
                                         <color key="textColor" red="0.53725490200000003" green="0.53725490200000003" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvY-jb-3ku">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                        <subviews>
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgm-aE-NdQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You must enter your measurements for post to be approved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yL6-WZ-qlW">
+                                                <rect key="frame" x="25" y="286" width="325" height="51"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="19"/>
+                                                <color key="textColor" red="0.19997376203536987" green="0.20001503825187683" blue="0.19997116923332214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfP-qG-9lB" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
+                                                <rect key="frame" x="102.5" y="345" width="170" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="170" id="0In-Gj-stB"/>
+                                                    <constraint firstAttribute="height" constant="40" id="hAz-Te-qe9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <state key="normal" title="ADD MEASUREMENTS">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientStartColor">
+                                                        <color key="value" red="0.039215686274509803" green="0.72941176470588232" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="gradientEndColor">
+                                                        <color key="value" red="0.1803921568627451" green="0.86274509803921573" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addMeasurementButtonTapped:" destination="wxc-hz-Uaa" eventType="touchUpInside" id="Fsw-fp-8qc"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Sgm-aE-NdQ" firstAttribute="leading" secondItem="bvY-jb-3ku" secondAttribute="leading" id="7qd-On-dze"/>
+                                            <constraint firstItem="Sgm-aE-NdQ" firstAttribute="top" secondItem="bvY-jb-3ku" secondAttribute="top" id="JcA-IV-oKM"/>
+                                            <constraint firstAttribute="bottom" secondItem="Sgm-aE-NdQ" secondAttribute="bottom" id="MPN-zf-fgC"/>
+                                            <constraint firstItem="hfP-qG-9lB" firstAttribute="top" secondItem="yL6-WZ-qlW" secondAttribute="bottom" constant="8" id="XKM-Qh-Pmr"/>
+                                            <constraint firstAttribute="trailing" secondItem="yL6-WZ-qlW" secondAttribute="trailing" constant="25" id="a31-Qb-8KB"/>
+                                            <constraint firstItem="hfP-qG-9lB" firstAttribute="centerX" secondItem="bvY-jb-3ku" secondAttribute="centerX" id="lfa-IX-12t"/>
+                                            <constraint firstAttribute="trailing" secondItem="Sgm-aE-NdQ" secondAttribute="trailing" id="niy-VC-2X5"/>
+                                            <constraint firstItem="yL6-WZ-qlW" firstAttribute="leading" secondItem="bvY-jb-3ku" secondAttribute="leading" constant="25" id="txA-u2-5TZ"/>
+                                            <constraint firstItem="yL6-WZ-qlW" firstAttribute="centerY" secondItem="bvY-jb-3ku" secondAttribute="centerY" id="yeY-OI-AZD"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="QEM-BB-2J2" firstAttribute="top" secondItem="Dxd-LN-6YA" secondAttribute="top" constant="21" id="2Xr-h8-PDA"/>
                                     <constraint firstItem="pkl-fa-LwF" firstAttribute="centerX" secondItem="tl7-Ch-28H" secondAttribute="centerX" id="3gV-BT-y7B"/>
+                                    <constraint firstAttribute="bottom" secondItem="bvY-jb-3ku" secondAttribute="bottom" id="9aX-gz-sxV"/>
                                     <constraint firstAttribute="trailing" secondItem="Xq4-jV-PWn" secondAttribute="trailing" id="9bi-KW-NFv"/>
                                     <constraint firstItem="QEM-BB-2J2" firstAttribute="centerX" secondItem="Dxd-LN-6YA" secondAttribute="centerX" id="Cge-9y-vvU"/>
                                     <constraint firstItem="QEM-BB-2J2" firstAttribute="leading" secondItem="k5e-lH-1KP" secondAttribute="trailing" constant="22.5" id="Dnn-R6-GPk"/>
                                     <constraint firstItem="Xq4-jV-PWn" firstAttribute="leading" secondItem="Dxd-LN-6YA" secondAttribute="leading" id="SIC-NB-IKS"/>
                                     <constraint firstItem="r4J-RS-Oos" firstAttribute="top" secondItem="QEM-BB-2J2" secondAttribute="bottom" constant="1" id="ToD-b9-VBy"/>
+                                    <constraint firstAttribute="trailing" secondItem="bvY-jb-3ku" secondAttribute="trailing" id="WSc-Vk-iI0"/>
                                     <constraint firstItem="tl7-Ch-28H" firstAttribute="leading" secondItem="QEM-BB-2J2" secondAttribute="trailing" constant="22.5" id="YQ0-OO-wpU"/>
                                     <constraint firstItem="r4J-RS-Oos" firstAttribute="centerX" secondItem="QEM-BB-2J2" secondAttribute="centerX" id="Z3w-lQ-Vax"/>
                                     <constraint firstItem="SOG-Nb-TqL" firstAttribute="centerX" secondItem="Xq4-jV-PWn" secondAttribute="centerX" id="bdl-12-4rO"/>
                                     <constraint firstItem="pkl-fa-LwF" firstAttribute="top" secondItem="tl7-Ch-28H" secondAttribute="bottom" id="ehC-ub-Dj4"/>
                                     <constraint firstAttribute="bottom" secondItem="Xq4-jV-PWn" secondAttribute="bottom" id="mdj-tG-D2l"/>
+                                    <constraint firstItem="bvY-jb-3ku" firstAttribute="leading" secondItem="Dxd-LN-6YA" secondAttribute="leading" id="oqD-HH-Umk"/>
                                     <constraint firstItem="aft-8h-zYb" firstAttribute="centerX" secondItem="k5e-lH-1KP" secondAttribute="centerX" id="uqQ-9d-Des"/>
+                                    <constraint firstItem="bvY-jb-3ku" firstAttribute="top" secondItem="Dxd-LN-6YA" secondAttribute="top" id="v2n-M2-vxa"/>
                                     <constraint firstItem="aft-8h-zYb" firstAttribute="top" secondItem="k5e-lH-1KP" secondAttribute="bottom" id="w3M-6f-VeL"/>
                                     <constraint firstItem="Xq4-jV-PWn" firstAttribute="top" secondItem="k5e-lH-1KP" secondAttribute="bottom" constant="22" id="xac-dE-9ef"/>
                                     <constraint firstItem="k5e-lH-1KP" firstAttribute="top" secondItem="Dxd-LN-6YA" secondAttribute="top" constant="22" id="yDY-M2-PYR"/>
@@ -4999,6 +5052,8 @@ Cg
                         <viewLayoutGuide key="safeArea" id="KMY-eA-ZVz"/>
                     </view>
                     <connections>
+                        <outlet property="addMeasurementView" destination="bvY-jb-3ku" id="0Fr-0V-gWe"/>
+                        <outlet property="addMesurementButton" destination="hfP-qG-9lB" id="Gwf-nn-GeO"/>
                         <outlet property="inReviewButton" destination="QEM-BB-2J2" id="o0M-Wb-e8G"/>
                         <outlet property="inReviewCountLabel" destination="r4J-RS-Oos" id="ocj-Fz-czD"/>
                         <outlet property="noDataLabel" destination="SOG-Nb-TqL" id="4bg-ml-ZuG"/>
