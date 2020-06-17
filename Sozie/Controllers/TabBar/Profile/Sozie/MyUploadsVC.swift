@@ -272,7 +272,7 @@ extension MyUploadsVC: MyUploadsCellDelegate {
     func updatePostData(image: UIImage) {
         var dataDict = [String: Any]()
         if let postIndex = currentCollectionViewIndex, let uploadIndex = currentCellIndex {
-            let uploadId = posts[postIndex].uploads[uploadIndex].uploadId
+            let uploadId = posts[postIndex].uploads[uploadIndex - 1 ].uploadId
             let postId = posts[postIndex].postId
             dataDict["existing_images_ids"] = uploadId
             var imagesData: [Data] = []

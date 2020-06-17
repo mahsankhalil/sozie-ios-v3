@@ -66,6 +66,8 @@ class FitTipsAnswerTextVC: UIViewController {
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: fitTipIndex)
+                } else {
+                    navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
                 }
             }
         }
