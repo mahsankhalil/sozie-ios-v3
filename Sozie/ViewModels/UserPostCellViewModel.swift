@@ -19,6 +19,8 @@ struct UserPostWithUploadsViewModel: RowViewModel {
     var isTutorial: Bool
     var isApproved: Bool
     var isModerated: Bool
+    var productURL: String
+    var postType: PostFilterType
 }
 struct UploadViewModel: RowViewModel {
     var imageURL: URL
