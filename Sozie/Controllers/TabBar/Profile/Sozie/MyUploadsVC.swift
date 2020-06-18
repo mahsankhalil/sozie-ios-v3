@@ -17,6 +17,8 @@ public enum PostFilterType: Int {
 }
 class MyUploadsVC: UIViewController {
 
+    @IBOutlet weak var addMesurementButton: DZGradientButton!
+    @IBOutlet weak var addMeasurementView: UIView!
     @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var successButton: UIButton!
     @IBOutlet weak var inReviewButton: UIButton!
@@ -43,6 +45,9 @@ class MyUploadsVC: UIViewController {
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0
+            if UserDefaultManager.checkIfMeasurementEmpty() {
+                noDataLabel.isHidden = true
+            }
             self.tableView.reloadData()
         }
     }
@@ -100,6 +105,11 @@ class MyUploadsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resetDataAndFetch()
+        if UserDefaultManager.checkIfMeasurementEmpty() {
+            self.addMeasurementView.isHidden = false
+        } else {
+            self.addMeasurementView.isHidden = true
+        }
     }
     func resetDataAndFetch() {
         serverParams.removeAll()
@@ -162,6 +172,11 @@ class MyUploadsVC: UIViewController {
         }
     }
 
+    @IBAction func addMeasurementButtonTapped(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let measurementVC = storyBoard.instantiateViewController(withIdentifier: "MeasurementsVC") as! MeasurementsVC
+        self.tabBarController?.navigationController?.pushViewController(measurementVC, animated: true)
+    }
     @IBAction func successButtonTapped(_ sender: Any) {
         currentFilterType = .success
         reloadData()
@@ -272,7 +287,7 @@ extension MyUploadsVC: MyUploadsCellDelegate {
     func updatePostData(image: UIImage) {
         var dataDict = [String: Any]()
         if let postIndex = currentCollectionViewIndex, let uploadIndex = currentCellIndex {
-            let uploadId = posts[postIndex].uploads[uploadIndex].uploadId
+            let uploadId = posts[postIndex].uploads[uploadIndex - 1 ].uploadId
             let postId = posts[postIndex].postId
             dataDict["existing_images_ids"] = uploadId
             var imagesData: [Data] = []

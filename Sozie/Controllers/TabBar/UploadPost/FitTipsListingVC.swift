@@ -121,6 +121,13 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
             destVC.fitTips = fitTips
             self.navigationController?.parent?.viewDidAppear(true)
             self.navigationController?.pushViewController(destVC, animated: true)
+        } else {
+            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
+            destVC.fitTipsIndex = indexPath.row
+            destVC.questionIndex = 0
+            destVC.fitTips = fitTips
+            destVC.type = fitTip.question[0].type
+            self.navigationController?.pushViewController(destVC, animated: true)
         }
     }
 }

@@ -90,6 +90,8 @@ class FitTipsAnswerTableVC: UIViewController {
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                } else {
+                    navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
                 }
             }
         }
@@ -181,7 +183,7 @@ extension FitTipsAnswerTableVC: UITableViewDelegate, UITableViewDataSource {
                         tableView.reloadData()
                     }
                 }
-            } else if currentType == "R" {
+            } else if currentType == "R" ||  currentType == "S" {
                 if arrayOfSelectedIndexes.contains(indexPath.row) {
                     arrayOfSelectedIndexes.removeAll { $0 == indexPath.row }
                     viewModels[indexPath.row].isCheckmarkHidden = true
