@@ -856,7 +856,7 @@ class ServerManager: NSObject {
             }
         }
     }
-    func editPostWithMultipleImages(params: [String: Any]?, postId: Int, imagesToEdit: [Data]?, imagesToUploads: [Data]?, block: CompletionHandler) {
+    func editPostWithMultipleImages(params: [String: Any]?, postId: Int, imagesToEdit: [Data]?, imagesToUploads: [Data]?, videoURL: URL? = nil, block: CompletionHandler) {
             let headers: HTTPHeaders = [
                 "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
                 "Content-type": "multipart/form-data"
@@ -874,6 +874,9 @@ class ServerManager: NSObject {
                     for data in allEditImagesData {
                         multipartFormData.append(data, withName: "images_to_edit", fileName: "image.png", mimeType: "image/png")
                     }
+                }
+                if let video = videoURL {
+                    multipartFormData.append(video, withName: "video", fileName: "video.mp4", mimeType: "video/mp4")
                 }
             }
         let url = ServerManager.editPostURL + String(postId)

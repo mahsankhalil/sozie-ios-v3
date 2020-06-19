@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 class UploadPictureCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var detailLabel: UILabel!
@@ -57,14 +57,22 @@ extension UploadPictureCell: CellConfigurable {
             }
         }
         if let isVideoModel = viewModel as? VideoAvailabilityProviding {
+            if let videoURL = isVideoModel.videoURL {
+                UtilityManager.getThumbnailImageFromVideoUrl(url: URL(string: videoURL)!) { (image) in
+                    self.imageView.image = image
+                }
+            }
             if let isVideo = isVideoModel.isVideo {
                 if isVideo == true {
                     playIcon.isHidden = false
-                    if let imageModel = viewModel as? ImageProviding {
-                        if imageModel.image == nil {
-                            playIcon.isHidden = true
-                        }
+                    if isVideoModel.videoURL == nil {
+                        playIcon.isHidden = true
                     }
+//                    if let imageModel = viewModel as? ImageProviding {
+//                        if imageModel.image == nil {
+//                            playIcon.isHidden = true
+//                        }
+//                    }
                 } else {
                     playIcon.isHidden = true
                 }
@@ -74,5 +82,5 @@ extension UploadPictureCell: CellConfigurable {
         } else {
             playIcon.isHidden = true
         }
-    }
+    }    
 }

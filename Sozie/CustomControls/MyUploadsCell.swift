@@ -56,6 +56,12 @@ extension MyUploadsCell: CellConfigurable {
                 let currentViewModel = UploadViewModel(imageURL: URL(string: upload.imageURL)!, status: upload.reviewAction, isApproved: upload.isApproved)
                 viewModels.append(currentViewModel)
             }
+            if let videos = postViewModel.videos {
+                for video in videos {
+                    let videoViewModel = UploadViewModel(imageURL: URL(string: ""), status: video.reviewAction, isApproved: video.isApproved, isVideo: true, videoURL: video.videoURL)
+                    viewModels.append(videoViewModel)
+                }
+            }
             switch postViewModel.postType {
             case .success:
                 self.editButton.isHidden = true

@@ -41,7 +41,7 @@ class MyUploadsVC: UIViewController {
         didSet {
             viewModels.removeAll()
             for post in posts {
-                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved, isModerated: post.isModerated, productURL: post.currentProduct?.imageURL ?? "", postType: currentFilterType ?? .success)
+                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved, isModerated: post.isModerated, productURL: post.currentProduct?.imageURL ?? "", postType: currentFilterType ?? .success, videos: post.videos)
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0
@@ -271,7 +271,12 @@ extension MyUploadsVC: MyUploadsCellDelegate {
     func imageTapped(collectionViewTag: Int, cellTag: Int) {
         if currentFilterType == .redo {
             if cellTag != 0 {
-                let popUpInstnc = RejectionReasonPopup.instance(reason: posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? "", collectionViewTag: collectionViewTag, cellTag: cellTag)
+                var reason = ""
+                // Video will be always at the end
+                if cellTag <= posts[collectionViewTag].uploads.count {
+                    reason = posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? ""
+                }
+            let popUpInstnc = RejectionReasonPopup.instance(reason: reason, collectionViewTag: collectionViewTag, cellTag: cellTag)
                 popUpInstnc.delegate = self
                 let popUpVC = PopupController
                     .create(self.tabBarController?.navigationController ?? self)
@@ -284,18 +289,29 @@ extension MyUploadsVC: MyUploadsCellDelegate {
             }
         }
     }
-    func updatePostData(image: UIImage) {
+    func updatePostData(image: UIImage?, videoURL: URL? = nil) {
         var dataDict = [String: Any]()
         if let postIndex = currentCollectionViewIndex, let uploadIndex = currentCellIndex {
-            let uploadId = posts[postIndex].uploads[uploadIndex - 1 ].uploadId
+            if uploadIndex <= posts[postIndex].uploads.count {
+                let uploadId = posts[postIndex].uploads[uploadIndex - 1 ].uploadId
+                if image != nil {
+                    dataDict["existing_images_ids"] = uploadId
+                }
+            } else {
+                if videoURL != nil {
+                    if let videos = posts[postIndex].videos {
+                        let videoPostID = videos[0].uploadId
+                        dataDict["video_to_edit_id"] = videoPostID
+                    }
+                }
+            }
             let postId = posts[postIndex].postId
-            dataDict["existing_images_ids"] = uploadId
             var imagesData: [Data] = []
-            if let imageData = image.jpegData(compressionQuality: 1.0) {
+            if let imageData = image?.jpegData(compressionQuality: 1.0) {
                 imagesData.append(imageData)
             }
             SVProgressHUD.show()
-            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: postId, imagesToEdit: imagesData, imagesToUploads: nil) { (isSuccess, response) in
+            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: postId, imagesToEdit: imagesData, imagesToUploads: nil, videoURL: videoURL) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
@@ -336,6 +352,16 @@ extension MyUploadsVC: RejectionResponseWithoutTitleDelegate {
 }
 extension MyUploadsVC: RejectionResponseDelegate {
     func tryAgainButtonTapped(button: UIButton, collectionViewTag: Int?, cellTag: Int?) {
+        if let currentCelltag = cellTag, let currentColectionViewTag = collectionViewTag {
+            if currentCelltag > posts[currentColectionViewTag].uploads.count {
+                // its video and we have to show video controller
+                let videoPicker = self.storyboard?.instantiateViewController(withIdentifier: "VideoPickerVC") as! VideoPickerVC
+                videoPicker.modalPresentationStyle = .fullScreen
+                videoPicker.delegate = self
+                self.present(videoPicker, animated: true, completion: nil)
+                return
+            }
+        }
         currentCollectionViewIndex = collectionViewTag
         currentCellIndex = cellTag
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -361,6 +387,13 @@ extension MyUploadsVC: RejectionResponseDelegate {
         }
     }
 
+}
+extension MyUploadsVC: CustomVideoRecorderDelegate {
+    func customImagePickerController(_ picker: VideoPickerVC, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL {
+            self.updatePostData(image: nil, videoURL: videoURL)
+        }
+    }
 }
 extension MyUploadsVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {

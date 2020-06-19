@@ -8,10 +8,11 @@
 
 import UIKit
 
-struct UploadPictureViewModel: RowViewModel, TitleViewModeling, ImageViewModeling, ImageProviding, VideoAvailabilityProviding {    
+struct UploadPictureViewModel: RowViewModel, TitleViewModeling, ImageViewModeling, ImageProviding, VideoAvailabilityProviding {
     var title: String?
     var attributedTitle: NSAttributedString?
     var imageURL: URL?
     var image: UIImage?
     var isVideo: Bool?
+    var videoURL: String?
 }

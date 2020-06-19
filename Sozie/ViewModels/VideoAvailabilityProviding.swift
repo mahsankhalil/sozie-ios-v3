@@ -9,4 +9,5 @@
 import UIKit
 protocol VideoAvailabilityProviding {
     var isVideo: Bool? { get set }
+    var videoURL: String? { get set }
 }

@@ -105,14 +105,34 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 } else if index == 2 {
                     title = "Side"
                 } else {
-                    title = "Optional"
+                    title = "Optional Picture"
                 }
                 let viewModel = UploadPictureViewModel(title: title, attributedTitle: nil, imageURL: URL(string: upload.imageURL), image: nil)
                 index = index + 1
                 viewModels.append(viewModel)
             }
-            let optionalViewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
-            viewModels.append(optionalViewModel)
+            for video in post.videos ?? [] {
+                let viewModel = UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: nil, image: nil, isVideo: true, videoURL: video.videoURL)
+                viewModels.append(viewModel)
+                index = index + 1
+            }
+            if index < 6 {
+                if index < 5 {
+                    let optionalViewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    viewModels.append(optionalViewModel)
+                } else {
+                    if let videos = post.videos {
+                        if videos.count > 0 {
+                            let optionalViewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                            viewModels.append(optionalViewModel)
+                        }
+                    }
+                }
+                if post.videos?.count == 0 {
+                    let optionalVideoViewModel = UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true)
+                    viewModels.append(optionalVideoViewModel)
+                }
+            }
             self.postImageView.sd_setImage(with: URL(string: post.uploads[0].imageURL), completed: nil)
             self.imagesCollectionView.reloadData()
         }
@@ -372,16 +392,27 @@ class UploadPostAndFitTipsVC: BaseViewController {
             var imagesToUploadData: [Data] = []
             var index = 0
             var arrayOfImagesToEditIds = [Int]()
+            var videoIdToEdit: Int?
             for viewModel in viewModels {
-                if viewModel.imageURL != nil && viewModel.image != nil {
-                    if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
-                        imagesToEditData.append(imageData)
-                        let uploadId = post.uploads[index].uploadId
-                        arrayOfImagesToEditIds.append(uploadId)
+                if viewModel.isVideo == false || viewModel.isVideo == nil {
+                    if viewModel.imageURL != nil && viewModel.image != nil {
+                        if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
+                            imagesToEditData.append(imageData)
+                            let uploadId = post.uploads[index].uploadId
+                            arrayOfImagesToEditIds.append(uploadId)
+                        }
+                    } else if viewModel.imageURL == nil && viewModel.image != nil {
+                        if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
+                            imagesToUploadData.append(imageData)
+                        }
                     }
-                } else if viewModel.imageURL == nil && viewModel.image != nil {
-                    if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
-                        imagesToUploadData.append(imageData)
+                } else {
+                    if (viewModel.videoURL?.lowercased().hasPrefix("http"))! == false {
+                        if let videos = post.videos {
+                            if videos.count > 0 {
+                                videoIdToEdit = videos[0].uploadId
+                            }
+                        }
                     }
                 }
                 index = index + 1
@@ -390,8 +421,11 @@ class UploadPostAndFitTipsVC: BaseViewController {
             if arrayOfImagesToEditIds.count > 0 {
                 dataDict["existing_images_ids"] = arrayOfImagesToEditIds.makeCommaSeparated()
             }
+            if self.currentVideoURL != nil {
+                dataDict["video_to_edit_id"] = videoIdToEdit
+            }
             SVProgressHUD.show()
-            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: post.postId, imagesToEdit: imagesToEditData, imagesToUploads: imagesToUploadData) { (isSuccess, response) in
+            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: post.postId, imagesToEdit: imagesToEditData, imagesToUploads: imagesToUploadData, videoURL: self.currentVideoURL) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
@@ -414,8 +448,10 @@ class UploadPostAndFitTipsVC: BaseViewController {
         }
         var imagesData: [Data] = []
         for viewModel in viewModels {
-            if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
-                imagesData.append(imageData)
+            if viewModel.isVideo == nil || viewModel.isVideo == false {
+                if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
+                    imagesData.append(imageData)
+                }
             }
         }
         dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
@@ -590,11 +626,12 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         if viewModels[indexPath.row].image == nil {
-            if indexPath.row == 3 {
+            if viewModels[indexPath.row].isVideo == true {
                 let videoPicker = self.storyboard?.instantiateViewController(withIdentifier: "VideoPickerVC") as! VideoPickerVC
                 videoPicker.modalPresentationStyle = .fullScreen
                 videoPicker.delegate = self
                 self.present(videoPicker, animated: true, completion: nil)
+                return
             }
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
@@ -702,10 +739,11 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         }
 //        cropVC.cropView.addSubview(tutorialImageView)
     }
-    func setupImage(pickedImage: UIImage) {
+    func setupImage(pickedImage: UIImage, videoURL: String? = nil) {
         if let index = selectedIndex {
             let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
             viewModels[index].image = scaledImg
+            viewModels[index].videoURL = videoURL
             self.postImageView.image = scaledImg
             if index > 2 {
                 if index < 5 {
@@ -822,7 +860,7 @@ extension UploadPostAndFitTipsVC: CustomVideoRecorderDelegate {
             self.currentVideoURL = videoURL
             self.getThumbnailImageFromVideoUrl(url: videoURL) { (image) in
                 if let pickedImage = image {
-                    self.setupImage(pickedImage: pickedImage)
+                    self.setupImage(pickedImage: pickedImage, videoURL: String(describing: videoURL))
                 }
             }
         }
