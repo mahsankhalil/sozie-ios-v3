@@ -748,14 +748,14 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         }
         hideAllSearchViews()
     }
-    func makeRequestAccepted(tag: Int, acceptedRequestId: Int) {
+    func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {
         requests[tag].isAccepted = true
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
-        let calendar = Calendar.current
-        let date = calendar.date(byAdding: .hour, value: 24, to: Date())
-        let acceptedRequest = AcceptedRequest(acceptedById: UserDefaultManager.getCurrentUserId()!, acceptedId: acceptedRequestId, expiry: dateFormat.string(from: date!))
+//        let dateFormat = DateFormatter()
+//        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+//        let calendar = Calendar.current
+//        let date = calendar.date(byAdding: .hour, value: 24, to: Date())
+//        let acceptedRequest = AcceptedRequest(acceptedById: UserDefaultManager.getCurrentUserId()!, acceptedId: acceptedRequestId, expiry: dateFormat.string(from: date!))
         requests[tag].acceptedRequest = acceptedRequest
         let viewModel = SozieRequestCellViewModel(request: requests[tag])
         viewModels.remove(at: tag)
@@ -774,7 +774,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
 //                SVProgressHUD.show()
 //                self.fetchAllSozieRequests()
                 let acceptedRequestResponse = response as! AcceptedRequestResponse
-                self.makeRequestAccepted(tag: tag, acceptedRequestId: acceptedRequestResponse.acceptedRequestId)
+                self.makeRequestAccepted(tag: tag, acceptedRequest: acceptedRequestResponse.acceptedRequest)
             } else {
                 let error = (response as! Error).localizedDescription
                 if let errorDict = error.getColonSeparatedErrorDetails() {

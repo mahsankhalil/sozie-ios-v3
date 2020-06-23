@@ -46,15 +46,15 @@ struct ValidateRespose: Codable {
 }
 struct AcceptedRequestResponse: Codable {
     var detail: String
-    var acceptedRequestId: Int
+    var acceptedRequest: AcceptedRequest
     enum CodingKeys: String, CodingKey {
         case detail
-        case acceptedRequestId = "accepted_request_id"
+        case acceptedRequest = "accepted_request"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         detail = try values.decode(String.self, forKey: .detail)
-        acceptedRequestId = try values.decode(Int.self, forKey: .acceptedRequestId)
+        acceptedRequest = try values.decode(AcceptedRequest.self, forKey: .acceptedRequest)
     }
 }
 
