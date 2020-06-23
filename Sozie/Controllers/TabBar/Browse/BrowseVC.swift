@@ -52,7 +52,7 @@ class BrowseVC: BaseViewController {
         didSet {
             categoriesViewModels.removeAll()
             for category in categoriesList {
-                let viewModel = ImageCellViewModel(imageURL: URL(string: category.notSelectedImage ?? ""), selectedImageURL: URL(string: category.selectedImage ?? ""))
+                let viewModel = ImageCellViewModel(imageURL: URL(string: category.notSelectedImage ?? ""), selectedImageURL: URL(string: category.selectedImage ?? ""), isSelected: false)
                 categoriesViewModels.append(viewModel)
             }
             categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
@@ -470,6 +470,11 @@ class BrowseVC: BaseViewController {
             popUpVC.dismiss()
         }
     }
+    func deSelectAllSelectedCategories() {
+        for index in 0..<categoriesViewModels.count {
+            categoriesViewModels[index].isSelected = false
+        }
+    }
 
     // MARK: - Actions
     @IBAction func filterBtnTapped(_ sender: Any) {
@@ -478,6 +483,8 @@ class BrowseVC: BaseViewController {
         showPopUpWithTitle(type: .filter)
     }
     @IBAction func clearFilterButtonTapped(_ sender: Any) {
+        self.deSelectAllSelectedCategories()
+        categoryCollectionVu.reloadData()
         categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
         filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
         refreshData()
@@ -626,6 +633,10 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //            let currentBrand = brandList[indexPath.row]
             filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
             productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
+            self.deSelectAllSelectedCategories()
+            categoriesViewModels[indexPath.row].isSelected = true
+            filterCategoryIds = [Float(categoriesList[indexPath.row].categoryId)]
+            collectionView.reloadData()
             productList.removeAll()
 //            filterByBrand(brandId: currentBrand.brandId)
             fetchFilteredData()
