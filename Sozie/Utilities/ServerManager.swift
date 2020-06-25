@@ -762,7 +762,8 @@ class ServerManager: NSObject {
         }
     }
     func getAllFitTips(params: [String: Any], block: CompletionHandler) {
-        Alamofire.request(ServerManager.fitTipsURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+        let url = ServerManager.fitTipsURL + "?category_id=" + String(describing: params["category_id"])
+        Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<[FitTips]> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

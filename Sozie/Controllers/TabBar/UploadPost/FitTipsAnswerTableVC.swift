@@ -86,6 +86,8 @@ class FitTipsAnswerTableVC: UIViewController {
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 } else if fitTip.question[0].type == "S" {
                     navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                } else if fitTip.question[0].type == "L" {
+                    navigateToRadioAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 }
             }
         }
@@ -115,6 +117,13 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     func navigateToRateAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRadioAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips

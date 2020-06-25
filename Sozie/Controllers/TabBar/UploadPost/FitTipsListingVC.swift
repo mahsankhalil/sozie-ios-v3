@@ -40,7 +40,7 @@ class FitTipsListingVC: UIViewController {
     }
     func checkIfFitTipAnswered(fitTip: FitTips) -> Bool {
         for question in fitTip.question {
-            if question.type == "R" || question.type == "C" || question.type == "S" {
+            if question.type == "R" || question.type == "C" || question.type == "S" || question.type == "L" {
                 for option in question.options {
                     if let answer = question.answer {
                         if checkIfAnswered(text: option.optionText, answer: answer) {
@@ -123,6 +123,13 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(destVC, animated: true)
         } else if fitTip.question[0].type == "S" {
             let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+            destVC.fitTipsIndex = indexPath.row
+            destVC.questionIndex = 0
+            destVC.fitTips = fitTips
+            self.navigationController?.parent?.viewDidAppear(true)
+            self.navigationController?.pushViewController(destVC, animated: true)
+        } else if fitTip.question[0].type == "L" {
+            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
             destVC.fitTipsIndex = indexPath.row
             destVC.questionIndex = 0
             destVC.fitTips = fitTips

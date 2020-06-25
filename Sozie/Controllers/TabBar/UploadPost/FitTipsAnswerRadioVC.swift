@@ -1,43 +1,109 @@
 //
-//  FitTipsAnswerRateVC.swift
+//  FitTipsAnswerRadioVC.swift
 //  Sozie
 //
-//  Created by Zaighum Ghazali Khan on 6/11/20.
+//  Created by Zaighum Ghazali Khan on 6/25/20.
 //  Copyright © 2020 Danial Zahid. All rights reserved.
 //
 
 import UIKit
-import Cosmos
-class FitTipsAnswerRateVC: UIViewController {
-    @IBOutlet weak var rateView: CosmosView!
+
+class FitTipsAnswerRadioVC: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var answerView: UIView!
+    var arrayOfButtons = [UIButton]()
     var fitTipsIndex: Int?
     var questionIndex: Int?
     var fitTips: [FitTips]?
+    var currentSelectedIndex: Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        rateView.settings.updateOnTouch = true
-        rateView.settings.filledColor = UIColor(hex: "ffbe25")
-        rateView.settings.emptyColor = UIColor(hex: "e0e0e0")
-        rateView.settings.emptyBorderColor = UIColor.clear
-        rateView.settings.filledBorderColor = UIColor.clear
-        rateView.rating = 0.0
-        rateView.settings.fillMode = .full
-        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+        titleLabel.textColor = UtilityManager.getGenderColor()
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
-            if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
-                if let rating = Double(answer) {
-                    rateView.rating = rating
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
+            titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
+            if let options = fitTips?[tipsIndex].question[quesIndex].options {
+                var index = 0
+                self.drawButtonInView(currentView: self.answerView, titles: options)
+                for option in options {
+                    if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
+                        if checkIfAnswered(text: option.optionText, answer: answer) {
+                            // question is being answered
+                            unseleAllButtons()
+                            makeButtonSelected(index: index)
+                        }
+                    }
+                    index = index + 1
                 }
             }
         }
     }
-
+    func checkIfAnswered(text: String, answer: String) -> Bool {
+        let answers = answer.components(separatedBy: ",")
+        for currentAnswer in answers where currentAnswer == text {
+                return true
+        }
+        return false
+    }
+    func drawButtonInView(currentView: UIView, titles: [Options]) {
+        let separation = (Double(UIScreen.main.bounds.size.width) / Double(titles.count + 2))
+        let buttonsView = UIView(frame: CGRect(x: 0, y: 0, width: (20.0 * Double(titles.count)) + (separation * Double(titles.count)) - separation, height: 50.0))
+        var index = 0.0
+        for title in titles {
+            let button = UIButton()
+            button.setImage(UIImage(named: "Ellipse 49"), for: .normal)
+            button.tag = Int(index)
+            button.frame = CGRect(x: Double(index * 20) + Double(separation * index), y: 0, width: 20, height: 20)
+            button.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
+            buttonsView.addSubview(button)
+            if index < Double(titles.count - 1) {
+                self.addLineAfterButton(button: button, buttonsView: buttonsView, separation: separation)
+            }
+            let label = UILabel(frame: CGRect(x: 0, y: Double(button.frame.height) + 10, width: separation, height: 20))
+            label.numberOfLines = 0
+            label.text = title.optionText
+            label.font = UIFont.systemFont(ofSize: 12)
+            label.textColor = UIColor.lightGray
+            label.sizeToFit()
+            label.textAlignment = .center
+            label.center.x = button.center.x
+            buttonsView.addSubview(label)
+            index = index + 1
+            arrayOfButtons.append(button)
+        }
+        buttonsView.center = currentView.center
+        buttonsView.center.y = currentView.frame.size.height / 2.0
+        currentView.addSubview(buttonsView)
+    }
+    func addLineAfterButton(button: UIButton, buttonsView: UIView, separation: Double) {
+        let line = UIView(frame: CGRect(x: Double(button.frame.origin.x) + Double(button.frame.width) + 3.0, y: 0.0, width: separation - 6.0, height: 1.0))
+        line.backgroundColor = UIColor.lightGray
+        line.center.y = button.center.y
+        buttonsView.addSubview(line)
+    }
+    func makeButtonSelected(index: Int) {
+        arrayOfButtons[index].setImage(UIImage(named: "Selected"), for: .normal)
+    }
+    @objc func buttonTapped(sender: UIButton) {
+        unseleAllButtons()
+        currentSelectedIndex = sender.tag
+        sender.setImage(UIImage(named: "Selected"), for: .normal)
+    }
+    func unseleAllButtons() {
+        for button in arrayOfButtons {
+            button.setImage(UIImage(named: "Ellipse 49"), for: .normal)
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -52,9 +118,9 @@ class FitTipsAnswerRateVC: UIViewController {
     }
 
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if rateView.rating != 0.0 {
+        if let currentAnswerIndex = currentSelectedIndex {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
-                let answer = String(Int(self.rateView.rating))
+                let answer = fitTips[fitTipIndex].question[questIndex].options[currentAnswerIndex].optionText
                 fitTips[fitTipIndex].question[questIndex].answer = answer
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
@@ -78,12 +144,13 @@ class FitTipsAnswerRateVC: UIViewController {
                     navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 } else if fitTip.question[0].type == "L" {
                     navigateToRadioAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-               }
+                }
             }
         } else {
-            UtilityManager.showErrorMessage(body: "Please select rating.", in: self)
+            UtilityManager.showErrorMessage(body: "Please select an option.", in: self)
         }
     }
+
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
         destVC.fitTipsIndex = fitTipIndex

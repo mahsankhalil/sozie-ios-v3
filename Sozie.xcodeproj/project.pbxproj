@@ -128,6 +128,7 @@
 		617DD44D23D5AC6300A08AE0 /* StoresPopupListingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DD44C23D5AC6300A08AE0 /* StoresPopupListingVC.swift */; };
 		617DD44F23D5AD3A00A08AE0 /* AdidasProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DD44E23D5AD3A00A08AE0 /* AdidasProduct.swift */; };
 		617DD45123D5AF0E00A08AE0 /* AdidasAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DD45023D5AF0E00A08AE0 /* AdidasAPIManager.swift */; };
+		617F77DB24A4EEB000FB7FFC /* FitTipsAnswerRadioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F77DA24A4EEB000FB7FFC /* FitTipsAnswerRadioVC.swift */; };
 		617FF0B1222810F70096597E /* SozieRequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FF0B0222810F70096597E /* SozieRequestCellViewModel.swift */; };
 		617FF0B322291B770096597E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FF0B222291B770096597E /* View.swift */; };
 		617FF0B622291C5F0096597E /* PostSizeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FF0B422291C5F0096597E /* PostSizeCollectionViewCell.swift */; };
@@ -399,6 +400,7 @@
 		617DD44C23D5AC6300A08AE0 /* StoresPopupListingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoresPopupListingVC.swift; sourceTree = "<group>"; };
 		617DD44E23D5AD3A00A08AE0 /* AdidasProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdidasProduct.swift; sourceTree = "<group>"; };
 		617DD45023D5AF0E00A08AE0 /* AdidasAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdidasAPIManager.swift; sourceTree = "<group>"; };
+		617F77DA24A4EEB000FB7FFC /* FitTipsAnswerRadioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsAnswerRadioVC.swift; sourceTree = "<group>"; };
 		617FA17B2270789F0055FD18 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		617FA17C227078AB0055FD18 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		617FA17D227078B50055FD18 /* Stage.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Stage.xcconfig; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				615816632333A4A500990F41 /* ThankYouController.swift */,
 				61D75378235872D1002BD92A /* RequestImagePickerController.swift */,
 				613AEB65247FDFC800B4A019 /* PosePopupVC.swift */,
+				617F77DA24A4EEB000FB7FFC /* FitTipsAnswerRadioVC.swift */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -1574,6 +1577,7 @@
 				6103E1B421FF33CC00C7E7CF /* TitleAndSwitchCell.swift in Sources */,
 				61EE668B22D344D6004265F1 /* Data.swift in Sources */,
 				6122289921F5D33500D4D747 /* SignInViewController.swift in Sources */,
+				617F77DB24A4EEB000FB7FFC /* FitTipsAnswerRadioVC.swift in Sources */,
 				615816642333A4A500990F41 /* ThankYouController.swift in Sources */,
 				6183FFD021E756810090393E /* SelectWorkVC.swift in Sources */,
 				DA48CB1821FAD871006804B6 /* ReuseIdentifierProviding.swift in Sources */,

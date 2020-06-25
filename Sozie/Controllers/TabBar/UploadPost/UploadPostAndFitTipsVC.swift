@@ -156,7 +156,9 @@ class UploadPostAndFitTipsVC: BaseViewController {
         return true
     }
     func fetchFitTipsFromServer() {
-        ServerManager.sharedInstance.getAllFitTips(params: [:]) { (isSuccess, response) in
+        var dataDict = [String: Any]()
+        dataDict["category_id"] = self.currentRequest?.requestedProduct.categoryId
+        ServerManager.sharedInstance.getAllFitTips(params: dataDict) { (isSuccess, response) in
             if isSuccess {
                 self.fitTips = (response as! [FitTips])
             }
