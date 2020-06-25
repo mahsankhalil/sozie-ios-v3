@@ -1,18 +1,18 @@
 //
-//  FitTipsAnswerTextVC.swift
+//  FitTipsAnswerRateVC.swift
 //  Sozie
 //
-//  Created by Zaighum Ghazali Khan on 7/4/19.
-//  Copyright © 2019 Danial Zahid. All rights reserved.
+//  Created by Zaighum Ghazali Khan on 6/11/20.
+//  Copyright © 2020 Danial Zahid. All rights reserved.
 //
 
 import UIKit
-
-class FitTipsAnswerTextVC: UIViewController {
+import Cosmos
+class FitTipsAnswerRateVC: UIViewController {
+    @IBOutlet weak var rateView: CosmosView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var textView: UITextView!
     var fitTipsIndex: Int?
     var questionIndex: Int?
     var fitTips: [FitTips]?
@@ -20,27 +20,41 @@ class FitTipsAnswerTextVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        titleLabel.textColor = UtilityManager.getGenderColor()
+        rateView.settings.updateOnTouch = true
+        rateView.settings.filledColor = UIColor(hex: "ffbe25")
+        rateView.settings.emptyColor = UIColor(hex: "e0e0e0")
+        rateView.settings.emptyBorderColor = UIColor.clear
+        rateView.settings.filledBorderColor = UIColor.clear
+        rateView.rating = 0.0
+        rateView.settings.fillMode = .full
+        (self.parent?.parent as? PopupController)?.updatePopUpSize()
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
             if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
-                textView.text = "I wish " + answer
+                if let rating = Double(answer) {
+                    rateView.rating = rating
+                }
             }
         }
-        textView.delegate = self
-        textView.becomeFirstResponder()
-        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
 
-    @IBAction func backButtonTaped(_ sender: Any) {
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
+
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if textView.text.isEmpty || textView.text == "I wish " {
-            UtilityManager.showErrorMessage(body: "Please enter comment", in: self)
-        } else {
+        if rateView.rating != 0.0 {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
-                let answer = self.textView.text.deletingPrefix("I wish ")
+                let answer = String(Int(self.rateView.rating))
                 fitTips[fitTipIndex].question[questIndex].answer = answer
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
@@ -62,10 +76,12 @@ class FitTipsAnswerTextVC: UIViewController {
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: fitTipIndex)
                 } else if fitTip.question[0].type == "S" {
                     navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-                }  else if fitTip.question[0].type == "L" {
+                } else if fitTip.question[0].type == "L" {
                     navigateToRadioAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-                }
+               }
             }
+        } else {
+            UtilityManager.showErrorMessage(body: "Please select rating.", in: self)
         }
     }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
@@ -104,31 +120,5 @@ class FitTipsAnswerTextVC: UIViewController {
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
-    }
-
-}
-extension FitTipsAnswerTextVC: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Type your comment..." {
-            textView.text = "I wish "
-        }
-    }
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "I wish " {
-            textView.text = "I wish "
-        } else {
-
-        }
-    }
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let  char = text.cString(using: String.Encoding.utf8)!
-        let isBackSpace = strcmp(char, "\\b")
-        if isBackSpace == -92 {
-            // If backspace is pressed this will call
-            if textView.text == "I wish " {
-                return false
-            }
-        }
-        return true
     }
 }

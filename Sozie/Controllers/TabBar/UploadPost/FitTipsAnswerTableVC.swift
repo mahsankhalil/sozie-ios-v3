@@ -74,41 +74,23 @@ class FitTipsAnswerTableVC: UIViewController {
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
-//                        self.navigationController?.popToRootViewController(animated: true)
-//                        return
                     }
                 } else {
                     questIndex = questIndex + 1
                 }
                 let fitTip = fitTips[fitTipIndex]
                 if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
-                    //Single selection
-//                    navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-//                } else if fitTip.question[0].type == "C" {
-                    //Multiple selection
                     navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-                } else {
-                    navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
+                } else if fitTip.question[0].type == "S" {
+                    navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                } else if fitTip.question[0].type == "L" {
+                    navigateToRadioAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 }
             }
         }
-//        if let tipsIndex = fitTipsIndex {
-//            if let fitTip = fitTips?[tipsIndex] {
-//                if fitTip.question[0].type == "R" {
-//                    //Single selection
-//
-//                } else if fitTip.question[0].type == "C" {
-//                    //Multiple selection
-//
-//                } else if fitTip.question[0].type == "T" {
-//                    //Text Input
-//
-//                }
-//            }
-//        }
     }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
@@ -131,6 +113,20 @@ class FitTipsAnswerTableVC: UIViewController {
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
         destVC.type = type
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRateAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRadioAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     /*

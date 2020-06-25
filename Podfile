@@ -30,6 +30,8 @@ pod 'Analytics', '~> 3.6.10'
 pod 'Branch'
 pod 'Segment-Firebase’
 pod 'CropViewController'
+pod 'Cosmos', '~> 22.1'
+
 #pod 'Segment-Intercom', '1.0.0-beta'
 end
 target 'Sozie' do
