@@ -18,10 +18,13 @@ public enum PopupType: String {
 }
 class BrowseVC: BaseViewController {
 
+    @IBOutlet weak var searchOptionsViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchOptionsView: UIView!
+    @IBOutlet weak var searchByDescriptionButton: UIButton!
+    @IBOutlet weak var searchByIdButton: UIButton!
     @IBOutlet weak var searchTxtFld: UITextField!
     @IBOutlet weak var searchVu: UIView!
     @IBOutlet weak var searchVuHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var categoryBtn: UIButton!
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var itemsCountLbl: UILabel!
@@ -217,6 +220,7 @@ class BrowseVC: BaseViewController {
     func setupViews() {
         searchTxtFld.delegate = self
         searchVuHeightConstraint.constant = 0.0
+        searchOptionsViewHeightConstraint.constant = 0.0
     }
     func showSearchVu() {
         searchVuHeightConstraint.constant = 0.0
@@ -475,7 +479,22 @@ class BrowseVC: BaseViewController {
             categoriesViewModels[index].isSelected = false
         }
     }
-
+    func showSearchOptionView() {
+        self.searchOptionsViewHeightConstraint.constant = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchOptionsViewHeightConstraint.constant = 47.0
+            self.view.layoutIfNeeded()
+            self.searchOptionsView.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+        }
+    }
+    func hideSearchOptionView() {
+        searchOptionsViewHeightConstraint.constant = 47.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchOptionsViewHeightConstraint.constant = 0.0
+            self.searchOptionsView.clipsToBounds = true
+            self.view.layoutIfNeeded()
+        }
+    }
     // MARK: - Actions
     @IBAction func filterBtnTapped(_ sender: Any) {
         largeBottomView?.removeFromSuperview()
@@ -489,13 +508,29 @@ class BrowseVC: BaseViewController {
         filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
         refreshData()
     }
+    
+    @IBAction func searchByDescriptionButtonTapped(_ sender: Any) {
+        hideSearchOptionView()
+        showSearchVu()
+    }
+    @IBAction func searchByIdButtonTapped(_ sender: Any) {
+        hideSearchOptionView()
+        showSearchVu()
+    }
     @IBAction func searchBtnTapped(_ sender: Any) {
 //        UtilityManager.showMessageWith(title: "This Feature is Coming Soon.", body: "", in: self)
-        if searchVuHeightConstraint.constant == 0 {
-            showSearchVu()
-        } else {
+        if searchOptionsViewHeightConstraint.constant == 0 && searchVuHeightConstraint.constant == 0 {
+            showSearchOptionView()
+        } else if searchOptionsViewHeightConstraint.constant == 47.0 && searchVuHeightConstraint.constant == 0 {
+            hideSearchOptionView()
+        } else if searchVuHeightConstraint.constant == 47.0 && searchOptionsViewHeightConstraint.constant == 0.0 {
             hideSearchVu()
         }
+//        if searchVuHeightConstraint.constant == 0 {
+//            showSearchVu()
+//        } else {
+//            hideSearchVu()
+//        }
     }
     @IBAction func categoryBtnTapped(_ sender: Any) {
         largeBottomView?.removeFromSuperview()
@@ -598,7 +633,9 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
-            loadNextPage()
+            if productList.count > 10 {
+                loadNextPage()
+            }
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
