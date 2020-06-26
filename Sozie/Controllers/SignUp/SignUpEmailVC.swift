@@ -80,7 +80,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         } else {
             signUpDict![User.CodingKeys.email.stringValue] = emailTxtFld.text
             signUpDict!["password"] = passwordTxtFld.text
-
+            signUpDict!["referral_code"] = referralCodeTextField.text
             confirmPasswordTxtFld.setError( nil, animated: true)
             verifyEmailFromServer(email: emailTxtFld.text)
         }

@@ -52,6 +52,7 @@ class ServerManager: NSObject {
     static let reviewURL = ServerManager.serverURL + "post/review/"
     static let acceptRequestURL = ServerManager.serverURL + "productrequest/sozie/request/"
     static let fitTipsURL = ServerManager.serverURL + "common/fittips"
+    static let referalCodeURL = ServerManager.serverURL + "referral/get"
     static let notificationURL = ServerManager.serverURL + "user/notify_config/"
     static let tutorialURL = ServerManager.serverURL + "user/tutorial_states/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
@@ -765,6 +766,21 @@ class ServerManager: NSObject {
         Alamofire.request(ServerManager.fitTipsURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<[FitTips]> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func getReferalCode(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.referalCodeURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ReferalResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }
