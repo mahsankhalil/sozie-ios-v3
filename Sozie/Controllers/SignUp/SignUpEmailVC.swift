@@ -29,6 +29,9 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     let validator = Validator()
     var signUpDict: [String: Any]?
 
+    @IBOutlet weak var pasteButton: UIButton!
+    @IBOutlet weak var whatsThisButton: UIButton!
+    @IBOutlet weak var referralCodeTextField: MFTextField!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +40,10 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         emailTxtFld.setupAppDesign()
         passwordTxtFld.setupAppDesign()
         confirmPasswordTxtFld.setupAppDesign()
+        referralCodeTextField.setupAppDesign()
+        referralCodeTextField.placeholderAnimatesOnFocus = true
         applyValidators()
+        self.whatsThisButton.alpha = 0.0
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +55,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     func applyValidators() {
         validator.registerField(emailTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Please enter a valid email address") as Rule, EmailRule(message: "Invalid email")])
         validator.registerField(passwordTxtFld, errorLabel: nil, rules: [RequiredRule(message: "Password can't be empty") as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule])
-        [emailTxtFld, passwordTxtFld].forEach { (field) in
+        [emailTxtFld, passwordTxtFld, referralCodeTextField].forEach { (field) in
             field?.delegate = self
         }
     }
@@ -74,7 +80,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         } else {
             signUpDict![User.CodingKeys.email.stringValue] = emailTxtFld.text
             signUpDict!["password"] = passwordTxtFld.text
-
+            signUpDict!["referral_code"] = referralCodeTextField.text
             confirmPasswordTxtFld.setError( nil, animated: true)
             verifyEmailFromServer(email: emailTxtFld.text)
         }
@@ -92,10 +98,46 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     func textFieldDidEndEditing(_ textField: UITextField) {
         let txtFld  = textField as! MFTextField
         txtFld.setError(nil, animated: true)
+        if textField == referralCodeTextField {
+            if textField.text == "" {
+                hideWhatsThisButton()
+            }
+        }
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == referralCodeTextField {
+            showWhatsThisButton()
+        }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == referralCodeTextField {
+//            let  char = string.cString(using: String.Encoding.utf8)!
+//            let isBackSpace = strcmp(char, "\\b")
+//            if isBackSpace == -92 {
+//                if textField.text?.count == 1 {
+//                    self.hideWhatsThisButton()
+//                }
+//            } else {
+//                self.showWhatsThisButton()
+//            }
+//        }
+//        return true
+//    }
+    func showWhatsThisButton() {
+        UIView.animate(withDuration: 0.3*0.3, delay: 0.0, options: .curveEaseOut, animations: {
+            self.whatsThisButton.alpha = 1.0
+            self.whatsThisButton.superview?.layoutIfNeeded()
+        })
+    }
+    func hideWhatsThisButton() {
+        UIView.animate(withDuration: 0.3*0.3, delay: 0.0, options: .curveEaseOut, animations: {
+            self.whatsThisButton.alpha = 0.0
+            self.whatsThisButton.superview?.layoutIfNeeded()
+        })
     }
 
     // MARK: - Navigation
@@ -144,7 +186,23 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
             }
         }
     }
-
+    @IBAction func whatsThisButtonTapped(_ sender: Any) {
+        referralCodeTextField.resignFirstResponder()
+        let popUpInstnc = ReferralPopupVC.instance()
+        let popUpVC = PopupController
+            .create(self)
+            .show(popUpInstnc)
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+    }
+    @IBAction func pasteButtonTapped(_ sender: Any) {
+        let pasteBoard: UIPasteboard = UIPasteboard.general
+        referralCodeTextField.text = pasteBoard.string
+        if referralCodeTextField.text != "" {
+            showWhatsThisButton()
+        }
+    }
     @IBAction func googleBtnTapped(_ sender: Any) {
         SVProgressHUD.show()
         GIDSignIn.sharedInstance()?.signOut()

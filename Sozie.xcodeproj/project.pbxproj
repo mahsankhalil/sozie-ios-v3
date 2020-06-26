@@ -41,6 +41,7 @@
 		610A74452203303300964886 /* ProductImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 610A74442203303300964886 /* ProductImg.png */; };
 		610A744722033B9000964886 /* MK.png in Resources */ = {isa = PBXBuildFile; fileRef = 610A744622033B9000964886 /* MK.png */; };
 		610A74492204280800964886 /* ProductImg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 610A74482204280700964886 /* ProductImg1.png */; };
+		61106E8324A61931000ABA1C /* ReferalResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61106E8224A61931000ABA1C /* ReferalResponse.swift */; };
 		61145CC121DB926700062332 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61145CC021DB926600062332 /* ServerManager.swift */; };
 		61161A102486A01700F61C12 /* MyUploadsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B9D1D42227EC9B007C6326 /* MyUploadsVC.swift */; };
 		61161A122489035200F61C12 /* RejectionReasonPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61161A112489035200F61C12 /* RejectionReasonPopup.swift */; };
@@ -94,6 +95,7 @@
 		613F897B21E8AEF800EB48D2 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897A21E8AEF800EB48D2 /* LoginResponse.swift */; };
 		613F897D21E8C5FB00EB48D2 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613F897C21E8C5FB00EB48D2 /* CustomError.swift */; };
 		6140C07522117CD200D9CE4F /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140C07422117CD200D9CE4F /* ProductDetailVC.swift */; };
+		6140DED5246038F30001B167 /* ReferralPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140DED4246038F00001B167 /* ReferralPopupVC.swift */; };
 		614374DB2236919200DBD295 /* BlockedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374D92236919200DBD295 /* BlockedUserCell.swift */; };
 		614374DC2236919200DBD295 /* BlockedUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614374DA2236919200DBD295 /* BlockedUserCell.xib */; };
 		614374DE22369A5400DBD295 /* BlockListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614374DD22369A5400DBD295 /* BlockListVC.swift */; };
@@ -314,6 +316,7 @@
 		610A74442203303300964886 /* ProductImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProductImg.png; sourceTree = "<group>"; };
 		610A744622033B9000964886 /* MK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MK.png; sourceTree = "<group>"; };
 		610A74482204280700964886 /* ProductImg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProductImg1.png; sourceTree = "<group>"; };
+		61106E8224A61931000ABA1C /* ReferalResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferalResponse.swift; sourceTree = "<group>"; };
 		61145CC021DB926600062332 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		61161A112489035200F61C12 /* RejectionReasonPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectionReasonPopup.swift; sourceTree = "<group>"; };
 		61161A132489037A00F61C12 /* RejectionReasonPopupWithoutTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectionReasonPopupWithoutTitle.swift; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 		613F897A21E8AEF800EB48D2 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		613F897C21E8C5FB00EB48D2 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		6140C07422117CD200D9CE4F /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
+		6140DED4246038F00001B167 /* ReferralPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralPopupVC.swift; sourceTree = "<group>"; };
 		614374D92236919200DBD295 /* BlockedUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserCell.swift; sourceTree = "<group>"; };
 		614374DA2236919200DBD295 /* BlockedUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockedUserCell.xib; sourceTree = "<group>"; };
 		614374DD22369A5400DBD295 /* BlockListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListVC.swift; sourceTree = "<group>"; };
@@ -844,6 +848,7 @@
 				6188C70221EC98A000B51EA1 /* SizeChartPopUpVC.swift */,
 				613CFD342266005D00841348 /* MeasurementTutorialVC.swift */,
 				6117C38423912F5B00F7C2F0 /* MaleMeasurementTutorialVC.swift */,
+				6140DED4246038F00001B167 /* ReferralPopupVC.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -1020,6 +1025,7 @@
 				617DD44E23D5AD3A00A08AE0 /* AdidasProduct.swift */,
 				6178BA05248A468A001B786E /* AddPostResponse.swift */,
 				61FF8DBC248E5A4900AE746E /* PostFitTips.swift */,
+				61106E8224A61931000ABA1C /* ReferalResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1583,6 +1589,7 @@
 				619EC53121E5F95000E4AE02 /* SizeChart.swift in Sources */,
 				61C40D05221E7DE900FBD7FF /* TabPageViewController.swift in Sources */,
 				694480F721C7A018001A11A2 /* UtilityManager.swift in Sources */,
+				61106E8324A61931000ABA1C /* ReferalResponse.swift in Sources */,
 				6106459C222FD7DE00AE41C3 /* SozieProfileVC.swift in Sources */,
 				613C4616226212D700AF77DF /* FirstShopperWelcomeVC.swift in Sources */,
 				61EE668D22D36F8F004265F1 /* SozieRequestTutorialVC.swift in Sources */,
@@ -1614,6 +1621,7 @@
 				611EDFD5221AF0DB00FB2DBE /* WishTableViewCell.swift in Sources */,
 				6120D43B22B110600000678C /* TextFieldCellViewModeling.swift in Sources */,
 				DA48CB0E21FABB8C006804B6 /* DoubleTextFieldCellViewModeling.swift in Sources */,
+				6140DED5246038F30001B167 /* ReferralPopupVC.swift in Sources */,
 				61C4E45A23631061009A5E29 /* GoShoppingPopup.swift in Sources */,
 				617CD12A21DE286700D4C885 /* SignUpViewController.swift in Sources */,
 				617FF0B1222810F70096597E /* SozieRequestCellViewModel.swift in Sources */,
