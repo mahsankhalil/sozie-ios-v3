@@ -45,7 +45,7 @@ class BrowseVC: BaseViewController {
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
     var categoryPopupInstance: PopupNavController?
     var filterPopupInstance: PopupNavController?
-    var filterCategoryIds: [Float]?
+    var filterCategoryIds: [Int]?
     var filterBrandId: Int?
     var filterBySozies = false
     var selectedIndex: Int?
@@ -665,19 +665,27 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             smallBottomView?.removeFromSuperview()
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else {
-            filterCategoryIds?.removeAll()
-            filterCategoryIds?.append(Float(categoriesList[indexPath.row].categoryId))
+//            filterCategoryIds?.removeAll()
+//            filterCategoryIds?.append(Float(categoriesList[indexPath.row].categoryId))
 //            let currentBrand = brandList[indexPath.row]
+            self.getAllSubCategoresIdFrom(category: categoriesList[indexPath.row])
             filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
             productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
             self.deSelectAllSelectedCategories()
             categoriesViewModels[indexPath.row].isSelected = true
-            filterCategoryIds = [Float(categoriesList[indexPath.row].categoryId)]
+//            filterCategoryIds = [categoriesList[indexPath.row].categoryId]
             collectionView.reloadData()
             productList.removeAll()
 //            filterByBrand(brandId: currentBrand.brandId)
             fetchFilteredData()
 
+        }
+    }
+    func getAllSubCategoresIdFrom(category: Category) {
+        filterCategoryIds?.removeAll()
+        filterCategoryIds = [Int]()
+        for subCategory in category.subCategories {
+            filterCategoryIds?.append(subCategory.subCategoryId)
         }
     }
 }
@@ -700,7 +708,7 @@ extension BrowseVC: PopupNavControllerDelegate {
             filterByBrand(brandId: objId)
         } else if type == FilterType.category {
             if let catId = objId {
-                self.filterCategoryIds = [Float(catId)]
+                self.filterCategoryIds = [catId]
 //                self.filterBrandId = nil
 //                self.filterBySozies = false
             }
