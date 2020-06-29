@@ -264,9 +264,10 @@ class BrowseVC: BaseViewController {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getAllCategories(params: [:]) { (isSuccess, response) in
             if isSuccess {
-                self.categoriesList = self.categoryCollectionVu.prepareDataSourceForInfiniteScroll(array: response as! [Category]) as! [Category]
+//                self.categoriesList = self.categoryCollectionVu.prepareDataSourceForInfiniteScroll(array: response as! [Category]) as! [Category]
+                self.categoriesList = response as! [Category]
                 self.categoryCollectionVu.reloadData()
-                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
+//                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
             }
         }
     }
@@ -508,7 +509,6 @@ class BrowseVC: BaseViewController {
         filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
         refreshData()
     }
-    
     @IBAction func searchByDescriptionButtonTapped(_ sender: Any) {
         hideSearchOptionView()
         showSearchVu()
