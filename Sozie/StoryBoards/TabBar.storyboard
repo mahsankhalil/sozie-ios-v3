@@ -153,13 +153,24 @@
                                             <constraint firstItem="qN7-Za-enX" firstAttribute="centerY" secondItem="eAJ-PI-7pc" secondAttribute="centerY" id="wqS-Ec-mAG"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6e-n0-3tl">
+                                        <rect key="frame" x="151.5" y="16" width="72" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="wfh-af-qi5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.058823529411764705" green="0.058823529411764705" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="eAJ-PI-7pc" firstAttribute="centerY" secondItem="8VK-Gj-weP" secondAttribute="centerY" id="1wc-e1-aWj"/>
                                     <constraint firstAttribute="trailing" secondItem="eAJ-PI-7pc" secondAttribute="trailing" id="Hqq-6E-PV0"/>
+                                    <constraint firstItem="L6e-n0-3tl" firstAttribute="centerX" secondItem="8VK-Gj-weP" secondAttribute="centerX" id="JIR-CG-plB"/>
                                     <constraint firstItem="eAJ-PI-7pc" firstAttribute="leading" secondItem="8VK-Gj-weP" secondAttribute="leading" id="Voa-rb-N5Q"/>
                                     <constraint firstItem="sA3-N7-IBE" firstAttribute="centerY" secondItem="8VK-Gj-weP" secondAttribute="centerY" id="bmU-lJ-BVH"/>
+                                    <constraint firstItem="L6e-n0-3tl" firstAttribute="top" secondItem="8VK-Gj-weP" secondAttribute="top" constant="16" id="iFl-eT-eBr"/>
                                     <constraint firstAttribute="trailing" secondItem="sA3-N7-IBE" secondAttribute="trailing" id="kLy-Zd-g7e"/>
                                     <constraint firstItem="sA3-N7-IBE" firstAttribute="leading" secondItem="8VK-Gj-weP" secondAttribute="leading" id="uLM-xy-ZKX"/>
                                 </constraints>
@@ -182,6 +193,7 @@
                         <outlet property="cancelButton" destination="0FG-if-Vmo" id="OXB-N5-MdE"/>
                         <outlet property="captureButton" destination="WWY-s8-WJB" id="xCM-07-RNb"/>
                         <outlet property="howToButton" destination="f6k-CU-RCe" id="x0N-tW-9gR"/>
+                        <outlet property="timerLabel" destination="L6e-n0-3tl" id="zPQ-U8-Wwj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLA-pG-cNl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

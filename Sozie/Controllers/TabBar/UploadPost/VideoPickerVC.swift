@@ -17,7 +17,11 @@ class VideoPickerVC: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var howToButton: UIButton!
     @IBOutlet weak var captureButton: UIButton!
+    @IBOutlet weak var timerLabel: UILabel!
+
     var timer: Timer!
+    var timeMin = 0
+    var timeSec = 0
     var count = 20
     var session: AVCaptureSession?
     var input: AVCaptureDeviceInput?
@@ -28,6 +32,7 @@ class VideoPickerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        timerLabel.isHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -37,12 +42,24 @@ class VideoPickerVC: UIViewController {
         return AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: position)
     }
     @objc func update() {
+        timeSec += 1
+
+        if timeSec == 60 {
+            timeSec = 0
+            timeMin += 1
+        }
+
+        let timeNow = String(format: "%02d:%02d:%02d", 0, timeMin, timeSec)
+
+        timerLabel.text = timeNow
         if self.count > 0 {
             self.count = self.count - 1
         } else {
             self.videoFileOutput?.stopRecording()
             self.timer.invalidate()
             self.captureButton.setImage(UIImage(named: "Record"), for: .normal)
+            self.count = 20
+            timerLabel.isHidden = true
         }
     }
     func setupVideoCapture() {
@@ -76,6 +93,10 @@ class VideoPickerVC: UIViewController {
         }
     }
     func startRecording() {
+        timeSec = 0
+        timeMin = 0
+        timerLabel.isHidden = false
+        self.count = 20
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         //        sessionQueue.async {
         let recordingDelegate: AVCaptureFileOutputRecordingDelegate? = self
@@ -90,15 +111,14 @@ class VideoPickerVC: UIViewController {
         // Do recording and save the output to the `filePath`
         self.videoFileOutput?.startRecording(to: filePath, recordingDelegate: recordingDelegate!)
     }
-    func manageCroppingToSquare(filePath: URL , completion: @escaping (_ outputURL : URL?) -> ()) {
+    func manageCroppingToSquare(filePath: URL, completion: @escaping (_ outputURL: URL?) -> ()) {
         // output file
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let outputPath = documentsURL?.appendingPathComponent("squareVideo.mov")
         if FileManager.default.fileExists(atPath: (outputPath?.path)!) {
             do {
                try FileManager.default.removeItem(atPath: (outputPath?.path)!)
-            }
-            catch {
+            } catch {
                 print ("Error deleting file")
             }
         }
@@ -120,9 +140,9 @@ class VideoPickerVC: UIViewController {
 
         //rotate to potrait
         let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
-        let t1 = CGAffineTransform(translationX: clipVideoTrack.naturalSize.height, y: -(clipVideoTrack.naturalSize.width - clipVideoTrack.naturalSize.height) / 2)
-        let t2: CGAffineTransform = t1.rotated(by: .pi/2)
-        let finalTransform: CGAffineTransform = t2
+        let vt1 = CGAffineTransform(translationX: clipVideoTrack.naturalSize.height, y: -(clipVideoTrack.naturalSize.width - clipVideoTrack.naturalSize.height) / 2)
+        let vt2: CGAffineTransform = vt1.rotated(by: .pi/2)
+        let finalTransform: CGAffineTransform = vt2
         transformer.setTransform(finalTransform, at: CMTime.zero)
         instruction.layerInstructions = [transformer]
         videoComposition.instructions = [instruction]
@@ -188,6 +208,7 @@ extension VideoPickerVC: AVCaptureFileOutputRecordingDelegate {
         if self.videoFileOutput?.isRecording == false {
             self.videoFileOutput?.stopRecording()
             self.timer.invalidate()
+            timerLabel.isHidden = true
             if FileManager.default.fileExists(atPath: outputFileURL.path) == false {
                 self.setupVideoCapture()
                 return
@@ -204,7 +225,7 @@ extension VideoPickerVC: AVCaptureFileOutputRecordingDelegate {
 //                    let videoRecorded = fileURL as URL
                     var info = [String: Any]()
                     info["UIImagePickerControllerMediaURL"] = fileURL
-                    UtilityManager.showMessageWith(title: "Alert!", body: "Are you sure to user this video?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                    UtilityManager.showMessageWith(title: "Alert!", body: "Are you sure to use this video?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                         self.delegate?.customImagePickerController(self, didFinishPickingMediaWithInfo: info)
                         self.dismiss(animated: true, completion: nil)
                     }
