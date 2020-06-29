@@ -2539,12 +2539,12 @@ They will try on items of your choice so you can be sure of what size you want t
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vS1-gy-5De">
-                                <rect key="frame" x="25" y="182" width="325" height="135.5"/>
+                                <rect key="frame" x="25" y="182" width="325" height="135"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Invite friends ">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <font key="NSOriginalFont" size="17" name=".SFNSText"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2552,7 +2552,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                     <fragment content="and you'll get ">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -2567,14 +2567,14 @@ They will try on items of your choice so you can be sure of what size you want t
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="when they sign up and they'll get ">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <font key="NSOriginalFont" size="14" name=".SFNSText"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2590,7 +2590,7 @@ They will try on items of your choice so you can be sure of what size you want t
                                     <fragment content=" - it's a win win!">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <font key="NSOriginalFont" size="14" name=".SFNSText"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2601,14 +2601,14 @@ Cgo
 </string>
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Refer ">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <font key="NSOriginalFont" size="14" name=".SFNSText"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2621,10 +2621,17 @@ Cgo
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=" male or female. The more the merrier - 10 friends gets you ">
+                                    <fragment content=", ">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="male or female. The more the merrier - 10 friends gets you ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <font key="NSOriginalFont" size="14" name=".SFNSText"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2640,7 +2647,7 @@ Cgo
                                     <fragment content=" and the rewards are endless">
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <font key="NSOriginalFont" size="14" name=".SFNSText"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -2659,7 +2666,7 @@ Cg
 </string>
                                         <attributes>
                                             <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name=".SFNSText"/>
+                                            <font key="NSFont" size="14" name="SegoeUI"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -2667,7 +2674,7 @@ Cg
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIC-WW-UT2">
-                                <rect key="frame" x="25" y="325" width="325" height="36"/>
+                                <rect key="frame" x="25" y="324.5" width="325" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="When your friends use Sozie:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Skq-il-wFv">
                                         <rect key="frame" x="0.0" y="8" width="177" height="18"/>
@@ -2693,7 +2700,7 @@ Cg
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjW-Z7-89Z">
-                                <rect key="frame" x="25" y="369" width="325" height="37.5"/>
+                                <rect key="frame" x="25" y="368.5" width="325" height="37.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="1.">
                                         <attributes>
