@@ -632,11 +632,16 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 12.0
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
-            if productList.count > 10 {
+        if productList.count < totalCount {
+            if indexPath.row == productList.count - 6 {
                 loadNextPage()
             }
         }
+//        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
+//            if productList.count > 10 {
+//                loadNextPage()
+//            }
+//        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == productsCollectionVu {

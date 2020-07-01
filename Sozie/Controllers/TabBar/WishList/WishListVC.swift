@@ -13,6 +13,7 @@ class WishListVC: BaseViewController {
     @IBOutlet weak var wishListUnderLineView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noProductLabel: UILabel!
+    var isViewRequestButtonTapped = false
     private var viewModels: [ProductImageCellViewModel] = []
     private var productList: [Product] = [] {
         didSet {
@@ -78,6 +79,10 @@ class WishListVC: BaseViewController {
         // Pass the selected object to the new view controller.
         let destVC = segue.destination as? ProductDetailVC
         destVC?.currentProduct = selectedProduct
+        if isViewRequestButtonTapped == true {
+            destVC?.shoulScrollToRequests = true
+            self.isViewRequestButtonTapped = false
+        }
     }
 
 }
@@ -117,18 +122,22 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension WishListVC: WishTableViewCellDelegate {
-    func buyButtonTapped(button: UIButton) {
-        let currentProduct = productList[button.tag]
+    func viewRequestsButtonTapped(button: UIButton) {
+        isViewRequestButtonTapped = true
+        selectedProduct = productList[button.tag]
+        performSegue(withIdentifier: "toProductDetail", sender: self)
+//        let currentProduct = productList[button.tag]
+////        if let productURL = currentProduct.deepLink {
+////            guard let url = URL(string: productURL) else { return }
+////            UIApplication.shared.open(url)
+////        }
+//
 //        if let productURL = currentProduct.deepLink {
-//            guard let url = URL(string: productURL) else { return }
-//            UIApplication.shared.open(url)
+//            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
+//            webVC.url = URL(string: productURL)
+//            webVC.modalPresentationStyle = .overFullScreen
+//            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
 //        }
-        if let productURL = currentProduct.deepLink {
-            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
-            webVC.url = URL(string: productURL)
-            webVC.modalPresentationStyle = .overFullScreen
-            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
-        }
     }
 
     func crossButonTapped(btn: UIButton) {

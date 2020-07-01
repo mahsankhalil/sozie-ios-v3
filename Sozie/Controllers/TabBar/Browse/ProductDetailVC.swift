@@ -11,38 +11,52 @@ import SDWebImage
 import SVProgressHUD
 import EasyTipView
 import SafariServices
+import TPKeyboardAvoiding
 class ProductDetailVC: BaseViewController {
 
     @IBOutlet weak var topViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionTextLabel: UILabel!
-    @IBOutlet weak var requestSozieButton: DZGradientButton!
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var buyButton: DZGradientButton!
-    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var swipeToSeeView: UIView!
     @IBOutlet weak var heartButtonWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var allReviewButton: UIButton!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var reviewButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var commentsTableView: UITableView!
-    @IBOutlet weak var sozieBuyButton: DZGradientButton!
-    @IBOutlet weak var addCommentHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var addCommentTextField: UITextField!
+    @IBOutlet weak var requestsTableView: UITableView!
+    @IBOutlet weak var viewRequestsButton: UIButton!
+    @IBOutlet weak var noDataLabel: UILabel!
+    @IBOutlet weak var mainScrollView: TPKeyboardAvoidingScrollView!
+    
+    var nextURL: String?
     var currentProduct: Product?
     var viewModels: [PostCellViewModel] = []
     var commentViewModels: [CommentsViewModel] = []
     var productViewModel = ProductDetailCellViewModel()
+    var requestsViewModels: [SozieRequestCellViewModel] = []
+    var reuseableIdentifier = "SozieRequestTableViewCell"
+    var reuseableIdentifierTarget = "TargetRequestTableViewCell"
     var currentPostId: Int?
     @IBOutlet weak var bottomView: UIView!
     var tipView: EasyTipView?
     var tapGesture: UITapGestureRecognizer?
     var currentIndex: Int = 0
+    var currentRequest: SozieRequest?
+    var serverParams: [String: Any] = [String: Any]()
+    var shoulScrollToRequests = false
+    var requests: [SozieRequest] = [] {
+        didSet {
+            requestsViewModels.removeAll()
+            for request in requests {
+                let viewModel = SozieRequestCellViewModel(request: request)
+                requestsViewModels.append(viewModel)
+            }
+            noDataLabel.isHidden = requestsViewModels.count != 0
+            requestsTableView.reloadData()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.commentsTableView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         swipeToSeeView.roundCorners(corners: [.topLeft], radius: 20.0)
         setupSozieLogoNavBar()
@@ -51,41 +65,22 @@ class ProductDetailVC: BaseViewController {
 //        fetchProductDetailFromServer()
         collectionView.register(UINib(nibName: "PostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PostCollectionViewCell")
         collectionView.register(UINib(nibName: "ProductDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductDetailCollectionViewCell")
-        buyButton.layer.cornerRadius = 3.0
-        sozieBuyButton.layer.cornerRadius = 3.0
-        requestSozieButton.layer.cornerRadius = 3.0
         pageControl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-        reviewButtonHeightConstraint.constant = 0.0
-        addCommentHeightConstraint.constant = 0.0
-        allReviewButton.isHidden = true
-        commentsTableView.isHidden = true
-        addCommentTextField.delegate = self
-        tableViewHeightConstraint.constant = 0.0
+        tableViewHeightConstraint.constant = 400
         if #available(iOS 11.0, *) {
             let window = UIApplication.shared.keyWindow
             let topPadding = window?.safeAreaInsets.top
             let bottomPadding = window?.safeAreaInsets.bottom
             topViewHeightConstraint.constant = UIScreen.main.bounds.size.height - topPadding! - bottomPadding! - (self.tabBarController?.tabBar.frame.height)! - (self.navigationController?.navigationBar.frame.height)! - 109
         }
-        if UserDefaultManager.getIfShopper() {
-            heartButtonWidthConstraint.constant = 32.0
-            heartButton.isHidden = false
-            buyButton.isHidden = false
-            requestSozieButton.isHidden = false
-            sozieBuyButton.isHidden = true
-        } else {
-//            heartButtonWidthConstraint.constant = 0.0
-//            heartButton.isHidden = true
-            buyButton.isHidden = true
-            sozieBuyButton.isHidden = false
-            requestSozieButton.isHidden = true
-        }
+
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken != nil {
 //            self.showTagItemButton()
             self.showCancelButton()
         }
-        sozieBuyButton.shadowAdded = false
+        self.fetchRequestsFromServer()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAllData), name: Notification.Name(rawValue: "PostUploaded"), object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -105,41 +100,54 @@ class ProductDetailVC: BaseViewController {
         }
     }
     override func viewDidAppear(_ animated: Bool) {
-        if UserDefaultManager.getIfShopper() {
-            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.requestSozieButtonUserGuide) == false {
-                showTipView()
-            }
-        }
     }
-    func showTipView() {
-        if UserDefaultManager.isUserGuideDisabled() == false {
-            let text = "After swiping, if you still don't see your size tried on, click above!"
-            var prefer = UtilityManager.tipViewGlobalPreferences()
-            prefer.drawing.arrowPosition = .top
-            prefer.positioning.maxWidth = 110
-            tipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
-            tipView?.show(animated: true, forView: self.requestSozieButton, withinSuperview: self.bottomView)
-            UserDefaultManager.setUserGuideShown(userGuide: UserDefaultKey.requestSozieButtonUserGuide)
-            perform(#selector(self.dismissTipView), with: nil, afterDelay: 5.0)
-        }
-    }
-    @objc func dismissTipView() {
-        tipView?.dismiss(withCompletion: nil)
-    }
+
     override func viewDidLayoutSubviews() {
 //        descriptionTextLabel.setContentOffset(.zero, animated: false)
     }
+    @objc func loadNextPage() {
+        if let nextUrl = self.nextURL {
+            serverParams["next"] = nextUrl
+            fetchRequestsFromServer()
+        } else {
+            serverParams.removeValue(forKey: "next")
+            requestsTableView.bottomRefreshControl?.endRefreshing()
+        }
+    }
+    @objc func reloadAllData() {
+        serverParams.removeAll()
+        requests.removeAll()
+        fetchRequestsFromServer()
+    }
+    func fetchRequestsFromServer() {
+        if let productId = currentProduct?.merchantProductId {
+            serverParams["search_field"] = "article_id"
+            serverParams["search_value"] = productId
+            if let nextUrl = self.nextURL {
+                serverParams["next"] = nextUrl
+            }
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    let paginatedData = response as! RequestsPaginatedResponse
+                    self.requests.append(contentsOf: paginatedData.results)
+                    self.nextURL = paginatedData.next
+                    if self.shoulScrollToRequests == true {
+                        self.scrollToBottom()
+                    }
+                }
 
-    func fetchProductDetailFromServer () {
+            }
+        }
+    }
+    func fetchProductDetailFromServer() {
         if let productId = currentProduct?.productStringId {
             SVProgressHUD.show()
             ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     self.updateCurrentProductObject(product: response as! Product)
-                    if self.currentIndex != 0 {
-//                        self.collectionView.scrollToItem(at: IndexPath(item: self.currentIndex, section: 0), at: .centeredHorizontally, animated: false)
-                    }
                     self.populateProductData()
                 }
             }
@@ -239,8 +247,6 @@ class ProductDetailVC: BaseViewController {
             }
         }
         self.collectionView.scrollToItem(at: IndexPath(item: indexOfPost, section: 0), at: .centeredHorizontally, animated: false)
-        updateCommentsView()
-
     }
 
     @objc func showSuccessPopUp() {
@@ -252,6 +258,10 @@ class ProductDetailVC: BaseViewController {
         popUpInstnc!.closeHandler = { []  in
             popUpVC.dismiss()
         }
+    }
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: mainScrollView.contentSize.height - mainScrollView.bounds.size.height)
+        mainScrollView.setContentOffset(bottomOffset, animated: true)
     }
     // MARK: - Navigation
 
@@ -283,59 +293,8 @@ class ProductDetailVC: BaseViewController {
     }
     // MARK: - Actions
 
-    @IBAction func requestSozieButtonTapped(_ sender: Any) {
-//        let popUpInstnc = RequestSizeChartPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
-        let popUpInstnc = SizePickerPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
-
-//        let popUpInstnc = SizeChartPopUpVC.instance(arrayOfSizeChart: nil, arrayOfGeneral: nil, type: nil, productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
-        let popUpVC = PopupController
-            .create(self.tabBarController?.navigationController ?? self)
-            .show(popUpInstnc)
-        let options = PopupCustomOption.layout(.bottom)
-        _ = popUpVC.customize([options])
-//        popUpInstnc.delegate = self
-        popUpInstnc.closeHandler = { []  in
-            popUpVC.dismiss()
-            DispatchQueue.main.async {
-                self.showSuccessPopUp()
-            }
-//            self.perform(#selector(self.showSuccessPopUp), with: nil, afterDelay: 1.0)
-        }
-    }
-    @IBAction func butButtonTapped(_ sender: Any) {
-        if let productURL = self.currentProduct?.deepLink {
-            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
-            webVC.url = URL(string: productURL)
-            webVC.modalPresentationStyle = .overFullScreen
-            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
-        }
-    }
-    @IBAction func shareButtonTapped(_ sender: Any) {
-        if var imageURL = currentProduct?.merchantImageURL {
-            if imageURL == "" {
-                if let imageURLTarget = currentProduct?.imageURL {
-                    imageURL =  imageURLTarget
-                }
-            } else {
-                if imageURL.contains("|") {
-                    let delimeter = "|"
-                    let url = imageURL.components(separatedBy: delimeter)
-                    imageURL = url[0]
-                }
-            }
-            SVProgressHUD.show()
-            SDWebImageDownloader.shared().downloadImage(with: URL(string: imageURL), options: SDWebImageDownloaderOptions.highPriority, progress: nil) { (image, _, _, _) in
-                SVProgressHUD.dismiss()
-                if let downloadedImage = image {
-                    if let productURL = self.currentProduct?.deepLink {
-                        if let appLink = URL(string: "https://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8") {
-                            UtilityManager.showActivityControllerWith(objectsToShare: [downloadedImage, "I’m obsessed with this look! What do you think?\n", productURL, "\nHave it tried on for you in your size by your Sozie!\nDownload ", appLink], viewController: self)
-                        }
-                    }
-                }
-            }
-        }
-
+    @IBAction func viewRequestsButtonTapped(_ sender: Any) {
+        scrollToBottom()
     }
     @IBAction func heartButtonTapped(_ sender: Any) {
         if currentProduct?.isFavourite == false {
@@ -371,9 +330,6 @@ class ProductDetailVC: BaseViewController {
     override func cancelButtonTapped() {
         super.cancelButtonTapped()
         self.navigationController?.popViewController(animated: true)
-    }
-    @IBAction func allReviewsButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toCommentsDetail", sender: self)
     }
 }
 
@@ -442,63 +398,6 @@ extension ProductDetailVC: UIScrollViewDelegate {
             }
         }
         currentIndex = currentPage
-        updateCommentsView()
-    }
-    func updateCommentsView() {
-        tableViewHeightConstraint.constant = 128.0
-        reviewButtonHeightConstraint.constant = 18.0
-        allReviewButton.isHidden = false
-        commentsTableView.isHidden = false
-        if currentIndex != 0 {
-            if let allPosts = currentProduct?.posts {
-                if currentIndex > allPosts.count {
-                    return
-                }
-                let currentPost = allPosts[currentIndex - 1]
-                if currentPost.canPostReview == true {
-                    addCommentHeightConstraint.constant = 24.0
-                } else {
-                    addCommentHeightConstraint.constant = 0.0
-                }
-                if let fitTips = currentPost.compiledFitTips {
-                    self.descriptionTextLabel.text = fitTips
-                }
-                if let totalCount = currentPost.reviews?.totalCount {
-                    if totalCount <= 2 {
-                        allReviewButton.setTitle(String(currentPost.reviews?.totalCount ?? 0) + " Reviews", for: .normal)
-                    } else {
-                        allReviewButton.setTitle("View all " + String(currentPost.reviews?.totalCount ?? 0) + " reviews", for: .normal)
-                    }
-                }
-                if let reviews = allPosts[currentIndex - 1].reviews {
-                    commentViewModels.removeAll()
-                    for review in reviews.reviews {
-                        let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
-                        commentViewModels.append(viewModel)
-                    }
-                    commentsTableView.reloadData()
-                }
-            }
-        } else {
-            hideAddCommentView()
-        }
-    }
-    func hideAddCommentView() {
-        addCommentHeightConstraint.constant = 0.0
-        if let reviews = currentProduct?.reviews {
-            commentViewModels.removeAll()
-            let totalCount = reviews.totalCount
-            if totalCount <= 2 {
-                allReviewButton.setTitle(String(reviews.totalCount) + " Reviews", for: .normal)
-            } else {
-                allReviewButton.setTitle("View all " + String(reviews.totalCount) + " reviews", for: .normal)
-            }
-            for review in reviews.reviews {
-                let viewModel = CommentsViewModel(title: nil, attributedTitle: self.getAttributedStringWith(name: review.addedBy.username, text: review.text), description: review.createdAt, imageURL: URL(string: review.addedBy.picture))
-                commentViewModels.append(viewModel)
-            }
-            commentsTableView.reloadData()
-        }
     }
     func getAttributedStringWith(name: String, text: String) -> NSAttributedString {
         let myAttribute = [ NSAttributedString.Key.font: UIFont(name: "SegoeUI-Bold", size: 14.0)!, NSAttributedString.Key.foregroundColor: UIColor(hex: "282828") ]
@@ -513,14 +412,6 @@ extension ProductDetailVC: UIScrollViewDelegate {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken != nil {
             self.showSmallTagThisItemView()
-        }
-        let contentOffsetX = scrollView.contentOffset.x
-        if contentOffsetX > (scrollView.contentSize.width - scrollView.bounds.width)  /* Needed offset */ {            
-            if UserDefaultManager.getIfShopper() == false {
-                if (scrollView.contentSize.width - scrollView.bounds.width) != 0 {
-//                    UtilityManager.openImagePickerActionSheetFrom(viewController: self)
-                }
-            }
         }
     }
 }
@@ -633,96 +524,316 @@ extension ProductDetailVC: UINavigationControllerDelegate, UIImagePickerControll
         }
     }
 }
-
 extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentViewModels.count
+        return requestsViewModels.count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let viewModel = commentViewModels[indexPath.row]
-        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
+        let viewModel = requestsViewModels[indexPath.row]
+        var identifier = reuseableIdentifier
+        if viewModel.brandId == 10 || viewModel.brandId == 18 {
+            identifier = reuseableIdentifierTarget
+        }
+        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier)
         if tableViewCell == nil {
-            tableView.register(UINib(nibName: viewModel.reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
-            tableViewCell = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
+            tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)
+            tableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier)
         }
         guard let cell = tableViewCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
         if let cellConfigurable = cell as? CellConfigurable {
             cellConfigurable.setup(viewModel)
         }
+        if let cellIndexing = cell as? ButtonProviding {
+            cellIndexing.assignTagWith(indexPath.row)
+        }
+        if let currentCell = cell as? SozieRequestTableViewCell {
+            currentCell.delegate = self
+        }
+        if let currentCell = cell as? TargetRequestTableViewCell {
+            currentCell.delegate = self
+            currentCell.cancelButton.isUserInteractionEnabled = true
+        }
+        cell.selectionStyle = .none
         return cell
     }
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 62.0
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        selectedProduct = requests[indexPath.row].requestedProduct
+//        if (viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true) || viewModels[indexPath.row].isSelected == false {
+//            if (tableView.cellForRow(at: indexPath) as? TargetRequestTableViewCell) != nil {
+//                let cell = (tableView.cellForRow(at: indexPath) as? TargetRequestTableViewCell)
+//                let button = cell?.acceptButton
+//                self.acceptRequestButtonTapped(button: button!)
+//            }
+//        }
+//        if viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true {
+//            performSegue(withIdentifier: "toProductDetail", sender: self)
+//        } else if viewModels[indexPath.row].isSelected == false {
+//            performSegue(withIdentifier: "toProductDetail", sender: self)
+//        }
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (requests.count < 10 && indexPath.row == requests.count - 2) || (indexPath.row == requests.count - 10) {
+            loadNextPage()
+        }
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            if let allPosts = currentProduct?.posts {
-                let currentPost = allPosts[currentIndex - 1]
-                if let currentReview = currentPost.reviews?.reviews[indexPath.row] {
-                    if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
-                        ServerManager.sharedInstance.deleteReview(reviewId: currentReview.reviewId) { (isSuccess, response) in
-                            if isSuccess {
-                                tableView.beginUpdates()
-                                tableView.deleteRows(at: [indexPath], with: .automatic)
-                                self.commentViewModels.remove(at: indexPath.row)
-                                tableView.endUpdates()
-                                self.fetchProductDetailFromServer()
-                            } else {
-                                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if currentIndex != 0 {
-            if let allPosts = currentProduct?.posts {
-                let currentPost = allPosts[currentIndex - 1]
-                if let currentReview = currentPost.reviews?.reviews[indexPath.row] {
-                    if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
-                        return true
-                    } else {
-                        return false
-                    }
-                }
-            }
-        }
-        return false
-    }
 }
-extension ProductDetailVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text == "" {
-            UtilityManager.showMessageWith(title: "Warning!", body: "Please enter text.", in: self)
-        } else {
+
+extension ProductDetailVC: SozieRequestTableViewCellDelegate {
+    func pictureButtonTapped(button: UIButton) {
+        
+    }
+    func cancelRequestButtonTapped(button: UIButton) {
+        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
+            self.cancelRequest(button: button)
+        }
+    }
+    func cancelRequest(button: UIButton) {
+        let currentRequest = self.requests[button.tag]
+        if let acceptedRequestId = currentRequest.acceptedRequest?.acceptedId {
             SVProgressHUD.show()
-            var dataDict = [String: Any]()
-            var currentPost: Post?
-            if let allPosts = currentProduct?.posts {
-                if currentIndex != 0 {
-                    currentPost = allPosts[currentIndex - 1]
-                }
-            }
-            dataDict["added_by"] = UserDefaultManager.getCurrentUserId()
-            dataDict["post"] = currentPost?.postId
-            dataDict["text"] = textField.text
-            ServerManager.sharedInstance.addReview(params: dataDict) { (isSuccess, response) in
+            ServerManager.sharedInstance.cancelRequest(requestId: acceptedRequestId) { (isSuccess, _) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
-                    textField.text = ""
-                    self.fetchProductDetailFromServer()
-                } else {
-                    UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+                    if let cell = self.requestsTableView.cellForRow(at: IndexPath(row: button.tag, section: 0)) as? SozieRequestTableViewCell {
+                        cell.timer?.invalidate()
+                        cell.timer = nil
+                    } else if let cell = self.requestsTableView.cellForRow(at: IndexPath(row: button.tag, section: 0)) as? TargetRequestTableViewCell {
+                        cell.timer?.invalidate()
+                        cell.timer = nil
+                    }
+                    self.serverParams.removeAll()
+                    self.requests.removeAll()
+                    SVProgressHUD.show()
+                    let appDel = UIApplication.shared.delegate as! AppDelegate
+                    appDel.fetchUserDetail()
+                    self.nextURL = nil
+                    self.fetchRequestsFromServer()
                 }
             }
         }
-        textField.resignFirstResponder()
-        return true
+    }
+    func nearByStorButtonAction(button: UIButton) {
+        let currentRequest = requests[button.tag]
+        let product = currentRequest.requestedProduct
+        var imageURL = ""
+        if var prodImageURL = product.merchantImageURL {
+            if prodImageURL == "" {
+                if let imageURLTarget = product.imageURL {
+                    imageURL = imageURLTarget
+                }
+            } else {
+                if prodImageURL.contains("|") {
+                    let delimeter = "|"
+                    let url = prodImageURL.components(separatedBy: delimeter)
+                    prodImageURL = url[0]
+                }
+                imageURL = prodImageURL
+            }
+        } else {
+            if let img = product.imageURL {
+                imageURL = img.getActualSizeImageURL() ?? ""
+            }
+        }
+        if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
+            if currentRequest.brandId == 10 {
+                self.showTargetStore(merchantId: merchantId, imageURL: imageURL)
+            } else if currentRequest.brandId == 18 {
+                self.showAdidasStoresPopup(productId: merchantId, imageURL: imageURL, sku: currentRequest.sku ?? "")
+            }
+        }
+    }
+    func showTargetStore(merchantId: String, imageURL: String) {
+        let popUpInstnc = StoresPopupVC.instance(productId: merchantId, productImage: imageURL, progreesVC: nil)
+        popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        _ = popUpVC.show(popUpInstnc)
+        popUpInstnc.closeHandler = { [] in
+            popUpVC.dismiss()
+        }
+    }
+    func showAdidasStoresPopup(productId: String, imageURL: String, sku: String) {
+        let popUpInstnc = StoresPopupListingVC.instance(productId: productId, productImage: imageURL, sku: sku, progreesVC: nil)
+        popUpInstnc.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        _ = popUpVC.show(popUpInstnc)
+        popUpInstnc.closeHandler = { [] in
+            popUpVC.dismiss()
+        }
+    }
+    func nearbyStoresButtonTapped(button: UIButton) {
+        if UserDefaultManager.getIfPostTutorialShown() == true {
+            UtilityManager.showMessageWith(title: "Covid-19 Update", body: "We have paused in-store operations until further notice. Please stay safe at home", in: self)
+            return
+        }
+        if let userId = UserDefaultManager.getCurrentUserId() {
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.getUserProfile(userId: userId) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    let user = response as! User
+                    UserDefaultManager.updateUserObject(user: user)
+                    self.nearByStorButtonAction(button: button)
+                }
+            }
+        }
+    }
+    func acceptRequestButtonTapped(button: UIButton) {
+        currentRequest = requests[button.tag]
+        if currentRequest?.isAccepted == true {
+            if let user = UserDefaultManager.getCurrentUserObject() {
+                if user.isBanned == true {
+                    UtilityManager.showMessageWith(title: "Oops!", body: "You have been banned from Sozie for having 2 strikes against you.\nAny of the following reason results in a strike:\n- Cancelling an accepted request\n- Not completing an accepted request within 24 hours\n- Having a completed request rejected\n We have sent you an email with more details", in: self, leftAligned: true)
+                    return
+                }
+            }
+            if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
+                uploadPostVC.currentRequest = currentRequest
+                self.navigationController?.pushViewController(uploadPostVC, animated: true)
+            }
+            
+        } else {
+            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "If you do not complete the request, a strike will be counted against you.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                    self.acceptRequestAPICall(tag: button.tag)
+                }
+            }
+            
+        }
+    }
+    func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {
+        requests[tag].isAccepted = true
+//        let dateFormat = DateFormatter()
+//        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+//        let calendar = Calendar.current
+//        let date = calendar.date(byAdding: .hour, value: 24, to: Date())
+//        let acceptedRequest = AcceptedRequest(acceptedById: UserDefaultManager.getCurrentUserId()!, acceptedId: acceptedRequestId, expiry: dateFormat.string(from: date!))
+        requests[tag].acceptedRequest = acceptedRequest
+        let viewModel = SozieRequestCellViewModel(request: requests[tag])
+        requestsViewModels.remove(at: tag)
+        requestsViewModels.insert(viewModel, at: tag)
+        self.requestsTableView.reloadRows(at: [IndexPath(row: tag, section: 0)], with: .none)
+    }
+    func acceptRequestAPICall(tag: Int) {
+        SVProgressHUD.show()
+        var dataDict = [String: Any]()
+        dataDict["product_request"] = currentRequest?.requestId
+        ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+//                self.serverParams.removeAll()
+//                self.requests.removeAll()
+//                SVProgressHUD.show()
+//                self.fetchAllSozieRequests()
+                let acceptedRequestResponse = response as! AcceptedRequestResponse
+                self.makeRequestAccepted(tag: tag, acceptedRequest: acceptedRequestResponse.acceptedRequest)
+            } else {
+                let error = (response as! Error).localizedDescription
+                if let errorDict = error.getColonSeparatedErrorDetails() {
+                    if let title = errorDict["title"] as? String, let description = errorDict["description"] as? String {
+                        if title == "Tutorial Rejected" {
+                            UserDefaultManager.makeUserGuideEnable()
+                            UserDefaultManager.removeAllUserGuidesShown()
+                            self.showResetTutorialPopup(text: description)
+                        } else if title == "Oops!" {
+                            UtilityManager.showMessageWith(title: title, body: description, in: self, leftAligned: true)
+                        } else {
+                            UtilityManager.showMessageWith(title: title, body: description, in: self)
+                        }
+                    } else {
+                        UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                    }
+                } else {
+                    UtilityManager.showMessageWith(title: "Error!", body: (response as! Error).localizedDescription, in: self)
+                }
+            }
+        }
+    }
+    func showResetTutorialPopup(text: String) {
+        let popUpInstnc = SozieRequestErrorPopUp.instance(description: text)
+        let popUpVC = PopupController
+            .create(self.tabBarController?.navigationController ?? self)
+            .show(popUpInstnc)
+        popUpInstnc.closeHandler = { []  in
+            popUpVC.dismiss()
+        }
+        popUpInstnc.resetTutorialHandler = { [] in
+            popUpVC.dismiss()
+        }
+    }
+    @objc func showInstructions() {
+//        tutorialVC?.view.removeFromSuperview()
+//        instructionsScrollView.isHidden = false
+//        disableRootButtons()
     }
 }
+
+//extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return commentViewModels.count
+//    }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let viewModel = commentViewModels[indexPath.row]
+//        var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
+//        if tableViewCell == nil {
+//            tableView.register(UINib(nibName: viewModel.reuseIdentifier, bundle: nil), forCellReuseIdentifier: viewModel.reuseIdentifier)
+//            tableViewCell = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIdentifier)
+//        }
+//        guard let cell = tableViewCell else { return UITableViewCell() }
+//        cell.selectionStyle = .none
+//        if let cellConfigurable = cell as? CellConfigurable {
+//            cellConfigurable.setup(viewModel)
+//        }
+//        return cell
+//    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 62.0
+//    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            if let allPosts = currentProduct?.posts {
+//                let currentPost = allPosts[currentIndex - 1]
+//                if let currentReview = currentPost.reviews?.reviews[indexPath.row] {
+//                    if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
+//                        ServerManager.sharedInstance.deleteReview(reviewId: currentReview.reviewId) { (isSuccess, response) in
+//                            if isSuccess {
+//                                tableView.beginUpdates()
+//                                tableView.deleteRows(at: [indexPath], with: .automatic)
+//                                self.commentViewModels.remove(at: indexPath.row)
+//                                tableView.endUpdates()
+//                                self.fetchProductDetailFromServer()
+//                            } else {
+//                                UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        if currentIndex != 0 {
+//            if let allPosts = currentProduct?.posts {
+//                let currentPost = allPosts[currentIndex - 1]
+//                if let currentReview = currentPost.reviews?.reviews[indexPath.row] {
+//                    if currentReview.addedBy.userId == UserDefaultManager.getCurrentUserId() {
+//                        return true
+//                    } else {
+//                        return false
+//                    }
+//                }
+//            }
+//        }
+//        return false
+//    }
+//}

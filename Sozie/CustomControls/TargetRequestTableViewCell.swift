@@ -168,6 +168,15 @@ extension TargetRequestTableViewCell: CellConfigurable {
         let calendar = Calendar.current
         let diffDateComponents = calendar.dateComponents([.hour, .minute, .second], from: Date(), to: futuredate)
         let hours = diffDateComponents.hour!
+        if hours > 24 {
+            let days = hours/24
+            if days == 1 {
+                timerLabel.text = String(format: "%d day left", days)
+            } else {
+                timerLabel.text = String(format: "%d days left", days)
+            }
+            return
+        }
         let minutes = diffDateComponents.minute!
         let seconds = diffDateComponents.second!
         let countdown = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
