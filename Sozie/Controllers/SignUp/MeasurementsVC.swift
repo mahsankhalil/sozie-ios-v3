@@ -44,12 +44,8 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var skipButton: DZGradientButton!
     @IBOutlet weak var skiptoDoItLaterButton: UIButton!
     @IBOutlet weak var orLabel: UILabel!
-
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
-    
-    
     var sizes: Size?
     var currentMeasurement = LocalMeasurement()
     var rowViewModels: [RowViewModel] = []
@@ -59,7 +55,6 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,7 +84,15 @@ class MeasurementsVC: UIViewController {
         if UIScreen.main.bounds.size.height < 731 {
             scrollViewHeightConstraint.constant = 731
         } else {
-            scrollViewHeightConstraint.constant = UIScreen.main.bounds.height
+            var topSafeArea: CGFloat = 0.0
+            var bottomSafeArea: CGFloat = 0.0
+            if #available(iOS 11.0, *) {
+                if let window = UIApplication.shared.keyWindow {
+                    bottomSafeArea = window.safeAreaInsets.bottom
+                    topSafeArea = window.safeAreaInsets.top
+                }
+            }
+            scrollViewHeightConstraint.constant = UIScreen.main.bounds.height - topSafeArea - bottomSafeArea
         }
         scrollView.contentSizeToFit()
 //        skipButton.isHidden = true

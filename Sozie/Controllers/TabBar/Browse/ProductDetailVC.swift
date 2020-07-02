@@ -120,8 +120,8 @@ class ProductDetailVC: BaseViewController {
         fetchRequestsFromServer()
     }
     func fetchRequestsFromServer() {
-        if let productId = currentProduct?.merchantProductId {
-            serverParams["search_field"] = "article_id"
+        if let productId = currentProduct?.productStringId {
+            serverParams["search_field"] = "product_id"
             serverParams["search_value"] = productId
             if let nextUrl = self.nextURL {
                 serverParams["next"] = nextUrl
@@ -205,7 +205,7 @@ class ProductDetailVC: BaseViewController {
     }
     func assignImageURL() {
         if var imageURL = currentProduct?.merchantImageURL {
-            if imageURL == "" {
+            if imageURL == "" || imageURL.count < 4 {
                 if let imageURLTarget = currentProduct?.imageURL {
                     productViewModel.imageURL = URL(string: imageURLTarget)
                 }
@@ -395,6 +395,10 @@ extension ProductDetailVC: UIScrollViewDelegate {
         if currentPage == 0 {
             if let productName = currentProduct?.productName, let productDescription = currentProduct?.description {
                 descriptionTextLabel.text = productName + "\n" +  productDescription
+            }
+        } else {
+            if let fittips = currentProduct?.posts?[currentPage - 1].compiledFitTips {
+                descriptionTextLabel.text = fittips
             }
         }
         currentIndex = currentPage
@@ -697,14 +701,12 @@ extension ProductDetailVC: SozieRequestTableViewCellDelegate {
                 uploadPostVC.currentRequest = currentRequest
                 self.navigationController?.pushViewController(uploadPostVC, animated: true)
             }
-            
         } else {
             UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "If you do not complete the request, a strike will be counted against you.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                 UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                     self.acceptRequestAPICall(tag: button.tag)
                 }
             }
-            
         }
     }
     func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {

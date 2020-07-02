@@ -2737,7 +2737,7 @@ Complete from home in your own clothes.</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wish List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D22-6e-RYC">
-                                                <rect key="frame" x="12" y="0.0" width="189.5" height="46"/>
+                                                <rect key="frame" x="12" y="0.0" width="195" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Jsi-q4-TB9"/>
                                                 </constraints>
@@ -2746,7 +2746,7 @@ Complete from home in your own clothes.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -5649,7 +5649,7 @@ Cg
                                 <rect key="frame" x="0.0" y="69" width="375" height="875"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions" translatesAutoresizingMaskIntoConstraints="NO" id="QwS-ce-Fea">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="875"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="750" height="875"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="875" id="d8F-iW-l3n"/>
                                         </constraints>
@@ -5779,7 +5779,7 @@ Cg
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-37-bLi" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="231" width="327" height="34.5"/>
+                                                <rect key="frame" x="24" y="215.5" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -5796,7 +5796,7 @@ Cg
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Retype New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F8M-8y-sRN" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="291" width="327" height="35"/>
+                                                <rect key="frame" x="24" y="260" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -5813,7 +5813,7 @@ Cg
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KbI-Yk-nlC" customClass="MFTextField">
-                                                <rect key="frame" x="24" y="171" width="327" height="34.5"/>
+                                                <rect key="frame" x="24" y="171" width="327" height="19"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -6637,16 +6637,28 @@ Cg
                                             <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="Grey Star"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bt6-Ca-YeG">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="266"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="B7y-Ab-w90" id="xt0-eI-1h8"/>
+                                            <outlet property="delegate" destination="B7y-Ab-w90" id="DYl-S6-Fqo"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Bt6-Ca-YeG" secondAttribute="bottom" id="2Ht-uY-M0S"/>
                                     <constraint firstItem="qIt-XM-tfl" firstAttribute="leading" secondItem="a62-5K-xoW" secondAttribute="leading" id="5kY-dq-jbt"/>
                                     <constraint firstItem="Lf7-xH-CJe" firstAttribute="centerX" secondItem="a62-5K-xoW" secondAttribute="centerX" id="6Xp-u6-yft"/>
+                                    <constraint firstItem="Bt6-Ca-YeG" firstAttribute="leading" secondItem="a62-5K-xoW" secondAttribute="leading" id="8Ph-kt-EHu"/>
                                     <constraint firstItem="Lf7-xH-CJe" firstAttribute="top" secondItem="3SE-tn-e3S" secondAttribute="bottom" constant="10" id="MyG-s3-14d"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bt6-Ca-YeG" secondAttribute="trailing" id="TZF-gj-pmk"/>
                                     <constraint firstItem="Lf7-xH-CJe" firstAttribute="centerY" secondItem="a62-5K-xoW" secondAttribute="centerY" constant="-10" id="TbK-Qx-0Y4"/>
                                     <constraint firstItem="qIt-XM-tfl" firstAttribute="top" secondItem="Lf7-xH-CJe" secondAttribute="bottom" constant="10" id="Wqc-M8-s0P"/>
                                     <constraint firstItem="3SE-tn-e3S" firstAttribute="leading" secondItem="a62-5K-xoW" secondAttribute="leading" id="XEr-Dz-8g5"/>
                                     <constraint firstAttribute="trailing" secondItem="qIt-XM-tfl" secondAttribute="trailing" id="Z82-Mb-x8w"/>
+                                    <constraint firstItem="Bt6-Ca-YeG" firstAttribute="top" secondItem="a62-5K-xoW" secondAttribute="top" id="hA1-uO-cmT"/>
                                     <constraint firstAttribute="trailing" secondItem="3SE-tn-e3S" secondAttribute="trailing" id="zr6-sH-cTR"/>
                                 </constraints>
                             </view>
@@ -6669,6 +6681,7 @@ Cg
                         <outlet property="backButton" destination="fpP-f4-oIU" id="Agz-j3-v9Z"/>
                         <outlet property="nextButton" destination="Ncf-6f-AMq" id="rEu-gQ-OtF"/>
                         <outlet property="rateView" destination="Lf7-xH-CJe" id="M7W-fL-lcE"/>
+                        <outlet property="tableView" destination="Bt6-Ca-YeG" id="v1o-Wf-2L5"/>
                         <outlet property="titleLabel" destination="wQA-ed-P3I" id="eLD-yC-ldE"/>
                     </connections>
                 </viewController>

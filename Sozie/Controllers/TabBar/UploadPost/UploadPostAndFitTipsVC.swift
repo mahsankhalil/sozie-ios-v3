@@ -314,7 +314,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     func assignImageURL() {
         if var imageURL = currentProduct?.merchantImageURL {
-            if imageURL == "" {
+            if imageURL == "" || imageURL.count < 4 {
                 if let imageURLTarget = currentProduct?.imageURL {
                     productImageView.sd_setImage(with: URL(string: imageURLTarget), completed: nil)
                 }
@@ -660,7 +660,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
         let popUpVC = PopupController
             .create(self.tabBarController?.navigationController ?? self)
             .show(popUpInstnc)
-        let options = PopupCustomOption.layout(.top)
+        let options = PopupCustomOption.layout(.center)
         _ = popUpVC.customize([options])
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()

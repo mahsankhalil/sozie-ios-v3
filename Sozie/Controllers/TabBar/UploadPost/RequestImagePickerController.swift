@@ -90,7 +90,7 @@ class RequestImagePickerController: UIViewController {
         let popUpVC = PopupController
             .create(self)
             .show(popUpInstnc)
-        let options = PopupCustomOption.layout(.top)
+        let options = PopupCustomOption.layout(.center)
         _ = popUpVC.customize([options])
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()

@@ -146,6 +146,14 @@ extension PosePopupVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
 }
 extension PosePopupVC: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width - 20.0, height: UIScreen.main.bounds.size.height - 20.0)
+        var topSafeArea: CGFloat = 0.0
+        var bottomSafeArea: CGFloat = 0.0
+        if #available(iOS 11.0, *) {
+            if let window = UIApplication.shared.keyWindow {
+                bottomSafeArea = window.safeAreaInsets.bottom
+                topSafeArea = window.safeAreaInsets.top
+            }
+        }
+        return CGSize(width: UIScreen.main.bounds.size.width - 20.0, height: UIScreen.main.bounds.size.height - 20.0 - topSafeArea - bottomSafeArea)
     }
 }
