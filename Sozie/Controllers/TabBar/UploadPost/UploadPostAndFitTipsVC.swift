@@ -413,10 +413,12 @@ class UploadPostAndFitTipsVC: BaseViewController {
                         }
                     }
                 } else {
-                    if (viewModel.videoURL?.lowercased().hasPrefix("http"))! == false {
-                        if let videos = post.videos {
-                            if videos.count > 0 {
-                                videoIdToEdit = videos[0].uploadId
+                    if let urlForVideo = viewModel.videoURL {
+                        if (urlForVideo.lowercased().hasPrefix("http")) == false {
+                            if let videos = post.videos {
+                                if videos.count > 0 {
+                                    videoIdToEdit = videos[0].uploadId
+                                }
                             }
                         }
                     }
