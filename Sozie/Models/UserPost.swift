@@ -25,7 +25,6 @@ struct UserPost: Codable {
     var fitTipsAnswers: [PostFitTips]?
     var currentProduct: Product?
     var videos: [VideoUploads]?
-    
     enum CodingKeys: String, CodingKey {
         case postId = "id"
 //        case imageURL = "public_image_url"
