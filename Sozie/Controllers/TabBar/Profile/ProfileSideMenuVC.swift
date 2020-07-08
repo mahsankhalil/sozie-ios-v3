@@ -182,7 +182,7 @@ class ProfileSideMenuVC: BaseViewController {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         // Configure the fields of the interface.
-        composeVC.setToRecipients(["contact@sozie.com"])
+        composeVC.setToRecipients(["theteam@sozie.com"])
         composeVC.setSubject("Feedback")
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
