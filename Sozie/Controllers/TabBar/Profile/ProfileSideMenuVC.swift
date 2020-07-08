@@ -141,27 +141,27 @@ class ProfileSideMenuVC: BaseViewController {
     }
     */
     func rateThisApp() {
-//        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
-//            else { fatalError("Expected a valid URL") }
-//        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        } else {
-            rateApp(appId: "id1363346896") { (_) in
-            }
-        }
+        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
+            else { fatalError("Expected a valid URL") }
+        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+//        if #available(iOS 10.3, *) {
+//            SKStoreReviewController.requestReview()
+//        } else {
+//            rateApp(appId: "id1363346896") { (_) in
+//            }
+//        }
     }
-    func rateApp(appId: String, completion: @escaping ((_ success: Bool) -> Void)) {
-        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
-            completion(false)
-            return
-        }
-        guard #available(iOS 10, *) else {
-            completion(UIApplication.shared.openURL(url))
-            return
-        }
-        UIApplication.shared.open(url, options: [:], completionHandler: completion)
-    }
+//    func rateApp(appId: String, completion: @escaping ((_ success: Bool) -> Void)) {
+//        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
+//            completion(false)
+//            return
+//        }
+//        guard #available(iOS 10, *) else {
+//            completion(UIApplication.shared.openURL(url))
+//            return
+//        }
+//        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+//    }
     func showInviteFriendsVC() {
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let inviteVC = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVC") as! InviteFriendsVC
