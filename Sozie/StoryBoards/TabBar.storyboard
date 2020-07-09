@@ -2737,7 +2737,7 @@ Complete from home in your own clothes.</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wish List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D22-6e-RYC">
-                                                <rect key="frame" x="12" y="0.0" width="189.5" height="46"/>
+                                                <rect key="frame" x="12" y="0.0" width="195" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Jsi-q4-TB9"/>
                                                 </constraints>
@@ -2746,7 +2746,7 @@ Complete from home in your own clothes.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
