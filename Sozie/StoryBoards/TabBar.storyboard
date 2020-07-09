@@ -5091,18 +5091,31 @@ Cg
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvY-jb-3ku">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                         <subviews>
-                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgm-aE-NdQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgm-aE-NdQ">
+                                                <rect key="frame" x="0.0" y="211.5" width="375" height="200"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alert - Default 1 Line Title" translatesAutoresizingMaskIntoConstraints="NO" id="CTX-MR-hVD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="CTX-MR-hVD" secondAttribute="bottom" id="3PW-zK-P6W"/>
+                                                    <constraint firstAttribute="height" constant="200" id="9Wf-ES-QHa"/>
+                                                    <constraint firstItem="CTX-MR-hVD" firstAttribute="top" secondItem="Sgm-aE-NdQ" secondAttribute="top" id="HXT-sa-KjT"/>
+                                                    <constraint firstItem="CTX-MR-hVD" firstAttribute="leading" secondItem="Sgm-aE-NdQ" secondAttribute="leading" id="UYd-nt-ORg"/>
+                                                    <constraint firstAttribute="trailing" secondItem="CTX-MR-hVD" secondAttribute="trailing" id="tVg-ow-8Pj"/>
+                                                </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You must enter your measurements for post to be approved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yL6-WZ-qlW">
-                                                <rect key="frame" x="25" y="286" width="325" height="51"/>
-                                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="19"/>
-                                                <color key="textColor" red="0.19997376203536987" green="0.20001503825187683" blue="0.19997116923332214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="25" y="266" width="325" height="51"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="19"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfP-qG-9lB" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                                <rect key="frame" x="102.5" y="345" width="170" height="40"/>
+                                                <rect key="frame" x="102.5" y="333" width="170" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="170" id="0In-Gj-stB"/>
                                                     <constraint firstAttribute="height" constant="40" id="hAz-Te-qe9"/>
@@ -5127,14 +5140,13 @@ Cg
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Sgm-aE-NdQ" firstAttribute="leading" secondItem="bvY-jb-3ku" secondAttribute="leading" id="7qd-On-dze"/>
-                                            <constraint firstItem="Sgm-aE-NdQ" firstAttribute="top" secondItem="bvY-jb-3ku" secondAttribute="top" id="JcA-IV-oKM"/>
-                                            <constraint firstAttribute="bottom" secondItem="Sgm-aE-NdQ" secondAttribute="bottom" id="MPN-zf-fgC"/>
-                                            <constraint firstItem="hfP-qG-9lB" firstAttribute="top" secondItem="yL6-WZ-qlW" secondAttribute="bottom" constant="8" id="XKM-Qh-Pmr"/>
+                                            <constraint firstItem="Sgm-aE-NdQ" firstAttribute="centerY" secondItem="bvY-jb-3ku" secondAttribute="centerY" id="LDD-V0-Xqw"/>
+                                            <constraint firstItem="hfP-qG-9lB" firstAttribute="top" secondItem="yL6-WZ-qlW" secondAttribute="bottom" constant="16" id="XKM-Qh-Pmr"/>
                                             <constraint firstAttribute="trailing" secondItem="yL6-WZ-qlW" secondAttribute="trailing" constant="25" id="a31-Qb-8KB"/>
                                             <constraint firstItem="hfP-qG-9lB" firstAttribute="centerX" secondItem="bvY-jb-3ku" secondAttribute="centerX" id="lfa-IX-12t"/>
                                             <constraint firstAttribute="trailing" secondItem="Sgm-aE-NdQ" secondAttribute="trailing" id="niy-VC-2X5"/>
                                             <constraint firstItem="yL6-WZ-qlW" firstAttribute="leading" secondItem="bvY-jb-3ku" secondAttribute="leading" constant="25" id="txA-u2-5TZ"/>
-                                            <constraint firstItem="yL6-WZ-qlW" firstAttribute="centerY" secondItem="bvY-jb-3ku" secondAttribute="centerY" id="yeY-OI-AZD"/>
+                                            <constraint firstItem="yL6-WZ-qlW" firstAttribute="centerY" secondItem="bvY-jb-3ku" secondAttribute="centerY" constant="-20" id="yeY-OI-AZD"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -7337,6 +7349,7 @@ Click images with red X for feedback. </string>
     </scenes>
     <resources>
         <image name="3 Dots" width="3" height="13"/>
+        <image name="Alert - Default 1 Line Title" width="375" height="170"/>
         <image name="Apricot.png" width="100" height="12.333333015441895"/>
         <image name="Blank Heart" width="22" height="20"/>
         <image name="Camera icon" width="29" height="21.5"/>

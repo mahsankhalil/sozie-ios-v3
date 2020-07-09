@@ -54,7 +54,9 @@ class MyUploadsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        currentFilterType = .success
+        self.addMesurementButton.shadowAdded = false
+        self.addMesurementButton.shadowLayer = nil
+        currentFilterType = .inReview
         self.tableView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         let refreshControl = UIRefreshControl.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -105,7 +107,11 @@ class MyUploadsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resetDataAndFetch()
-        if UserDefaultManager.checkIfMeasurementEmpty() {
+        hideShowAddMeasurementView()
+        self.addMesurementButton.removeShadow()
+    }
+    func hideShowAddMeasurementView() {
+        if UserDefaultManager.checkIfMeasurementEmpty() && self.posts.count > 0 {
             self.addMeasurementView.isHidden = false
         } else {
             self.addMeasurementView.isHidden = true
@@ -114,8 +120,8 @@ class MyUploadsVC: UIViewController {
     func resetDataAndFetch() {
         serverParams.removeAll()
         posts.removeAll()
-        serverParams["review_action"] = "A"
-        currentFilterType = .success
+        serverParams["review_action"] = "P"
+        currentFilterType = .inReview
         getPostsFromServer()
         reloadData()
     }
@@ -135,6 +141,7 @@ class MyUploadsVC: UIViewController {
                 self.posts.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
                 self.applyCountLabel(count: paginatedData.count)
+                self.hideShowAddMeasurementView()
 //                self.countLabel.text = String(paginatedData.count) + ( paginatedData.count <= 1 ? " Upload" : " Uploads")
             }
         }
