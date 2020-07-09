@@ -49,7 +49,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var isTutorialShowing: Bool = false
     var isFitTipsTutorialShown: Bool = false
     var currentVideoURL: URL?
-    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true), UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false)]
+    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true)]
 
     var currentTaskId: String?
     var currentPostId: Int?
