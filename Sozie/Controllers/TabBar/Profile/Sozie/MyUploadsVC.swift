@@ -112,7 +112,11 @@ class MyUploadsVC: UIViewController {
     }
     func hideShowAddMeasurementView() {
         if UserDefaultManager.checkIfMeasurementEmpty() && self.posts.count > 0 {
-            self.addMeasurementView.isHidden = false
+            if self.posts[0].isTutorialPost == false {
+                self.addMeasurementView.isHidden = false
+            } else {
+                self.addMeasurementView.isHidden = true
+            }
         } else {
             self.addMeasurementView.isHidden = true
         }
