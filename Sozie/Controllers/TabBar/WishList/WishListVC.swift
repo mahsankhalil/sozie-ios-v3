@@ -55,7 +55,7 @@ class WishListVC: BaseViewController {
         //Add image to mutable string
         completeText.append(attachmentString)
         //Add your text to mutable string
-        let  textAfterIcon = NSMutableAttributedString(string: " under your favourite items. They'll be saved here so come bact to this page to easily accept your requests later.")
+        let  textAfterIcon = NSMutableAttributedString(string: " under your favourite items. They'll be saved here so come back to this page to easily accept your requests later.")
         completeText.append(textAfterIcon)
         self.noProductLabel.textAlignment = .center
         self.noProductLabel.attributedText = completeText
