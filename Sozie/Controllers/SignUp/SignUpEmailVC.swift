@@ -12,6 +12,7 @@ import SwiftValidator
 import SVProgressHUD
 import GoogleSignIn
 import TPKeyboardAvoiding
+import AuthenticationServices
 class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
 
     @IBOutlet weak var signInBtn: UIButton!
@@ -20,7 +21,6 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     @IBOutlet weak var emailTxtFld: MFTextField!
     @IBOutlet weak var passwordTxtFld: MFTextField!
     @IBOutlet weak var confirmPasswordTxtFld: MFTextField!
-
     @IBOutlet weak var facebookBtn: UIButton!
     @IBOutlet weak var showConfirmPasswordBtn: UIButton!
     @IBOutlet weak var showPasswordBtn: UIButton!
@@ -29,6 +29,9 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
     let validator = Validator()
     var signUpDict: [String: Any]?
 
+    @IBOutlet weak var socialButtonViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var loginAppleButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var appleLoginButtonView: UIView!
     @IBOutlet weak var pasteButton: UIButton!
     @IBOutlet weak var whatsThisButton: UIButton!
     @IBOutlet weak var referralCodeTextField: MFTextField!
@@ -44,8 +47,30 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         referralCodeTextField.placeholderAnimatesOnFocus = true
         applyValidators()
         self.whatsThisButton.alpha = 0.0
+        setupAppleLoginButton()
     }
-
+    func setupAppleLoginButton() {
+        if #available(iOS 13, *) {
+            let customAppleLoginButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 56.0, height: 44.0))
+            customAppleLoginButton.setImage(UIImage(named: "Apple Iocn"), for: .normal)
+            customAppleLoginButton.addTarget(self, action: #selector(handleLogInWithAppleIDButtonPress), for: .touchUpInside)
+            self.appleLoginButtonView.addSubview(customAppleLoginButton)
+        } else {
+            self.loginAppleButtonWidthConstraint.constant = 0.0
+            self.socialButtonViewWidthConstraint.constant = 112.0
+        }
+    }
+    @objc private func handleLogInWithAppleIDButtonPress() {
+        if #available(iOS 13, *) {
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let request = appleIDProvider.createRequest()
+            request.requestedScopes = [.fullName, .email]
+            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+            authorizationController.delegate = self
+            authorizationController.presentationContextProvider = self
+            authorizationController.performRequests()
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GIDSignIn.sharedInstance().delegate = self
@@ -167,6 +192,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         }
     }
     // MARK: - Actions
+    
     @IBAction func facebookBtnTapped(_ sender: Any) {
         SVProgressHUD.show()
         SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in
@@ -247,5 +273,31 @@ extension SignUpEmailVC: SignUpInfoProvider {
         set (newInfo) {
             signUpDict = newInfo
         }
+    }
+}
+extension SignUpEmailVC: ASAuthorizationControllerDelegate {
+    @available(iOS 13.0, *)
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            // Get user data with Apple ID credentitial
+            let dataDict = SocialAuthManager.sharedInstance.convertAppleUserToAppDict(user: appleIDCredential)
+            self.signUpDict = self.signUpDict!.merging(dataDict) { (_, new) in new }
+            if let email = self.signUpDict![User.CodingKeys.email.stringValue] as? String {
+                self.verifyEmailFromServer(email: email)
+            }
+            // Write your code here
+        }
+    }
+    @available(iOS 13.0, *)
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+        print(error.localizedDescription)
+    }
+}
+
+extension SignUpEmailVC: ASAuthorizationControllerPresentationContextProviding {
+    @available(iOS 13.0, *)
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
