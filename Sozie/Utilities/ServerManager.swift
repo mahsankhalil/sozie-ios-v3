@@ -25,7 +25,7 @@ class ServerManager: NSObject {
     static let forgotPasswordURL = ServerManager.serverURL + "user/forgot_password/"
     static let resetPassword = ServerManager.serverURL + "user/reset_password/"
 //    static let productListURL = ServerManager.serverURL + "product/browse/v2/feed/get/"
-    static let productListURL = ServerManager.serverURL + "product/browse/feed/get/"
+    static let productListURL = ServerManager.serverURL + "product/browse/"
     static let browseSearchURL = ServerManager.serverURL + "product/browse/feed/search/"
     static let logoutURL = ServerManager.serverURL + "user/logout/"
     static let categoriesURL = ServerManager.serverURL + "common/categories"
@@ -248,13 +248,13 @@ class ServerManager: NSObject {
         ]
         var url = ServerManager.productListURL
 
-        if let isFirstPage = params["is_first_page"] as? Bool {
-            url = url + "?is_first_page=" + String(isFirstPage ? 1:0)
+        if let currentPage = params["current_page"] as? Int {
+            url = url + "?current_page=" + String(currentPage)
         }
         Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
 
             let decoder = JSONDecoder()
-            let obj: Result<[Product]> = decoder.decodeResponse(from: response)
+            let obj: Result<BrowseResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }
