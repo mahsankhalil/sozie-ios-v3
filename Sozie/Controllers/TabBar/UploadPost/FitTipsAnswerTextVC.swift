@@ -30,8 +30,15 @@ class FitTipsAnswerTextVC: UIViewController {
         textView.delegate = self
         textView.becomeFirstResponder()
         (self.parent?.parent as? PopupController)?.updatePopUpSize()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
     }
-
+    @objc func dismissKeyboard() {
+        self.textView.resignFirstResponder()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+    }
     @IBAction func backButtonTaped(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }

@@ -47,6 +47,9 @@ class FitTipsAnswerRateVC: UIViewController {
             }
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+    }
     func getControllerheight() -> CGFloat {
         if let tipsIndex = fitTipsIndex {
             if fitTips?[tipsIndex].question.count == 1 {

@@ -43,6 +43,9 @@ class FitTipsAnswerTableVC: UIViewController {
             }
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+    }
     func checkIfAnswered(text: String, answer: String) -> Bool {
         let answers = answer.components(separatedBy: ",")
         for currentAnswer in answers where currentAnswer == text {

@@ -81,17 +81,22 @@ class RequestImagePickerController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let _ = photoIndex {
+//            self.perform(#selector(showPosePopup), with: nil, afterDelay: 1.0)
             showPosePopup()
         }
     }
-    func showPosePopup() {
+    @objc func showPosePopup() {
         let popUpInstnc = PosePopupVC.instance(photoIndex: photoIndex)
         let popUpVC = PopupController
             .create(self)
             .show(popUpInstnc)
-        let options = PopupCustomOption.layout(.center)
+        let options = PopupCustomOption.layout(.top)
         _ = popUpVC.customize([options])
+        popUpVC.updatePopUpSize()
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()
         }

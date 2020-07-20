@@ -187,8 +187,8 @@ class UploadPostAndFitTipsVC: BaseViewController {
 //        }
         progressTutorialVC?.updateProgress(progress: 6.0/8.0)
         if let tutVC = picturesTutorialVC {
-            tutVC.view.frame.origin.y = 215.0
-            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 638)
+            tutVC.view.frame.origin.y = 235.0
+            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 618)
             self.scrollView.addSubview(tutVC.view)
             self.scrollView.contentSizeToFit()
         }

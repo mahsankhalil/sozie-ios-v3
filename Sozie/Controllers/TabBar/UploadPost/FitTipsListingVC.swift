@@ -33,6 +33,7 @@ class FitTipsListingVC: UIViewController {
         // Do any additional setup after loading the view.
         titleLabel.textColor = UtilityManager.getGenderColor()
         self.tableView.backgroundColor = UIColor.white
+        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
