@@ -354,7 +354,10 @@ class ServerManager: NSObject {
         }
     }
     func getAllCategories(params: [String: Any], block: CompletionHandler) {
-        Alamofire.request(ServerManager.categoriesURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.categoriesURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
 
             let decoder = JSONDecoder()
             let obj: Result<[Category]> = decoder.decodeResponse(from: response)
