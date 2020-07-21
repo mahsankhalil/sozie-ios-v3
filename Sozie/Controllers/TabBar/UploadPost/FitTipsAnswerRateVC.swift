@@ -46,9 +46,10 @@ class FitTipsAnswerRateVC: UIViewController {
                 }
             }
         }
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     override func viewDidAppear(_ animated: Bool) {
-        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     func getControllerheight() -> CGFloat {
         if let tipsIndex = fitTipsIndex {
@@ -173,7 +174,7 @@ extension FitTipsAnswerRateVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModels.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "RatingTableViewCell")

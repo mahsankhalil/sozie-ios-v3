@@ -42,9 +42,10 @@ class FitTipsAnswerTableVC: UIViewController {
                 }
             }
         }
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     override func viewDidAppear(_ animated: Bool) {
-        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     func checkIfAnswered(text: String, answer: String) -> Bool {
         let answers = answer.components(separatedBy: ",")
@@ -100,7 +101,7 @@ class FitTipsAnswerTableVC: UIViewController {
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
-        self.navigationController?.parent?.viewDidAppear(true)
+//        self.navigationController?.parent?.viewDidAppear(true)
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     func navigateToPickerAnswer(fitTipIndex: Int, questIndex: Int) {

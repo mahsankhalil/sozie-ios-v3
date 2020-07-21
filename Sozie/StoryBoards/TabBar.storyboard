@@ -6878,7 +6878,6 @@ Cg
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="NSI-GU-JPX" firstAttribute="top" secondItem="3dB-5y-apm" secondAttribute="top" constant="20" id="0om-bM-WHo"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NSI-GU-JPX" secondAttribute="bottom" id="6tV-pp-bH2"/>
                                     <constraint firstItem="GK5-c9-8cO" firstAttribute="top" secondItem="3dB-5y-apm" secondAttribute="top" constant="16" id="Obq-pN-Wag"/>
                                     <constraint firstAttribute="height" constant="94" id="lXw-Xv-fj0"/>
                                     <constraint firstItem="4us-gP-DiW" firstAttribute="top" secondItem="3dB-5y-apm" secondAttribute="top" constant="12" id="nlb-6c-PzC"/>

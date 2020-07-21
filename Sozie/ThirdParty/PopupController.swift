@@ -256,8 +256,6 @@ private extension PopupController {
         let obj = (notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         if needsToMoveFrom(obj.cgRectValue.origin) {
             move(obj.cgRectValue.origin)
-//                self.move(obj.cgRectValue.size)
-//            move(obj.cgRectValue.size)
         }
     }
 

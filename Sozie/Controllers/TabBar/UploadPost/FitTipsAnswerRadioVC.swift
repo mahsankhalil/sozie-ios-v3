@@ -27,6 +27,7 @@ class FitTipsAnswerRadioVC: UIViewController {
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
         }
+        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
