@@ -256,11 +256,13 @@ private extension PopupController {
         let obj = (notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         if needsToMoveFrom(obj.cgRectValue.origin) {
             move(obj.cgRectValue.origin)
+//                self.move(obj.cgRectValue.size)
+//            move(obj.cgRectValue.size)
         }
     }
 
     @objc func popupControllerWillHideKeyboard(_ notification: Notification) {
-        back()
+        self.back()
     }
 
     @objc func popupControllerDidHideKeyboard(_ notification: Notification) {
@@ -332,7 +334,6 @@ private extension PopupController {
         }
         return (popupView.frame.maxY + layout.origin(popupView).y) > origin.y
     }
-
     func move(_ origin: CGPoint) {
         guard let child = children.last as? PopupContentViewController else {
             return
@@ -348,12 +349,6 @@ private extension PopupController {
             return
         }
         popupView.frame.size = child.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
-        var bottomSafeArea: CGFloat = 0.0
-        if #available(iOS 11.0, *) {
-            if let window = UIApplication.shared.keyWindow {
-                bottomSafeArea = window.safeAreaInsets.bottom
-            }
-        }
         baseScrollView.contentInset.top = layout.origin(popupView).y
         defaultContentOffset.y = -baseScrollView.contentInset.top
     }

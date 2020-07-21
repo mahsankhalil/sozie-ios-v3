@@ -36,11 +36,11 @@ class RequestImagePickerController: UIViewController {
         // Do any additional setup after loading the view.
         hideShowSampleImageView()
         var topPadding: CGFloat! = 0.0
-//        var bottomPadding: CGFloat! = 0.0
+        var bottomPadding: CGFloat! = 0.0
         if #available(iOS 11.0, *) {
             let window = UIApplication.shared.keyWindow
             topPadding = window?.safeAreaInsets.top ?? 0.0
-//            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         }
         imageViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
         cameraViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
@@ -58,7 +58,7 @@ class RequestImagePickerController: UIViewController {
         overlayImageView?.frame.size.height = UIScreen.main.bounds.size.height - 140.0
         overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)! * (9.0/16.0)
         overlayImageView?.center.x = UIScreen.main.bounds.size.width/2.0
-        overlayImageView?.center.y = (UIScreen.main.bounds.size.height - 90.0)/2.0
+        overlayImageView?.center.y = (UIScreen.main.bounds.size.height - 90.0 - bottomPadding)/2.0
         overlayImageView?.layer.borderWidth = 1.0
         overlayImageView?.layer.borderColor = UIColor.white.cgColor
         if let imageView = overlayImageView {
