@@ -714,10 +714,12 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
         cropVC.aspectRatioPickerButtonHidden = true
         cropVC.aspectRatioLockEnabled = true
+        cropVC.aspectRatioLockDimensionSwapEnabled = true
         cropVC.resetButtonHidden = true
         cropVC.rotateButtonsHidden = true
         cropVC.toolbar.doneTextButton.setTitleColor(UIColor.white, for: .normal)
         cropVC.toolbar.cancelTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.cropView.cropBoxResizeEnabled = false
         cropVC.cropView.gridOverlayHidden = true
         cropVC.cropView.setGridOverlayHidden(true, animated: true)
         let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
