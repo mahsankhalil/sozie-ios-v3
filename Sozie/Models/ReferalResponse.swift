@@ -31,3 +31,19 @@ struct ReferalResponse: Codable {
 
     }
 }
+struct ReferalVerificationResponse: Codable {
+
+    var isValid: Bool
+    var detail: String?
+
+    enum CodingKeys: String, CodingKey {
+        case isValid = "is_valid"
+        case detail
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        isValid = try values.decode(Bool.self, forKey: .isValid)
+        detail = try? values.decode(String.self, forKey: .detail)
+    }
+}

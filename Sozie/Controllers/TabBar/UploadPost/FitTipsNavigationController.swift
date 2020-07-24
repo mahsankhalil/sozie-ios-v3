@@ -19,6 +19,9 @@ class FitTipsNavigationController: UINavigationController {
         self.delegate = self
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     class func instance(fitTips: [FitTips]) -> FitTipsNavigationController {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "FitTipsNavigationController") as! FitTipsNavigationController

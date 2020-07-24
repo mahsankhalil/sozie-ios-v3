@@ -37,6 +37,7 @@ class FitTipsAnswerTextVC: UIViewController {
         self.textView.resignFirstResponder()
     }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 //        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     @IBAction func backButtonTaped(_ sender: Any) {

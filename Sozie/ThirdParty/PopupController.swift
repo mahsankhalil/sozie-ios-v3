@@ -96,9 +96,13 @@ open class PopupController: UIViewController {
         self.removeFromParent()
     }
     // MARK: Overrides
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        registerNotification()
+    }
+
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        registerNotification()
     }
 
     open override func viewDidDisappear(_ animated: Bool) {

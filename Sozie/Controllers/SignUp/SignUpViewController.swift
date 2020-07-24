@@ -209,6 +209,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                 if let user = UserDefaultManager.getCurrentUserObject() {
 //                    HubSpotManager.createContact(user: user)
 //                    Analytics.logEvent("SignUp-Completed", parameters: ["email": user.email])
+                    if let tutorialCompleted = user.tutorialCompleted {
+                        if tutorialCompleted == false {
+                            UserDefaultManager.removeAllUserGuidesShown()
+                        } else {
+                            UserDefaultManager.setPostTutorialShown()
+                            UserDefaultManager.setBrowserTutorialShown()
+                            UserDefaultManager.setRequestTutorialShown()
+                        }
+                    }
                     SegmentManager.createEntity(user: user)
                     SegmentManager.createEventSecondScreenSignupCompleted()
                 }

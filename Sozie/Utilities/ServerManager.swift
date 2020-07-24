@@ -834,6 +834,19 @@ class ServerManager: NSObject {
             }
         }
     }
+    func verifyReferalCode(params: [String: Any], block: CompletionHandler) {
+        Alamofire.request(ServerManager.referalCodeURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ReferalVerificationResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    
 func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, videoURL: URL? = nil, block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,

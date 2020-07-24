@@ -91,12 +91,39 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         ServerManager.sharedInstance.validateEmailOrUsername(params: dataDict as [String: Any]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+                if self.referralCodeTextField.text?.isEmpty == true {
+                    self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+                } else {
+                    self.verifyReferralCodeFromServer()
+                }
             } else {
                 let error = response as! Error
                 UtilityManager.showMessageWith(title: "Please Try Again", body: error.localizedDescription, in: self)
             }
         }
+    }
+    func verifyReferralCodeFromServer() {
+        if self.referralCodeTextField.text?.isEmpty == false {
+            SVProgressHUD.show()
+            var dataDict = [String: Any]()
+            dataDict["code"] = self.referralCodeTextField.text
+            ServerManager.sharedInstance.verifyReferalCode(params: dataDict) { (isSuccess, response) in
+                if isSuccess {
+                    let referralResponse = response as! ReferalVerificationResponse
+                    if referralResponse.isValid == true {
+                        self.performSegue(withIdentifier: "toSignUpPersonalInfo", sender: self)
+                    } else {
+                        if let detail = referralResponse.detail {
+                            UtilityManager.showErrorMessage(body: detail, in: self)
+                        }
+                    }
+                } else {
+                    let error = response as! Error
+                    UtilityManager.showErrorMessage(body: error.localizedDescription, in: self)
+                }
+            }
+        }
+        
     }
     // MARK: - Validation CallBacks
     func validationSuccessful() {
