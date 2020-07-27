@@ -27,16 +27,32 @@ class PosePopupVC: UIViewController {
         if let index = photoIndex {
             switch index {
             case 0:
-                self.populateFrontPoseImages()
+                if UserDefaultManager.getCurrentUserGender() == "F" {
+                    self.populateFrontPoseImages()
+                } else {
+                    self.populateMaleFrontPoseImages()
+                }
                 self.bottomLabel.text = "Front poses that work"
             case 1:
-                self.populateBackPoseImages()
+                if UserDefaultManager.getCurrentUserGender() == "F" {
+                    self.populateBackPoseImages()
+                } else {
+                    self.populateMaleBackPoseImages()
+                }
                 self.bottomLabel.text = "Back poses that work"
             case 2:
-                self.populateSidePoseImages()
+                if UserDefaultManager.getCurrentUserGender() == "F" {
+                    self.populateSidePoseImages()
+                } else {
+                    self.populateMaleSidePoseImages()
+                }
                 self.bottomLabel.text = "Side poses that work"
             default:
-                self.populateFrontPoseImages()
+                if UserDefaultManager.getCurrentUserGender() == "F" {
+                    self.populateFrontPoseImages()
+                } else {
+                    self.populateMaleFrontPoseImages()
+                }
                 self.bottomLabel.text = "Front poses that work"
             }
         } else {
@@ -87,6 +103,31 @@ class PosePopupVC: UIViewController {
     func populateSidePoseImages() {
         for index in 0..<9 {
             let name = "Side-" + String(index + 1)
+            let viewModel = ImageViewModel(imageName: name)
+            viewModels.append(viewModel)
+        }
+        self.collectionView.reloadData()
+    }
+    func populateMaleFrontPoseImages() {
+        for index in 0..<9 {
+            let name = "MaleFront-" + String(index + 1)
+            let viewModel = ImageViewModel(imageName: name)
+            viewModels.append(viewModel)
+        }
+        self.collectionView.reloadData()
+    }
+
+    func populateMaleBackPoseImages() {
+        for index in 0..<9 {
+            let name = "MaleBack-" + String(index + 1)
+            let viewModel = ImageViewModel(imageName: name)
+            viewModels.append(viewModel)
+        }
+        self.collectionView.reloadData()
+    }
+    func populateMaleSidePoseImages() {
+        for index in 0..<9 {
+            let name = "MaleSide-" + String(index + 1)
             let viewModel = ImageViewModel(imageName: name)
             viewModels.append(viewModel)
         }

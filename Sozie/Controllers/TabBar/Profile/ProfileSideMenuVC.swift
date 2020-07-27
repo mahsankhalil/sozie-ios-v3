@@ -54,7 +54,7 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var howToTakePicturesButton: UIButton!
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
     let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
-    let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
+    let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
     private let higlightedCellReuseIdentifier = "HighLightedCell"
@@ -214,6 +214,11 @@ class ProfileSideMenuVC: BaseViewController {
         tosVC.type = type
         self.navigationController?.pushViewController(tosVC, animated: true)
     }
+    func showTermsAndConditionsVC() {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let destVC = storyBoard.instantiateViewController(withIdentifier: "TermsAndConditionsVC") as! TermsAndConditionsVC
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
     @IBAction func menuBtnTapped(_ sender: Any) {
 
     }
@@ -341,7 +346,8 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         case 3:
             showTOSVC(type: TOSType.privacyPolicy)
         case 4:
-            showTOSVC(type: TOSType.termsCondition)
+            showTermsAndConditionsVC()
+//            showTOSVC(type: TOSType.termsCondition)
         default:
             return
         }

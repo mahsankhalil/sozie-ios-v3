@@ -106,8 +106,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         // **Perform sign in action here**
         if URL.absoluteString == "terms" {
             let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
-            let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
-            tosVC.type = TOSType.termsCondition
+            let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsAndConditionsVC") as! TermsAndConditionsVC
             self.present(tosVC, animated: true, completion: nil)
         } else if URL.absoluteString == "privacy" {
             let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
