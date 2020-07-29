@@ -11,6 +11,8 @@ import SVProgressHUD
 import TPKeyboardAvoiding
 import UserNotifications
 import CropViewController
+import AVKit
+import SDWebImage
 //import FirebaseAnalytics
 protocol UploadPostAndFitTipsDelegate: class {
     func uploadPostInfoButtonTapped()
@@ -46,7 +48,13 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var submitTutorialVC: SubmitPostTutorialVC?
     var isTutorialShowing: Bool = false
     var isFitTipsTutorialShown: Bool = false
-    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
+    var currentVideoURL: URL?
+    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true)]
+
+    var currentTaskId: String?
+    var currentPostId: Int?
+    var currentPost: UserPost?
+//    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.postMaskButton.isHidden = true
@@ -60,6 +68,9 @@ class UploadPostAndFitTipsVC: BaseViewController {
         if let frontImage = selectedImage {
             viewModels[0].image = frontImage
         }
+        if let postID = currentPostId {
+            self.getCurrentPost(postId: postID)
+        }
         self.postImageView.layer.borderWidth = 1.0
         self.postImageView.layer.borderColor = UIColor(hex: "DBDBDB").cgColor
         self.sizeCheckMark.isHidden = true
@@ -70,6 +81,89 @@ class UploadPostAndFitTipsVC: BaseViewController {
 //        let formattedString = NSMutableAttributedString()
 //        formattedString.bold("Required Tutorial", size: 15.0).normal(": Upload real photos of yourself")
 //        progressTutorialVC?.updateProgressTitle(string: formattedString)
+    }
+    func getCurrentPost(postId: Int) {
+        ServerManager.sharedInstance.getCurrentPostWith(postID: postId) { (isSuccess, response) in
+            if isSuccess {
+                let currentPost = response as! UserPost
+                self.currentPost = currentPost
+                self.populateDataWithCurrentPost()
+                self.populateFitTips()
+            }
+        }
+    }
+    func populateDataWithCurrentPost() {
+        viewModels.removeAll()
+        if let post = currentPost {
+            var index = 0
+            for upload in post.uploads {
+                var title = ""
+                if index == 0 {
+                    title = "Front"
+                } else if index == 1 {
+                    title = "Back"
+                } else if index == 2 {
+                    title = "Side"
+                } else {
+                    title = "Optional Picture"
+                }
+                let viewModel = UploadPictureViewModel(title: title, attributedTitle: nil, imageURL: URL(string: upload.imageURL), image: nil)
+                index = index + 1
+                viewModels.append(viewModel)
+            }
+            for video in post.videos ?? [] {
+                let viewModel = UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: nil, image: nil, isVideo: true, videoURL: video.videoURL)
+                viewModels.append(viewModel)
+                index = index + 1
+            }
+            if index < 6 {
+                if index < 5 {
+                    let optionalViewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    viewModels.append(optionalViewModel)
+                } else {
+                    if let videos = post.videos {
+                        if videos.count > 0 {
+                            let optionalViewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                            viewModels.append(optionalViewModel)
+                        }
+                    }
+                }
+                if post.videos?.count == 0 {
+                    let optionalVideoViewModel = UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true)
+                    viewModels.append(optionalVideoViewModel)
+                }
+            }
+            self.postImageView.sd_setImage(with: URL(string: post.uploads[0].imageURL), completed: nil)
+            self.imagesCollectionView.reloadData()
+        }
+    }
+    func populateFitTips() {
+        if let post = currentPost {
+            if let fitTipAnswers = post.fitTipsAnswers {
+                for fitTip in fitTipAnswers {
+                    self.matchFitTipsAndPopulateAnswer(fitTip: fitTip)
+                }
+            }
+        }
+    }
+    func matchFitTipsAndPopulateAnswer(fitTip: PostFitTips) {
+        if let allFitTips = fitTips {
+            var fitTipsIndex = 0
+            for currentFitTip in allFitTips {
+                var questionIndex = 0
+                for question in currentFitTip.question {
+                    if question.questionId == fitTip.questionId {
+                        fitTips![fitTipsIndex].question[questionIndex].isAnswered = true
+                        fitTips![fitTipsIndex].question[questionIndex].answer = fitTip.answerText
+                    }
+                    questionIndex = questionIndex + 1
+                }
+                fitTipsIndex = fitTipsIndex + 1
+            }
+        }
+        if checkIfAllQuestionsAnswered() {
+            self.fitTipsCheckMark.isHidden = false
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -93,8 +187,8 @@ class UploadPostAndFitTipsVC: BaseViewController {
 //        }
         progressTutorialVC?.updateProgress(progress: 6.0/8.0)
         if let tutVC = picturesTutorialVC {
-            tutVC.view.frame.origin.y = 215.0
-            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 638)
+            tutVC.view.frame.origin.y = 235.0
+            tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.size.width, height: 618)
             self.scrollView.addSubview(tutVC.view)
             self.scrollView.contentSizeToFit()
         }
@@ -156,9 +250,18 @@ class UploadPostAndFitTipsVC: BaseViewController {
         return true
     }
     func fetchFitTipsFromServer() {
-        ServerManager.sharedInstance.getAllFitTips(params: [:]) { (isSuccess, response) in
+        var dataDict = [String: Any]()
+        if self.currentRequest != nil {
+            dataDict["category_id"] = self.currentRequest?.requestedProduct.categoryId
+        } else {
+            dataDict["category_id"] = self.currentProduct?.categoryId
+        }
+        ServerManager.sharedInstance.getAllFitTips(params: dataDict) { (isSuccess, response) in
             if isSuccess {
                 self.fitTips = (response as! [FitTips])
+                if self.currentPost != nil {
+                    self.populateFitTips()
+                }
             }
         }
     }
@@ -171,6 +274,15 @@ class UploadPostAndFitTipsVC: BaseViewController {
                     self.updateCurrentProductObject(product: response as! Product)
                     self.populateProductData()
                 }
+            }
+        }
+    }
+    func fetchProductDetail(productId: String) {
+        ServerManager.sharedInstance.getProductDetail(productId: productId) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                self.currentProduct = (response as! Product)
+                self.populateProductData()
             }
         }
     }
@@ -202,7 +314,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     func assignImageURL() {
         if var imageURL = currentProduct?.merchantImageURL {
-            if imageURL == "" {
+            if imageURL == "" || imageURL.count < 4 {
                 if let imageURLTarget = currentProduct?.imageURL {
                     productImageView.sd_setImage(with: URL(string: imageURLTarget), completed: nil)
                 }
@@ -219,7 +331,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
         }
     }
     func checkIfAllImagesUplaoded() -> Bool {
-        for index in 0...viewModels.count where index < 3 && viewModels[index].image == nil {
+        for index in 0...viewModels.count where index < 3 && viewModels[index].image == nil && viewModels[index].imageURL == nil {
             return false
         }
         return true
@@ -279,6 +391,59 @@ class UploadPostAndFitTipsVC: BaseViewController {
             }
         }
     }
+    func updatePostData() {
+        if let post = currentPost {
+            var dataDict = [String: Any]()
+            var imagesToEditData: [Data] = []
+            var imagesToUploadData: [Data] = []
+            var index = 0
+            var arrayOfImagesToEditIds = [Int]()
+            var videoIdToEdit: Int?
+            for viewModel in viewModels {
+                if viewModel.isVideo == false || viewModel.isVideo == nil {
+                    if viewModel.imageURL != nil && viewModel.image != nil {
+                        if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
+                            imagesToEditData.append(imageData)
+                            let uploadId = post.uploads[index].uploadId
+                            arrayOfImagesToEditIds.append(uploadId)
+                        }
+                    } else if viewModel.imageURL == nil && viewModel.image != nil {
+                        if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
+                            imagesToUploadData.append(imageData)
+                        }
+                    }
+                } else {
+                    if let urlForVideo = viewModel.videoURL {
+                        if (urlForVideo.lowercased().hasPrefix("http")) == false {
+                            if let videos = post.videos {
+                                if videos.count > 0 {
+                                    videoIdToEdit = videos[0].uploadId
+                                }
+                            }
+                        }
+                    }
+                }
+                index = index + 1
+            }
+            dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
+            if arrayOfImagesToEditIds.count > 0 {
+                dataDict["existing_images_ids"] = arrayOfImagesToEditIds.makeCommaSeparated()
+            }
+            if self.currentVideoURL != nil {
+                dataDict["video_to_edit_id"] = videoIdToEdit
+            }
+            SVProgressHUD.show()
+            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: post.postId, imagesToEdit: imagesToEditData, imagesToUploads: imagesToUploadData, videoURL: self.currentVideoURL) { (isSuccess, response) in
+                SVProgressHUD.dismiss()
+                if isSuccess {
+                    self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
+                    self.getPostProgress(isTutorial: false)
+                } else {
+                    self.bottomButtom.isEnabled = true
+                }
+            }
+        }
+    }
     func uploadPOstData(isTutorial: Bool) {
         var dataDict = [String: Any]()
         dataDict["product_id"] = currentProduct?.productStringId
@@ -291,34 +456,66 @@ class UploadPostAndFitTipsVC: BaseViewController {
         }
         var imagesData: [Data] = []
         for viewModel in viewModels {
-            if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
-                imagesData.append(imageData)
+            if viewModel.isVideo == nil || viewModel.isVideo == false {
+                if let imageData = viewModel.image?.jpegData(compressionQuality: 1.0) {
+                    imagesData.append(imageData)
+                }
             }
         }
         dataDict["fit_tips"] = self.makeFitTipsArray().toJSONString()
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         SVProgressHUD.show()
-        ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData) { (isSuccess, response) in
+        ServerManager.sharedInstance.addPostWithMultipleImages(params: dataDict, imagesData: imagesData, videoURL: self.currentVideoURL) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-                if isTutorial {
-                    UserDefaultManager.setBrowserTutorialShown()
-                    self.uploadTutorialData()
-                } else {
-                    SegmentManager.createEventRequestSubmitted()
-//                    UtilityManager.showMessageWith(title: "THANK YOU!", body: "We are reviewing your post now", in: self, dismissAfter: 3)
-                    self.showThankYouController()
-                    self.bottomButtom.isEnabled = true
-                    self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
-                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
-                }
+                self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
+                self.getPostProgress(isTutorial: isTutorial)
+//                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//                if isTutorial {
+//                    UserDefaultManager.setBrowserTutorialShown()
+//                    self.uploadTutorialData()
+//                } else {
+//                    SegmentManager.createEventRequestSubmitted()
+//                    self.showThankYouController()
+//                    self.bottomButtom.isEnabled = true
+//                    self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
+//                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
+//                }
             } else {
                 self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
             }
         }
     }
+    func getPostProgress(isTutorial: Bool) {
+        if let taskId = self.currentTaskId {
+            ServerManager.sharedInstance.getPostProgress(taskId: taskId) { (isSuccess, response) in
+                if isSuccess {
+                    let taskInfo = (response as! ProgressResponse).taskInfo
+                    if taskInfo.taskStatus == "SUCCESS" || taskInfo.taskStatus == "NOTREQUIRED" {
+                        SVProgressHUD.dismiss()
+                        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+                        if isTutorial {
+                            UserDefaultManager.setBrowserTutorialShown()
+                            self.uploadTutorialData()
+                        } else {
+                            SegmentManager.createEventRequestSubmitted()
+                            self.showThankYouController()
+                            self.bottomButtom.isEnabled = true
+                            self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
+                            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
+                        }
+                    } else if taskInfo.taskStatus == "FAILURE" {
+                        SVProgressHUD.dismiss()
+                    } else {
+                        SVProgressHUD.showProgress(Float( taskInfo.info.progress.percent) / 100.0)
+                        self.getPostProgress(isTutorial: isTutorial)
+                    }
+                }
+            }
+        }
+    }
+
     func showThankYouController() {
         let thankYouVC = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouController") as! ThankYouController
         self.view.addSubview(thankYouVC.view)
@@ -373,13 +570,17 @@ class UploadPostAndFitTipsVC: BaseViewController {
             UtilityManager.showErrorMessage(body: "Please answer all Fit Tips.", in: self)
         } else {
             self.bottomButtom.isEnabled = false
+            if currentPost != nil {
+                self.updatePostData()
+                return
+            }
             uploadPOstData(isTutorial: false)
         }
     }
     @IBAction func deleteButtonTapped(_ sender: Any) {
         if let index = selectedIndex {
             viewModels[index].image = nil
-            viewModels[index].imageURL = nil
+//            viewModels[index].imageURL = nil
             postImageView.image = nil
             selectedIndex = nil
             if index > 2 {
@@ -415,7 +616,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 50.0, height: 65.0)
+            return CGSize(width: 50.0, height: 80.0)
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -433,6 +634,13 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         if viewModels[indexPath.row].image == nil {
+            if viewModels[indexPath.row].isVideo == true {
+                let videoPicker = self.storyboard?.instantiateViewController(withIdentifier: "VideoPickerVC") as! VideoPickerVC
+                videoPicker.modalPresentationStyle = .fullScreen
+                videoPicker.delegate = self
+                self.present(videoPicker, animated: true, completion: nil)
+                return
+            }
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
                 UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: self.selectedIndex, progressTutorialVC: self.progressTutorialVC)
@@ -443,6 +651,8 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
             }))
             alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        } else if viewModels[indexPath.row].imageURL != nil {
+            self.postImageView.sd_setImage(with: self.viewModels[indexPath.row].imageURL, completed: nil)
         } else {
             self.postImageView.image = viewModels[indexPath.row].image
         }
@@ -452,7 +662,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
         let popUpVC = PopupController
             .create(self.tabBarController?.navigationController ?? self)
             .show(popUpInstnc)
-        let options = PopupCustomOption.layout(.top)
+        let options = PopupCustomOption.layout(.center)
         _ = popUpVC.customize([options])
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()
@@ -468,10 +678,10 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
             self.postImageView.image = scaledImg
             if index > 2 {
                 if index < 5 {
-                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                    let viewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
                     viewModels.append(viewModel)
                 }
-                viewModels[index].title = ""
+//                viewModels[index].title = ""
             }
             UIImageWriteToSavedPhotosAlbum(scaledImg, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
             self.imagesCollectionView.reloadData()
@@ -504,10 +714,12 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
         cropVC.aspectRatioPickerButtonHidden = true
         cropVC.aspectRatioLockEnabled = true
+        cropVC.aspectRatioLockDimensionSwapEnabled = true
         cropVC.resetButtonHidden = true
         cropVC.rotateButtonsHidden = true
         cropVC.toolbar.doneTextButton.setTitleColor(UIColor.white, for: .normal)
         cropVC.toolbar.cancelTextButton.setTitleColor(UIColor.white, for: .normal)
+        cropVC.cropView.cropBoxResizeEnabled = false
         cropVC.cropView.gridOverlayHidden = true
         cropVC.cropView.setGridOverlayHidden(true, animated: true)
         let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
@@ -537,17 +749,20 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         }
 //        cropVC.cropView.addSubview(tutorialImageView)
     }
-    func setupImage(pickedImage: UIImage) {
+    func setupImage(pickedImage: UIImage, videoURL: String? = nil) {
         if let index = selectedIndex {
             let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
             viewModels[index].image = scaledImg
+            viewModels[index].videoURL = videoURL
             self.postImageView.image = scaledImg
             if index > 2 {
                 if index < 5 {
-                    let viewModel = UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
-                    viewModels.append(viewModel)
+                    if viewModels[index].isVideo == false {
+                        let viewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                        viewModels.append(viewModel)
+                    }
                 }
-                viewModels[index].title = ""
+//                viewModels[index].title = ""
             }
             self.imagesCollectionView.reloadData()
         }
@@ -647,5 +862,37 @@ extension UploadPostAndFitTipsVC: TutorialProgressDelegate {
         self.addSubmitTutorial()
         self.navigationController?.popViewController(animated: true)
         self.popUpVC?.dismiss()
+    }
+}
+extension UploadPostAndFitTipsVC: CustomVideoRecorderDelegate {
+    func customImagePickerController(_ picker: VideoPickerVC, didFinishPickingMediaWithInfo info: [String: Any]) {
+        if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL {
+            self.currentVideoURL = videoURL
+            self.getThumbnailImageFromVideoUrl(url: videoURL) { (image) in
+                if let pickedImage = image {
+                    self.setupImage(pickedImage: pickedImage, videoURL: String(describing: videoURL))
+                }
+            }
+        }
+    }
+    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?) -> Void)) {
+        DispatchQueue.global().async {
+            let asset = AVAsset(url: url)
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+            avAssetImageGenerator.appliesPreferredTrackTransform = true
+            let thumnailTime = CMTimeMake(value: 2, timescale: 1)
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil)
+                let thumbImage = UIImage(cgImage: cgThumbImage)
+                DispatchQueue.main.async {
+                    completion(thumbImage)
+                }
+            } catch {
+                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    completion(nil) //11
+                }
+            }
+        }
     }
 }

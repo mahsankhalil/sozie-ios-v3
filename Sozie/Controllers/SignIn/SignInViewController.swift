@@ -13,7 +13,7 @@ import SVProgressHUD
 import MaterialTextField
 import FBSDKLoginKit
 import TPKeyboardAvoiding
-
+import AuthenticationServices
 class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
 
     static let identifier = "signInViewController"
@@ -23,6 +23,9 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var forgotPasswordBtn: UIButton!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
+    @IBOutlet weak var appleLoginButtonView: UIView!
+    @IBOutlet weak var socialButtonViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var loginAppleButtonWidthConstraint: NSLayoutConstraint!
     let validator = Validator()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         emailField.setupAppDesign()
         passwordField.setupAppDesign()
         applyRightVuToPassword()
+        setupAppleLoginButton()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,6 +47,28 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         GIDSignIn.sharedInstance().uiDelegate = self
     }
 
+    func setupAppleLoginButton() {
+        if #available(iOS 13, *) {
+            let customAppleLoginButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 56.0, height: 44.0))
+            customAppleLoginButton.setImage(UIImage(named: "Apple Iocn"), for: .normal)
+            customAppleLoginButton.addTarget(self, action: #selector(handleLogInWithAppleIDButtonPress), for: .touchUpInside)
+            self.appleLoginButtonView.addSubview(customAppleLoginButton)
+        } else {
+            self.loginAppleButtonWidthConstraint.constant = 0.0
+            self.socialButtonViewWidthConstraint.constant = 112.0
+        }
+    }
+    @objc private func handleLogInWithAppleIDButtonPress() {
+        if #available(iOS 13, *) {
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let request = appleIDProvider.createRequest()
+            request.requestedScopes = [.fullName, .email]
+            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+            authorizationController.delegate = self
+            authorizationController.presentationContextProvider = self
+            authorizationController.performRequests()
+        }
+    }
     func applyRightVuToPassword() {
         let eyeBtn = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 19.0, height: 22.0))
         eyeBtn.setImage(UIImage(named: "eye-icon-white"), for: .normal)
@@ -245,5 +271,27 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
 extension SignInViewController: ForgotPasswordEmailPopupDelegate {
     func recoverPasswordBtnTapped(email: String) {
         self.forgotPassword(email: email)
+    }
+}
+extension SignInViewController: ASAuthorizationControllerDelegate {
+    @available(iOS 13.0, *)
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            // Get user data with Apple ID credentitial
+            var dataDict = SocialAuthManager.sharedInstance.convertAppleUserToAppDict(user: appleIDCredential)
+            self.signInWithDict(dataDict: dataDict)
+            // Write your code here
+        }
+    }
+    @available(iOS 13.0, *)
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print(error.localizedDescription)
+    }
+}
+
+extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
+    @available(iOS 13.0, *)
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }

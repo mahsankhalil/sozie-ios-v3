@@ -42,6 +42,10 @@ class FitTipsAnswerTableVC: UIViewController {
                 }
             }
         }
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
     }
     func checkIfAnswered(text: String, answer: String) -> Bool {
         let answers = answer.components(separatedBy: ",")
@@ -74,46 +78,30 @@ class FitTipsAnswerTableVC: UIViewController {
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
-//                        self.navigationController?.popToRootViewController(animated: true)
-//                        return
                     }
                 } else {
                     questIndex = questIndex + 1
                 }
                 let fitTip = fitTips[fitTipIndex]
                 if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
-                    //Single selection
-//                    navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-//                } else if fitTip.question[0].type == "C" {
-                    //Multiple selection
                     navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                } else if fitTip.question[0].type == "S" {
+                    navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                } else if fitTip.question[0].type == "L" {
+                    navigateToRadioAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 }
             }
         }
-//        if let tipsIndex = fitTipsIndex {
-//            if let fitTip = fitTips?[tipsIndex] {
-//                if fitTip.question[0].type == "R" {
-//                    //Single selection
-//
-//                } else if fitTip.question[0].type == "C" {
-//                    //Multiple selection
-//
-//                } else if fitTip.question[0].type == "T" {
-//                    //Text Input
-//
-//                }
-//            }
-//        }
     }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
-        self.navigationController?.parent?.viewDidAppear(true)
+//        self.navigationController?.parent?.viewDidAppear(true)
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     func navigateToPickerAnswer(fitTipIndex: Int, questIndex: Int) {
@@ -129,6 +117,20 @@ class FitTipsAnswerTableVC: UIViewController {
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
         destVC.type = type
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRateAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRadioAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     /*
@@ -181,7 +183,7 @@ extension FitTipsAnswerTableVC: UITableViewDelegate, UITableViewDataSource {
                         tableView.reloadData()
                     }
                 }
-            } else if currentType == "R" {
+            } else if currentType == "R" ||  currentType == "S" {
                 if arrayOfSelectedIndexes.contains(indexPath.row) {
                     arrayOfSelectedIndexes.removeAll { $0 == indexPath.row }
                     viewModels[indexPath.row].isCheckmarkHidden = true

@@ -72,7 +72,15 @@ import Hex
         shadowLayer?.layer.shadowRadius = 4
         shadowLayer?.layer.masksToBounds = true
         shadowLayer?.clipsToBounds = false
+        shadowLayer?.tag = 112
         self.superview?.addSubview(shadowLayer ?? UIView())
         self.superview?.bringSubviewToFront(self)
+    }
+    func removeShadow() {
+        for view in self.superview?.subviews ?? [] {
+            if view.tag == 112 {
+                view.removeFromSuperview()
+            }
+        }
     }
 }

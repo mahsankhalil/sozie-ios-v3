@@ -54,7 +54,7 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var howToTakePicturesButton: UIButton!
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
     let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
-    let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions of use"]
+    let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
     private let higlightedCellReuseIdentifier = "HighLightedCell"
@@ -141,27 +141,27 @@ class ProfileSideMenuVC: BaseViewController {
     }
     */
     func rateThisApp() {
-//        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
-//            else { fatalError("Expected a valid URL") }
-//        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        } else {
-            rateApp(appId: "id1363346896") { (_) in
-            }
-        }
+        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
+            else { fatalError("Expected a valid URL") }
+        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+//        if #available(iOS 10.3, *) {
+//            SKStoreReviewController.requestReview()
+//        } else {
+//            rateApp(appId: "id1363346896") { (_) in
+//            }
+//        }
     }
-    func rateApp(appId: String, completion: @escaping ((_ success: Bool) -> Void)) {
-        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
-            completion(false)
-            return
-        }
-        guard #available(iOS 10, *) else {
-            completion(UIApplication.shared.openURL(url))
-            return
-        }
-        UIApplication.shared.open(url, options: [:], completionHandler: completion)
-    }
+//    func rateApp(appId: String, completion: @escaping ((_ success: Bool) -> Void)) {
+//        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
+//            completion(false)
+//            return
+//        }
+//        guard #available(iOS 10, *) else {
+//            completion(UIApplication.shared.openURL(url))
+//            return
+//        }
+//        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+//    }
     func showInviteFriendsVC() {
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let inviteVC = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVC") as! InviteFriendsVC
@@ -182,7 +182,7 @@ class ProfileSideMenuVC: BaseViewController {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         // Configure the fields of the interface.
-        composeVC.setToRecipients(["contact@sozie.com"])
+        composeVC.setToRecipients(["theteam@sozie.com"])
         composeVC.setSubject("Feedback")
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
@@ -213,6 +213,11 @@ class ProfileSideMenuVC: BaseViewController {
         let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
         tosVC.type = type
         self.navigationController?.pushViewController(tosVC, animated: true)
+    }
+    func showTermsAndConditionsVC() {
+        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+        let destVC = storyBoard.instantiateViewController(withIdentifier: "TermsAndConditionsVC") as! TermsAndConditionsVC
+        self.navigationController?.pushViewController(destVC, animated: true)
     }
     @IBAction func menuBtnTapped(_ sender: Any) {
 
@@ -341,7 +346,8 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         case 3:
             showTOSVC(type: TOSType.privacyPolicy)
         case 4:
-            showTOSVC(type: TOSType.termsCondition)
+            showTermsAndConditionsVC()
+//            showTOSVC(type: TOSType.termsCondition)
         default:
             return
         }

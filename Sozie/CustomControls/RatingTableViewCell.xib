@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="segoeui.ttf">
+            <string>SegoeUI</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="KGk-i7-Jjw" customClass="RatingTableViewCell" customModule="Sozie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comfort" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0G-SW-hbp">
+                        <rect key="frame" x="60" y="6" width="52" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="pAE-kt-8XN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCB-ge-fHq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="0z9-FK-Qg1"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="3Mg-ST-U0v" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="60" y="31" width="200" height="20"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="de0-7i-QN3"/>
+                            <constraint firstAttribute="width" constant="200" id="jVJ-a3-XJB"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                <integer key="value" value="0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                <real key="value" value="25"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Yellow Star"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="Grey Star"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="3Mg-ST-U0v" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="DOZ-q1-Puu"/>
+                    <constraint firstAttribute="trailing" secondItem="QCB-ge-fHq" secondAttribute="trailing" id="G6L-qf-Ysr"/>
+                    <constraint firstItem="QCB-ge-fHq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OUc-M7-2fY"/>
+                    <constraint firstItem="3Mg-ST-U0v" firstAttribute="leading" secondItem="S0G-SW-hbp" secondAttribute="leading" id="WgU-iy-Sho"/>
+                    <constraint firstItem="QCB-ge-fHq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Zsm-Jv-WYm"/>
+                    <constraint firstItem="3Mg-ST-U0v" firstAttribute="top" secondItem="S0G-SW-hbp" secondAttribute="bottom" constant="6" id="akq-D6-LIa"/>
+                    <constraint firstItem="S0G-SW-hbp" firstAttribute="top" secondItem="QCB-ge-fHq" secondAttribute="bottom" constant="5" id="vue-uZ-erJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="rateView" destination="3Mg-ST-U0v" id="jAF-2w-Aov"/>
+                <outlet property="titleLabel" destination="S0G-SW-hbp" id="854-bQ-CdS"/>
+            </connections>
+            <point key="canvasLocation" x="47.826086956521742" y="71.651785714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Grey Star" width="20" height="20"/>
+        <image name="Yellow Star" width="20" height="20"/>
+    </resources>
+</document>

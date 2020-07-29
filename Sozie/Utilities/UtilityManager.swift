@@ -161,6 +161,47 @@ class UtilityManager: NSObject {
             }
         })
     }
+    static func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?) -> Void)) {
+        DispatchQueue.global().async { //1
+            let request = URLRequest(url: url)
+            let cache = URLCache.shared
+
+            if
+                let cachedResponse = cache.cachedResponse(for: request),
+                let image = UIImage(data: cachedResponse.data) {
+                DispatchQueue.main.async {
+                    completion(image)
+                    return
+                }
+            }
+            let asset = AVAsset(url: url) //2
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset) //3
+            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
+            let thumnailTime = CMTimeMake(value: 2, timescale: 1) //5
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
+                let thumbNailImage = UIImage(cgImage: cgThumbImage) //7
+                if
+                    let data = thumbNailImage.pngData(),
+                    let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+                {
+                    let cachedResponse = CachedURLResponse(response: response, data: data)
+
+                    cache.storeCachedResponse(cachedResponse, for: request)
+                }
+                DispatchQueue.main.async { //8
+                    completion(thumbNailImage) //9
+                    return
+                }
+            } catch {
+                print(error.localizedDescription) //10
+//                DispatchQueue.main.async {
+//                    completion(nil) //11
+//                }
+            }
+        }
+    }
+
     static func showPermissionAlertWith(title: String, message: String, viewController: UIViewController) {
         let permissionAlertController = UIAlertController (title: title, message: message, preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Settings", style: .destructive) { (_) -> Void in

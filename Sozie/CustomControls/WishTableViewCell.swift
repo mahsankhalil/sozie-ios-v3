@@ -9,18 +9,16 @@
 import UIKit
 protocol WishTableViewCellDelegate: class {
     func crossButonTapped(btn: UIButton)
-    func buyButtonTapped(button: UIButton)
+    func viewRequestsButtonTapped(button: UIButton)
 }
 class WishTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var crossButton: UIButton!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var maskImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var backgroudView: UIView!
-    @IBOutlet weak var buyButton: DZGradientButton!
+    @IBOutlet weak var viewRequestsButton: DZGradientButton!
     weak var delegate: WishTableViewCellDelegate?
 
     override func awakeFromNib() {
@@ -35,8 +33,8 @@ class WishTableViewCell: UITableViewCell {
     @IBAction func crossButtonTapped(_ sender: Any) {
         delegate?.crossButonTapped(btn: sender as! UIButton)
     }
-    @IBAction func buyButtonTapped(_ sender: Any) {
-        delegate?.buyButtonTapped(button: sender as! UIButton)
+    @IBAction func viewRequestsButtonTapped(_ sender: Any) {
+        delegate?.viewRequestsButtonTapped(button: sender as! UIButton)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,16 +53,6 @@ extension WishTableViewCell: CellConfigurable {
         if let titleImgModel = viewModel as? TitleImageViewModeling {
             titleImageView.sd_setImage(with: titleImgModel.titleImageURL, completed: nil)
         }
-        if let titleModel = viewModel as? TitleViewModeling {
-            priceLabel.text = titleModel.title!
-        }
-        if let countModel = viewModel as? CountViewModeling {
-            if countModel.count > 0 {
-                maskImageView.isHidden = false
-            } else {
-                maskImageView.isHidden = true
-            }
-        }
         if let descriptionModel = viewModel as? DescriptionViewModeling {
             if let description = descriptionModel.description {
                 descriptionLabel.text = description
@@ -76,7 +64,7 @@ extension WishTableViewCell: CellConfigurable {
 }
 extension WishTableViewCell: ButtonProviding {
     func assignTagWith(_ index: Int) {
-        buyButton.tag = index
+        viewRequestsButton.tag = index
         crossButton.tag = index
     }
 }

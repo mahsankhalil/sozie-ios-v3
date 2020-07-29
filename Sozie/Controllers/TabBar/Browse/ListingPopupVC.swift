@@ -110,10 +110,10 @@ class ListingPopupVC: UIViewController {
                 var viewModel1 = DisclosureCellViewModel()
                 viewModel1.title = "FILTER BY BRANDS"
                 viewModels.append(viewModel1)
-                var viewModel2 = DisclosureCellViewModel()
-                viewModel2.title = "FILTER BY SOZIES"
-                viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
-                viewModels.append(viewModel2)
+//                var viewModel2 = DisclosureCellViewModel()
+//                viewModel2.title = "FILTER BY SOZIES"
+//                viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
+//                viewModels.append(viewModel2)
                 self.tableView.reloadData()
             }
         }

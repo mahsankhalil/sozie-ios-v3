@@ -36,11 +36,11 @@ class RequestImagePickerController: UIViewController {
         // Do any additional setup after loading the view.
         hideShowSampleImageView()
         var topPadding: CGFloat! = 0.0
-//        var bottomPadding: CGFloat! = 0.0
+        var bottomPadding: CGFloat! = 0.0
         if #available(iOS 11.0, *) {
             let window = UIApplication.shared.keyWindow
             topPadding = window?.safeAreaInsets.top ?? 0.0
-//            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         }
         imageViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
         cameraViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
@@ -55,10 +55,10 @@ class RequestImagePickerController: UIViewController {
         previewLayer.videoGravity = .resizeAspectFill
         camerView.layer.addSublayer(previewLayer)
         overlayImageView = UIImageView(image: UIImage(named: "Canvas-Camera"))
-        overlayImageView?.frame.size.height = UIScreen.main.bounds.size.height - 140.0
+        overlayImageView?.frame.size.height = UIScreen.main.bounds.size.height - 160.0
         overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)! * (9.0/16.0)
         overlayImageView?.center.x = UIScreen.main.bounds.size.width/2.0
-        overlayImageView?.center.y = (UIScreen.main.bounds.size.height - 90.0)/2.0
+        overlayImageView?.center.y = (UIScreen.main.bounds.size.height - 90.0 - bottomPadding)/2.0
         overlayImageView?.layer.borderWidth = 1.0
         overlayImageView?.layer.borderColor = UIColor.white.cgColor
         if let imageView = overlayImageView {
@@ -81,17 +81,22 @@ class RequestImagePickerController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let _ = photoIndex {
+//            self.perform(#selector(showPosePopup), with: nil, afterDelay: 1.0)
             showPosePopup()
         }
     }
-    func showPosePopup() {
+    @objc func showPosePopup() {
         let popUpInstnc = PosePopupVC.instance(photoIndex: photoIndex)
         let popUpVC = PopupController
             .create(self)
             .show(popUpInstnc)
         let options = PopupCustomOption.layout(.top)
         _ = popUpVC.customize([options])
+        popUpVC.updatePopUpSize()
         popUpInstnc.closeHandler = { []  in
             popUpVC.dismiss()
         }

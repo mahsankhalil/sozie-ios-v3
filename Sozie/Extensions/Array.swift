@@ -25,6 +25,17 @@ extension Array where Element == Int {
         json = json + "]"
         return json
     }
+    func makeCommaSeparated() -> String {
+        if self.count == 0 {
+            return "."
+        }
+        var json = ""
+        for elem in self {
+            json = json + String(elem) + ","
+        }
+        json.remove(at: json.index(before: json.endIndex))
+        return json
+    }
 }
 extension Array where Element == Float {
     func convertArrayToString() -> [String] {
