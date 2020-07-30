@@ -29,9 +29,17 @@ class FitTipsAnswerTextVC: UIViewController {
         }
         textView.delegate = self
         textView.becomeFirstResponder()
-        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
     }
-
+    @objc func dismissKeyboard() {
+        self.textView.resignFirstResponder()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+    }
     @IBAction func backButtonTaped(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -50,41 +58,30 @@ class FitTipsAnswerTextVC: UIViewController {
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
-//                        self.navigationController?.popToRootViewController(animated: true)
-//                        return
                     }
                 } else {
                     questIndex = questIndex + 1
                 }
                 let fitTip = fitTips[fitTipIndex]
                 if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
-                    //Single selection
-                    //                    navigateToPickerAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-                    //                } else if fitTip.question[0].type == "C" {
-                    //Multiple selection
                     navigateToTableAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex, type: fitTip.question[0].type)
                 } else if fitTip.question[0].type == "T" {
                     //Text Input
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: fitTipIndex)
+                } else if fitTip.question[0].type == "S" {
+                    navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
+                }  else if fitTip.question[0].type == "L" {
+                    navigateToRadioAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 }
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
-        self.navigationController?.parent?.viewDidAppear(true)
+//        self.navigationController?.parent?.viewDidAppear(true)
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     func navigateToPickerAnswer(fitTipIndex: Int, questIndex: Int) {
@@ -100,6 +97,20 @@ class FitTipsAnswerTextVC: UIViewController {
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
         destVC.type = type
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRateAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    func navigateToRadioAnswer(fitTipIndex: Int, questIndex: Int) {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
+        destVC.fitTipsIndex = fitTipIndex
+        destVC.questionIndex = questIndex
+        destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
 

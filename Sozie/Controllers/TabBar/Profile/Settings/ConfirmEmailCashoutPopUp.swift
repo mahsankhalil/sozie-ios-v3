@@ -19,6 +19,7 @@ class ConfirmEmailCashoutPopUp: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        emailTextField.delegate = self
     }
     class func instance() -> ConfirmEmailCashoutPopUp {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
@@ -66,5 +67,11 @@ class ConfirmEmailCashoutPopUp: UIViewController {
 extension ConfirmEmailCashoutPopUp: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
         return CGSize(width: 274.0, height: 214.0)
+    }
+}
+extension ConfirmEmailCashoutPopUp: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

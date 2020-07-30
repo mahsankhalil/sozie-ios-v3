@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
-
+import AuthenticationServices
 class SocialAuthManager: NSObject {
 
     static let sharedInstance = SocialAuthManager()
@@ -94,5 +94,45 @@ class SocialAuthManager: NSObject {
         dataDict[User.CodingKeys.socialToken.stringValue] = user.authentication.accessToken
         dataDict[User.CodingKeys.signUpMedium.stringValue] = "GL"
         return dataDict
+    }
+    @available (iOS 13, *)
+    func convertAppleUserToAppDict(user: ASAuthorizationAppleIDCredential) -> [String: Any] {
+        var dataDict = [String: String]()
+        let userId = user.user
+        var userFirstName = user.fullName?.givenName
+        var userLastName = user.fullName?.familyName
+        var userEmail = user.email
+        if user.email == nil {
+            let keychain = UserDataKeychain()
+            do {
+                let userData = try keychain.retrieve()
+                userEmail = userData.email
+                userFirstName = userData.name.givenName
+                userLastName = userData.name.familyName
+            } catch {
+            }
+        } else {
+            saveUserDataOnKeychain(user: user)
+        }
+        dataDict[User.CodingKeys.socialId.stringValue] = userId
+        dataDict[User.CodingKeys.firstName.stringValue] = userFirstName
+        dataDict[User.CodingKeys.lastName.stringValue] = userLastName
+        dataDict[User.CodingKeys.email.stringValue] = userEmail
+        if let token = user.identityToken {
+            dataDict[User.CodingKeys.socialToken.stringValue] = String(decoding: token, as: UTF8.self)
+        }
+        dataDict[User.CodingKeys.signUpMedium.stringValue] = "AP"
+        return dataDict
+    }
+    @available (iOS 13, *)
+    func saveUserDataOnKeychain(user: ASAuthorizationAppleIDCredential) {
+        let userData = UserData(email: user.email!,
+                                name: user.fullName!,
+                                identifier: user.user)
+        let keychain = UserDataKeychain()
+        do {
+          try keychain.store(userData)
+        } catch {
+        }
     }
 }

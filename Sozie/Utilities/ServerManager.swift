@@ -25,7 +25,7 @@ class ServerManager: NSObject {
     static let forgotPasswordURL = ServerManager.serverURL + "user/forgot_password/"
     static let resetPassword = ServerManager.serverURL + "user/reset_password/"
 //    static let productListURL = ServerManager.serverURL + "product/browse/v2/feed/get/"
-    static let productListURL = ServerManager.serverURL + "product/browse/feed/get/"
+    static let productListURL = ServerManager.serverURL + "product/browse/"
     static let browseSearchURL = ServerManager.serverURL + "product/browse/feed/search/"
     static let logoutURL = ServerManager.serverURL + "user/logout/"
     static let categoriesURL = ServerManager.serverURL + "common/categories"
@@ -41,7 +41,9 @@ class ServerManager: NSObject {
     static let soziesURL = ServerManager.serverURL + "user/sozie/list"
     static let sozieRequestsURL = ServerManager.serverURL + "productrequest/sozie/request/"
     static let addPostURL = ServerManager.serverURL + "post/add/"
+    static let editPostURL = ServerManager.serverURL + "post/update/"
     static let postURL = ServerManager.serverURL + "post/list/"
+    static let getPostURL = ServerManager.serverURL + "post/get/"
     static let uploadsURL = ServerManager.serverURL + "post/uploads/list"
     static let changePasswordURL = ServerManager.serverURL + "user/change_password/"
     static let blockListURL = ServerManager.serverURL + "user/blocked/list"
@@ -52,8 +54,10 @@ class ServerManager: NSObject {
     static let reviewURL = ServerManager.serverURL + "post/review/"
     static let acceptRequestURL = ServerManager.serverURL + "productrequest/sozie/request/"
     static let fitTipsURL = ServerManager.serverURL + "common/fittips"
+    static let referalCodeURL = ServerManager.serverURL + "referral/get"
     static let notificationURL = ServerManager.serverURL + "user/notify_config/"
     static let tutorialURL = ServerManager.serverURL + "user/tutorial_states/"
+    static let postProgressURL = ServerManager.serverURL + "post/get_post_progress/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -244,13 +248,13 @@ class ServerManager: NSObject {
         ]
         var url = ServerManager.productListURL
 
-        if let isFirstPage = params["is_first_page"] as? Bool {
-            url = url + "?is_first_page=" + String(isFirstPage ? 1:0)
+        if let currentPage = params["current_page"] as? Int {
+            url = url + "?current_page=" + String(currentPage)
         }
         Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
 
             let decoder = JSONDecoder()
-            let obj: Result<[Product]> = decoder.decodeResponse(from: response)
+            let obj: Result<BrowseResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }
@@ -350,7 +354,10 @@ class ServerManager: NSObject {
         }
     }
     func getAllCategories(params: [String: Any], block: CompletionHandler) {
-        Alamofire.request(ServerManager.categoriesURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.categoriesURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
 
             let decoder = JSONDecoder()
             let obj: Result<[Category]> = decoder.decodeResponse(from: response)
@@ -540,9 +547,15 @@ class ServerManager: NSObject {
             if let userId = params["user_id"] {
                 url = url + "&user_id=" + String(userId as! Int)
             }
+            if let reviewAction = params["review_action"] as? String {
+                url = url + "&review_action=" + reviewAction
+            }
         } else {
             if let userId = params["user_id"] {
                 url = url + "?user_id=" + String(userId as! Int)
+            }
+            if let reviewAction = params["review_action"] as? String {
+                url = url + "&review_action=" + reviewAction
             }
         }
         Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
@@ -587,6 +600,38 @@ class ServerManager: NSObject {
                 }
             case .failure(let error):
                 block!(false, error)
+            }
+        }
+    }
+    func getPostProgress(taskId: String, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.postProgressURL + "?task_id=" + taskId
+        Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ProgressResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func getCurrentPostWith(postID: Int, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        let url = ServerManager.getPostURL + String(postID)
+        Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<UserPost> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
             }
         }
     }
@@ -762,7 +807,8 @@ class ServerManager: NSObject {
         }
     }
     func getAllFitTips(params: [String: Any], block: CompletionHandler) {
-        Alamofire.request(ServerManager.fitTipsURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+        let url = ServerManager.fitTipsURL + "?category_id=" + String(describing: params["category_id"])
+        Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<[FitTips]> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
@@ -773,7 +819,35 @@ class ServerManager: NSObject {
             }
         }
     }
-    func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, block: CompletionHandler) {
+    func getReferalCode(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.referalCodeURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ReferalResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func verifyReferalCode(params: [String: Any], block: CompletionHandler) {
+        Alamofire.request(ServerManager.referalCodeURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ReferalVerificationResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    
+func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, videoURL: URL? = nil, block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
             "Content-type": "multipart/form-data"
@@ -787,6 +861,9 @@ class ServerManager: NSObject {
                     multipartFormData.append(data, withName: "images_to_upload", fileName: "image.png", mimeType: "image/png")
                 }
             }
+            if let video = videoURL {
+                multipartFormData.append(video, withName: "video", fileName: "video.mp4", mimeType: "video/mp4")
+            }
 //            if let data = imageData {
 //                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
 //            }
@@ -799,7 +876,7 @@ class ServerManager: NSObject {
             case .success(let upload, _, _):
                 upload.responseData { response in
                     let decoder = JSONDecoder()
-                    let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+                    let obj: Result<AddPostResponse> = decoder.decodeResponse(from: response)
                     obj.ifSuccess {
                         block!(true, obj.value!)
                     }
@@ -812,6 +889,48 @@ class ServerManager: NSObject {
             }
         }
     }
+    func editPostWithMultipleImages(params: [String: Any]?, postId: Int, imagesToEdit: [Data]?, imagesToUploads: [Data]?, videoURL: URL? = nil, block: CompletionHandler) {
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
+                "Content-type": "multipart/form-data"
+            ]
+            let formData: (MultipartFormData) -> Void = { (multipartFormData) in
+                for (key, value) in (params ?? [:]) {
+                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                }
+                if let allImagesData = imagesToUploads {
+                    for data in allImagesData {
+                        multipartFormData.append(data, withName: "images_to_upload", fileName: "image.png", mimeType: "image/png")
+                    }
+                }
+                if let allEditImagesData = imagesToEdit {
+                    for data in allEditImagesData {
+                        multipartFormData.append(data, withName: "images_to_edit", fileName: "image.png", mimeType: "image/png")
+                    }
+                }
+                if let video = videoURL {
+                    multipartFormData.append(video, withName: "video", fileName: "video.mp4", mimeType: "video/mp4")
+                }
+            }
+        let url = ServerManager.editPostURL + String(postId)
+            Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: url, method: .patch, headers: headers) { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseData { response in
+                        let decoder = JSONDecoder()
+                        let obj: Result<AddPostResponse> = decoder.decodeResponse(from: response)
+                        obj.ifSuccess {
+                            block!(true, obj.value!)
+                        }
+                        obj.ifFailure {
+                            block!(false, obj.error!)
+                        }
+                    }
+                case .failure(let error):
+                    block!(false, error)
+                }
+            }
+        }
     func updateUserToken(params: [String: Any], block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")

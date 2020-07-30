@@ -18,10 +18,13 @@ public enum PopupType: String {
 }
 class BrowseVC: BaseViewController {
 
+    @IBOutlet weak var searchOptionsViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchOptionsView: UIView!
+    @IBOutlet weak var searchByDescriptionButton: UIButton!
+    @IBOutlet weak var searchByIdButton: UIButton!
     @IBOutlet weak var searchTxtFld: UITextField!
     @IBOutlet weak var searchVu: UIView!
     @IBOutlet weak var searchVuHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var categoryBtn: UIButton!
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var itemsCountLbl: UILabel!
@@ -38,22 +41,27 @@ class BrowseVC: BaseViewController {
             productsCollectionVu.dataSource = self
         }
     }
-    @IBOutlet weak var brandsCollectionVu: InfiniteScrollCollectionView!
+    @IBOutlet weak var categoryCollectionVu: InfiniteScrollCollectionView!
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var requestedButton: UIButton!
+    @IBOutlet weak var postsButton: UIButton!
+    
     var categoryPopupInstance: PopupNavController?
     var filterPopupInstance: PopupNavController?
-    var filterCategoryIds: [Float]?
+    var filterCategoryIds: [Int]?
     var filterBrandId: Int?
     var filterBySozies = false
     var selectedIndex: Int?
     var searchString: String?
     var totalCount: Int = 0
-    private var brandList: [Brand] = [] {
+    var currentPage: Int = 1
+    var filterType: String?
+    private var categoriesList: [Category] = [] {
         didSet {
-            brandViewModels.removeAll()
-            for brand in brandList {
-                let viewModel = ImageCellViewModel(imageURL: URL(string: brand.logo))
-                brandViewModels.append(viewModel)
+            categoriesViewModels.removeAll()
+            for category in categoriesList {
+                let viewModel = ImageCellViewModel(imageURL: URL(string: category.notSelectedImage ?? ""), selectedImageURL: URL(string: category.selectedImage ?? ""), isSelected: false)
+                categoriesViewModels.append(viewModel)
             }
             categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
             filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
@@ -71,7 +79,7 @@ class BrowseVC: BaseViewController {
             print(productsCollectionVu.contentOffset)
         }
     }
-    private var brandViewModels: [ImageCellViewModel] = []
+    private var categoriesViewModels: [ImageCellViewModel] = []
     private var productViewModels: [ProductImageCellViewModel] = []
     var pageSize = 6
     var pagesPerRequest = 3
@@ -86,8 +94,8 @@ class BrowseVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.brandsCollectionVu.infiniteScrollDelegate = self
-        _ = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
+        self.categoryCollectionVu.infiniteScrollDelegate = self
+        _ = self.categoryCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         setupSozieLogoNavBar()
 //        if let userType = UserDefaultManager.getCurrentUserType() {
 //            if userType == UserType.shopper.rawValue {
@@ -106,14 +114,28 @@ class BrowseVC: BaseViewController {
 //        }
 
         fetchBrandsFromServer()
+        fetchCategoriesFromServer()
 //        fetchProductCount()
         setupViews()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name(rawValue: "RefreshBrowseData"), object: nil)
         self.refreshData()
+        resetButtonToDefault(button: self.requestedButton)
+        resetButtonToDefault(button: self.postsButton)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         perform(#selector(showWelcomeView), with: nil, afterDelay: 0.5)
+    }
+    func resetButtonToDefault(button: UIButton) {
+        button.setTitleColor(UIColor(hex: "898989"), for: .normal)
+        button.backgroundColor = UIColor.white
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor(hex: "0ABAB5").cgColor
+        button.layer.cornerRadius = 3.0
+    }
+    func makeButtonSelected(button: UIButton) {
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor(hex: "0ABAB5")
     }
     @objc func showWelcomeView() {
         if UserDefaultManager.getIfBrowseTutorialShown() == false {
@@ -216,6 +238,7 @@ class BrowseVC: BaseViewController {
     func setupViews() {
         searchTxtFld.delegate = self
         searchVuHeightConstraint.constant = 0.0
+        searchOptionsViewHeightConstraint.constant = 0.0
     }
     func showSearchVu() {
         searchVuHeightConstraint.constant = 0.0
@@ -238,13 +261,16 @@ class BrowseVC: BaseViewController {
     func hideSearchVu() {
         if searchTxtFld.text?.isEmpty == false {
             searchString = searchTxtFld.text
+            searchTxtFld.text = ""
             self.isFirstPage = true
+            currentPage = 1
             self.clearFilterButton.isHidden = false
             self.productList.removeAll()
             self.productsCollectionVu.refreshControl?.beginRefreshing()
-            fetchProductsFromServerV3()
+//            fetchProductsFromServerV3()
+            fetchProductsFromServer()
         } else {
-            searchString = nil
+//            searchString = nil
         }
         searchVuHeightConstraint.constant = 47.0
         UIView.animate(withDuration: 0.3) {
@@ -255,16 +281,28 @@ class BrowseVC: BaseViewController {
         }
     }
 
+    func fetchCategoriesFromServer() {
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.getAllCategories(params: [:]) { (isSuccess, response) in
+            if isSuccess {
+//                self.categoriesList = self.categoryCollectionVu.prepareDataSourceForInfiniteScroll(array: response as! [Category]) as! [Category]
+                self.categoriesList = response as! [Category]
+                self.categoryCollectionVu.reloadData()
+//                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
+            }
+        }
+    }
+
     func fetchBrandsFromServer() {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-                self.brandList = response as! [Brand]
-                _ = UserDefaultManager.saveAllBrands(brands: self.brandList)
-                self.brandList = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: self.brandList) as! [Brand]
-                self.brandsCollectionVu.reloadData()
-                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
+                let brandList = response as! [Brand]
+                _ = UserDefaultManager.saveAllBrands(brands: brandList)
+//                self.brandList = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: self.brandList) as! [Brand]
+//                self.brandsCollectionVu.reloadData()
+//                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
 //                if let user = UserDefaultManager.getCurrentUserObject() {
 //                    if let brandId = user.brand {
 //                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
@@ -276,27 +314,34 @@ class BrowseVC: BaseViewController {
         }
     }
     @objc func setInitialOffsetToBrandsCollectionView() {
-        self.brandsCollectionVu.setInitialOffset()
+        self.categoryCollectionVu.setInitialOffset()
     }
     @objc func loadNextPage() {
         isFirstPage = false
-//        fetchProductsFromServer()
-        fetchProductsFromServerV3()
+        if (currentPage < self.totalCount / 18) || (currentPage == self.totalCount / 18 && self.totalCount % 18 > 0) {
+            currentPage = currentPage + 1
+        }
+        fetchProductsFromServer()
+//        fetchProductsFromServerV3()
 
     }
     @objc func refreshData() {
         searchTxtFld.text = ""
         isFirstPage = true
+        currentPage = 1
         filterBrandId = nil
         filterCategoryIds = nil
         filterBySozies = false
         clearFilterButton.isHidden = true
         searchString = nil
+        filterType = nil
         productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
         productList.removeAll()
 //        fetchProductCount()
-//        fetchProductsFromServer()
-        fetchProductsFromServerV3()
+        fetchProductsFromServer()
+        resetButtonToDefault(button: postsButton)
+        resetButtonToDefault(button: requestedButton)
+//        fetchProductsFromServerV3()
 
     }
 
@@ -329,11 +374,12 @@ class BrowseVC: BaseViewController {
 
     func fetchProductsFromServer() {
         var dataDict = [String: Any]()
-        dataDict["pagesize"] = pageSize
-        dataDict["pages_per_request"] = pagesPerRequest
-        if isFirstPage {
-            dataDict["is_first_page"] = isFirstPage
-        }
+//        dataDict["pagesize"] = pageSize
+//        dataDict["pages_per_request"] = pagesPerRequest
+        dataDict["current_page"] = currentPage
+//        if isFirstPage {
+//            dataDict["is_first_page"] = isFirstPage
+//        }
         if let brandId = filterBrandId {
             dataDict["brand"] = brandId
         }
@@ -342,6 +388,12 @@ class BrowseVC: BaseViewController {
         }
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
+        }
+        if let string = searchString {
+            dataDict["query"] = string
+        }
+        if let filter = filterType {
+            dataDict["filter_type"] = filter
         }
 //        if let userType = UserDefaultManager.getCurrentUserType() {
 //            if userType == UserType.sozie.rawValue {
@@ -354,7 +406,9 @@ class BrowseVC: BaseViewController {
             self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
 
             if isSuccess {
-                self.productList.append(contentsOf: response as! [Product])
+                self.totalCount = (response as! BrowseResponse).count
+                self.itemsCountLbl.text = String((response as! BrowseResponse).count) + ((response as! BrowseResponse).count <= 1 ? " ITEM" : " ITEMS")
+                self.productList.append(contentsOf: (response as! BrowseResponse).products)
                 self.productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 50
             } else {
 
@@ -397,11 +451,12 @@ class BrowseVC: BaseViewController {
     }
     func fetchFilteredData() {
         self.isFirstPage = true
+        currentPage = 1
         self.clearFilterButton.isHidden = false
         self.productsCollectionVu.refreshControl?.beginRefreshing()
 //        fetchProductCount()
-//        fetchProductsFromServer()
-        fetchProductsFromServerV3()
+        fetchProductsFromServer()
+//        fetchProductsFromServerV3()
 
     }
     func removeTargetIfUS(brands: [Brand]) -> [Brand] {
@@ -458,25 +513,82 @@ class BrowseVC: BaseViewController {
             popUpVC.dismiss()
         }
     }
-
+    func deSelectAllSelectedCategories() {
+        for index in 0..<categoriesViewModels.count {
+            categoriesViewModels[index].isSelected = false
+        }
+    }
+    func showSearchOptionView() {
+        self.searchOptionsViewHeightConstraint.constant = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchOptionsViewHeightConstraint.constant = 47.0
+            self.view.layoutIfNeeded()
+            self.searchOptionsView.applyShadowWith(radius: 8.0, shadowOffSet: CGSize(width: 0.0, height: 8.0), opacity: 0.5)
+        }
+    }
+    func hideSearchOptionView() {
+        searchOptionsViewHeightConstraint.constant = 47.0
+        UIView.animate(withDuration: 0.3) {
+            self.searchOptionsViewHeightConstraint.constant = 0.0
+            self.searchOptionsView.clipsToBounds = true
+            self.view.layoutIfNeeded()
+        }
+    }
     // MARK: - Actions
+    @IBAction func requestedButtonTapped(_ sender: Any) {
+        makeButtonSelected(button: sender as! UIButton)
+        resetButtonToDefault(button: postsButton)
+        filterType = "without_post"
+        currentPage = 1
+        productList.removeAll()
+        self.clearFilterButton.isHidden = false
+        self.productsCollectionVu.refreshControl?.beginRefreshing()
+        fetchProductsFromServer()
+    }
+    @IBAction func postsButtonTapped(_ sender: Any) {
+        makeButtonSelected(button: sender as! UIButton)
+        resetButtonToDefault(button: requestedButton)
+        filterType = "with_post"
+        currentPage = 1
+        productList.removeAll()
+        self.clearFilterButton.isHidden = false
+        self.productsCollectionVu.refreshControl?.beginRefreshing()
+        fetchProductsFromServer()
+    }
     @IBAction func filterBtnTapped(_ sender: Any) {
         largeBottomView?.removeFromSuperview()
         showSmallBottomView()
         showPopUpWithTitle(type: .filter)
     }
     @IBAction func clearFilterButtonTapped(_ sender: Any) {
+        self.deSelectAllSelectedCategories()
+        categoryCollectionVu.reloadData()
         categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
         filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
         refreshData()
     }
+    @IBAction func searchByDescriptionButtonTapped(_ sender: Any) {
+        hideSearchOptionView()
+        showSearchVu()
+    }
+    @IBAction func searchByIdButtonTapped(_ sender: Any) {
+        hideSearchOptionView()
+        showSearchVu()
+    }
     @IBAction func searchBtnTapped(_ sender: Any) {
 //        UtilityManager.showMessageWith(title: "This Feature is Coming Soon.", body: "", in: self)
-        if searchVuHeightConstraint.constant == 0 {
-            showSearchVu()
-        } else {
+        if searchOptionsViewHeightConstraint.constant == 0 && searchVuHeightConstraint.constant == 0 {
+            showSearchOptionView()
+        } else if searchOptionsViewHeightConstraint.constant == 47.0 && searchVuHeightConstraint.constant == 0 {
+            hideSearchOptionView()
+        } else if searchVuHeightConstraint.constant == 47.0 && searchOptionsViewHeightConstraint.constant == 0.0 {
             hideSearchVu()
         }
+//        if searchVuHeightConstraint.constant == 0 {
+//            showSearchVu()
+//        } else {
+//            hideSearchVu()
+//        }
     }
     @IBAction func categoryBtnTapped(_ sender: Any) {
         largeBottomView?.removeFromSuperview()
@@ -493,8 +605,8 @@ extension BrowseVC: UIScrollViewDelegate {
         if appDelegate.imageTaken != nil {
             showSmallBottomView()
         }
-        if scrollView == brandsCollectionVu {
-            brandsCollectionVu.infiniteScrollViewDidScroll(scrollView: scrollView)
+        if scrollView == categoryCollectionVu {
+            categoryCollectionVu.infiniteScrollViewDidScroll(scrollView: scrollView)
         }
     }
 }
@@ -515,8 +627,8 @@ extension BrowseVC: UITextFieldDelegate {
 
 extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == brandsCollectionVu {
-            return brandViewModels.count
+        if collectionView == categoryCollectionVu {
+            return categoriesViewModels.count
         } else {
             return productViewModels.count
         }
@@ -524,8 +636,8 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var rowViewModel: RowViewModel
-        if collectionView == brandsCollectionVu {
-            rowViewModel = brandViewModels[indexPath.row]
+        if collectionView == categoryCollectionVu {
+            rowViewModel = categoriesViewModels[indexPath.row]
         } else {
             rowViewModel = productViewModels[indexPath.row]
         }
@@ -545,7 +657,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == brandsCollectionVu {
+        if collectionView == categoryCollectionVu {
             return CGSize(width: 95.0, height: 54.0 )
         } else {
             return CGSize(width: (UIScreen.main.bounds.size.width-44)/2, height: 200.0 )
@@ -557,7 +669,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView == brandsCollectionVu {
+        if collectionView == categoryCollectionVu {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         } else {
             return UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
@@ -566,7 +678,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == brandsCollectionVu {
+        if collectionView == categoryCollectionVu {
             return 0.0
         } else {
             return 16.0
@@ -578,9 +690,16 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 12.0
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
-            loadNextPage()
+        if productList.count < totalCount {
+            if indexPath.row == productList.count - 6 {
+                loadNextPage()
+            }
         }
+//        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
+//            if productList.count > 10 {
+//                loadNextPage()
+//            }
+//        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == productsCollectionVu {
@@ -609,13 +728,27 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             smallBottomView?.removeFromSuperview()
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else {
-            let currentBrand = brandList[indexPath.row]
+//            filterCategoryIds?.removeAll()
+//            filterCategoryIds?.append(Float(categoriesList[indexPath.row].categoryId))
+//            let currentBrand = brandList[indexPath.row]
+            self.getAllSubCategoresIdFrom(category: categoriesList[indexPath.row])
             filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
             productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
+            self.deSelectAllSelectedCategories()
+            categoriesViewModels[indexPath.row].isSelected = true
+//            filterCategoryIds = [categoriesList[indexPath.row].categoryId]
+            collectionView.reloadData()
             productList.removeAll()
-            filterByBrand(brandId: currentBrand.brandId)
+//            filterByBrand(brandId: currentBrand.brandId)
             fetchFilteredData()
 
+        }
+    }
+    func getAllSubCategoresIdFrom(category: Category) {
+        filterCategoryIds?.removeAll()
+        filterCategoryIds = [Int]()
+        for subCategory in category.subCategories {
+            filterCategoryIds?.append(subCategory.subCategoryId)
         }
     }
 }
@@ -638,7 +771,7 @@ extension BrowseVC: PopupNavControllerDelegate {
             filterByBrand(brandId: objId)
         } else if type == FilterType.category {
             if let catId = objId {
-                self.filterCategoryIds = [Float(catId)]
+                self.filterCategoryIds = [catId]
 //                self.filterBrandId = nil
 //                self.filterBySozies = false
             }

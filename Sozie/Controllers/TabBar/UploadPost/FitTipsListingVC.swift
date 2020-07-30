@@ -33,6 +33,10 @@ class FitTipsListingVC: UIViewController {
         // Do any additional setup after loading the view.
         titleLabel.textColor = UtilityManager.getGenderColor()
         self.tableView.backgroundColor = UIColor.white
+//        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,7 +44,7 @@ class FitTipsListingVC: UIViewController {
     }
     func checkIfFitTipAnswered(fitTip: FitTips) -> Bool {
         for question in fitTip.question {
-            if question.type == "R" || question.type == "C" {
+            if question.type == "R" || question.type == "C" || question.type == "S" || question.type == "L" {
                 for option in question.options {
                     if let answer = question.answer {
                         if checkIfAnswered(text: option.optionText, answer: answer) {
@@ -119,7 +123,21 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
             destVC.fitTipsIndex = indexPath.row
             destVC.questionIndex = 0
             destVC.fitTips = fitTips
-            self.navigationController?.parent?.viewDidAppear(true)
+//            self.navigationController?.parent?.viewDidAppear(true)
+            self.navigationController?.pushViewController(destVC, animated: true)
+        } else if fitTip.question[0].type == "S" {
+            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+            destVC.fitTipsIndex = indexPath.row
+            destVC.questionIndex = 0
+            destVC.fitTips = fitTips
+//            self.navigationController?.parent?.viewDidAppear(true)
+            self.navigationController?.pushViewController(destVC, animated: true)
+        } else if fitTip.question[0].type == "L" {
+            let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
+            destVC.fitTipsIndex = indexPath.row
+            destVC.questionIndex = 0
+            destVC.fitTips = fitTips
+//            self.navigationController?.parent?.viewDidAppear(true)
             self.navigationController?.pushViewController(destVC, animated: true)
         }
     }

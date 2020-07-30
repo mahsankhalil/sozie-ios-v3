@@ -9,6 +9,8 @@
 import UIKit
 
 class PostSizeCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var playIconImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelBackgroundView: UIView!
     @IBOutlet weak var sizeLabel: UILabel!
@@ -60,6 +62,15 @@ extension PostSizeCollectionViewCell: CellConfigurable {
                 self.statusImageView.image = UIImage(named: "checked")
             } else {
                 self.statusImageView.image = UIImage(named: "cancel")
+            }
+            playIconImageView.isHidden = true
+            if uploadViewModel.isVideo == true {
+                playIconImageView.isHidden = false
+                if let videoURL = uploadViewModel.videoURL {
+                    UtilityManager.getThumbnailImageFromVideoUrl(url: URL(string: videoURL)!) { (image) in
+                        self.imageView.image = image
+                    }
+                }
             }
         }
     }

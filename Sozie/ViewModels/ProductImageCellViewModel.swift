@@ -43,6 +43,8 @@ struct ProductImageCellViewModel: RowViewModel, TitleViewModeling, ImageViewMode
                 }
                 imageURL = prodImageURL
             }
+        } else if let productImageURL = product.imageURL {
+            imageURL = productImageURL
         }
         var brandImageURL = ""
         if let brandId = product.brandId {

@@ -17,11 +17,29 @@ class ImageCollectionViewCell: UICollectionViewCell {
 }
 extension ImageCollectionViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {
-        if let imageModel = viewModel as? ImageViewModeling {
-            imageView.sd_setShowActivityIndicatorView(true)
-            imageView.sd_setIndicatorStyle(.gray)
-            imageView.sd_setImage(with: imageModel.imageURL, completed: nil)
+        if let currentViewModel = viewModel as? ImageCellViewModel {
+            if currentViewModel.isSelected == true {
+                imageView.sd_setShowActivityIndicatorView(true)
+                imageView.sd_setIndicatorStyle(.gray)
+                imageView.sd_setImage(with: currentViewModel.selectedImageURL, completed: nil)
+            } else {
+                imageView.sd_setShowActivityIndicatorView(true)
+                imageView.sd_setIndicatorStyle(.gray)
+                imageView.sd_setImage(with: currentViewModel.imageURL, completed: nil)
+            }
         }
+//        if let imageModel = viewModel as? ImageViewModeling {
+//            if let selectionViewModel = viewModel as? SelectionProviding {
+//                if selectionViewModel.isSelected == true {
+//                    
+//                } else {
+//                    
+//                }
+//            }
+//            imageView.sd_setShowActivityIndicatorView(true)
+//            imageView.sd_setIndicatorStyle(.gray)
+//            imageView.sd_setImage(with: imageModel.imageURL, completed: nil)
+//        }
 
     }
 }

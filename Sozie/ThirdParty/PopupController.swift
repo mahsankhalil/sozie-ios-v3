@@ -96,9 +96,13 @@ open class PopupController: UIViewController {
         self.removeFromParent()
     }
     // MARK: Overrides
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        registerNotification()
+    }
+
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        registerNotification()
     }
 
     open override func viewDidDisappear(_ animated: Bool) {
@@ -260,7 +264,7 @@ private extension PopupController {
     }
 
     @objc func popupControllerWillHideKeyboard(_ notification: Notification) {
-        back()
+        self.back()
     }
 
     @objc func popupControllerDidHideKeyboard(_ notification: Notification) {
@@ -332,7 +336,6 @@ private extension PopupController {
         }
         return (popupView.frame.maxY + layout.origin(popupView).y) > origin.y
     }
-
     func move(_ origin: CGPoint) {
         guard let child = children.last as? PopupContentViewController else {
             return

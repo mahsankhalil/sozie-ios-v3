@@ -19,6 +19,9 @@ class FitTipsNavigationController: UINavigationController {
         self.delegate = self
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     class func instance(fitTips: [FitTips]) -> FitTipsNavigationController {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "FitTipsNavigationController") as! FitTipsNavigationController
@@ -42,7 +45,7 @@ extension FitTipsNavigationController: PopupContentViewController {
             if let tipsIndex = destVC.fitTipsIndex, let questionIndex = destVC.questionIndex {
                 if let count = fitTips?[tipsIndex].question[questionIndex].options.count {
                     let height = (CGFloat(count) * 40.0) + 150.0
-                    let maxHeight = UIScreen.main.bounds.size.height - 88.0
+                    let maxHeight = UIScreen.main.bounds.size.height
                     if height <= maxHeight {
                         return CGSize(width: UIScreen.main.bounds.size.width, height: height)
                     } else {
@@ -58,7 +61,13 @@ extension FitTipsNavigationController: PopupContentViewController {
                 return CGSize(width: UIScreen.main.bounds.size.width, height: 330)
             }
         }
-        return CGSize(width: UIScreen.main.bounds.size.width, height: 330)
+        if let rateVC = self.topViewController as? FitTipsAnswerRateVC {
+            return CGSize(width: UIScreen.main.bounds.size.width, height: rateVC.getControllerheight())
+        }
+        if self.topViewController as? FitTipsAnswerRadioVC != nil {
+            return CGSize(width: UIScreen.main.bounds.size.width, height: 250.0)
+        }
+        return CGSize(width: UIScreen.main.bounds.size.width, height: 360)
     }
 }
 extension FitTipsNavigationController: UINavigationControllerDelegate {

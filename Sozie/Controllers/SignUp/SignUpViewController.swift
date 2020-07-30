@@ -106,8 +106,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         // **Perform sign in action here**
         if URL.absoluteString == "terms" {
             let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
-            let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsOfServiceVC") as! TermsOfServiceVC
-            tosVC.type = TOSType.termsCondition
+            let tosVC = storyBoard.instantiateViewController(withIdentifier: "TermsAndConditionsVC") as! TermsAndConditionsVC
             self.present(tosVC, animated: true, completion: nil)
         } else if URL.absoluteString == "privacy" {
             let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
@@ -209,6 +208,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                 if let user = UserDefaultManager.getCurrentUserObject() {
 //                    HubSpotManager.createContact(user: user)
 //                    Analytics.logEvent("SignUp-Completed", parameters: ["email": user.email])
+                    if let tutorialCompleted = user.tutorialCompleted {
+                        if tutorialCompleted == false {
+                            UserDefaultManager.removeAllUserGuidesShown()
+                        } else {
+                            UserDefaultManager.setPostTutorialShown()
+                            UserDefaultManager.setBrowserTutorialShown()
+                            UserDefaultManager.setRequestTutorialShown()
+                        }
+                    }
                     SegmentManager.createEntity(user: user)
                     SegmentManager.createEventSecondScreenSignupCompleted()
                 }
@@ -336,15 +344,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         if UserDefaultManager.getCurrentUserObject() != nil {
             return
         }
-        if let countryId = signUpDict!["country"] as? Int, countryId == 1 {
-            applyMaleSelection()
-        } else {
-            tipView?.dismiss()
-            let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
-            tipView = EasyTipView(text: sozietext, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
-            tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
-
-        }
+//        if let countryId = signUpDict!["country"] as? Int {
+        applyMaleSelection()
+//        }
+//        else {
+//            tipView?.dismiss()
+//            let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
+//            tipView = EasyTipView(text: sozietext, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
+//            tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
+//
+//        }
 //        let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
 //        let shopperText = "“Hi guys, We are working hard on a Sozie solution for you! Please look out for the updated version of our app in the near future.”"
 //        var text = sozietext

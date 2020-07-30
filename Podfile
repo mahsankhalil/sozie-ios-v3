@@ -13,7 +13,7 @@ pod 'FBSDKCoreKit', '~> 5.5.0'
 pod 'FBSDKLoginKit', '~> 5.5.0'
 pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
 pod 'Alamofire', '~> 4.8.0'
-pod 'MaterialTextField', '~> 1.0'
+pod 'MaterialTextField', :git => 'https://github.com/stephsharp/MaterialTextField', :commit => 'c3b6516'
 pod 'EasyTipView', '~> 2.0.1'
 pod 'SideMenu', '~> 6.0'
 pod 'Hex', '~> 6.0.0'
@@ -30,6 +30,8 @@ pod 'Analytics', '~> 3.6.10'
 pod 'Branch'
 pod 'Segment-Firebase’
 pod 'CropViewController'
+pod 'Cosmos', '~> 22.1'
+
 #pod 'Segment-Intercom', '1.0.0-beta'
 end
 target 'Sozie' do

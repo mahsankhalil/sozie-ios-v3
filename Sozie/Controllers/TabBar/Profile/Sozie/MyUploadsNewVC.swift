@@ -22,7 +22,7 @@ class MyUploadsNewVC: UIViewController {
         didSet {
             viewModels.removeAll()
             for post in posts {
-                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved, isModerated: post.isModerated)
+                let viewModel = UserPostWithUploadsViewModel(uploads: post.uploads, isTutorial: post.isTutorialPost, isApproved: post.isApproved, isModerated: post.isModerated, productURL: post.productImageURL ?? "", postType: .success)
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0

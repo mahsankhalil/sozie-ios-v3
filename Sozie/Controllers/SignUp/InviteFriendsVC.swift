@@ -7,9 +7,11 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 class InviteFriendsVC: UIViewController {
 
+    @IBOutlet weak var copyButton: UIButton!
+    @IBOutlet weak var referalCodeLabel: UILabel!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var inviteBtn: DZGradientButton!
     @IBOutlet weak var skipBtn: UIButton!
@@ -21,8 +23,16 @@ class InviteFriendsVC: UIViewController {
         // Do any additional setup after loading the view.
         if let fromMenu = isFromSideMenu {
             if fromMenu == true {
-                inviteLaterLabel.isHidden = true
+//                inviteLaterLabel.isHidden = true
                 skipBtn.isHidden = true
+            }
+        }
+        SVProgressHUD.show()
+        ServerManager.sharedInstance.getReferalCode(params: [:]) { (isSuccess, response) in
+            SVProgressHUD.dismiss()
+            if isSuccess {
+                let code = (response as! ReferalResponse).code
+                self.referalCodeLabel.text = code
             }
         }
     }
@@ -47,8 +57,12 @@ class InviteFriendsVC: UIViewController {
         }
     }
 
+    @IBAction func copyButtonTapped(_ sender: Any) {
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = referalCodeLabel.text
+    }
     @IBAction func inviteBtnTapped(_ sender: Any) {
-        let objectsToShare = ["https://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8"]
+        let objectsToShare = ["Check this out! I'm making money from trying on clothes, and you can too! Download Sozie and receive an extra $5! Here is your referral bonus code: " + (self.referalCodeLabel.text ?? "") +  "\nhttps://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8"]
         UtilityManager.showActivityControllerWith(objectsToShare: objectsToShare, viewController: self)
     }
 
