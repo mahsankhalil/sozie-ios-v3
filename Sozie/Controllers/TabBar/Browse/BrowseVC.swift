@@ -60,7 +60,18 @@ class BrowseVC: BaseViewController {
         didSet {
             categoriesViewModels.removeAll()
             for category in categoriesList {
-                let viewModel = ImageCellViewModel(imageURL: URL(string: category.notSelectedImage ?? ""), selectedImageURL: URL(string: category.selectedImage ?? ""), isSelected: false)
+                var activeCategoryImage = ""
+                var inActiveCategoryImage = ""
+                if let gender = UserDefaultManager.getCurrentUserGender() {
+                    if gender == "M" {
+                        activeCategoryImage = category.maleSelectedImage ?? ""
+                        inActiveCategoryImage = category.maleNotSelectedImage ?? ""
+                    } else {
+                        activeCategoryImage = category.femaleSelectedImage ?? ""
+                        inActiveCategoryImage = category.femaleNotSelectedImage ?? ""
+                    }
+                }
+                let viewModel = ImageCellViewModel(imageURL: URL(string: inActiveCategoryImage), selectedImageURL: URL(string: activeCategoryImage), isSelected: false)
                 categoriesViewModels.append(viewModel)
             }
             categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
