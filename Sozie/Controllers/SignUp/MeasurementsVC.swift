@@ -43,7 +43,7 @@ class MeasurementsVC: UIViewController {
     @IBOutlet weak var uploadBtn: UIButton!
     @IBOutlet weak var skipButton: DZGradientButton!
     @IBOutlet weak var skiptoDoItLaterButton: UIButton!
-    @IBOutlet weak var orLabel: UILabel!
+    @IBOutlet weak var addMeasurementLabel: UILabel!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     var sizes: Size?
@@ -64,13 +64,15 @@ class MeasurementsVC: UIViewController {
         if isFromSignUp {
             backBtn.isHidden = true
             saveButton.isHidden = true
+            addMeasurementLabel.text = "Add your measurements below"
         } else {
+            addMeasurementLabel.text = "Add your measurements"
             saveButton.isHidden = false
             uploadBtn.isHidden = true
             skipButton.isHidden = true
             skipButton.shadowAdded = false
             skiptoDoItLaterButton.isHidden = true
-            orLabel.isHidden = true
+//            orLabel.isHidden = true
 //            skipButton.isHidden = true
 //            uploadBtn.setTitle("Save", for: .normal)
             backBtn.isHidden = false

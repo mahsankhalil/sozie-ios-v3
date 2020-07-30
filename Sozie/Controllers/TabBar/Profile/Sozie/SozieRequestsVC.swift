@@ -27,6 +27,8 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var questionMarkButton: UIButton!
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var instructionsScrollView: UIScrollView!
+    @IBOutlet weak var instructionsImageView: UIImageView!
+    
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
@@ -69,7 +71,15 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (860.0/375.0) * UIScreen.main.bounds.size.width
+        instructionsHeightConstraint.constant = (980.0/375.0) * UIScreen.main.bounds.size.width
+        if let gender = UserDefaultManager.getCurrentUserGender() {
+            if gender == "M" {
+                instructionsImageView.image = UIImage(named: "MaleInstructions")
+            } else {
+                instructionsImageView.image = UIImage(named: "instructions")
+            }
+        }
+
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
 //            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
 //            tutorialVC?.delegate = self
