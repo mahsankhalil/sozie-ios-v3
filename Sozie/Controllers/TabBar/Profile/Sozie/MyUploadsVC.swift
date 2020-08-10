@@ -280,12 +280,15 @@ extension MyUploadsVC: MyUploadsCellDelegate {
 
     }
     func imageTapped(collectionViewTag: Int, cellTag: Int) {
-        if currentFilterType == .redo {
+        if currentFilterType == .redo || currentFilterType == .inReview {
             if cellTag != 0 {
                 var reason = ""
                 // Video will be always at the end
                 if cellTag <= posts[collectionViewTag].uploads.count {
                     reason = posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? ""
+                }
+                if reason == "" {
+                    return
                 }
             let popUpInstnc = RejectionReasonPopup.instance(reason: reason, collectionViewTag: collectionViewTag, cellTag: cellTag)
                 popUpInstnc.delegate = self
