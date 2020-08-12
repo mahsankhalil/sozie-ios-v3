@@ -268,16 +268,16 @@ extension MyUploadsVC: MyUploadsCellDelegate {
     }
     func warningButtonTapped(button: UIButton) {
         let popUpInstnc = RejectionReasonPopupWithoutTitle.instance()
-         popUpInstnc.delegate = self
-         let popUpVC = PopupController
+        popUpInstnc.delegate = self
+        popUpInstnc.postIndex = button.tag
+        let popUpVC = PopupController
              .create(self.tabBarController?.navigationController ?? self)
              .show(popUpInstnc)
          _ = popUpVC.didCloseHandler { (_) in
-         }
-         popUpInstnc.closeHandler = { []  in
-             popUpVC.dismiss()
         }
-
+        popUpInstnc.closeHandler = { []  in
+         popUpVC.dismiss()
+        }
     }
     func imageTapped(collectionViewTag: Int, cellTag: Int) {
         if currentFilterType == .redo || currentFilterType == .inReview {
@@ -366,6 +366,8 @@ extension MyUploadsVC: RejectionResponseWithoutTitleDelegate {
 }
 extension MyUploadsVC: RejectionResponseDelegate {
     func tryAgainButtonTapped(button: UIButton, collectionViewTag: Int?, cellTag: Int?) {
+        currentCollectionViewIndex = collectionViewTag
+        currentCellIndex = cellTag
         if let currentCelltag = cellTag, let currentColectionViewTag = collectionViewTag {
             if currentCelltag > posts[currentColectionViewTag].uploads.count {
                 // its video and we have to show video controller
@@ -376,8 +378,6 @@ extension MyUploadsVC: RejectionResponseDelegate {
                 return
             }
         }
-        currentCollectionViewIndex = collectionViewTag
-        currentCellIndex = cellTag
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: (cellTag ?? 1) - 1, progressTutorialVC: nil)
