@@ -45,7 +45,6 @@ class BrowseVC: BaseViewController {
     @IBOutlet weak var brandsVuHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var requestedButton: UIButton!
     @IBOutlet weak var postsButton: UIButton!
-    
     var categoryPopupInstance: PopupNavController?
     var filterPopupInstance: PopupNavController?
     var filterCategoryIds: [Int]?
@@ -108,28 +107,10 @@ class BrowseVC: BaseViewController {
         self.categoryCollectionVu.infiniteScrollDelegate = self
         _ = self.categoryCollectionVu.prepareDataSourceForInfiniteScroll(array: [])
         setupSozieLogoNavBar()
-//        if let userType = UserDefaultManager.getCurrentUserType() {
-//            if userType == UserType.shopper.rawValue {
-//                setupSozieLogoNavBar()
-//            } else {
-//                brandsVuHeightConstraint.constant = 0.0
-//                if let user = UserDefaultManager.getCurrentUserObject() {
-//                    if let brandId = user.brand {
-//                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-//                            setupBrandNavBar(imageURL: brand.titleImageCentred)
-//                        }
-//                        currentSozieBrandId = brandId
-//                    }
-//                }
-//            }
-//        }
-
         fetchBrandsFromServer()
         fetchCategoriesFromServer()
-//        fetchProductCount()
         setupViews()
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name(rawValue: "RefreshBrowseData"), object: nil)
-        self.refreshData()
         resetButtonToDefault(button: self.requestedButton)
         resetButtonToDefault(button: self.postsButton)
     }
@@ -299,6 +280,7 @@ class BrowseVC: BaseViewController {
 //                self.categoriesList = self.categoryCollectionVu.prepareDataSourceForInfiniteScroll(array: response as! [Category]) as! [Category]
                 self.categoriesList = response as! [Category]
                 self.categoryCollectionVu.reloadData()
+                self.refreshData()
 //                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
             }
         }
@@ -341,7 +323,12 @@ class BrowseVC: BaseViewController {
         isFirstPage = true
         currentPage = 1
         filterBrandId = nil
-        filterCategoryIds = nil
+
+        if let category = findCategoryWithId(categoryId: 10) {
+            self.getAllSubCategoresIdFrom(category: category)
+        } else {
+            filterCategoryIds = nil
+        }
         filterBySozies = false
         clearFilterButton.isHidden = true
         searchString = nil
@@ -354,6 +341,14 @@ class BrowseVC: BaseViewController {
         resetButtonToDefault(button: requestedButton)
 //        fetchProductsFromServerV3()
 
+    }
+    func findCategoryWithId(categoryId: Int) -> Category? {
+        for category in categoriesList {
+            if category.categoryId == categoryId {
+                return category
+            }
+        }
+        return nil
     }
 
     func fetchProductCount() {
@@ -552,6 +547,7 @@ class BrowseVC: BaseViewController {
         filterType = "without_post"
         currentPage = 1
         productList.removeAll()
+        filterCategoryIds = nil
         self.clearFilterButton.isHidden = false
         self.productsCollectionVu.refreshControl?.beginRefreshing()
         fetchProductsFromServer()
@@ -562,6 +558,7 @@ class BrowseVC: BaseViewController {
         filterType = "with_post"
         currentPage = 1
         productList.removeAll()
+        filterCategoryIds = nil
         self.clearFilterButton.isHidden = false
         self.productsCollectionVu.refreshControl?.beginRefreshing()
         fetchProductsFromServer()
