@@ -48,6 +48,13 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         applyValidators()
         self.whatsThisButton.alpha = 0.0
         setupAppleLoginButton()
+        if let countryId = signUpDict![User.CodingKeys.country.stringValue] as? Int {
+            if countryId == 1 {
+                self.referralCodeTextField.isHidden = true
+                self.whatsThisButton.isHidden = true
+                self.pasteButton.isHidden = true
+            }
+        }
     }
     func setupAppleLoginButton() {
         if #available(iOS 13, *) {
@@ -123,7 +130,6 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
                 }
             }
         }
-        
     }
     // MARK: - Validation CallBacks
     func validationSuccessful() {
@@ -219,7 +225,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         }
     }
     // MARK: - Actions
-    
+
     @IBAction func facebookBtnTapped(_ sender: Any) {
         SVProgressHUD.show()
         SocialAuthManager.sharedInstance.loginWithFacebook(from: self) { (isSuccess, response) in

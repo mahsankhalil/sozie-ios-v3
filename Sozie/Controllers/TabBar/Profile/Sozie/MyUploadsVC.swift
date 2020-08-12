@@ -268,24 +268,27 @@ extension MyUploadsVC: MyUploadsCellDelegate {
     }
     func warningButtonTapped(button: UIButton) {
         let popUpInstnc = RejectionReasonPopupWithoutTitle.instance()
-         popUpInstnc.delegate = self
-         let popUpVC = PopupController
+        popUpInstnc.delegate = self
+        popUpInstnc.postIndex = button.tag
+        let popUpVC = PopupController
              .create(self.tabBarController?.navigationController ?? self)
              .show(popUpInstnc)
          _ = popUpVC.didCloseHandler { (_) in
-         }
-         popUpInstnc.closeHandler = { []  in
-             popUpVC.dismiss()
         }
-
+        popUpInstnc.closeHandler = { []  in
+         popUpVC.dismiss()
+        }
     }
     func imageTapped(collectionViewTag: Int, cellTag: Int) {
-        if currentFilterType == .redo {
+        if currentFilterType == .redo || currentFilterType == .inReview {
             if cellTag != 0 {
                 var reason = ""
                 // Video will be always at the end
                 if cellTag <= posts[collectionViewTag].uploads.count {
                     reason = posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? ""
+                }
+                if reason == "" {
+                    return
                 }
             let popUpInstnc = RejectionReasonPopup.instance(reason: reason, collectionViewTag: collectionViewTag, cellTag: cellTag)
                 popUpInstnc.delegate = self
@@ -363,6 +366,8 @@ extension MyUploadsVC: RejectionResponseWithoutTitleDelegate {
 }
 extension MyUploadsVC: RejectionResponseDelegate {
     func tryAgainButtonTapped(button: UIButton, collectionViewTag: Int?, cellTag: Int?) {
+        currentCollectionViewIndex = collectionViewTag
+        currentCellIndex = cellTag
         if let currentCelltag = cellTag, let currentColectionViewTag = collectionViewTag {
             if currentCelltag > posts[currentColectionViewTag].uploads.count {
                 // its video and we have to show video controller
@@ -373,8 +378,6 @@ extension MyUploadsVC: RejectionResponseDelegate {
                 return
             }
         }
-        currentCollectionViewIndex = collectionViewTag
-        currentCellIndex = cellTag
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: (cellTag ?? 1) - 1, progressTutorialVC: nil)

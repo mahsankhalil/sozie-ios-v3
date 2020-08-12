@@ -458,7 +458,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="7uP-Qn-jce"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
-                                                <state key="normal" title="Requested">
+                                                <state key="normal" title="Pick Up Requests">
                                                     <color key="titleColor" red="0.53725490196078429" green="0.53725490196078429" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -471,7 +471,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="KoZ-rN-5z7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
-                                                <state key="normal" title="Posts">
+                                                <state key="normal" title="See Other Sozies">
                                                     <color key="titleColor" red="0.53725490196078429" green="0.53725490196078429" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -2786,7 +2786,7 @@ Complete from home in your own clothes.</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D22-6e-RYC">
-                                                <rect key="frame" x="12" y="0.0" width="233.5" height="46"/>
+                                                <rect key="frame" x="12" y="0.0" width="249" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Jsi-q4-TB9"/>
                                                 </constraints>
@@ -2795,7 +2795,7 @@ Complete from home in your own clothes.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -2823,7 +2823,7 @@ Complete from home in your own clothes.</string>
                                         </connections>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click on the  under your favourite picture or Sozie to save it here for viewing later" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZb-3C-S1O">
-                                        <rect key="frame" x="53" y="259" width="269" height="64"/>
+                                        <rect key="frame" x="53" y="263" width="269" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="269" id="kR7-7V-cFd"/>
                                         </constraints>
@@ -4015,6 +4015,7 @@ Cg
                         <outlet property="crossButton" destination="U05-QG-ILh" id="rlX-yh-JTX"/>
                         <outlet property="gotItButton" destination="gyN-lW-kZE" id="kzp-j0-wKP"/>
                         <outlet property="instructionsHeightConstraint" destination="jgx-4a-01h" id="Fs1-98-r1r"/>
+                        <outlet property="instructionsImageView" destination="OVH-Ge-ikh" id="wRC-nn-wf5"/>
                         <outlet property="instructionsScrollView" destination="jn3-0f-PRI" id="Rd3-i1-dtb"/>
                         <outlet property="noDataLabel" destination="gCP-kl-HO1" id="tmi-3w-zuD"/>
                         <outlet property="questionMarkButton" destination="VfK-it-NRf" id="jaA-cV-een"/>
@@ -7559,7 +7560,7 @@ Click images with red X for feedback. </string>
         <image name="crossIcon" width="11" height="12"/>
         <image name="down-arrow-sketch" width="50" height="65.5"/>
         <image name="info" width="30" height="32"/>
-        <image name="instructions" width="375" height="860"/>
+        <image name="instructions" width="375" height="980"/>
         <image name="placeholder" width="7.5" height="10"/>
         <image name="right2" width="30" height="29"/>
         <image name="shutter" width="66" height="66"/>

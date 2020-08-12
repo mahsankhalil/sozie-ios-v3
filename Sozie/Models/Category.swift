@@ -13,14 +13,18 @@ struct Category: Codable {
     var categoryId: Int
     var categoryName: String
     var subCategories: [SubCategory]
-    var selectedImage: String?
-    var notSelectedImage: String?
+    var femaleSelectedImage: String?
+    var femaleNotSelectedImage: String?
+    var maleSelectedImage: String?
+    var maleNotSelectedImage: String?
     enum CodingKeys: String, CodingKey {
         case categoryId = "id"
         case categoryName = "name"
         case subCategories = "sub_categories"
-        case selectedImage = "s_image"
-        case notSelectedImage = "ns_image"
+        case femaleSelectedImage = "female_active_image"
+        case femaleNotSelectedImage = "female_inactive_image"
+        case maleSelectedImage = "male_active_image"
+        case maleNotSelectedImage = "male_inactive_image"
     }
 
     init(from decoder: Decoder) throws {
@@ -28,8 +32,10 @@ struct Category: Codable {
         categoryId = try values.decode(Int.self, forKey: .categoryId)
         categoryName = try values.decode(String.self, forKey: .categoryName)
         subCategories = try values.decode([SubCategory].self, forKey: .subCategories)
-        selectedImage = try? values.decode(String.self, forKey: .selectedImage)
-        notSelectedImage = try? values.decode(String.self, forKey: .notSelectedImage)
+        femaleSelectedImage = try? values.decode(String.self, forKey: .femaleSelectedImage)
+        femaleNotSelectedImage = try? values.decode(String.self, forKey: .femaleNotSelectedImage)
+        maleSelectedImage = try? values.decode(String.self, forKey: .maleSelectedImage)
+        maleNotSelectedImage = try? values.decode(String.self, forKey: .maleNotSelectedImage)
 
     }
 }

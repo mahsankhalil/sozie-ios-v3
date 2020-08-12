@@ -24,7 +24,7 @@ class UploadProfilePictureVC: UIViewController, UINavigationControllerDelegate, 
         imgVu.applyCornerRadiusAndBorder()
         if isFromSignUp {
             skipBtn.isHidden = false
-            backBtn.isHidden = true
+//            backBtn.isHidden = true
         } else {
             if let currentUser = UserDefaultManager.getCurrentUserObject() {
                 if let picture = currentUser.picture {

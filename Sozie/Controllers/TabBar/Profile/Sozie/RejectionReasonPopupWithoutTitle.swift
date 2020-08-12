@@ -17,6 +17,7 @@ class RejectionReasonPopupWithoutTitle: UIViewController {
     @IBOutlet weak var userLabel: UILabel!
     var closeHandler: (() -> Void)?
     weak var delegate: RejectionResponseWithoutTitleDelegate?
+    var postIndex: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +26,9 @@ class RejectionReasonPopupWithoutTitle: UIViewController {
             if let name = user.firstName {
                 userLabel.text = "Hi " + name
             }
+        }
+        if let index = postIndex {
+            self.tryAgainButton.tag = index
         }
     }
     class func instance() -> RejectionReasonPopupWithoutTitle {

@@ -45,7 +45,7 @@ extension FitTipsNavigationController: PopupContentViewController {
             if let tipsIndex = destVC.fitTipsIndex, let questionIndex = destVC.questionIndex {
                 if let count = fitTips?[tipsIndex].question[questionIndex].options.count {
                     let height = (CGFloat(count) * 40.0) + 150.0
-                    let maxHeight = UIScreen.main.bounds.size.height
+                    let maxHeight = UIScreen.main.bounds.size.height - 64
                     if height <= maxHeight {
                         return CGSize(width: UIScreen.main.bounds.size.width, height: height)
                     } else {
