@@ -58,6 +58,7 @@ class ServerManager: NSObject {
     static let notificationURL = ServerManager.serverURL + "user/notify_config/"
     static let tutorialURL = ServerManager.serverURL + "user/tutorial_states/"
     static let postProgressURL = ServerManager.serverURL + "post/get_post_progress/"
+    static let verifySozieCodeURL = ServerManager.serverURL + "user/verify/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -951,6 +952,21 @@ func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, vide
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
         Alamofire.request(ServerManager.tutorialURL, method: .patch, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func verifySozieCode(params: [String: Any], block: CompletionHandler) {
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+//        ]
+        Alamofire.request(ServerManager.verifySozieCodeURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

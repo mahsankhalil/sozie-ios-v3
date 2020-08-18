@@ -28,7 +28,6 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var instructionsScrollView: UIScrollView!
     @IBOutlet weak var instructionsImageView: UIImageView!
-    
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?

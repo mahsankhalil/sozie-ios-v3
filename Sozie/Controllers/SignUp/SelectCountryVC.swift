@@ -29,7 +29,7 @@ class SelectCountryVC: UIViewController {
 
     var selectedCountryId: Int?
     var currentUserType: UserType?
-    var signUpDict: [String: Any] = [:]
+    var signUpDict: [String: Any]? = [:]
 
     var countries: [Country]? {
         didSet {
@@ -81,8 +81,8 @@ class SelectCountryVC: UIViewController {
     @IBAction func nextBtnTapped(_ sender: Any) {
         if let countryid = selectedCountryId {
             currentUserType = .sozie
-            signUpDict[User.CodingKeys.country.stringValue] = countryid
-            signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+            signUpDict![User.CodingKeys.country.stringValue] = countryid
+            signUpDict![User.CodingKeys.type.stringValue] = currentUserType?.rawValue
             performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
 //            if currentUserType == .shopper {
 //                performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
@@ -132,5 +132,13 @@ extension SelectCountryVC: UITableViewDelegate, UITableViewDataSource {
         viewModels[indexPath.row].isCheckmarkHidden = false
         selectedViewModelIndex = indexPath.row
         tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+    }
+}
+extension SelectCountryVC: SignUpInfoProvider {
+    var signUpInfo: [String: Any]? {
+        get { return signUpDict }
+        set (newInfo) {
+            signUpDict = newInfo
+        }
     }
 }
