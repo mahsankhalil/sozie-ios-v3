@@ -355,13 +355,13 @@ extension MyUploadsVC: MyUploadsCellDelegate {
 }
 extension MyUploadsVC: RejectionResponseWithoutTitleDelegate {
     func rejectionResponseWithoutTitleTryAgainButtonTapped(button: UIButton) {
-        let currentPost = posts[button.tag]
-        let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
-        addPostVC.currentPostId = currentPost.postId
-        addPostVC.currentProduct = currentPost.currentProduct
-        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
-            profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
-        }
+//        let currentPost = posts[button.tag]
+//        let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
+//        addPostVC.currentPostId = currentPost.postId
+//        addPostVC.currentProduct = currentPost.currentProduct
+//        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+//            profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
+//        }
     }
 }
 extension MyUploadsVC: RejectionResponseDelegate {
