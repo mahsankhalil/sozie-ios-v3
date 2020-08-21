@@ -47,6 +47,7 @@ class BrowseVC: BaseViewController {
     @IBOutlet weak var postsButton: UIButton!
     var categoryPopupInstance: PopupNavController?
     var filterPopupInstance: PopupNavController?
+    var brandsFilterPopupInstance: SelectionPopupVC?
     var filterCategoryIds: [Int]?
     var filterBrandId: Int?
     var filterBySozies = false
@@ -75,6 +76,7 @@ class BrowseVC: BaseViewController {
             }
             categoryPopupInstance = PopupNavController.instance(type: PopupType.category, brandList: UserDefaultManager.getALlBrands())
             filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
+            brandsFilterPopupInstance = SelectionPopupVC.instance(type: .filter, brandList: UserDefaultManager.getALlBrands(), brandId: nil)
         }
     }
 
@@ -566,7 +568,18 @@ class BrowseVC: BaseViewController {
     @IBAction func filterBtnTapped(_ sender: Any) {
         largeBottomView?.removeFromSuperview()
         showSmallBottomView()
-        showPopUpWithTitle(type: .filter)
+//        showPopUpWithTitle(type: .filter)
+        brandsFilterPopupInstance?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        brandsFilterPopupInstance?.delegate = self
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        let options = PopupCustomOption.layout(.bottom)
+        popUpVC.cornerRadius = 0.0
+        _ = popUpVC.customize([options])
+        _ = popUpVC.show(brandsFilterPopupInstance!)
+        brandsFilterPopupInstance?.closeHandler = { [] in
+            popUpVC.dismiss()
+        }
     }
     @IBAction func clearFilterButtonTapped(_ sender: Any) {
         self.deSelectAllSelectedCategories()
@@ -771,7 +784,7 @@ extension BrowseVC: WaterfallLayoutDelegate {
 
 }
 
-extension BrowseVC: PopupNavControllerDelegate {
+extension BrowseVC: PopupNavControllerDelegate, SelectionPopupVCDelegate {
     func doneButtonTapped(type: FilterType?, objId: Int?) {
         productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
         productList.removeAll()
@@ -797,3 +810,6 @@ extension BrowseVC: BrowseWelcomeDelegate {
         tutorialVC?.view.removeFromSuperview()
     }
 }
+//extension BrowseVC: SelectionPopupVCDelegate {
+//
+//}

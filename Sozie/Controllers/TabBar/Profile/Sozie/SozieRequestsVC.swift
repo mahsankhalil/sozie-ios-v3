@@ -28,6 +28,9 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var instructionsScrollView: UIScrollView!
     @IBOutlet weak var instructionsImageView: UIImageView!
+    
+    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var brandFilterButton: UIButton!
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
@@ -99,7 +102,32 @@ class SozieRequestsVC: UIViewController {
         searchTextField.delegate = self
         searchViewHeightConstraint.constant = 0.0
         searchOptionsViewHeightConstraint.constant = 0.0
-        self.reloadAllData()
+        if let brands = UserDefaultManager.getALlBrands() {
+            if brands.count == 0 {
+            }
+        }
+        if let brands = UserDefaultManager.getALlBrands() {
+            if brands.count != 0 {
+                self.reloadAllData()
+            }
+        }
+//        self.reloadAllData()
+        self.fetchBrandsFromServer()
+    }
+    func fetchBrandsFromServer() {
+        ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
+            if isSuccess {
+                if let brands = UserDefaultManager.getALlBrands() {
+                    if brands.count == 0 {
+                        self.reloadAllData()
+                    }
+                } else {
+                    self.reloadAllData()
+                }
+                let brandList = response as! [Brand]
+                _ = UserDefaultManager.saveAllBrands(brands: brandList)
+            }
+        }
     }
     @objc func resetFirstTime() {
         serverParams.removeAll()
@@ -460,6 +488,20 @@ class SozieRequestsVC: UIViewController {
        }
     }
 
+    @IBAction func brandFilterButtonTapped(_ sender: Any) {
+        let brandsFilterPopupInstance = SelectionPopupVC.instance(type: .filter, brandList: UserDefaultManager.getALlBrands(), brandId: nil)
+        brandsFilterPopupInstance.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+        brandsFilterPopupInstance.delegate = self
+        let popUpVC = PopupController
+            .create(self.tabBarController!.navigationController!)
+        let options = PopupCustomOption.layout(.bottom)
+        popUpVC.cornerRadius = 0.0
+        _ = popUpVC.customize([options])
+        _ = popUpVC.show(brandsFilterPopupInstance)
+        brandsFilterPopupInstance.closeHandler = { [] in
+            popUpVC.dismiss()
+        }
+    }
     @IBAction func searchByIdButtonTapped(_ sender: Any) {
         searchType = "article_id"
         hideSearchOptionView()
@@ -592,9 +634,10 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         self.view.layoutIfNeeded()
     }
     func cancelRequestButtonTapped(button: UIButton) {
-        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
-            self.cancelRequest(button: button)
-        }
+//        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
+//            self.cancelRequest(button: button)
+//        }
+        self.cancelRequest(button: button)
         hideAllSearchViews()
     }
     func cancelRequest(button: UIButton) {
@@ -874,5 +917,20 @@ extension SozieRequestsVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideSearchVu()
         return true
+    }
+}
+extension SozieRequestsVC: SelectionPopupVCDelegate {
+    func doneButtonTapped(type: FilterType?, objId: Int?) {
+        if type == FilterType.filter {
+            if let brandId = objId {
+                crossButton.isHidden = false
+                searchString = String(brandId)
+                searchType = "brand_id"
+                self.requests.removeAll()
+                serverParams.removeAll()
+                self.tableView.refreshControl?.beginRefreshing()
+                fetchAllSozieRequests()
+            }
+        }
     }
 }

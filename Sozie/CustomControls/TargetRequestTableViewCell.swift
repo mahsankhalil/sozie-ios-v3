@@ -22,6 +22,7 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var overlayView: UIView!
 //    @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var pictureButton: UIButton!
+    @IBOutlet weak var brandImageView: UIImageView!
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -90,16 +91,14 @@ extension TargetRequestTableViewCell: CellConfigurable {
         if let availabilityModel = viewModel as? AvailabilityProviding {
             logoImageView.isHidden = !availabilityModel.isAvailable
             backgroudView.layer.borderColor = availabilityModel.isAvailable ? UIColor(hex: "FC8787").cgColor : UIColor(hex: "A6A6A6").cgColor
-            if availabilityModel.isAvailable == true {
-                if let brandProvider = viewModel as? BrandIdProviding {
-                    if let brand = UserDefaultManager.getBrandWithId(brandId: brandProvider.brandId) {
-//                        self.titleLabel.text = "Requested by " + brand.label
-                    }
-                }
-            }
         } else {
             logoImageView.isHidden = true
             backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor
+        }
+        if let brandProvider = viewModel as? BrandIdProviding {
+            if let brand = UserDefaultManager.getBrandWithId(brandId: brandProvider.brandId) {
+                self.brandImageView.sd_setImage(with: URL(string: brand.titleImageCentred), completed: nil)
+            }
         }
         logoImageView.isHidden = true
         backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor

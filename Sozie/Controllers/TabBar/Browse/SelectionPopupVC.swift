@@ -24,6 +24,8 @@ class SelectionPopupVC: UIViewController {
     weak var delegate: SelectionPopupVCDelegate?
     var selectedBrandId: Int?
     var popupType: PopupType?
+    var closeHandler: (() -> Void)?
+    var isFromBrand: Bool = false
     var category: Category? = nil {
         didSet {
             viewModels.removeAll()
@@ -36,7 +38,7 @@ class SelectionPopupVC: UIViewController {
     var brandList: [Brand]? = [] {
         didSet {
             viewModels.removeAll()
-            for brand in brandList! {
+            for brand in brandList ?? [] {
                 var checkMarkHidden = true
                 if let brandId = selectedBrandId {
                     if brandId == brand.brandId {
@@ -52,12 +54,24 @@ class SelectionPopupVC: UIViewController {
     }
     private var viewModels: [BrandCellViewModel] = []
 
+    class func instance(type: PopupType?, brandList: [Brand]?, brandId: Int? = nil) -> SelectionPopupVC {
+        let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
+        let instnce = storyboard.instantiateViewController(withIdentifier: "SelectionPopupVC") as! SelectionPopupVC
+        instnce.popupType = type
+        instnce.brandList = brandList
+        instnce.selectedBrandId = brandId
+        instnce.isFromBrand = true
+        return instnce
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         topView.layer.cornerRadius = 10.0
         titleLabel.textColor = UtilityManager.getGenderColor()
+        if isFromBrand {
+            self.backButton.isHidden = true
+        }
 //        titleLbl.text = popupType?.rawValue
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +107,7 @@ class SelectionPopupVC: UIViewController {
                 filterType = FilterType.filter
             }
             delegate?.doneButtonTapped(type: filterType, objId: selectedId)
+            closeHandler!()
         }
     }
 }
@@ -133,5 +148,10 @@ extension SelectionPopupVC: UITableViewDelegate, UITableViewDataSource {
             selectedViewModelIndex = indexPath.row
         }
         tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+    }
+}
+extension SelectionPopupVC: PopupContentViewController {
+    func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.size.width, height: 200)
     }
 }
