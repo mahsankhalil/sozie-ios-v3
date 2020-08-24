@@ -74,6 +74,8 @@ class PinCodeVC: UIViewController {
             ServerManager.sharedInstance.verifySozieCode(params: dataDict) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.codeLinkedWith = (response as! CodeValidateRespose).linkedWith
                     self.signUpDict["signup_sozie_code"] = self.pincode?.uppercased()
                     let landingVC = self.storyboard?.instantiateViewController(withIdentifier: "LandingViewController") as! LandingViewController
                     landingVC.modalPresentationStyle = .fullScreen

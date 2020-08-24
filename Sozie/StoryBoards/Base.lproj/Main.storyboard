@@ -579,7 +579,9 @@ Check your updated </string>
                         <viewLayoutGuide key="safeArea" id="oSp-xq-umH"/>
                     </view>
                     <connections>
+                        <outlet property="bottomViewHeightConstraint" destination="4AI-6F-Emh" id="Qo9-la-mAY"/>
                         <outlet property="detailLabel" destination="Nr0-E2-AdA" id="weQ-27-cU7"/>
+                        <outlet property="titleLabel" destination="66p-Lh-8UL" id="0VZ-Ft-NMm"/>
                         <outlet property="videoView" destination="E9v-z3-dQJ" id="7Rq-ZA-qrp"/>
                     </connections>
                 </viewController>

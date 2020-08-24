@@ -971,7 +971,7 @@ func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, vide
 //        ]
         Alamofire.request(ServerManager.verifySozieCodeURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
             let decoder = JSONDecoder()
-            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            let obj: Result<CodeValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }

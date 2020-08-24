@@ -44,6 +44,21 @@ struct ValidateRespose: Codable {
         detail = try values.decode(String.self, forKey: .detail)
     }
 }
+struct CodeValidateRespose: Codable {
+
+    var detail: String
+    var linkedWith: String
+    enum CodingKeys: String, CodingKey {
+        case detail
+        case linkedWith = "linked_with"
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        detail = try values.decode(String.self, forKey: .detail)
+        linkedWith = try values.decode(String.self, forKey: .linkedWith)
+    }
+}
 struct AcceptedRequestResponse: Codable {
     var detail: String
     var acceptedRequest: AcceptedRequest
