@@ -14,6 +14,7 @@ import SafariServices
 import TPKeyboardAvoiding
 class ProductDetailVC: BaseViewController {
 
+    @IBOutlet weak var orderButton: DZGradientButton!
     @IBOutlet weak var topViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionTextLabel: UILabel!
@@ -294,6 +295,14 @@ class ProductDetailVC: BaseViewController {
     }
     // MARK: - Actions
 
+    @IBAction func orderButtonTapped(_ sender: Any) {
+        if let productURL = self.currentProduct?.deepLink {
+            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
+            webVC.url = URL(string: productURL)
+            webVC.modalPresentationStyle = .overFullScreen
+            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
+        }
+    }
     @IBAction func viewRequestsButtonTapped(_ sender: Any) {
         scrollToBottom()
     }

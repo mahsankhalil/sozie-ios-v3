@@ -23,6 +23,8 @@ class TargetRequestTableViewCell: UITableViewCell {
 //    @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var brandImageView: UIImageView!
+    @IBOutlet weak var productIdLabel: UILabel!
+    
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -99,6 +101,10 @@ extension TargetRequestTableViewCell: CellConfigurable {
             if let brand = UserDefaultManager.getBrandWithId(brandId: brandProvider.brandId) {
                 self.brandImageView.sd_setImage(with: URL(string: brand.titleImageCentred), completed: nil)
             }
+        }
+        if let productIdProvider = viewModel as? ProductIdProviding {
+            let productId = productIdProvider.productId
+            self.productIdLabel.text = "ID: " + productId
         }
         logoImageView.isHidden = true
         backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor

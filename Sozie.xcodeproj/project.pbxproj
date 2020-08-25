@@ -121,6 +121,7 @@
 		6164D28822FAFFF1008B5B22 /* SEGIntercomIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6164D28122FAFFF0008B5B22 /* SEGIntercomIntegration.m */; };
 		6164D28A22FAFFF1008B5B22 /* SEGIntercomIntegrationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6164D28322FAFFF0008B5B22 /* SEGIntercomIntegrationFactory.m */; };
 		6166814022315797009DD1D0 /* TermsOfServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166813F22315796009DD1D0 /* TermsOfServiceVC.swift */; };
+		616A41A324F3D5DD003B8D38 /* ProductIdProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616A41A224F3D5DD003B8D38 /* ProductIdProviding.swift */; };
 		616DDD68220ADF1C00A7CCFA /* DisclosureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */; };
 		616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */; };
 		616DDD6D220B080000A7CCFA /* PopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616DDD6C220B080000A7CCFA /* PopUpViewModel.swift */; };
@@ -419,6 +420,7 @@
 		6164D28722FAFFF0008B5B22 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		6164D28C22FB0065008B5B22 /* Sozie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sozie-Bridging-Header.h"; sourceTree = "<group>"; };
 		6166813F22315796009DD1D0 /* TermsOfServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceVC.swift; sourceTree = "<group>"; };
+		616A41A224F3D5DD003B8D38 /* ProductIdProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdProviding.swift; sourceTree = "<group>"; };
 		616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureCell.swift; sourceTree = "<group>"; };
 		616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisclosureCell.xib; sourceTree = "<group>"; };
 		616DDD6C220B080000A7CCFA /* PopUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewModel.swift; sourceTree = "<group>"; };
@@ -1256,6 +1258,7 @@
 				613AEB63247E8C3800B4A019 /* SelectedImageViewModeling.swift */,
 				617F684324ACCFB200B70763 /* RatingQuestionsViewModel.swift */,
 				61FBDB9524CEBA600061CF39 /* TermsConditionViewModel.swift */,
+				616A41A224F3D5DD003B8D38 /* ProductIdProviding.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1665,6 +1668,7 @@
 				DA48CB2421FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift in Sources */,
 				61EE668F22D5E5B2004265F1 /* BrowseWelcomeVC.swift in Sources */,
 				61D26A1D24E55982007B4A1D /* PasswordItemView.swift in Sources */,
+				616A41A324F3D5DD003B8D38 /* ProductIdProviding.swift in Sources */,
 				61B5A0C9229D3E60009D372C /* TargetProduct.swift in Sources */,
 				61C40D06221E7DE900FBD7FF /* TabPageOption.swift in Sources */,
 				61A05CCD24C05ACB0059B1AD /* UserDataKeychain.swift in Sources */,
@@ -1819,7 +1823,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -1912,7 +1916,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -2061,7 +2065,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -2092,7 +2096,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
