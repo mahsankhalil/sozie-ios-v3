@@ -218,7 +218,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
                         }
                     }
                     SegmentManager.createEntity(user: user)
-                    SegmentManager.createEventSecondScreenSignupCompleted()
+                    SegmentManager.createEventSignUpCompleted1()
+//                    SegmentManager.createEventSecondScreenSignupCompleted()
                 }
                 self.performSegue(withIdentifier: "toMeasurementVC", sender: self)
             } else {
