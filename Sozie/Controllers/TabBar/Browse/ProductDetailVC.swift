@@ -56,7 +56,7 @@ class ProductDetailVC: BaseViewController {
             requestsTableView.reloadData()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -599,12 +599,13 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
 
 extension ProductDetailVC: SozieRequestTableViewCellDelegate {
     func pictureButtonTapped(button: UIButton) {
-        
+
     }
     func cancelRequestButtonTapped(button: UIButton) {
-        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
-            self.cancelRequest(button: button)
-        }
+//        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
+//            self.cancelRequest(button: button)
+//        }
+        self.cancelRequest(button: button)
     }
     func cancelRequest(button: UIButton) {
         let currentRequest = self.requests[button.tag]
