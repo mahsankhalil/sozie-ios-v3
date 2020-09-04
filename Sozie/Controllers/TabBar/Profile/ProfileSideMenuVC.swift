@@ -332,37 +332,35 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
     func performSectionThreeActions(row: Int) {
         if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
             switch row {
-                case 0:
-                    rateThisApp()
-                case 1:
-                    sendFeedbackWithEmail()
-                case 2:
-                    showTOSVC(type: TOSType.privacyPolicy)
-                case 3:
-                    showTermsAndConditionsVC()
-        //            showTOSVC(type: TOSType.termsCondition)
-                default:
-                    return
+            case 0:
+                rateThisApp()
+            case 1:
+                sendFeedbackWithEmail()
+            case 2:
+                showTOSVC(type: TOSType.privacyPolicy)
+            case 3:
+                showTermsAndConditionsVC()
+    //            showTOSVC(type: TOSType.termsCondition)
+            default:
+                return
             }
-            
         } else {
             switch row {
-                case 0:
-                    showInviteFriendsVC()
-                case 1:
-                    rateThisApp()
-                case 2:
-                    sendFeedbackWithEmail()
-                case 3:
-                    showTOSVC(type: TOSType.privacyPolicy)
-                case 4:
-                    showTermsAndConditionsVC()
-        //            showTOSVC(type: TOSType.termsCondition)
-                default:
-                    return
+            case 0:
+                showInviteFriendsVC()
+            case 1:
+                rateThisApp()
+            case 2:
+                sendFeedbackWithEmail()
+            case 3:
+                showTOSVC(type: TOSType.privacyPolicy)
+            case 4:
+                showTermsAndConditionsVC()
+    //            showTOSVC(type: TOSType.termsCondition)
+            default:
+                return
             }
         }
-        
     }
 
 }
