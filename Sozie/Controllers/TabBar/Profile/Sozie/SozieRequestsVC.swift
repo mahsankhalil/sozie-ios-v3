@@ -791,7 +791,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 self.showUploadPostTutorial()
                 return
             } else {
-                UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "If you do not complete the request, a strike will be counted against you.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have 19 days to upload your photos and complete your review.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                     UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                         self.acceptRequestAPICall(tag: button.tag)
                     }
