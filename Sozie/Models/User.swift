@@ -34,6 +34,7 @@ struct User: Codable {
     var tutorialCompleted: Bool?
     var createdAt: String?
     var isBanned: Bool?
+    var sozieType: String?
     enum CodingKeys: String, CodingKey {
         case username
         case email
@@ -59,6 +60,7 @@ struct User: Codable {
         case tutorialCompleted = "tutorial_completed"
         case createdAt = "created_at"
         case isBanned = "is_banned"
+        case sozieType = "sozie_type"
     }
 
     init(from decoder: Decoder) throws {
@@ -87,6 +89,7 @@ struct User: Codable {
         tutorialCompleted = try? values.decode(Bool.self, forKey: .tutorialCompleted)
         isBanned = try? values.decode(Bool.self, forKey: .isBanned)
         createdAt = try? values.decode(String.self, forKey: .createdAt)
+        sozieType = try? values.decode(String.self, forKey: .sozieType)
     }
 }
 struct UserPreferences: Codable {

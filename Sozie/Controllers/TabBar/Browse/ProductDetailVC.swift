@@ -14,6 +14,7 @@ import SafariServices
 import TPKeyboardAvoiding
 class ProductDetailVC: BaseViewController {
 
+    @IBOutlet weak var orderButton: DZGradientButton!
     @IBOutlet weak var topViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionTextLabel: UILabel!
@@ -55,6 +56,7 @@ class ProductDetailVC: BaseViewController {
             requestsTableView.reloadData()
         }
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -293,6 +295,14 @@ class ProductDetailVC: BaseViewController {
     }
     // MARK: - Actions
 
+    @IBAction func orderButtonTapped(_ sender: Any) {
+        if let productURL = self.currentProduct?.deepLink {
+            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
+            webVC.url = URL(string: productURL)
+            webVC.modalPresentationStyle = .overFullScreen
+            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
+        }
+    }
     @IBAction func viewRequestsButtonTapped(_ sender: Any) {
         scrollToBottom()
     }
@@ -589,12 +599,13 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
 
 extension ProductDetailVC: SozieRequestTableViewCellDelegate {
     func pictureButtonTapped(button: UIButton) {
-        
+
     }
     func cancelRequestButtonTapped(button: UIButton) {
-        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
-            self.cancelRequest(button: button)
-        }
+//        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
+//            self.cancelRequest(button: button)
+//        }
+        self.cancelRequest(button: button)
     }
     func cancelRequest(button: UIButton) {
         let currentRequest = self.requests[button.tag]
@@ -702,7 +713,7 @@ extension ProductDetailVC: SozieRequestTableViewCellDelegate {
                 self.navigationController?.pushViewController(uploadPostVC, animated: true)
             }
         } else {
-            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "If you do not complete the request, a strike will be counted against you.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have 19 days to upload your photos and complete your review.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                 UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                     self.acceptRequestAPICall(tag: button.tag)
                 }

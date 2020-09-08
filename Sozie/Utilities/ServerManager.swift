@@ -18,7 +18,7 @@ class ServerManager: NSObject {
     static let loginURL = ServerManager.serverURL + "user/login/"
     static let profileURL = ServerManager.serverURL + "user/profile/"
     static let sizeChartURL = ServerManager.serverURL + "common/sizechart"
-    static let brandListURL = ServerManager.serverURL + "brand/list"
+    static let brandListURL = ServerManager.serverURL + "brand/filters"
     static let countriesListURL = ServerManager.serverURL + "common/countries"
     static let validateURL = ServerManager.serverURL + "user/validate/"
     static let signUpURL = ServerManager.serverURL + "user/signup/"
@@ -58,6 +58,7 @@ class ServerManager: NSObject {
     static let notificationURL = ServerManager.serverURL + "user/notify_config/"
     static let tutorialURL = ServerManager.serverURL + "user/tutorial_states/"
     static let postProgressURL = ServerManager.serverURL + "post/get_post_progress/"
+    static let verifySozieCodeURL = ServerManager.serverURL + "user/verify/"
     public typealias CompletionHandler = ((Bool, Any) -> Void)?
     func loginWith(params: [String: Any], block: CompletionHandler) {
         Alamofire.request(ServerManager.loginURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
@@ -105,7 +106,10 @@ class ServerManager: NSObject {
     }
 
     func getBrandList(params: [String: Any], block: CompletionHandler) {
-        Alamofire.request(ServerManager.brandListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        Alamofire.request(ServerManager.brandListURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             guard let block = block else { return }
             let decoder = JSONDecoder()
             let obj: Result<[Brand]> = decoder.decodeResponse(from: response)
@@ -953,6 +957,21 @@ func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, vide
         Alamofire.request(ServerManager.tutorialURL, method: .patch, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+    }
+    func verifySozieCode(params: [String: Any], block: CompletionHandler) {
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+//        ]
+        Alamofire.request(ServerManager.verifySozieCodeURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<CodeValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }

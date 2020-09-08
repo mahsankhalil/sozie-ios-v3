@@ -59,10 +59,12 @@ class InviteFriendsVC: UIViewController {
 
     @IBAction func copyButtonTapped(_ sender: Any) {
         let pasteboard = UIPasteboard.general
-        pasteboard.string = referalCodeLabel.text
+        pasteboard.string = "Your 6 Digit Access Code at Signup: 5B69E6\nMy referral code: " + (referalCodeLabel.text ?? "")
     }
     @IBAction func inviteBtnTapped(_ sender: Any) {
-        let objectsToShare = ["Check this out! I'm making money from trying on clothes, and you can too! Download Sozie and receive an extra $5! Here is your referral bonus code: " + (self.referalCodeLabel.text ?? "") +  "\nhttps://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8"]
+        var textToShare = "Check this out! I make money trying on clothes, and you can too! Download Sozie - your 6-digit code to get in is 5B69E6"  + "\n\nMake sure you also enter my referral code: "
+        textToShare = textToShare + (self.referalCodeLabel.text ?? "") + " for an extra $5." + "\n\nhttps://itunes.apple.com/us/app/sozie-shop2gether/id1363346896?ls=1&mt=8"
+        let objectsToShare = [ textToShare ]
         UtilityManager.showActivityControllerWith(objectsToShare: objectsToShare, viewController: self)
     }
 

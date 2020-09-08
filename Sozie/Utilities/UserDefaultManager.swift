@@ -57,6 +57,10 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.type
     }
+    static func getCurrentSozieType() -> String? {
+        guard let loginResponse = loginResponse() else { return nil }
+        return loginResponse.user?.sozieType
+    }
     static func getCurrentUserGender() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.gender

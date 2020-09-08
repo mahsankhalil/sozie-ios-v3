@@ -54,7 +54,7 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var howToTakePicturesButton: UIButton!
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
     let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
-    let aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions"]
+    var aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
     private let higlightedCellReuseIdentifier = "HighLightedCell"
@@ -62,13 +62,19 @@ class ProfileSideMenuVC: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.tblVu.backgroundColor = UIColor.white
-        if UserDefaultManager.getIfShopper() {
-            self.myBalanceViewHeightContraint.constant = 0.0
+        if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
+            myBalanceViewHeightContraint.constant = 0.0
+            aboutTitles = ["Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions"]
         } else {
             self.myBalanceViewHeightContraint.constant = 50.0
-//            accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements", "Change My Workplace"]
         }
+        self.tblVu.backgroundColor = UIColor.white
+//        if UserDefaultManager.getIfShopper() {
+//            self.myBalanceViewHeightContraint.constant = 0.0
+//        } else {
+//            self.myBalanceViewHeightContraint.constant = 50.0
+////            accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements", "Change My Workplace"]
+//        }
         let accountViewModels = setupViewModels(accountTitles)
         let accountSection = Section(title: "ACCOUNT", rowViewModels: accountViewModels)
         sections.append(accountSection)
@@ -79,6 +85,7 @@ class ProfileSideMenuVC: BaseViewController {
         let aboutSection = Section(title: "ABOUT", rowViewModels: aboutViewModels)
         sections.append(aboutSection)
         logoutBtn.cornerRadius = 0.0
+        
     }
 
     func setupViewModels(_ titles: [String]) -> [RowViewModel] {
@@ -144,24 +151,7 @@ class ProfileSideMenuVC: BaseViewController {
         guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896?action=write-review")
             else { fatalError("Expected a valid URL") }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-//        if #available(iOS 10.3, *) {
-//            SKStoreReviewController.requestReview()
-//        } else {
-//            rateApp(appId: "id1363346896") { (_) in
-//            }
-//        }
     }
-//    func rateApp(appId: String, completion: @escaping ((_ success: Bool) -> Void)) {
-//        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + appId) else {
-//            completion(false)
-//            return
-//        }
-//        guard #available(iOS 10, *) else {
-//            completion(UIApplication.shared.openURL(url))
-//            return
-//        }
-//        UIApplication.shared.open(url, options: [:], completionHandler: completion)
-//    }
     func showInviteFriendsVC() {
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let inviteVC = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVC") as! InviteFriendsVC
@@ -223,9 +213,13 @@ class ProfileSideMenuVC: BaseViewController {
 
     }
     @IBAction func myBalanceButtonTapped(_ sender: Any) {
-        let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
-        let balanceVC = storyBoard.instantiateViewController(withIdentifier: "MyBalanceVC") as! MyBalanceVC
-        self.navigationController?.pushViewController(balanceVC, animated: true)
+        if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
+            UtilityManager.showMessageWith(title: "My Balance", body: "Currently you do not have access of My Balance. Please ask your manager.", in: self)
+        } else {
+            let storyBoard = UIStoryboard(name: "TabBar", bundle: Bundle.main)
+            let balanceVC = storyBoard.instantiateViewController(withIdentifier: "MyBalanceVC") as! MyBalanceVC
+            self.navigationController?.pushViewController(balanceVC, animated: true)
+        }
     }
     @IBAction func howToTakeSoziePicturesButtonTapped(_ sender: Any) {
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ShowInstructions")))
@@ -336,20 +330,36 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     func performSectionThreeActions(row: Int) {
-        switch row {
-        case 0:
-            showInviteFriendsVC()
-        case 1:
-            rateThisApp()
-        case 2:
-            sendFeedbackWithEmail()
-        case 3:
-            showTOSVC(type: TOSType.privacyPolicy)
-        case 4:
-            showTermsAndConditionsVC()
-//            showTOSVC(type: TOSType.termsCondition)
-        default:
-            return
+        if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
+            switch row {
+            case 0:
+                rateThisApp()
+            case 1:
+                sendFeedbackWithEmail()
+            case 2:
+                showTOSVC(type: TOSType.privacyPolicy)
+            case 3:
+                showTermsAndConditionsVC()
+    //            showTOSVC(type: TOSType.termsCondition)
+            default:
+                return
+            }
+        } else {
+            switch row {
+            case 0:
+                showInviteFriendsVC()
+            case 1:
+                rateThisApp()
+            case 2:
+                sendFeedbackWithEmail()
+            case 3:
+                showTOSVC(type: TOSType.privacyPolicy)
+            case 4:
+                showTermsAndConditionsVC()
+    //            showTOSVC(type: TOSType.termsCondition)
+            default:
+                return
+            }
         }
     }
 

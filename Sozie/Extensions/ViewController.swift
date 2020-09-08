@@ -42,7 +42,7 @@ extension UIViewController {
             return
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewCOntroller = storyboard.instantiateViewController(withIdentifier: "LandingViewController")
+        let viewCOntroller = storyboard.instantiateViewController(withIdentifier: "PinCodeVC")
         viewCOntroller.view.frame = rootViewController.view.frame
         viewCOntroller.view.layoutIfNeeded()
         UIView.transition(with: window, duration: 1.0, options: .transitionFlipFromLeft, animations: {

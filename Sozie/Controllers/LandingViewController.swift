@@ -21,9 +21,10 @@ class LandingViewController: UIViewController {
     @IBOutlet weak var shopperLabel: UILabel!
     @IBOutlet weak var sozieLabel: UILabel!
     var currentUserType: UserType?
-    var signUpDict: [String: Any] = [:]
+//    var signUpDict: [String: Any] = [:]
     var avPlayer: AVPlayer!
     var avPlayerLayer: AVPlayerLayer!
+    private var signUpDict: [String: Any]?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -75,20 +76,28 @@ class LandingViewController: UIViewController {
 
     @IBAction func signupShopperBtnTapped(_ sender: Any) {
         currentUserType = .shopper
-        signUpDict[User.CodingKeys.country.stringValue] = 2
-        signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+        signUpDict![User.CodingKeys.country.stringValue] = 2
+        signUpDict![User.CodingKeys.type.stringValue] = currentUserType?.rawValue
 //        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
         performSegue(withIdentifier: "toWelcome", sender: self)
     }
 
     @IBAction func signUpSozieBtnTapped(_ sender: Any) {
         currentUserType = .sozie
-        signUpDict[User.CodingKeys.country.stringValue] = 2
-        signUpDict[User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+        signUpDict![User.CodingKeys.country.stringValue] = 2
+        signUpDict![User.CodingKeys.type.stringValue] = currentUserType?.rawValue
 //        performSegue(withIdentifier: "toWorkVC", sender: self)
         performSegue(withIdentifier: "toWelcome", sender: self)
 
 //        performSegue(withIdentifier: "toCountryVC", sender: self)
     }
 
+}
+extension LandingViewController: SignUpInfoProvider {
+    var signUpInfo: [String: Any]? {
+        get { return signUpDict }
+        set (newInfo) {
+            signUpDict = newInfo
+        }
+    }
 }

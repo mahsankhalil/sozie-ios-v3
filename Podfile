@@ -31,7 +31,7 @@ pod 'Branch'
 pod 'Segment-Firebase’
 pod 'CropViewController'
 pod 'Cosmos', '~> 22.1'
-
+#pod "PinCodeInputView"
 #pod 'Segment-Intercom', '1.0.0-beta'
 end
 target 'Sozie' do

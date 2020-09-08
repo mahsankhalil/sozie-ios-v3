@@ -347,6 +347,13 @@ class MeasurementsVC: UIViewController {
         ServerManager.sharedInstance.updateProfile(params: dataDict, imageData: nil) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
+                if self.isFromSignUp {
+                    SegmentManager.createEventSignUpCompleted2()
+                } else {
+                    if UserDefaultManager.checkIfMeasurementEmpty() {
+                        SegmentManager.createEventSignUpCompleted2()
+                    }
+                }
                 let user = response as! User
                 UserDefaultManager.updateUserObject(user: user)
                 SegmentManager.createEntity(user: user)

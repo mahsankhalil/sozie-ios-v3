@@ -14,6 +14,8 @@ class FirstSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
     weak var delegate: WelcomeButtonActionsDelegate?
     var index: Int = 1
 
+    @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var videoView: AVPlayerView!
     @IBOutlet weak var detailLabel: UILabel!
     var avPlayer: AVPlayer!
@@ -23,9 +25,19 @@ class FirstSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
 
 //         Do any additional setup after loading the view.
         let formattedString = NSMutableAttributedString()
-        formattedString.normal("Fill ").bold("Requests ").normal("within 24 hours.\nYou get paid for each approved request.\nCheck your updated ").bold("Balance ").normal("on your ").bold("Profile ").normal("page to see the money you’ve made!")
+        formattedString.normal("Fill ").bold("Requests ").normal("for Try-Ons.\nYou get paid for each approved request.\nCheck your updated ").bold("Balance ").normal("on your ").bold("Profile ").normal("page to see the money you’ve made!")
         detailLabel.attributedText = formattedString
         loadVideo()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let linkedWith = appDelegate.codeLinkedWith {
+            if linkedWith == "brand" {
+                detailLabel.text = ""
+                let formattedString = NSMutableAttributedString()
+                formattedString.normal("Sozie ").bold("Requests", size: 28.0)
+                titleLabel.attributedText = formattedString
+                bottomViewHeightConstraint.constant = 203
+            }
+        }
     }
     func loadVideo() {
         let url = Bundle.main.url(forResource: "now_02", withExtension: "mp4")

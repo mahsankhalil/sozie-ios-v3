@@ -58,7 +58,18 @@ class SegmentManager: NSObject {
             analytics?.track("SignUp-Completed", properties: ["userId": user.userId])
         }
     }
-
+    class func createEventSignUpCompleted1() {
+        let analytics = (UIApplication.shared.delegate as! AppDelegate).segmentAnalytics
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            analytics?.track("SignUp-Completed-1", properties: ["userId": user.userId])
+        }
+    }
+    class func createEventSignUpCompleted2() {
+        let analytics = (UIApplication.shared.delegate as! AppDelegate).segmentAnalytics
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            analytics?.track("SignUp-Completed-2", properties: ["userId": user.userId])
+        }
+    }
     class func createEventTutorialCompleted() {
         let analytics = (UIApplication.shared.delegate as! AppDelegate).segmentAnalytics
         if let user = UserDefaultManager.getCurrentUserObject() {

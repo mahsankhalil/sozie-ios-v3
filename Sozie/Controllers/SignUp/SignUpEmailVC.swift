@@ -113,7 +113,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         if self.referralCodeTextField.text?.isEmpty == false {
             SVProgressHUD.show()
             var dataDict = [String: Any]()
-            dataDict["code"] = self.referralCodeTextField.text
+            dataDict["code"] = self.referralCodeTextField.text?.uppercased()
             ServerManager.sharedInstance.verifyReferalCode(params: dataDict) { (isSuccess, response) in
                 if isSuccess {
                     let referralResponse = response as! ReferalVerificationResponse
@@ -138,7 +138,7 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         } else {
             signUpDict![User.CodingKeys.email.stringValue] = emailTxtFld.text
             signUpDict!["password"] = passwordTxtFld.text
-            signUpDict!["referral_code"] = referralCodeTextField.text
+            signUpDict!["referral_code"] = referralCodeTextField.text?.uppercased()
             confirmPasswordTxtFld.setError( nil, animated: true)
             verifyEmailFromServer(email: emailTxtFld.text)
         }
