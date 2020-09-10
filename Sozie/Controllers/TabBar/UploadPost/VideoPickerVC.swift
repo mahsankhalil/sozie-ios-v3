@@ -33,6 +33,7 @@ class VideoPickerVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         timerLabel.isHidden = true
+        self.howToButton.isHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

@@ -81,6 +81,11 @@ class SozieRequestsVC: UIViewController {
                 instructionsImageView.image = UIImage(named: "instructions")
             }
         }
+        if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
+            brandFilterButton.isHidden = true
+        } else {
+            brandFilterButton.isHidden = true
+        }
 
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
 //            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)

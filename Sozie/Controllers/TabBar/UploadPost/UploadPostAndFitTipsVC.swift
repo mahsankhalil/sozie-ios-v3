@@ -48,6 +48,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var submitTutorialVC: SubmitPostTutorialVC?
     var isTutorialShowing: Bool = false
     var isFitTipsTutorialShown: Bool = false
+    var isFromProductDetail = false
     var currentVideoURL: URL?
     var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Optional Video", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true)]
 
@@ -70,13 +71,16 @@ class UploadPostAndFitTipsVC: BaseViewController {
         }
         if let postID = currentPostId {
             self.getCurrentPost(postId: postID)
+            self.postDeleteButton.isHidden = true
+        }
+        if isFromProductDetail == false {
+            self.showInfoButton()
         }
         self.postImageView.layer.borderWidth = 1.0
         self.postImageView.layer.borderColor = UIColor(hex: "DBDBDB").cgColor
         self.sizeCheckMark.isHidden = true
         self.fitTipsCheckMark.isHidden = true
         fetchFitTipsFromServer()
-        self.showInfoButton()
         progressTutorialVC?.delegate = self
 //        let formattedString = NSMutableAttributedString()
 //        formattedString.bold("Required Tutorial", size: 15.0).normal(": Upload real photos of yourself")
@@ -583,7 +587,12 @@ class UploadPostAndFitTipsVC: BaseViewController {
 //            viewModels[index].imageURL = nil
             postImageView.image = nil
             selectedIndex = nil
-            if index > 2 {
+            if let isVideo = viewModels[index].isVideo, isVideo == true {
+                viewModels[index].videoURL = nil
+                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                return
+            }
+            if index > 3 {
                 viewModels.remove(at: index)
                 self.imagesCollectionView.reloadData()
             } else {

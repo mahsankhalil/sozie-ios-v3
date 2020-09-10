@@ -65,7 +65,6 @@ class UserDefaultManager: NSObject {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.gender
     }
-
     static func deleteLoginResponse() {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginResponse)
         UserDefaults.standard.synchronize()

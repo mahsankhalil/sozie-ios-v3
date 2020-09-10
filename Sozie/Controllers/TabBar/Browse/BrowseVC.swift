@@ -115,6 +115,11 @@ class BrowseVC: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name(rawValue: "RefreshBrowseData"), object: nil)
         resetButtonToDefault(button: self.requestedButton)
         resetButtonToDefault(button: self.postsButton)
+        if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
+            filterBtn.isHidden = true
+        } else {
+            filterBtn.isHidden = true
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

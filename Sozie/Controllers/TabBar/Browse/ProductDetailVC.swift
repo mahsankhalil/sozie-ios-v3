@@ -710,6 +710,7 @@ extension ProductDetailVC: SozieRequestTableViewCellDelegate {
             }
             if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
                 uploadPostVC.currentRequest = currentRequest
+                uploadPostVC.isFromProductDetail = true
                 self.navigationController?.pushViewController(uploadPostVC, animated: true)
             }
         } else {

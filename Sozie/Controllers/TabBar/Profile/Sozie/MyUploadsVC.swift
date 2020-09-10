@@ -64,6 +64,11 @@ class MyUploadsVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(loadNextPage), for: .valueChanged)
         tableView.bottomRefreshControl = refreshControl
         reloadData()
+        if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
+            noDataLabel.text = "Upload pictures to create your gallery"
+        } else {
+            noDataLabel.text = "Upload pictures to create your gallery and earn money!"
+        }
     }
     func reloadData() {
         switch currentFilterType {
@@ -135,6 +140,7 @@ class MyUploadsVC: UIViewController {
             getPostsFromServer()
         } else {
             serverParams.removeValue(forKey: "next")
+            self.tableView.bottomRefreshControl?.endRefreshing()
         }
     }
     func getPostsFromServer() {
@@ -146,6 +152,7 @@ class MyUploadsVC: UIViewController {
                 self.nextURL = paginatedData.next
                 self.applyCountLabel(count: paginatedData.count)
                 self.hideShowAddMeasurementView()
+                self.tableView.bottomRefreshControl?.endRefreshing()
 //                self.countLabel.text = String(paginatedData.count) + ( paginatedData.count <= 1 ? " Upload" : " Uploads")
             }
         }
