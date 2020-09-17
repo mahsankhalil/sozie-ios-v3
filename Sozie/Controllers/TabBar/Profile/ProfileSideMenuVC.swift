@@ -53,7 +53,7 @@ class ProfileSideMenuVC: BaseViewController {
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var howToTakePicturesButton: UIButton!
     var accountTitles = ["Edit Profile", "Update Profile Picture", "Change Password", "My Measurements"]
-    let settingTitles = ["Push Notifications", "Reset Tutorial", "Blocked Accounts"]
+    let settingTitles = ["Push Notifications", "Blocked Accounts"]
     var aboutTitles = ["Invite Friends", "Rate Sozie app", "Send Feedback", "Privacy Policy", "Terms and Conditions"]
     private let titleCellReuseIdentifier = "TitleCell"
     private let titleAndSwitchCellReuseIdentifier = "TitleAndSwitchCell"
@@ -85,7 +85,6 @@ class ProfileSideMenuVC: BaseViewController {
         let aboutSection = Section(title: "ABOUT", rowViewModels: aboutViewModels)
         sections.append(aboutSection)
         logoutBtn.cornerRadius = 0.0
-        
     }
 
     func setupViewModels(_ titles: [String]) -> [RowViewModel] {
@@ -323,7 +322,7 @@ extension ProfileSideMenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     func performSectionTwoActions(row: Int) {
         switch row {
-        case 2:
+        case 1:
             showBlockedListVC()
         default:
             return

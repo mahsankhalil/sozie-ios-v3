@@ -28,7 +28,6 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var instructionsScrollView: UIScrollView!
     @IBOutlet weak var instructionsImageView: UIImageView!
-    
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var brandFilterButton: UIButton!
     var nextURL: String?
@@ -73,7 +72,7 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (980.0/375.0) * UIScreen.main.bounds.size.width
+        instructionsHeightConstraint.constant = (1050.0/375.0) * UIScreen.main.bounds.size.width
         if let gender = UserDefaultManager.getCurrentUserGender() {
             if gender == "M" {
                 instructionsImageView.image = UIImage(named: "MaleInstructions")
@@ -84,7 +83,7 @@ class SozieRequestsVC: UIViewController {
         if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
             brandFilterButton.isHidden = true
         } else {
-            brandFilterButton.isHidden = true
+            brandFilterButton.isHidden = false
         }
 
 //        if UserDefaultManager.getIfRequestTutorialShown() == false {
@@ -639,10 +638,10 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         self.view.layoutIfNeeded()
     }
     func cancelRequestButtonTapped(button: UIButton) {
-//        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request? Cancelling will result in a strike against you.", in: self, okBtnTitle: "Ok", cancelBtnTitle: "Cancel", dismissAfter: nil) {
-//            self.cancelRequest(button: button)
-//        }
-        self.cancelRequest(button: button)
+        UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil) {
+            self.cancelRequest(button: button)
+        }
+//        self.cancelRequest(button: button)
         hideAllSearchViews()
     }
     func cancelRequest(button: UIButton) {

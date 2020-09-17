@@ -118,7 +118,7 @@ class BrowseVC: BaseViewController {
         if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
             filterBtn.isHidden = true
         } else {
-            filterBtn.isHidden = true
+            filterBtn.isHidden = false
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -333,6 +333,10 @@ class BrowseVC: BaseViewController {
 
         if let category = findCategoryWithId(categoryId: 10) {
             self.getAllSubCategoresIdFrom(category: category)
+            if let clothigIndex = self.getIndexOfClothing() {
+                categoriesViewModels[clothigIndex].isSelected = true
+                self.categoryCollectionVu.reloadItems(at: [IndexPath(row: clothigIndex, section: 0)])
+            }
         } else {
             filterCategoryIds = nil
         }
@@ -353,6 +357,15 @@ class BrowseVC: BaseViewController {
         for category in categoriesList {
             if category.categoryId == categoryId {
                 return category
+            }
+        }
+        return nil
+    }
+    func getIndexOfClothing() -> Int? {
+        for index in 0..<categoriesList.count {
+            let category = categoriesList[index]
+            if category.categoryId == 10 {
+                return index
             }
         }
         return nil

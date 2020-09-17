@@ -269,6 +269,7 @@ extension MyUploadsVC: MyUploadsCellDelegate {
         let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
         addPostVC.currentPostId = currentPost.postId
         addPostVC.currentProduct = currentPost.currentProduct
+        addPostVC.delegate = self
         if let profileParentVC = self.parent?.parent as? ProfileRootVC {
             profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
         }
@@ -503,5 +504,22 @@ extension MyUploadsVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currentPost = posts[indexPath.row]
         self.performSegue(withIdentifier: "toProductDetail", sender: self)
+    }
+}
+extension MyUploadsVC: UploadPostAndFitTipsDelegate {
+    func uploadPostInfoButtonTapped() {
+//        if let tutVC = tutorialVC {
+//            tutVC.view.removeFromSuperview()
+//        }
+//        instructionsScrollView.isHidden = false
+//        disableRootButtons()
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            if let tabVC = profileParentVC.tabViewController {
+                if let requestVC = tabVC.sozieRequestsVC {
+                    tabVC.displayControllerWithIndex(0, direction: .reverse, animated: false)
+                    requestVC.uploadPostInfoButtonTapped()
+                }
+            }
+        }
     }
 }

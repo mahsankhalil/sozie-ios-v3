@@ -396,6 +396,9 @@ extension ProductDetailVC: UIScrollViewDelegate {
         let xAxis = scrollView.contentOffset.x
         let width = scrollView.bounds.size.width
         let currentPage = Int(ceil(xAxis/width))
+        if currentPage > currentProduct?.posts?.count ?? 0 {
+            return
+        }
         pageControl.currentPage = currentPage
         if let posts = currentProduct?.posts {
             if posts.count > 0 {
