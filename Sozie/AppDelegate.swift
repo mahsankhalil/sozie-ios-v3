@@ -194,7 +194,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print(error)
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .badge, .sound])
+        let userInfo = notification.request.content.userInfo
+        if let type = userInfo["type"] as? String, type == "referral_payment" {
+            if let text = userInfo["text"] as? String {
+                if UserDefaultManager.isUserLoggedIn() {
+                    let popUpInstnc = ReferralPaymentPopupVC.instance(text: text)
+                    let popUpVC = PopupController
+                        .create((self.window?.rootViewController)!)
+                        .show(popUpInstnc)
+                    popUpInstnc.closeHandler = { []  in
+                        popUpVC.dismiss()
+                    }
+                }
+            }
+        } else {
+            completionHandler([.alert, .badge, .sound])
+        }
     }
     func updatePushTokenToServer() {
         #if !targetEnvironment(simulator)
@@ -217,6 +232,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updateBadge")))
             Intercom.handlePushNotification(userInfo)
+        } else if let type = userInfo["type"] as? String, type == "referral_payment" {
+            if let text = userInfo["text"] as? String {
+                if UserDefaultManager.isUserLoggedIn() {
+                    let popUpInstnc = ReferralPaymentPopupVC.instance(text: text)
+                    let popUpVC = PopupController
+                        .create((self.window?.rootViewController)!)
+                        .show(popUpInstnc)
+                    popUpInstnc.closeHandler = { []  in
+                        popUpVC.dismiss()
+                    }
+                }
+            }
         }
         completionHandler(.noData)
     }
