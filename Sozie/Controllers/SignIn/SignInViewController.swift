@@ -278,7 +278,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             // Get user data with Apple ID credentitial
-            var dataDict = SocialAuthManager.sharedInstance.convertAppleUserToAppDict(user: appleIDCredential)
+            let dataDict = SocialAuthManager.sharedInstance.convertAppleUserToAppDict(user: appleIDCredential)
             self.signInWithDict(dataDict: dataDict)
             // Write your code here
         }

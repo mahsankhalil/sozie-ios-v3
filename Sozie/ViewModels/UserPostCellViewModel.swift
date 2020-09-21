@@ -23,7 +23,7 @@ struct UserPostWithUploadsViewModel: RowViewModel {
     var postType: PostFilterType
     var videos: [VideoUploads]?
 }
-struct UploadViewModel: RowViewModel,VideoAvailabilityProviding {
+struct UploadViewModel: RowViewModel, VideoAvailabilityProviding {
     var imageURL: URL?
     var status: String
     var isApproved: Bool

@@ -112,7 +112,7 @@ class VideoPickerVC: UIViewController {
         // Do recording and save the output to the `filePath`
         self.videoFileOutput?.startRecording(to: filePath, recordingDelegate: recordingDelegate!)
     }
-    func manageCroppingToSquare(filePath: URL, completion: @escaping (_ outputURL: URL?) -> ()) {
+    func manageCroppingToSquare(filePath: URL, completion: @escaping (_ outputURL: URL?) -> Void) {
         // output file
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let outputPath = documentsURL?.appendingPathComponent("squareVideo.mov")
@@ -154,7 +154,7 @@ class VideoPickerVC: UIViewController {
         exporter?.outputURL = outputPath
         exporter?.videoComposition = videoComposition
 
-        exporter?.exportAsynchronously() {
+        exporter?.exportAsynchronously {
             if exporter?.status == .completed {
                 print("Export complete")
                 DispatchQueue.main.async(execute: {

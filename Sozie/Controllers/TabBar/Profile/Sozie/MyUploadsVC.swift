@@ -411,7 +411,7 @@ extension MyUploadsVC: RejectionResponseDelegate {
 
 }
 extension MyUploadsVC: CustomVideoRecorderDelegate {
-    func customImagePickerController(_ picker: VideoPickerVC, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func customImagePickerController(_ picker: VideoPickerVC, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL {
             self.updatePostData(image: nil, videoURL: videoURL)
         }

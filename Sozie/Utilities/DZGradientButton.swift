@@ -77,10 +77,8 @@ import Hex
         self.superview?.bringSubviewToFront(self)
     }
     func removeShadow() {
-        for view in self.superview?.subviews ?? [] {
-            if view.tag == 112 {
-                view.removeFromSuperview()
-            }
+        for view in self.superview?.subviews ?? [] where view.tag == 112 {
+            view.removeFromSuperview()
         }
     }
 }

@@ -20,7 +20,6 @@ final class UnderlineItemView: UIView, ItemType {
             label.text = String(text)
         }
     }
-    
     var isHiddenCursor: Bool = false
     private let label: UILabel = .init()
     private let underLineView: UIView = .init()
@@ -28,7 +27,6 @@ final class UnderlineItemView: UIView, ItemType {
         super.init(frame: .zero)
         addSubview(label)
         addSubview(underLineView)
-        
         clipsToBounds = true
         label.textAlignment = .center
         label.isUserInteractionEnabled = false

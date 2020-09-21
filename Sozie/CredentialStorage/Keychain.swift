@@ -110,8 +110,7 @@ extension Keychain {
     } catch KeychainError.notFound {
       query[kSecAttrGeneric as String] = archived
       status = SecItemAdd(query as CFDictionary, nil)
-    } 
-
+    }
     guard status == noErr else {
       throw KeychainError.secCallFailed(status)
     }

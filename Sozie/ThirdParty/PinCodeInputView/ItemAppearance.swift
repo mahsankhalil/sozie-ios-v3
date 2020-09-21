@@ -9,7 +9,7 @@
 import Foundation
 
 public struct ItemAppearance {
-    
+
     public let itemSize: CGSize
     public let font: UIFont
     public let textColor: UIColor

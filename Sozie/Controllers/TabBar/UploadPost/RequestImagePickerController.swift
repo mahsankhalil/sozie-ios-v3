@@ -84,7 +84,7 @@ class RequestImagePickerController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let _ = photoIndex {
+        if photoIndex != nil {
 //            self.perform(#selector(showPosePopup), with: nil, afterDelay: 1.0)
             showPosePopup()
         }

@@ -55,7 +55,6 @@ class PinCodeVC: UIViewController {
         pinCodeInputView.frame = CGRect(x: 0, y: 0, width: securityCodeView.bounds.width, height: securityCodeView.bounds.height)
         pinCodeInputView.keyboardType = .default
     }
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

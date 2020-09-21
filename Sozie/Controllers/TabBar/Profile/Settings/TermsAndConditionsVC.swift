@@ -12,7 +12,6 @@ class TermsAndConditionsVC: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var viewModels: [TermsConditionViewModel] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,7 +29,6 @@ class TermsAndConditionsVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
     /*
     // MARK: - Navigation
 
@@ -43,7 +41,7 @@ class TermsAndConditionsVC: UIViewController {
 
 }
 extension TermsAndConditionsVC: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
@@ -68,5 +66,5 @@ extension TermsAndConditionsVC: UITableViewDelegate, UITableViewDataSource {
         viewModels[indexPath.row].isAvailable = !viewModels[indexPath.row].isAvailable
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-    
+
 }

@@ -32,7 +32,7 @@ class SecondSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
         avPlayer.volume = 0
         avPlayer.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
         videoView.backgroundColor = UIColor.clear
-        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem) 
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
         avPlayer.play()
     }
     @objc func playerItemDidReachEnd() {

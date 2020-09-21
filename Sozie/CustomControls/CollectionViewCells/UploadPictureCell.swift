@@ -82,5 +82,5 @@ extension UploadPictureCell: CellConfigurable {
         } else {
             playIcon.isHidden = true
         }
-    }    
+    }
 }

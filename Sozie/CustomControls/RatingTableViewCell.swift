@@ -36,7 +36,6 @@ class RatingTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }
 extension RatingTableViewCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {

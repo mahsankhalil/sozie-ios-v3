@@ -354,10 +354,8 @@ class BrowseVC: BaseViewController {
 
     }
     func findCategoryWithId(categoryId: Int) -> Category? {
-        for category in categoriesList {
-            if category.categoryId == categoryId {
-                return category
-            }
+        for category in categoriesList where category.categoryId == categoryId {
+            return category
         }
         return nil
     }

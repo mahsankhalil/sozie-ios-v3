@@ -70,7 +70,7 @@ class FitTipsAnswerTextVC: UIViewController {
                     navigateToTextAnswer(fitTipIndex: fitTipIndex, questIndex: fitTipIndex)
                 } else if fitTip.question[0].type == "S" {
                     navigateToRateAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
-                }  else if fitTip.question[0].type == "L" {
+                } else if fitTip.question[0].type == "L" {
                     navigateToRadioAnswer(fitTipIndex: fitTipIndex, questIndex: questIndex)
                 }
             }

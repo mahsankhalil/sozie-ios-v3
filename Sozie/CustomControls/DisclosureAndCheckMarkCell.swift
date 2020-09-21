@@ -21,7 +21,6 @@ class DisclosureAndCheckMarkCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }
 extension DisclosureAndCheckMarkCell: CellConfigurable {
     func setup(_ viewModel: RowViewModel) {

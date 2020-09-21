@@ -9,7 +9,6 @@
 import UIKit
 
 class PostSizeCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var playIconImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelBackgroundView: UIView!

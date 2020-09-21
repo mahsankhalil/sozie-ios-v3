@@ -28,7 +28,7 @@ class ProductDetailVC: BaseViewController {
     @IBOutlet weak var viewRequestsButton: UIButton!
     @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var mainScrollView: TPKeyboardAvoidingScrollView!
-    
+
     var nextURL: String?
     var currentProduct: Product?
     var viewModels: [PostCellViewModel] = []

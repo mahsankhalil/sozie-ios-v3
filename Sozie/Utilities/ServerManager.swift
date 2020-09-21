@@ -850,7 +850,7 @@ class ServerManager: NSObject {
             }
         }
     }
-    
+
 func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, videoURL: URL? = nil, block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,

@@ -48,7 +48,6 @@ class RejectionReasonPopupWithoutTitle: UIViewController {
     @IBAction func tryAgainButtonTapped(_ sender: Any) {
         self.closeHandler!()
         delegate?.rejectionResponseWithoutTitleTryAgainButtonTapped(button: sender as! UIButton)
-        
     }
 }
 extension RejectionReasonPopupWithoutTitle: PopupContentViewController {

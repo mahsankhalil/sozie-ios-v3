@@ -80,10 +80,8 @@ class FitTipsAnswerRateVC: UIViewController {
                 allFitTips[tipsIndex].question[questIndex].isAnswered = true
                 return true
             }
-            for question in allFitTips[tipsIndex].question {
-                if question.answer == nil {
-                    return false
-                }
+            for question in allFitTips[tipsIndex].question where question.answer == nil {
+                return false
             }
         }
         return true

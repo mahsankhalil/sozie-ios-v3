@@ -24,7 +24,7 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var brandImageView: UIImageView!
     @IBOutlet weak var productIdLabel: UILabel!
-    
+
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
