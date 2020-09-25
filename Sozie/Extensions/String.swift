@@ -39,6 +39,12 @@ extension String {
             return "$"
         case "EUR":
             return "€"
+        case "£":
+            return self
+        case "$":
+            return self
+        case "€":
+            return self
         default:
             return ""
         }
