@@ -56,7 +56,9 @@ class ProfileRootVC: BaseViewController {
     }
     func populateCurrentUserData() {
         if let currentUser = UserDefaultManager.getCurrentUserObject() {
-            self.nameLabel.text = currentUser.username
+            if let firstName = currentUser.firstName, let lastName = currentUser.lastName {
+                self.nameLabel.text = firstName + " " + lastName
+            }
             populateMeasurementData(currentUser: currentUser)
             if let imageURL = currentUser.picture {
                 if imageURL != "" {
