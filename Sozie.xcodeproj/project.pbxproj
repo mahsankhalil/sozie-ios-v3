@@ -37,10 +37,6 @@
 		610A7439220307D000964886 /* TitleImageViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A7438220307D000964886 /* TitleImageViewModeling.swift */; };
 		610A743B2203126600964886 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A743A2203126600964886 /* ProductCollectionViewCell.swift */; };
 		610A743D22031B7C00964886 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A743C22031B7C00964886 /* Product.swift */; };
-		610A743F22032E5200964886 /* M_S.png in Resources */ = {isa = PBXBuildFile; fileRef = 610A743E22032E5100964886 /* M_S.png */; };
-		610A74452203303300964886 /* ProductImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 610A74442203303300964886 /* ProductImg.png */; };
-		610A744722033B9000964886 /* MK.png in Resources */ = {isa = PBXBuildFile; fileRef = 610A744622033B9000964886 /* MK.png */; };
-		610A74492204280800964886 /* ProductImg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 610A74482204280700964886 /* ProductImg1.png */; };
 		61106E8324A61931000ABA1C /* ReferalResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61106E8224A61931000ABA1C /* ReferalResponse.swift */; };
 		61145CC121DB926700062332 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61145CC021DB926600062332 /* ServerManager.swift */; };
 		61161A102486A01700F61C12 /* MyUploadsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B9D1D42227EC9B007C6326 /* MyUploadsVC.swift */; };
@@ -129,7 +125,7 @@
 		61716226225F5F2A0098C3E1 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61716225225F5F2A0098C3E1 /* Label.swift */; };
 		6173E020221C068100AC9781 /* DescriptionViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6173E01F221C068100AC9781 /* DescriptionViewModeling.swift */; };
 		6178BA06248A468A001B786E /* AddPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6178BA05248A468A001B786E /* AddPostResponse.swift */; };
-		6178BA0C248A9FA3001B786E /* SignupTrimmed.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6178BA0B248A9FA3001B786E /* SignupTrimmed.mp4 */; };
+		6178BA0C248A9FA3001B786E /* SignupTrimmed.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 6178BA0B248A9FA3001B786E /* SignupTrimmed.m4v */; };
 		6179EC29227706AC00AE75F9 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6179EC27227706AC00AE75F9 /* CommentCell.swift */; };
 		6179EC2A227706AC00AE75F9 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6179EC28227706AC00AE75F9 /* CommentCell.xib */; };
 		6179EC2C22770B4600AE75F9 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6179EC2B22770B4600AE75F9 /* CommentsVC.swift */; };
@@ -221,7 +217,6 @@
 		61C40D10221EAE1000FBD7FF /* SozieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D0E221EAE1000FBD7FF /* SozieTableViewCell.xib */; };
 		61C40D13221EB35D00FBD7FF /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C40D11221EB35D00FBD7FF /* RequestTableViewCell.swift */; };
 		61C40D14221EB35D00FBD7FF /* RequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */; };
-		61C40D16221EC65600FBD7FF /* Apricot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C40D15221EC65600FBD7FF /* Apricot@3x.png */; };
 		61C4E45A23631061009A5E29 /* GoShoppingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C4E45923631061009A5E29 /* GoShoppingPopup.swift */; };
 		61CC5CF822E1E261003C3455 /* TutorialProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CC5CF722E1E261003C3455 /* TutorialProgressVC.swift */; };
 		61D26A1B24E55982007B4A1D /* UnderlineItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D26A1824E55982007B4A1D /* UnderlineItemView.swift */; };
@@ -333,10 +328,6 @@
 		610A7438220307D000964886 /* TitleImageViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleImageViewModeling.swift; sourceTree = "<group>"; };
 		610A743A2203126600964886 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		610A743C22031B7C00964886 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		610A743E22032E5100964886 /* M_S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = M_S.png; sourceTree = "<group>"; };
-		610A74442203303300964886 /* ProductImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProductImg.png; sourceTree = "<group>"; };
-		610A744622033B9000964886 /* MK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MK.png; sourceTree = "<group>"; };
-		610A74482204280700964886 /* ProductImg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProductImg1.png; sourceTree = "<group>"; };
 		61106E8224A61931000ABA1C /* ReferalResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferalResponse.swift; sourceTree = "<group>"; };
 		61145CC021DB926600062332 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		61161A112489035200F61C12 /* RejectionReasonPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectionReasonPopup.swift; sourceTree = "<group>"; };
@@ -429,7 +420,7 @@
 		61716225225F5F2A0098C3E1 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		6173E01F221C068100AC9781 /* DescriptionViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewModeling.swift; sourceTree = "<group>"; };
 		6178BA05248A468A001B786E /* AddPostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostResponse.swift; sourceTree = "<group>"; };
-		6178BA0B248A9FA3001B786E /* SignupTrimmed.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignupTrimmed.mp4; sourceTree = "<group>"; };
+		6178BA0B248A9FA3001B786E /* SignupTrimmed.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignupTrimmed.m4v; sourceTree = "<group>"; };
 		6179EC27227706AC00AE75F9 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		6179EC28227706AC00AE75F9 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		6179EC2B22770B4600AE75F9 /* CommentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
@@ -527,7 +518,6 @@
 		61C40D0E221EAE1000FBD7FF /* SozieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SozieTableViewCell.xib; sourceTree = "<group>"; };
 		61C40D11221EB35D00FBD7FF /* RequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
 		61C40D12221EB35D00FBD7FF /* RequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestTableViewCell.xib; sourceTree = "<group>"; };
-		61C40D15221EC65600FBD7FF /* Apricot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Apricot@3x.png"; sourceTree = "<group>"; };
 		61C4E45923631061009A5E29 /* GoShoppingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoShoppingPopup.swift; sourceTree = "<group>"; };
 		61CC5CF722E1E261003C3455 /* TutorialProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProgressVC.swift; sourceTree = "<group>"; };
 		61D26A1824E55982007B4A1D /* UnderlineItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlineItemView.swift; sourceTree = "<group>"; };
@@ -1143,7 +1133,7 @@
 			isa = PBXGroup;
 			children = (
 				61A05CCA24C05ACA0059B1AD /* CredentialStorage */,
-				6178BA0B248A9FA3001B786E /* SignupTrimmed.mp4 */,
+				6178BA0B248A9FA3001B786E /* SignupTrimmed.m4v */,
 				615816612333A46A00990F41 /* ThankYouAnimation.gif */,
 				613C48C1230A81C600200AE0 /* Arrow-Gif.gif */,
 				613C48C2230A81C800200AE0 /* Down-Arrow.gif */,
@@ -1166,11 +1156,6 @@
 				694480A421C7A018001A11A2 /* Views */,
 				6998E7DC21C77778009DFBEF /* AppDelegate.swift */,
 				6998E7E321C77779009DFBEF /* Assets.xcassets */,
-				610A744622033B9000964886 /* MK.png */,
-				610A74442203303300964886 /* ProductImg.png */,
-				610A74482204280700964886 /* ProductImg1.png */,
-				61C40D15221EC65600FBD7FF /* Apricot@3x.png */,
-				610A743E22032E5100964886 /* M_S.png */,
 				6998E7E821C77779009DFBEF /* Info.plist */,
 				6164D28C22FB0065008B5B22 /* Sozie-Bridging-Header.h */,
 			);
@@ -1343,7 +1328,6 @@
 				617F684224ACBAF200B70763 /* RatingTableViewCell.xib in Resources */,
 				61A20A5821E5DDAC00B27C8E /* SingleTextFieldCell.xib in Resources */,
 				614374DC2236919200DBD295 /* BlockedUserCell.xib in Resources */,
-				610A744722033B9000964886 /* MK.png in Resources */,
 				61E944A7244867C800417683 /* now_02.mp4 in Resources */,
 				613C48C3230A81C800200AE0 /* Arrow-Gif.gif in Resources */,
 				6120D43722B1064F0000678C /* TitleTextFieldCell.xib in Resources */,
@@ -1355,7 +1339,6 @@
 				61C40D14221EB35D00FBD7FF /* RequestTableViewCell.xib in Resources */,
 				611E412022145C0D007B1C62 /* PostCollectionViewCell.xib in Resources */,
 				61D769A323210C9000EDBC4A /* GoogleService-Info-DEV.plist in Resources */,
-				610A743F22032E5200964886 /* M_S.png in Resources */,
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
 				61C40D01221E7DE900FBD7FF /* TabView.xib in Resources */,
 				613AEB6A247FE54600B4A019 /* ImageViewCell.xib in Resources */,
@@ -1364,12 +1347,10 @@
 				613C48C4230A81C800200AE0 /* Down-Arrow.gif in Resources */,
 				61C40D10221EAE1000FBD7FF /* SozieTableViewCell.xib in Resources */,
 				6103E18C21F9E98800C7E7CF /* Main.storyboard in Resources */,
-				61C40D16221EC65600FBD7FF /* Apricot@3x.png in Resources */,
 				61D769A1232102D000EDBC4A /* GoogleService-Info.plist in Resources */,
 				61B5A0CD229E8B12009D372C /* StoreCell.xib in Resources */,
 				69854D6B21C8CA6D0092672D /* segoeuib.ttf in Resources */,
 				611E411C22145BF2007B1C62 /* ProductDetailCollectionViewCell.xib in Resources */,
-				610A74452203303300964886 /* ProductImg.png in Resources */,
 				613CFD312264B53D00841348 /* now_01.mp4 in Resources */,
 				617FF0B722291C5F0096597E /* PostSizeCollectionViewCell.xib in Resources */,
 				6103E18B21F9E98800C7E7CF /* LaunchScreen.storyboard in Resources */,
@@ -1381,12 +1362,11 @@
 				611EDFD6221AF0DB00FB2DBE /* WishTableViewCell.xib in Resources */,
 				6103E1B121FF330400C7E7CF /* TitleCell.xib in Resources */,
 				613CFD332264B6FA00841348 /* now.mp4 in Resources */,
-				6178BA0C248A9FA3001B786E /* SignupTrimmed.mp4 in Resources */,
+				6178BA0C248A9FA3001B786E /* SignupTrimmed.m4v in Resources */,
 				61A20A5C21E5DDBF00B27C8E /* DoubleTextFieldCell.xib in Resources */,
 				616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */,
 				61F086E72476858000D5B591 /* DisclosureAndCheckMarkCell.xib in Resources */,
 				6103E18E21F9E9AB00C7E7CF /* TabBar.storyboard in Resources */,
-				610A74492204280800964886 /* ProductImg1.png in Resources */,
 				6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1827,7 +1807,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -1920,7 +1900,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -2069,7 +2049,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
@@ -2100,7 +2080,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sozie/Sozie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 8VJR2RYALF;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (

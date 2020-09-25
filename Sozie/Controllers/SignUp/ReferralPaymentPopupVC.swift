@@ -56,6 +56,6 @@ class ReferralPaymentPopupVC: UIViewController {
 }
 extension ReferralPaymentPopupVC: PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width - 26.0, height: 300.0)
+        return CGSize(width: UIScreen.main.bounds.size.width - 26.0, height: 250.0)
     }
 }
