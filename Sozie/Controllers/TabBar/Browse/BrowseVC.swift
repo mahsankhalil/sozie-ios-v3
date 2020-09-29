@@ -11,7 +11,7 @@ import SVProgressHUD
 import WaterfallLayout
 import CCBottomRefreshControl
 import EasyTipView
-
+import SideMenu
 public enum PopupType: String {
     case category = "CATEGORY"
     case filter = "FILTER"
@@ -221,7 +221,8 @@ class BrowseVC: BaseViewController {
 //        }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.imageTaken == nil {
-            super.cancelButtonTapped()
+//            super.cancelButtonTapped()
+//            setupSozieLogoNavBar()
             cancelTipView?.dismiss()
             collectionTipView?.dismiss()
             if let index = selectedIndex {
@@ -631,6 +632,20 @@ class BrowseVC: BaseViewController {
         largeBottomView?.removeFromSuperview()
         showSmallBottomView()
         showPopUpWithTitle(type: .category)
+    }
+    @IBAction func sideMenuButtonTapped(_ sender: Any) {
+        var sideMenuSet = SideMenuSettings()
+        sideMenuSet.presentationStyle.backgroundColor = UIColor.black
+        sideMenuSet.presentationStyle = .menuSlideIn
+        sideMenuSet.menuWidth = UIScreen.main.bounds.size.width - 60.0
+        sideMenuSet.statusBarEndAlpha = 0.0
+        sideMenuSet.blurEffectStyle = .light
+        sideMenuSet.presentationStyle.menuStartAlpha = 0.0
+        sideMenuSet.presentationStyle.presentingEndAlpha = 0.3
+        let rightMenu = SideMenuNavigationController(rootViewController: (storyboard?.instantiateViewController(withIdentifier: "ProfileSideMenuVC"))!, settings: sideMenuSet)
+        rightMenu.setNavigationBarHidden(true, animated: false)
+        present(rightMenu, animated: true, completion: nil)
+
     }
     @objc override func nextButtonTapped() {
         performSegue(withIdentifier: "toProductDetail", sender: self)
