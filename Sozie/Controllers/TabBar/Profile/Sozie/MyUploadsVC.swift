@@ -76,22 +76,22 @@ class MyUploadsVC: UIViewController {
             setupButtonSelected(button: successButton)
             setUpButtonUnselected(button: inReviewButton)
             setUpButtonUnselected(button: reDoButton)
-            hideOtherLabels(label: successCountLabel)
+//            hideOtherLabels(label: successCountLabel)
         case .inReview:
             setupButtonSelected(button: inReviewButton)
             setUpButtonUnselected(button: successButton)
             setUpButtonUnselected(button: reDoButton)
-            hideOtherLabels(label: inReviewCountLabel)
+//            hideOtherLabels(label: inReviewCountLabel)
         case .redo:
             setupButtonSelected(button: reDoButton)
             setUpButtonUnselected(button: inReviewButton)
             setUpButtonUnselected(button: successButton)
-            hideOtherLabels(label: redoCountLabel)
+//            hideOtherLabels(label: redoCountLabel)
         default:
             setupButtonSelected(button: successButton)
             setUpButtonUnselected(button: inReviewButton)
             setUpButtonUnselected(button: reDoButton)
-            hideOtherLabels(label: successCountLabel)
+//            hideOtherLabels(label: successCountLabel)
         }
     }
     func setUpButtonUnselected(button: UIButton) {
@@ -132,6 +132,7 @@ class MyUploadsVC: UIViewController {
         serverParams["review_action"] = "P"
         currentFilterType = .inReview
         getPostsFromServer()
+        self.getPostsCount()
         reloadData()
     }
     @objc func loadNextPage() {
@@ -150,45 +151,59 @@ class MyUploadsVC: UIViewController {
                 let paginatedData = response as! PostPaginatedResponse
                 self.posts.append(contentsOf: paginatedData.results)
                 self.nextURL = paginatedData.next
-                self.applyCountLabel(count: paginatedData.count)
+//                self.applyCountLabel(count: paginatedData.count)
                 self.hideShowAddMeasurementView()
                 self.tableView.bottomRefreshControl?.endRefreshing()
 //                self.countLabel.text = String(paginatedData.count) + ( paginatedData.count <= 1 ? " Upload" : " Uploads")
             }
         }
     }
-    func applyCountLabel(count: Int) {
-        switch currentFilterType {
-        case .success:
-            self.successCountLabel.text = String(count)
-        case .inReview:
-            self.inReviewCountLabel.text = String(count)
-        case .redo:
-            self.redoCountLabel.text = String(count)
-        default:
-            return
+    func getPostsCount() {
+        var dataDict = [String: Any]()
+        dataDict["user_id"] = UserDefaultManager.getCurrentUserId()
+        ServerManager.sharedInstance.getUserPostsCount(params: dataDict) { (isSuccess, response) in
+            if isSuccess {
+                let countData = response as! PostCountResponse
+                self.successCountLabel.text = String(countData.approveCount)
+                self.inReviewCountLabel.text = String(countData.pendingCount)
+                self.redoCountLabel.text = String(countData.rejectedCount)
+
+            }
         }
+
     }
+//    func applyCountLabel(count: Int) {
+//        switch currentFilterType {
+//        case .success:
+//            self.successCountLabel.text = String(count)
+//        case .inReview:
+//            self.inReviewCountLabel.text = String(count)
+//        case .redo:
+//            self.redoCountLabel.text = String(count)
+//        default:
+//            return
+//        }
+//    }
     func resetData() {
         serverParams.removeAll()
         posts.removeAll()
-        redoCountLabel.text = ""
-        inReviewCountLabel.text = ""
-        successCountLabel.text = ""
+//        redoCountLabel.text = ""
+//        inReviewCountLabel.text = ""
+//        successCountLabel.text = ""
     }
-    func hideOtherLabels(label: UILabel) {
-        label.isHidden = false
-        if label == successCountLabel {
-            inReviewCountLabel.isHidden = true
-            redoCountLabel.isHidden = true
-        } else if label == inReviewCountLabel {
-            successCountLabel.isHidden = true
-            redoCountLabel.isHidden = true
-        } else if label == redoCountLabel {
-            successCountLabel.isHidden = true
-            inReviewCountLabel.isHidden = true
-        }
-    }
+//    func hideOtherLabels(label: UILabel) {
+//        label.isHidden = false
+//        if label == successCountLabel {
+//            inReviewCountLabel.isHidden = true
+//            redoCountLabel.isHidden = true
+//        } else if label == inReviewCountLabel {
+//            successCountLabel.isHidden = true
+//            redoCountLabel.isHidden = true
+//        } else if label == redoCountLabel {
+//            successCountLabel.isHidden = true
+//            inReviewCountLabel.isHidden = true
+//        }
+//    }
 
     @IBAction func addMeasurementButtonTapped(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)

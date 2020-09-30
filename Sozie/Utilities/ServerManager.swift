@@ -541,6 +541,27 @@ class ServerManager: NSObject {
             }
         }
     }
+    func getUserPostsCount(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
+        var url = ServerManager.postURL
+        if let userId = params["user_id"] {
+            url = url + "?user_id=" + String(userId as! Int)
+        }
+        url = url + "&response_type=count"
+        Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+            let decoder = JSONDecoder()
+            let obj: Result<PostCountResponse> = decoder.decodeResponse(from: response)
+            obj.ifSuccess {
+                block!(true, obj.value!)
+            }
+            obj.ifFailure {
+                block!(false, obj.error!)
+            }
+        }
+
+    }
     func getUserPosts(params: [String: Any], block: CompletionHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")

@@ -60,6 +60,7 @@
 		6122289921F5D33500D4D747 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289821F5D33500D4D747 /* SignInViewController.swift */; };
 		6122289B21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */; };
 		6122289D21F5D3D500D4D747 /* ServerResponsePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122289C21F5D3D500D4D747 /* ServerResponsePopUp.swift */; };
+		6123949725248D9D00A4F69D /* PostCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123949625248D9D00A4F69D /* PostCountResponse.swift */; };
 		6129C62F242CD5CD00766711 /* SozieInstructionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6129C62E242CD5CD00766711 /* SozieInstructionsVC.swift */; };
 		612F00CD2208476A0025DBEA /* ListingPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00CC2208476A0025DBEA /* ListingPopupVC.swift */; };
 		612F00CF22084B390025DBEA /* SelectionPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F00CE22084B390025DBEA /* SelectionPopupVC.swift */; };
@@ -350,6 +351,7 @@
 		6122289821F5D33500D4D747 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		6122289A21F5D35B00D4D747 /* ForgotPasswordEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordEmailPopUp.swift; sourceTree = "<group>"; };
 		6122289C21F5D3D500D4D747 /* ServerResponsePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponsePopUp.swift; sourceTree = "<group>"; };
+		6123949625248D9D00A4F69D /* PostCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCountResponse.swift; sourceTree = "<group>"; };
 		6129C62E242CD5CD00766711 /* SozieInstructionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SozieInstructionsVC.swift; sourceTree = "<group>"; };
 		612F00CC2208476A0025DBEA /* ListingPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingPopupVC.swift; sourceTree = "<group>"; };
 		612F00CE22084B390025DBEA /* SelectionPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPopupVC.swift; sourceTree = "<group>"; };
@@ -1099,6 +1101,7 @@
 				6178BA05248A468A001B786E /* AddPostResponse.swift */,
 				61FF8DBC248E5A4900AE746E /* PostFitTips.swift */,
 				61106E8224A61931000ABA1C /* ReferalResponse.swift */,
+				6123949625248D9D00A4F69D /* PostCountResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1650,6 +1653,7 @@
 				613B0808230E994200AB5E8B /* SozieRequestErrorPopUp.swift in Sources */,
 				613F40ED222014B8009AABA6 /* SizeCellViewModel.swift in Sources */,
 				DA48CB2421FC3A64006804B6 /* DoubleTextFieldCellViewModel.swift in Sources */,
+				6123949725248D9D00A4F69D /* PostCountResponse.swift in Sources */,
 				61EE668F22D5E5B2004265F1 /* BrowseWelcomeVC.swift in Sources */,
 				61D26A1D24E55982007B4A1D /* PasswordItemView.swift in Sources */,
 				616A41A324F3D5DD003B8D38 /* ProductIdProviding.swift in Sources */,
