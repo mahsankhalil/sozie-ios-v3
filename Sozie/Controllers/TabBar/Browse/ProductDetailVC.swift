@@ -12,6 +12,7 @@ import SVProgressHUD
 import EasyTipView
 import SafariServices
 import TPKeyboardAvoiding
+import SideMenu
 class ProductDetailVC: BaseViewController {
 
     @IBOutlet weak var orderButton: DZGradientButton!
@@ -102,6 +103,20 @@ class ProductDetailVC: BaseViewController {
         }
     }
     override func viewDidAppear(_ animated: Bool) {
+    }
+    @IBAction func sideMenuButtonTapped(_ sender: Any) {
+        var sideMenuSet = SideMenuSettings()
+        sideMenuSet.presentationStyle.backgroundColor = UIColor.black
+        sideMenuSet.presentationStyle = .menuSlideIn
+        sideMenuSet.menuWidth = UIScreen.main.bounds.size.width - 60.0
+        sideMenuSet.statusBarEndAlpha = 0.0
+        sideMenuSet.blurEffectStyle = .light
+        sideMenuSet.presentationStyle.menuStartAlpha = 0.0
+        sideMenuSet.presentationStyle.presentingEndAlpha = 0.3
+        let rightMenu = SideMenuNavigationController(rootViewController: (storyboard?.instantiateViewController(withIdentifier: "ProfileSideMenuVC"))!, settings: sideMenuSet)
+        rightMenu.setNavigationBarHidden(true, animated: false)
+        present(rightMenu, animated: true, completion: nil)
+
     }
 
     override func viewDidLayoutSubviews() {

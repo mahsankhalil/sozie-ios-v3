@@ -869,6 +869,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     @objc func showInstructions() {
         tutorialVC?.view.removeFromSuperview()
         instructionsScrollView.isHidden = false
+        instructionsScrollView.setContentOffset(CGPoint.zero, animated: true)
         disableRootButtons()
     }
 }

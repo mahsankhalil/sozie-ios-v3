@@ -27,8 +27,15 @@ class TabBarVC: UITabBarController {
 //        Intercom.setBottomPadding(30.0)
         NotificationCenter.default.addObserver(self, selector: #selector(updateBadge), name: Notification.Name(rawValue: "updateBadge"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showProfileTab), name: Notification.Name(rawValue: "showProfileTab"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showInstructions), name: Notification.Name(rawValue: "ShowInstructions"), object: nil)
     }
 
+    @objc func showInstructions() {
+        self.selectedIndex = 2
+        if let cntroller = self.viewControllers![2] as? UINavigationController {
+            cntroller.popToRootViewController(animated: false)
+        }
+    }
     @objc func showProfileTab() {
         self.selectedIndex = 2
     }

@@ -33,9 +33,11 @@ class ProfileTabsPageVC: TabPageViewController {
         option.pageBackgoundColor = UIColor.clear
         option.font = UIFont(name: Font.standard.rawValue, size: 13.0)!
         self.view.backgroundColor = UIColor.clear
-
+        NotificationCenter.default.addObserver(self, selector: #selector(showInstructions), name: Notification.Name(rawValue: "ShowInstructions"), object: nil)
     }
-
+    @objc func showInstructions() {
+        self.displayControllerWithIndex(0, direction: .reverse, animated: true)
+    }
     //    override func updateNavigationBar() {
     //
     //    }

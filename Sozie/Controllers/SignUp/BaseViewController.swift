@@ -141,6 +141,7 @@ class BaseViewController: UIViewController {
         let infoButton = UIBarButtonItem(image: UIImage(named: "info"), style: .plain, target: self, action: #selector(infoButtonTapped))
         navigationItem.rightBarButtonItem = infoButton
     }
+    
     @objc func infoButtonTapped() {
     }
     @objc func tagItemButtonTapped() {

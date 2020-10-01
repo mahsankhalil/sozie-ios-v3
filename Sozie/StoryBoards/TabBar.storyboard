@@ -967,6 +967,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sRM-8U-giY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Zav-Aa-d0q">
+                        <barButtonItem key="rightBarButtonItem" image="Menu Icon" id="o0o-NB-0eq">
+                            <connections>
+                                <action selector="sideMenuButtonTapped:" destination="Shc-8z-rMy" id="333-46-zuo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="843"/>
                     <connections>
                         <outlet property="bottomView" destination="M7L-ct-lfX" id="DS1-7x-bid"/>
@@ -992,7 +999,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iuN-hJ-MH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2592.8000000000002" y="-304.4977511244378"/>
+            <point key="canvasLocation" x="2594" y="-224"/>
         </scene>
         <!--WebVC-->
         <scene sceneID="zTl-7d-Hde">
@@ -2819,7 +2826,7 @@ Complete from home in your own clothes.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Wish List Selected" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EL-Jq6">
-                                                <rect key="frame" x="333" y="15" width="26" height="23.000000000000007"/>
+                                                <rect key="frame" x="333" y="15" width="26" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Jod-t9-8Hf"/>
                                                     <constraint firstAttribute="height" constant="23" id="u5D-Tp-tTb"/>
@@ -7707,8 +7714,8 @@ Click images with red X for feedback. </string>
         <image name="up-arrow-sketch" width="50" height="65.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LXu-v3-0l3"/>
-        <segue reference="nT3-Pv-VcT"/>
+        <segue reference="567-1Z-O12"/>
+        <segue reference="o6Q-L5-dL4"/>
         <segue reference="fhc-UN-Ju3"/>
     </inferredMetricsTieBreakers>
 </document>
