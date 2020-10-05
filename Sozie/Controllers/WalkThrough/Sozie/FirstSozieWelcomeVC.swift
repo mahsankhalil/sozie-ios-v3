@@ -8,7 +8,11 @@
 
 import UIKit
 import AVFoundation
-
+class AVPlayerView: UIView {
+    override class var layerClass: AnyClass {
+        return AVPlayerLayer.self
+    }
+}
 class FirstSozieWelcomeVC: UIViewController, WelcomeModel, IndexProviding {
 
     weak var delegate: WelcomeButtonActionsDelegate?

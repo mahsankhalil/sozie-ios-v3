@@ -38,8 +38,6 @@ class WelcomePageVC: UIPageViewController {
         delegate = self
         if userType == UserType.sozie {
             orderedViewControllers = [self.viewCntrollerWith(identifier: "SecondSozieWelcomeVC"), self.viewCntrollerWith(identifier: "FirstSozieWelcomeVC")] as! [UIViewController]
-        } else {
-            orderedViewControllers = [self.viewCntrollerWith(identifier: "FirstShopperWelcomeVC"), self.viewCntrollerWith(identifier: "SecondShopperWelcomeVC"), self.viewCntrollerWith(identifier: "ThirdShopperWelcomeVC")] as! [UIViewController]
         }
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
