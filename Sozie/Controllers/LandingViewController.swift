@@ -9,19 +9,9 @@
 import UIKit
 import AVFoundation
 
-public enum UserType: String {
-    case sozie = "SZ"
-    case shopper = "SP"
-}
-
 class LandingViewController: UIViewController {
 
     @IBOutlet weak var sozieButton: DZGradientButton!
-    @IBOutlet weak var shopperButton: UIButton!
-    @IBOutlet weak var shopperLabel: UILabel!
-    @IBOutlet weak var sozieLabel: UILabel!
-    var currentUserType: UserType?
-//    var signUpDict: [String: Any] = [:]
     var avPlayer: AVPlayer!
     var avPlayerLayer: AVPlayerLayer!
     private var signUpDict: [String: Any]?
@@ -32,13 +22,7 @@ class LandingViewController: UIViewController {
         sozieButton.shadowAdded = true
         sozieButton.layer.borderWidth = 0.5
         sozieButton.layer.borderColor = UIColor(hex: "979797").cgColor
-        shopperButton.layer.cornerRadius = 6.0
-        shopperButton.layer.borderWidth = 0.5
-        shopperButton.layer.borderColor = UIColor(hex: "979797").cgColor
         loadBackgroundVideo()
-        shopperLabel.lblShadow(color: UIColor.black, radius: 5, opacity: 0.84)
-        sozieLabel.lblShadow(color: UIColor.black, radius: 5, opacity: 0.84)
-
     }
     func loadBackgroundVideo() {
         let url = Bundle.main.url(forResource: "SignupTrimmed", withExtension: "m4v")
@@ -66,30 +50,11 @@ class LandingViewController: UIViewController {
         if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
             signUpInfoProvider.signUpInfo = signUpDict
         }
-        if let destVC = segue.destination as? WelcomeRootVC {
-            destVC.userType = currentUserType
-        }
-//        if segue.identifier == "toCountryVC", let selectCountryViewController = segue.destination as? SelectCountryVC {
-//            selectCountryViewController.currentUserType = currentUserType
-//        }
     }
-
-    @IBAction func signupShopperBtnTapped(_ sender: Any) {
-        currentUserType = .shopper
-        signUpDict![User.CodingKeys.country.stringValue] = 2
-        signUpDict![User.CodingKeys.type.stringValue] = currentUserType?.rawValue
-//        performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-        performSegue(withIdentifier: "toWelcome", sender: self)
-    }
-
     @IBAction func signUpSozieBtnTapped(_ sender: Any) {
-        currentUserType = .sozie
         signUpDict![User.CodingKeys.country.stringValue] = 2
-        signUpDict![User.CodingKeys.type.stringValue] = currentUserType?.rawValue
-//        performSegue(withIdentifier: "toWorkVC", sender: self)
+        signUpDict![User.CodingKeys.type.stringValue] = "SZ"
         performSegue(withIdentifier: "toWelcome", sender: self)
-
-//        performSegue(withIdentifier: "toCountryVC", sender: self)
     }
 
 }

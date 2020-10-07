@@ -18,15 +18,11 @@ class ProductDetailCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        if UserDefaultManager.getIfShopper() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken != nil {
             cameraButton.isHidden = true
         } else {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if appDelegate.imageTaken != nil {
-                cameraButton.isHidden = true
-            } else {
-                cameraButton.isHidden = false
-            }
+            cameraButton.isHidden = false
         }
         cameraButton.isHidden = true
     }

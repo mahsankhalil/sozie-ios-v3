@@ -53,10 +53,6 @@ class UserDefaultManager: NSObject {
         return loginResponse.user?.userId
     }
 
-    static func getCurrentUserType() -> String? {
-        guard let loginResponse = loginResponse() else { return nil }
-        return loginResponse.user?.type
-    }
     static func getCurrentSozieType() -> String? {
         guard let loginResponse = loginResponse() else { return nil }
         return loginResponse.user?.sozieType
@@ -152,16 +148,6 @@ class UserDefaultManager: NSObject {
         } else {
             return nil
         }
-    }
-    static func getIfShopper() -> Bool {
-        if let userType = UserDefaultManager.getCurrentUserType() {
-            if userType == UserType.shopper.rawValue {
-                return true
-            } else {
-                return false
-            }
-        }
-        return true
     }
     static func getIfUserGuideShownFor(userGuide: String) -> Bool {
         if UserDefaults.standard.bool(forKey: userGuide) == true {

@@ -28,7 +28,6 @@ class SelectCountryVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var selectedCountryId: Int?
-    var currentUserType: UserType?
     var signUpDict: [String: Any]? = [:]
 
     var countries: [Country]? {
@@ -80,15 +79,9 @@ class SelectCountryVC: UIViewController {
 
     @IBAction func nextBtnTapped(_ sender: Any) {
         if let countryid = selectedCountryId {
-            currentUserType = .sozie
             signUpDict![User.CodingKeys.country.stringValue] = countryid
-            signUpDict![User.CodingKeys.type.stringValue] = currentUserType?.rawValue
+            signUpDict![User.CodingKeys.type.stringValue] = "SZ"
             performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-//            if currentUserType == .shopper {
-//                performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-//            } else if currentUserType == .sozie {
-//                performSegue(withIdentifier: "toWorkVC", sender: self)
-//            }
         } else {
             UtilityManager.showErrorMessage(body: "Please select Country.", in: self)
         }

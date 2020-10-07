@@ -80,8 +80,6 @@ class MeasurementsVC: UIViewController {
         }
         setupMeasurement()
         fetchDataFromServer()
-        if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.measurementUserGuide) == false {
-        }
         tableViewHeightConstraint.constant = 490
         if UIScreen.main.bounds.size.height < 731 {
             scrollViewHeightConstraint.constant = 731
@@ -97,7 +95,6 @@ class MeasurementsVC: UIViewController {
             scrollViewHeightConstraint.constant = UIScreen.main.bounds.height - topSafeArea - bottomSafeArea
         }
         scrollView.contentSizeToFit()
-//        skipButton.isHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

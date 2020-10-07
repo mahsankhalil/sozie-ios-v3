@@ -17,15 +17,10 @@ class ProfileTabsPageVC: TabPageViewController {
 
     override init() {
         super.init()
-        if UserDefaultManager.getIfShopper() {
-            soziesVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SoziesVC") as? SoziesVC
-            requestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "RequestsVC") as? RequestsVC
-            tabItems = [(soziesVC, "SOZIES"), (requestsVC, "REQUESTS")] as! [(viewController: UIViewController, title: String)]
-        } else {
-            sozieRequestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SozieRequestsVC") as? SozieRequestsVC
-            myUploadsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "MyUploadsVC") as? MyUploadsVC
-            tabItems = [(sozieRequestsVC, "Sozie Requests"), (myUploadsVC, "My Uploads")] as! [(viewController: UIViewController, title: String)]
-        }
+        
+        sozieRequestsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "SozieRequestsVC") as? SozieRequestsVC
+        myUploadsVC = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(withIdentifier: "MyUploadsVC") as? MyUploadsVC
+        tabItems = [(sozieRequestsVC, "Sozie Requests"), (myUploadsVC, "My Uploads")] as! [(viewController: UIViewController, title: String)]
         option.tabWidth = UIScreen.main.bounds.size.width / CGFloat(tabItems.count)
         option.tabHeight = 44.0
         option.currentColor = UtilityManager.getGenderColor() //UIColor(hex: "FC8C8C")

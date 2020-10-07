@@ -11,7 +11,6 @@ import UIKit
 class WelcomeRootVC: UIViewController {
 
     @IBOutlet weak var pageControl: UIPageControl!
-    var userType: UserType?
     var signUpDict: [String: Any]?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,6 @@ class WelcomeRootVC: UIViewController {
         // Pass the selected object to the new view controller.
         if let destVC = segue.destination as? WelcomePageVC {
             destVC.pageDelegate = self
-            destVC.userType = userType
         }
         if var signUpInfoProvider = segue.destination as? SignUpInfoProvider {
             signUpInfoProvider.signUpInfo = signUpDict

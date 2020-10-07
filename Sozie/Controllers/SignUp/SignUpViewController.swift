@@ -201,13 +201,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             if isSuccess {
                 if let loginResponse = response as? LoginResponse {
                     _ = UserDefaultManager.saveLoginResponse(loginResp: loginResponse)
-//                    UtilityManager.registerUserOnIntercom()
                 }
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.updatePushTokenToServer()
                 if let user = UserDefaultManager.getCurrentUserObject() {
-//                    HubSpotManager.createContact(user: user)
-//                    Analytics.logEvent("SignUp-Completed", parameters: ["email": user.email])
                     if let tutorialCompleted = user.tutorialCompleted {
                         if tutorialCompleted == false {
                             UserDefaultManager.removeAllUserGuidesShown()
@@ -318,7 +315,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
         maleBtn.applyButtonUnSelected()
         femaleBtn.applyButtonShadow()
         maleBtn.layer.shadowOpacity = 0.0
-//        tipView?.dismiss()
     }
     func applyMaleSelection() {
         isMaleSelected = true
@@ -338,43 +334,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, ValidationDel
             return
         }
         applyFemaleSelection()
-
     }
 
     @IBAction func maleBtnTapped(_ sender: Any) {
         if UserDefaultManager.getCurrentUserObject() != nil {
             return
         }
-//        if let countryId = signUpDict!["country"] as? Int {
         applyMaleSelection()
-//        }
-//        else {
-//            tipView?.dismiss()
-//            let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
-//            tipView = EasyTipView(text: sozietext, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
-//            tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
-//
-//        }
-//        let sozietext = "“Hi guys, We are working on your Sozie solution so that you can earn money too! Please check back in the near future for an updated version of our app”"
-//        let shopperText = "“Hi guys, We are working hard on a Sozie solution for you! Please look out for the updated version of our app in the near future.”"
-//        var text = sozietext
-//        if UserDefaultManager.getCurrentUserObject() != nil, let userType = UserDefaultManager.getCurrentUserType() {
-//            if userType == UserType.sozie.rawValue {
-//                text = sozietext
-//            } else {
-//                text = shopperText
-//            }
-//        } else {
-//            if let userType = signUpDict?[User.CodingKeys.type.stringValue] as? String {
-//                if userType == UserType.sozie.rawValue {
-//                    text = sozietext
-//                } else {
-//                    text = shopperText
-//                }
-//            }
-//        }
-//        tipView = EasyTipView(text: text, preferences: UtilityManager.tipViewGlobalPreferences(), delegate: nil)
-//        tipView?.show(animated: true, forView: self.maleBtn, withinSuperview: self.view)
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {

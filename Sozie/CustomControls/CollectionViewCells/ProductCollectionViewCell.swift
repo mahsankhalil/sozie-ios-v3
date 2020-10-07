@@ -29,14 +29,6 @@ class ProductCollectionViewCell: UICollectionViewCell {
         productImageView.sd_setShowActivityIndicatorView(true)
         productImageView.sd_setIndicatorStyle(.gray)
         titleImageViewHeightConstraint.constant = 13.0
-
-//        if let userType = UserDefaultManager.getCurrentUserType() {
-//            if userType == UserType.shopper.rawValue {
-//                titleImageViewHeightConstraint.constant = 13.0
-//            } else {
-//                titleImageViewHeightConstraint.constant = 0.0
-//            }
-//        }
     }
     func showTipView() {
         if UserDefaultManager.isUserGuideDisabled() == false {
@@ -93,16 +85,6 @@ extension ProductCollectionViewCell: CellConfigurable {
                 checkMarkImageView.isHidden = false
             } else {
                 checkMarkImageView.isHidden = true
-            }
-        }
-        if UserDefaultManager.getIfShopper() {
-            if maskImageView.tag == 0 && maskImageView.isHidden == false {
-                tipView?.isHidden = false
-            } else {
-                tipView?.isHidden = true
-            }
-            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.browseUserGuide) == false {
-                showTipView()
             }
         }
     }

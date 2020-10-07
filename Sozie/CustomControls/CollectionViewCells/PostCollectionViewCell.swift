@@ -41,19 +41,14 @@ class PostCollectionViewCell: UICollectionViewCell {
         profileImageView.makeViewCircle()
         profileImageView.applyStandardBorder(hexColor: "A6A6A6")
         sizeWornView.roundCorners(corners: [.topLeft], radius: 20.0)
-        if UserDefaultManager.getIfShopper() {
-            followButtonWidthConstraint.constant = 60.0
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.imageTaken != nil {
             cameraButton.isHidden = true
         } else {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if appDelegate.imageTaken != nil {
-                cameraButton.isHidden = true
-            } else {
-                cameraButton.isHidden = false
-            }
-            followButtonWidthConstraint.constant = 0.0
-            followButton.isHidden = true
+            cameraButton.isHidden = false
         }
+        followButtonWidthConstraint.constant = 0.0
+        followButton.isHidden = true
         cameraButton.isHidden = true
     }
     @objc func dismissTipView() {
@@ -124,16 +119,6 @@ extension PostCollectionViewCell: CellConfigurable {
             sizeWornLabel.text = descriptionViewModel.description
         }
         assignMeasurements(viewModel: viewModel)
-        if UserDefaultManager.getIfShopper() {
-            if followButton.tag == 1 {
-                tipView?.isHidden = false
-            } else {
-                tipView?.isHidden = true
-            }
-            if UserDefaultManager.getIfUserGuideShownFor(userGuide: UserDefaultKey.followButtonUserGuide) == false {
-                perform(#selector(showTipView), with: nil, afterDelay: 0.5)
-            }
-        }
     }
     func assignMeasurements(viewModel: RowViewModel) {
         if let measurementModel = viewModel as? MeasurementViewModeling {

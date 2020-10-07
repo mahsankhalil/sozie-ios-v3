@@ -383,11 +383,6 @@ class BrowseVC: BaseViewController {
         if filterBySozies {
             dataDict["filter_by_sozie"] = filterBySozies
         }
-//        if let userType = UserDefaultManager.getCurrentUserType() {
-//            if userType == UserType.sozie.rawValue {
-//                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
-//            }
-//        }
         ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
             if isSuccess {
                 self.itemsCountLbl.text = String((response as! CountResponse).count) + ((response as! CountResponse).count <= 1 ? " ITEM" : " ITEMS")
@@ -420,11 +415,6 @@ class BrowseVC: BaseViewController {
         if let filter = filterType {
             dataDict["filter_type"] = filter
         }
-//        if let userType = UserDefaultManager.getCurrentUserType() {
-//            if userType == UserType.sozie.rawValue {
-//                dataDict["brand"] = UserDefaultManager.getCurrentUserObject()?.brand
-//            }
-//        }
         ServerManager.sharedInstance.getAllProducts(params: dataDict) { (isSuccess, response) in
 
             self.productsCollectionVu.refreshControl?.endRefreshing()

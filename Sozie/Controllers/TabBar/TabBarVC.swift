@@ -15,12 +15,8 @@ class TabBarVC: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if UserDefaultManager.getCurrentUserType() == UserType.shopper.rawValue {
-            populateUIOfShopperType()
-        } else {
-            populateUIOfSozieType()
-            currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
-        }
+        populateUIOfSozieType()
+        currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
         self.delegate = self
         self.view.backgroundColor = UIColor.white
 //        Intercom.setLauncherVisible(true)
@@ -48,15 +44,6 @@ class TabBarVC: UITabBarController {
     }
 
     // MARK: - Custom Methods
-    func populateUIOfShopperType() {
-        let shopNC = self.storyboard?.instantiateViewController(withIdentifier: "BrowseNC")
-        shopNC?.tabBarItem = UITabBarItem(title: "Shop", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected"))
-        let wishListNC = self.storyboard?.instantiateViewController(withIdentifier: "WishListNC")
-        wishListNC?.tabBarItem = UITabBarItem(title: "Saved Requests", image: UIImage(named: "Whish List"), selectedImage: UIImage(named: "Wish List Selected"))
-        let profileNC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNC")
-        profileNC?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "Profile icon"), selectedImage: UIImage(named: "Profile icon-Selected"))
-        self.viewControllers = ([shopNC, wishListNC, profileNC] as! [UIViewController])
-    }
     func populateUIOfSozieType() {
         var genderImageString = ""
         if let gender = UserDefaultManager.getCurrentUserGender() {
@@ -68,8 +55,6 @@ class TabBarVC: UITabBarController {
         browseNC?.tabBarItem = UITabBarItem(title: "Browse", image: UIImage(named: "Shop"), selectedImage: UIImage(named: "Shop Selected" + genderImageString))
         let wishListNC = self.storyboard?.instantiateViewController(withIdentifier: "WishListNC")
         wishListNC?.tabBarItem = UITabBarItem(title: "Saved Requests", image: UIImage(named: "Whish List"), selectedImage: UIImage(named: "Wish List Selected" + genderImageString))
-//        let cameraVc = UIViewController()
-//        cameraVc.tabBarItem = UITabBarItem(title: "Camera", image: UIImage(named: "Camera icon"), selectedImage: UIImage(named: "Camera icon-Selected"))
         var imageIcon = UIImage(named: "Profile icon")
         if let user = UserDefaultManager.getCurrentUserObject() {
             if let image = user.picture {
@@ -109,23 +94,21 @@ class TabBarVC: UITabBarController {
 }
 extension TabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if UserDefaultManager.getIfShopper() == false {
-            if self.customizableViewControllers?.index(of: viewController) == 0 {
-                if currentBrandId != UserDefaultManager.getCurrentUserObject()?.brand {
-                    if let navCntrlr = viewController as? UINavigationController {
-                        navCntrlr.popToRootViewController(animated: true)
-                    }
-                    currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
+        if self.customizableViewControllers?.index(of: viewController) == 0 {
+            if currentBrandId != UserDefaultManager.getCurrentUserObject()?.brand {
+                if let navCntrlr = viewController as? UINavigationController {
+                    navCntrlr.popToRootViewController(animated: true)
                 }
-            } else if self.customizableViewControllers?.index(of: viewController) == 2 {
-                if UserDefaultManager.getIfBrowseTutorialShown() == false {
-                    UserDefaultManager.setBrowserTutorialShown()
-                }
-
-            } else if self.customizableViewControllers?.index(of: viewController) == 3 {
-                Intercom.presentMessenger()
-                return false
+                currentBrandId = UserDefaultManager.getCurrentUserObject()?.brand
             }
+        } else if self.customizableViewControllers?.index(of: viewController) == 2 {
+            if UserDefaultManager.getIfBrowseTutorialShown() == false {
+                UserDefaultManager.setBrowserTutorialShown()
+            }
+
+        } else if self.customizableViewControllers?.index(of: viewController) == 3 {
+            Intercom.presentMessenger()
+            return false
         }
         return true
     }

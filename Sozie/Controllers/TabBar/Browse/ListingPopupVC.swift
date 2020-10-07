@@ -96,24 +96,10 @@ class ListingPopupVC: UIViewController {
                     self.tableView.reloadData()
                 }
             } else {
-//                if let userType = UserDefaultManager.getCurrentUserType() {
-//                    if userType == UserType.shopper.rawValue {
-//                        viewModels.removeAll()
-//                        var viewModel1 = DisclosureCellViewModel()
-//                        viewModel1.title = "FILTER BY BRANDS"
-//                        viewModels.append(viewModel1)
-//                    } else {
-//                        viewModels.removeAll()
-//                    }
-//                }
                 viewModels.removeAll()
                 var viewModel1 = DisclosureCellViewModel()
                 viewModel1.title = "FILTER BY BRANDS"
                 viewModels.append(viewModel1)
-//                var viewModel2 = DisclosureCellViewModel()
-//                viewModel2.title = "FILTER BY SOZIES"
-//                viewModel2.reuseIdentifier = "TitleAndCheckmarkCell"
-//                viewModels.append(viewModel2)
                 self.tableView.reloadData()
             }
         }
@@ -228,26 +214,17 @@ extension ListingPopupVC: UITableViewDelegate, UITableViewDataSource {
         } else if filterType == FilterType.mySozies || filterType == FilterType.request {
             reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
             return
-        } else // if let userType = UserDefaultManager.getCurrentUserType() {
-        {
-//            if userType == UserType.sozie.rawValue {
-//                if indexPath.row == 0 {
-//                    reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
-//                    return
-//                }
-//            } else
-                if indexPath.row == 1 {
-                reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
-                return
+        } else {
+            if indexPath.row == 1 {
+            reloadIndexPaths(indexPath: indexPath, isDoneHidden: false)
+            return
             }
         }
-
         performSegue(withIdentifier: "toSubcategory", sender: self)
     }
 
 }
 extension ListingPopupVC: SelectionPopupVCDelegate {
-
     func doneButtonTapped(type: FilterType?, objId: Int?) {
         delegate?.doneButtonTapped(type: type, objId: objId)
     }

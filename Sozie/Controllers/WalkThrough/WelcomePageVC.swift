@@ -28,7 +28,6 @@ class WelcomePageVC: UIPageViewController {
     var currentIndex = 0
     var pendingIndex = 0
     weak var pageDelegate: PageControlIndexProviding?
-    var userType: UserType?
     var signUpDict: [String: Any]?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +35,7 @@ class WelcomePageVC: UIPageViewController {
         // Do any additional setup after loading the view.
         dataSource = self
         delegate = self
-        if userType == UserType.sozie {
-            orderedViewControllers = [self.viewCntrollerWith(identifier: "SecondSozieWelcomeVC"), self.viewCntrollerWith(identifier: "FirstSozieWelcomeVC")] as! [UIViewController]
-        }
+        orderedViewControllers = [self.viewCntrollerWith(identifier: "SecondSozieWelcomeVC"), self.viewCntrollerWith(identifier: "FirstSozieWelcomeVC")] as! [UIViewController]
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .forward,
@@ -140,21 +137,10 @@ extension WelcomePageVC: WelcomeButtonActionsDelegate {
     }
 
     func skipButtonTapped() {
-//        if userType == UserType.sozie {
-//            performSegue(withIdentifier: "toWorkVC", sender: self)
-//        } else {
-//            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-//        }
-//        self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
         self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
 
     func shopTogetherButtonTapped() {
-//        if userType == UserType.sozie {
-//            performSegue(withIdentifier: "toWorkVC", sender: self)
-//        } else {
-//            performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
-//        }
         self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
 //        self.parent?.performSegue(withIdentifier: "toSignUpEmailVC", sender: self)
     }
