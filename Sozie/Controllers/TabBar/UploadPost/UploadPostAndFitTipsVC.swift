@@ -719,7 +719,8 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
     func showCropVC(image: UIImage) {
         let cropVC = CropViewController(image: image)
         cropVC.delegate = self
-        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+//        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+        cropVC.customAspectRatio = CGSize(width: 1.0, height: 1.0)
         cropVC.aspectRatioPickerButtonHidden = true
         cropVC.aspectRatioLockEnabled = true
         cropVC.aspectRatioLockDimensionSwapEnabled = true
@@ -751,6 +752,7 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
 //        tutorialImageView.frame.origin.y = 20
         imgVu.center = cropVC.cropView.center
         imgVu.frame = cropVC.cropView.cropBoxFrame
+        imgVu.contentMode = .center
         cropVC.cropView.addSubview(imgVu)
         self.present(cropVC, animated: true) {
             imgVu.frame = cropVC.cropView.cropBoxFrame
