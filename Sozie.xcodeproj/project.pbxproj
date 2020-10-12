@@ -23,6 +23,8 @@
 		6103E1B121FF330400C7E7CF /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6103E1AF21FF330400C7E7CF /* TitleCell.xib */; };
 		6103E1B421FF33CC00C7E7CF /* TitleAndSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6103E1B221FF33CC00C7E7CF /* TitleAndSwitchCell.swift */; };
 		6103E1B521FF33CC00C7E7CF /* TitleAndSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6103E1B321FF33CC00C7E7CF /* TitleAndSwitchCell.xib */; };
+		61048662253462DA00B63839 /* PhotoOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61048660253462DA00B63839 /* PhotoOverlayViewController.swift */; };
+		61048663253462DA00B63839 /* PhotoOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61048661253462DA00B63839 /* PhotoOverlayViewController.xib */; };
 		61064592222D392100AE41C3 /* UploadPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61064591222D392100AE41C3 /* UploadPostVC.swift */; };
 		61064594222E718E00AE41C3 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61064593222E718E00AE41C3 /* PhotoEditorViewController.swift */; };
 		61064596222E777300AE41C3 /* PhotoEditor+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61064595222E777200AE41C3 /* PhotoEditor+Gestures.swift */; };
@@ -312,6 +314,8 @@
 		6103E1AF21FF330400C7E7CF /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
 		6103E1B221FF33CC00C7E7CF /* TitleAndSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndSwitchCell.swift; sourceTree = "<group>"; };
 		6103E1B321FF33CC00C7E7CF /* TitleAndSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleAndSwitchCell.xib; sourceTree = "<group>"; };
+		61048660253462DA00B63839 /* PhotoOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoOverlayViewController.swift; sourceTree = "<group>"; };
+		61048661253462DA00B63839 /* PhotoOverlayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoOverlayViewController.xib; sourceTree = "<group>"; };
 		61064591222D392100AE41C3 /* UploadPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostVC.swift; sourceTree = "<group>"; };
 		61064593222E718E00AE41C3 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
 		61064595222E777200AE41C3 /* PhotoEditor+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhotoEditor+Gestures.swift"; sourceTree = "<group>"; };
@@ -867,6 +871,8 @@
 				617F684024ACBAF200B70763 /* RatingTableViewCell.xib */,
 				61FBDB9724CEBC6A0061CF39 /* TermsConditionCell.swift */,
 				61FBDB9824CEBC6A0061CF39 /* TermsConditionCell.xib */,
+				61048660253462DA00B63839 /* PhotoOverlayViewController.swift */,
+				61048661253462DA00B63839 /* PhotoOverlayViewController.xib */,
 			);
 			path = CustomControls;
 			sourceTree = "<group>";
@@ -1325,6 +1331,7 @@
 				61C40D14221EB35D00FBD7FF /* RequestTableViewCell.xib in Resources */,
 				611E412022145C0D007B1C62 /* PostCollectionViewCell.xib in Resources */,
 				61D769A323210C9000EDBC4A /* GoogleService-Info-DEV.plist in Resources */,
+				61048663253462DA00B63839 /* PhotoOverlayViewController.xib in Resources */,
 				69854D6A21C8CA6D0092672D /* segoeui.ttf in Resources */,
 				61C40D01221E7DE900FBD7FF /* TabView.xib in Resources */,
 				613AEB6A247FE54600B4A019 /* ImageViewCell.xib in Resources */,
@@ -1534,6 +1541,7 @@
 				61F0285022CCBE1700B3BB4B /* FitTipsAnswerTableVC.swift in Sources */,
 				6179EC2C22770B4600AE75F9 /* CommentsVC.swift in Sources */,
 				614374E222390EAE00DBD295 /* MyBalanceVC.swift in Sources */,
+				61048662253462DA00B63839 /* PhotoOverlayViewController.swift in Sources */,
 				61B9D1C8222548BA007C6326 /* SozieRequest.swift in Sources */,
 				61FBDB9624CEBA600061CF39 /* TermsConditionViewModel.swift in Sources */,
 				61B5A0D622A12C12009D372C /* TargetRequestTableViewCell.swift in Sources */,

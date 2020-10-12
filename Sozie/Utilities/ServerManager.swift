@@ -380,9 +380,9 @@ class ServerManager: NSObject {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
-        Alamofire.request(ServerManager.productCountURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+        Alamofire.request(ServerManager.logoutURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
-            let obj: Result<CountResponse> = decoder.decodeResponse(from: response)
+            let obj: Result<ValidateRespose> = decoder.decodeResponse(from: response)
             obj.ifSuccess {
                 block!(true, obj.value!)
             }

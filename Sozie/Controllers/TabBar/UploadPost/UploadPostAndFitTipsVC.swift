@@ -731,7 +731,16 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         cropVC.cropView.cropBoxResizeEnabled = false
         cropVC.cropView.gridOverlayHidden = true
         cropVC.cropView.setGridOverlayHidden(true, animated: true)
-        let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
+        let overlayVC = PhotoOverlayViewController(nibName: "PhotoOverlayViewController", bundle: .main)
+        if let overlayView = overlayVC.view {
+            overlayView.center = cropVC.cropView.center
+            cropVC.cropView.addSubview(overlayView)
+            cropVC.cropView.bringSubviewToFront(cropVC.cropView.gridOverlayView)
+            cropVC.addChild(overlayVC)
+            self.present(cropVC, animated: true) {
+            }
+        }
+//        let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
 //        var image: UIImage?
 //        if let index = selectedIndex {
 //            switch index {
@@ -750,13 +759,13 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
 //        let tutorialImageView = UIImageView(image: image)
 //        tutorialImageView.frame.origin.x = UIScreen.main.bounds.size.width - 68
 //        tutorialImageView.frame.origin.y = 20
-        imgVu.center = cropVC.cropView.center
-        imgVu.frame = cropVC.cropView.cropBoxFrame
-        imgVu.contentMode = .center
-        cropVC.cropView.addSubview(imgVu)
-        self.present(cropVC, animated: true) {
-            imgVu.frame = cropVC.cropView.cropBoxFrame
-        }
+//        overlayView.center = cropVC.cropView.center
+//        imgVu.frame = cropVC.cropView.cropBoxFrame
+//        imgVu.contentMode = .center
+//        cropVC.cropView.addSubview(overlayView)
+//        self.present(cropVC, animated: true) {
+//            imgVu.frame = cropVC.cropView.cropBoxFrame
+//        }
 //        cropVC.cropView.addSubview(tutorialImageView)
     }
     func setupImage(pickedImage: UIImage, videoURL: String? = nil) {

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="segoeui.ttf">
+            <string>SegoeUI</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoOverlayViewController" customModule="Sozie" customModuleProvider="target">
+            <connections>
+                <outlet property="poseButton" destination="Hcv-Nn-VJQ" id="QfH-hv-jRT"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="GAP-Il-aNU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="244"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wob-cc-Kjj">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="244"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Smile &amp; look at the camera :)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnv-sc-w1x">
+                            <rect key="frame" x="24" y="112" width="207" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="CQe-KG-eiP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.Tuck in the tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrn-6H-VaE">
+                            <rect key="frame" x="24" y="156" width="115" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="vVf-QV-BQ3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Make sure head and feet are not cut off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hb-VY-EUG">
+                            <rect key="frame" x="24" y="68" width="277" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="TKQ-Ca-0fr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcv-Nn-VJQ">
+                            <rect key="frame" x="24" y="200" width="104" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="ICj-pD-aVd"/>
+                            </constraints>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="5">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="SegoeUI"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=". ">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="SegoeUI"/>
+                                            <font key="NSOriginalFont" size="15" name="SegoeUI"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Strike a pose!">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="15" name="SegoeUI"/>
+                                            <font key="NSOriginalFont" size="15" name="SegoeUI"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Use grid to center body in frames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLz-uM-kdT">
+                            <rect key="frame" x="24" y="24" width="237" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="dD4-Sz-Uft"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="244" id="52L-IA-ejp"/>
+                        <constraint firstItem="HLz-uM-kdT" firstAttribute="top" secondItem="Wob-cc-Kjj" secondAttribute="top" constant="24" id="6bB-21-Lh2"/>
+                        <constraint firstItem="3hb-VY-EUG" firstAttribute="top" secondItem="HLz-uM-kdT" secondAttribute="bottom" constant="24" id="CnU-lQ-WnN"/>
+                        <constraint firstAttribute="width" constant="375" id="RJU-8v-Qid"/>
+                        <constraint firstItem="Qrn-6H-VaE" firstAttribute="leading" secondItem="Wob-cc-Kjj" secondAttribute="leading" constant="24" id="Wlj-Dz-A4I"/>
+                        <constraint firstItem="Hcv-Nn-VJQ" firstAttribute="top" secondItem="Qrn-6H-VaE" secondAttribute="bottom" constant="24" id="abh-PF-JdF"/>
+                        <constraint firstItem="3hb-VY-EUG" firstAttribute="leading" secondItem="Wob-cc-Kjj" secondAttribute="leading" constant="24" id="bTQ-TK-SOo"/>
+                        <constraint firstItem="Hcv-Nn-VJQ" firstAttribute="leading" secondItem="Wob-cc-Kjj" secondAttribute="leading" constant="24" id="fT4-bs-9A0"/>
+                        <constraint firstItem="HLz-uM-kdT" firstAttribute="leading" secondItem="Wob-cc-Kjj" secondAttribute="leading" constant="24" id="jiR-Gi-BV3"/>
+                        <constraint firstItem="Qrn-6H-VaE" firstAttribute="top" secondItem="Wnv-sc-w1x" secondAttribute="bottom" constant="24" id="rzg-jZ-av8"/>
+                        <constraint firstItem="Wnv-sc-w1x" firstAttribute="top" secondItem="3hb-VY-EUG" secondAttribute="bottom" constant="24" id="smD-AS-qhN"/>
+                        <constraint firstItem="Wnv-sc-w1x" firstAttribute="leading" secondItem="Wob-cc-Kjj" secondAttribute="leading" constant="24" id="vhC-YT-RF8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Wob-cc-Kjj" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="27W-ZC-96P"/>
+                <constraint firstItem="Wob-cc-Kjj" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="VRL-3X-NLq"/>
+                <constraint firstItem="Wob-cc-Kjj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Wx8-qg-vFD"/>
+                <constraint firstItem="Wob-cc-Kjj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bRo-XC-fTU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="86"/>
+        </view>
+    </objects>
+</document>

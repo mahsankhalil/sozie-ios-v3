@@ -7507,9 +7507,6 @@ Click images with red X for feedback. </string>
                                                 </fragment>
                                             </attributedString>
                                         </state>
-                                        <connections>
-                                            <action selector="poseButtonTapped:" destination="j4y-eq-zTY" eventType="touchUpInside" id="gdu-8V-MIQ"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Use grid to center body in frames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbn-kk-l9p">
                                         <rect key="frame" x="24" y="24" width="237" height="20"/>
