@@ -14,8 +14,8 @@ struct PostCountResponse: Codable {
     var approveCount: Int
     enum CodingKeys: String, CodingKey {
         case pendingCount = "pending_count"
-        case rejectedCount = "approved_count"
-        case approveCount = "rejected_count"
+        case rejectedCount = "rejected_count"
+        case approveCount = "approved_count"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

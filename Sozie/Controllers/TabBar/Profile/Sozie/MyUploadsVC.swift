@@ -442,7 +442,8 @@ extension MyUploadsVC: UINavigationControllerDelegate, UIImagePickerControllerDe
     func showCropVC(image: UIImage) {
         let cropVC = CropViewController(image: image)
         cropVC.delegate = self
-        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+//        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+        cropVC.customAspectRatio = CGSize(width: 1.0, height: 1.0)
         cropVC.aspectRatioPickerButtonHidden = true
         cropVC.aspectRatioLockEnabled = true
         cropVC.resetButtonHidden = true
@@ -454,6 +455,7 @@ extension MyUploadsVC: UINavigationControllerDelegate, UIImagePickerControllerDe
         let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
         imgVu.center = cropVC.cropView.center
         imgVu.frame = cropVC.cropView.cropBoxFrame
+        imgVu.contentMode = .center
         cropVC.cropView.addSubview(imgVu)
         self.present(cropVC, animated: true) {
             imgVu.frame = cropVC.cropView.cropBoxFrame
