@@ -103,10 +103,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qN7-Za-enX">
-                                                <rect key="frame" x="0.0" y="106.5" width="375" height="162"/>
+                                                <rect key="frame" x="0.0" y="79.5" width="375" height="216"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Twirl around to show the garment from various angles." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsu-mX-gVZ">
-                                                        <rect key="frame" x="24" y="112" width="328" height="35"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Tuck in the tags" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsu-mX-gVZ">
+                                                        <rect key="frame" x="24" y="112" width="328" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -116,6 +116,12 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="cK4-IA-aPq"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4. Twirl around to show the garment from various angles." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bux-vy-4hP">
+                                                        <rect key="frame" x="24" y="154" width="327" height="35"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -133,9 +139,12 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="O7Y-FM-70j" firstAttribute="leading" secondItem="qN7-Za-enX" secondAttribute="leading" constant="24" id="Jp6-jn-hoH"/>
-                                                    <constraint firstAttribute="height" constant="162" id="K0Y-2F-UoN"/>
+                                                    <constraint firstAttribute="height" constant="216" id="K0Y-2F-UoN"/>
+                                                    <constraint firstItem="bux-vy-4hP" firstAttribute="top" secondItem="zsu-mX-gVZ" secondAttribute="bottom" constant="24.5" id="S4p-J3-nEk"/>
                                                     <constraint firstItem="HDX-CC-TtS" firstAttribute="top" secondItem="qN7-Za-enX" secondAttribute="top" constant="24" id="YvZ-cm-fqt"/>
                                                     <constraint firstAttribute="width" constant="375" id="cPF-md-TwC"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bux-vy-4hP" secondAttribute="trailing" constant="24" id="hhL-wr-TtS"/>
+                                                    <constraint firstItem="bux-vy-4hP" firstAttribute="leading" secondItem="qN7-Za-enX" secondAttribute="leading" constant="24" id="n6d-vt-RFA"/>
                                                     <constraint firstAttribute="trailing" secondItem="zsu-mX-gVZ" secondAttribute="trailing" constant="23" id="skz-V6-hV8"/>
                                                     <constraint firstItem="zsu-mX-gVZ" firstAttribute="top" secondItem="O7Y-FM-70j" secondAttribute="bottom" constant="24" id="v1Z-2r-KcJ"/>
                                                     <constraint firstItem="O7Y-FM-70j" firstAttribute="top" secondItem="HDX-CC-TtS" secondAttribute="bottom" constant="24" id="vll-4b-sxS"/>
