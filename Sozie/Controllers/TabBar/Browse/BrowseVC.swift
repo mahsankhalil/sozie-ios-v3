@@ -157,43 +157,6 @@ class BrowseVC: BaseViewController {
             }
         }
     }
-    func showTipeViewAfterDelay() {
-        perform(#selector(showTipView), with: nil, afterDelay: 0.5)
-    }
-    @objc func showTipView() {
-        if UserDefaultManager.isUserGuideDisabled() == false {
-            let text = "To tag your photo, select model picture."
-            var prefer = UtilityManager.tipViewGlobalPreferences()
-            prefer.drawing.arrowPosition = .bottom
-            prefer.positioning.maxWidth = 110
-            collectionTipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
-            collectionTipView?.show(animated: true, forView: self.productsCollectionVu, withinSuperview: self.view)
-        }
-    }
-    override func showCancelButtonTipView() {
-        if UserDefaultManager.isUserGuideDisabled() == false {
-            let text = "You can cancel if you don't want to tag photo."
-            var prefer = UtilityManager.tipViewGlobalPreferences()
-            prefer.drawing.arrowPosition = .top
-            prefer.positioning.maxWidth = 110
-            prefer.positioning.bubbleVInset = 0
-            cancelTipView = EasyTipView(text: text, preferences: prefer, delegate: nil)
-            cancelTipView?.show(animated: true, forView: self.itemsCountLbl, withinSuperview: self.view)
-            if let tipView = cancelTipView {
-                tipView.frame = CGRect(x: tipView.frame.origin.x, y: tipView.frame.origin.y - 110.0, width: tipView.frame.width, height: tipView.frame.height)
-            }
-        }
-    }
-    override func cancelButtonTapped() {
-        super.cancelButtonTapped()
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.rightBarButtonItem = nil
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.imageTaken = nil
-        cancelTipView?.dismiss()
-        collectionTipView?.dismiss()
-
-    }
     func updateCellModelIfChangeMadeInVisibleCells() {
         let visibleIndexPaths = productsCollectionVu.indexPathsForVisibleItems
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -206,32 +169,6 @@ class BrowseVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCellModelIfChangeMadeInVisibleCells()
-//        if UserDefaultManager.getIfShopper() == false {
-//            if let user = UserDefaultManager.getCurrentUserObject() {
-//                if let brandId = user.brand {
-//                    if currentSozieBrandId != brandId {
-//                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-//                            setupBrandNavBar(imageURL: brand.titleImageCentred)
-//                        }
-//                        currentSozieBrandId = brandId
-//                        refreshData()
-//                    }
-//                }
-//            }
-//        }
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if appDelegate.imageTaken == nil {
-//            super.cancelButtonTapped()
-//            setupSozieLogoNavBar()
-            cancelTipView?.dismiss()
-            collectionTipView?.dismiss()
-            if let index = selectedIndex {
-                if index < productViewModels.count {
-                    productViewModels[index].isSelected = false
-                    productsCollectionVu.reloadItems(at: [IndexPath(item: index, section: 0)])
-                }
-            }
-        }
     }
     // MARK: - Custom Methods
 
@@ -267,10 +204,7 @@ class BrowseVC: BaseViewController {
             self.clearFilterButton.isHidden = false
             self.productList.removeAll()
             self.productsCollectionVu.refreshControl?.beginRefreshing()
-//            fetchProductsFromServerV3()
             fetchProductsFromServer()
-        } else {
-//            searchString = nil
         }
         searchVuHeightConstraint.constant = 47.0
         UIView.animate(withDuration: 0.3) {
@@ -285,11 +219,9 @@ class BrowseVC: BaseViewController {
         SVProgressHUD.show()
         ServerManager.sharedInstance.getAllCategories(params: [:]) { (isSuccess, response) in
             if isSuccess {
-//                self.categoriesList = self.categoryCollectionVu.prepareDataSourceForInfiniteScroll(array: response as! [Category]) as! [Category]
                 self.categoriesList = response as! [Category]
                 self.categoryCollectionVu.reloadData()
                 self.refreshData()
-//                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
             }
         }
     }
@@ -301,16 +233,6 @@ class BrowseVC: BaseViewController {
             if isSuccess {
                 let brandList = response as! [Brand]
                 _ = UserDefaultManager.saveAllBrands(brands: brandList)
-//                self.brandList = self.brandsCollectionVu.prepareDataSourceForInfiniteScroll(array: self.brandList) as! [Brand]
-//                self.brandsCollectionVu.reloadData()
-//                self.perform(#selector(self.setInitialOffsetToBrandsCollectionView), with: nil, afterDelay: 0.01)
-//                if let user = UserDefaultManager.getCurrentUserObject() {
-//                    if let brandId = user.brand {
-//                        if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
-//                            self.setupBrandNavBar(imageURL: brand.titleImageCentred)
-//                        }
-//                    }
-//                }
             }
         }
     }
@@ -323,15 +245,12 @@ class BrowseVC: BaseViewController {
             currentPage = currentPage + 1
         }
         fetchProductsFromServer()
-//        fetchProductsFromServerV3()
-
     }
     @objc func refreshData() {
         searchTxtFld.text = ""
         isFirstPage = true
         currentPage = 1
         filterBrandId = nil
-
         if let category = findCategoryWithId(categoryId: 10) {
             self.getAllSubCategoresIdFrom(category: category)
             if let clothigIndex = self.getIndexOfClothing() {
@@ -347,12 +266,9 @@ class BrowseVC: BaseViewController {
         filterType = nil
         productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
         productList.removeAll()
-//        fetchProductCount()
         fetchProductsFromServer()
         resetButtonToDefault(button: postsButton)
         resetButtonToDefault(button: requestedButton)
-//        fetchProductsFromServerV3()
-
     }
     func findCategoryWithId(categoryId: Int) -> Category? {
         for category in categoriesList where category.categoryId == categoryId {
@@ -369,37 +285,9 @@ class BrowseVC: BaseViewController {
         }
         return nil
     }
-
-    func fetchProductCount() {
-        var dataDict = [String: Any]()
-        dataDict["pagesize"] = pageSize
-        dataDict["pages_per_request"] = pagesPerRequest
-        if let brandId = filterBrandId {
-            dataDict["brand"] = brandId
-        }
-        if let categoryIds = filterCategoryIds {
-            dataDict["categories"] = categoryIds.makeArrayJSON()
-        }
-        if filterBySozies {
-            dataDict["filter_by_sozie"] = filterBySozies
-        }
-        ServerManager.sharedInstance.getProductsCount(params: dataDict) { (isSuccess, response) in
-            if isSuccess {
-                self.itemsCountLbl.text = String((response as! CountResponse).count) + ((response as! CountResponse).count <= 1 ? " ITEM" : " ITEMS")
-            } else {
-
-            }
-        }
-    }
-
     func fetchProductsFromServer() {
         var dataDict = [String: Any]()
-//        dataDict["pagesize"] = pageSize
-//        dataDict["pages_per_request"] = pagesPerRequest
         dataDict["current_page"] = currentPage
-//        if isFirstPage {
-//            dataDict["is_first_page"] = isFirstPage
-//        }
         if let brandId = filterBrandId {
             dataDict["brand"] = brandId
         }
@@ -430,37 +318,6 @@ class BrowseVC: BaseViewController {
             }
         }
     }
-    func fetchProductsFromServerV3() {
-        var dataDict = [String: Any]()
-        dataDict["pagesize"] = pageSize
-        dataDict["pages_per_request"] = pagesPerRequest
-        if isFirstPage {
-            dataDict["is_first_page"] = isFirstPage
-        }
-        if let brandId = filterBrandId {
-            dataDict["brand"] = brandId
-        }
-        if let categoryIds = filterCategoryIds {
-            dataDict["categories"] = categoryIds.makeArrayJSON()
-        }
-        if filterBySozies {
-            dataDict["filter_by_sozie"] = filterBySozies
-        }
-        if let string = searchString {
-            dataDict["query"] = string
-        }
-        ServerManager.sharedInstance.getALLProductV3(params: dataDict) { (isSuccess, response) in
-            self.productsCollectionVu.refreshControl?.endRefreshing()
-            self.productsCollectionVu.bottomRefreshControl?.endRefreshing()
-            if isSuccess {
-                self.totalCount = (response as! BrowseResponse).count
-                self.itemsCountLbl.text = String((response as! BrowseResponse).count) + ((response as! BrowseResponse).count <= 1 ? " ITEM" : " ITEMS")
-                self.productList.append(contentsOf: (response as! BrowseResponse).products)
-                self.productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 50
-            }
-        }
-    }
-
     func filterByBrand(brandId: Int?) {
         self.filterBrandId = brandId
     }
@@ -469,28 +326,8 @@ class BrowseVC: BaseViewController {
         currentPage = 1
         self.clearFilterButton.isHidden = false
         self.productsCollectionVu.refreshControl?.beginRefreshing()
-//        fetchProductCount()
         fetchProductsFromServer()
-//        fetchProductsFromServerV3()
-
     }
-    func removeTargetIfUS(brands: [Brand]) -> [Brand] {
-        var brandsList: [Brand] = []
-        for brand in brands {
-            if let user = UserDefaultManager.getCurrentUserObject() {
-                if let countryId = user.country {
-                    if countryId == 1 {
-                        if brand.brandId == 10 {
-                            continue
-                        }
-                    }
-                }
-            }
-            brandsList.append(brand)
-        }
-        return brandsList
-    }
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -573,9 +410,6 @@ class BrowseVC: BaseViewController {
         fetchProductsFromServer()
     }
     @IBAction func filterBtnTapped(_ sender: Any) {
-        largeBottomView?.removeFromSuperview()
-        showSmallBottomView()
-//        showPopUpWithTitle(type: .filter)
         brandsFilterPopupInstance?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
         brandsFilterPopupInstance?.delegate = self
         let popUpVC = PopupController
@@ -618,11 +452,11 @@ class BrowseVC: BaseViewController {
 //            hideSearchVu()
 //        }
     }
-    @IBAction func categoryBtnTapped(_ sender: Any) {
-        largeBottomView?.removeFromSuperview()
-        showSmallBottomView()
-        showPopUpWithTitle(type: .category)
-    }
+//    @IBAction func categoryBtnTapped(_ sender: Any) {
+//        largeBottomView?.removeFromSuperview()
+//        showSmallBottomView()
+//        showPopUpWithTitle(type: .category)
+//    }
     @IBAction func sideMenuButtonTapped(_ sender: Any) {
         var sideMenuSet = SideMenuSettings()
         sideMenuSet.presentationStyle.backgroundColor = UIColor.black
@@ -637,16 +471,9 @@ class BrowseVC: BaseViewController {
         present(rightMenu, animated: true, completion: nil)
 
     }
-    @objc override func nextButtonTapped() {
-        performSegue(withIdentifier: "toProductDetail", sender: self)
-    }
 }
 extension BrowseVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if appDelegate.imageTaken != nil {
-            showSmallBottomView()
-        }
         if scrollView == categoryCollectionVu {
             categoryCollectionVu.infiniteScrollViewDidScroll(scrollView: scrollView)
         }
@@ -737,53 +564,20 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 loadNextPage()
             }
         }
-//        if (productList.count < 10 && indexPath.row == productList.count - 1) || (indexPath.row == productList.count - 10) {
-//            if productList.count > 10 {
-//                loadNextPage()
-//            }
-//        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == productsCollectionVu {
             selectedProduct = productList[indexPath.row]
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if let cell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? ProductCollectionViewCell {
-                if let tipView = cell.tipView {
-                    tipView.dismiss()
-                }
-            }
-//            if appDelegate.imageTaken != nil {
-//                productViewModels[indexPath.row].isSelected = true
-//                var indexPathToReload = [indexPath]
-//                if let index = selectedIndex {
-//                    if index != indexPath.row {
-//                        productViewModels[index].isSelected = false
-//                        indexPathToReload.append(IndexPath(item: index, section: 0))
-//                    }
-//                }
-//                self.productsCollectionVu.reloadItems(at: indexPathToReload)
-//                self.showNextButton()
-//                selectedIndex = indexPath.row
-//                return
-//            }
-            largeBottomView?.removeFromSuperview()
-            smallBottomView?.removeFromSuperview()
             performSegue(withIdentifier: "toProductDetail", sender: self)
         } else {
-//            filterCategoryIds?.removeAll()
-//            filterCategoryIds?.append(Float(categoriesList[indexPath.row].categoryId))
-//            let currentBrand = brandList[indexPath.row]
             self.getAllSubCategoresIdFrom(category: categoriesList[indexPath.row])
             filterPopupInstance = PopupNavController.instance(type: PopupType.filter, brandList: UserDefaultManager.getALlBrands())
             productsCollectionVu.bottomRefreshControl?.triggerVerticalOffset = 500
             self.deSelectAllSelectedCategories()
             categoriesViewModels[indexPath.row].isSelected = true
-//            filterCategoryIds = [categoriesList[indexPath.row].categoryId]
             collectionView.reloadData()
             productList.removeAll()
-//            filterByBrand(brandId: currentBrand.brandId)
             fetchFilteredData()
-
         }
     }
     func getAllSubCategoresIdFrom(category: Category) {
@@ -814,12 +608,8 @@ extension BrowseVC: PopupNavControllerDelegate, SelectionPopupVCDelegate {
         } else if type == FilterType.category {
             if let catId = objId {
                 self.filterCategoryIds = [catId]
-//                self.filterBrandId = nil
-//                self.filterBySozies = false
             }
         } else if type == FilterType.sozie {
-//            self.filterCategoryIds = nil
-//            self.filterBrandId = nil
             self.filterBySozies = true
         }
         fetchFilteredData()
@@ -831,6 +621,3 @@ extension BrowseVC: BrowseWelcomeDelegate {
         tutorialVC?.view.removeFromSuperview()
     }
 }
-//extension BrowseVC: SelectionPopupVCDelegate {
-//
-//}
