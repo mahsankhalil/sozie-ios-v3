@@ -60,6 +60,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         self.placeholder = placeholder
         self.values1 = values
         self.firstColumnAppendingString = valuesSuffix
+        pickerView.reloadAllComponents()
     }
 
     func configure(title: String, rightTitle: String, placeholder: String, values1: [String], values1Suffix: String, values2: [String], values2Suffix: String) {
@@ -67,6 +68,7 @@ class CustomPickerTextField: MFTextField, UITextFieldDelegate, UIPickerViewDeleg
         self.applyRightVuLblWith(title: rightTitle)
         self.values2 = values2
         self.secondColumnAppendingString = values2Suffix
+        pickerView.reloadAllComponents()
     }
     func getindexInArray(allValues: [String], currentValue: String) -> Int {
         for index in 0..<allValues.count where currentValue == allValues[index] {

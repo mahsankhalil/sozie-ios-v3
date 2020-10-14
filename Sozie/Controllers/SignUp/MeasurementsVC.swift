@@ -240,15 +240,15 @@ class MeasurementsVC: UIViewController {
                 guard let size = response as? AllSizes else { return }
                 if let gender = UserDefaultManager.getCurrentUserGender() {
                     if gender == "F" {
-                        self.setSizeAccordingly(size: size.female!)
                         self.sizes = size.female
+                        self.setSizeAccordingly(size: size.female!)
                     } else {
-                        self.setSizeAccordingly(size: size.male!)
                         self.sizes = size.male
+                        self.setSizeAccordingly(size: size.male!)
                     }
                 } else {
-                    self.setSizeAccordingly(size: size.female!)
                     self.sizes = size.female
+                    self.setSizeAccordingly(size: size.female!)
                 }
                 self.tblVu.reloadData()
             } else {
