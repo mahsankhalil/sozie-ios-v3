@@ -10,5 +10,5 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 #include "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.dev.xcconfig"
 SLASH = /
-SERVER_URL = http:$(SLASH)/dev-api.sozie.com/api/v1/
+SERVER_URL = http:$(SLASH)/dev-api.sozie.com/
 BETA_TESTER = YES

@@ -7,73 +7,69 @@
 //
 
 import UIKit
-
+import WaterfallLayout
 class PosePopupVC: UIViewController {
 
     @IBOutlet weak var bottomLabel: UILabel!
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     @IBOutlet weak var nextButton: DZGradientButton!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!// {
+//        didSet {
+//            let layout = WaterfallLayout()
+//            layout.delegate = self
+//            layout.sectionInset = UIEdgeInsets(top: 0, left: 5.0, bottom: 0, right: 5.0)
+//            layout.minimumLineSpacing = 2.5
+//            layout.minimumInteritemSpacing = 2.5
+//            layout.headerHeight = 0.0
+//            collectionView.collectionViewLayout = layout
+//            collectionView.dataSource = self
+//        }
+//    }
+
     var viewModels: [ImageViewModel] = []
     var photoIndex: Int? = 0
     var closeHandler: (() -> Void)?
+    var imagesBaseURL = (Bundle.main.infoDictionary?["SERVER_URL"] as! String) + "static/images/post/positions/"
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         collectionView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageViewCell")
+        if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
+            imagesBaseURL = imagesBaseURL + "adidas/"
+        } else {
+            imagesBaseURL = imagesBaseURL + "target/"
+        }
+        if let gender = UserDefaultManager.getCurrentUserGender(), gender == "F" {
+            imagesBaseURL = imagesBaseURL + "female/"
+        } else {
+            imagesBaseURL = imagesBaseURL + "male/"
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let index = photoIndex {
             switch index {
             case 0:
-                if UserDefaultManager.getCurrentUserGender() == "F" {
-                    self.populateFrontPoseImages()
-                } else {
-                    self.populateMaleFrontPoseImages()
-                }
+                self.populateFrontPoseImages()
                 self.bottomLabel.text = "Front poses that work"
             case 1:
-                if UserDefaultManager.getCurrentUserGender() == "F" {
-                    self.populateBackPoseImages()
-                } else {
-                    self.populateMaleBackPoseImages()
-                }
+                self.populateBackPoseImages()
                 self.bottomLabel.text = "Back poses that work"
             case 2:
-                if UserDefaultManager.getCurrentUserGender() == "F" {
-                    self.populateSidePoseImages()
-                } else {
-                    self.populateMaleSidePoseImages()
-                }
+                self.populateSidePoseImages()
                 self.bottomLabel.text = "Side poses that work"
             default:
-                if UserDefaultManager.getCurrentUserGender() == "F" {
-                    self.populateFrontPoseImages()
-                } else {
-                    self.populateMaleFrontPoseImages()
-                }
+                self.populateFrontPoseImages()
                 self.bottomLabel.text = "Front poses that work"
             }
         } else {
             self.populateFrontPoseImages()
             self.bottomLabel.text = "Front poses that work"
         }
+        self.collectionView.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        if let index = photoIndex {
-//            switch index {
-//            case 0:
-//                self.populateFrontPoseImages()
-//            case 1:
-//                self.populateBackPoseImages()
-//            case 2:
-//                self.populateSidePoseImages()
-//            default:
-//                return
-//            }
-//        }
     }
     static func instance(photoIndex: Int?) -> PosePopupVC {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
@@ -85,54 +81,60 @@ class PosePopupVC: UIViewController {
     }
     func populateFrontPoseImages() {
         for index in 0..<9 {
-            let name = "Front-" + String(index + 1)
-            let viewModel = ImageViewModel(imageName: name)
+            var urlOfImage = imagesBaseURL + "front/"
+            let name = "Front-" + String(index + 1) + ".png"
+            urlOfImage = urlOfImage + name
+            let viewModel = ImageViewModel(imageName: nil, imageURL: urlOfImage)
             viewModels.append(viewModel)
         }
-        self.collectionView.reloadData()
+//        self.collectionView.reloadData()
     }
 
     func populateBackPoseImages() {
         for index in 0..<9 {
-            let name = "Back-" + String(index + 1)
-            let viewModel = ImageViewModel(imageName: name)
+            var urlOfImage = imagesBaseURL + "back/"
+            let name = "Back-" + String(index + 1) + ".png"
+            urlOfImage = urlOfImage + name
+            let viewModel = ImageViewModel(imageName: nil, imageURL: urlOfImage)
             viewModels.append(viewModel)
         }
-        self.collectionView.reloadData()
+//        self.collectionView.reloadData()
     }
     func populateSidePoseImages() {
         for index in 0..<9 {
-            let name = "Side-" + String(index + 1)
-            let viewModel = ImageViewModel(imageName: name)
+            var urlOfImage = imagesBaseURL + "side/"
+            let name = "Side-" + String(index + 1) + ".png"
+            urlOfImage = urlOfImage + name
+            let viewModel = ImageViewModel(imageName: nil, imageURL: urlOfImage)
             viewModels.append(viewModel)
         }
-        self.collectionView.reloadData()
+//        self.collectionView.reloadData()
     }
-    func populateMaleFrontPoseImages() {
-        for index in 0..<9 {
-            let name = "MaleFront-" + String(index + 1)
-            let viewModel = ImageViewModel(imageName: name)
-            viewModels.append(viewModel)
-        }
-        self.collectionView.reloadData()
-    }
-
-    func populateMaleBackPoseImages() {
-        for index in 0..<9 {
-            let name = "MaleBack-" + String(index + 1)
-            let viewModel = ImageViewModel(imageName: name)
-            viewModels.append(viewModel)
-        }
-        self.collectionView.reloadData()
-    }
-    func populateMaleSidePoseImages() {
-        for index in 0..<9 {
-            let name = "MaleSide-" + String(index + 1)
-            let viewModel = ImageViewModel(imageName: name)
-            viewModels.append(viewModel)
-        }
-        self.collectionView.reloadData()
-    }
+//    func populateMaleFrontPoseImages() {
+//        for index in 0..<9 {
+//            let name = "MaleFront-" + String(index + 1)
+//            let viewModel = ImageViewModel(imageName: name)
+//            viewModels.append(viewModel)
+//        }
+//        self.collectionView.reloadData()
+//    }
+//
+//    func populateMaleBackPoseImages() {
+//        for index in 0..<9 {
+//            let name = "MaleBack-" + String(index + 1)
+//            let viewModel = ImageViewModel(imageName: name)
+//            viewModels.append(viewModel)
+//        }
+//        self.collectionView.reloadData()
+//    }
+//    func populateMaleSidePoseImages() {
+//        for index in 0..<9 {
+//            let name = "MaleSide-" + String(index + 1)
+//            let viewModel = ImageViewModel(imageName: name)
+//            viewModels.append(viewModel)
+//        }
+//        self.collectionView.reloadData()
+//    }
     /*
     // MARK: - Navigation
 
@@ -162,24 +164,26 @@ extension PosePopupVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let availableWidth: Int = Int(UIScreen.main.bounds.size.width - 20)
+        let availableWidth: Int = Int(UIScreen.main.bounds.size.width - 40)
         let widthPerItem = Double(availableWidth/3)
-        let heightPerItem = Double(widthPerItem * 1.9126)
+        let heightPerItem = Double(widthPerItem * 1.9038)
         return CGSize(width: widthPerItem, height: heightPerItem )
     }
+    
     //3
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: (UIScreen.main.bounds.size.width - 20.0 - (104 * 3))/4, bottom: 0, right: (UIScreen.main.bounds.size.width - 20.0 - (104 * 3))/4)
+//        return UIEdgeInsets(top: 10, left: (UIScreen.main.bounds.size.width - 20.0 - (104 * 3))/4, bottom: 0, right: (UIScreen.main.bounds.size.width - 20.0 - (104 * 3))/4)
+        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return (UIScreen.main.bounds.size.width - 20.0 - (103 * 3))/4
+        return 5.0
     }
     // 4
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return 5.0
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -198,3 +202,17 @@ extension PosePopupVC: PopupContentViewController {
         return CGSize(width: UIScreen.main.bounds.size.width - 20.0, height: UIScreen.main.bounds.size.height - 20.0 - topSafeArea - bottomSafeArea)
     }
 }
+//extension PosePopupVC: WaterfallLayoutDelegate {
+//    func collectionView(_ collectionView: UICollectionView, layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let availableWidth: Int = Int(UIScreen.main.bounds.size.width - 40)
+//        let widthPerItem = Double(availableWidth/3)
+//        let heightPerItem = Double(widthPerItem * 1.9126)
+//        return CGSize(width: widthPerItem, height: heightPerItem )
+////        return WaterfallLayout.automaticSize
+//    }
+//
+//    func collectionViewLayout(for section: Int) -> WaterfallLayout.Layout {
+//        return .flow(column: 3)
+//    }
+//
+//}

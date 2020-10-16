@@ -10,4 +10,5 @@ import UIKit
 
 struct ImageViewModel: RowViewModel {
     var imageName: String?
+    var imageURL: String?
 }

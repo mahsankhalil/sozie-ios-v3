@@ -14,7 +14,7 @@ class ServerManager: NSObject {
     //static let serverURL = "http://35.177.203.47/api/v1/"
 //    static let serverURL = "http://172.16.12.58:8000/api/v1/"
 //    static let serverURL = "http://52.56.155.110/api/v1/"
-    static let serverURL = Bundle.main.infoDictionary?["SERVER_URL"] as! String
+    static let serverURL = (Bundle.main.infoDictionary?["SERVER_URL"] as! String) + "api/v1/"
     static let loginURL = ServerManager.serverURL + "user/login/"
     static let profileURL = ServerManager.serverURL + "user/profile/"
     static let sizeChartURL = ServerManager.serverURL + "common/sizechart"

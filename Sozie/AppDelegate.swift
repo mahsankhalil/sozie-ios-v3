@@ -216,6 +216,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let token = pushToken, token != "" {
             var dataDict = [String: Any]()
             dataDict["device_notify_id"] = token
+            dataDict["device_type"] = "IOS"
             ServerManager.sharedInstance.updateUserToken(params: dataDict) { (_, _) in
             }
         }
