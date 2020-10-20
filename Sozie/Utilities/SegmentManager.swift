@@ -48,6 +48,20 @@ class SegmentManager: NSObject {
         if UserDefaultManager.checkIfMeasurementEmpty() {
             signUpComplete = true
         }
+        if let signupMedium = user.signUpMedium {
+            dataDict["signup_medium"] = signupMedium
+        } else {
+            dataDict["signup_medium"] = "EM"
+        }
+        if let brand = user.brand {
+            dataDict["brand"] = brand
+        }
+        if let sozieType = user.sozieType {
+            dataDict["sozie_type"] = sozieType
+        }
+        if let country = user.country {
+            dataDict["country"] = country
+        }
         dataDict["sign-up_complete"] = signUpComplete
         let analytics = (UIApplication.shared.delegate as! AppDelegate).segmentAnalytics
         analytics?.identify(String(user.userId), traits: dataDict)

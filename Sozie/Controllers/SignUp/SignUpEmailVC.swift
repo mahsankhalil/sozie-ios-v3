@@ -48,8 +48,16 @@ class SignUpEmailVC: UIViewController, UITextFieldDelegate, ValidationDelegate, 
         applyValidators()
         self.whatsThisButton.alpha = 0.0
         setupAppleLoginButton()
-        if let countryId = signUpDict![User.CodingKeys.country.stringValue] as? Int {
-            if countryId == 1 {
+//        if let countryId = signUpDict![User.CodingKeys.country.stringValue] as? Int {
+//            if countryId == 1 {
+//                self.referralCodeTextField.isHidden = true
+//                self.whatsThisButton.isHidden = true
+//                self.pasteButton.isHidden = true
+//            }
+//        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let linkedWith = appDelegate.codeLinkedWith {
+            if linkedWith == "brand" {
                 self.referralCodeTextField.isHidden = true
                 self.whatsThisButton.isHidden = true
                 self.pasteButton.isHidden = true
