@@ -169,7 +169,6 @@ extension PosePopupVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let heightPerItem = Double(widthPerItem * 1.9038)
         return CGSize(width: widthPerItem, height: heightPerItem )
     }
-    
     //3
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

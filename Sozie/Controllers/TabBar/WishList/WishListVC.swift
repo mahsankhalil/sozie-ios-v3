@@ -140,18 +140,6 @@ extension WishListVC: WishTableViewCellDelegate {
         isViewRequestButtonTapped = true
         selectedProduct = productList[button.tag]
         performSegue(withIdentifier: "toProductDetail", sender: self)
-//        let currentProduct = productList[button.tag]
-////        if let productURL = currentProduct.deepLink {
-////            guard let url = URL(string: productURL) else { return }
-////            UIApplication.shared.open(url)
-////        }
-//
-//        if let productURL = currentProduct.deepLink {
-//            let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
-//            webVC.url = URL(string: productURL)
-//            webVC.modalPresentationStyle = .overFullScreen
-//            self.tabBarController?.navigationController?.present(webVC, animated: true, completion: nil)
-//        }
     }
 
     func crossButonTapped(btn: UIButton) {

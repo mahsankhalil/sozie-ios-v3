@@ -85,17 +85,10 @@ class SozieRequestsVC: UIViewController {
         } else {
             brandFilterButton.isHidden = false
         }
-
-//        if UserDefaultManager.getIfRequestTutorialShown() == false {
-//            tutorialVC = (self.storyboard?.instantiateViewController(withIdentifier: "SozieRequestTutorialVC") as! SozieRequestTutorialVC)
-//            tutorialVC?.delegate = self
-//            UIApplication.shared.keyWindow?.addSubview((tutorialVC?.view)!)
-//        }
         showPostTutorials()
         NotificationCenter.default.addObserver(self, selector: #selector(resetFirstTime), name: Notification.Name(rawValue: "ResetFirstTime"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAllData), name: Notification.Name(rawValue: "PostUploaded"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showInstructions), name: Notification.Name(rawValue: "ShowInstructions"), object: nil)
-//        self.view.window?.addSubview(tutorialVC.view)
         if let user = UserDefaultManager.getCurrentUserObject() {
             if user.country == 1 {
                 self.totalTutorialCount = 7
@@ -115,7 +108,6 @@ class SozieRequestsVC: UIViewController {
                 self.reloadAllData()
             }
         }
-//        self.reloadAllData()
         self.fetchBrandsFromServer()
     }
     func fetchBrandsFromServer() {
@@ -148,7 +140,6 @@ class SozieRequestsVC: UIViewController {
             profileParentVC.navigationController?.navigationBar.isUserInteractionEnabled = false
             profileParentVC.tabViewController?.tabView.isUserInteractionEnabled = false
         }
-//        ((self.parent as! ProfileTabsPageVC).view.subviews.compactMap { $0 as? UIScrollView }.first as! UIScrollView).isScrollEnabled = false
         if let parent = self.parent as? ProfileTabsPageVC {
             let scrollView = parent.view.subviews.compactMap { $0 as? UIScrollView }.first
             scrollView!.isScrollEnabled = false
@@ -171,9 +162,6 @@ class SozieRequestsVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        serverParams.removeAll()
-//        requests.removeAll()
-//        fetchAllSozieRequests()
         hideAllSearchViews()
     }
     @objc func reloadAllData() {
@@ -192,7 +180,6 @@ class SozieRequestsVC: UIViewController {
                 tutVC.view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 50.0 + (topPadding ?? 0))
                 let formattedString = NSMutableAttributedString()
                 formattedString.bold("Required Tutorial\nComplete from home in your own clothes.")
-//                formattedString.bold("Required Tutorial", size: 15.0).normal(": Follow arrow prompts below")
                 tutVC.updateProgressTitle(string: formattedString)
                 window?.addSubview(tutVC.view)
             }
@@ -377,16 +364,13 @@ class SozieRequestsVC: UIViewController {
     }
     func showPostTutorials() {
         if UserDefaultManager.getIfPostTutorialShown() == false {
-//            if UserDefaultManager.getIfRequestTutorialShown() {
             populateDummyRequests()
             self.showInStockTutorial()
             if let tabBarContrlr = self.parent?.parent?.parent?.parent as? TabBarVC {
-//                tabBarContrlr.tabBar.isUserInteractionEnabled = false
                 if let firstItem = tabBarContrlr.tabBar.items?[0], let secondItem = tabBarContrlr.tabBar.items?[1], let thirdItem = tabBarContrlr.tabBar.items?[2] {
                     firstItem.isEnabled = false
                     secondItem.isEnabled = false
                     thirdItem.isEnabled = false
-//                    fourthItem.isEnabled = false
                 }
             }
             if let tutorialView = self.acceptRequestTutorialVC?.view {
@@ -396,9 +380,7 @@ class SozieRequestsVC: UIViewController {
                     }
                 }
             }
-//            }
         }
-
     }
     func showSearchVu() {
         searchViewHeightConstraint.constant = 0.0
@@ -413,7 +395,6 @@ class SozieRequestsVC: UIViewController {
         }
     }
     @objc func dismissKeyboard() {
-//        self.view.endEditing(true)
         self.searchTextField.text = ""
         self.hideSearchVu()
         if let rcgnizer = gstrRcgnzr {
@@ -424,8 +405,6 @@ class SozieRequestsVC: UIViewController {
         if searchTextField.text?.isEmpty == false {
             crossButton.isHidden = false
             searchString = searchTextField.text
-//            self.isFirstPage = true
-//            self.clearFilterButton.isHidden = false
         } else {
             crossButton.isHidden = true
             searchString = nil
@@ -592,19 +571,6 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        selectedProduct = requests[indexPath.row].requestedProduct
-//        if (viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true) || viewModels[indexPath.row].isSelected == false {
-//            if (tableView.cellForRow(at: indexPath) as? TargetRequestTableViewCell) != nil {
-//                let cell = (tableView.cellForRow(at: indexPath) as? TargetRequestTableViewCell)
-//                let button = cell?.acceptButton
-//                self.acceptRequestButtonTapped(button: button!)
-//            }
-//        }
-//        if viewModels[indexPath.row].acceptedBySomeoneElse == false && viewModels[indexPath.row].isSelected == true {
-//            performSegue(withIdentifier: "toProductDetail", sender: self)
-//        } else if viewModels[indexPath.row].isSelected == false {
-//            performSegue(withIdentifier: "toProductDetail", sender: self)
-//        }
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if (requests.count < 10 && indexPath.row == requests.count - 2) || (indexPath.row == requests.count - 10) {
@@ -641,7 +607,6 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         UtilityManager.showMessageWith(title: "Warning!", body: "Are you sure you want to cancel this request?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil) {
             self.cancelRequest(button: button)
         }
-//        self.cancelRequest(button: button)
         hideAllSearchViews()
     }
     func cancelRequest(button: UIButton) {
@@ -806,12 +771,6 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     }
     func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {
         requests[tag].isAccepted = true
-//        let dateFormat = DateFormatter()
-//        dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-//        dateFormat.timeZone = TimeZone(abbreviation: "UTC")
-//        let calendar = Calendar.current
-//        let date = calendar.date(byAdding: .hour, value: 24, to: Date())
-//        let acceptedRequest = AcceptedRequest(acceptedById: UserDefaultManager.getCurrentUserId()!, acceptedId: acceptedRequestId, expiry: dateFormat.string(from: date!))
         requests[tag].acceptedRequest = acceptedRequest
         let viewModel = SozieRequestCellViewModel(request: requests[tag])
         viewModels.remove(at: tag)
@@ -825,10 +784,6 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         ServerManager.sharedInstance.acceptRequest(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
-//                self.serverParams.removeAll()
-//                self.requests.removeAll()
-//                SVProgressHUD.show()
-//                self.fetchAllSozieRequests()
                 let acceptedRequestResponse = response as! AcceptedRequestResponse
                 self.makeRequestAccepted(tag: tag, acceptedRequest: acceptedRequestResponse.acceptedRequest)
             } else {
@@ -916,9 +871,6 @@ extension SozieRequestsVC: TutorialProgressDelegate {
     }
 }
 extension SozieRequestsVC: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-//        hideSearchVu()
-    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideSearchVu()
         return true

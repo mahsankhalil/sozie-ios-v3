@@ -13,7 +13,6 @@ import UserNotifications
 import CropViewController
 import AVKit
 import SDWebImage
-//import FirebaseAnalytics
 protocol UploadPostAndFitTipsDelegate: class {
     func uploadPostInfoButtonTapped()
 }
@@ -28,9 +27,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     @IBOutlet weak var productView: UIView!
     @IBOutlet weak var bottomButtom: DZGradientButton!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
-    @IBOutlet weak var sizeTextField: UITextField!
     @IBOutlet weak var fitTipsTextField: UITextField!
-    @IBOutlet weak var sizeCheckMark: UIImageView!
     @IBOutlet weak var fitTipsCheckMark: UIImageView!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     var progressTutorialVC: TutorialProgressVC?
@@ -55,7 +52,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
     var currentTaskId: String?
     var currentPostId: Int?
     var currentPost: UserPost?
-//    var viewModels = [UploadPictureViewModel(title: "Front", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Back", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Side", attributedTitle: nil, imageURL: URL(string: ""), image: nil), UploadPictureViewModel(title: "Optional", attributedTitle: nil, imageURL: URL(string: ""), image: nil)]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.postMaskButton.isHidden = true
@@ -78,13 +74,9 @@ class UploadPostAndFitTipsVC: BaseViewController {
         }
         self.postImageView.layer.borderWidth = 1.0
         self.postImageView.layer.borderColor = UIColor(hex: "DBDBDB").cgColor
-        self.sizeCheckMark.isHidden = true
         self.fitTipsCheckMark.isHidden = true
         fetchFitTipsFromServer()
         progressTutorialVC?.delegate = self
-//        let formattedString = NSMutableAttributedString()
-//        formattedString.bold("Required Tutorial", size: 15.0).normal(": Upload real photos of yourself")
-//        progressTutorialVC?.updateProgressTitle(string: formattedString)
     }
     func getCurrentPost(postId: Int) {
         ServerManager.sharedInstance.getCurrentPostWith(postID: postId) { (isSuccess, response) in
@@ -180,15 +172,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
     }
     func addPicturesTutorial() {
         picturesTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "SelectPicturesTutorialVC") as? SelectPicturesTutorialVC
-//        if let tabBarContrlr = self.parent?.parent as? TabBarVC {
-//            tabBarContrlr.tabBar.isUserInteractionEnabled = false
-//            if let firstItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem, let secondItem = tabBarContrlr.tabBar.items![1] as? UITabBarItem, let thirdItem = tabBarContrlr.tabBar.items![2] as? UITabBarItem, let fourthItem = tabBarContrlr.tabBar.items![0] as? UITabBarItem {
-//                firstItem.isEnabled = false
-//                secondItem.isEnabled = false
-//                thirdItem.isEnabled = false
-//                fourthItem.isEnabled = false
-//            }
-//        }
         progressTutorialVC?.updateProgress(progress: 6.0/8.0)
         if let tutVC = picturesTutorialVC {
             tutVC.view.frame.origin.y = 235.0
@@ -201,7 +184,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
         picturesTutorialVC?.view.removeFromSuperview()
     }
     func addFitTipsTutorial() {
-        //563-165
         fitTipsTutorialVC = self.storyboard?.instantiateViewController(withIdentifier: "AddFitTipsTutorialVC") as? AddFitTipsTutorialVC
         progressTutorialVC?.updateProgress(progress: 7.0/8.0)
         if let tutVC = fitTipsTutorialVC {
@@ -239,9 +221,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 }
             }
         }
-//        if isSizeSelected {
-//            self.sizeCheckMark.isHidden = false
-//        }
     }
     func checkIfAllQuestionsAnswered() -> Bool {
         if let fitTips = fitTips {
@@ -298,7 +277,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
     func populateProductData() {
         var priceString = ""
         var searchPrice = 0.0
-        //        let currentProduct = self.currentProduct
         if let price = currentProduct?.searchPrice {
             searchPrice = Double(price)
         }
@@ -474,17 +452,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
             if isSuccess {
                 self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
                 self.getPostProgress(isTutorial: isTutorial)
-//                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-//                if isTutorial {
-//                    UserDefaultManager.setBrowserTutorialShown()
-//                    self.uploadTutorialData()
-//                } else {
-//                    SegmentManager.createEventRequestSubmitted()
-//                    self.showThankYouController()
-//                    self.bottomButtom.isEnabled = true
-//                    self.perform(#selector(self.popViewController), with: nil, afterDelay: 3.0)
-//                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PostUploaded")))
-//                }
             } else {
                 self.bottomButtom.isEnabled = true
                 UtilityManager.showErrorMessage(body: (response as! Error).localizedDescription, in: self)
@@ -542,7 +509,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
                 if var user = UserDefaultManager.getCurrentUserObject() {
                     user.isTutorialApproved = true
                     UserDefaultManager.updateUserObject(user: user)
-//                    Analytics.logEvent("Tutorial-Completed", parameters: ["email": user.email])
                     SegmentManager.createEventTutorialCompleted()
                 }
                 if let tabBarContrlr = self.parent?.parent as? TabBarVC {
@@ -584,7 +550,6 @@ class UploadPostAndFitTipsVC: BaseViewController {
     @IBAction func deleteButtonTapped(_ sender: Any) {
         if let index = selectedIndex {
             viewModels[index].image = nil
-//            viewModels[index].imageURL = nil
             postImageView.image = nil
             selectedIndex = nil
             if let isVideo = viewModels[index].isVideo, isVideo == true {
@@ -689,7 +654,6 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
                     let viewModel = UploadPictureViewModel(title: "Optional Picture", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
                     viewModels.append(viewModel)
                 }
-//                viewModels[index].title = ""
             }
             UIImageWriteToSavedPhotosAlbum(scaledImg, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
             self.imagesCollectionView.reloadData()
@@ -699,7 +663,6 @@ extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
                 removePictureTutorial()
                 if isFitTipsTutorialShown == false {
                     addFitTipsTutorial()
-//                    self.imagesCollectionView.isUserInteractionEnabled = false
                 }
             }
         }
@@ -712,7 +675,6 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//            self.setupImage(pickedImage: pickedImage)
             self.showCropVC(image: pickedImage)
         }
     }
@@ -740,33 +702,6 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
             self.present(cropVC, animated: true) {
             }
         }
-//        let imgVu = UIImageView(image: UIImage(named: "Canvas-Gallery"))
-//        var image: UIImage?
-//        if let index = selectedIndex {
-//            switch index {
-//            case 0:
-//                image = UtilityManager.genderRespectedFrontImage()
-//            case 1:
-//                image = UtilityManager.genderRespectedBackImage()
-//            case 2:
-//                image = UtilityManager.genderRespectedSideImage()
-//            default:
-//                image = nil
-//            }
-//        } else {
-//            image = nil
-//        }
-//        let tutorialImageView = UIImageView(image: image)
-//        tutorialImageView.frame.origin.x = UIScreen.main.bounds.size.width - 68
-//        tutorialImageView.frame.origin.y = 20
-//        overlayView.center = cropVC.cropView.center
-//        imgVu.frame = cropVC.cropView.cropBoxFrame
-//        imgVu.contentMode = .center
-//        cropVC.cropView.addSubview(overlayView)
-//        self.present(cropVC, animated: true) {
-//            imgVu.frame = cropVC.cropView.cropBoxFrame
-//        }
-//        cropVC.cropView.addSubview(tutorialImageView)
     }
     func setupImage(pickedImage: UIImage, videoURL: String? = nil) {
         if let index = selectedIndex {
@@ -781,7 +716,6 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
                         viewModels.append(viewModel)
                     }
                 }
-//                viewModels[index].title = ""
             }
             self.imagesCollectionView.reloadData()
         }
@@ -801,7 +735,6 @@ extension UploadPostAndFitTipsVC: CropViewControllerDelegate {
                 removePictureTutorial()
                 if isFitTipsTutorialShown == false {
                     addFitTipsTutorial()
-//                    self.imagesCollectionView.isUserInteractionEnabled = false
                 }
             }
         }
@@ -829,21 +762,7 @@ extension UploadPostAndFitTipsVC: PhotoEditorDelegate {
 extension UploadPostAndFitTipsVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
-        if textField == sizeTextField {
-            let popUpInstnc = SizePickerPopupVC.instance(productSizeChart: currentProduct?.sizeChart, currentProductId: currentProduct?.productStringId, brandid: currentProduct?.brandId)
-            popUpInstnc.delegate = self
-            popUpVC = PopupController
-                .create(self.tabBarController?.navigationController ?? self)
-                .show(popUpInstnc)
-            let options = PopupCustomOption.layout(.bottom)
-            _ = popUpVC?.customize([options])
-            _ = popUpVC?.didCloseHandler { (_) in
-                self.updateViews()
-            }
-            popUpInstnc.closeHandler = { []  in
-                self.popUpVC?.dismiss()
-            }
-        } else if textField == fitTipsTextField {
+        if textField == fitTipsTextField {
             if let listOfFitTips = fitTips {
                 let popUpInstnc = FitTipsNavigationController.instance(fitTips: listOfFitTips)
                 popUpInstnc.delegate = self
@@ -865,13 +784,6 @@ extension UploadPostAndFitTipsVC: UITextFieldDelegate {
                 }
             }
         }
-    }
-}
-extension UploadPostAndFitTipsVC: RequestSizeChartPopupVCDelegate {
-    func selectedValueFromPopUp(value: String?) {
-        selectedSizeValue = value
-        sizeTextField.text = selectedSizeValue
-        isSizeSelected = true
     }
 }
 extension UploadPostAndFitTipsVC: TutorialProgressDelegate {
