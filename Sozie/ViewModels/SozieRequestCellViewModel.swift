@@ -29,12 +29,12 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var productId: String
     init (request: SozieRequest) {
         var imageURL = ""
-        if let productImageURL = request.requestedProduct.imageURL {
+        if let productImageURL = request.requestedProduct?.imageURL {
             imageURL = productImageURL.getActualSizeImageURL() ?? ""
         }
-        if let feedId = request.requestedProduct.feedId {
+        if let feedId = request.requestedProduct?.feedId {
             if feedId == 18857 {
-                if let merchantImageURL = request.requestedProduct.merchantImageURL {
+                if let merchantImageURL = request.requestedProduct?.merchantImageURL {
                     let delimeter = "|"
                     let url = merchantImageURL.components(separatedBy: delimeter)
                     imageURL = url[0]
@@ -76,6 +76,6 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
         } else {
             self.expiry = ""
         }
-        self.productId = request.requestedProduct.productStringId ?? ""
+        self.productId = request.requestedProduct?.productStringId ?? ""
     }
 }

@@ -48,6 +48,7 @@ class SozieRequestsVC: UIViewController {
     var gstrRcgnzr: UIGestureRecognizer?
     var searchString: String?
     var searchType: String?
+    var requestCount: Int = 0
     var requests: [SozieRequest] = [] {
         didSet {
             viewModels.removeAll()
@@ -336,17 +337,34 @@ class SozieRequestsVC: UIViewController {
             self.tableView.refreshControl?.endRefreshing()
             if isSuccess {
                 let paginatedData = response as! RequestsPaginatedResponse
-                self.requests.append(contentsOf: paginatedData.results)
-                self.nextURL = paginatedData.next
-                if self.requests.count > 0 {
-                    let brandId = self.requests[0].brandId
-                    let brand = UserDefaultManager.getBrandWithId(brandId: brandId)
-                    self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS") + " BY " + (brand?.label.uppercased() ?? "")
-                } else {
-                    self.searchCountLabel.text = String(paginatedData.count) + (paginatedData.count <= 1 ? " REQUEST" : " REQUESTS")
+                //self.requests.append(contentsOf: paginatedData.results)
+                //Now checking if requested product detail is null or not. It it's null don't append it
+                for result in paginatedData.results where result.requestedProduct != nil {
+                    self.requests.append(result)
                 }
+                self.nextURL = paginatedData.next
+                var countRequestAccepted = 0
+                for request in self.requests where request.acceptedRequest?.acceptedId != nil {
+                    countRequestAccepted += 1
+                    //print("acceptedId: \(request.acceptedRequest?.acceptedId)")
+                }
+                self.requestCount = 0
+                print(paginatedData.count)
+                print(countRequestAccepted)
+                self.requestCount = self.requests.count - countRequestAccepted
+                self.beautifyRequestCount(count: self.requestCount)
                 self.showPostTutorials()
             }
+        }
+    }
+    func beautifyRequestCount(count: Int) {
+        if self.requests.count > 0 {
+//            let brandId = self.requests[0].brandId
+//            let brand = UserDefaultManager.getBrandWithId(brandId: brandId)
+            self.searchCountLabel.text = String(count) + (count <= 1 ? " OPEN REQUEST" : " OPEN REQUESTS")
+//            self.searchCountLabel.text = String(count) + (count <= 1 ? "OPEN REQUEST" : "OPEN REQUESTS") + " BY " + (brand?.label.uppercased() ?? "")
+        } else {
+            self.searchCountLabel.text = String(count) + (count <= 1 ? " OPEN REQUEST" : " OPEN REQUESTS")
         }
     }
     func populateDummyRequests() {
@@ -354,7 +372,7 @@ class SozieRequestsVC: UIViewController {
             if var user = UserDefaultManager.getCurrentUserObject() {
                 user.isSuperUser = true
                 let dummyProduct = Product(productId: 49263387, productName: "Women's Plus Size Sleeveless Square Neck Denim Dress - Universal Thread Indigo X, Blue", brandId: 10, imageURL: "https://target.scene7.com/is/image/Target/GUEST_bd675863-a930-4bf2-b855-c342457004e4?wid=1000&hei=1000", description: "Look effortlessly chic while keeping your cool for any occasion wearing this Sleeveless Square-Neck Denim Dress from Universal Thread. This indigo midi dress comes with a front tie that lets you find your ideal fit, and it's cut in a relaxed silhouette for comfortable wear. In a sleeveless design made from a 100 percent cotton fabric with side slits, this sleeveless denim midi dress keeps you feeling airy, light and comfy throughout your day. Pair it with espadrilles and a straw bucket bag for a casual day out or with strappy heels and drop earrings for a nighttime twist. Size: X. Color: Blue. Gender: Female. Age Group: Adult.", merchantProductId: "54441283", productStringId: "bd675863a9304bf2b855c342457004e4", searchPrice: 32.99, currency: "USD", merchantImageURL: "")
-                let dummyRequest = SozieRequest(requestId: 700, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil, color: nil, displaySize: "3x")
+                let dummyRequest = SozieRequest(requestId: 700, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil, color: nil, expiry: nil, displaySize: "3x")
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
@@ -629,6 +647,8 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     let appDel = UIApplication.shared.delegate as! AppDelegate
                     appDel.fetchUserDetail()
                     self.fetchAllSozieRequests()
+                    self.requestCount += 1
+                    self.beautifyRequestCount(count: self.requestCount)
                 }
             }
         }
@@ -638,9 +658,9 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         let currentRequest = requests[button.tag]
         let product = currentRequest.requestedProduct
         var imageURL = ""
-        if var prodImageURL = product.merchantImageURL {
+        if var prodImageURL = product!.merchantImageURL {
             if prodImageURL == "" {
-                if let imageURLTarget = product.imageURL {
+                if let imageURLTarget = product!.imageURL {
                     imageURL = imageURLTarget
                 }
             } else {
@@ -652,11 +672,11 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 imageURL = prodImageURL
             }
         } else {
-            if let img = product.imageURL {
+            if let img = product!.imageURL {
                 imageURL = img.getActualSizeImageURL() ?? ""
             }
         }
-        if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
+        if let merchantId = currentRequest.requestedProduct?.merchantProductId?.components(separatedBy: " ")[0] {
             if currentRequest.brandId == 10 {
                 self.showTargetStore(merchantId: merchantId, imageURL: imageURL)
             } else if currentRequest.brandId == 18 {
@@ -760,7 +780,16 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 self.showUploadPostTutorial()
                 return
             } else {
-                UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have 19 days to upload your photos and complete your review.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                print("Expiry: \(String(describing: currentRequest?.expiry))")
+                let dateFormat = DateFormatter()
+                dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+                var remainingTime = ""
+                if let date = dateFormat.date(from: (currentRequest?.expiry)!) {
+                    remainingTime = beautifyRemainingTime(expiry: date)
+                }
+//                "You’ll have \(remainingTime) to upload your photos and complete your review.",
+                UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have \(remainingTime) to accept this request.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                     UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                         self.acceptRequestAPICall(tag: button.tag)
                     }
@@ -768,6 +797,23 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             }
         }
         hideAllSearchViews()
+    }
+    func beautifyRemainingTime(expiry: Date) -> String {
+        let calendar = Calendar.current
+        let diffDateComponents = calendar.dateComponents([.hour, .minute, .second], from: Date(), to: expiry)
+        let hours = diffDateComponents.hour!
+        if hours > 24 {
+            let days = hours/24
+            if days == 1 {
+                return String(format: "%d day", days)
+            } else {
+                return String(format: "%d days", days)
+            }
+        }
+        let minutes = diffDateComponents.minute!
+        let seconds = diffDateComponents.second!
+        let countdown = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
+        return countdown
     }
     func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {
         requests[tag].isAccepted = true
@@ -786,6 +832,8 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             if isSuccess {
                 let acceptedRequestResponse = response as! AcceptedRequestResponse
                 self.makeRequestAccepted(tag: tag, acceptedRequest: acceptedRequestResponse.acceptedRequest)
+                self.requestCount -= 1
+                self.beautifyRequestCount(count: self.requestCount)
             } else {
                 let error = (response as! Error).localizedDescription
                 if let errorDict = error.getColonSeparatedErrorDetails() {

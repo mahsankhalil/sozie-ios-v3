@@ -235,7 +235,7 @@ class UploadPostAndFitTipsVC: BaseViewController {
     func fetchFitTipsFromServer() {
         var dataDict = [String: Any]()
         if self.currentRequest != nil {
-            dataDict["category_id"] = self.currentRequest?.requestedProduct.categoryId
+            dataDict["category_id"] = self.currentRequest?.requestedProduct?.categoryId
         } else {
             dataDict["category_id"] = self.currentProduct?.categoryId
         }

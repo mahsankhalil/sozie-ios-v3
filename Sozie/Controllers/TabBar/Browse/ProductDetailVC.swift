@@ -573,9 +573,9 @@ extension ProductDetailVC: SozieRequestTableViewCellDelegate {
         let currentRequest = requests[button.tag]
         let product = currentRequest.requestedProduct
         var imageURL = ""
-        if var prodImageURL = product.merchantImageURL {
+        if var prodImageURL = product!.merchantImageURL {
             if prodImageURL == "" {
-                if let imageURLTarget = product.imageURL {
+                if let imageURLTarget = product!.imageURL {
                     imageURL = imageURLTarget
                 }
             } else {
@@ -587,11 +587,11 @@ extension ProductDetailVC: SozieRequestTableViewCellDelegate {
                 imageURL = prodImageURL
             }
         } else {
-            if let img = product.imageURL {
+            if let img = product!.imageURL {
                 imageURL = img.getActualSizeImageURL() ?? ""
             }
         }
-        if let merchantId = currentRequest.requestedProduct.merchantProductId?.components(separatedBy: " ")[0] {
+        if let merchantId = currentRequest.requestedProduct?.merchantProductId?.components(separatedBy: " ")[0] {
             if currentRequest.brandId == 10 {
                 self.showTargetStore(merchantId: merchantId, imageURL: imageURL)
             } else if currentRequest.brandId == 18 {
@@ -651,12 +651,38 @@ extension ProductDetailVC: SozieRequestTableViewCellDelegate {
                 self.navigationController?.pushViewController(uploadPostVC, animated: true)
             }
         } else {
-            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have 19 days to upload your photos and complete your review.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+            print("Expiry: \(String(describing: currentRequest?.expiry))")
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+            var remainingTime = ""
+            if let date = dateFormat.date(from: (currentRequest?.expiry)!) {
+                remainingTime = beautifyRemainingTime(expiry: date)
+            }
+//            "You’ll have \(remainingTime) to upload your photos and complete your review."
+            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have \(remainingTime) to accept this request.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                 UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                     self.acceptRequestAPICall(tag: button.tag)
                 }
             }
         }
+    }
+    func beautifyRemainingTime(expiry: Date) -> String {
+        let calendar = Calendar.current
+        let diffDateComponents = calendar.dateComponents([.hour, .minute, .second], from: Date(), to: expiry)
+        let hours = diffDateComponents.hour!
+        if hours > 24 {
+            let days = hours/24
+            if days == 1 {
+                return String(format: "%d day", days)
+            } else {
+                return String(format: "%d days", days)
+            }
+        }
+        let minutes = diffDateComponents.minute!
+        let seconds = diffDateComponents.second!
+        let countdown = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
+        return countdown
     }
     func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {
         requests[tag].isAccepted = true

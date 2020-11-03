@@ -15,7 +15,7 @@ pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', 
 pod 'Alamofire', '~> 4.8.0'
 pod 'MaterialTextField', :git => 'https://github.com/stephsharp/MaterialTextField', :commit => 'c3b6516'
 pod 'EasyTipView', '~> 2.0.1'
-pod 'SideMenu', '~> 6.0'
+pod 'SideMenu', '~> 6.4.8'
 pod 'Hex', '~> 6.0.0'
 pod 'WaterfallLayout', '~> 0.1'
 pod 'CCBottomRefreshControl'

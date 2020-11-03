@@ -26,12 +26,12 @@ class RequestsVC: UIViewController {
             viewModels.removeAll()
             for request in requests {
                 var imageURL = ""
-                if let productImageURL = request.requestedProduct.imageURL {
+                if let productImageURL = request.requestedProduct?.imageURL {
                     imageURL = productImageURL.getActualSizeImageURL() ?? ""
                 }
-                if let feedId = request.requestedProduct.feedId {
+                if let feedId = request.requestedProduct?.feedId {
                     if feedId == 18857 {
-                        if let merchantImageURL = request.requestedProduct.merchantImageURL {
+                        if let merchantImageURL = request.requestedProduct?.merchantImageURL {
                             let delimeter = "|"
                             let url = merchantImageURL.components(separatedBy: delimeter)
                             imageURL = url[0]
@@ -39,21 +39,21 @@ class RequestsVC: UIViewController {
                     }
                 }
                 var brandImageURL = ""
-                if let brandId = request.requestedProduct.brandId {
+                if let brandId = request.requestedProduct?.brandId {
                     if let brand = UserDefaultManager.getBrandWithId(brandId: brandId) {
                         brandImageURL = brand.titleImage
                     }
                 }
                 var searchPrice = 0.0
-                if let price = request.requestedProduct.searchPrice {
+                if let price = request.requestedProduct?.searchPrice {
                     searchPrice = Double(price)
                 }
                 var priceString = ""
-                if let currency = request.requestedProduct.currency?.getCurrencySymbol() {
+                if let currency = request.requestedProduct?.currency?.getCurrencySymbol() {
                     priceString = currency + String(format: "%0.2f", searchPrice)
                 }
 
-                let viewModel = MyRequestCellViewModel(price: priceString, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), title: request.requestedProduct.productName, attributedTitle: nil, isSelected: request.isFilled, subtitle: "Size Requested: " + request.sizeValue)
+                let viewModel = MyRequestCellViewModel(price: priceString, titleImageURL: URL(string: brandImageURL), imageURL: URL(string: imageURL), title: request.requestedProduct?.productName, attributedTitle: nil, isSelected: request.isFilled, subtitle: "Size Requested: " + request.sizeValue)
                 viewModels.append(viewModel)
             }
             noDataLabel.isHidden = viewModels.count != 0
@@ -176,7 +176,7 @@ extension RequestsVC: RequestTableViewCellDelegate {
 //            guard let url = URL(string: productURL) else { return }
 //            UIApplication.shared.open(url)
 //        }
-        if let productURL = currentProduct.deepLink {
+        if let productURL = currentProduct!.deepLink {
             let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebVC
             webVC.url = URL(string: productURL)
             webVC.modalPresentationStyle = .overFullScreen

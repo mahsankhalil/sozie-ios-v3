@@ -88,6 +88,6 @@ class PinCodeVC: UIViewController {
         }
     }
     @IBAction func whatsThisButtonTapped(_ sender: Any) {
-        UtilityManager.showMessageWith(title: "What is this?", body: "6-digit code is your unique code. If you don't have one, check your welcome email", in: self)
+        UtilityManager.showMessageWith(title: "What is this?", body: "6 digit code is your unique code. Check your welcome email or ask the friend that referred you for this code.", in: self)
     }
 }
