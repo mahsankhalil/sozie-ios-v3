@@ -651,39 +651,45 @@ extension ProductDetailVC: SozieRequestTableViewCellDelegate {
                 self.navigationController?.pushViewController(uploadPostVC, animated: true)
             }
         } else {
-            print("Expiry: \(String(describing: currentRequest?.expiry))")
-            let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+//            print("Expiry: \(String(describing: currentRequest?.expiry))")
+//            let dateFormat = DateFormatter()
+//            dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//            dateFormat.timeZone = TimeZone(abbreviation: "UTC")
             var remainingTime = ""
-            if let date = dateFormat.date(from: (currentRequest?.expiry)!) {
-                remainingTime = beautifyRemainingTime(expiry: date)
+            print("Expiry: \(String(describing: currentRequest?.waitForPost))")
+            if let waitForPost = currentRequest?.waitForPost {
+                remainingTime = beautifyRemainingTime(waitForPost: waitForPost)
             }
 //            "You’ll have \(remainingTime) to upload your photos and complete your review."
-            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have \(remainingTime) to accept this request.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
-                UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
-                    self.acceptRequestAPICall(tag: button.tag)
-                }
+            UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have \(remainingTime) to upload your photos and complete your review.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                self.acceptRequestAPICall(tag: button.tag)
+//                UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+//                }
             }
         }
     }
-    func beautifyRemainingTime(expiry: Date) -> String {
-        let calendar = Calendar.current
-        let diffDateComponents = calendar.dateComponents([.hour, .minute, .second], from: Date(), to: expiry)
-        let hours = diffDateComponents.hour!
-        if hours > 24 {
-            let days = hours/24
-            if days == 1 {
-                return String(format: "%d day", days)
+    func beautifyRemainingTime(waitForPost: Int) -> String {
+            let remainingDays = waitForPost / 24
+    //        let calendar = Calendar.current
+    //        let diffDateComponents = calendar.dateComponents([.hour, .minute, .second], from: Date(), to: expiry)
+    //        let hours = diffDateComponents.hour!
+    //        if hours > 24 {
+    //            let days = hours/24
+    //            if days == 1 {
+    //                return String(format: "%d day", days)
+    //            } else {
+    //                return String(format: "%d days", days)
+    //            }
+    //        }
+    //        let minutes = diffDateComponents.minute!
+    //        let seconds = diffDateComponents.second!
+    //        let countdown = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
+            if remainingDays == 1 {
+                return String(format: "%d day", remainingDays)
             } else {
-                return String(format: "%d days", days)
+                return String(format: "%d days", remainingDays)
             }
         }
-        let minutes = diffDateComponents.minute!
-        let seconds = diffDateComponents.second!
-        let countdown = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
-        return countdown
-    }
     func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {
         requests[tag].isAccepted = true
         requests[tag].acceptedRequest = acceptedRequest

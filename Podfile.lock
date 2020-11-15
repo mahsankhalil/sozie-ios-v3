@@ -100,6 +100,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.30.0)
   - SwiftValidator (4.0.0)
+  - Toast-Swift (5.0.1)
   - TPKeyboardAvoiding (1.3.2)
   - WaterfallLayout (0.2)
 
@@ -126,6 +127,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftLint (= 0.30.0)
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
+  - Toast-Swift (~> 5.0.1)
   - TPKeyboardAvoiding
   - WaterfallLayout (~> 0.1)
 
@@ -160,6 +162,7 @@ SPEC REPOS:
     - SideMenu
     - SVProgressHUD
     - SwiftLint
+    - Toast-Swift
     - TPKeyboardAvoiding
     - WaterfallLayout
 
@@ -211,9 +214,10 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 4e37cb5cd33435170dfd09fba089f41fdbf64d53
   SwiftValidator: 249b6b3ae3b294266c5b9de134d94f18f2d5aa47
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WaterfallLayout: 030e04b041e5c6c47ae2c1eaa685c60289fab0b1
 
-PODFILE CHECKSUM: d3fa58a3725eb41fbe3a6a8912a521a5865bacbe
+PODFILE CHECKSUM: e98c3e69003ebf4b3d8991e7ba9dddf550fa6bab
 
 COCOAPODS: 1.10.0.beta.1

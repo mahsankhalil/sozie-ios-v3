@@ -410,6 +410,8 @@ class BrowseVC: BaseViewController {
         fetchProductsFromServer()
     }
     @IBAction func filterBtnTapped(_ sender: Any) {
+        hideSearchOptionView()
+        hideSearchVu()
         brandsFilterPopupInstance?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
         brandsFilterPopupInstance?.delegate = self
         let popUpVC = PopupController
@@ -474,6 +476,8 @@ class BrowseVC: BaseViewController {
 }
 extension BrowseVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        hideSearchOptionView()
+        hideSearchVu()
         if scrollView == categoryCollectionVu {
             categoryCollectionVu.infiniteScrollViewDidScroll(scrollView: scrollView)
         }
@@ -566,6 +570,8 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        hideSearchOptionView()
+        hideSearchVu()
         if collectionView == productsCollectionVu {
             selectedProduct = productList[indexPath.row]
             performSegue(withIdentifier: "toProductDetail", sender: self)

@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import AVFoundation
+import Toast_Swift
 protocol CustomVideoRecorderDelegate: class {
     func customImagePickerController(_ picker: VideoPickerVC, didFinishPickingMediaWithInfo info: [String: Any])
 }
@@ -22,7 +23,7 @@ class VideoPickerVC: UIViewController {
     var timer: Timer!
     var timeMin = 0
     var timeSec = 0
-    var count = 20
+    var count = 180000  // 3 Minutes
     var session: AVCaptureSession?
     var input: AVCaptureDeviceInput?
     var micInput: AVCaptureDeviceInput?
@@ -59,15 +60,16 @@ class VideoPickerVC: UIViewController {
             self.videoFileOutput?.stopRecording()
             self.timer.invalidate()
             self.captureButton.setImage(UIImage(named: "Record"), for: .normal)
-            self.count = 20
+            self.count = 180000
             timerLabel.isHidden = true
         }
+        print("Count: \(self.count)")
     }
     func setupVideoCapture() {
         self.session = AVCaptureSession()
         let camera = getDevice(position: .back)
         let micDevice: AVCaptureDevice? = {
-            return AVCaptureDevice.default(for: .audio)
+            return AVCaptureDevice.default(for: AVMediaType.audio)
         }()
         do {
             micInput = try AVCaptureDeviceInput(device: micDevice!)
@@ -97,7 +99,7 @@ class VideoPickerVC: UIViewController {
         timeSec = 0
         timeMin = 0
         timerLabel.isHidden = false
-        self.count = 20
+        self.count = 180000
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         //        sessionQueue.async {
         let recordingDelegate: AVCaptureFileOutputRecordingDelegate? = self
@@ -187,9 +189,15 @@ class VideoPickerVC: UIViewController {
                 self.startRecording()
                 (sender as! UIButton).setImage(UIImage(named: "Stop"), for: .normal)
             } else {
-                self.videoFileOutput?.stopRecording()
-                self.timer.invalidate()
-                (sender as! UIButton).setImage(UIImage(named: "Record"), for: .normal)
+                //If seconds are greater than 10 then allow user to stop recording.
+                if timeSec >= 10 || timeMin >= 1 {
+                    self.videoFileOutput?.stopRecording()
+                    self.timer.invalidate()
+                    (sender as! UIButton).setImage(UIImage(named: "Record"), for: .normal)
+                }
+                else {
+                    self.view.makeToast("Minimum recording is 10 Seconds")
+                }
             }
         }
     }

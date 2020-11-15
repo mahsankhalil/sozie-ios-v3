@@ -832,8 +832,11 @@ class ServerManager: NSObject {
         }
     }
     func getAllFitTips(params: [String: Any], block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
+        ]
         let url = ServerManager.fitTipsURL + "?category_id=" + String(describing: params["category_id"])
-        Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { response in
+        Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<[FitTips]> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

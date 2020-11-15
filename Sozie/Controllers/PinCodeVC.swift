@@ -73,6 +73,7 @@ class PinCodeVC: UIViewController {
             ServerManager.sharedInstance.verifySozieCode(params: dataDict) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
+                    UserDefaultManager.saveSozieCode(code: self.pincode!.uppercased())  //Saving SozieCode
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.codeLinkedWith = (response as! CodeValidateRespose).linkedWith
                     self.signUpDict["signup_sozie_code"] = self.pincode?.uppercased()

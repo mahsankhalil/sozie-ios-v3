@@ -131,6 +131,13 @@ class UserDefaultManager: NSObject {
     static func getALlBrands() -> [Brand]? {
         return brandList()
     }
+    static func saveSozieCode(code: String) {
+        UserDefaults.standard.set(code, forKey: UserDefaultKey.sozieCode)
+        UserDefaults.standard.synchronize()
+    }
+    static func getSozieCode() -> String? {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.sozieCode)
+    }
 
     private static func brandList () -> [Brand]? {
         if let brandList = UserDefaults.standard.data(forKey: UserDefaultKey.brands) {

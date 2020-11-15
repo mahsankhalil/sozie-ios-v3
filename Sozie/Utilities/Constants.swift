@@ -26,6 +26,7 @@ public class UserDefaultKey: NSObject {
     static let followButtonUserGuide = "followButtonUserGuide"
     static let mySoziesUserGuide = "mySoziesUserGuide"
     static let myRequestsUserGuide = "myRequestsUserGuide"
+    static let sozieCode = "sozie_code"
 }
 
 public class Constant: NSObject {

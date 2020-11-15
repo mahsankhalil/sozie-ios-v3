@@ -62,6 +62,10 @@ class SegmentManager: NSObject {
         if let country = user.country {
             dataDict["country"] = country
         }
+        if let sozieCode = UserDefaultManager.getSozieCode() {
+            dataDict["brand_code"] = sozieCode  //Sending SozieCode to MetaData
+            print("SozieCode: \(String(describing: UserDefaultManager.getSozieCode()))")
+        }
         dataDict["sign-up_complete"] = signUpComplete
         let analytics = (UIApplication.shared.delegate as! AppDelegate).segmentAnalytics
         analytics?.identify(String(user.userId), traits: dataDict)

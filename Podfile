@@ -33,6 +33,7 @@ pod 'CropViewController'
 pod 'Cosmos', '~> 22.1'
 #pod "PinCodeInputView"
 #pod 'Segment-Intercom', '1.0.0-beta'
+pod 'Toast-Swift', '~> 5.0.1'
 end
 target 'Sozie' do
     all_pods

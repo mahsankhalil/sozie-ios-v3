@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 class SozieRequestsVC: UIViewController {
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchView: UIView!
@@ -78,7 +79,18 @@ class SozieRequestsVC: UIViewController {
             if gender == "M" {
                 instructionsImageView.image = UIImage(named: "MaleInstructions")
             } else {
-                instructionsImageView.image = UIImage(named: "instructions")
+                if (UserDefaultManager.getALlBrands()?.count ?? 0 > 0) {
+                    let brands = UserDefaultManager.getALlBrands()
+                    if brands?[0].label == "Adidas" {
+                        instructionsImageView.image = UIImage(named: "instruction_adidas_female")
+                    }
+                    else if brands?[0].label == "Target"{
+                        instructionsImageView.image = UIImage(named: "instruction_target_female")
+                    }
+                }
+                else {
+                    instructionsImageView.image = UIImage(named: "instruction_target_female")
+                }
             }
         }
         if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
@@ -331,6 +343,7 @@ class SozieRequestsVC: UIViewController {
         if searchType != nil && searchType != "" {
             serverParams["search_field"] = searchType
         }
+        //print("search_value: \(searchType) search_field: \(searchString)")
         ServerManager.sharedInstance.getSozieRequest(params: serverParams) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             self.tableView.bottomRefreshControl?.endRefreshing()
@@ -343,15 +356,15 @@ class SozieRequestsVC: UIViewController {
                     self.requests.append(result)
                 }
                 self.nextURL = paginatedData.next
-                var countRequestAccepted = 0
-                for request in self.requests where request.acceptedRequest?.acceptedId != nil {
-                    countRequestAccepted += 1
-                    //print("acceptedId: \(request.acceptedRequest?.acceptedId)")
-                }
-                self.requestCount = 0
-                print(paginatedData.count)
-                print(countRequestAccepted)
-                self.requestCount = self.requests.count - countRequestAccepted
+//                var countRequestAccepted = 0
+//                for request in self.requests where request.acceptedRequest?.acceptedId != nil {
+//                    countRequestAccepted += 1
+//                    //print("acceptedId: \(request.acceptedRequest?.acceptedId)")
+//                }
+//                self.requestCount = 0
+//                print("Total: \(self.requests.count) Accepted: \(countRequestAccepted)")
+//                self.requestCount = self.requests.count - countRequestAccepted
+                self.requestCount = paginatedData.count
                 self.beautifyRequestCount(count: self.requestCount)
                 self.showPostTutorials()
             }
@@ -367,12 +380,18 @@ class SozieRequestsVC: UIViewController {
             self.searchCountLabel.text = String(count) + (count <= 1 ? " OPEN REQUEST" : " OPEN REQUESTS")
         }
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+         let touch: UITouch? = touches.first
+         if touch != searchView {
+            hideSearchOptionView()
+        }
+    }
     func populateDummyRequests() {
         if self.requests.count == 0 {
             if var user = UserDefaultManager.getCurrentUserObject() {
                 user.isSuperUser = true
                 let dummyProduct = Product(productId: 49263387, productName: "Women's Plus Size Sleeveless Square Neck Denim Dress - Universal Thread Indigo X, Blue", brandId: 10, imageURL: "https://target.scene7.com/is/image/Target/GUEST_bd675863-a930-4bf2-b855-c342457004e4?wid=1000&hei=1000", description: "Look effortlessly chic while keeping your cool for any occasion wearing this Sleeveless Square-Neck Denim Dress from Universal Thread. This indigo midi dress comes with a front tie that lets you find your ideal fit, and it's cut in a relaxed silhouette for comfortable wear. In a sleeveless design made from a 100 percent cotton fabric with side slits, this sleeveless denim midi dress keeps you feeling airy, light and comfy throughout your day. Pair it with espadrilles and a straw bucket bag for a casual day out or with strappy heels and drop earrings for a nighttime twist. Size: X. Color: Blue. Gender: Female. Age Group: Adult.", merchantProductId: "54441283", productStringId: "bd675863a9304bf2b855c342457004e4", searchPrice: 32.99, currency: "USD", merchantImageURL: "")
-                let dummyRequest = SozieRequest(requestId: 700, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil, color: nil, expiry: nil, displaySize: "3x")
+                let dummyRequest = SozieRequest(requestId: 700, user: user, sizeValue: "3x", productId: "bd675863a9304bf2b855c342457004e4", requestedProduct: dummyProduct, brandId: 10, isFilled: false, isAccepted: false, acceptedRequest: nil, color: nil, expiry: nil, waitForPost: nil, displaySize: "3x")
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
                 self.requests.append(dummyRequest)
@@ -429,7 +448,8 @@ class SozieRequestsVC: UIViewController {
         }
         self.requests.removeAll()
         serverParams.removeAll()
-        self.tableView.refreshControl?.beginRefreshing()
+        //self.tableView.refreshControl?.beginRefreshing()
+        //print("search_value: \(searchType) search_field: \(searchString)")
         fetchAllSozieRequests()
         searchViewHeightConstraint.constant = 47.0
         UIView.animate(withDuration: 0.3) {
@@ -490,6 +510,7 @@ class SozieRequestsVC: UIViewController {
     }
 
     @IBAction func brandFilterButtonTapped(_ sender: Any) {
+        hideAllSearchViews()
         let brandsFilterPopupInstance = SelectionPopupVC.instance(type: .filter, brandList: UserDefaultManager.getALlBrands(), brandId: nil)
         brandsFilterPopupInstance.view.transform = CGAffineTransform(scaleX: 1, y: 1)
         brandsFilterPopupInstance.delegate = self
@@ -504,7 +525,7 @@ class SozieRequestsVC: UIViewController {
         }
     }
     @IBAction func searchByIdButtonTapped(_ sender: Any) {
-        searchType = "article_id"
+        searchType = "product_id"
         hideSearchOptionView()
         showSearchVu()
     }
@@ -546,7 +567,8 @@ extension SozieRequestsVC: SizeSelectionDelegate {
         hideSearchOptionView()
         self.requests.removeAll()
         serverParams.removeAll()
-        self.tableView.refreshControl?.beginRefreshing()
+        //self.tableView.refreshControl?.beginRefreshing()
+        //print("search_value: \(searchType) search_field: \(searchString)")
         fetchAllSozieRequests()
     }
 }
@@ -589,6 +611,10 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        hideAllSearchViews()    //Hiding all search when tableview got selected
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        hideAllSearchViews()    //Hiding all search when tableview starts scrolling.
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if (requests.count < 10 && indexPath.row == requests.count - 2) || (indexPath.row == requests.count - 10) {
@@ -711,6 +737,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         }
     }
     func nearbyStoresButtonTapped(button: UIButton) {
+        hideAllSearchViews()
         if UserDefaultManager.getIfPostTutorialShown() == true {
             UtilityManager.showMessageWith(title: "Covid-19 Update", body: "We have paused in-store operations until further notice. Please stay safe at home", in: self)
             return
@@ -733,7 +760,6 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 }
             }
         }
-        hideAllSearchViews()
     }
     func acceptDumnyRequest(tag: Int) {
         requests[tag].isAccepted = true
@@ -780,40 +806,47 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 self.showUploadPostTutorial()
                 return
             } else {
-                print("Expiry: \(String(describing: currentRequest?.expiry))")
-                let dateFormat = DateFormatter()
-                dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                dateFormat.timeZone = TimeZone(abbreviation: "UTC")
+                //print("Expiry: \(String(describing: currentRequest?.expiry))")
+//                let dateFormat = DateFormatter()
+//                dateFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//                dateFormat.timeZone = TimeZone(abbreviation: "UTC")
                 var remainingTime = ""
-                if let date = dateFormat.date(from: (currentRequest?.expiry)!) {
-                    remainingTime = beautifyRemainingTime(expiry: date)
+                print("Expiry: \(String(describing: currentRequest?.waitForPost))")
+                if let waitForPost = currentRequest?.waitForPost {
+                    remainingTime = beautifyRemainingTime(waitForPost: waitForPost)
                 }
 //                "You’ll have \(remainingTime) to upload your photos and complete your review.",
-                UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have \(remainingTime) to accept this request.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
-                    UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
-                        self.acceptRequestAPICall(tag: button.tag)
-                    }
+                UtilityManager.showMessageWith(title: "Are you sure you want to accept this request?", body: "You’ll have \(remainingTime) to upload your photos and complete your review.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+                    self.acceptRequestAPICall(tag: button.tag)
+//                    UtilityManager.showMessageWith(title: "Are you a part of Sozie@Home?", body: "Only accept if you are part of our Sozie@Home program. In-store operations are paused until further notice.", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
+//                        self.acceptRequestAPICall(tag: button.tag)
+//                    }
                 }
             }
         }
         hideAllSearchViews()
     }
-    func beautifyRemainingTime(expiry: Date) -> String {
-        let calendar = Calendar.current
-        let diffDateComponents = calendar.dateComponents([.hour, .minute, .second], from: Date(), to: expiry)
-        let hours = diffDateComponents.hour!
-        if hours > 24 {
-            let days = hours/24
-            if days == 1 {
-                return String(format: "%d day", days)
-            } else {
-                return String(format: "%d days", days)
-            }
+    func beautifyRemainingTime(waitForPost: Int) -> String {
+        let remainingDays = waitForPost / 24
+//        let calendar = Calendar.current
+//        let diffDateComponents = calendar.dateComponents([.hour, .minute, .second], from: Date(), to: expiry)
+//        let hours = diffDateComponents.hour!
+//        if hours > 24 {
+//            let days = hours/24
+//            if days == 1 {
+//                return String(format: "%d day", days)
+//            } else {
+//                return String(format: "%d days", days)
+//            }
+//        }
+//        let minutes = diffDateComponents.minute!
+//        let seconds = diffDateComponents.second!
+//        let countdown = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
+        if remainingDays == 1 {
+            return String(format: "%d day", remainingDays)
+        } else {
+            return String(format: "%d days", remainingDays)
         }
-        let minutes = diffDateComponents.minute!
-        let seconds = diffDateComponents.second!
-        let countdown = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
-        return countdown
     }
     func makeRequestAccepted(tag: Int, acceptedRequest: AcceptedRequest) {
         requests[tag].isAccepted = true
