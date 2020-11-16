@@ -82,6 +82,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         return true
     }
+    func getSupportedVersionFromServer() {
+        ServerManager.sharedInstance.getMinimumSupportedVersion(params: [:]) { (isSuccess, response) in
+            if isSuccess {
+                let versionInfo = response as! SupportedVersionResponse
+                let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                if versionInfo.ios.supportedVersion.versionCompare(appVersion ?? "0.0.0") == ComparisonResult.orderedDescending {
+                    UtilityManager.showMessageWith(title: "Please Update!", body: "A new version is available Please Update.", in: (self.window?.rootViewController!)!, okBtnTitle: "Update", cancelBtnTitle: nil, dismissAfter: nil, leftAligned: nil) {
+                        guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1363346896")
+                            else { fatalError("Expected a valid URL") }
+                        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+        }
+    }
     @objc func createIdentityOnSegment() {
         if let user = UserDefaultManager.getCurrentUserObject() {
             SegmentManager.createEntity(user: user)
@@ -173,6 +188,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        getSupportedVersionFromServer()
         application.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {

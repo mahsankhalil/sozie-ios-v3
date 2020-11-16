@@ -117,6 +117,7 @@
 		6164D28822FAFFF1008B5B22 /* SEGIntercomIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6164D28122FAFFF0008B5B22 /* SEGIntercomIntegration.m */; };
 		6164D28A22FAFFF1008B5B22 /* SEGIntercomIntegrationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6164D28322FAFFF0008B5B22 /* SEGIntercomIntegrationFactory.m */; };
 		6166814022315797009DD1D0 /* TermsOfServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166813F22315796009DD1D0 /* TermsOfServiceVC.swift */; };
+		6166DEC925629B4900447BC1 /* SupportedVersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166DEC825629B4900447BC1 /* SupportedVersionResponse.swift */; };
 		616A41A324F3D5DD003B8D38 /* ProductIdProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616A41A224F3D5DD003B8D38 /* ProductIdProviding.swift */; };
 		616DDD68220ADF1C00A7CCFA /* DisclosureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */; };
 		616DDD69220ADF1C00A7CCFA /* DisclosureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */; };
@@ -412,6 +413,7 @@
 		6164D28722FAFFF0008B5B22 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		6164D28C22FB0065008B5B22 /* Sozie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sozie-Bridging-Header.h"; sourceTree = "<group>"; };
 		6166813F22315796009DD1D0 /* TermsOfServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceVC.swift; sourceTree = "<group>"; };
+		6166DEC825629B4900447BC1 /* SupportedVersionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedVersionResponse.swift; sourceTree = "<group>"; };
 		616A41A224F3D5DD003B8D38 /* ProductIdProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdProviding.swift; sourceTree = "<group>"; };
 		616DDD66220ADF1C00A7CCFA /* DisclosureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureCell.swift; sourceTree = "<group>"; };
 		616DDD67220ADF1C00A7CCFA /* DisclosureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisclosureCell.xib; sourceTree = "<group>"; };
@@ -1091,6 +1093,7 @@
 				61FF8DBC248E5A4900AE746E /* PostFitTips.swift */,
 				61106E8224A61931000ABA1C /* ReferalResponse.swift */,
 				6123949625248D9D00A4F69D /* PostCountResponse.swift */,
+				6166DEC825629B4900447BC1 /* SupportedVersionResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1546,6 +1549,7 @@
 				61FBDB9624CEBA600061CF39 /* TermsConditionViewModel.swift in Sources */,
 				61B5A0D622A12C12009D372C /* TargetRequestTableViewCell.swift in Sources */,
 				61FF8DBD248E5A4900AE746E /* PostFitTips.swift in Sources */,
+				6166DEC925629B4900447BC1 /* SupportedVersionResponse.swift in Sources */,
 				61B4D40C22E06EA3003682AD /* NearbyStoresTutorialVC.swift in Sources */,
 				611E41222214719F007B1C62 /* ProductDetailCellViewModel.swift in Sources */,
 				61F35F412217FBF7007B7A44 /* CountViewModeling.swift in Sources */,
