@@ -309,6 +309,8 @@ extension MyUploadsVC: MyUploadsCellDelegate {
                 // Video will be always at the end
                 if cellTag <= posts[collectionViewTag].uploads.count {
                     reason = posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? ""
+                } else if let videos = posts[collectionViewTag].videos, videos.count > 0 {
+                    reason = videos[0].rejectionReason ?? ""
                 }
                 if reason == "" {
                     return

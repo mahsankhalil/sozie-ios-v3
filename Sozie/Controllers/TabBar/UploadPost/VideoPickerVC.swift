@@ -194,8 +194,7 @@ class VideoPickerVC: UIViewController {
                     self.videoFileOutput?.stopRecording()
                     self.timer.invalidate()
                     (sender as! UIButton).setImage(UIImage(named: "Record"), for: .normal)
-                }
-                else {
+                } else {
                     self.view.makeToast("Minimum recording is 10 Seconds")
                 }
             }
