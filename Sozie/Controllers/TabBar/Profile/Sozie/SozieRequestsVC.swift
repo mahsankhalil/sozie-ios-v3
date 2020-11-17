@@ -557,7 +557,11 @@ class SozieRequestsVC: UIViewController {
 extension SozieRequestsVC: SizeSelectionDelegate {
     func doneButtonTapped(selectedSizes: [String]) {
         var string = ""
+        var allSizes = [String]()
         for size in selectedSizes {
+            allSizes.append(contentsOf: size.getNumericSizes())
+        }
+        for size in allSizes {
             string = string + size.lowercased() + " "
         }
         string.removeLast()

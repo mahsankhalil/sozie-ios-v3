@@ -107,4 +107,55 @@ extension String {
                 .compare(otherVersionComponents.joined(separator: versionDelimiter), options: .numeric) // <6>
         }
     }
+    func sizeMap() -> String {
+        let sizeMapper = [
+            "0": "XXS",
+            "2": "XXS",
+            "4": "XS",
+            "6": "XS",
+            "8": "S",
+            "10": "S",
+            "12": "M",
+            "14": "M",
+            "16": "L",
+            "18": "L",
+            "20": "XL",
+            "22": "XL",
+            "24": "XXL",
+            "26": "XXL",
+            "L": "L",
+            "M": "M",
+            "S": "S",
+            "1X": "1X",
+            "2X": "2X",
+            "3X": "3X",
+            "4X": "4X",
+            "XL": "XL",
+            "XS": "XS",
+            "2XL": "XXL",
+            "2XS": "XXS",
+            "3XL": "3X",
+            "1 Size": "1 Size"]
+        if let mappedSize = sizeMapper[self] {
+            return mappedSize
+        } else {
+            return self
+        }
+    }
+    func getNumericSizes() -> [String] {
+        let mapper = [
+            "XXS": ["0", "2", "2XS", "XXS"],
+            "XS": ["4", "6", "XS"],
+            "S": ["8", "10", "S"],
+            "M": ["12", "14", "M"],
+            "L": ["16", "18", "L"],
+            "XL": ["20", "22", "XL"],
+            "XXL": ["24", "26", "2XL", "XXL"]
+        ]
+        if let sizesArray = mapper[self] {
+            return sizesArray
+        } else {
+            return [self]
+        }
+    }
 }
