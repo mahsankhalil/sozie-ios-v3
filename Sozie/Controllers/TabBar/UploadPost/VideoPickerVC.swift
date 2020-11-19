@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import Toast_Swift
+import SVProgressHUD
 protocol CustomVideoRecorderDelegate: class {
     func customImagePickerController(_ picker: VideoPickerVC, didFinishPickingMediaWithInfo info: [String: Any])
 }
@@ -23,7 +24,7 @@ class VideoPickerVC: UIViewController {
     var timer: Timer!
     var timeMin = 0
     var timeSec = 0
-    var count = 180000  // 3 Minutes
+    var count = 180  // 3 Minutes
     var session: AVCaptureSession?
     var input: AVCaptureDeviceInput?
     var micInput: AVCaptureDeviceInput?
@@ -60,7 +61,7 @@ class VideoPickerVC: UIViewController {
             self.videoFileOutput?.stopRecording()
             self.timer.invalidate()
             self.captureButton.setImage(UIImage(named: "Record"), for: .normal)
-            self.count = 180000
+            self.count = 180
             timerLabel.isHidden = true
         }
         print("Count: \(self.count)")
@@ -99,7 +100,7 @@ class VideoPickerVC: UIViewController {
         timeSec = 0
         timeMin = 0
         timerLabel.isHidden = false
-        self.count = 180000
+        self.count = 180
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         //        sessionQueue.async {
         let recordingDelegate: AVCaptureFileOutputRecordingDelegate? = self
@@ -139,7 +140,7 @@ class VideoPickerVC: UIViewController {
         videoComposition.renderSize = CGSize(width: CGFloat(clipVideoTrack.naturalSize.height), height: CGFloat(clipVideoTrack.naturalSize.height))
         videoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
         let instruction = AVMutableVideoCompositionInstruction()
-        instruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: CMTimeMakeWithSeconds(60, preferredTimescale: 30))
+        instruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: CMTimeMakeWithSeconds(200, preferredTimescale: 30))
 
         //rotate to potrait
         let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
@@ -151,7 +152,7 @@ class VideoPickerVC: UIViewController {
         videoComposition.instructions = [instruction]
 
         //exporter
-        let exporter = AVAssetExportSession.init(asset: asset, presetName: AVAssetExportPresetMediumQuality)
+        let exporter = AVAssetExportSession.init(asset: asset, presetName: AVAssetExportPresetHighestQuality)
         exporter?.outputFileType = AVFileType.mov
         exporter?.outputURL = outputPath
         exporter?.videoComposition = videoComposition
@@ -228,8 +229,10 @@ extension VideoPickerVC: AVCaptureFileOutputRecordingDelegate {
                 self.setupVideoCapture()
                 return
             }
+            SVProgressHUD.show()
             self.manageCroppingToSquare(filePath: outputFileURL) { (fileURL) in
                 DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
 //                    let videoRecorded = fileURL as URL
                     var info = [String: Any]()
                     info["UIImagePickerControllerMediaURL"] = fileURL

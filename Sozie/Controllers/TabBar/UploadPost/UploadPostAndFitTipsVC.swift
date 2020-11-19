@@ -721,9 +721,9 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
         }
     }
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
+        if let _ = error {
             // we got back an error!
-            UtilityManager.showMessageWith(title: "Save Error", body: error.localizedDescription, in: self)
+            UtilityManager.showMessageWith(title: "Save Error", body: "You have to give picture save permissions in settings for this application", in: self)
         }
     }
 }
