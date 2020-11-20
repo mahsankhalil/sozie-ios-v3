@@ -585,9 +585,9 @@ extension SozieRequestsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = viewModels[indexPath.row]
         var identifier = reuseableIdentifier
-        if viewModel.brandId == 10 || viewModel.brandId == 18 {
-            identifier = reuseableIdentifierTarget
-        }
+//        if viewModel.brandId == 10 || viewModel.brandId == 18 {
+        identifier = reuseableIdentifierTarget
+//        }
         var tableViewCell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: identifier)
         if tableViewCell == nil {
             tableView.register(UINib(nibName: identifier, bundle: nil), forCellReuseIdentifier: identifier)

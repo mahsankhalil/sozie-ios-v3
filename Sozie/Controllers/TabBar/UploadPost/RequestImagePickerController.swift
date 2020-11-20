@@ -44,8 +44,8 @@ class RequestImagePickerController: UIViewController {
         }
 //        imageViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
         imageViewHeightConstraint.constant = UIScreen.main.bounds.size.width
-//        cameraViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
-        cameraViewHeightConstraint.constant = UIScreen.main.bounds.size.height
+        cameraViewHeightConstraint.constant = (UIScreen.main.bounds.size.width/9.0)*16.0
+//        cameraViewHeightConstraint.constant = UIScreen.main.bounds.size.height
 
         captureSession = AVCaptureSession()
         guard let captureDevice = AVCaptureDevice.default(for: .video),
@@ -60,12 +60,12 @@ class RequestImagePickerController: UIViewController {
         overlayImageView = UIImageView(image: UIImage(named: "Canvas-Camera"))
         overlayImageView?.frame.size.height = UIScreen.main.bounds.size.width
 
-//        overlayImageView?.frame.size.height = UIScreen.main.bounds.size.height - 160.0
-//        overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)! * (9.0/16.0)
-        overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)!
+        overlayImageView?.frame.size.height = UIScreen.main.bounds.size.height - 160.0
+        overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)! * (9.0/16.0)
+//        overlayImageView?.frame.size.width = (overlayImageView?.frame.size.height)!
         overlayImageView?.center.x = UIScreen.main.bounds.size.width/2.0
-        overlayImageView?.center.y = UIScreen.main.bounds.size.height/2.0
-//        overlayImageView?.center.y = (UIScreen.main.bounds.size.height - 90.0 - bottomPadding)/2.0
+//        overlayImageView?.center.y = UIScreen.main.bounds.size.height/2.0
+        overlayImageView?.center.y = (UIScreen.main.bounds.size.height - 90.0 - bottomPadding)/2.0
 
         overlayImageView?.layer.borderWidth = 1.0
         overlayImageView?.layer.borderColor = UIColor.white.cgColor
