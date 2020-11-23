@@ -7115,20 +7115,51 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeV-E8-0pW">
                                 <rect key="frame" x="0.0" y="94" width="375" height="236"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="I wish " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kDq-N2-TB3">
-                                        <rect key="frame" x="16" y="25" width="343" height="171"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go ahead!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUW-Qs-QqM" userLabel="Questions">
+                                        <rect key="frame" x="20" y="0.0" width="335" height="19"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k4G-9b-Neb" userLabel="Progress Questions">
+                                        <rect key="frame" x="20" y="24" width="335" height="6"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="gVF-xs-HTW"/>
+                                        </constraints>
+                                        <color key="progressTintColor" red="0.46274509803921571" green="0.81960784313725488" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="trackTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </progressView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rtg-Gg-nXW" userLabel="TextView">
+                                        <rect key="frame" x="20" y="39" width="335" height="150"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="Sto-eS-CKa"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40 Remaining Characters" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7L-TY-Dov">
+                                        <rect key="frame" x="20" y="194" width="335" height="19"/>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="kDq-N2-TB3" firstAttribute="top" secondItem="HeV-E8-0pW" secondAttribute="top" constant="25" id="70Y-kd-UO1"/>
-                                    <constraint firstAttribute="bottom" secondItem="kDq-N2-TB3" secondAttribute="bottom" constant="40" id="RKW-57-TeV"/>
-                                    <constraint firstItem="kDq-N2-TB3" firstAttribute="leading" secondItem="HeV-E8-0pW" secondAttribute="leading" constant="16" id="Y76-FC-gTw"/>
-                                    <constraint firstAttribute="trailing" secondItem="kDq-N2-TB3" secondAttribute="trailing" constant="16" id="yKM-hq-p8c"/>
+                                    <constraint firstItem="Rtg-Gg-nXW" firstAttribute="top" secondItem="k4G-9b-Neb" secondAttribute="bottom" constant="10" id="1zV-Wq-rDo"/>
+                                    <constraint firstItem="k4G-9b-Neb" firstAttribute="leading" secondItem="HeV-E8-0pW" secondAttribute="leading" constant="20" id="9qy-z7-vy0"/>
+                                    <constraint firstItem="W7L-TY-Dov" firstAttribute="leading" secondItem="HeV-E8-0pW" secondAttribute="leading" constant="20" id="KF9-Ob-agU"/>
+                                    <constraint firstItem="aUW-Qs-QqM" firstAttribute="leading" secondItem="HeV-E8-0pW" secondAttribute="leading" constant="20" id="MIr-38-QxC"/>
+                                    <constraint firstAttribute="trailing" secondItem="k4G-9b-Neb" secondAttribute="trailing" constant="20" id="MOT-OB-O9d"/>
+                                    <constraint firstItem="aUW-Qs-QqM" firstAttribute="top" secondItem="HeV-E8-0pW" secondAttribute="top" id="SKj-7j-wRu"/>
+                                    <constraint firstAttribute="trailing" secondItem="W7L-TY-Dov" secondAttribute="trailing" constant="20" id="TL7-iA-lNw"/>
+                                    <constraint firstItem="W7L-TY-Dov" firstAttribute="top" secondItem="Rtg-Gg-nXW" secondAttribute="bottom" constant="5" id="WGp-9G-WkI"/>
+                                    <constraint firstItem="k4G-9b-Neb" firstAttribute="top" secondItem="aUW-Qs-QqM" secondAttribute="bottom" constant="5" id="Xx1-7y-o2d"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rtg-Gg-nXW" secondAttribute="trailing" constant="20" id="YAu-9W-OPF"/>
+                                    <constraint firstItem="Rtg-Gg-nXW" firstAttribute="leading" secondItem="HeV-E8-0pW" secondAttribute="leading" constant="20" id="aSW-Wd-VaE"/>
+                                    <constraint firstAttribute="trailing" secondItem="aUW-Qs-QqM" secondAttribute="trailing" constant="20" id="p5V-sO-vib"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -7148,8 +7179,11 @@ Cg
                     <size key="freeformSize" width="375" height="330"/>
                     <connections>
                         <outlet property="backButton" destination="4us-gP-DiW" id="Fw7-he-Adz"/>
+                        <outlet property="characterCountLabel" destination="W7L-TY-Dov" id="IdP-4K-10d"/>
                         <outlet property="nextButton" destination="GK5-c9-8cO" id="6K0-OR-acZ"/>
-                        <outlet property="textView" destination="kDq-N2-TB3" id="S7e-qK-haD"/>
+                        <outlet property="progressBar" destination="k4G-9b-Neb" id="5t0-2u-DKL"/>
+                        <outlet property="questionLabel" destination="aUW-Qs-QqM" id="nIA-DB-mRN"/>
+                        <outlet property="textView" destination="Rtg-Gg-nXW" id="ypg-R4-UtV"/>
                         <outlet property="titleLabel" destination="NSI-GU-JPX" id="lGD-8i-tqn"/>
                     </connections>
                 </viewController>

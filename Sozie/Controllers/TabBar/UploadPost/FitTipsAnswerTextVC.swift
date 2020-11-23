@@ -12,19 +12,26 @@ class FitTipsAnswerTextVC: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    //@IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var characterCountLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var textView: UITextView!
     var fitTipsIndex: Int?
     var questionIndex: Int?
     var fitTips: [FitTips]?
+    var timer: Timer? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         titleLabel.textColor = UtilityManager.getGenderColor()
+        var review = ""
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
             if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
-                textView.text = "I wish " + answer
+                review = answer
+                textView.text = review
             }
         }
         textView.delegate = self
@@ -32,6 +39,10 @@ class FitTipsAnswerTextVC: UIViewController {
 //        (self.parent?.parent as? PopupController)?.updatePopUpSize()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
+        //Showing border around textview
+        self.textView.layer.borderWidth = 0.5
+        self.textView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        refreshReviewContents(review: review)
     }
     @objc func dismissKeyboard() {
         self.textView.resignFirstResponder()
@@ -44,11 +55,12 @@ class FitTipsAnswerTextVC: UIViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if textView.text.isEmpty || textView.text == "I wish " {
-            UtilityManager.showErrorMessage(body: "Please enter comment", in: self)
+        if textView.text.count < 200 {
+            //UtilityManager.showErrorMessage(body: "Please enter comment", in: self)
+            self.view.makeToast("Please complete your review!")
         } else {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
-                let answer = self.textView.text.deletingPrefix("I wish ")
+                let answer = self.textView.text//.deletingPrefix("I wish ")
                 fitTips[fitTipIndex].question[questIndex].answer = answer
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
@@ -113,30 +125,173 @@ class FitTipsAnswerTextVC: UIViewController {
         destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
+    
+    private func refreshReviewContents(review: String) {
+        let textCount = review.count
+        questionLabel.text = getQuestionTitle(length: textCount)
+        characterCountLabel.text = getRemainingQuestionLength(length: textCount)
+        progressBar.progress = getCurrentProgress(length: textCount)
+    }
+
+    private func getQuestionTitle(length: Int) -> String? {
+        if length >= 0 && length <= 40 {
+            questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+            return "Go Ahead!"
+        }
+
+        if (length >= 41 && length <= 80) {
+            questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+            return "Where would you wear this?"
+        }
+
+        if (length >= 81 && length <= 120) {
+            questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+            return "What did you like or how'd it feel?"
+        }
+
+        if (length >= 121 && length <= 160) {
+            questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+            return "What could have been better?"
+        }
+
+        if (length >= 161 && length <= 200) {
+            questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+            return "How have you styled it and how else would you wear it?"
+        }
+        
+        if (length > 200) {
+            questionLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.7450980392, blue: 0.9882352941, alpha: 1)
+            return "Great Review!"
+        }
+
+        return ""
+    }
+    
+    private func getRemainingQuestionLength(length: Int) -> String {
+        if (length >= 0 && length <= 40) {
+            let remaining = 40 - length
+            if (remaining == 0) {
+                return "Minimum 40 Characters"
+            } else if (remaining == 1) {
+                return "Minimum \(remaining) Character"
+            } else {
+                return "Minimum \(remaining) Characters"
+            }
+        }
+
+        if (length >= 41 && length <= 80) {
+            let remaining = 80 - length
+            if (remaining == 0) {
+                return "Minimum 40 Characters"
+            } else if (remaining == 1) {
+                return "Minimum \(remaining) Character"
+            } else {
+                return "Minimum \(remaining) Characters"
+            }
+        }
+
+        if (length >= 81 && length <= 120) {
+            let remaining = 120 - length
+            if (remaining == 0) {
+                return "Minimum 40 Characters"
+            } else if (remaining == 1) {
+                return "Minimum \(remaining) Character"
+            } else {
+                return "Minimum \(remaining) Characters"
+            }
+        }
+
+        if (length >= 121 && length <= 160) {
+            let remaining = 160 - length
+            if remaining == 0 {
+               return "Minimum 40 Characters"
+            } else if remaining == 1 {
+                return "Minimum \(remaining) Character"
+            } else {
+                return "Minimum \(remaining) Characters"
+            }
+        }
+
+        if (length >= 161 && length <= 200) {
+            let remaining = 200 - length
+            if remaining > 1 {
+               return "Minimum \(remaining) Characters"
+            }
+            else {
+                return "Minimum \(remaining) Character"
+            }
+        }
+
+        return "0 Remaining Character"
+    }
+    
+    private func getCurrentProgress(length: Int) -> Float {
+        var result: Float = 1.0//(Float(length) / Float(200))
+        if (length < 200) {
+            result = Float(length) / Float(200)
+        }
+        return result
+    }
+    
+    private func countSpecialCharacter(userInput: String) -> Int {
+        if userInput.count <= 0 {
+            return 0
+        }
+        var countSpecial = 0
+        let characters = Array(userInput)
+        for (index, _) in characters.enumerated() {
+            let value: String = String(characters[index])
+            if value.range(of: ".*[^A-Za-z0-9' ',.?!].*", options: .regularExpression) != nil {
+                countSpecial += 1
+            }
+        }
+
+        return countSpecial
+    }
 
 }
 extension FitTipsAnswerTextVC: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Type your comment..." {
-            textView.text = "I wish "
+    func textViewDidChange(_ textView: UITextView) {
+        //print(textView.text)
+        if countSpecialCharacter(userInput: textView.text) > 2 {
+            UtilityManager.showErrorMessage(body: "Please submit a valid review.\nYou can not use more than 2 special characters.", in: self)
+            var typed: String = textView.text
+            typed.removeLast()
+            textView.text = typed
+        } else {
+            refreshReviewContents(review: textView.text)
         }
     }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+//        if textView.text == "Type your comment..." {
+//            textView.text = "I wish "
+//        }
+    }
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "I wish " {
-            textView.text = "I wish "
-        } else {
+//        if textView.text == "I wish " {
+//            textView.text = "I wish "
+//        } else {
+//
+//        }
+    }
 
+    @objc func getHints(timer: Timer) {
+        if (textView.text.count < 200) {
+            questionLabel.text = "KEEP GOING"
         }
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let  char = text.cString(using: String.Encoding.utf8)!
-        let isBackSpace = strcmp(char, "\\b")
-        if isBackSpace == -92 {
-            // If backspace is pressed this will call
-            if textView.text == "I wish " {
-                return false
-            }
-        }
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(getHints), userInfo: nil, repeats: false)
         return true
+//        let  char = text.cString(using: String.Encoding.utf8)!
+//        let isBackSpace = strcmp(char, "\\b")
+//        if isBackSpace == -92 {
+//            // If backspace is pressed this will call
+//            if textView.text == "I wish " {
+//                return false
+//            }
+//        }
+//        return true
     }
 }
