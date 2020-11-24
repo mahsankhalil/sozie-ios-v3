@@ -8,7 +8,7 @@ def all_pods
 pod 'TPKeyboardAvoiding'
 pod 'SVProgressHUD'
 pod 'SDWebImage', '~> 4.4.2'
-pod 'GoogleSignIn' '~> 4.4.0'
+pod 'GoogleSignIn', '~> 4.4.0'
 pod 'FBSDKCoreKit', '~> 5.5.0'
 pod 'FBSDKLoginKit', '~> 5.5.0'
 pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
