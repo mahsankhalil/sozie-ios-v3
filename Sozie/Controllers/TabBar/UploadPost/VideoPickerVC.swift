@@ -24,7 +24,7 @@ class VideoPickerVC: UIViewController {
     var timer: Timer!
     var timeMin = 0
     var timeSec = 0
-    var count = 180  // 3 Minutes
+    var count = 60  // 3 Minutes
     var session: AVCaptureSession?
     var input: AVCaptureDeviceInput?
     var micInput: AVCaptureDeviceInput?
@@ -61,7 +61,7 @@ class VideoPickerVC: UIViewController {
             self.videoFileOutput?.stopRecording()
             self.timer.invalidate()
             self.captureButton.setImage(UIImage(named: "Record"), for: .normal)
-            self.count = 180
+            self.count = 60
             timerLabel.isHidden = true
         }
         print("Count: \(self.count)")
@@ -82,7 +82,7 @@ class VideoPickerVC: UIViewController {
             print(error)
             input = nil
         }
-        session?.sessionPreset = AVCaptureSession.Preset.medium
+        session?.sessionPreset = AVCaptureSession.Preset.high
         if session?.canAddInput(input!) == true {
             session?.addInput(input!)
             if (session?.canAddInput(micInput!))! {
@@ -100,7 +100,7 @@ class VideoPickerVC: UIViewController {
         timeSec = 0
         timeMin = 0
         timerLabel.isHidden = false
-        self.count = 180
+        self.count = 60
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         //        sessionQueue.async {
         let recordingDelegate: AVCaptureFileOutputRecordingDelegate? = self
@@ -229,19 +229,19 @@ extension VideoPickerVC: AVCaptureFileOutputRecordingDelegate {
                 self.setupVideoCapture()
                 return
             }
-            SVProgressHUD.show()
-            self.manageCroppingToSquare(filePath: outputFileURL) { (fileURL) in
+//            SVProgressHUD.show()
+//            self.manageCroppingToSquare(filePath: outputFileURL) { (fileURL) in
                 DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
+//                    SVProgressHUD.dismiss()
 //                    let videoRecorded = fileURL as URL
                     var info = [String: Any]()
-                    info["UIImagePickerControllerMediaURL"] = fileURL
+                    info["UIImagePickerControllerMediaURL"] = outputFileURL
                     UtilityManager.showMessageWith(title: "Alert!", body: "Are you sure to use this video?", in: self, okBtnTitle: "Yes", cancelBtnTitle: "No", dismissAfter: nil, leftAligned: nil) {
                         self.delegate?.customImagePickerController(self, didFinishPickingMediaWithInfo: info)
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
-            }
+//            }
         }
     }
 }
