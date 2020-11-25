@@ -29,6 +29,7 @@ class FitTipsShowReviewVC: UIViewController {
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var reviewHeight: NSLayoutConstraint!
     var currentProduct: Product?
     var fitTips: [FitTips]?
     var questionList = [Question]()
@@ -43,17 +44,16 @@ class FitTipsShowReviewVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-//        //After Tableviews data source values are assigned
-//        tableView.reloadData()
-//        tableView.layoutIfNeeded()
-//        tableView.heightAnchor.constraint(equalToConstant: tableView.contentSize.height).isActive = true
+    
+        tableView.register(FitTipsSelectionCell.nib(), forCellReuseIdentifier: FitTipsSelectionCell.identifier)
+        tableView.register(FitTipsRatingCell.nib(), forCellReuseIdentifier: FitTipsRatingCell.identifier)
     }
     override func viewWillLayoutSubviews() {
         self.tableViewHeight?.constant = self.tableView.contentSize.height
 //        self.scrollViewHeight?.constant = self.scrollView.contentSize.height
         
-        scrollView.contentSize = CGSize(width: 375, height: 700)
+        //scrollView.contentSize = CGSize(width: 375, height: 700)
+        self.reviewHeight?.constant = self.reviewTextView.contentSize.height
     }
     
     @IBAction func onButtonPressed(_ sender: UIButton) {
@@ -160,7 +160,6 @@ class FitTipsShowReviewVC: UIViewController {
                 }
             }
         }
-        
         //Then get the other rating questions
         if let fitTipsList = fitTips {
             for fitTip in fitTipsList {
@@ -172,12 +171,10 @@ class FitTipsShowReviewVC: UIViewController {
                 }
             }
         }
-        
         print("Total: \(questionList.count)")
         for question in questionList {
-            print("Name: \(question.questionText) Options Count: \(question.options.count)")
+            print("Name: \(question.questionText) Answer: \(question.answer) Options Count: \(question.options.count)")
         }
-        
     }
     /*
     // MARK: - Navigation
@@ -188,36 +185,79 @@ class FitTipsShowReviewVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    func checkIfAnswered(text: String, answer: String) -> Bool {
+        let answers = answer.components(separatedBy: ",")
+        for currentAnswer in answers where currentAnswer == text {
+                return true
+        }
+        return false
+    }
 }
 
 extension FitTipsShowReviewVC: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
-    
 }
 
 extension FitTipsShowReviewVC: UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return questionList.count
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if questionList[section].type == "S" {
+            return 1
+        }
         return questionList[section].options.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = questionList[indexPath.section].options[indexPath.row].optionText
+        if questionList[indexPath.section].type == "S" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: FitTipsRatingCell.identifier, for: indexPath) as! FitTipsRatingCell
+            let question = questionList[indexPath.section]
+            if question.isAnswered {
+                if let rating = Double(question.answer ?? "0") {
+                    cell.configure(rating: rating)
+                }
+            }
+            return cell
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: FitTipsSelectionCell.identifier, for: indexPath) as! FitTipsSelectionCell
+        let question = questionList[indexPath.section]
+        let optionName = question.options[indexPath.row].optionText
+        
+        if question.type == "C" {
+            if let answer = question.answer {
+                if (checkIfAnswered(text: optionName, answer: answer)) {
+                    cell.configure(imageName: "fitTips_selected", optionName: optionName)
+                }
+                else {
+                    cell.configure(imageName: "fitTips_not_selected", optionName: optionName)
+                }
+            }
+        } else {
+            if question.answer == optionName {
+                cell.configure(imageName: "fitTips_selected", optionName: optionName)
+            } else {
+                cell.configure(imageName: "fitTips_not_selected", optionName: optionName)
+            }
+        }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return questionList[section].questionText
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return questionList[section].questionText
+//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 35))
+        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 15, height: 35))
+        label.text = questionList[section].questionText
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.font = UIFont(name: "SegoeUI-SemiBold", size: 15.0)
+        view.addSubview(label)
+        return view
     }
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 35
+    }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.viewWillLayoutSubviews()
     }

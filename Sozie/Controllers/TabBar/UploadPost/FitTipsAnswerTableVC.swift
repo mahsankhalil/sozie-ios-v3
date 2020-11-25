@@ -70,9 +70,11 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     @IBAction func nextButtonTapped(_ sender: Any) {
         if type == "R" && arrayOfSelectedIndexes.isEmpty {
-            UtilityManager.showMessageWith(title: "Oops!", body: "You forgot to select an option!", in: self)
+            //UtilityManager.showMessageWith(title: "Oops!", body: "You forgot to select an option!", in: self)
+            self.view.makeToast("You forgot to select an option!")
         } else if type == "C" && arrayOfSelectedIndexes.count < 2 {
-            UtilityManager.showMessageWith(title: "Oops!", body: "You must select 2 options!", in: self)
+            //UtilityManager.showMessageWith(title: "Oops!", body: "You must select 2 options!", in: self)
+            self.view.makeToast("You must select 2 options!")
         } else {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
                 var arrayOfAnswers = [String]()
@@ -83,9 +85,14 @@ class FitTipsAnswerTableVC: UIViewController {
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
                     if fitTipIndex == fitTips.count - 1 {
-                        (self.navigationController as! FitTipsNavigationController).closeHandler!()
-                        gotoFitTipsReviewVC()
-                        return
+                        if isFitTipsCompleted() {
+                            (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                            gotoFitTipsReviewVC()
+                            return
+                        } else {
+                            self.view.makeToast("FitTips not completed yet!")
+                            return
+                        }
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
@@ -154,6 +161,16 @@ class FitTipsAnswerTableVC: UIViewController {
         destVC.currentProduct = self.currentProduct
         destVC.fitTips = fitTips
         present(destVC, animated: true)
+    }
+    func isFitTipsCompleted() -> Bool {
+        if let fitTips = fitTips {
+            for fitTip in fitTips {
+                for quest in fitTip.question where quest.isAnswered == false {
+                        return false
+                }
+            }
+        }
+        return true
     }
     /*
     // MARK: - Navigation

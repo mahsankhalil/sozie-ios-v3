@@ -45,9 +45,14 @@ class FitTipsAnswerPickerVC: UIViewController {
             fitTips[fitTipIndex].question[questIndex].isAnswered = true
             if questIndex == fitTips[fitTipIndex].question.count - 1 {
                 if fitTipIndex == fitTips.count - 1 {
-                    (self.navigationController as! FitTipsNavigationController).closeHandler!()
-                    gotoFitTipsReviewVC()
-                    return
+                    if isFitTipsCompleted() {
+                        (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                        gotoFitTipsReviewVC()
+                        return
+                    } else {
+                        self.view.makeToast("FitTips not completed yet!")
+                        return
+                    }
                 } else {
                     fitTipIndex = fitTipIndex + 1
                     questIndex = 0
@@ -75,6 +80,16 @@ class FitTipsAnswerPickerVC: UIViewController {
         destVC.fitTips = fitTips
         destVC.currentProduct = self.currentProduct
         present(destVC, animated: true)
+    }
+    func isFitTipsCompleted() -> Bool {
+        if let fitTips = fitTips {
+            for fitTip in fitTips {
+                for quest in fitTip.question where quest.isAnswered == false {
+                        return false
+                }
+            }
+        }
+        return true
     }
     /*
     // MARK: - Navigation

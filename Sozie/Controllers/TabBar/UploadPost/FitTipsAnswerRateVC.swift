@@ -115,9 +115,14 @@ class FitTipsAnswerRateVC: UIViewController {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
 //                if questIndex == fitTips[fitTipIndex].question.count - 1 {
                     if fitTipIndex == fitTips.count - 1 {
-                        (self.navigationController as! FitTipsNavigationController).closeHandler!()
-                        gotoFitTipsReviewVC()
-                        return
+                        if isFitTipsCompleted() {
+                            (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                            gotoFitTipsReviewVC()
+                            return
+                        } else {
+                            self.view.makeToast("FitTips not completed yet!")
+                            return
+                        }
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
@@ -138,7 +143,8 @@ class FitTipsAnswerRateVC: UIViewController {
                }
             }
         } else {
-            UtilityManager.showErrorMessage(body: "Please select rating.", in: self)
+            //UtilityManager.showErrorMessage(body: "Please select rating.", in: self)
+            self.view.makeToast("Please select rating.")
         }
     }
     private func gotoFitTipsReviewVC() {
@@ -146,7 +152,17 @@ class FitTipsAnswerRateVC: UIViewController {
         destVC.currentProduct = self.currentProduct
         destVC.fitTips = fitTips
         present(destVC, animated: true)
-       }
+    }
+    func isFitTipsCompleted() -> Bool {
+        if let fitTips = fitTips {
+            for fitTip in fitTips {
+                for quest in fitTip.question where quest.isAnswered == false {
+                        return false
+                }
+            }
+        }
+        return true
+    }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
         destVC.currentProduct = self.currentProduct

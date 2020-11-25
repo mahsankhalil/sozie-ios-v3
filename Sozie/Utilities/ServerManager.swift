@@ -836,7 +836,11 @@ class ServerManager: NSObject {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
-        let url = ServerManager.fitTipsURL + "?category_id=" + String(describing: params["category_id"]) + "&app_version=" + Constant.fitTipsVersion
+        var brandId = 0
+        if UserDefaultManager.getALlBrands()?.count ?? 0 > 0 {
+            brandId = UserDefaultManager.getALlBrands()?[0].brandId as! Int
+        }
+        let url = ServerManager.fitTipsURL + "?category_id=" + String(describing: params["category_id"]) + "&app_version=" + Constant.fitTipsVersion + "&brand_id=" + String(brandId)
         Alamofire.request(url, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<[FitTips]> = decoder.decodeResponse(from: response)

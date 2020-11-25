@@ -137,9 +137,14 @@ class FitTipsAnswerRadioVC: UIViewController {
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
                     if fitTipIndex == fitTips.count - 1 {
-                        (self.navigationController as! FitTipsNavigationController).closeHandler!()
-                        gotoFitTipsReviewVC()
-                        return
+                        if isFitTipsCompleted() {
+                            (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                            gotoFitTipsReviewVC()
+                            return
+                        } else {
+                            self.view.makeToast("FitTips not completed yet!")
+                            return
+                        }
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
@@ -160,7 +165,8 @@ class FitTipsAnswerRadioVC: UIViewController {
                 }
             }
         } else {
-            UtilityManager.showErrorMessage(body: "Please select an option.", in: self)
+            //UtilityManager.showErrorMessage(body: "Please select an option.", in: self)
+            self.view.makeToast("Please select an option.")
         }
     }
     private func gotoFitTipsReviewVC() {
@@ -168,6 +174,16 @@ class FitTipsAnswerRadioVC: UIViewController {
         destVC.currentProduct = self.currentProduct
         destVC.fitTips = fitTips
         present(destVC, animated: true)
+    }
+    func isFitTipsCompleted() -> Bool {
+        if let fitTips = fitTips {
+            for fitTip in fitTips {
+                for quest in fitTip.question where quest.isAnswered == false {
+                        return false
+                }
+            }
+        }
+        return true
     }
 
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {

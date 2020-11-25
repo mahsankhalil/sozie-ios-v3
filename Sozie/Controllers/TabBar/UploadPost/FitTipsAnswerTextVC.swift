@@ -76,9 +76,14 @@ class FitTipsAnswerTextVC: UIViewController {
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
                     if fitTipIndex == fitTips.count - 1 {
-                        (self.navigationController as! FitTipsNavigationController).closeHandler!()
-                        gotoFitTipsReviewVC()
-                        return
+                        if isFitTipsCompleted() {
+                            (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                            gotoFitTipsReviewVC()
+                            return
+                        } else {
+                            self.view.makeToast("FitTips not completed yet!")
+                            return
+                        }
                     } else {
                         fitTipIndex = fitTipIndex + 1
                         questIndex = 0
@@ -105,6 +110,16 @@ class FitTipsAnswerTextVC: UIViewController {
         destVC.currentProduct = self.currentProduct
         destVC.fitTips = fitTips
         present(destVC, animated: true)
+    }
+    func isFitTipsCompleted() -> Bool {
+        if let fitTips = fitTips {
+            for fitTip in fitTips {
+                for quest in fitTip.question where quest.isAnswered == false {
+                        return false
+                }
+            }
+        }
+        return true
     }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
@@ -264,7 +279,7 @@ class FitTipsAnswerTextVC: UIViewController {
         let characters = Array(userInput)
         for (index, _) in characters.enumerated() {
             let value: String = String(characters[index])
-            if value.range(of: ".*[^A-Za-z0-9' ',.?!].*", options: .regularExpression) != nil {
+            if value.range(of: "[^A-Za-z0-9' ',.?!]", options: .regularExpression) != nil {
                 countSpecial += 1
             }
         }
