@@ -681,7 +681,7 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
     func showCropVC(image: UIImage) {
         let cropVC = CropViewController(image: image)
         cropVC.delegate = self
-        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
+        cropVC.customAspectRatio = CGSize(width: 4.0, height: 5.0)
 //        cropVC.customAspectRatio = CGSize(width: 1.0, height: 1.0)
         cropVC.aspectRatioPickerButtonHidden = true
         cropVC.aspectRatioLockEnabled = true
@@ -705,7 +705,7 @@ extension UploadPostAndFitTipsVC: UINavigationControllerDelegate, UIImagePickerC
     }
     func setupImage(pickedImage: UIImage, videoURL: String? = nil) {
         if let index = selectedIndex {
-            let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+            let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 1080, height: (pickedImage.size.height/pickedImage.size.width)*1080))
             viewModels[index].image = scaledImg
             viewModels[index].videoURL = videoURL
             self.postImageView.image = scaledImg

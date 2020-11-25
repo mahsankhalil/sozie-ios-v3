@@ -445,7 +445,7 @@ extension MyUploadsVC: UINavigationControllerDelegate, UIImagePickerControllerDe
         let cropVC = CropViewController(image: image)
         cropVC.delegate = self
 //        cropVC.customAspectRatio = CGSize(width: 9.0, height: 16.0)
-        cropVC.customAspectRatio = CGSize(width: 1.0, height: 1.0)
+        cropVC.customAspectRatio = CGSize(width: 4.0, height: 5.0)
         cropVC.aspectRatioPickerButtonHidden = true
         cropVC.aspectRatioLockEnabled = true
         cropVC.resetButtonHidden = true
@@ -464,7 +464,7 @@ extension MyUploadsVC: UINavigationControllerDelegate, UIImagePickerControllerDe
         }
     }
     func setupImage(pickedImage: UIImage) {
-        let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 750, height: (pickedImage.size.height/pickedImage.size.width)*750))
+        let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 1080, height: (pickedImage.size.height/pickedImage.size.width)*1080))
         self.updatePostData(image: scaledImg)
     }
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -482,7 +482,7 @@ extension MyUploadsVC: CropViewControllerDelegate {
 }
 extension MyUploadsVC: CaptureManagerDelegate {
     func processCapturedImage(image: UIImage) {
-        let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 750, height: (image.size.height/image.size.width)*750))
+        let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 1080, height: (image.size.height/image.size.width)*1080))
         self.updatePostData(image: scaledImg)
     }
 }

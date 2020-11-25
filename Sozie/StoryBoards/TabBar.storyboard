@@ -7408,7 +7408,7 @@ Click images with red X for feedback. </string>
                                 <rect key="frame" x="0.0" y="211.5" width="375" height="244"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Smile &amp; look at the camera :)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kn-1g-sz7">
-                                        <rect key="frame" x="24" y="112" width="209" height="20"/>
+                                        <rect key="frame" x="24" y="112" width="207" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="WjM-we-NYu"/>
                                         </constraints>
@@ -7417,7 +7417,7 @@ Click images with red X for feedback. </string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.Tuck in the tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNY-ms-30a">
-                                        <rect key="frame" x="24" y="156" width="118.5" height="20"/>
+                                        <rect key="frame" x="24" y="156" width="115" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="JEN-Aq-8LL"/>
                                         </constraints>
@@ -7426,7 +7426,7 @@ Click images with red X for feedback. </string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Make sure head and feet are not cut off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oam-9j-q5q">
-                                        <rect key="frame" x="24" y="68" width="280.5" height="20"/>
+                                        <rect key="frame" x="24" y="68" width="277" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="PVv-Pn-Qb5"/>
                                         </constraints>
@@ -7469,7 +7469,7 @@ Click images with red X for feedback. </string>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Use grid to center body in frames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbn-kk-l9p">
-                                        <rect key="frame" x="24" y="24" width="241" height="20"/>
+                                        <rect key="frame" x="24" y="24" width="237" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="gSv-TM-TOd"/>
                                         </constraints>
@@ -7595,7 +7595,7 @@ Click images with red X for feedback. </string>
                             <constraint firstItem="yy4-06-FSR" firstAttribute="top" secondItem="xLA-d1-aaq" secondAttribute="top" id="4Tw-O3-DCP"/>
                             <constraint firstItem="ovG-QX-gZR" firstAttribute="trailing" secondItem="xLA-d1-aaq" secondAttribute="trailing" id="8A2-EP-wtA"/>
                             <constraint firstItem="Ic6-hJ-nfG" firstAttribute="top" secondItem="HKv-c8-C2o" secondAttribute="top" id="9v1-AE-F7f"/>
-                            <constraint firstItem="Def-iH-0Sa" firstAttribute="centerY" secondItem="HKv-c8-C2o" secondAttribute="centerY" id="Cql-Qm-TOU"/>
+                            <constraint firstItem="Def-iH-0Sa" firstAttribute="centerY" secondItem="HKv-c8-C2o" secondAttribute="centerY" id="BpK-5C-Ehy"/>
                             <constraint firstItem="Ic6-hJ-nfG" firstAttribute="leading" secondItem="xLA-d1-aaq" secondAttribute="leading" id="Dw3-vl-gYz"/>
                             <constraint firstItem="lqY-8i-lmf" firstAttribute="leading" secondItem="xLA-d1-aaq" secondAttribute="leading" id="EQo-M3-Ez2"/>
                             <constraint firstItem="lqY-8i-lmf" firstAttribute="trailing" secondItem="xLA-d1-aaq" secondAttribute="trailing" id="G9O-pn-qfm"/>
@@ -7605,9 +7605,9 @@ Click images with red X for feedback. </string>
                             <constraint firstItem="Ic6-hJ-nfG" firstAttribute="centerY" secondItem="HKv-c8-C2o" secondAttribute="centerY" id="gFj-zP-w46"/>
                             <constraint firstItem="Vk2-hd-bq6" firstAttribute="centerX" secondItem="HKv-c8-C2o" secondAttribute="centerX" id="hFH-sl-864"/>
                             <constraint firstItem="ovG-QX-gZR" firstAttribute="bottom" secondItem="xLA-d1-aaq" secondAttribute="bottom" id="lm4-dL-rSI"/>
-                            <constraint firstItem="lqY-8i-lmf" firstAttribute="top" secondItem="HKv-c8-C2o" secondAttribute="top" id="ntQ-nE-sZo"/>
                             <constraint firstItem="xLA-d1-aaq" firstAttribute="trailing" secondItem="yy4-06-FSR" secondAttribute="trailing" constant="8" id="rP5-Ye-ZQi"/>
-                            <constraint firstItem="Def-iH-0Sa" firstAttribute="centerX" secondItem="Ic6-hJ-nfG" secondAttribute="centerX" id="v7h-ja-Jtd"/>
+                            <constraint firstItem="Def-iH-0Sa" firstAttribute="centerX" secondItem="HKv-c8-C2o" secondAttribute="centerX" id="sz0-B3-9LU"/>
+                            <constraint firstItem="lqY-8i-lmf" firstAttribute="centerY" secondItem="HKv-c8-C2o" secondAttribute="centerY" id="w7n-wx-n8W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xLA-d1-aaq"/>
                     </view>
