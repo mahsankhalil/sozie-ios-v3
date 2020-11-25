@@ -14,6 +14,7 @@ class FitTipsListingVC: UIViewController {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
 
+    var currentProduct: Product?
     var fitTips: [FitTips] = [] {
         didSet {
             viewModels.removeAll()
@@ -103,6 +104,7 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
         let fitTip = fitTips[indexPath.row]
         if fitTip.question[0].type == "R" || fitTip.question[0].type == "C" {
             let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
+            destVC.currentProduct = self.currentProduct
             destVC.fitTipsIndex = indexPath.row
             destVC.questionIndex = 0
             destVC.fitTips = fitTips
@@ -111,6 +113,7 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
         } else if fitTip.question[0].type == "T" {
             //Text Input
             let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
+            destVC.currentProduct = self.currentProduct
             destVC.fitTipsIndex = indexPath.row
             destVC.questionIndex = 0
             destVC.fitTips = fitTips
@@ -118,6 +121,7 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(destVC, animated: true)
         } else if fitTip.question[0].type == "S" {
             let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+            destVC.currentProduct = self.currentProduct
             destVC.fitTipsIndex = indexPath.row
             destVC.questionIndex = 0
             destVC.fitTips = fitTips
@@ -125,6 +129,7 @@ extension FitTipsListingVC: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(destVC, animated: true)
         } else if fitTip.question[0].type == "L" {
             let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
+            destVC.currentProduct = self.currentProduct
             destVC.fitTipsIndex = indexPath.row
             destVC.questionIndex = 0
             destVC.fitTips = fitTips

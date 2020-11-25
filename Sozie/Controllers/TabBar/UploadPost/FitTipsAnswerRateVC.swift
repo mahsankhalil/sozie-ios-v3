@@ -14,6 +14,7 @@ class FitTipsAnswerRateVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    var currentProduct: Product?
     var fitTipsIndex: Int?
     var questionIndex: Int?
     var fitTips: [FitTips]?
@@ -43,6 +44,15 @@ class FitTipsAnswerRateVC: UIViewController {
             if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
                 if let rating = Double(answer) {
                     rateView.rating = rating
+                }
+            }
+        }
+        if let fitTipIndex = fitTipsIndex, let questIndex = questionIndex, let fitTips = fitTips {
+            if questIndex == fitTips[fitTipIndex].question.count - 1 {
+                if fitTipIndex == fitTips.count - 1 {
+                    nextButton.setTitle("Done", for: .normal)
+                } else {
+                    nextButton.setTitle("Next", for: .normal)
                 }
             }
         }
@@ -106,6 +116,7 @@ class FitTipsAnswerRateVC: UIViewController {
 //                if questIndex == fitTips[fitTipIndex].question.count - 1 {
                     if fitTipIndex == fitTips.count - 1 {
                         (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                        gotoFitTipsReviewVC()
                         return
                     } else {
                         fitTipIndex = fitTipIndex + 1
@@ -130,8 +141,15 @@ class FitTipsAnswerRateVC: UIViewController {
             UtilityManager.showErrorMessage(body: "Please select rating.", in: self)
         }
     }
+    private func gotoFitTipsReviewVC() {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsShowReviewVC") as! FitTipsShowReviewVC
+        destVC.currentProduct = self.currentProduct
+        destVC.fitTips = fitTips
+        present(destVC, animated: true)
+       }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -140,6 +158,7 @@ class FitTipsAnswerRateVC: UIViewController {
     }
     func navigateToPickerAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerPickerVC") as! FitTipsAnswerPickerVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -147,6 +166,7 @@ class FitTipsAnswerRateVC: UIViewController {
     }
     func navigateToTableAnswer(fitTipIndex: Int, questIndex: Int, type: String) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -155,6 +175,7 @@ class FitTipsAnswerRateVC: UIViewController {
     }
     func navigateToRateAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -162,6 +183,7 @@ class FitTipsAnswerRateVC: UIViewController {
     }
     func navigateToRadioAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips

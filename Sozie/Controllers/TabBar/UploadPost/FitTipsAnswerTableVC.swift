@@ -13,6 +13,7 @@ class FitTipsAnswerTableVC: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    var currentProduct: Product?
     var fitTipsIndex: Int?
     var questionIndex: Int?
     var fitTips: [FitTips]?
@@ -39,6 +40,15 @@ class FitTipsAnswerTableVC: UIViewController {
                     }
                     viewModels.append(viewModel)
                     index = index + 1
+                }
+            }
+        }
+        if let fitTipIndex = fitTipsIndex, let questIndex = questionIndex, let fitTips = fitTips {
+            if questIndex == fitTips[fitTipIndex].question.count - 1 {
+                if fitTipIndex == fitTips.count - 1 {
+                    nextButton.setTitle("Done", for: .normal)
+                } else {
+                    nextButton.setTitle("Next", for: .normal)
                 }
             }
         }
@@ -74,6 +84,7 @@ class FitTipsAnswerTableVC: UIViewController {
                 if questIndex == fitTips[fitTipIndex].question.count - 1 {
                     if fitTipIndex == fitTips.count - 1 {
                         (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                        gotoFitTipsReviewVC()
                         return
                     } else {
                         fitTipIndex = fitTipIndex + 1
@@ -98,6 +109,7 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -106,6 +118,7 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     func navigateToPickerAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerPickerVC") as! FitTipsAnswerPickerVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -113,6 +126,7 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     func navigateToTableAnswer(fitTipIndex: Int, questIndex: Int, type: String) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -121,6 +135,7 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     func navigateToRateAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRateVC") as! FitTipsAnswerRateVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -128,10 +143,17 @@ class FitTipsAnswerTableVC: UIViewController {
     }
     func navigateToRadioAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerRadioVC") as! FitTipsAnswerRadioVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    private func gotoFitTipsReviewVC() {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsShowReviewVC") as! FitTipsShowReviewVC
+        destVC.currentProduct = self.currentProduct
+        destVC.fitTips = fitTips
+        present(destVC, animated: true)
     }
     /*
     // MARK: - Navigation

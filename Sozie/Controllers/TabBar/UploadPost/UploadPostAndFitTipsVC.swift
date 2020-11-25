@@ -764,7 +764,7 @@ extension UploadPostAndFitTipsVC: UITextFieldDelegate {
         textField.resignFirstResponder()
         if textField == fitTipsTextField {
             if let listOfFitTips = fitTips {
-                let popUpInstnc = FitTipsNavigationController.instance(fitTips: listOfFitTips)
+                let popUpInstnc = FitTipsNavigationController.instance(fitTips: listOfFitTips, product: self.currentProduct)
                 popUpInstnc.delegate = self
                 popUpVC = PopupController
                     .create(self.tabBarController?.navigationController ?? self)

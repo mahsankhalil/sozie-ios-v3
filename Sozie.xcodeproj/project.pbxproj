@@ -272,6 +272,7 @@
 		6998E7E421C77779009DFBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6998E7E321C77779009DFBEF /* Assets.xcassets */; };
 		69DA9A1521CB9B3A008D8FEB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1421CB9B3A008D8FEB /* MainTabBarController.swift */; };
 		69DA9A1721CBC6A0008D8FEB /* DZValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */; };
+		93240154256CE4D300B5BE1F /* FitTipsShowReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93240153256CE4D300B5BE1F /* FitTipsShowReviewVC.swift */; };
 		D738BF6321F3D72600302FE5 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF6221F3D72600302FE5 /* Array.swift */; };
 		D738BF6521F3E33A00302FE5 /* TitleAndCheckmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D738BF6421F3E33A00302FE5 /* TitleAndCheckmarkCell.xib */; };
 		D738BF6721F3E3EA00302FE5 /* TitleAndCheckmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D738BF6621F3E3EA00302FE5 /* TitleAndCheckmarkCell.swift */; };
@@ -579,6 +580,7 @@
 		69DA9A1621CBC6A0008D8FEB /* DZValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DZValidator.swift; sourceTree = "<group>"; };
 		6D6DB5173D2668C7DB0FA4BB /* Pods-Sozie.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.dev.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.dev.xcconfig"; sourceTree = "<group>"; };
 		814AE7F56575BA4304684826 /* Pods-Sozie.stage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sozie.stage.xcconfig"; path = "Pods/Target Support Files/Pods-Sozie/Pods-Sozie.stage.xcconfig"; sourceTree = "<group>"; };
+		93240153256CE4D300B5BE1F /* FitTipsShowReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitTipsShowReviewVC.swift; sourceTree = "<group>"; };
 		BDBDF67CA0D5BC596F1176F9 /* Pods_Sozie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sozie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D738BF6221F3D72600302FE5 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D738BF6421F3E33A00302FE5 /* TitleAndCheckmarkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleAndCheckmarkCell.xib; sourceTree = "<group>"; };
@@ -723,6 +725,7 @@
 				613AEB65247FDFC800B4A019 /* PosePopupVC.swift */,
 				618B4E082497C1AE0066E9CD /* VideoPickerVC.swift */,
 				617F77DA24A4EEB000FB7FFC /* FitTipsAnswerRadioVC.swift */,
+				93240153256CE4D300B5BE1F /* FitTipsShowReviewVC.swift */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -1603,6 +1606,7 @@
 				6103E19E21FB190100C7E7CF /* BrowseVC.swift in Sources */,
 				616DDD6D220B080000A7CCFA /* PopUpViewModel.swift in Sources */,
 				DA48CB1021FABE7E006804B6 /* SingleTextFieldCellViewModeling.swift in Sources */,
+				93240154256CE4D300B5BE1F /* FitTipsShowReviewVC.swift in Sources */,
 				610A622422F997EF00D12E55 /* SegmentManager.swift in Sources */,
 				617CD12C21DE288400D4C885 /* SelectCountryVC.swift in Sources */,
 				DA48CB2021FC25E8006804B6 /* MeasurementTypeProviding.swift in Sources */,
