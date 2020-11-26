@@ -13,6 +13,7 @@ class FitTipsAnswerPickerVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
+    var currentProduct: Product?
     var fitTipsIndex: Int?
     var questionIndex: Int?
     var fitTips: [FitTips]?
@@ -22,6 +23,16 @@ class FitTipsAnswerPickerVC: UIViewController {
         titleLabel.textColor = UtilityManager.getGenderColor()
         if let tipsIndex = fitTipsIndex, let quesIndex = questionIndex {
             titleLabel.text = fitTips?[tipsIndex].question[quesIndex].questionText
+        }
+        
+        if let fitTipIndex = fitTipsIndex, let questIndex = questionIndex, let fitTips = fitTips {
+            if questIndex == fitTips[fitTipIndex].question.count - 1 {
+                if fitTipIndex == fitTips.count - 1 {
+                    nextButton.setTitle("Done", for: .normal)
+                } else {
+                    nextButton.setTitle("Next", for: .normal)
+                }
+            }
         }
     }
 
@@ -34,8 +45,14 @@ class FitTipsAnswerPickerVC: UIViewController {
             fitTips[fitTipIndex].question[questIndex].isAnswered = true
             if questIndex == fitTips[fitTipIndex].question.count - 1 {
                 if fitTipIndex == fitTips.count - 1 {
-                    (self.navigationController as! FitTipsNavigationController).closeHandler!()
-                    return
+                    if isFitTipsCompleted() {
+                        (self.navigationController as! FitTipsNavigationController).closeHandler!()
+                        gotoFitTipsReviewVC()
+                        return
+                    } else {
+                        self.view.makeToast("FitTips not completed yet!")
+                        return
+                    }
                 } else {
                     fitTipIndex = fitTipIndex + 1
                     questIndex = 0
@@ -58,6 +75,22 @@ class FitTipsAnswerPickerVC: UIViewController {
             }
         }
     }
+    private func gotoFitTipsReviewVC() {
+        let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsShowReviewVC") as! FitTipsShowReviewVC
+        destVC.fitTips = fitTips
+        destVC.currentProduct = self.currentProduct
+        present(destVC, animated: true)
+    }
+    func isFitTipsCompleted() -> Bool {
+        if let fitTips = fitTips {
+            for fitTip in fitTips {
+                for quest in fitTip.question where quest.isAnswered == false {
+                        return false
+                }
+            }
+        }
+        return true
+    }
     /*
     // MARK: - Navigation
 
@@ -69,6 +102,7 @@ class FitTipsAnswerPickerVC: UIViewController {
     */
     func navigateToTextAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTextVC") as! FitTipsAnswerTextVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -77,6 +111,7 @@ class FitTipsAnswerPickerVC: UIViewController {
     }
     func navigateToPickerAnswer(fitTipIndex: Int, questIndex: Int) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerPickerVC") as! FitTipsAnswerPickerVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips
@@ -84,6 +119,7 @@ class FitTipsAnswerPickerVC: UIViewController {
     }
     func navigateToTableAnswer(fitTipIndex: Int, questIndex: Int, type: String) {
         let destVC = self.storyboard?.instantiateViewController(withIdentifier: "FitTipsAnswerTableVC") as! FitTipsAnswerTableVC
+        destVC.currentProduct = self.currentProduct
         destVC.fitTipsIndex = fitTipIndex
         destVC.questionIndex = questIndex
         destVC.fitTips = fitTips

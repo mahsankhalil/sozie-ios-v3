@@ -9,6 +9,7 @@
 import UIKit
 
 class FitTipsNavigationController: UINavigationController {
+    var currentProduct: Product?
     var fitTips: [FitTips]?
     var closeHandler: (() -> Void)?
     var navigationHandler: (() -> Void)?
@@ -22,10 +23,11 @@ class FitTipsNavigationController: UINavigationController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    class func instance(fitTips: [FitTips]) -> FitTipsNavigationController {
+    class func instance(fitTips: [FitTips], product: Product?) -> FitTipsNavigationController {
         let storyboard = UIStoryboard(name: "TabBar", bundle: nil)
         let instnce = storyboard.instantiateViewController(withIdentifier: "FitTipsNavigationController") as! FitTipsNavigationController
         instnce.fitTips = fitTips
+        instnce.currentProduct = product
         return instnce
     }
     /*
@@ -75,6 +77,7 @@ extension FitTipsNavigationController: UINavigationControllerDelegate {
         navigationHandler!()
         if let destVC = self.viewControllers[0] as? FitTipsListingVC {
             destVC.fitTips = self.fitTips!
+            destVC.currentProduct = self.currentProduct
         }
     }
 }

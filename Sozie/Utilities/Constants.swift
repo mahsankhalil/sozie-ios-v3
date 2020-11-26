@@ -38,6 +38,7 @@ public class Constant: NSObject {
     static let eventDateFormat = "MM/dd/yyyy hh:mm a"
     static let eventDetailDateFormat = "MMM dd yyyy',' hh:mm a"
     static let animationDuration: TimeInterval = 0.5
+    static let fitTipsVersion = "4"
 
     static let single = "single"
     static let double = "double"
