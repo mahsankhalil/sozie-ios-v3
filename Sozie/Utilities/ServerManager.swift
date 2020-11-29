@@ -895,14 +895,8 @@ func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, vide
                 }
             }
             if let video = videoURL {
-                multipartFormData.append(video, withName: "video", fileName: "video.mp4", mimeType: "video/mp4")
+                multipartFormData.append(video, withName: "videos_to_add", fileName: "video.mp4", mimeType: "video/mp4")
             }
-//            if let data = imageData {
-//                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
-//            }
-//            if let thumbdata = thumbImageData {
-//                multipartFormData.append(thumbdata, withName: "thumb_image", fileName: "image.png", mimeType: "image/png")
-//            }
         }
         Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
             switch result {
@@ -922,6 +916,94 @@ func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, vide
             }
         }
     }
+    func addPostWithMultipleImagesAndVideos(params: [String: Any]?, imagesData: [Data]?, videoURLs: [URL]? = nil, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
+            "Content-type": "multipart/form-data"
+        ]
+        let formData: (MultipartFormData) -> Void = { (multipartFormData) in
+            for (key, value) in (params ?? [:]) {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            if let allImagesData = imagesData {
+                for data in allImagesData {
+                    multipartFormData.append(data, withName: "images_to_upload", fileName: "image.png", mimeType: "image/png")
+                }
+            }
+            if let videos = videoURLs {
+                for video in videos {
+                    multipartFormData.append(video, withName: "videos_to_upload", fileName: "video.mp4", mimeType: "video/mp4")
+                }
+            }
+        }
+        Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseData { response in
+                    let decoder = JSONDecoder()
+                    let obj: Result<AddPostResponse> = decoder.decodeResponse(from: response)
+                    obj.ifSuccess {
+                        block!(true, obj.value!)
+                    }
+                    obj.ifFailure {
+                        block!(false, obj.error!)
+                    }
+                }
+            case .failure(let error):
+                block!(false, error)
+            }
+        }
+    }
+    func editPostWithMultipleImagesAndVideos(params: [String: Any]?, postId: Int, imagesToEdit: [Data]?, imagesToUploads: [Data]?, videoURLs: [URL]? = nil, videosToEditURLs: [URL]? = nil, block: CompletionHandler) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
+            "Content-type": "multipart/form-data"
+        ]
+        let formData: (MultipartFormData) -> Void = { (multipartFormData) in
+            for (key, value) in (params ?? [:]) {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            if let allImagesData = imagesToUploads {
+                for data in allImagesData {
+                    multipartFormData.append(data, withName: "images_to_upload", fileName: "image.png", mimeType: "image/png")
+                }
+            }
+            if let allEditImagesData = imagesToEdit {
+                for data in allEditImagesData {
+                    multipartFormData.append(data, withName: "images_to_edit", fileName: "image.png", mimeType: "image/png")
+                }
+            }
+            if let videos = videoURLs {
+                for video in videos {
+                    multipartFormData.append(video, withName: "videos_to_upload", fileName: "video.mp4", mimeType: "video/mp4")
+                }
+            }
+            if let videosToEdit = videosToEditURLs {
+                for videoToEdit in videosToEdit {
+                    multipartFormData.append(videoToEdit, withName: "videos_to_edit", fileName: "video.mp4", mimeType: "video/mp4")
+                }
+            }
+        }
+    let url = ServerManager.editPostURL + String(postId)
+        Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: url, method: .patch, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseData { response in
+                    let decoder = JSONDecoder()
+                    let obj: Result<AddPostResponse> = decoder.decodeResponse(from: response)
+                    obj.ifSuccess {
+                        block!(true, obj.value!)
+                    }
+                    obj.ifFailure {
+                        block!(false, obj.error!)
+                    }
+                }
+            case .failure(let error):
+                block!(false, error)
+            }
+        }
+    }
+
     func editPostWithMultipleImages(params: [String: Any]?, postId: Int, imagesToEdit: [Data]?, imagesToUploads: [Data]?, videoURL: URL? = nil, block: CompletionHandler) {
             let headers: HTTPHeaders = [
                 "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "") ,
@@ -942,7 +1024,7 @@ func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, vide
                     }
                 }
                 if let video = videoURL {
-                    multipartFormData.append(video, withName: "video", fileName: "video.mp4", mimeType: "video/mp4")
+                    multipartFormData.append(video, withName: "videos_to_upload", fileName: "video.mp4", mimeType: "video/mp4")
                 }
             }
         let url = ServerManager.editPostURL + String(postId)

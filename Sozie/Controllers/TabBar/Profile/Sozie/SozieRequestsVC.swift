@@ -788,21 +788,26 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                     return
                 }
             }
-            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
-                if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
-                    uploadPostVC.currentRequest = currentRequest
-                    if isFromTutorial {
-                        if UserDefaultManager.getIfPostTutorialShown() == false {
-                            uploadPostVC.isTutorialShowing = true
-                        }
-                    }
-                    uploadPostVC.progressTutorialVC = progressTutorialVC
-                    uploadPostVC.delegate = self
-                    hideUploadPostTutorial()
-                    isFromTutorial = false
-                profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
-                }
+            if currentRequest?.brandId == 19 {
+                showUploadPostVC()
+            } else {
+                showUploadPostAndFitTips()
             }
+//            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+//                if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
+//                    uploadPostVC.currentRequest = currentRequest
+//                    if isFromTutorial {
+//                        if UserDefaultManager.getIfPostTutorialShown() == false {
+//                            uploadPostVC.isTutorialShowing = true
+//                        }
+//                    }
+//                    uploadPostVC.progressTutorialVC = progressTutorialVC
+//                    uploadPostVC.delegate = self
+//                    hideUploadPostTutorial()
+//                    isFromTutorial = false
+//                profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
+//                }
+//            }
         } else {
             if self.isFromTutorial == true {
                 self.acceptDumnyRequest(tag: button.tag)
@@ -829,6 +834,34 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             }
         }
         hideAllSearchViews()
+    }
+    func showUploadPostAndFitTips() {
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as? UploadPostAndFitTipsVC {
+                uploadPostVC.currentRequest = currentRequest
+                if isFromTutorial {
+                    if UserDefaultManager.getIfPostTutorialShown() == false {
+                        uploadPostVC.isTutorialShowing = true
+                    }
+                }
+                uploadPostVC.progressTutorialVC = progressTutorialVC
+                uploadPostVC.delegate = self
+                hideUploadPostTutorial()
+                isFromTutorial = false
+            profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
+            }
+        }
+    }
+    func showUploadPostVC() {
+        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+            if let uploadPostVC = self.storyboard?.instantiateViewController(withIdentifier: "AddPostVC") as? AddPostVC {
+                uploadPostVC.currentRequest = currentRequest
+                uploadPostVC.delegate = self
+                hideUploadPostTutorial()
+                isFromTutorial = false
+                profileParentVC.navigationController?.pushViewController(uploadPostVC, animated: true)
+            }
+        }
     }
     func beautifyRemainingTime(waitForPost: Int) -> String {
         let remainingDays = waitForPost / 24

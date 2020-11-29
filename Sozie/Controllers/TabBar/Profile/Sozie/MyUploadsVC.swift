@@ -281,13 +281,30 @@ extension MyUploadsVC: UITableViewDelegate, UITableViewDataSource {
 extension MyUploadsVC: MyUploadsCellDelegate {
     func editButtonTapped(button: UIButton) {
         let currentPost = posts[button.tag]
-        let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
-        addPostVC.currentPostId = currentPost.postId
-        addPostVC.currentProduct = currentPost.currentProduct
-        addPostVC.delegate = self
-        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
-            profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
+        if currentPost.currentProduct?.brandId == 19 {
+            let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "AddPostVC") as! AddPostVC
+            addPostVC.currentPostId = currentPost.postId
+            addPostVC.currentProduct = currentPost.currentProduct
+            addPostVC.delegate = self
+            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+                profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
+            }
+        } else {
+            let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
+            addPostVC.currentPostId = currentPost.postId
+            addPostVC.currentProduct = currentPost.currentProduct
+            addPostVC.delegate = self
+            if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+                profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
+            }
         }
+//        let addPostVC = self.storyboard?.instantiateViewController(withIdentifier: "UploadPostAndFitTipsVC") as! UploadPostAndFitTipsVC
+//        addPostVC.currentPostId = currentPost.postId
+//        addPostVC.currentProduct = currentPost.currentProduct
+//        addPostVC.delegate = self
+//        if let profileParentVC = self.parent?.parent as? ProfileRootVC {
+//            profileParentVC.navigationController?.pushViewController(addPostVC, animated: true)
+//        }
     }
     func warningButtonTapped(button: UIButton) {
         let popUpInstnc = RejectionReasonPopupWithoutTitle.instance()

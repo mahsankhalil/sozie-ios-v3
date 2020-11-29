@@ -35,7 +35,11 @@ class PosePopupVC: UIViewController {
         // Do any additional setup after loading the view.
         collectionView.register(UINib(nibName: "ImageViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageViewCell")
         if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
-            imagesBaseURL = imagesBaseURL + "adidas/"
+            if let user = UserDefaultManager.getCurrentUserObject(), user.brand == 19 {
+                imagesBaseURL = imagesBaseURL + "tommy/"
+            } else {
+                imagesBaseURL = imagesBaseURL + "adidas/"
+            }
         } else {
             imagesBaseURL = imagesBaseURL + "target/"
         }
@@ -56,6 +60,10 @@ class PosePopupVC: UIViewController {
                 self.populateBackPoseImages()
                 self.bottomLabel.text = "Back poses that work"
             case 2:
+                if let user = UserDefaultManager.getCurrentUserObject(), user.brand == 19 {
+                    self.populateFrontPoseImages()
+                    self.bottomLabel.text = "Front poses that work"
+                }
                 self.populateSidePoseImages()
                 self.bottomLabel.text = "Side poses that work"
             default:
@@ -66,7 +74,13 @@ class PosePopupVC: UIViewController {
             self.populateFrontPoseImages()
             self.bottomLabel.text = "Front poses that work"
         }
+        populateTommyBottomLabel()
         self.collectionView.reloadData()
+    }
+    func populateTommyBottomLabel() {
+        if let user = UserDefaultManager.getCurrentUserObject(), user.brand == 19 {
+            self.bottomLabel.text = "Looks that work"
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

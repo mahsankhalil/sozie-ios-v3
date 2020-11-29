@@ -177,7 +177,9 @@ class UtilityManager: NSObject {
             let asset = AVAsset(url: url) //2
             let avAssetImageGenerator = AVAssetImageGenerator(asset: asset) //3
             avAssetImageGenerator.appliesPreferredTrackTransform = true //4
-            let thumnailTime = CMTimeMake(value: 2, timescale: 1) //5
+            let duration = asset.duration
+            
+            let thumnailTime = CMTimeMake(value: duration.value, timescale: 2) //5
             do {
                 let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
                 let thumbNailImage = UIImage(cgImage: cgThumbImage) //7
