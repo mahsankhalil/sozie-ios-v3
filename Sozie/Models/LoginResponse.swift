@@ -88,6 +88,22 @@ struct CountResponse: Codable {
 
 struct BalanceResponse: Codable {
     var balance: Float
+    var currency: String?
+    var requestRemainingBalance: RemainingBalance?
+    enum CodingKeys: String, CodingKey {
+        case balance
+        case currency
+        case requestRemainingBalance = "request_remaining_balance"
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        balance = try values.decode(Float.self, forKey: .balance)
+        currency = try? values.decode(String.self, forKey: .currency)
+        requestRemainingBalance = try? values.decode(RemainingBalance.self, forKey: .requestRemainingBalance)
+    }
+}
+struct RemainingBalance: Codable {
+    var balance: Float
     enum CodingKeys: String, CodingKey {
         case balance
     }

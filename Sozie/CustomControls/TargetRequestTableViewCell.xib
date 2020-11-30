@@ -14,6 +14,9 @@
         <array key="segoeuib.ttf">
             <string>SegoeUI-Bold</string>
         </array>
+        <array key="seguisb.ttf">
+            <string>SegoeUI-SemiBold</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -128,6 +131,15 @@
                                     <constraint firstAttribute="width" constant="100" id="pG1-Hd-iFa"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-aP-vOD">
+                                <rect key="frame" x="330" y="35" width="0.0" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="eRp-eb-Vvr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI-SemiBold" family="Segoe UI" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJl-CH-owF">
                                 <rect key="frame" x="0.0" y="0.0" width="343" height="143"/>
                                 <color key="backgroundColor" white="0.72062059859154926" alpha="0.68298855633802813" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,6 +151,7 @@
                             <constraint firstItem="4dp-ZY-5pe" firstAttribute="leading" secondItem="vEi-4F-nlD" secondAttribute="trailing" constant="10" id="0ag-4a-20f"/>
                             <constraint firstItem="PiI-Xm-Tbw" firstAttribute="top" secondItem="fsa-6p-Xiv" secondAttribute="bottom" constant="-3" id="1Gb-pW-S7b"/>
                             <constraint firstItem="IQD-5f-LQK" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" constant="20" id="1nd-4Y-BXG"/>
+                            <constraint firstItem="MlX-aP-vOD" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" constant="35" id="4Qo-UA-50Y"/>
                             <constraint firstAttribute="bottom" secondItem="AJl-CH-owF" secondAttribute="bottom" id="5UB-M2-D3o"/>
                             <constraint firstItem="WuJ-8Q-nGb" firstAttribute="leading" secondItem="vEi-4F-nlD" secondAttribute="trailing" constant="10" id="7BR-y2-VVF"/>
                             <constraint firstAttribute="trailing" secondItem="6bd-Ae-oty" secondAttribute="trailing" id="8du-WL-RKj"/>
@@ -149,6 +162,7 @@
                             <constraint firstItem="pAj-fp-ddn" firstAttribute="top" secondItem="vEi-4F-nlD" secondAttribute="bottom" id="Lcd-xl-St5"/>
                             <constraint firstAttribute="trailing" secondItem="WuJ-8Q-nGb" secondAttribute="trailing" id="Nah-AO-9Ew"/>
                             <constraint firstItem="4dp-ZY-5pe" firstAttribute="top" secondItem="fsa-6p-Xiv" secondAttribute="bottom" constant="22" id="Num-zQ-yjm"/>
+                            <constraint firstAttribute="trailing" secondItem="MlX-aP-vOD" secondAttribute="trailing" constant="13" id="QwO-Xr-vWi"/>
                             <constraint firstItem="WuJ-8Q-nGb" firstAttribute="top" secondItem="4dp-ZY-5pe" secondAttribute="bottom" constant="20" id="UXq-ua-MXN"/>
                             <constraint firstItem="fsa-6p-Xiv" firstAttribute="top" secondItem="3rl-IZ-nQQ" secondAttribute="top" constant="16" id="Yc6-U2-oeT"/>
                             <constraint firstAttribute="trailing" secondItem="AJl-CH-owF" secondAttribute="trailing" id="bwQ-fa-2po"/>
@@ -181,6 +195,7 @@
                 <outlet property="logoImageView" destination="0nT-0w-pmW" id="5Fl-dl-FWQ"/>
                 <outlet property="overlayView" destination="AJl-CH-owF" id="YJH-vS-yyV"/>
                 <outlet property="pictureButton" destination="IDl-j7-idt" id="5he-vF-XAm"/>
+                <outlet property="priceLabel" destination="MlX-aP-vOD" id="FbJ-Rv-zWB"/>
                 <outlet property="productIdLabel" destination="PiI-Xm-Tbw" id="D2j-1D-gaa"/>
                 <outlet property="productImageView" destination="vEi-4F-nlD" id="NY1-3f-vRa"/>
                 <outlet property="sizeRequestedLabel" destination="fsa-6p-Xiv" id="Nhu-BB-fuq"/>

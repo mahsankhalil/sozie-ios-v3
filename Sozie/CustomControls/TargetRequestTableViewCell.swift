@@ -25,6 +25,7 @@ class TargetRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var brandImageView: UIImageView!
     @IBOutlet weak var productIdLabel: UILabel!
 
+    @IBOutlet weak var priceLabel: UILabel!
     var timer: Timer?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -105,6 +106,9 @@ extension TargetRequestTableViewCell: CellConfigurable {
         if let productIdProvider = viewModel as? ProductIdProviding {
             let productId = productIdProvider.productId
             self.productIdLabel.text = "ID: " + productId
+        }
+        if let priceProvider = viewModel as? PriceProviding {
+            self.priceLabel.text = priceProvider.price
         }
         logoImageView.isHidden = true
         backgroudView.layer.borderColor = UIColor(hex: "A6A6A6").cgColor

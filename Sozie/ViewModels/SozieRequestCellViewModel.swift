@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding, FilledViewModeling, ExpiryViewModeling, ColorViewModeling, ProductIdProviding {
+struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementViewModeling, ImageViewModeling, SelectionProviding, SubtitleViewModeling, DescriptionViewModeling, AvailabilityProviding, BrandIdProviding, FilledViewModeling, ExpiryViewModeling, ColorViewModeling, ProductIdProviding, PriceProviding {
     var brandId: Int
     var description: String?
     var subtitle: String?
@@ -27,6 +27,7 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
     var acceptedBySomeoneElse: Bool
     var colorTitle: String?
     var productId: String
+    var price: String?
     init (request: SozieRequest) {
         var imageURL = ""
         if let productImageURL = request.requestedProduct?.imageURL {
@@ -77,5 +78,8 @@ struct SozieRequestCellViewModel: RowViewModel, TitleViewModeling, MeasurementVi
             self.expiry = ""
         }
         self.productId = request.requestedProduct?.productStringId ?? ""
+        if let price = request.requestedProduct?.searchPrice, let currency = request.requestedProduct?.currency {
+            self.price = currency + String(price)
+        }
     }
 }

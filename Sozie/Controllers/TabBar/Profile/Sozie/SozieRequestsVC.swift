@@ -31,6 +31,8 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var instructionsImageView: UIImageView!
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var brandFilterButton: UIButton!
+    @IBOutlet weak var balanceLabel: UILabel!
+    
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
@@ -79,12 +81,11 @@ class SozieRequestsVC: UIViewController {
             if gender == "M" {
                 instructionsImageView.image = UIImage(named: "MaleInstructions")
             } else {
-                if (UserDefaultManager.getALlBrands()?.count ?? 0 > 0) {
+                if UserDefaultManager.getALlBrands()?.count ?? 0 > 0 {
                     let brands = UserDefaultManager.getALlBrands()
                     if brands?[0].label == "Adidas" {
                         instructionsImageView.image = UIImage(named: "instruction_adidas_female")
-                    }
-                    else if brands?[0].label == "Target"{
+                    } else if brands?[0].label == "Target"{
                         instructionsImageView.image = UIImage(named: "instruction_target_female")
                     }
                 }
@@ -122,6 +123,28 @@ class SozieRequestsVC: UIViewController {
             }
         }
         self.fetchBrandsFromServer()
+        if let user = UserDefaultManager.getCurrentUserObject() {
+            if user.brand == 19 {
+                fetchBalanceDetailFromServer()
+            } else {
+                self.balanceLabel.isHidden = true
+            }
+        }
+    }
+    func fetchBalanceDetailFromServer() {
+        var dataDict = [String: Any]()
+        dataDict["brand_id"] = 19
+        ServerManager.sharedInstance.getCurrentBalance(params: dataDict) { (isSuccess, response) in
+            if isSuccess {
+                let balanceResponse = (response as! BalanceResponse)
+                if let remainingBalance = balanceResponse.requestRemainingBalance {
+                    if let currency = balanceResponse.currency {
+                        self.balanceLabel.text = "Balance: " + currency + String(remainingBalance.balance)
+                    }
+                }
+
+            }
+        }
     }
     func fetchBrandsFromServer() {
         ServerManager.sharedInstance.getBrandList(params: [:]) { (isSuccess, response) in
