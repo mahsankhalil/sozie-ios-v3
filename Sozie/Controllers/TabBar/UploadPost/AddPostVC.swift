@@ -11,6 +11,7 @@ import TPKeyboardAvoiding
 import SVProgressHUD
 import AVKit
 import CropViewController
+import MBProgressHUD
 class AddPostVC: UIViewController {
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var videosCollectionView: UICollectionView!
@@ -28,11 +29,13 @@ class AddPostVC: UIViewController {
     var currentRequest: SozieRequest?
     var currentProduct: Product?
     weak var delegate: UploadPostAndFitTipsDelegate?
-    var selectedIndex: Int?
+//    var selectedIndex: Int?
     var currentVideoURL: URL?
     var currentPostId: Int?
     var currentPost: UserPost?
     var currentTaskId: String?
+    var pictureSelectedIndex: Int?
+    var videoSelectedIndex: Int?
     var pictureViewModels = [UploadPictureViewModel(title: "Look 1", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "Look 2", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false), UploadPictureViewModel(title: "More Looks", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: false)]
     var videoViewModels = [UploadPictureViewModel(title: "Take 1", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true), UploadPictureViewModel(title: "Take 2", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true), UploadPictureViewModel(title: "More Takes", attributedTitle: nil, imageURL: URL(string: ""), image: nil, isVideo: true)]
     override func viewDidLoad() {
@@ -190,23 +193,41 @@ class AddPostVC: UIViewController {
 
         }
     }
-    @IBAction func deleteButtonTapped(_ sender: Any) {
-//        if let index = selectedIndex {
-//            viewModels[index].image = nil
-//            postImageView.image = nil
-//            selectedIndex = nil
-//            if let isVideo = viewModels[index].isVideo, isVideo == true {
-//                viewModels[index].videoURL = nil
-//                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
-//                return
-//            }
-//            if index > 3 {
-//                viewModels.remove(at: index)
-//                self.imagesCollectionView.reloadData()
-//            } else {
-//                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
-//            }
-//        }
+    @IBAction func pictureDeleteButtonTapped(_ sender: Any) {
+        if let index = pictureSelectedIndex {
+            pictureViewModels[index].image = nil
+            postImageView.image = nil
+            pictureSelectedIndex = nil
+            if let isVideo = pictureViewModels[index].isVideo, isVideo == true {
+                pictureViewModels[index].videoURL = nil
+                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                return
+            }
+            if index > 3 {
+                pictureViewModels.remove(at: index)
+                self.imagesCollectionView.reloadData()
+            } else {
+                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            }
+        }
+    }
+    @IBAction func videoDeleteButtonTapped(_ sender: Any) {
+        if let index = videoSelectedIndex {
+            videoViewModels[index].image = nil
+            postImageView.image = nil
+            pictureSelectedIndex = nil
+            if let isVideo = videoViewModels[index].isVideo, isVideo == true {
+                videoViewModels[index].videoURL = nil
+                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                return
+            }
+            if index > 3 {
+                videoViewModels.remove(at: index)
+                self.imagesCollectionView.reloadData()
+            } else {
+                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            }
+        }
     }
     func updatePostData() {
         if let post = currentPost {
@@ -261,10 +282,15 @@ class AddPostVC: UIViewController {
 //            if videoURLs.count > 0 {
 //                dataDict["videos_to_upload"] = videoURLs
 //            }
-            
-            SVProgressHUD.show()
-            ServerManager.sharedInstance.editPostWithMultipleImagesAndVideos(params: dataDict, postId: post.postId, imagesToEdit: imagesToEditData, imagesToUploads: imagesToUploadData, videoURLs: videoURLs, videosToEditURLs: videoURLsToEdit) { (isSuccess, response) in
-                SVProgressHUD.dismiss()
+//            SVProgressHUD.setStatus("Please wait your data is been posted")
+//            SVProgressHUD.setDefaultMaskType(.none)
+//            SVProgressHUD.show()
+
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.label.text = "Please wait your data is been posted"
+             ServerManager.sharedInstance.editPostWithMultipleImagesAndVideos(params: dataDict, postId: post.postId, imagesToEdit: imagesToEditData, imagesToUploads: imagesToUploadData, videoURLs: videoURLs, videosToEditURLs: videoURLsToEdit) { (isSuccess, response) in
+//                SVProgressHUD.dismiss()
+                MBProgressHUD.hide(for: self.view, animated: true)
                 if isSuccess {
                     self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
                     self.getPostProgress()
@@ -297,9 +323,15 @@ class AddPostVC: UIViewController {
             }
         }
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        SVProgressHUD.setStatus("Please wait your data is been posted")
+        SVProgressHUD.setDefaultMaskType(.none)
         SVProgressHUD.show()
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "Please wait your data is been posted"
         ServerManager.sharedInstance.addPostWithMultipleImagesAndVideos(params: dataDict, imagesData: imagesData, videoURLs: videoURLs) { (isSuccess, response) in
-            SVProgressHUD.dismiss()
+//            SVProgressHUD.dismiss()
+            MBProgressHUD.hide(for: self.view, animated: true)
+
             if isSuccess {
                 self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
                 self.getPostProgress()
@@ -378,10 +410,12 @@ extension AddPostVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         return 32.0
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
         var viewModels = pictureViewModels
         if collectionView.tag == 1 {
             viewModels = videoViewModels
+            videoSelectedIndex = indexPath.row
+        } else {
+            pictureSelectedIndex = indexPath.row
         }
         if viewModels[indexPath.row].image == nil {
             if viewModels[indexPath.row].isVideo == true {
@@ -393,10 +427,10 @@ extension AddPostVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-                UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: self.selectedIndex, progressTutorialVC: nil)
+                UtilityManager.openCustomCameraFrom(viewController: self, photoIndex: self.pictureSelectedIndex, progressTutorialVC: nil)
             }))
             alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-                self.showPosePopup(index: self.selectedIndex)
+                self.showPosePopup(index: self.pictureSelectedIndex)
 //                UtilityManager.openGalleryFrom(viewController: self)
             }))
             alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
@@ -438,14 +472,21 @@ extension AddPostVC: CustomVideoRecorderDelegate {
         }
     }
     func setupImage(pickedImage: UIImage, videoURL: String? = nil) {
+        var selectedIndex: Int?
+        if videoURL == nil {
+            selectedIndex = pictureSelectedIndex
+        } else {
+            selectedIndex = videoSelectedIndex
+        }
         if let index = selectedIndex {
             let scaledImg = pickedImage.scaleImageToSize(newSize: CGSize(width: 1080, height: (pickedImage.size.height/pickedImage.size.width)*1080))
             if videoURL == nil {
                 pictureViewModels[index].image = scaledImg
+                pictureViewModels[index].title = "Look " + String(index + 1)
                 self.postImageView.image = scaledImg
                 if index > 1 {
                     if index < 5 {
-                        let viewModel = UploadPictureViewModel(title: "Look " + String(index + 2), attributedTitle: nil, imageURL: URL(string: ""), image: nil)
+                        let viewModel = UploadPictureViewModel(title: "More Looks", attributedTitle: nil, imageURL: URL(string: ""), image: nil)
                         pictureViewModels.append(viewModel)
                     }
                 }
@@ -521,7 +562,7 @@ extension AddPostVC: UINavigationControllerDelegate, UIImagePickerControllerDele
 }
 extension AddPostVC: CaptureManagerDelegate {
     func processCapturedImage(image: UIImage) {
-        if let index = selectedIndex {
+        if let index = pictureSelectedIndex {
             let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 1080, height: (image.size.height/image.size.width)*1080))
             pictureViewModels[index].image = scaledImg
             self.postImageView.image = scaledImg
