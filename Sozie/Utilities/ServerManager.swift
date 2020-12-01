@@ -726,7 +726,11 @@ class ServerManager: NSObject {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + (UserDefaultManager.getAccessToken() ?? "")
         ]
-        Alamofire.request(ServerManager.balanceURL, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseData { response in
+        var url = ServerManager.balanceURL
+        if let brandId = params["brand_id"] as? Int {
+            url = ServerManager.balanceURL + "?brand_id=" + String(brandId)
+        }
+        Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: headers).responseData { response in
             let decoder = JSONDecoder()
             let obj: Result<BalanceResponse> = decoder.decodeResponse(from: response)
             obj.ifSuccess {

@@ -24,11 +24,18 @@ extension UploadPictureCell: CellConfigurable {
         if let titleModel = viewModel as? TitleViewModeling {
             if let title = titleModel.title {
                 detailLabel.text = title
-                if title == "Optional Picture" {
+                if title == "Optional Picture" || title == "More Looks" || title == "More Takes" {
                     self.cameraImageView.isHidden = true
                     self.addMoreLabel.isHidden = false
                     self.cameraImageView.image = UIImage(named: "Camera icon")
-                } else if title == "Optional Video" {
+                } else if title == "Optional Video" || title == "Take 1" || title == "Take 2" {
+                    if title == "Take 1" || title == "Take 2" {
+                        let attributedString = NSMutableAttributedString(string: title)
+                        let starString = NSMutableAttributedString(string: "*")
+                        starString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: NSMakeRange(0, starString.length))
+                        attributedString.append(starString)
+                        detailLabel.attributedText = attributedString
+                    }
                     self.cameraImageView.isHidden = false
                     self.addMoreLabel.isHidden = true
                     self.cameraImageView.image = UIImage(named: "Video")

@@ -646,7 +646,7 @@ extension UploadPostAndFitTipsVC: UICollectionViewDelegate, UICollectionViewData
 extension UploadPostAndFitTipsVC: CaptureManagerDelegate {
     func processCapturedImage(image: UIImage) {
         if let index = selectedIndex {
-            let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 750, height: (image.size.height/image.size.width)*750))
+            let scaledImg = image.scaleImageToSize(newSize: CGSize(width: 1080, height: (image.size.height/image.size.width)*1080))
             viewModels[index].image = scaledImg
             self.postImageView.image = scaledImg
             if index > 2 {

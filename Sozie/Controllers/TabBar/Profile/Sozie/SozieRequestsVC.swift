@@ -80,6 +80,14 @@ class SozieRequestsVC: UIViewController {
         if let gender = UserDefaultManager.getCurrentUserGender() {
             if gender == "M" {
                 instructionsImageView.image = UIImage(named: "MaleInstructions")
+                if UserDefaultManager.getALlBrands()?.count ?? 0 > 0 {
+                    let brands = UserDefaultManager.getALlBrands()
+                    if brands?[0].label == "Tommy" {
+                        instructionsImageView.image = UIImage(named: "instruction_tommy_male")
+                        instructionsHeightConstraint.constant = (937.0/375.0) * UIScreen.main.bounds.size.width
+
+                    }
+                }
             } else {
                 if UserDefaultManager.getALlBrands()?.count ?? 0 > 0 {
                     let brands = UserDefaultManager.getALlBrands()
@@ -87,9 +95,11 @@ class SozieRequestsVC: UIViewController {
                         instructionsImageView.image = UIImage(named: "instruction_adidas_female")
                     } else if brands?[0].label == "Target"{
                         instructionsImageView.image = UIImage(named: "instruction_target_female")
+                    } else if brands?[0].label == "Tommy"{
+                        instructionsImageView.image = UIImage(named: "instruction_tommy_female")
+                        instructionsHeightConstraint.constant = (937.0/375.0) * UIScreen.main.bounds.size.width
                     }
-                }
-                else {
+                } else {
                     instructionsImageView.image = UIImage(named: "instruction_target_female")
                 }
             }
@@ -139,7 +149,7 @@ class SozieRequestsVC: UIViewController {
                 let balanceResponse = (response as! BalanceResponse)
                 if let remainingBalance = balanceResponse.requestRemainingBalance {
                     if let currency = balanceResponse.currency {
-                        self.balanceLabel.text = "Balance: " + currency + String(remainingBalance.balance)
+                        self.balanceLabel.text = "Balance: " + currency + String(remainingBalance)
                     }
                 }
 
@@ -199,6 +209,7 @@ class SozieRequestsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideAllSearchViews()
+        self.fetchBalanceDetailFromServer()
     }
     @objc func reloadAllData() {
         serverParams.removeAll()
@@ -687,6 +698,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             ServerManager.sharedInstance.cancelRequest(requestId: acceptedRequestId) { (isSuccess, _) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
+                    self.fetchBalanceDetailFromServer()
                     if let cell = self.tableView.cellForRow(at: IndexPath(row: button.tag, section: 0)) as? SozieRequestTableViewCell {
                         cell.timer?.invalidate()
                         cell.timer = nil
@@ -927,6 +939,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
                 self.makeRequestAccepted(tag: tag, acceptedRequest: acceptedRequestResponse.acceptedRequest)
                 self.requestCount -= 1
                 self.beautifyRequestCount(count: self.requestCount)
+                self.fetchBalanceDetailFromServer()
             } else {
                 let error = (response as! Error).localizedDescription
                 if let errorDict = error.getColonSeparatedErrorDetails() {
