@@ -328,7 +328,7 @@ extension MyUploadsVC: MyUploadsCellDelegate {
                 if cellTag <= posts[collectionViewTag].uploads.count {
                     reason = posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? ""
                 } else if let videos = posts[collectionViewTag].videos, videos.count > 0 {
-                    let videoIndex = posts[collectionViewTag].uploads.count + cellTag - (posts[collectionViewTag].uploads.count + videos.count + 1)
+                    let videoIndex = cellTag - posts[collectionViewTag].uploads.count - 1
                     reason = videos[videoIndex].rejectionReason ?? ""
                     title = "WHAT'S WRONG WITH MY VIDEO?"
                 }
@@ -350,6 +350,7 @@ extension MyUploadsVC: MyUploadsCellDelegate {
     }
     func updatePostData(image: UIImage?, videoURL: URL? = nil) {
         var dataDict = [String: Any]()
+        var videoURLs: [URL] = []
         if let postIndex = currentCollectionViewIndex, let uploadIndex = currentCellIndex {
             if uploadIndex <= posts[postIndex].uploads.count {
                 let uploadId = posts[postIndex].uploads[uploadIndex - 1 ].uploadId
@@ -357,26 +358,35 @@ extension MyUploadsVC: MyUploadsCellDelegate {
                     dataDict["existing_images_ids"] = uploadId
                 }
             } else {
-                if videoURL != nil {
+                if let urlForVideo = videoURL {
                     if let videos = posts[postIndex].videos {
-                        let videoPostID = videos[0].uploadId
-                        dataDict["existing_videos_ids"] = videoPostID
+                        let videoIndex = uploadIndex - posts[postIndex].uploads.count - 1
+                        let videoPostID = videos[videoIndex].uploadId
+                        dataDict["existing_videos_ids"] = [videoPostID]
+                        videoURLs.append(urlForVideo)
                     }
                 }
             }
+            dataDict["fit_tips"] = []
             let postId = posts[postIndex].postId
             var imagesData: [Data] = []
             if let imageData = image?.jpegData(compressionQuality: 1.0) {
                 imagesData.append(imageData)
             }
             SVProgressHUD.show()
-            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: postId, imagesToEdit: imagesData, imagesToUploads: nil, videoURL: videoURL) { (isSuccess, response) in
+            ServerManager.sharedInstance.editPostWithMultipleImagesAndVideos(params: dataDict, postId: postId, imagesToEdit: imagesData, imagesToUploads: nil, videoURLs: nil, videosToEditURLs: videoURLs) { (isSuccess, response) in
                 SVProgressHUD.dismiss()
                 if isSuccess {
                     self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
-                    self.getPostProgress(isTutorial: false)
                 }
             }
+//            ServerManager.sharedInstance.editPostWithMultipleImages(params: dataDict, postId: postId, imagesToEdit: imagesData, imagesToUploads: nil, videoURL: videoURL) { (isSuccess, response) in
+//                SVProgressHUD.dismiss()
+//                if isSuccess {
+//                    self.currentTaskId = (response as! AddPostResponse).taskInfo.taskId
+//                    self.getPostProgress(isTutorial: false)
+//                }
+//            }
         }
     }
     func getPostProgress(isTutorial: Bool) {

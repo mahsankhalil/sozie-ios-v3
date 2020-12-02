@@ -256,16 +256,36 @@ class AddPostVC: UIViewController {
             var videoIndex = 0
             for viewModel in videoViewModels {
                 if let urlForVideo = viewModel.videoURL {
-                    if let videos = post.videos, videos.count <= (videoIndex + 1)  {
-                        videoIdsToEdit?.append(videos[videoIndex].uploadId)
-                        if let convertedURL = URL(string: urlForVideo) {
-                            videoURLsToEdit.append(convertedURL)
-                        }
-                    } else {
-                        if let convertedURL = URL(string: urlForVideo) {
-                            videoURLs.append(convertedURL)
+                    if let videos = post.videos {
+                        if videoIndex < videos.count - 1 {
+                            let video = videos[videoIndex]
+                            if urlForVideo != video.videoURL {
+                                videoIdsToEdit?.append(videos[videoIndex].uploadId)
+                                if let convertedURL = URL(string: urlForVideo) {
+                                    videoURLsToEdit.append(convertedURL)
+                                }
+                            }
+                            
+                        } else {
+                            if let convertedURL = URL(string: urlForVideo) {
+                                if (urlForVideo.lowercased().hasPrefix("http")) == false {
+                                    videoURLs.append(convertedURL)
+                                }
+                            }
                         }
                     }
+//                    if let videos = post.videos, videos.count <= (videoIndex + 1) {
+//                        videoIdsToEdit?.append(videos[videoIndex].uploadId)
+//                        if let convertedURL = URL(string: urlForVideo) {
+//                            videoURLsToEdit.append(convertedURL)
+//                        }
+//                    } else {
+//                        if let convertedURL = URL(string: urlForVideo) {
+//                            if (urlForVideo.lowercased().hasPrefix("http")) == false {
+//                                videoURLs.append(convertedURL)
+//                            }
+//                        }
+//                    }
                 }
                 videoIndex = videoIndex + 1
             }
