@@ -1,4 +1,0 @@
-{"identity":{"generator":"Crashlytics iOS SDK/3.13.4","build_version":"143","display_version":"3.13.4","api_key":"8a6fc2f4986c5dde6b54ede53b9befd32ba4bd8d","started_at":1606914043,"session_id":"8a31af52d7df4a1c8d501d7669ba14ce","install_id":"957A5FBA-8F78-41AF-ACA9-62191E9E7433","beta_token":null,"absolute_log_timestamps":true}}
-{"host":{"model":"iPhone9,4","machine":"D111AP","os_build_version":"17A577","os_display_version":"13.0.0","platform":"ios","locale":"en_PK"}}
-{"application":{"bundle_id":"com.sozie.sozieapp","custom_bundle_id":null,"build_version":"6","display_version":"3.3.1","extension_id":null}}
-{"executable":{"architecture":"arm64","uuid":"d5ec87b389213c3b8dd6d3ce3272aee6","base":4329275392,"size":8929280,"encrypted":false,"minimum_sdk_version":"11.0.0","built_sdk_version":"13.2.0"}}
