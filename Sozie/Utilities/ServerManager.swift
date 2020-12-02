@@ -899,7 +899,7 @@ func addPostWithMultipleImages(params: [String: Any]?, imagesData: [Data]?, vide
                 }
             }
             if let video = videoURL {
-                multipartFormData.append(video, withName: "videos_to_add", fileName: "video.mp4", mimeType: "video/mp4")
+                multipartFormData.append(video, withName: "videos_to_upload", fileName: "video.mp4", mimeType: "video/mp4")
             }
         }
         Alamofire.upload(multipartFormData: formData, usingThreshold: UInt64.init(), to: ServerManager.addPostURL, method: .post, headers: headers) { (result) in

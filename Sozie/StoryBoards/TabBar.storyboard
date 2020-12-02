@@ -7640,6 +7640,7 @@ Please click on the (restart tutorial) button below to start again!</string>
                     <size key="freeformSize" width="350" height="300"/>
                     <connections>
                         <outlet property="reasonLabel" destination="P8P-s0-OFz" id="wlp-Er-mKt"/>
+                        <outlet property="titleLabel" destination="JJr-Yw-ej8" id="n7n-K2-R7o"/>
                         <outlet property="tryAgainButton" destination="x9K-Pz-xCj" id="nrz-Qd-OST"/>
                         <outlet property="userLabel" destination="Kad-n5-HDY" id="UiV-OA-HDf"/>
                     </connections>

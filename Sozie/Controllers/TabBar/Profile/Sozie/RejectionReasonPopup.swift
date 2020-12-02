@@ -13,29 +13,34 @@ protocol RejectionResponseDelegate: class {
 class RejectionReasonPopup: UIViewController {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var reasonLabel: UILabel!
+    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tryAgainButton: DZGradientButton!
     weak var delegate: RejectionResponseDelegate?
     var reason: String?
     var collectionViewTag: Int?
     var cellTag: Int?
     var closeHandler: (() -> Void)?
+    var titleText: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         reasonLabel.text = reason
+        titleLabel.text = titleText
         if let user = UserDefaultManager.getCurrentUserObject() {
             if let name = user.firstName {
                 userLabel.text = "Hi " + name
             }
         }
     }
-    class func instance(reason: String, collectionViewTag: Int, cellTag: Int) -> RejectionReasonPopup {
+    class func instance(reason: String, collectionViewTag: Int, cellTag: Int, title: String) -> RejectionReasonPopup {
         let storyBoard = UIStoryboard(name: "TabBar", bundle: .main)
         let instance = storyBoard.instantiateViewController(withIdentifier: "RejectionReasonPopup") as! RejectionReasonPopup
         instance.reason = reason
         instance.collectionViewTag = collectionViewTag
         instance.cellTag = cellTag
+        instance.titleText = title
         return instance
     }
     /*

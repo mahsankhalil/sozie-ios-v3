@@ -324,15 +324,17 @@ extension MyUploadsVC: MyUploadsCellDelegate {
             if cellTag != 0 {
                 var reason = ""
                 // Video will be always at the end
+                var title = "WHAT'S WRONG WITH MY PICTURE?"
                 if cellTag <= posts[collectionViewTag].uploads.count {
                     reason = posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? ""
                 } else if let videos = posts[collectionViewTag].videos, videos.count > 0 {
                     reason = videos[0].rejectionReason ?? ""
+                    title = "WHAT'S WRONG WITH MY VIDEO?"
                 }
                 if reason == "" {
                     return
                 }
-            let popUpInstnc = RejectionReasonPopup.instance(reason: reason, collectionViewTag: collectionViewTag, cellTag: cellTag)
+            let popUpInstnc = RejectionReasonPopup.instance(reason: reason, collectionViewTag: collectionViewTag, cellTag: cellTag, title: title)
                 popUpInstnc.delegate = self
                 let popUpVC = PopupController
                     .create(self.tabBarController?.navigationController ?? self)
@@ -357,7 +359,7 @@ extension MyUploadsVC: MyUploadsCellDelegate {
                 if videoURL != nil {
                     if let videos = posts[postIndex].videos {
                         let videoPostID = videos[0].uploadId
-                        dataDict["video_to_edit_id"] = videoPostID
+                        dataDict["existing_videos_ids"] = videoPostID
                     }
                 }
             }

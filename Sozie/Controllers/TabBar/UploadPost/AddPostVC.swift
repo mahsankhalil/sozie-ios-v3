@@ -183,7 +183,7 @@ class AddPostVC: UIViewController {
     */
     @IBAction func submitButtonTapped(_ sender: Any) {
         if checkIfAllImagesAndVideoUploaded() == false {
-            UtilityManager.showErrorMessage(body: "Please choose minimum two photos and two videos", in: self)
+            UtilityManager.showMessageWith(title: "Not so fast!", body: "Please include 2 photo looks and 2 video takes to Submit.", in: self)
         } else {
             if currentPost != nil {
                 updatePostData()
@@ -215,17 +215,17 @@ class AddPostVC: UIViewController {
         if let index = videoSelectedIndex {
             videoViewModels[index].image = nil
             postImageView.image = nil
-            pictureSelectedIndex = nil
+            videoSelectedIndex = nil
             if let isVideo = videoViewModels[index].isVideo, isVideo == true {
                 videoViewModels[index].videoURL = nil
-                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                self.videosCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
                 return
             }
             if index > 3 {
                 videoViewModels.remove(at: index)
-                self.imagesCollectionView.reloadData()
+                self.videosCollectionView.reloadData()
             } else {
-                self.imagesCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                self.videosCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
             }
         }
     }
@@ -329,7 +329,7 @@ class AddPostVC: UIViewController {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "Please wait your data is been posted"
         ServerManager.sharedInstance.addPostWithMultipleImagesAndVideos(params: dataDict, imagesData: imagesData, videoURLs: videoURLs) { (isSuccess, response) in
-//            SVProgressHUD.dismiss()
+//	            SVProgressHUD.dismiss()
             MBProgressHUD.hide(for: self.view, animated: true)
 
             if isSuccess {
