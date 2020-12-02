@@ -328,7 +328,8 @@ extension MyUploadsVC: MyUploadsCellDelegate {
                 if cellTag <= posts[collectionViewTag].uploads.count {
                     reason = posts[collectionViewTag].uploads[cellTag - 1].rejectionReason ?? ""
                 } else if let videos = posts[collectionViewTag].videos, videos.count > 0 {
-                    reason = videos[0].rejectionReason ?? ""
+                    let videoIndex = posts[collectionViewTag].uploads.count + cellTag - (posts[collectionViewTag].uploads.count + videos.count + 1)
+                    reason = videos[videoIndex].rejectionReason ?? ""
                     title = "WHAT'S WRONG WITH MY VIDEO?"
                 }
                 if reason == "" {
