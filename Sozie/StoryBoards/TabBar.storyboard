@@ -48,16 +48,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="666.5"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qN7-Za-enX">
-                                                <rect key="frame" x="0.0" y="225.5" width="375" height="216"/>
+                                                <rect key="frame" x="0.0" y="279.5" width="375" height="108"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Tuck in the tags" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsu-mX-gVZ">
-                                                        <rect key="frame" x="24" y="112" width="328" height="20"/>
-                                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Smile &amp; look at the camera :)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7Y-FM-70j">
-                                                        <rect key="frame" x="24" y="68" width="207" height="20"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lights, camera, action!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7Y-FM-70j">
+                                                        <rect key="frame" x="24" y="68" width="147.5" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="cK4-IA-aPq"/>
                                                         </constraints>
@@ -65,14 +59,8 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4. Twirl around to show the garment from various angles." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bux-vy-4hP">
-                                                        <rect key="frame" x="24" y="156.5" width="327" height="40"/>
-                                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Use grid to center body in frames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDX-CC-TtS">
-                                                        <rect key="frame" x="24" y="24" width="237" height="20"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show your look and give your message. Ready?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDX-CC-TtS">
+                                                        <rect key="frame" x="24" y="24" width="313" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="y6Y-pc-jUZ"/>
                                                         </constraints>
@@ -84,17 +72,11 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="O7Y-FM-70j" firstAttribute="leading" secondItem="qN7-Za-enX" secondAttribute="leading" constant="24" id="Jp6-jn-hoH"/>
-                                                    <constraint firstAttribute="height" constant="216" id="K0Y-2F-UoN"/>
-                                                    <constraint firstItem="bux-vy-4hP" firstAttribute="top" secondItem="zsu-mX-gVZ" secondAttribute="bottom" constant="24.5" id="S4p-J3-nEk"/>
+                                                    <constraint firstAttribute="height" constant="108" id="K0Y-2F-UoN"/>
                                                     <constraint firstItem="HDX-CC-TtS" firstAttribute="top" secondItem="qN7-Za-enX" secondAttribute="top" constant="24" id="YvZ-cm-fqt"/>
                                                     <constraint firstAttribute="width" constant="375" id="cPF-md-TwC"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bux-vy-4hP" secondAttribute="trailing" constant="24" id="hhL-wr-TtS"/>
-                                                    <constraint firstItem="bux-vy-4hP" firstAttribute="leading" secondItem="qN7-Za-enX" secondAttribute="leading" constant="24" id="n6d-vt-RFA"/>
-                                                    <constraint firstAttribute="trailing" secondItem="zsu-mX-gVZ" secondAttribute="trailing" constant="23" id="skz-V6-hV8"/>
-                                                    <constraint firstItem="zsu-mX-gVZ" firstAttribute="top" secondItem="O7Y-FM-70j" secondAttribute="bottom" constant="24" id="v1Z-2r-KcJ"/>
                                                     <constraint firstItem="O7Y-FM-70j" firstAttribute="top" secondItem="HDX-CC-TtS" secondAttribute="bottom" constant="24" id="vll-4b-sxS"/>
                                                     <constraint firstItem="HDX-CC-TtS" firstAttribute="leading" secondItem="qN7-Za-enX" secondAttribute="leading" constant="24" id="w7p-Wx-y8n"/>
-                                                    <constraint firstItem="zsu-mX-gVZ" firstAttribute="leading" secondItem="qN7-Za-enX" secondAttribute="leading" constant="24" id="y2Q-j1-sRp"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -154,9 +136,10 @@
                                             <constraint firstAttribute="width" constant="74" id="Gfq-Ye-jwY"/>
                                             <constraint firstAttribute="height" constant="76" id="Po5-K7-7mR"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                         <inset key="titleEdgeInsets" minX="-30" minY="15" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="20" minY="-40" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="How to?" image="Howto"/>
+                                        <state key="normal" title="Guidelines" image="Howto"/>
                                         <connections>
                                             <action selector="howToButtonTaapped:" destination="j4y-eq-zTY" eventType="touchUpInside" id="1MQ-eU-Kd2"/>
                                             <action selector="howToButtonTapped:" destination="fFl-m6-399" eventType="touchUpInside" id="VFq-ie-5L1"/>
@@ -7735,28 +7718,10 @@ Click images with red X for feedback. </string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Def-iH-0Sa">
-                                <rect key="frame" x="0.0" y="211.5" width="375" height="244"/>
+                                <rect key="frame" x="0.0" y="280" width="375" height="108"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Smile &amp; look at the camera :)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kn-1g-sz7">
-                                        <rect key="frame" x="24" y="112" width="207" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="WjM-we-NYu"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.Tuck in the tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNY-ms-30a">
-                                        <rect key="frame" x="24" y="156" width="115" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="JEN-Aq-8LL"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Make sure head and feet are not cut off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oam-9j-q5q">
-                                        <rect key="frame" x="24" y="68" width="277" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Need some help? Check the guidelines." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oam-9j-q5q">
+                                        <rect key="frame" x="24" y="68" width="260" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="PVv-Pn-Qb5"/>
                                         </constraints>
@@ -7764,42 +7729,8 @@ Click images with red X for feedback. </string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RBz-IH-L6A">
-                                        <rect key="frame" x="24" y="200" width="111" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="LSA-Bh-M5c"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="5">
-                                                    <attributes>
-                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" metaFont="system" size="15"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                                <fragment content=". ">
-                                                    <attributes>
-                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" metaFont="system" size="15"/>
-                                                        <font key="NSOriginalFont" metaFont="system" size="15"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                                <fragment content="Strike a pose!">
-                                                    <attributes>
-                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" metaFont="system" size="15"/>
-                                                        <font key="NSOriginalFont" metaFont="system" size="15"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        <integer key="NSUnderline" value="1"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Use grid to center body in frames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbn-kk-l9p">
-                                        <rect key="frame" x="24" y="24" width="237" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Strike your pose" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbn-kk-l9p">
+                                        <rect key="frame" x="24" y="24" width="106.5" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="gSv-TM-TOd"/>
                                         </constraints>
@@ -7811,17 +7742,11 @@ Click images with red X for feedback. </string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="9fx-kJ-eDd"/>
-                                    <constraint firstItem="JNY-ms-30a" firstAttribute="leading" secondItem="Def-iH-0Sa" secondAttribute="leading" constant="24" id="Al5-MI-6Vu"/>
-                                    <constraint firstAttribute="height" constant="244" id="DXO-0q-Kdm"/>
-                                    <constraint firstItem="RBz-IH-L6A" firstAttribute="top" secondItem="JNY-ms-30a" secondAttribute="bottom" constant="24" id="GOo-64-zij"/>
-                                    <constraint firstItem="RBz-IH-L6A" firstAttribute="leading" secondItem="Def-iH-0Sa" secondAttribute="leading" constant="24" id="IsJ-iz-aUW"/>
+                                    <constraint firstAttribute="height" constant="108" id="DXO-0q-Kdm"/>
                                     <constraint firstItem="Oam-9j-q5q" firstAttribute="top" secondItem="qbn-kk-l9p" secondAttribute="bottom" constant="24" id="RN0-RP-rk4"/>
                                     <constraint firstItem="Oam-9j-q5q" firstAttribute="leading" secondItem="Def-iH-0Sa" secondAttribute="leading" constant="24" id="XR1-jk-UR6"/>
                                     <constraint firstItem="qbn-kk-l9p" firstAttribute="leading" secondItem="Def-iH-0Sa" secondAttribute="leading" constant="24" id="acr-8X-6Lb"/>
-                                    <constraint firstItem="JNY-ms-30a" firstAttribute="top" secondItem="7Kn-1g-sz7" secondAttribute="bottom" constant="24" id="cZe-kQ-JgB"/>
                                     <constraint firstItem="qbn-kk-l9p" firstAttribute="top" secondItem="Def-iH-0Sa" secondAttribute="top" constant="24" id="jyV-sK-DKp"/>
-                                    <constraint firstItem="7Kn-1g-sz7" firstAttribute="leading" secondItem="Def-iH-0Sa" secondAttribute="leading" constant="24" id="kfx-Ky-TE4"/>
-                                    <constraint firstItem="7Kn-1g-sz7" firstAttribute="top" secondItem="Oam-9j-q5q" secondAttribute="bottom" constant="24" id="wGy-sG-nKs"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vk2-hd-bq6">
@@ -7850,9 +7775,10 @@ Click images with red X for feedback. </string>
                                             <constraint firstAttribute="height" constant="76" id="V71-oQ-H1f"/>
                                             <constraint firstAttribute="width" constant="74" id="smj-qM-Wsr"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                         <inset key="titleEdgeInsets" minX="-30" minY="15" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="20" minY="-40" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="How to?" image="Howto"/>
+                                        <state key="normal" title="Guidelines" image="Howto"/>
                                         <connections>
                                             <action selector="howToButtonTaapped:" destination="j4y-eq-zTY" eventType="touchUpInside" id="ql6-Fi-faG"/>
                                         </connections>
