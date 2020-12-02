@@ -31,7 +31,16 @@ class FitTipsAnswerTableVC: UIViewController {
                 viewModels.removeAll()
                 var index = 0
                 for option in options {
-                    var viewModel = OptionsViewModel(title: option.optionText, attributedTitle: nil, isCheckmarkHidden: true)
+                    let currentQuestion = fitTips?[tipsIndex].question[quesIndex]
+                    var optionText = option.optionText
+                    if currentQuestion?.questionText == "Do you recommend this item?" {
+                        if optionText == "Yes" {
+                            optionText = self.addToYes(option: optionText)
+                        } else if optionText == "No" {
+                            optionText = self.addToNo(option: optionText)
+                        }
+                    }
+                    var viewModel = OptionsViewModel(title: optionText, attributedTitle: nil, isCheckmarkHidden: true)
                     if let answer = fitTips?[tipsIndex].question[quesIndex].answer {
                         if checkIfAnswered(text: option.optionText, answer: answer) {
                             viewModel.isCheckmarkHidden = false
@@ -53,6 +62,18 @@ class FitTipsAnswerTableVC: UIViewController {
             }
         }
 //        (self.parent?.parent as? PopupController)?.updatePopUpSize()
+    }
+    func addToYes(option: String) -> String {
+        return option + " - I ended up liking it"
+    }
+    func addToNo(option: String) -> String {
+        return option + " - I'm going to return it"
+    }
+    func removeFromYes(option: String) -> String {
+        return option.replacingOccurrences(of: " - I ended up liking it", with: "")
+    }
+    func removeFromNo(option: String) -> String {
+        return option.replacingOccurrences(of: "- I'm going to return it", with: "")
     }
     override func viewDidAppear(_ animated: Bool) {
 //        (self.parent?.parent as? PopupController)?.updatePopUpSize()
@@ -79,7 +100,16 @@ class FitTipsAnswerTableVC: UIViewController {
             if var fitTipIndex = fitTipsIndex, var questIndex = questionIndex, let fitTips = fitTips {
                 var arrayOfAnswers = [String]()
                 for index in arrayOfSelectedIndexes {
-                    arrayOfAnswers.append(fitTips[fitTipIndex].question[questIndex].options[index].optionText)
+                    let currentQuestion = fitTips[fitTipIndex].question[questIndex]
+                    var currentAnswer = fitTips[fitTipIndex].question[questIndex].options[index].optionText
+                    if currentQuestion.questionText == "Do you recommend this item?" {
+                        if currentAnswer == "Yes - I ended up liking it" {
+                            currentAnswer = self.removeFromYes(option: currentAnswer)
+                        } else if currentAnswer == "No - I'm going to return it" {
+                            currentAnswer = self.removeFromNo(option: currentAnswer)
+                        }
+                    }
+                    arrayOfAnswers.append(currentAnswer)
                 }
                 fitTips[fitTipIndex].question[questIndex].answer = arrayOfAnswers.makeArrayJSON()
                 fitTips[fitTipIndex].question[questIndex].isAnswered = true

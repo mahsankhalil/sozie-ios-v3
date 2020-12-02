@@ -163,7 +163,6 @@ class FitTipsAnswerTextVC: UIViewController {
         destVC.fitTips = fitTips
         self.navigationController?.pushViewController(destVC, animated: true)
     }
-    
     private func refreshReviewContents(review: String) {
         let textCount = review.count
         questionLabel.text = getQuestionTitle(length: textCount)
@@ -177,69 +176,68 @@ class FitTipsAnswerTextVC: UIViewController {
             return "Go Ahead!"
         }
 
-        if (length >= 41 && length <= 80) {
+        if length >= 41 && length <= 80 {
             questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
-            return "Where would you wear this?"
+            return "What do you like or not like?"
         }
 
-        if (length >= 81 && length <= 120) {
+        if length >= 81 && length <= 120 {
             questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
-            return "What did you like or how'd it feel?"
+            return "Where would you wear it?"
         }
 
-        if (length >= 121 && length <= 160) {
+        if length >= 121 && length <= 160 {
             questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
-            return "What could have been better?"
+            return "How have you styled it? "
         }
 
-        if (length >= 161 && length <= 200) {
+        if length >= 161 && length <= 200 {
             questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
-            return "How have you styled it and how else would you wear it?"
+            return "Anything else?"
         }
         
-        if (length > 200) {
-            questionLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.7450980392, blue: 0.9882352941, alpha: 1)
-            return "Great Review!"
-        }
+//        if length > 200 {
+//            questionLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.7450980392, blue: 0.9882352941, alpha: 1)
+//            return "Great Review!"
+//        }
 
         return ""
     }
-    
     private func getRemainingQuestionLength(length: Int) -> String {
-        if (length >= 0 && length <= 40) {
+        if length >= 0 && length <= 40 {
             let remaining = 40 - length
-            if (remaining == 0) {
+            if remaining == 0 {
                 return "Minimum 40 Characters"
-            } else if (remaining == 1) {
+            } else if remaining == 1 {
                 return "Minimum \(remaining) Character"
             } else {
                 return "Minimum \(remaining) Characters"
             }
         }
 
-        if (length >= 41 && length <= 80) {
+        if length >= 41 && length <= 80 {
             let remaining = 80 - length
-            if (remaining == 0) {
+            if remaining == 0 {
                 return "Minimum 40 Characters"
-            } else if (remaining == 1) {
+            } else if remaining == 1 {
                 return "Minimum \(remaining) Character"
             } else {
                 return "Minimum \(remaining) Characters"
             }
         }
 
-        if (length >= 81 && length <= 120) {
+        if length >= 81 && length <= 120 {
             let remaining = 120 - length
-            if (remaining == 0) {
+            if remaining == 0 {
                 return "Minimum 40 Characters"
-            } else if (remaining == 1) {
+            } else if remaining == 1 {
                 return "Minimum \(remaining) Character"
             } else {
                 return "Minimum \(remaining) Characters"
             }
         }
 
-        if (length >= 121 && length <= 160) {
+        if length >= 121 && length <= 160 {
             let remaining = 160 - length
             if remaining == 0 {
                return "Minimum 40 Characters"
@@ -250,27 +248,25 @@ class FitTipsAnswerTextVC: UIViewController {
             }
         }
 
-        if (length >= 161 && length <= 200) {
+        if length >= 161 && length <= 200 {
             let remaining = 200 - length
             if remaining > 1 {
                return "Minimum \(remaining) Characters"
-            }
-            else {
+            } else {
                 return "Minimum \(remaining) Character"
             }
         }
-
         return "0 Remaining Character"
     }
-    
+
     private func getCurrentProgress(length: Int) -> Float {
         var result: Float = 1.0//(Float(length) / Float(200))
-        if (length < 200) {
+        if length < 200 {
             result = Float(length) / Float(200)
         }
         return result
     }
-    
+
     private func countSpecialCharacter(userInput: String) -> Int {
         if userInput.count <= 0 {
             return 0
@@ -314,7 +310,7 @@ extension FitTipsAnswerTextVC: UITextViewDelegate {
     }
 
     @objc func getHints(timer: Timer) {
-        if (textView.text.count < 200) {
+        if textView.text.count < 200 {
             questionLabel.text = "KEEP GOING"
         }
     }

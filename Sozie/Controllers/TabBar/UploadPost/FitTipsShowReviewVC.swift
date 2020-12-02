@@ -15,16 +15,12 @@ class FitTipsShowReviewVC: UIViewController {
     @IBOutlet weak var brandImageView: UIImageView!
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
-    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var rateView: CosmosView!
-    
     @IBOutlet weak var reviewTextView: UITextView!
-    
     @IBOutlet weak var editButton: DZGradientButton!
     @IBOutlet weak var submitButton: UIButton!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -33,7 +29,6 @@ class FitTipsShowReviewVC: UIViewController {
     var currentProduct: Product?
     var fitTips: [FitTips]?
     var questionList = [Question]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         populateProductData()
@@ -41,21 +36,17 @@ class FitTipsShowReviewVC: UIViewController {
         populateOverralRating()
         populateReview()
         populateOtherReview()
-        
         tableView.delegate = self
         tableView.dataSource = self
-    
         tableView.register(FitTipsSelectionCell.nib(), forCellReuseIdentifier: FitTipsSelectionCell.identifier)
         tableView.register(FitTipsRatingCell.nib(), forCellReuseIdentifier: FitTipsRatingCell.identifier)
     }
     override func viewWillLayoutSubviews() {
         self.tableViewHeight?.constant = self.tableView.contentSize.height
 //        self.scrollViewHeight?.constant = self.scrollView.contentSize.height
-        
         //scrollView.contentSize = CGSize(width: 375, height: 700)
         self.reviewHeight?.constant = self.reviewTextView.contentSize.height
     }
-    
     @IBAction func onButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -223,13 +214,11 @@ extension FitTipsShowReviewVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FitTipsSelectionCell.identifier, for: indexPath) as! FitTipsSelectionCell
         let question = questionList[indexPath.section]
         let optionName = question.options[indexPath.row].optionText
-        
         if question.type == "C" {
             if let answer = question.answer {
                 if (checkIfAnswered(text: optionName, answer: answer)) {
                     cell.configure(imageName: "fitTips_selected", optionName: optionName)
-                }
-                else {
+                } else {
                     cell.configure(imageName: "fitTips_not_selected", optionName: optionName)
                 }
             }
