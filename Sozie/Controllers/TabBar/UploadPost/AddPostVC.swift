@@ -307,7 +307,7 @@ class AddPostVC: UIViewController {
 //            SVProgressHUD.show()
 
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            hud.label.text = "Please wait your data is been posted"
+            hud.label.text = "Please wait, your content is being submitted"
              ServerManager.sharedInstance.editPostWithMultipleImagesAndVideos(params: dataDict, postId: post.postId, imagesToEdit: imagesToEditData, imagesToUploads: imagesToUploadData, videoURLs: videoURLs, videosToEditURLs: videoURLsToEdit) { (isSuccess, response) in
 //                SVProgressHUD.dismiss()
                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -343,11 +343,11 @@ class AddPostVC: UIViewController {
             }
         }
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        SVProgressHUD.setStatus("Please wait your data is been posted")
-        SVProgressHUD.setDefaultMaskType(.none)
+//        SVProgressHUD.setStatus("Please wait your data is been posted")
+//        SVProgressHUD.setDefaultMaskType(.none)
         SVProgressHUD.show()
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.label.text = "Please wait your data is been posted"
+        hud.label.text = "Please wait, your content is being submitted"
         ServerManager.sharedInstance.addPostWithMultipleImagesAndVideos(params: dataDict, imagesData: imagesData, videoURLs: videoURLs) { (isSuccess, response) in
 //	            SVProgressHUD.dismiss()
             MBProgressHUD.hide(for: self.view, animated: true)
