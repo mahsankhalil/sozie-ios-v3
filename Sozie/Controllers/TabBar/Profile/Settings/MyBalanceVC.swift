@@ -38,7 +38,9 @@ class MyBalanceVC: UIViewController {
 
     func fetchDataFromServer() {
         SVProgressHUD.show()
-        ServerManager.sharedInstance.getCurrentBalance(params: [:]) { (isSuccess, response) in
+        var dataDict = [String: Any]()
+        dataDict["brand_id"] = 10
+        ServerManager.sharedInstance.getCurrentBalance(params: dataDict) { (isSuccess, response) in
             SVProgressHUD.dismiss()
             if isSuccess {
                 let balance = (response as! BalanceResponse).balance
