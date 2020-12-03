@@ -33,7 +33,7 @@ class FitTipsAnswerTableVC: UIViewController {
                 for option in options {
                     let currentQuestion = fitTips?[tipsIndex].question[quesIndex]
                     var optionText = option.optionText
-                    if currentQuestion?.questionText == "Do you recommend this item?" {
+                    if currentQuestion?.questionText == "Do you think you'll keep this item?" {
                         if optionText == "Yes" {
                             optionText = self.addToYes(option: optionText)
                         } else if optionText == "No" {
@@ -102,7 +102,7 @@ class FitTipsAnswerTableVC: UIViewController {
                 for index in arrayOfSelectedIndexes {
                     let currentQuestion = fitTips[fitTipIndex].question[questIndex]
                     var currentAnswer = fitTips[fitTipIndex].question[questIndex].options[index].optionText
-                    if currentQuestion.questionText == "Do you recommend this item?" {
+                    if currentQuestion.questionText == "Do you think you'll keep this item?" {
                         if currentAnswer == "Yes - I ended up liking it" {
                             currentAnswer = self.removeFromYes(option: currentAnswer)
                         } else if currentAnswer == "No - I'm going to return it" {

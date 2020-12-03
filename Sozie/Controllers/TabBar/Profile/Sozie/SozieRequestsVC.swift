@@ -32,6 +32,7 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var brandFilterButton: UIButton!
     @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var instructionCrossButton: UIButton!
     
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
@@ -84,7 +85,7 @@ class SozieRequestsVC: UIViewController {
                     let brands = UserDefaultManager.getALlBrands()
                     if brands?[0].label == "Tommy" {
                         instructionsImageView.image = UIImage(named: "instruction_tommy_male")
-                        instructionsHeightConstraint.constant = (937.0/375.0) * UIScreen.main.bounds.size.width
+                        instructionsHeightConstraint.constant = (725.0/375.0) * UIScreen.main.bounds.size.width
 
                     }
                 }
@@ -97,7 +98,7 @@ class SozieRequestsVC: UIViewController {
                         instructionsImageView.image = UIImage(named: "instruction_target_female")
                     } else if brands?[0].label == "Tommy"{
                         instructionsImageView.image = UIImage(named: "instruction_tommy_female")
-                        instructionsHeightConstraint.constant = (937.0/375.0) * UIScreen.main.bounds.size.width
+                        instructionsHeightConstraint.constant = (725.0/375.0) * UIScreen.main.bounds.size.width
                     }
                 } else {
                     instructionsImageView.image = UIImage(named: "instruction_target_female")
@@ -542,7 +543,15 @@ class SozieRequestsVC: UIViewController {
             popUpVC.dismiss()
        }
     }
-
+    @IBAction func instructionCrossButtonTapped(_ sender: Any) {
+        instructionsScrollView.isHidden = true
+        enableRootButtons()
+        if ifGotItButtonTapped == false {
+            showPostTutorials()
+            ifGotItButtonTapped = true
+        }
+    }
+    
     @IBAction func brandFilterButtonTapped(_ sender: Any) {
         hideAllSearchViews()
         let brandsFilterPopupInstance = SelectionPopupVC.instance(type: .filter, brandList: UserDefaultManager.getALlBrands(), brandId: nil)

@@ -4047,7 +4047,7 @@ Cg
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdq-cA-Vz4">
-                                                <rect key="frame" x="18" y="0.0" width="339" height="100"/>
+                                                <rect key="frame" x="18" y="30" width="339" height="70"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="339" id="F64-tp-I4r"/>
@@ -4095,11 +4095,24 @@ Cg
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUV-jK-FH9">
+                                                <rect key="frame" x="327" y="0.0" width="48" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="nE7-sO-NgB"/>
+                                                    <constraint firstAttribute="height" constant="29" id="pE7-pM-Zhe"/>
+                                                </constraints>
+                                                <state key="normal" image="Cross"/>
+                                                <connections>
+                                                    <action selector="instructionCrossButtonTapped:" destination="F5W-yp-aSP" eventType="touchUpInside" id="4Ci-Ov-mhh"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="CJD-eh-NJh"/>
-                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="top" secondItem="oxA-md-0rs" secondAttribute="top" id="IH5-mx-oiI"/>
+                                            <constraint firstItem="kdq-cA-Vz4" firstAttribute="top" secondItem="oxA-md-0rs" secondAttribute="top" constant="30" id="IH5-mx-oiI"/>
+                                            <constraint firstAttribute="trailing" secondItem="RUV-jK-FH9" secondAttribute="trailing" id="WBj-yS-AkY"/>
+                                            <constraint firstItem="RUV-jK-FH9" firstAttribute="top" secondItem="oxA-md-0rs" secondAttribute="top" id="XtC-Qg-aS4"/>
                                             <constraint firstItem="kdq-cA-Vz4" firstAttribute="centerX" secondItem="oxA-md-0rs" secondAttribute="centerX" id="dOc-np-hlj"/>
                                             <constraint firstAttribute="bottom" secondItem="kdq-cA-Vz4" secondAttribute="bottom" id="qao-FD-aIV"/>
                                         </constraints>
@@ -4153,8 +4166,9 @@ Cg
                     <connections>
                         <outlet property="balanceLabel" destination="wHH-Px-zgP" id="8uy-zH-Je3"/>
                         <outlet property="brandFilterButton" destination="Jfh-Sd-tGV" id="qqM-Sa-mgA"/>
-                        <outlet property="crossButton" destination="U05-QG-ILh" id="rlX-yh-JTX"/>
+                        <outlet property="crossButton" destination="U05-QG-ILh" id="zX4-uJ-0Fm"/>
                         <outlet property="gotItButton" destination="gyN-lW-kZE" id="kzp-j0-wKP"/>
+                        <outlet property="instructionCrossButton" destination="RUV-jK-FH9" id="EW0-dg-e2V"/>
                         <outlet property="instructionsHeightConstraint" destination="jgx-4a-01h" id="Fs1-98-r1r"/>
                         <outlet property="instructionsImageView" destination="OVH-Ge-ikh" id="wRC-nn-wf5"/>
                         <outlet property="instructionsScrollView" destination="jn3-0f-PRI" id="Rd3-i1-dtb"/>
@@ -5818,7 +5832,7 @@ Cg
                                                         <rect key="frame" x="21" y="6" width="304" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <inset key="titleEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" title="GUIDELINES">
+                                                        <state key="normal" title="HOW TO USE SOZIE">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>

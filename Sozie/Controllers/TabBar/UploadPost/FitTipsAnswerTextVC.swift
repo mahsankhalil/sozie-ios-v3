@@ -195,10 +195,10 @@ class FitTipsAnswerTextVC: UIViewController {
             questionLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
             return "Anything else?"
         }
-//        if length > 200 {
-//            questionLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.7450980392, blue: 0.9882352941, alpha: 1)
-//            return "Great Review!"
-//        }
+        if length > 200 {
+            questionLabel.textColor = #colorLiteral(red: 0.1803921569, green: 0.7450980392, blue: 0.9882352941, alpha: 1)
+            return "Great Review!"
+        }
 
         return ""
     }

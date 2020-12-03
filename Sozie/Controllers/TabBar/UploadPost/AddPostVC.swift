@@ -214,7 +214,7 @@ class AddPostVC: UIViewController {
     @IBAction func videoDeleteButtonTapped(_ sender: Any) {
         if let index = videoSelectedIndex {
             videoViewModels[index].image = nil
-            postImageView.image = nil
+            videoImageView.image = nil
             videoSelectedIndex = nil
             if let isVideo = videoViewModels[index].isVideo, isVideo == true {
                 videoViewModels[index].videoURL = nil
