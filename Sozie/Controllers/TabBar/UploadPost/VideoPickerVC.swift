@@ -191,12 +191,12 @@ class VideoPickerVC: UIViewController {
                 (sender as! UIButton).setImage(UIImage(named: "Stop"), for: .normal)
             } else {
                 //If seconds are greater than 10 then allow user to stop recording.
-                if timeSec >= 10 || timeMin >= 1 {
+                if timeSec >= 15 || timeMin >= 1 {
                     self.videoFileOutput?.stopRecording()
                     self.timer.invalidate()
                     (sender as! UIButton).setImage(UIImage(named: "Record"), for: .normal)
                 } else {
-                    self.view.makeToast("Minimum recording is 10 Seconds")
+                    self.view.makeToast("Minimum recording is 15 Seconds")
                 }
             }
         }
