@@ -14,8 +14,8 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var gotItButton: UIButton!
-    @IBOutlet weak var instructionsHeightConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var gotItButton: UIButton!
+//    @IBOutlet weak var instructionsHeightConstraint: NSLayoutConstraint!
     var reuseableIdentifier = "SozieRequestTableViewCell"
     var reuseableIdentifierTarget = "TargetRequestTableViewCell"
     @IBOutlet weak var searchBySizeButton: UIButton!
@@ -28,12 +28,10 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var questionMarkButton: UIButton!
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var instructionsScrollView: UIScrollView!
-    @IBOutlet weak var instructionsImageView: UIImageView!
+//    @IBOutlet weak var instructionsImageView: UIImageView!
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var brandFilterButton: UIButton!
     @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var instructionCrossButton: UIButton!
-    
     var nextURL: String?
     var viewModels: [SozieRequestCellViewModel] = []
     var selectedProduct: Product?
@@ -42,6 +40,7 @@ class SozieRequestsVC: UIViewController {
     var tutorialVC: SozieRequestTutorialVC?
     var inStockTutorialVC: RequestInStockTutorialVC?
     var acceptRequestTutorialVC: AcceptRequestTutorialVC?
+    var sozieInstructionViewController: SozieInstructionsViewController?
     var ifInStockTutorialShown: Bool = false
     var ifAcceptRequestTutorialShown: Bool = false
     var ifUploadPostTutorialShown: Bool = false
@@ -77,34 +76,6 @@ class SozieRequestsVC: UIViewController {
         topRefreshControl.triggerVerticalOffset = 50.0
         topRefreshControl.addTarget(self, action: #selector(reloadRequestData), for: .valueChanged)
         tableView.refreshControl = topRefreshControl
-        instructionsHeightConstraint.constant = (1050.0/375.0) * UIScreen.main.bounds.size.width
-        if let gender = UserDefaultManager.getCurrentUserGender() {
-            if gender == "M" {
-                instructionsImageView.image = UIImage(named: "MaleInstructions")
-                if UserDefaultManager.getALlBrands()?.count ?? 0 > 0 {
-                    let brands = UserDefaultManager.getALlBrands()
-                    if brands?[0].label == "Tommy" {
-                        instructionsImageView.image = UIImage(named: "instruction_tommy_male")
-                        instructionsHeightConstraint.constant = (725.0/375.0) * UIScreen.main.bounds.size.width
-
-                    }
-                }
-            } else {
-                if UserDefaultManager.getALlBrands()?.count ?? 0 > 0 {
-                    let brands = UserDefaultManager.getALlBrands()
-                    if brands?[0].label == "Adidas" {
-                        instructionsImageView.image = UIImage(named: "instruction_adidas_female")
-                    } else if brands?[0].label == "Target"{
-                        instructionsImageView.image = UIImage(named: "instruction_target_female")
-                    } else if brands?[0].label == "Tommy"{
-                        instructionsImageView.image = UIImage(named: "instruction_tommy_female")
-                        instructionsHeightConstraint.constant = (725.0/375.0) * UIScreen.main.bounds.size.width
-                    }
-                } else {
-                    instructionsImageView.image = UIImage(named: "instruction_target_female")
-                }
-            }
-        }
         if let sozieType = UserDefaultManager.getCurrentSozieType(), sozieType == "BS" {
             brandFilterButton.isHidden = true
         } else {
@@ -141,6 +112,17 @@ class SozieRequestsVC: UIViewController {
                 self.balanceLabel.isHidden = true
             }
         }
+        //Add Instructions
+        sozieInstructionViewController = UIStoryboard(name: "TabBar", bundle: nil).instantiateViewController(
+            withIdentifier: SozieInstructionsViewController.reuseIdentifier) as? SozieInstructionsViewController
+        sozieInstructionViewController?.btnTappedDelegate = self
+        addChild(sozieInstructionViewController!)
+        instructionsScrollView.addSubview(sozieInstructionViewController!.view)
+        sozieInstructionViewController!.view.frame = CGRect(x: 0, y: 0,
+                                          width: instructionsScrollView.frame.width,
+                                          height: instructionsScrollView.frame.height)
+        sozieInstructionViewController!.didMove(toParent: self)
+        //
     }
     func fetchBalanceDetailFromServer() {
         var dataDict = [String: Any]()
@@ -984,6 +966,14 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
             self.resetFirstTime()
         }
     }
+    func closeInstructions() {
+        instructionsScrollView.isHidden = true
+        enableRootButtons()
+        if ifGotItButtonTapped == false {
+            showPostTutorials()
+            ifGotItButtonTapped = true
+        }
+    }
     @objc func showInstructions() {
         tutorialVC?.view.removeFromSuperview()
         instructionsScrollView.isHidden = false
@@ -1051,6 +1041,14 @@ extension SozieRequestsVC: SelectionPopupVCDelegate {
                 self.tableView.refreshControl?.beginRefreshing()
                 fetchAllSozieRequests()
             }
+        }
+    }
+}
+
+extension SozieRequestsVC: ButtonTappedDelegate {
+    func onButtonTappedDelegate(_ sender: Any?) {
+        if sender as? NSObject == sozieInstructionViewController!.iGotITButton {
+            closeInstructions()
         }
     }
 }

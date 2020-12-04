@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NumberingTextFieldCell" id="KGk-i7-Jjw" customClass="NumberingTextFieldCell" customModule="Sozie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqh-AT-e3P">
+                        <rect key="frame" x="0.0" y="13.5" width="30" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="suN-8j-wsw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.99677342179999995" green="0.52648168799999995" blue="0.52059328559999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept Requests For clothes in your style dfsdfsdfsdfs dfsdfsdfsdfsdfsdfsfds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSC-9P-icz">
+                        <rect key="frame" x="35" y="5.5" width="285" height="33.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" systemColor="systemGray2Color"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jSC-9P-icz" firstAttribute="centerY" secondItem="nqh-AT-e3P" secondAttribute="centerY" id="1MZ-dW-Rw7"/>
+                    <constraint firstItem="jSC-9P-icz" firstAttribute="leading" secondItem="nqh-AT-e3P" secondAttribute="trailing" constant="5" id="Nrg-NJ-ggx"/>
+                    <constraint firstAttribute="trailing" secondItem="jSC-9P-icz" secondAttribute="trailing" id="WJk-Tq-i16"/>
+                    <constraint firstItem="nqh-AT-e3P" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hU5-1Q-J2f"/>
+                    <constraint firstItem="nqh-AT-e3P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rBV-jj-lGe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="jSC-9P-icz" id="yLI-Hs-t0c"/>
+                <outlet property="numberLabel" destination="nqh-AT-e3P" id="C12-7i-bUZ"/>
+            </connections>
+            <point key="canvasLocation" x="113" y="49"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
