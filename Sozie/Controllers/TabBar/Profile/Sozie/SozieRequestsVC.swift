@@ -1047,7 +1047,10 @@ extension SozieRequestsVC: SelectionPopupVCDelegate {
 
 extension SozieRequestsVC: ButtonTappedDelegate {
     func onButtonTappedDelegate(_ sender: Any?) {
-        if sender as? NSObject == sozieInstructionViewController!.iGotITButton {
+        if sender as? NSObject == sozieInstructionViewController!.iGotITButton ||
+            sender as? NSObject == sozieInstructionViewController!.crossButton {
+            sozieInstructionViewController?.scrollView.setContentOffset(.zero, animated: false)
+            sozieInstructionViewController?.instructionTableVIew.setContentOffset(.zero, animated: false)
             closeInstructions()
         }
     }
