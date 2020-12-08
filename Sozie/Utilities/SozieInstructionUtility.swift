@@ -11,6 +11,8 @@ import Foundation
 struct SozieInstructionUtility {
     private static func getSozieTommyMaleInstructions() -> [[String]] {
         var set = [[String]]()
+        //instruction heading and cross btn header title
+        set.append([])
         //Instructions
         var instructionList = [String]()
         instructionList.append("Accept Requests")
@@ -35,10 +37,14 @@ struct SozieInstructionUtility {
         donotList.append("Have a messy background.")
         set.append(doList)
         set.append(donotList)
+        //close button list
+        set.append([])
         return set
     }
     private static func getSozieTommyFemaleInstructions() -> [[String]] {
         var set = [[String]]()
+        //instruction heading and cross btn header title
+        set.append([])
         //Instructions
         var instructionList = [String]()
         instructionList.append("Accept Requests")
@@ -64,10 +70,14 @@ struct SozieInstructionUtility {
         donotList.append("Have a messy background.")
         set.append(doList)
         set.append(donotList)
+        //close button list
+        set.append([])
         return set
     }
     private static func getSozieTargetFemaleInstructions() -> [[String]] {
         var set = [[String]]()
+        //instruction heading and cross btn header title
+        set.append([])
         //Instructions
         var instructionList = [String]()
         instructionList.append("Accept request for clothes in your size")
@@ -95,10 +105,14 @@ struct SozieInstructionUtility {
         donotList.append("Leave a mess.")
         set.append(doList)
         set.append(donotList)
+        //close button list
+        set.append([])
         return set
     }
     private static func getSozieAddidasFemaleInstructions() -> [[String]] {
         var set = [[String]]()
+        //instruction heading and cross btn header title
+        set.append([])
         //Instructions
         var instructionList = [String]()
         instructionList.append("Accept request for clothes in your size")
@@ -126,14 +140,18 @@ struct SozieInstructionUtility {
         donotList.append("Leave a mess.")
         set.append(doList)
         set.append(donotList)
+        //close button list
+        set.append([])
         return set
     }
     private static func getSozieMenInstructions() -> [[String]] {
         var set = [[String]]()
+        //instruction heading and cross btn header title
+        set.append([])
         //Instructions
         var instructionList = [String]()
         instructionList.append("Accept request for clothes in your size")
-        instructionList.append("Have your full length picture taken. Below are three requested angles (front, back, side")
+        instructionList.append("Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side")
         instructionList.append("Hide Tags")
         instructionList.append("Fill in the Sozie Fit Tips")
         instructionList.append("Submit!")
@@ -156,6 +174,8 @@ struct SozieInstructionUtility {
         donotList.append("Leave a mess.")
         set.append(doList)
         set.append(donotList)
+        //close button list
+        set.append([])
         return set
     }
     static func getSozieCompleteInstructionsSet() -> [[String]] {
@@ -189,10 +209,12 @@ struct SozieInstructionUtility {
     static func getSozieInstructionsSetTitleList() -> [String] {
         var instructionSet: [String] =
             [
+                "Instruction Title",
                 "SOZIE INSTRUCTIONS",
                 "Image Title",
                 "DO",
-                "DO NOT"
+                "DO NOT",
+                "Close Button"
             ]
         if UserDefaultManager.getALlBrands()?.count ?? 0 > 0 {
             let brands = UserDefaultManager.getALlBrands()

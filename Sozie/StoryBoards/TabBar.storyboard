@@ -4035,24 +4035,24 @@ Cg
                                     <constraint firstItem="dbh-Pr-xqA" firstAttribute="leading" secondItem="O4z-UW-tEO" secondAttribute="leading" id="zAv-jz-0WF"/>
                                 </constraints>
                             </view>
-                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-0f-PRI">
-                                <rect key="frame" x="0.0" y="47" width="375" height="1070"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSz-lM-YK5">
+                                <rect key="frame" x="0.0" y="94" width="375" height="1023"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pOd-GA-Mn6"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="O4z-UW-tEO" firstAttribute="leading" secondItem="pOd-GA-Mn6" secondAttribute="leading" id="29l-zj-sic"/>
+                            <constraint firstItem="pOd-GA-Mn6" firstAttribute="trailing" secondItem="qSz-lM-YK5" secondAttribute="trailing" id="3m1-v7-BZ4"/>
                             <constraint firstItem="O4z-UW-tEO" firstAttribute="trailing" secondItem="pOd-GA-Mn6" secondAttribute="trailing" id="LLL-5Q-bWo"/>
                             <constraint firstItem="O4z-UW-tEO" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="bottom" id="MIf-Ea-08C"/>
-                            <constraint firstItem="jn3-0f-PRI" firstAttribute="trailing" secondItem="pOd-GA-Mn6" secondAttribute="trailing" id="ObL-yr-7g6"/>
+                            <constraint firstItem="qSz-lM-YK5" firstAttribute="top" secondItem="ZNv-L9-ztQ" secondAttribute="bottom" id="Oh2-ie-pTM"/>
                             <constraint firstItem="ZNv-L9-ztQ" firstAttribute="top" secondItem="k1V-mc-ItS" secondAttribute="top" constant="44" id="YHQ-We-9YN"/>
-                            <constraint firstItem="jn3-0f-PRI" firstAttribute="top" secondItem="k1V-mc-ItS" secondAttribute="top" constant="47" id="cjS-8W-9cu"/>
+                            <constraint firstItem="qSz-lM-YK5" firstAttribute="leading" secondItem="pOd-GA-Mn6" secondAttribute="leading" id="a9d-Fh-RXO"/>
+                            <constraint firstItem="pOd-GA-Mn6" firstAttribute="bottom" secondItem="qSz-lM-YK5" secondAttribute="bottom" id="cMD-XD-fJ0"/>
                             <constraint firstItem="ZNv-L9-ztQ" firstAttribute="trailing" secondItem="pOd-GA-Mn6" secondAttribute="trailing" id="eee-Tb-i2P"/>
                             <constraint firstItem="ZNv-L9-ztQ" firstAttribute="leading" secondItem="pOd-GA-Mn6" secondAttribute="leading" id="hwR-6x-m2G"/>
-                            <constraint firstItem="jn3-0f-PRI" firstAttribute="leading" secondItem="pOd-GA-Mn6" secondAttribute="leading" id="kAf-PL-IJ5"/>
-                            <constraint firstItem="jn3-0f-PRI" firstAttribute="bottom" secondItem="pOd-GA-Mn6" secondAttribute="bottom" id="ou2-Sq-qmg"/>
                             <constraint firstItem="O4z-UW-tEO" firstAttribute="bottom" secondItem="pOd-GA-Mn6" secondAttribute="bottom" id="wu8-9e-pd6"/>
                         </constraints>
                     </view>
@@ -4061,7 +4061,7 @@ Cg
                         <outlet property="balanceLabel" destination="wHH-Px-zgP" id="8uy-zH-Je3"/>
                         <outlet property="brandFilterButton" destination="Jfh-Sd-tGV" id="qqM-Sa-mgA"/>
                         <outlet property="crossButton" destination="U05-QG-ILh" id="rlX-yh-JTX"/>
-                        <outlet property="instructionsScrollView" destination="jn3-0f-PRI" id="Rd3-i1-dtb"/>
+                        <outlet property="instructionsView" destination="qSz-lM-YK5" id="6Zm-EF-YXj"/>
                         <outlet property="mainView" destination="O4z-UW-tEO" id="EZX-7G-170"/>
                         <outlet property="noDataLabel" destination="gCP-kl-HO1" id="tmi-3w-zuD"/>
                         <outlet property="questionMarkButton" destination="VfK-it-NRf" id="jaA-cV-een"/>
@@ -5380,130 +5380,30 @@ Cg
             <objects>
                 <viewController storyboardIdentifier="SozieInstructionsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Oct-lA-ViS" customClass="SozieInstructionsViewController" customModule="Sozie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Csp-ph-XhJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Wi-21-PEY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="1080"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xri-Kq-uLk">
-                                        <rect key="frame" x="15" y="42" width="345" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="345" id="PiI-6t-wRo"/>
-                                        </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment content="SCROLL TO THE BOTTOM OF THE SCREEN AND CLICK ON ">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.064676895740000004" green="0.046411909160000001" blue="0.17396223550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="  ">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="0.99677342179999995" green="0.52648168799999995" blue="0.52059328559999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.064676895740000004" green="0.046411909160000001" blue="0.17396223550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="I GET IT">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="0.99677342179999995" green="0.52648168799999995" blue="0.52059328559999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="1" green="0.98800655662658166" blue="0.96279398185594911" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="  ">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="0.99677342179999995" green="0.52648168799999995" blue="0.52059328559999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.064676895740000004" green="0.046411909160000001" blue="0.17396223550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" TO SEE YOUR REQUESTS">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.064676895740000004" green="0.046411909160000001" blue="0.17396223550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue-CondensedBold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3BL-jR-gkq">
-                                        <rect key="frame" x="21" y="90" width="333" height="864"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="864" id="hK6-1N-Khq"/>
-                                        </constraints>
-                                    </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ni-tp-iZc" customClass="DZGradientButton" customModule="Sozie" customModuleProvider="target">
-                                        <rect key="frame" x="45" y="984" width="285" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="AgH-RB-SQK"/>
-                                        </constraints>
-                                        <state key="normal" title="I GOT IT"/>
-                                        <connections>
-                                            <action selector="onClickIGotIt:" destination="Oct-lA-ViS" eventType="touchUpInside" id="aft-xV-fT7"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwg-aY-m3H">
-                                        <rect key="frame" x="335" y="12" width="25" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="1GM-gI-ZCF"/>
-                                            <constraint firstAttribute="width" constant="25" id="Ga9-Gi-SpE"/>
-                                        </constraints>
-                                        <state key="normal" image="Cross-1">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onClickCrossBtn:" destination="Oct-lA-ViS" eventType="touchUpInside" id="qrl-u7-Q9n"/>
-                                            <action selector="onClickCrossBtn:" destination="Oct-lA-ViS" eventType="touchUpOutside" id="xHj-xW-Enp"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="4ni-tp-iZc" secondAttribute="bottom" constant="30" id="0fp-q7-Xj3"/>
-                                    <constraint firstItem="xri-Kq-uLk" firstAttribute="top" secondItem="uwg-aY-m3H" secondAttribute="bottom" constant="5" id="1pz-sQ-Czy"/>
-                                    <constraint firstItem="4ni-tp-iZc" firstAttribute="leading" secondItem="xri-Kq-uLk" secondAttribute="leading" constant="30" id="7rE-4Q-CeT"/>
-                                    <constraint firstAttribute="trailing" secondItem="3BL-jR-gkq" secondAttribute="trailing" constant="21" id="8IO-I1-RBr"/>
-                                    <constraint firstItem="xri-Kq-uLk" firstAttribute="leading" secondItem="0Wi-21-PEY" secondAttribute="leading" constant="15" id="9wv-nA-WYC"/>
-                                    <constraint firstItem="3BL-jR-gkq" firstAttribute="top" secondItem="xri-Kq-uLk" secondAttribute="bottom" constant="10" id="E2C-hc-eZ1"/>
-                                    <constraint firstItem="uwg-aY-m3H" firstAttribute="top" secondItem="0Wi-21-PEY" secondAttribute="top" constant="12" id="P0K-qw-H8u"/>
-                                    <constraint firstItem="4ni-tp-iZc" firstAttribute="top" secondItem="3BL-jR-gkq" secondAttribute="bottom" constant="30" id="Rk2-Ug-skR"/>
-                                    <constraint firstAttribute="trailing" secondItem="uwg-aY-m3H" secondAttribute="trailing" constant="15" id="fih-GQ-8Uw"/>
-                                    <constraint firstAttribute="trailing" secondItem="xri-Kq-uLk" secondAttribute="trailing" constant="15" id="jZB-Ij-Orl"/>
-                                    <constraint firstItem="3BL-jR-gkq" firstAttribute="leading" secondItem="0Wi-21-PEY" secondAttribute="leading" constant="21" id="nN9-53-heG"/>
-                                    <constraint firstItem="4ni-tp-iZc" firstAttribute="trailing" secondItem="xri-Kq-uLk" secondAttribute="trailing" constant="-30" id="tsQ-vE-IlF"/>
-                                </constraints>
-                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="42" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3BL-jR-gkq">
+                                <rect key="frame" x="0.0" y="10" width="375" height="652"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FDJ-IA-Wm0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FDJ-IA-Wm0" firstAttribute="trailing" secondItem="0Wi-21-PEY" secondAttribute="trailing" id="0PG-aV-XDN"/>
-                            <constraint firstItem="0Wi-21-PEY" firstAttribute="leading" secondItem="FDJ-IA-Wm0" secondAttribute="leading" id="2uM-od-RyJ"/>
-                            <constraint firstItem="0Wi-21-PEY" firstAttribute="bottom" secondItem="FDJ-IA-Wm0" secondAttribute="bottom" id="EnJ-Ud-MzD"/>
-                            <constraint firstItem="0Wi-21-PEY" firstAttribute="top" secondItem="FDJ-IA-Wm0" secondAttribute="top" id="mW7-JE-P3a"/>
+                            <constraint firstItem="3BL-jR-gkq" firstAttribute="leading" secondItem="FDJ-IA-Wm0" secondAttribute="leading" id="PPc-oN-cvQ"/>
+                            <constraint firstItem="FDJ-IA-Wm0" firstAttribute="trailing" secondItem="3BL-jR-gkq" secondAttribute="trailing" id="QoP-R9-SVC"/>
+                            <constraint firstAttribute="bottom" secondItem="3BL-jR-gkq" secondAttribute="bottom" constant="5" id="k38-0a-OfA"/>
+                            <constraint firstItem="3BL-jR-gkq" firstAttribute="top" secondItem="FDJ-IA-Wm0" secondAttribute="top" constant="10" id="kIx-WY-U5s"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="375" height="1080"/>
                     <connections>
-                        <outlet property="closeBtnInstructionLabel" destination="xri-Kq-uLk" id="BMI-Oh-RHt"/>
-                        <outlet property="crossButton" destination="uwg-aY-m3H" id="QK5-tV-r1x"/>
-                        <outlet property="iGotITButton" destination="4ni-tp-iZc" id="iQK-pA-CuW"/>
-                        <outlet property="instructionHeightConstraint" destination="hK6-1N-Khq" id="1a2-2M-ZEq"/>
                         <outlet property="instructionTableVIew" destination="3BL-jR-gkq" id="rfQ-gA-AuK"/>
-                        <outlet property="scrollView" destination="0Wi-21-PEY" id="gUU-91-sag"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCR-j9-QuZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4853.6000000000004" y="1089.3553223388308"/>
+            <point key="canvasLocation" x="4833" y="956"/>
         </scene>
         <!--RequestsVC-->
         <scene sceneID="KTM-Wh-gdt">
@@ -8333,9 +8233,6 @@ Click images with red X for feedback. </string>
     <designables>
         <designable name="0ae-NF-hwM">
             <size key="intrinsicContentSize" width="142" height="31"/>
-        </designable>
-        <designable name="4ni-tp-iZc">
-            <size key="intrinsicContentSize" width="56" height="30"/>
         </designable>
         <designable name="4rV-37-bLi">
             <size key="intrinsicContentSize" width="94.5" height="32.310000000000002"/>

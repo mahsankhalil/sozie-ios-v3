@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqh-AT-e3P">
-                        <rect key="frame" x="0.0" y="13.5" width="30" height="17"/>
+                        <rect key="frame" x="21" y="10" width="30" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="suN-8j-wsw"/>
                         </constraints>
@@ -28,18 +28,19 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept Requests For clothes in your style dfsdfsdfsdfs dfsdfsdfsdfsdfsdfsfds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSC-9P-icz">
-                        <rect key="frame" x="35" y="5.5" width="285" height="33.5"/>
+                        <rect key="frame" x="56" y="10" width="243" height="34"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="jSC-9P-icz" firstAttribute="centerY" secondItem="nqh-AT-e3P" secondAttribute="centerY" id="1MZ-dW-Rw7"/>
+                    <constraint firstItem="jSC-9P-icz" firstAttribute="top" secondItem="nqh-AT-e3P" secondAttribute="top" id="HAP-Nz-V1N"/>
                     <constraint firstItem="jSC-9P-icz" firstAttribute="leading" secondItem="nqh-AT-e3P" secondAttribute="trailing" constant="5" id="Nrg-NJ-ggx"/>
-                    <constraint firstAttribute="trailing" secondItem="jSC-9P-icz" secondAttribute="trailing" id="WJk-Tq-i16"/>
-                    <constraint firstItem="nqh-AT-e3P" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hU5-1Q-J2f"/>
-                    <constraint firstItem="nqh-AT-e3P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rBV-jj-lGe"/>
+                    <constraint firstAttribute="trailing" secondItem="jSC-9P-icz" secondAttribute="trailing" constant="21" id="WJk-Tq-i16"/>
+                    <constraint firstItem="jSC-9P-icz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="eiO-q3-3M4"/>
+                    <constraint firstItem="nqh-AT-e3P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="rBV-jj-lGe"/>
+                    <constraint firstAttribute="bottom" secondItem="jSC-9P-icz" secondAttribute="bottom" id="ujK-JS-7rj"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

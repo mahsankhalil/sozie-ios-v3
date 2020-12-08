@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DO NOT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sst-tf-cKP">
-                        <rect key="frame" x="0.0" y="20" width="414" height="41"/>
+                        <rect key="frame" x="21" y="20" width="372" height="41"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xc9-lC-UbA">
-                        <rect key="frame" x="0.0" y="62" width="414" height="1"/>
+                        <rect key="frame" x="21" y="62" width="372" height="1"/>
                         <color key="backgroundColor" red="0.99677342179999995" green="0.52648168799999995" blue="0.52059328559999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="3G2-WG-yLO"/>
@@ -33,12 +33,12 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="sst-tf-cKP" secondAttribute="trailing" id="6EF-Rk-8r3"/>
-                    <constraint firstItem="Xc9-lC-UbA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="70C-Tv-5M2"/>
+                    <constraint firstAttribute="trailing" secondItem="sst-tf-cKP" secondAttribute="trailing" constant="21" id="6EF-Rk-8r3"/>
+                    <constraint firstItem="Xc9-lC-UbA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="70C-Tv-5M2"/>
                     <constraint firstItem="Xc9-lC-UbA" firstAttribute="top" secondItem="sst-tf-cKP" secondAttribute="bottom" constant="1" id="bgz-7P-YNm"/>
                     <constraint firstItem="sst-tf-cKP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="lNX-E0-7dy"/>
-                    <constraint firstAttribute="trailing" secondItem="Xc9-lC-UbA" secondAttribute="trailing" id="lnL-3c-8Bl"/>
-                    <constraint firstItem="sst-tf-cKP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="map-e4-Ioe"/>
+                    <constraint firstAttribute="trailing" secondItem="Xc9-lC-UbA" secondAttribute="trailing" constant="21" id="lnL-3c-8Bl"/>
+                    <constraint firstItem="sst-tf-cKP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="map-e4-Ioe"/>
                     <constraint firstAttribute="bottom" secondItem="Xc9-lC-UbA" secondAttribute="bottom" id="nJI-xH-ycc"/>
                 </constraints>
             </tableViewCellContentView>

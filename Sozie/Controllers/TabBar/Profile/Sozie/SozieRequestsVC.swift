@@ -27,7 +27,7 @@ class SozieRequestsVC: UIViewController {
     @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var questionMarkButton: UIButton!
     @IBOutlet weak var crossButton: UIButton!
-    @IBOutlet weak var instructionsScrollView: UIScrollView!
+    @IBOutlet weak var instructionsView: UIView!
 //    @IBOutlet weak var instructionsImageView: UIImageView!
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var brandFilterButton: UIButton!
@@ -117,10 +117,10 @@ class SozieRequestsVC: UIViewController {
             withIdentifier: SozieInstructionsViewController.reuseIdentifier) as? SozieInstructionsViewController
         sozieInstructionViewController?.btnTappedDelegate = self
         addChild(sozieInstructionViewController!)
-        instructionsScrollView.addSubview(sozieInstructionViewController!.view)
+        instructionsView.addSubview(sozieInstructionViewController!.view)
         sozieInstructionViewController!.view.frame = CGRect(x: 0, y: 0,
-                                          width: instructionsScrollView.frame.width,
-                                          height: instructionsScrollView.frame.height)
+                                          width: instructionsView.frame.width,
+                                          height: instructionsView.frame.height)
         sozieInstructionViewController!.didMove(toParent: self)
         //
     }
@@ -504,7 +504,7 @@ class SozieRequestsVC: UIViewController {
         self.crossButton.isHidden = true
     }
     @IBAction func gotItButtonTapped(_ sender: Any) {
-        instructionsScrollView.isHidden = true
+        instructionsView.isHidden = true
         enableRootButtons()
         if ifGotItButtonTapped == false {
             showPostTutorials()
@@ -526,7 +526,7 @@ class SozieRequestsVC: UIViewController {
        }
     }
     @IBAction func instructionCrossButtonTapped(_ sender: Any) {
-        instructionsScrollView.isHidden = true
+        instructionsView.isHidden = true
         enableRootButtons()
         if ifGotItButtonTapped == false {
             showPostTutorials()
@@ -564,7 +564,7 @@ class SozieRequestsVC: UIViewController {
         }
     }
     @IBAction func questionMarkButtonTapped(_ sender: Any) {
-        instructionsScrollView.isHidden = false
+        instructionsView.isHidden = false
         disableRootButtons()
     }
     // MARK: - Navigation
@@ -967,7 +967,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
         }
     }
     func closeInstructions() {
-        instructionsScrollView.isHidden = true
+        instructionsView.isHidden = true
         enableRootButtons()
         if ifGotItButtonTapped == false {
             showPostTutorials()
@@ -976,8 +976,7 @@ extension SozieRequestsVC: SozieRequestTableViewCellDelegate {
     }
     @objc func showInstructions() {
         tutorialVC?.view.removeFromSuperview()
-        instructionsScrollView.isHidden = false
-        instructionsScrollView.setContentOffset(CGPoint.zero, animated: true)
+        instructionsView.isHidden = false
         disableRootButtons()
     }
 }
@@ -1006,7 +1005,7 @@ extension SozieRequestsVC: UploadPostAndFitTipsDelegate {
         if let tutVC = tutorialVC {
             tutVC.view.removeFromSuperview()
         }
-        instructionsScrollView.isHidden = false
+        instructionsView.isHidden = false
         disableRootButtons()
     }
 }
@@ -1047,9 +1046,8 @@ extension SozieRequestsVC: SelectionPopupVCDelegate {
 
 extension SozieRequestsVC: ButtonTappedDelegate {
     func onButtonTappedDelegate(_ sender: Any?) {
-        if sender as? NSObject == sozieInstructionViewController!.iGotITButton ||
-            sender as? NSObject == sozieInstructionViewController!.crossButton {
-            sozieInstructionViewController?.scrollView.setContentOffset(.zero, animated: false)
+        if sender as? NSObject == sozieInstructionViewController!.crossButton ||
+            sender as? NSObject == sozieInstructionViewController!.closeButton {
             sozieInstructionViewController?.instructionTableVIew.setContentOffset(.zero, animated: false)
             closeInstructions()
         }
