@@ -151,7 +151,7 @@ struct SozieInstructionUtility {
         //Instructions
         var instructionList = [String]()
         instructionList.append("Accept request for clothes in your size")
-        instructionList.append("Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken. Below are three requested angles (front, back, side")
+        instructionList.append("Have your full length picture taken. Below are three requested angles (front, back, side Have your full length picture taken.")
         instructionList.append("Hide Tags")
         instructionList.append("Fill in the Sozie Fit Tips")
         instructionList.append("Submit!")
