@@ -149,11 +149,13 @@ class UtilityManager: NSObject {
         //Photos
         PHPhotoLibrary.requestAuthorization({ status in
             if status == .authorized {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-                imagePicker.allowsEditing = false
-                viewController.present(imagePicker, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                    imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                    imagePicker.allowsEditing = false
+                    viewController.present(imagePicker, animated: true, completion: nil)
+                }
             } else {
                 DispatchQueue.main.async {
                     UtilityManager.showPermissionAlertWith(title: "Gallery Unavailable!", message: "Please check to see if permissions granted in settings.", viewController: viewController)
